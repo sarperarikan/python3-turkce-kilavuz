@@ -1,0 +1,81 @@
+
+Nesneler
+
+Geçen bölümlerden birinde sýnýflarý tanýmlarken, bunlarýn, nesne üretmemizi saðlayan bir veri tipi olduðuna dair muðlak bir laf etmiþtik. Ýþte bu baþlýk altýnda, o taným içinde geçen ve nesne tabanlý programlamanýn temelini oluþturan ‘nesne’ kavramý üzerine eðileceðiz.
+
+
+Nesne Nedir?
+
+Programlamaya iliþkin kavramlar içinde, özellikle programlamaya yeni baþlayanlarýn kafasýný en fazla karýþtýran kavram nedir diye sorsak, herhalde alacaðýmýz cevap ‘nesne’ olur. Hakikaten, saðda solda sürekli duyduðumuz bu ‘nesne’ denen þey, öteden beri yazýlým geliþtirici adaylarýnýn zihnini karýþtýrýr durur.
+
+Aslýnda ‘nesne’ (object) dedikleri, ilk bakýþta uyandýrdýðý izlenimin aksine, anlamasý zor, gizemli bir kavram deðildir. Dolayýsýyla, nesne kavramýna iliþkin olarak öðrenmemiz gereken ilk þey, bunun abartýlacak veya korkulacak bir þey olmadýðýdýr. Peki ama tam olarak nedir bu nesne dedikleri?
+
+Kabaca, Python’da belli birtakým metotlara ve/veya niteliklere sahip olan öðelere nesne adý verilir. Yani ‘nesne’ kelimesi, içinde birtakým metot ve/veya nitelikler barýndýran öðeleri tanýmlamak için kullanýlan bir tabirden, basit bir isimlendirmeden ibarettir.
+
+Peki bir nesne oluþturmak için acaba ne yapmamýz gerekiyor?
+
+Hatýrlarsanýz, geçen bölümde, sýnýflarýn nesne üretmemizi saðlayan veri tipleri olduðunu söylemiþtik. O halde gelin minik bir nesne üretelim:
+
+class Sýnýf():
+pass
+
+sýnýf = Sýnýf()
+
+Ýþte bu kodlardaki sýnýf = Sýnýf() komutu ile bir nesne üretmiþ olduk. Nesnemizin adý da ‘sýnýf’. Teknik olarak ifade edersek, sýnýf örneði, Sýnýf() adlý sýnýfýn bütün nitelik ve metotlarýný bünyesinde barýndýran bir nesnedir. Mesela yukarýdaki kodlarýn sýnýf.py adlý bir dosyada bulunduðunu varsayarak þöyle bir deneme yapalým:
+
+>>> import sýnýf
+>>> snf = sýnýf.Sýnýf()
+
+Bu þekilde, kodlarý içeren modülü içe aktarmýþ ve modül içindeki Sýnýf() adlý sýnýfý snf adý ile örneklemiþ olduk. Yani yukarýdaki kodlar yardýmýyla snf adlý bir nesne oluþturduk. Bakalým bu nesne hangi nitelik ve/veya metotlara sahipmiþ:
+
+>>> dir(snf)
+
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__',
+ '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__',
+ '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__',
+ '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__',
+ '__sizeof__', '__str__', '__subclasshook__', '__weakref__']
+
+Gördüðünüz gibi, biz boþ bir sýnýf tanýmlamýþ olsak da, snf nesnesi öntanýmlý olarak yine de bazý nitelik ve metotlara sahip. Ýþte Python’da, yukarýdaki gibi birtakým nitelik ve metotlara sahip olan bu tür öðelere ‘nesne’ adý veriyoruz.
+
+Bir de isterseniz yukarýdaki gibi boþ bir sýnýf tanýmlamak yerine, sýnýfýmýz içinde kendimiz birtakým nitelik ve metotlar tanýmlamayý da deneyelim:
+
+class Sýnýf():
+sýnýf_niteliði = 'sýnýf niteliði'
+
+def __init__(self):
+self.örnek_niteliði = 'örnek niteliði'
+
+def örnek_metodu(self):
+print('örnek metodu')
+
+@classmethod
+def sýnýf_metodu(cls):
+print('sýnýf metodu')
+
+@staticmethod
+def statik_metot():
+print('statik metot')
+
+Þimdi nesne içeriðini tekrar kontrol edelim:
+
+>>> import sýnýf
+>>> snf = sýnýf.Sýnýf()
+>>> dir(snf)
+
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__',
+ '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__',
+ '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__',
+ '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__',
+ '__sizeof__', '__str__', '__subclasshook__', '__weakref__',
+ 'statik_metot', 'sýnýf_metodu', 'sýnýf_niteliði',
+ 'örnek_metodu', 'örnek_niteliði']
+
+Gördüðünüz gibi, kendi tanýmladýðýmýz nitelik ve metotlar da snf adlý nesne içine eklenmiþ...
+
+Ýþte snf adlý sýnýf örneðinin, yukarýda gösterilen birtakým durum ve davranýþlara sahip olmasýndan yola çýkarak, snf örneðinin bir nesne olduðunu söylüyoruz.
+
+Yukarýdaki açýklamalarýn, ‘nesne’ kavramý hakkýnda en azýndan bir fikir sahibi olmanýzý saðladýðýný zannediyorum. Gördüðünüz gibi, nesne denen þey aslýnda basit bir isimlendirmeden ibarettir: Python’da belli bir durumu/niteliði/metodu/davranýþý olan elemanlara/öðelere nesne (object) adý veriyoruz. Peki o zaman, nesne denen þey basit bir adlandýrmadan ibaretse nesne tabanlý programlamanýn etrafýnda koparýlan bunca yaygaranýn sebebi nedir?
+
+Nesne tabanlý programlamayý bu kadar özel ve önemli kýlan þeyin ne olduðunu anlamak için gelin nesnelere biraz daha yakýndan bakalým.
+

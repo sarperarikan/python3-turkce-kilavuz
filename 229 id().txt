@@ -1,0 +1,19 @@
+
+id()
+
+Python’da her nesnenin bir kimliðinin olduðunu biliyorsunuz. Kimlik iþleçlerini incelediðimiz konuda bundan bir miktar bahsetmiþ ve orada id() adlý bir fonksiyondan söz etmiþtik.
+
+Orada þöyle bir örnek vermiþtik:
+
+>>> a = 50
+>>> id(a)
+
+505494576
+
+>>> kardiz = "Elveda Zalim Dünya!"
+>>> id(kardiz)
+
+14461728
+
+Orada söylediðimiz ve yukarýdaki örneklerden de bir kez daha gördüðünüz gibi, Python’daki her nesnenin kimliði eþþiz, tek ve benzersizdir.
+

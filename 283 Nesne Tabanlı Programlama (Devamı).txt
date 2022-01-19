@@ -1,0 +1,234 @@
+
+Nesne Tabanlý Programlama (Devamý)
+
+Geçen bölümde Python’da nesne tabanlý programlama konusunun temellerinden söz etmiþtik. Bu bölümde ise nesne tabanlý programlamanýn ayrýntýlarýna inmeye baþlayacaðýz.
+
+
+Sýnýf Metotlarý
+
+Nesne tabanlý programlamaya giriþ yaptýðýmýz geçen bölümde þunlara deðindik:
+
+Sýnýflar (classes) 
+Örnekler (instances) 
+Sýnýf nitelikleri (class attributes) 
+Örnek nitelikleri (instance attributes) 
+Örnek metotlarý (instance methods) 
+Bunlar nesne tabanlý programlamanýn en temel kavramlarýdýr. Bunlarý iyice öðrendiyseniz, etrafta gördüðünüz kodlarýn büyük bölümünü anlayabilecek kývama gelmiþsiniz demektir.
+
+Ama elbette nesne tabanlý programlama yalnýzca bu temel kavramlardan ibaret deðil. Nesne tabanlý programlamanýn derinlerine indikçe, bunlarýn dýþýnda baþka pek çok kavramla daha karþýlaþacaðýz. Mesela sýnýf metotlarý (class methods) bu kavramlardan biridir. Ýþte bu bölümde, nesne tabanlý programlamanýn ileri düzey kavramlarýnýn ilki olan bu sýnýf metotlarýndan (class methods) söz edeceðiz.
+
+Dilerseniz ne ile karþý karþýya olduðumuzu anlayabilmek için basit bir örnek üzerinden ilerleyelim.
+
+Hatýrlarsanýz bir önceki bölümde þöyle bir kod parçasý vermiþtik:
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+def personeli_görüntüle(self):
+print('Personel listesi:')
+for kiþi in self.personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Bu kodlarda, bir personel listesi oluþturmamýzý, personele ekleme yapmamýzý, personeli görüntülememizi, personele yeni kabiliyet eklememizi ve eklediðimiz kabiliyetleri görüntüleyebilmemizi saðlayan örnek metotlarý var. Gelin bu kodlara bir de personel sayýsýný görüntülememizi saðlayacak bir baþka örnek metodu daha ekleyelim:
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+def personel_sayýsýný_görüntüle(self):
+print(len(self.personel))
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+def personeli_görüntüle(self):
+print('Personel listesi:')
+for kiþi in self.personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Burada yeni olarak personel_sayýsýný_görüntüle() adlý bir örnek metodu tanýmladýk. Bu metot, bir sýnýf niteliði olan personel‘e eriþerek bunun uzunluðunu ekrana basýyor. Böylece personelin kaç kiþiden oluþtuðunu öðrenmiþ oluyoruz.
+
+Bu yeni örnek metodunu aþaðýdaki þekilde kullanabiliriz.
+
+Öncelikle kodlarýmýzý barýndýran modülü içe aktaralým:
+
+>>> import çalýþan
+
+Daha sonra personel listesine birkaç çalýþan ekleyelim:
+
+>>> ahmet = çalýþan.Çalýþan('Ahmet')
+
+Ahmet adlý kiþi personele eklendi
+
+>>> mehmet = çalýþan.Çalýþan('Mehmet')
+
+Mehmet adlý kiþi personele eklendi
+
+>>> ayþe = çalýþan.Çalýþan('Ayþe')
+
+Ayþe adlý kiþi personele eklendi
+
+Artýk herhangi bir örnek deðiþkeni üzerinden personel sayýsýna eriþebiliriz:
+
+>>> ayþe.personel_sayýsýný_görüntüle()
+
+3
+
+Ancak kodlarýn çalýþma mantýðý açýsýndan burada bir tutarsýzlýktan söz edebiliriz. Genel olarak bütün personele dair bilgi veren bir fonksiyona ahmet, mehmet, ayþe gibi bireysel örnek deðiþkenleri üzerinden eriþmek kulaða sizce de biraz tuhaf gelmiyor mu? Neticede bu fonksiyon, aslýnda sýnýfýn herhangi bir örneði ile özellikle veya doðrudan iliþkili deðil. Yani bu fonksiyon tek tek sýnýf örneklerini deðil, genel olarak sýnýfýn bütününü ilgilendiriyor. Bu bakýmdan, personel_sayýsýný_görüntüle() fonksiyonunun örnek deðiþkenlerinden baðýmsýz bir biçimde kullanýlabilmesi çok daha mantýklý olacaktýr.
+
+Ayrýca, bir örnek metodu olan personel_sayýsýný_görüntüle() fonksiyonunu örneklerden baðýmsýz olarak kullanamadýðýmýz için, bu metot yardýmýyla personel sayýsýnýn 0 olduðu bir durumu görüntülememiz de mümkün olmuyor. Çünkü bu fonksiyona eriþebilmek için öncelikle sýnýfý en az bir kez örneklemiþ, yani sýnýfýn en az bir adet örneðini çýkarmýþ olmamýz gerekiyor. Bu durum da kodlarýmýzýn mantýðý açýsýndan son derece ciddi bir kýsýtlamadýr.
+
+Yukarýda sýralanan gerekçeler doðrultusunda kodlarý hem daha tutarlý bir hale getirmek hem de personel sayýsýnýn 0 olduðu durumu göstermemizi engelleyen kýsýtlamayý aþabilmek için þöyle bir þey deneyebilirsiniz:
+
+def personel_sayýsýný_görüntüle():
+print(len(Çalýþan.personel))
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+def personeli_görüntüle(self):
+print('Personel listesi:')
+for kiþi in self.personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Burada personel sayýsýný görüntüleyen fonksiyonu sýnýftan ayýrdýk. Böylece þu þekilde bir kullaným mümkün olabildi:
+
+>>> import çalýþan
+>>> çalýþan.personel_sayýsýný_görüntüle()
+
+0
+
+personel_sayýsýný_görüntüle() adlý fonksiyonu sýnýftan ayýrýp modül düzeyinde çalýþan bir fonksiyon (veya bir baþka deyiþle global düzeyde çalýþan bir fonksiyon) haline getirdiðimiz için, artýk bu fonksiyon Çalýþan() sýnýfýnýn herhangi bir örneðine baðýmlý deðil. Dolayýsýyla bu fonksiyonu, Çalýþan() sýnýfý için bir örnek çýkarmak zorunda kalmadan da kullanabiliyoruz. Bu da bize personel sayýsýnýn 0 olduðu durumu gösterebilme imkaný tanýyor.
+
+Bu fonksiyonu bir de birkaç örnek çýkardýktan sonra çalýþtýralým...
+
+Önce sýnýfýmýzýn birkaç örneðini çýkaralým:
+
+>>> ahmet = çalýþan.Çalýþan('Ahmet')
+
+Ahmet adlý kiþi personele eklendi
+
+>>> ayþe = çalýþan.Çalýþan('Ayþe')
+
+Ayþe adlý kiþi personele eklendi
+
+>>> mehmet = çalýþan.Çalýþan('Mehmet')
+
+Mehmet adlý kiþi personele eklendi
+
+Þimdi de personelin þu anda kaç kiþiden oluþtuðunu sorgulayalým:
+
+>>> çalýþan.personel_sayýsýný_görüntüle()
+
+3
+
+Gördüðünüz gibi, bu þekilde kodlarýmýz biraz daha tutarlý bir görünüme kavuþtu. Ancak bu þekilde, bariz bir biçimde Çalýþan() sýnýfý ile iliþkili olan personel_sayýsýný_görüntüle() fonksiyonunu sýnýftan ayýrmýþ ve kod bütünlüðünü bozmuþ olduk. Çünkü, her ne kadar personel_sayýsýný_görüntüle() fonksiyonu Çalýþan() sýnýfýnýn herhangi bir örneði ile iliþkili olmasa da, anlam açýsýndan bu fonksiyonun Çalýþan() sýnýfýna ait olduðu besbelli. Ayrýca, yukarýdaki kodlarý barýndýran modülün tamamýný deðil de, from çalýþan import Çalýþan gibi bir komutla yalnýzca Çalýþan() sýnýfýný içe aktarýrsak, personel_sayýsýný_görüntüle() fonksiyonu dýþarýda kalacaktýr:
+
+>>> from çalýþan import Çalýþan
+>>> dir()
+
+Gördüðünüz gibi, personel_sayýsýný_görüntüle() fonksiyonu listede yok. Dolayýsýyla, sýnýfla sýký sýkýya iliþkili olan bu fonksiyonu sýnýftan kopardýðýmýz için, seçmeli içe aktarmalarda bu fonksiyon geride kalýyor ve böylece bu fonksiyonu kullanamaz hale geliyoruz.
+
+Seçmeli içe aktarmalarda bu fonksiyon aktarým iþlemiyle birlikte gelmediði için, ilgili fonksiyonu özel olarak içe aktarmamýz gerekir:
+
+>>> from çalýþan import personel_sayýsýný_görüntüle
+
+Bu þekilde çalýþan modülü içinden personel_sayýsýný_görüntüle() adlý fonksiyonu özel olarak elle içe aktarmýþ olduk. Artýk bu fonksiyonu þöyle kullanabiliriz:
+
+>>> personel_sayýsýný_görüntüle()
+
+Ancak bu da, her zaman tercih etmeyeceðiniz bir kýsýtlama olabilir. O halde bu kýsýtlamayý aþmak için gelin, ilgili fonksiyonu tekrar sýnýf içine alalým:
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+def personel_sayýsýný_görüntüle(self):
+print(len(self.personel))
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+def personeli_görüntüle(self):
+print('Personel listesi:')
+for kiþi in self.personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Yukarýdaki kodlarda ilgili fonksiyona bir örnek adýyla deðil de, sýnýf adýyla eriþmek için ilk etapta þu kodu denemek aklýnýza gelmiþ olabilir:
+
+>>> from çalýþan import Çalýþan
+>>> Çalýþan.personel_sayýsýný_görüntüle()
+
+Ancak bu kod size þöyle bir hata mesajý verir:
+
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+TypeError: personel_sayýsýný_görüntüle() missing
+1 required positional argument: 'self'
+
+Çünkü burada siz Çalýþan.personel_sayýsýný_görüntüle() komutunu vererek aslýnda sýnýfýn bir metoduna (class method) eriþmeye çalýþýyorsunuz. Ancak kodlarýmýzýn içinde bir sýnýf metodu yok. Zira, yukarýda sýnýf adýyla eriþmeye çalýþtýðýmýz personel_sayýsýný_görüntüle() fonksiyonu bir sýnýf metodu deðil, bir örnek metodudur. Örnek metotlarýna da sýnýf adlarýyla eriþmemizin mümkün olmadýðýný, bu tür metotlara eriþebilmek için sýnýfý en az bir kez örneklemiþ olmamýz gerektiðini biliyorsunuz.
+
+Burada, __init__() ve personel_sayýsýný_görüntüle() dýþýnda þu örnek metotlarý var: personel_sayýsýný_görüntüle(), personele_ekle(), personeli_görüntüle(), kabiliyet_ekle(), kabiliyetlerleri_görüntüle(). Bunlarý birer örnek metodu yapan þeyin, self kelimesi olduðunu biliyoruz...
+
+Daha önce de söylediðimiz gibi, her ne kadar Python’da sýnýf niteliklerine hem örnekler hem de doðrudan sýnýf adlarý üzerinden eriþebilsek de örnek niteliklerine ve örnek metotlarýna yalnýzca örnekler üzerinden eriþebiliriz. Bir metoda, sýnýf adý ile eriþebilmek için, ilgili metodu bir sýnýf metodu olarak tanýmlamýþ olmamýz gerekir. Peki ama nasýl?
+

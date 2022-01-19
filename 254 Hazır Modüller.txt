@@ -1,0 +1,35 @@
+
+Hazýr Modüller
+
+Hatýrlarsanýz, Python’da iki farklý fonksiyon türü olduðundan söz etmiþtik:
+
+
+Kendi tanýmladýðýmýz fonksiyonlar 
+Gömülü (‘built-in’) fonksiyonlar 
+
+Ayný þekilde modüller de iki farklý baþlýk altýnda incelenebilir:
+
+
+Kendi tanýmladýðýmýz modüller 
+Hazýr modüller 
+
+Biz burada öncelikle hazýr modülleri ele alacaðýz. Bu þekilde modül kavramýný iyice anladýktan sonra da kendi modüllerimizi nasýl yazacaðýmýzý öðreneceðiz.
+
+Hazýr modüller, Python geliþtiricilerinin veya bizim dýþýmýzdaki Python programcýlarýnýn yazýp hizmetimize sunduðu modüllerdir.
+
+Hazýr modüller de kendi içinde ikiye ayrýlabilir:
+
+
+Standart Kütüphane Modülleri 
+Üçüncü Þahýs Modülleri 
+
+Standart Kütüphane Modülleri, doðrudan Python geliþtiricileri tarafýndan yazýlýp dile kaynaþtýrýlmýþ modüllerdir. Bu yönüyle bu modüller daha önce öðrendiðimiz gömülü fonksiyonlara çok benzer. Týpký gömülü fonksiyonlarda olduðu gibi, Standart Kütüphane Modülleri de her an emrimize amadedir. Biz bunlarý istediðimiz her an, herhangi bir ek yazýlým kurmak zorunda kalmadan, kendi programlarýmýz içinde kullanabiliriz.
+
+Ayrýca bkz.
+
+Python’ýn Standart Kütüphanesi içinde hangi modüllerin olduðunu https://docs.python.org/3/library/ adresinden inceleyebilirsiniz.
+
+Standart Kütüphane içinde, Python ile programlama yaparken iþlerinizi bir hayli kolaylaþtýracak pek çok modül bulacaksýnýz.
+
+Baþta da söylediðimiz gibi, biz bu bölüme gelinceye kadar üstünkörü de olsa modüllerden söz etmiþtik. Örneðin önceki derslerimizde andýðýmýz sys, os, random ve benzeri modüller hep birer Standart Kütüphane modülüdür. Dolayýsýyla bu modüllerin sunduðu iþlevsellikten kendi programlarýmýzda istediðimiz her an yararlanabiliriz.
+

@@ -1,0 +1,19 @@
+
+print()
+
+print() fonksiyonunu artýk gayet iyi tanýyoruz. Bu fonksiyonu, bildiðiniz gibi, kullanýcýlarýmýza birtakým mesajlar göstermek için kullanýyoruz.
+
+Kullanýmýný daha önce ayrýntýlý bir þekilde anlatmýþ olduðumuz bu fonksiyonu þu þekilde formüle edebiliriz:
+
+print(deg1, deg2, deg3, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+
+Burada;
+
+
+degx:Çýktý verilecek deðerlerin ne olduðunu belirtir. Buraya 256 adete kadar deðer yazabilirsiniz. 
+sep:Çýktý verilirken deðerlerin arasýna hangi karakterin yerleþtirileceðini belirtir. Bu deðer öntanýmlý olarak boþluk karakteridir. 
+end:Çýktý verilecek son deðerin ardýndan hangi karakterin iliþtirileceðini belirtir. Bu deðer öntanýmlý olarak satýr baþý (\n) karakteridir. 
+file:Çýktýlarýn hangi dosyaya yazýlacaðýný belirtir. Öntanýmlý olarak bu parametrenin deðeri sys.stdout‘tur. Yani print() fonksiyonu çýktýlarýný öntanýmlý olarak standart çýktý konumuna gönderir. 
+flush:Bildiðiniz gibi, herhangi bir dosyaya yazma iþlemi sýrasýnda dosyaya yazýlacak deðerler öncelikle tampona alýnýr. Ýþlem tamamlandýktan sonra tampondaki bu deðerler topluca dosyaya aktarýlýr. Ýþte bu parametre, deðerleri tampona almadan doðrudan dosyaya gönderebilmemizi saðlar. Bu parametrenin öntanýmlý deðeri False‘tur. Yani deðerler dosyaya yazýlmadan önce öntanýmlý olarak öncelikle tampona gider. Ama eðer biz bu parametrenin deðerini True olarak deðiþtirirsek, deðerler doðrudan dosyaya yazýlýr. 
+
+

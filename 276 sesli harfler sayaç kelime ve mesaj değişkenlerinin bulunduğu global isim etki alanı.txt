@@ -1,0 +1,278 @@
+
+sesli_harfler, sayaç, kelime ve mesaj deðiþkenlerinin bulunduðu global isim/etki alaný. 
+seslidir() fonksiyonunun lokal isim/etki alaný. 
+artýr() fonksiyonunun lokal isim/etki alaný. 
+
+Bildiðiniz gibi, global isim alanýnda bulunan deðiþkenlere her yerden ulaþabiliyoruz. Ancak bunlarý her yerden deðiþtiremiyoruz. Yani mesela global isim alanýnda bulunan sayaç deðiþkeninin deðerini, seslidir() fonksiyonu içinden görüntüleyebiliriz.
+
+Bunu teyit edelim:
+
+sesli_harfler = 'aeýioöuü'
+sayaç = 0
+
+kelime = input('Bir kelime girin: ')
+
+def seslidir(harf):
+print('sayaç deðiþkeninin deðeri þu anda: ', sayaç)
+return harf in sesli_harfler
+
+def artýr():
+global sayaç
+for harf in kelime:
+if seslidir(harf):
+sayaç += 1
+return sayaç
+
+mesaj = '{} kelimesinde {} sesli harf var.'
+print(mesaj.format(kelime, artýr()))
+
+Gördüðünüz gibi, global isim alanýndaki sayaç deðiþkeninin deðerini seslidir() fonksiyonu içinde kullanabildik. Ama eðer bu deðiþken üzerinde deðiþiklik yapacaksak ilave adýmlar atmak zorundayýz. Dolayýsýyla, mesela artýr() fonksiyonunun etki alanýndan, global etki alanýndaki sayaç deðiþkeni üzerinde deðiþiklik yapabilmek için global deyimini kullanmamýz gerekiyor. Bu þekilde, global isim alanýnda bulunan sayaç adlý deðiþkenin deðerini artýrabiliyoruz.
+
+Dikkat ederseniz, artýr() fonksiyonunda iki tane global deðiþken var: sayaç ve kelime. Ama biz bunlardan yalnýzca sayaç deðiþkenini global olarak belirledik. Öbür global deðiþkenimiz kelime için ise bu iþlemi yapmadýk. Çünkü kelime adlý deðiþkeni deðiþtirmek gibi bir niyetimiz yok. Biz bu deðiþkeni sadece kullanmakla yetiniyoruz. O yüzden bu deðiþkeni global olarak belirlemek zorunda deðiliz.
+
+Ancak bildiðiniz gibi, global deyimini kullanmak pek tavsiye edilen bir þey deðil. Eðer siz de bu deyimi kullanmak istemezseniz, yukarýdaki kodlarý þu þekilde yazmayý yeðleyebilirsiniz:
+
+sesli_harfler = 'aeýioöuü'
+sayaç = 0
+
+kelime = input('Bir kelime girin: ')
+
+def seslidir(harf):
+return harf in sesli_harfler
+
+def artýr(sayaç):
+for harf in kelime:
+if seslidir(harf):
+sayaç += 1
+return sayaç
+
+mesaj = '{} kelimesinde {} sesli harf var.'
+print(mesaj.format(kelime, artýr(sayaç)))
+
+Gördüðünüz gibi, bu kodlarda global deyimini kullanmak yerine, artýr() fonksiyonuna verdiðimiz sayaç parametresi üzerinden global isim alanýyla iletiþim kurarak, sayaç deðiþkenini manipüle edebildik. Sadece deðerini kullandýðýmýz global deðiþken kelime için ise özel bir þey yapmamýza gerek kalmadý.
+
+Bu arada, tabii ki, artýr() fonksiyonunda parametre olarak kullandýðýmýz kelime sayaç olmak zorunda deðil. Kodlarýmýzý mesela þöyle de yazabilirdik:
+
+sesli_harfler = 'aeýioöuü'
+sayaç = 0
+
+kelime = input('Bir kelime girin: ')
+
+def seslidir(harf):
+return harf in sesli_harfler
+
+def artýr(n):
+for harf in kelime:
+if seslidir(harf):
+n += 1
+return n
+
+mesaj = '{} kelimesinde {} sesli harf var.'
+print(mesaj.format(kelime, artýr(sayaç)))
+
+Önemli olan, artýr() fonksiyonunun, bizim global isim alanýyla iletiþim kurmamýzý saðlayacak bir parametre almasý. Bu parametrenin adýnýn ne olduðunun bir önemi yok.
+
+Yukarýdaki kodlarda birkaç deðiþiklik daha yaparak, bu kodlarý iyice geniþletilebilir hale getirebiliriz:
+
+sesli_harfler = 'aeýioöuü'
+sayaç = 0
+
+def kelime_sor():
+return input('Bir kelime girin: ')
+
+def seslidir(harf):
+return harf in sesli_harfler
+
+def artýr(sayaç, kelime):
+for harf in kelime:
+if seslidir(harf):
+sayaç += 1
+return sayaç
+
+def ekrana_bas(kelime):
+mesaj = "{} kelimesinde {} sesli harf var."
+print(mesaj.format(kelime, artýr(sayaç, kelime)))
+
+def çalýþtýr():
+kelime = kelime_sor()
+ekrana_bas(kelime)
+
+çalýþtýr()
+
+Bu kodlarda, fonksiyonlara verdiðimiz parametreler yardýmýyla, farklý fonksiyonlarýn lokal etki alanlarýnda yer alan öðeler arasýnda nasýl iletiþim kurduðumuza dikkat edin. Bir önceki kodlarda global etki alanýnda bulunan kelime deðiþkenini bu kez çalýþtýr() fonksiyonunun lokal etki alaný içine yerleþtirdiðimiz için, artýr() fonksiyonu içindeki kelime deðiþkeni boþa düþtü. O yüzden, bu deðiþkeni artýr() fonksiyonuna bir parametre olarak verdik ve ekrana_bas() fonksiyonu içinde bu fonksiyonu çaðýrýrken, hem sayaç hem de kelime argümanlarýný kullandýk.
+
+Ayrýca, kullanýcýya kelime sorup, aldýðý kelimeyi ekrana basan kod parçalarýný, yani programýmýzý baþlatan kodlarý çalýþtýr() baþlýðý altýnda toplayarak bu kýsmý tam anlamýyla ‘modüler’, yani esnek ve takýlýp çýkarýlabilir bir hale getirdik.
+
+Gördüðünüz gibi, yazdýðýmýz kodlarýn olabildiðince anlaþýlýr ve yönetilebilir olmasýný saðlayabilmek için, bu kodlarý küçük birtakým birimlere böldük. Bu þekilde hem hangi iþlevin nerede olduðunu bulmak kolaylaþtý, hem kodlarýn görünüþü daha anlaþýlýr oldu, hem de bu kodlara ileride yeni özellikler eklemek basitleþti. Unutmayýn, bir programcýnýn görevi yalnýzca çalýþan kodlar yazmak deðildir. Programcý ayný zamanda kodlarýnýn okunaklýlýðýný artýrmak ve bakýmýný kolaylaþtýrmakla da yükümlüdür.
+
+Bu bakýmdan, programcý ile kod arasýndaki iliþkiyi, yazar ile kitap arasýndaki iliþkiye benzetebilirsiniz. Týpký bir programcý gibi, yazarýn da görevi aklýna gelenleri bir kaðýda geliþigüzel boca etmek deðildir. Yazar, yazdýðý kitabýn daha anlaþýlýr olmasýný saðlamak için kitabýna bir baþlýk atmalý, yazdýðý yazýlarý alt baþlýklara ve paragraflara bölmeli, ayrýca noktalama iþaretlerini yerli yerinde kullanarak yazýlarýný olabildiðince okunaklý hale getirmelidir. Bir ana baþlýðý ve alt baþlýklarý olmayan, sadece tek bir büyük paragraftan oluþan, içinde hiçbir noktalama iþaretinin kullanýlmadýðý bir makaleyi okumanýn veya bu makaleye sonradan yeni bir þeyler eklemenin ne kadar zor olduðunu düþünün. Ýþte ayný þey bir programcýnýn yazdýðý kodlar için de geçerlidir. Eðer yazdýðýnýz kodlarý anlaþýlýr birimlere bölmeden ekrana yýðarsanýz bu kodlarý ne baþkalarý okuyup anlayabilir, ne de siz ileride bu kodlara yeni iþlevler ekleyebilirsiniz.
+
+Python programlama dili, kodlarýnýzý olabildiðince anlaþýlýr, okunaklý ve yönetilebilir hale getirmeniz için size pek çok araç sunar. Önceki derslerde gördüðümüz deðiþkenler, fonksiyonlar ve modüller bu araçlardan yalnýzca birkaçýdýr. Ýþte bu bölümde inceleyeceðimiz sýnýflar da kodlarýmýzý ehlileþtirmek için kullanacaðýmýz son derece faydalý araçlardýr.
+
+Birazdan, ‘sýnýf’ denen bu faydalý araçlarý enine boyuna inceleyeceðiz. Ama gelin isterseniz, anlatmaya devam etmeden önce, verdiðimiz son kodlarý biraz daha kurcalayalým.
+
+Hatýrlarsanýz, geçen bölümde, yazdýðýmýz Python kodlarýnýn ayný zamanda hem baðýmsýz bir program olarak hem de bir modül olarak kullanýlabileceðini söylemiþtik.
+
+Mesela, yukarýdaki kodlarý sayac.py adlý bir dosyaya kaydettiðimizi varsayarsak, bu programý komut satýrý üzerinden python sayac.py gibi bir kodla çalýþtýrabiliyoruz. Biz bu programý bu þekilde komut satýrý üzerinden veya üzerine çift týklayarak çalýþtýrdýðýmýzda, bu kodlarý baðýmsýz bir program olarak çalýþtýrmýþ oluyoruz. Gelin bir de bu kodlarý bir modül olarak nasýl içe aktaracaðýmýzý inceleyelim.
+
+Þimdi, sayac.py programýnýn bulunduðu dizin altýnda Python komut satýrýný baþlatalým ve orada þu komutu vererek sayac modülünü içe aktaralým:
+
+>>> import sayac
+
+Bu komutu verdiðimiz anda, sayac.py programý çalýþmaya baþlayacaktýr. Ancak bizim istediðimiz þey bu deðil. Biz sayac.py programýnýn çalýþmaya baþlamasýný istemiyoruz. Bizim istediðimiz þey, bu sayac.py dosyasýný baðýmsýz bir program olarak deðil, bir modül olarak kullanmak ve böylece bu modül içindeki nitelik ve fonksiyonlara eriþmek. Tam bu noktada þöyle bir soru aklýmýza geliyor: Acaba bir insan neden bir programý modül olarak içe aktarmak istiyor olabilir?
+
+Bir Python dosyasýna modül olarak eriþmek istemenizin birkaç sebebi olabilir. Mesela bir program yazýyorsunuzdur ve amacýnýz yazdýðýnýz kodlarýn düzgün çalýþýp çalýþmadýðýný test etmektir. Bunun için, programýnýzý etkileþimli kabuk ortamýna bir modül olarak aktarýp, bu modülün test etmek istediðiniz kýsýmlarýný tek tek çalýþtýrabilirsiniz. Ayný þekilde, kendi yazdýðýnýz veya baþkasý tarafýndan yazýlmýþ bir program içindeki iþlevsellikten baþka bir program içinde de yararlanmak istiyor olabilirsiniz. Ýþte bunun için de, ilgili programý, baþka bir program içinden çaðýrarak, yani o programý öteki program içine bir modül olarak aktararak, ilgili modül içindeki iþlevleri kullanabilirsiniz.
+
+Diyelim ki biz, yukarýda yazdýðýmýz sayac.py adlý dosya içindeki kodlarýn düzgün çalýþýp çalýþmadýðýný kontrol etmek istiyoruz. Bunun için sayac.py dosyasýndaki kodlarda þu deðiþikliði yapalým:
+
+sesli_harfler = 'aeýioöuü'
+sayaç = 0
+
+def kelime_sor():
+return input('Bir kelime girin: ')
+
+def seslidir(harf):
+return harf in sesli_harfler
+
+def artýr(sayaç, kelime):
+for harf in kelime:
+if seslidir(harf):
+sayaç += 1
+return sayaç
+
+def ekrana_bas(kelime):
+mesaj = "{} kelimesinde {} sesli harf var."
+print(mesaj.format(kelime, artýr(sayaç, kelime)))
+
+def çalýþtýr():
+kelime = kelime_sor()
+ekrana_bas(kelime)
+
+if __name__ == '__main__':
+çalýþtýr()
+
+Gördüðünüz gibi, burada çalýþtýr() fonksiyonunu if __name__ == '__main__' bloðuna aldýk. Buna göre, eðer __name__ niteliðinin deðeri ‘__main__’ ise çalýþtýr() fonksiyonu iþlemeye baþlayacak. Aksi halde herhangi bir þey olmayacak.
+
+Þimdi sayac.py programýný komut satýrý üzerinden python sayac.py gibi bir komutla çalýþtýrýn. Programýnýz normal bir þekilde çalýþacaktýr. Çünkü, bildiðiniz gibi, bir Python programý baðýmsýz bir program olarak çalýþtýrýldýðýnda __name__ niteliðinin deðeri ‘__main__’ olur. Dolayýsýyla da çalýþtýr() fonksiyonu iþlemeye baþlar.
+
+Þimdi de etkileþimli kabuðu tekrar açýn ve þu komutu vererek modülü içe aktarýn:
+
+>>> import sayac
+
+Bu defa programýmýz çalýþmaya baþlamadý. Çünkü bu kez, programýmýzý bir modül olarak içe aktardýðýmýz için, __name__ niteliðinin deðeri ‘__main__’ deðil, ilgili modülün adý oldu (yani bizim örneðimizde sayac).
+
+Böylece __name__ niteliðinin farklý durumlarda farklý bir deðere sahip olmasýndan yararlanarak, programýnýzýn farklý durumlarda farklý tepkiler vermesini saðlamýþ olduk.
+
+sayac modülünü içe aktardýktan sonra, bu modülün içinde neler olduðunu nasýl kontrol edebileceðinizi biliyorsunuz:
+
+>>> dir(sayac)
+
+['__builtins__', '__cached__', '__doc__', '__file__', '__loader__',
+ '__name__', '__package__', '__spec__', 'artýr', 'ekrana_bas',
+ 'kelime_sor', 'sayaç', 'sesli_harfler', 'seslidir', 'çalýþtýr']
+
+Bu listede, sayac modülüne ait bütün nitelik ve fonksiyonlarý görebiliyoruz. Bunlarý, baþka modüllerde olduðu gibi kullanma imkanýna sahibiz.
+
+Mesela bu listede görünen seslidir() fonksiyonunu kullanalým:
+
+>>> sayac.seslidir('ö')
+
+True
+
+>>> sayac.seslidir('ç')
+
+False
+
+Gördüðünüz gibi, sayac.py içinde tanýmladýðýmýz seslidir() fonksiyonunu, rastgele harflerin birer sesli harf olup olmadýðýný denetlemek için de kullanabiliyoruz. Bu þekilde ayný zamanda seslidir() fonksiyonunun düzgün bir þekilde çalýþýp çalýþmadýðýný, sesli olan ve olmayan harfleri baþarýlý bir þekilde birbirinden ayýrt edip edemediðini de test etmiþ oluyoruz.
+
+Devam edelim:
+
+>>> sayac.sesli_harfler
+
+'aeýioöuü'
+
+Modüllerin ne kadar faydalý araçlar olabileceðini bu örnek gayet net bir þekilde gösteriyor. Eðer ileride sesli harfleri kullanmamýzý gerektiren baþka bir program yazacak olursak, bu harfleri yeniden tanýmlamak yerine, sayac.py dosyasýndan içe aktarabiliriz.
+
+Bütün bu örnekler sayesinde, sýnýflarý daha iyi anlamamýzý saðlayacak altyapýyý oluþturmuþ, bir yandan da eski bilgilerimizi pekiþtirmiþ olduk. Dilerseniz, sýnýflarý anlatmaya geçmeden önce, yukarýda verdiðimiz kodlarý sýnýflý bir yapý içinde nasýl ifade edebileceðimizi de görelim.
+
+Elbette aþaðýdaki kodlarý anlamanýzý þu aþamada sizden beklemiyoruz. Bu bölümün sonuna vardýðýmýzda, zihninizde her þey berraklaþmýþ olacak. Siz þimdilik sadece aþaðýdaki kodlara bakýn ve hem okunaklýlýk hem de yönetilebilirlik bakýmýndan bu kodlarýn bize ne gibi faydalar saðlýyor olabileceðine dair fikir yürütmeye çalýþýn. Anlamadýðýnýz kýsýmlar olursa bunlarý geçin gitsin. Anladýðýnýz kýsýmlar ise yanýnýza kâr kalsýn.
+
+class HarfSayacý:
+def __init__(self):
+self.sesli_harfler = 'aeýioöuü'
+self.sayaç = 0
+
+def kelime_sor(self):
+return input('Bir kelime girin: ')
+
+def seslidir(self, harf):
+return harf in self.sesli_harfler
+
+def artýr(self):
+for harf in self.kelime:
+if self.seslidir(harf):
+self.sayaç += 1
+return self.sayaç
+
+def ekrana_bas(self):
+mesaj = "{} kelimesinde {} sesli harf var."
+sesli_harf_sayýsý = self.artýr()
+print(mesaj.format(self.kelime, sesli_harf_sayýsý))
+
+def çalýþtýr(self):
+self.kelime = self.kelime_sor()
+self.ekrana_bas()
+
+if __name__ == '__main__':
+sayaç = HarfSayacý()
+sayaç.çalýþtýr()
+
+Hakkýnda herhangi bir fikre sahip olmadýðýnýz bir kod parçasýný anlamanýn en iyi yolu, anlamadýðýnýz kýsmý kodlardan çýkarýp, kodlarý bir de o þekilde çalýþtýrmaktýr. Mesela yukarýdaki __init__, self ve class gibi öðelerin ismini deðiþtirin, bunlarý kodlardan çýkarýn veya baþka bir yere koyun. Elde ettiðiniz sonuçlarý gözlemleyerek bu kodlar hakkýnda en azýndan bir fikir sahibi olabilirsiniz.
+
+Gelin isterseniz, henüz yukarýdaki kodlarý anlayabilecek kadar sýnýf bilgisine sahip olmasak da, bu kodlarý þöyle bir üstünkörü gözden geçirerek, bu kodlarýn programcýlýk deneyimimiz açýsýndan bize ne gibi bir katký sunuyor olabileceðini anlamaya çalýþalým.
+
+Yukarýdaki kodlarda dikkatimizi çeken ilk þey, bu kodlarýn son derece derli toplu görünüyor olmasýdýr. Öyle ki, HarfSayacý adlý sýnýf içindeki fonksiyonlar sanki ipe dizilir gibi dizilmiþ.
+
+HarfSayacý adlý sýnýf ile bu sýnýf yapýsý içinde yer alan fonksiyonlar arasýndaki iliþki gayet net bir þekilde görünüyor. Eðer ileride bu sayaca yeni bir iþlev eklemek istersek, neyi nereye yerleþtirmemiz gerektiði çok açýk. Mesela ilerde bu kodlara sesli harflerle birlikte bir de sessiz harf denetim iþlevi eklemek istersek, gerekli deðiþiklikleri kolayca yapabiliriz:
+
+class HarfSayacý:
+def __init__(self):
+self.sesli_harfler = 'aeýioöuü'
+self.sessiz_harfler = 'bcçdfgðhjklmnprsþtvyz'
+self.sayaç_sesli = 0
+self.sayaç_sessiz = 0
+
+def kelime_sor(self):
+return input('Bir kelime girin: ')
+
+def seslidir(self, harf):
+return harf in self.sesli_harfler
+
+def sessizdir(self, harf):
+return harf in self.sessiz_harfler
+
+def artýr(self):
+for harf in self.kelime:
+if self.seslidir(harf):
+self.sayaç_sesli += 1
+if self.sessizdir(harf):
+self.sayaç_sessiz += 1
+return (self.sayaç_sesli, self.sayaç_sessiz)
+
+def ekrana_bas(self):
+sesli, sessiz = self.artýr()
+mesaj = "{} kelimesinde {} sesli {} sessiz harf var."
+print(mesaj.format(self.kelime, sesli, sessiz))
+
+def çalýþtýr(self):
+self.kelime = self.kelime_sor()
+self.ekrana_bas()
+
+if __name__ == '__main__':
+sayaç = HarfSayacý()
+sayaç.çalýþtýr()
+
+Ayrýca sýnýflý kodlarda, farklý etki alanlarý ile iletiþim kurmak, sýnýfsýz kodlara kýyasla daha zahmetsizdir. Sýnýflý ve sýnýfsýz kodlarda fonksiyonlara verdiðimiz parametreleri birbirleri ile kýyaslayarak bu durumu kendiniz de görebilirsiniz.
+
+Sýnýflý yapýlarýn daha pek çok avantajlý yönü vardýr. Ýþte biz bu bölümde bunlarý size tek tek göstermeye çalýþacaðýz.
+

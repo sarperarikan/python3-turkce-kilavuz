@@ -1,0 +1,72 @@
+
+enumerate()
+
+Ýngilizcede enumerate kelimesi ‘numaralandýrmak’ anlamýna gelir. enumerate() fonksiyonunun görevi de kelimenin bu anlamýyla aynýdýr. Yani bu fonksiyonu kullanarak nesneleri numaralandýrabiliriz.
+
+Bu fonksiyon bize bir ‘enumerate’ nesnesi verir:
+
+>>> enumerate('istihza')
+
+<class 'enumerate'>
+
+Bu nesnenin içeriðine nasýl eriþebileceðimizi biliyorsunuz:
+
+Nesneyi bir listeye çevirebiliriz:
+
+>>> list(enumerate('istihza'))
+
+[(0, 'i'), (1, 's'), (2, 't'), (3, 'i'), (4, 'h'), (5, 'z'), (6, 'a')]
+
+veya:
+
+>>> [i for i in enumerate('istihza')]
+
+[(0, 'i'), (1, 's'), (2, 't'), (3, 'i'), (4, 'h'), (5, 'z'), (6, 'a')]
+
+print() fonksiyonuna yýldýzlý parametre olarak verebiliriz:
+
+>>> print(*enumerate('istihza'))
+
+(0, 'i') (1, 's') (2, 't') (3, 'i') (4, 'h') (5, 'z') (6, 'a')
+
+veya nesne üzerinde bir döngü kurabiliriz:
+
+>>> for i in enumerate('istihza'):
+... print(i)
+...
+(0, 'i')
+(1, 's')
+(2, 't')
+(3, 'i')
+(4, 'h')
+(5, 'z')
+(6, 'a')
+
+Gördüðünüz gibi, ‘enumerate’ nesnesi bize her koþulda iki öðeli demetler veriyor. Bu demetlerin herbir öðesine nasýl ulaþabileceðimizi de biliyor olmalýsýnýz:
+
+>>> for sýra, öðe in enumerate('istihza'):
+... print("{}. {:>2}".format(sýra, öðe))
+...
+0.  i
+1.  s
+2.  t
+3.  i
+4.  h
+5.  z
+6.  a
+
+Örneklerden de gördüðünüz gibi, enumerate() fonksiyonu bize bir dizi içindeki öðelerin sýrasýný ve öðenin kendisini içeren bir demet veriyor. Dikkat ettiyseniz, her zaman olduðu gibi, Python burada da saymaya 0’dan baþlýyor. Yani enumerate() fonksiyonunun ürettiði öðe sýralamasýnda ilk öðenin sýrasý 0 oluyor. Elbette eðer isterseniz enumerate() fonksiyonunun saymaya kaçtan baþlayacaðýný kendiniz de belirleyebilirsiniz:
+
+>>> for sýra, öðe in enumerate('istihza', 1):
+... print("{}. {:>2}".format(sýra, öðe))
+...
+1.  i
+2.  s
+3.  t
+4.  i
+5.  h
+6.  z
+7.  a
+
+enumerate() fonksiyonuna verdiðimiz ikinci parametre saymaya kaçtan baþlanacaðýný gösteriyor. Eðer bu fonksiyonu ikinci parametre olmadan kullanýrsak Python bizim saymaya 0’dan baþlamak istediðimizi varsayacaktýr.
+

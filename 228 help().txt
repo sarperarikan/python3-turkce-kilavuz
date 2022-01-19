@@ -1,0 +1,35 @@
+
+help()
+
+help() fonksiyonu gömülü fonksiyonlar içinde en faydalý fonksiyonlarýn baþýnda gelir. Bu fonksiyonu kullanarak Python programlama diline ait öðelere iliþkin yardým belgelerine ulaþabiliriz. Örneðin:
+
+>>> help(dir)
+
+Bu komutu verdiðimizde dir() fonksiyonunun ne iþe yaradýðýný gösteren Ýngilizce bir belgeye ulaþýrýz. Gördüðünüz gibi, hakkýnda bilgi edinmek istediðimiz öðeyi help() fonksiyonuna parametre olarak vererek ilgili yardým dosyasýna eriþebiliyoruz.
+
+Eðer bu fonksiyonu parametresiz olarak kullanýrsak ‘etkileþimli yardým’ denen ekrana ulaþýrýz:
+
+>>> help()
+
+Welcome to Python 3.3!  This is the interactive help utility.
+
+If this is your first time using Python, you should definitely check out
+the tutorial on the Internet at http://docs.python.org/3.3/tutorial/.
+
+Enter the name of any module, keyword, or topic to get help on writing
+Python programs and using Python modules.  To quit this help utility and
+return to the interpreter, just type "quit".
+
+To get a list of available modules, keywords, or topics, type "modules",
+"keywords", or "topics".  Each module also comes with a one-line summary
+of what it does; to list the modules whose summaries contain a given word
+such as "spam", type "modules spam".
+
+help>
+
+Bu ekranda, hakkýnda bilgi edinmek istediðiniz öðeyi help> ibaresinden hemen sonra, boþluk býrakmadan yazarak öðeye iliþkin bilgilere ulaþabilirsiniz:
+
+help> dir
+
+Etkileþimli yardým ekranýndan çýkmak için ‘q’ harfine basabilirsiniz.
+

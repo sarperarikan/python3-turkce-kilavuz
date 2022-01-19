@@ -1,0 +1,139 @@
+
+Metottan Niteliğe
+
+Şimdiye kadar verdiğimiz örneklerden anlamış olabileceğiniz gibi, bir sınıf içinde salt verileri tutan değişkenlere ‘nitelik’ adı veriyoruz. Mesela:
+
+class Falanca():
+nitelik = 'nitelik'
+
+def __init__(self):
+self.nitelik = 'nitelik'
+
+Burada nitelik bir sınıf niteliği, self.nitelik ise bir örnek niteliğidir.
+
+Buna karşılık, bir sınıf içinde fonksiyon biçiminde yer alan ve bir işlemi veya prosedürü yerine getiren öğelere ise metot adı veriyoruz. Mesela:
+
+class Falanca():
+def __init__(self):
+pass
+
+def örnek_fonk(self):
+pass
+
+@classmethod
+def sınıf_fonk(cls):
+pass
+
+@staticmethod
+def statik_fonk():
+pass
+
+Burada örnek_fonk() adlı fonksiyon bir örnek metodu, sınıf_fonk() adlı fonksiyon bir sınıf metodu, statik_fonk() adlı fonksiyon ise bir statik metottur. Metotlar ile niteliklerin gerçekleştirebilecekleri işlemlerin karmaşıklığının birbirinden farklı olmasının yanısıra, bunlar arasında kullanım açısından da farklılık vardır. Mesela Falanca() sınıfı içindeki nitelik adlı sınıf niteliğini şu şekilde kullanıyoruz:
+
+>>> Falanca.nitelik
+>>> Falanca.nitelik = 'yeni değer'
+
+Aynı sınıf içindeki sınıf_fonk() adlı sınıf metoduna ise şöyle erişiyoruz:
+
+>>> Falanca.sınıf_fonk()
+
+Niteliklerin aksine, metotlarda atama yoluyla değer değiştirme gibi bir şey söz konusu değildir. Yani şuna benzer bir şey yazamayız:
+
+>>> Falanca.sınıf_fonk() = 'yeni değer'
+
+Eğer metot bir parametre alıyorsa (yukarıdaki örneklerde metotlar parametre almıyor), bu parametreyi kullanarak metotla iletişim kurabiliriz. Mesela:
+
+>>> Falanca.sınıf_fonk(yeni_değer)
+
+Property kelimesi (attribute kelimesine benzer bir şekilde) İngilizcede ‘özellik, nitelik’ gibi anlamlara gelir. Kelime anlamına uygun olarak, @property bezeyicisinin yaptığı en temel iş, bir metodu, nitelik gibi kullanılabilecek hale getirmektir. Çok basit bir örnek verelim:
+
+class Program():
+def __init__(self):
+pass
+
+def versiyon(self):
+return '0.1'
+
+Burada versiyon() adlı bir örnek metodu tanımladık. Bu programı şöyle kullanıyoruz:
+
+>>> program = Program()
+>>> program.versiyon()
+
+'0.1'
+
+Şimdi programımızda şu değişikliği yapalım:
+
+class Program():
+def __init__(self):
+pass
+
+@property
+def versiyon(self):
+return '0.1'
+
+Burada versiyon() adlı metodu @property bezeyicisi ile ‘bezedik’. Böylece bu metodu bir ‘nitelik’ haline getirmiş olduk. Artık bunu şöyle kullanabiliriz:
+
+>>> program = Program()
+>>> program.versiyon
+
+'0.1'
+
+versiyon() fonksiyonunu, @property bezeyicisi yardımıyla bir niteliğe dönüştürdüğümüz için, artık bu fonksiyonu parantezsiz kullandığımıza dikkat edin.
+
+Gördüğünüz gibi, @property bezeyicisinin ilk görevi bir metodu niteliğe dönüştürmek. Peki acaba neden bir metodu niteliğe dönüştürmek istiyor olabiliriz?
+
+Şöyle bir program yazdığınızı düşünün:
+
+class Program():
+def __init__(self):
+self.data = 0
+
+Yazdığınız bu programı kullananlar, sınıf içindeki data niteliğine şu şekilde erişiyor:
+
+>>> p = Program()
+>>> p.data
+
+0
+
+Hatta duruma göre bu niteliği şu şekilde değişikliğe de uğratıyor:
+
+>>> p.data = 1
+
+Günün birinde, ‘data’ kelimesi yerine ‘veri’ kelimesinin daha uygun olduğunu düşünerek, ‘data’ kelimesini ‘veri’ olarak değiştirmek istediğinizi varsayalım. Bunun için kodlarınızda şu değişikliği yapabilirsiniz:
+
+class Program():
+def __init__(self):
+self.veri = 0
+
+Ancak bu şekilde, programınızı eskiden beri kullananların, sizin yazdığınız bu programı temel alarak oluşturdukları programları bozmuş oldunuz... Çünkü eğer bu programdan faydalanan birisi, yazdığı kodda eski self.data değişkenini kullanmışsa, yukarıdaki isim değişikliği yüzünden programı kullanılamaz hale gelecektir. İşte bunu önlemek için @property bezeyicisini kullanabilirsiniz.
+
+Dikkatlice bakın:
+
+class Program():
+def __init__(self):
+self.veri = 0
+
+@property
+def data(self):
+return self.veri
+
+Bu şekilde, self.data niteliğine yapılan bütün çağrılar data() adlı metot vasıtasıyla self.veri niteliğine yönlendirilecek. Böylece başkalarının bu programı kullanarak yazdığı eski kodları bozmadan, programımızda istediğimiz değişikliği yapmış olduk. Yani programımızda geriye dönük uyumluluğu (backwards compatibility) sağlamış olduk.
+
+Yukarıdaki kodlarda @property bezeyicisini kullanarak data() metodunu bir niteliğe dönüştürdüğümüz için artık şöyle bir kullanım mümkün:
+
+>>> p = Program()
+>>> p.data
+
+0
+
+>>> p.veri
+
+0
+
+Bu yapıda, self.veri üzerindeki değişiklikler self.data niteliğine de yansıyacaktır:
+
+>>> p.veri = 5
+>>> p.data
+
+5
+

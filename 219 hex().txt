@@ -1,0 +1,11 @@
+
+hex()
+
+Bu fonksiyon, bir sayýyý onaltýlý düzendeki karþýlýðýna çevirmemizi saðlar:
+
+>>> hex(305)
+
+'Ox131'
+
+Yalnýz hem oct() hem de hex() fonksiyonlarýnda dikkat etmemiz gereken þey, bu fonksiyonlarýn parametre olarak bir sayý alýp, çýktý olarak bir karakter dizisi veriyor olmasýdýr.
+

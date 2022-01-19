@@ -1,0 +1,5 @@
+
+input()
+
+Bu fonksiyonun ne iþe yaradýðýný gayet iyi biliyorsunuz. input() adlý bu gömülü fonksiyonu kullanarak kullanýcý ile veri alýþveriþinde bulunabiliyoruz.
+

@@ -1,0 +1,31 @@
+
+from modül_adý import isim as farklý_isim
+
+Bir modülü, kendi adýndan farklý bir adla nasýl içe aktarabileceðinizi biliyorsunuz:
+
+import subprocess as sp
+
+Bu þekilde subprocess modülünü sp adýyla içe aktarmýþ oluyoruz.
+
+Ayný þekilde, bir modül içinden belli nitelik ve fonksiyonlarý da nasýl içe aktaracaðýnýzý biliyorsunuz:
+
+from os import path, listdir
+
+Bu þekilde os modülünden path niteliðini ve listdir() fonksiyonunu içe aktarmýþ oluyoruz.
+
+Peki ya bir modül içinden belli nitelik ve fonksiyonlarý farklý bir adla içe aktarmak isterseniz ne yapacaksýnýz?
+
+Ýþte Python size bunun için de bir yol sunar. Dikkatlice bakýn:
+
+from os import path as p
+
+veya:
+
+from os import listdir as ld
+
+gibi...
+
+Bu örneklerde, os modülü içinden path adlý niteliði p adýyla; listdir() fonksiyonunu ise ld adýyla içe aktardýk. Böylece path niteliðini p adýyla; listdir() fonksiyonunu da ld adýyla kullanabiliriz.
+
+Yalnýz bu yöntem çok sýk kullanýlmaz. Bunu da not edip, içe aktarma yöntemlerinin sonuncusuna geçelim.
+

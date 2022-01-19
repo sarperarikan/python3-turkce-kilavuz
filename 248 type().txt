@@ -1,0 +1,9 @@
+
+type()
+
+type() fonksiyonunun görevi bir nesnenin hangi veri tipine ait olduðunu söylemektir. Bu fonksiyonu artýk yakýndan tanýyorsunuz:
+
+>>> type('elma')
+
+<class 'str'>
+

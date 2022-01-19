@@ -1,0 +1,165 @@
+
+__name__ Niteliði
+
+Þöyle bir program yazdýðýmýzý varsayalým:
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming"}
+
+def ara(sözcük):
+hata = "{} kelimesi sözlükte yok!"
+print(sözlük.get(sözcük, hata.format(sözcük)))
+
+def ekle(sözcük, anlam):
+mesaj = "{} kelimesi sözlüðe eklendi!"
+sözlük[sözcük] = anlam
+print(mesaj.format(sözcük))
+
+def sil(sözcük):
+try:
+sözlük.pop(sözcük)
+except KeyError as err:
+print(err, "kelimesi bulunamadý!")
+else:
+print("{} kelimesi sözlükten silindi!".format(sözcük))
+
+no = input('Yapmak istediðiniz iþlemin numarasýný girin: ')
+print('1. Sözlükte kelime ara')
+print('2. Sözlüðe kelime ekle')
+print('3. Sözlükten kelime sil')
+
+if no == '1':
+sözcük = input('Aradýðýnýz sözcük: ')
+ara(sözcük)
+
+elif no == '2':
+sözcük = input('Ekleyeceðiniz sözcük: ')
+anlam = input('Eklediðiniz sözcüðün anlamý: ')
+ekle(sözcük, anlam)
+
+elif no == '3':
+sözcük = input('Sileceðiniz sözcük: ')
+sil(sözcük)
+
+else:
+print('Yanlýþ iþlem')
+
+sözlük.py adýný verdiðimiz bu programý normal bir þekilde komut satýrýnda
+
+python sözlük.py
+
+gibi bir komutla çalýþtýrdýðýmýzda bize birtakým sorular sorulacak ve verdiðimiz cevaplara göre sözlük üzerinde bazý iþlemler yapýlacaktýr.
+
+Hatýrlarsanýz, modüller konusunu anlatmaya baþlarken, yazdýðýmýz bütün programlarýn aslýnda birer modül olduðunu, dolayýsýyla bunlarýn baþka programlarýn içine aktarýlarak, sahip olduklarý iþlevlerden baþka programlarda da yararlananýlabileceðini söylemiþtik.
+
+Yukarýdaki kodlarý, komut satýrý üzerinde baðýmsýz bir program gibi çalýþtýrabiliyoruz. Peki acaba biz bu programý doðrudan çalýþtýrmak deðil de baþka bir programýn içine aktarýp sahip olduðu iþlevlerden yararlanmak istersek ne yapacaðýz?
+
+Ýþte bunun için __name__ adlý bir nitelikten yararlanacaðýz.
+
+Python’daki herhangi bir modülü içe aktardýktan sonra bu modül üzerine dir() fonksiyonunu uygularsanýz, istisnasýz her modülün __name__ adlý bir niteliði olduðunu görürsünüz.
+
+__name__ niteliði iki farklý deðer alabilir: Ýçinde bulunduðu modülün adý veya "__main__" adlý özel bir deðer.
+
+Eðer bir Python programý baþka bir program içinden modül olarak içe aktarýlýyorsa, __name__ niteliðinin deðeri o modülün adý olacaktýr.
+
+Eðer bir Python programý doðrudan baðýmsýz bir program olarak çalýþtýrýlýyorsa, __name__ niteliðinin deðeri bu defa "__main__" olacaktýr.
+
+Gelin isterseniz bu durumu bir örnek üzerinde somutlaþtýralým. Mesela masaüstünde deneme.py adlý bir dosya oluþturup içine sadece þunu yazalým:
+
+print(__name__)
+
+Þimdi önce bu dosyayý baðýmsýz bir program olarak çalýþtýralým:
+
+python deneme.py
+
+Programýmýzý bu þekilde çalýþtýrdýðýmýzda alacaðýmýz çýktý þu olacaktýr:
+
+__main__
+
+Demek ki __name__ niteliðinin deðeri "__main__" imiþ...
+
+Þimdi de deneme.py dosyasýnýn bulunduðu konumda Python’ýn etkileþimli kabuðunu çalýþtýralým ve þu komut yardýmýyla bu dosyayý bir modül olarak içe aktaralým:
+
+>>> import deneme
+
+Bu defa þu çýktýyý aldýk:
+
+deneme
+
+Gördüðünüz gibi, __name__ niteliðinin deðeri bu kez de modül dosyasýnýn adý oldu.
+
+Ýþte bu özellikten yararlanarak, yazdýðýnýz programlarýn baðýmsýz çalýþtýrýlýrken ayrý, modül olarak içe aktarýlýrken ayrý davranmasýný saðlayabilirsiniz.
+
+Gelin bu bilgiyi yukarýdaki sözlük.py dosyasýna uygulayalým.
+
+Bu programý komut satýrý üzerinde baðýmsýz bir program olarak çalýþtýrdýðýnýzda ne olacaðýný biliyorsunuz. Peki ya ayný programý bir modül olarak içe aktarýrsak ne olur?
+
+Deneyelim:
+
+>>> import sözlük
+
+Yapmak istediðiniz iþlemin numarasýný girin:
+
+Gördüðünüz gibi, programýmýz doðrudan çalýþmaya baþladý. Ama biz bunu istemiyoruz. Biz istiyoruz ki, sözlük.py bir modül olarak aktarýldýðýnda çalýþmaya baþlamasýn. Ama biz onun içindeki nitelikleri kullanabilelim.
+
+Bunun için sözlük.py dosyasýnda þu deðiþikliði yapacaðýz:
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming"}
+
+def ara(sözcük):
+hata = "{} kelimesi sözlükte yok!"
+print(sözlük.get(sözcük, hata.format(sözcük)))
+
+def ekle(sözcük, anlam):
+mesaj = "{} kelimesi sözlüðe eklendi!"
+sözlük[sözcük] = anlam
+print(mesaj.format(sözcük))
+
+def sil(sözcük):
+try:
+sözlük.pop(sözcük)
+except KeyError as err:
+print(err, "kelimesi bulunamadý!")
+else:
+print("{} kelimesi sözlükten silindi!".format(sözcük))
+
+#BURAYA DÝKKAT!!!
+if __name__ == '__main__':
+no = input('Yapmak istediðiniz iþlemin numarasýný girin: ')
+print('1. Sözlükte kelime ara')
+print('2. Sözlüðe kelime ekle')
+print('3. Sözlükten kelime sil')
+
+if no == '1':
+sözcük = input('Aradýðýnýz sözcük: ')
+ara(sözcük)
+
+elif no == '2':
+sözcük = input('Ekleyeceðiniz sözcük: ')
+anlam = input('Eklediðiniz sözcüðün anlamý: ')
+ekle(sözcük, anlam)
+
+elif no == '3':
+sözcük = input('Sileceðiniz sözcük: ')
+sil(sözcük)
+
+else:
+print('Yanlýþ iþlem')
+
+Gördüðünüz gibi, çok basit bir if deyimi yardýmýyla dosyamýzýn baðýmsýz bir program olarak mý çalýþtýrýldýðýný yoksa bir modül olarak içe mi aktarýldýðýný kontrol ettik. Eðer __name__ niteliðinin deðeri ‘__main__’ ise, yani programýmýz baðýmsýz olarak çalýþtýrýlýyorsa if bloðu içindeki kodlarý iþletiyoruz. Eðer bu niteliðin deðeri baþka bir þey ise (yani modülün adý ise), bu durumda programýmýz bir modül olarak içe aktarýlýyor demektir. Bu durumda if bloðu içindeki kodlarý çalýþtýrmýyoruz...
+
+Her þeyin yolunda olup olmadýðýný kontrol etmek için sözlük modülünü içe aktaralým:
+
+>>> import sözlük
+
+Bu kez, tam da istediðimiz þekilde, programýmýz doðrudan çalýþmaya baþlamadan bize içindeki fonksiyonlarý kullanma imkaný sundu:
+
+>>> dir(sözlük)
+
+['__builtins__', '__cached__', '__doc__', '__file__',
+ '__loader__', '__name__', '__package__', '__spec__',
+ 'ara', 'ekle', 'sil', 'sözlük']
+

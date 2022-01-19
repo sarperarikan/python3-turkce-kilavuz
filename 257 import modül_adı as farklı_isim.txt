@@ -1,0 +1,69 @@
+
+import modül_adý as farklý_isim
+
+Bazý koþullar, bir modülü kendi adýyla deðil de baþka bir isimle içe aktarmanýzý gerektirebilir. Ya da siz bir modülü kendi adý dýþýnda bir adla içe aktarmanýn daha iyi bir fikir olduðunu düþünebilirsiniz.
+
+Peki ama ne tür koþullar bir modülü farklý bir adla içe aktarmamýzý gerektirebilir veya biz hangi sebeple bir modülü farklý adla içe aktarmayý isteyebiliriz?
+
+Bu sorularýn cevabýný verebilmek için, gelin isterseniz subprocess adlý bir Standart Kütüphane modülünden yararlanalým. Hem bu vesileyle yeni bir modül de öðrenmiþ oluruz...
+
+Not
+
+subprocess modülü, harici komutlarý Python içinden çalýþtýrabilmemizi saðlayan oldukça faydalý bir araçtýr. Bu modülü kullanarak Python programlarýmýz içinden, baþka programlarý çalýþtýrabiliriz.
+
+Bir modülün içindeki fonksiyon ve nitelikleri her kullanmak isteyiþimizde, o fonksiyon veya niteliðin baþýna modül adýný da eklememiz gerektiðini artýk gayet iyi biliyorsunuz. Örneðin subprocess adlý modülü
+
+>>> import subprocess
+
+komutuyla içe aktardýktan sonra, bu modül içindeki herhangi bir fonksiyon veya niteliði kullanabilmenin birinci þartý, modül adýný ilgili fonksiyon veya niteliðin önüne getirmektir. Mesela biz subprocess modülünün call() adlý fonksiyonunu kullanmak istersek, þöyle bir kod yazmamýz gerekir:
+
+>>> subprocess.call('notepad.exe')
+
+Bu þekilde ‘Notepad’ programýný Python içinden çalýþtýrmýþ olduk.
+
+Ancak gördüðünüz gibi, ‘subprocess’ biraz uzun bir kelime. Bu modülü her kullanmak isteyiþinizde nitelik veya fonksiyon adýnýn önüne bu uzun kelimeyi getirmek bir süre sonra sýkýcý bir hal alabilir. Bu yüzden eðer isterseniz modülü import subprocess þeklinde kendi adýyla deðil de daha kýsa bir adla içe aktarmayý tercih edebilirsiniz:
+
+>>> import subprocess as sp
+
+Burada þöyle bir formül uyguladýðýmýza dikkat edin:
+
+>>> import modül_adý as farklý_bir_isim
+
+Böylece artýk bu modülü yalnýzca sp önekiyle kullanabilirsiniz:
+
+>>> sp.call('notepad.exe')
+
+Örnek olmasý açýsýndan baþka bir modülü daha ele alalým. Modülümüzün adý webbrowser.
+
+Not
+
+webbrowser modülü, bilgisayarýmýzda kurulu internet tarayýcýsýný kullanarak internet sitelerini açabilmemizi saðlar.
+
+Týpký ‘subprocess’ gibi, ‘webbrowser’ kelimesi de, her defasýnda tekrar etmesi sýkýcý olabilecek bir kelime. Dolayýsýyla dilerseniz bu modülü import webbrowser yerine farklý bir isimle içe aktarabilirsiniz. Örneðin:
+
+>>> import webbrowser as br
+
+veya:
+
+>>> import webbrowser as web
+
+Modülü hangi adla içe aktaracaðýnýz tamamen size kalmýþ. Diyelim ki bu modülü ‘web’ adýyla içe aktardýk. Artýk bu modülün içindeki araçlarý web önekiyle kullanabiliriz:
+
+>>> web.open('www.istihza.com')
+
+Uyarý
+
+Bazý GNU/Linux daðýtýmlarýnda websitesi adresini ‘http’ önekiyle birlikte belirtmeniz gerekebilir. Örn. web.open('http://www.istihza.com').
+
+Bu kod, bilgisayarýmýzdaki öntanýmlý web tarayýcýsý hangisiyse onu çalýþtýracak ve bizi, parantez içinde gösterilen web sayfasýna götürecektir.
+
+Eðer biz webbrowser modülünü doðrudan kendi adýyla içe aktarsaydýk:
+
+>>> import webbrowser
+
+Bu durumda yukarýdaki komutu þu þekilde vermek zorunda kalacaktýk:
+
+>>> webbrowser.open('www.istihza.com')
+
+Ama bu modülü daha kýsa bir adla içe aktarmýþ olmamýz sayesinde, bu modülü gayet pratik bir þekilde kullanma imkanýna kavuþuyoruz.
+

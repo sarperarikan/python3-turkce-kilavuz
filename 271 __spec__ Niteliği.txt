@@ -1,0 +1,18 @@
+
+__spec__ Niteliði
+
+__spec__ niteliði de bize modüller hakkýnda çeþitli bilgiler sunan birtakým araçlarý içinde barýndýrýr. Mesela bir modülün ad ve konum bilgilerine ulaþmak için bu niteliði kullanabiliriz:
+
+>>> import subprocess
+>>> adý = subprocess.__spec__.name
+>>> konumu = subprocess.__spec__.origin
+>>> adý
+
+'subprocess'
+
+>>> konumu
+
+'C:\\Pythonxy\\lib\\subprocess.py'
+
+Týpký __loader__ gibi, bu nitelik de günlük olarak kullanacaðýmýz bir araç deðil. Bu niteliðin içindeki araçlarýn sunduðu bilgileri baþka yollardan da elde edebileceðimizi biliyorsunuz.
+

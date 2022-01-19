@@ -1,0 +1,31 @@
+
+reversed()
+
+Diyelim ki elimizde þöyle bir liste var:
+
+>>> isimler = ['ahmet', 'mehmet', 'veli', 'ayþe', 'çiðdem', 'ýþýk']
+
+Eðer bu listedeki isimleri ters çevirmek, yani þöyle bir liste elde etmek isterseniz:
+
+['ýþýk', 'çiðdem', 'ayþe', 'veli', 'mehmet', 'ahmet']
+
+... ne yapmanýz gerektiðini biliyorsunuz. Bu amaç için liste dilimleme yöntemlerinden yararlanabilirsiniz:
+
+>>> isimler[::-1]
+
+['ýþýk', 'çiðdem', 'ayþe', 'veli', 'mehmet', 'ahmet']
+
+Ýþte ayný iþlevi reversed() adlý bir fonksiyon yardýmýyla da yerine getirebilirsiniz:
+
+>>> reversed(isimler)
+
+<list_reverseiterator object at 0x00EB9710>
+
+Gördüðünüz gibi, týpký range() fonksiyonunda olduðu gibi, reversed() fonksiyonu da bize ürettiði öðelerin kendisi yerine, bir ‘nesne’ veriyor. Ama tabii ki bu bizim için bir sorun deðil. Biz bu nesnenin içeriðini nasýl elde edebileceðimizi gayet iyi biliyoruz:
+
+>>> list(reversed(isimler))
+
+['ýþýk', 'çiðdem', 'ayþe', 'veli', 'mehmet', 'ahmet']
+
+range() fonksiyonunu anlatýrken sözünü ettiðimiz içerik elde etme yöntemlerini reversed() fonksiyonuna da uygulayabilirsiniz.
+

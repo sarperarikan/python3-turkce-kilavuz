@@ -1,0 +1,59 @@
+
+Modüllerin Yolu
+
+Python geliþtiricilerinin yazýp dile kaynaþtýrdýðý kütüphane modülleri ile kendi yazdýðýnýz modüller arasýnda pek bir fark bulunmadýðýný ifade etmiþtik. Her iki modül türü de, içinde Python komutlarýný ve veri tiplerini barýndýran alelade Python programlarýndan ibarettir.
+
+Ancak þimdiye kadar yaptýðýmýz örneklerde bir þey dikkatinizi çekmiþ olmalý. Kütüphane modüllerini her yerden içe aktarabiliyoruz. Yani, komut satýrýný çalýþtýrdýðýmýz her konumda veya program dosyamýzýn bulunduðu her dizin altýnda bu modülleri rahatlýkla kullanabiliyoruz. Python’ýn bu modülleri bulamamasý gibi bir þey söz konusu deðil.
+
+Ama kendi yazdýðýmýz modülleri içe aktarabilmemiz için, bu modüllerin o anda içinde bulunduðumuz dizin altýnda yer almasý gerekiyor. Yani mesela yukarýda örneðini verdiðimiz sözlük modülünü, sözlük.py dosyasýný bilgisayarýmýzdaki hangi konuma kaydetmiþsek o konumdan içe aktarabiliyoruz.
+
+Diyelim ki sözlük.py dosyasýný masaüstüne kaydetmiþtik. Ýþte bu modülü komut satýrýnda içe aktarabilmemiz için, komut satýrýný da masaüstünün bulunduðu konumda çalýþtýrmýþ olmamýz gerekiyor.
+
+Ayný þekilde eðer biz bu sözlük modülünü, deneme.py adlý baþka bir program içinde kullanacaksak, bu deneme.py dosyasýnýn da sözlük.py adlý dosya ile ayný dizinde yer almasý gerekiyor.
+
+Aksi halde, import sözlük komutu hata verecektir.
+
+Peki neden kütüphane modüllerini her yerden içe aktarabilirken, kendi yazdýðýmýz modülleri yalnýzca bulunduklarý dizin altýnda içe aktarabiliyoruz?
+
+Aslýnda bunun cevabý çok basit: Biz bir program dosyasýnda veya komut satýrýnda import modül_adý gibi bir komut verdiðimizde Python ‘modül_adý’ olarak belirttiðimiz modülü bulmak için bir arama iþlemi gerçekleþtirir. Elbette Python bu modülü sabit diskin tamamýnda aramaz. Python, içe aktarmak istediðimiz modülü bulmak için belli birtakým dizinlerin içini kontrol eder. Peki Python modül dosyasýný bulmak için hangi dizinlerin içine bakar? Bu sorunun cevabýný bize sys modülünün path adlý bir niteliði verecek. Hemen bakalým:
+
+>>> import sys
+>>> sys.path
+
+Ýþte Python bir modül dosyasýný ararken, import komutunun verildiði dizin ile birlikte, sys.path çýktýsýnda görünen dizinlerin içine de bakar. Eðer modül dosyasýný bu dizinlerin içinde bulursa modülü baþarýyla içe aktarýr, ama eðer bulamazsa ImportError cinsinden bir hata verir.
+
+Peki eðer biz kendi modüllerimizi de her yerden içe aktarabilmek istersek ne yapmamýz gerekiyor?
+
+Bunun için iki seçeneðimiz var: Birincisi, modülün yolunu sys.path listesine ekleyebiliriz. Ýkincisi, modülümüzü sys.path içinde görünen dizinlerden birine kopyalayabilir veya taþýyabiliriz.
+
+Öncelikle birinci seçeneði ele alalým.
+
+Gördüðünüz gibi, sys.path komutunun çýktýsý aslýnda basit bir listeden baþka bir þey deðildir. Dolayýsýyla Python’da liste adlý veri tipi üzerinde ne tür iþlemler yapabiliyorsanýz, sys.path üzerinde de ayný þeyleri yapabilirsiniz.
+
+Mesela, modül dosyasýnýn /home/istihza/programlar adlý dizin içinde bulunduðunu varsayarsak, modül dosyasýnýn yolunu sys.path listesinin en sonuna þu þekilde ekleyebiliriz:
+
+sys.path.append(r'/home/istihza/programlar')
+
+Burada listelerin append() metodunu kullandýðýmýza dikkat edin. Dediðimiz gibi, sys.path aslýnda basit bir listeden ibarettir. Dolayýsýyla bir listeye nasýl öðe ekliyorsak, sys.path‘e de ayný þekilde öðe ekliyoruz.
+
+Modül dosyasýnýn bulunduðu /home/istihza/programlar yolunu sys.path listesine eklediðimize göre, artýk modülümüzü her yerden içe aktarabiliriz.
+
+Kendi yazdýðýmýz bir modülü her yerden içe aktarabilmenin ikinci yönteminin, ilgili modül dosyasýný sys.path çýktýsýnda görünen dizinlerden herhangi birine kopyalamak olduðunu söylemiþtik. Dolayýsýyla, sys.path çýktýsýna bakýp, modül dosyanýzý orada görünen dizinlerden herhangi biri içine kopyalayabilirsiniz. Yaygýn olarak tercih edilen konum, Python kurulum dizini içindeki site-packages adlý dizindir. Bu dizinin yerini þu þekilde tespit edebilirsiniz:
+
+>>> from distutils import sysconfig
+>>> sysconfig.get_python_lib()
+
+Modül dosyanýzý, bu komutlardan aldýðýnýz çýktýnýn gösterdiði dizin içine kopyaladýktan sonra, modülünüzü her yerden içe aktarabilirsiniz.
+
+Bu konuyu kapatmadan önce sys.path ile ilgili önemli bir bilgi daha verelim. Python, içe aktarmak istediðimiz bir modülü bulabilmek için dizinleri ararken sys.path listesindeki dizin adlarýný soldan saða doðru okur. Modül dosyasýný bulduðu anda da arama iþlemini sona erdirir ve modülü içe aktarýr. Diyelim ki sys.path çýktýmýz þöyle:
+
+['A', 'B', 'C']
+
+Eðer hem A, hem de B dizininde sözlük.py adlý bir dosya varsa, Python A dizinindeki sözlük modülünü içe aktarýr. Çünkü sys.path çýktýsýnda A dizini B dizininden önce geliyor. Eðer siz içe aktarma sýrasýnda bir dizine öncelik vermek isterseniz o dizini append() metoduyla sys.path listesinin sonuna eklemek yerine, insert() metoduyla listenin en baþýna ekleyebilirsiniz:
+
+>>> sys.path.insert(0, r'dizin/adý')
+
+Böylece Python, modülünüzü en baþa eklediðiniz dizinden içe aktaracaktýr.
+
+Tekrar tekrar söylediðimiz gibi, sys.path sýradan bir listedir. Dolayýsýyla listelerin üzerine hangi metotlarý uygulayabiliyorsanýz sys.path üzerine de o metotlarý uygulayabilirsiniz.
+

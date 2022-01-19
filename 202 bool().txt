@@ -1,0 +1,17 @@
+
+bool()
+
+Bu fonksiyon bir nesnenin bool deðerini verir:
+
+>>> bool(0)
+
+False
+
+>>> bool(1)
+
+True
+
+>>> bool([])
+
+False
+

@@ -1,0 +1,34 @@
+
+list()
+
+Bu fonksiyon iki farklý amaç için kullanýlabilir:
+
+Liste tipinde bir veri oluþturmak 
+Farklý veri tiplerini liste adlý veri tipine dönüþtürmek 
+Birinci amaç için bu fonksiyonu þu þekilde kullanýyoruz:
+
+>>> l = list()
+
+Böylece liste tipinde bir veri oluþturmuþ olduk.
+
+Dediðimiz gibi list() fonksiyonunu, farklý tipteki verileri listeye dönüþtürmek için de kullanabiliriz. Örneðin:
+
+>>> list('istihza')
+
+['i', 's', 't', 'i', 'h', 'z', 'a']
+
+Burada ‘istihza’ adlý karakter dizisini bir listeye dönüþtürdük.
+
+Elbette bu fonksiyonu kullanarak baþka veri tiplerini de listeye dönüþtürebiliriz. Örneðin bir sözlüðü, bu fonksiyon yardýmýyla kolayca listeye dönüþtürebiliriz:
+
+>>> s = {'elma': 44, 'armut': 10, 'erik': 100}
+>>> list(s)
+
+['armut', 'erik', 'elma']
+
+Bir sözlük listeye dönüþtürülürken, elbette sözlüðün anahtarlarý dikkate alýnacaktýr. Eðer siz sözlüðün anahtarlarýndan deðil de deðerlerinde bir liste oluþturmak isterseniz þöyle bir kod yazabilirsiniz:
+
+>>> list(s.values())
+
+[10, 100, 44]
+

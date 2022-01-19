@@ -1,0 +1,60 @@
+
+__doc__ Niteliði
+
+Ýsterseniz __doc__ niteliðini tarif etmeye çalýþmak yerine, bunu bir örnek üzerinden anlatalým. Þimdi Python kurulum dizini içinde os.py dosyasýnýn bulunduðu konuma gidelim ve bu dosyayý açalým. Dosyayý açtýðýnýzda, sayfanýn en baþýnda þu karakter dizisini göreceksiniz:
+
+r"""OS routines for NT or Posix depending on what system we're on.
+
+This exports:
+  - all functions from posix, nt or ce, e.g. unlink, stat, etc.
+  - os.path is either posixpath or ntpath
+  - os.name is either 'posix', 'nt' or 'ce'.
+  - os.curdir is a string representing the current directory ('.' or ':')
+  - os.pardir is a string representing the parent directory ('..' or '::')
+  - os.sep is the (or a most common) pathname separator ('/' or ':' or '\\')
+  - os.extsep is the extension separator (always '.')
+  - os.altsep is the alternate pathname separator (None or '/')
+  - os.pathsep is the component separator used in $PATH etc
+  - os.linesep is the line separator in text files ('\r' or '\n' or '\r\n')
+  - os.defpath is the default search path for executables
+  - os.devnull is the file path of the null device ('/dev/null', etc.)
+
+Programs that import and use 'os' stand a better chance of being
+portable between different platforms.  Of course, they must then
+only use functions that are defined by all platforms (e.g., unlink
+and opendir), and leave all pathname manipulation to os.path
+(e.g., split and join).
+"""
+
+Þimdi Python’ýn etkileþimli kabuðunu açýn ve þu komutlarý verin:
+
+>>> import os
+>>> print(os.__doc__)
+
+Bu komutlarý verdiðinizde, yukarýdaki karakter dizisinin çýktý olarak verildiðini göreceksiniz. Teknik dilde, üç týrnak içinde gösterilen karakter dizilerine belge dizisi (docstring) veya belgelendirme dizisi (documentation string) adý verilir. Modüllerin __doc__ niteliðini kullanarak, bir modül dosyasýnýn en baþýnda bulunan belgelendirme dizilerine eriþebiliriz.
+
+Bir örnek daha verelim. Mesela random modülüne bakalým:
+
+>>> import random
+>>> print(random.__doc__)
+
+os.py dosyasý ile ayný konumda bulunan random.py dosyasýný açtýðýnýzda, yukarýdaki komutlardan aldýðýnýz çýktýnýn random.py dosyasýnýn en baþýndaki uzun karakter dizisi olduðunu göreceksiniz.
+
+Çeþitli yazýlýmlar, bu belge dizilerini kullanarak, ilgili modüle iliþkin kýsa kýlavuzlar oluþturur. Mesela Python’ýn help() fonksiyonu bu belge dizilerinden yararlanýr:
+
+>>> help(os)
+
+Siz de kendi yazdýðýnýz modüllerde bu belge dizilerinden yararlanabilirsiniz. Ancak aklýnýzda bulundurmanýz gereken önemli nokta, bu belge dizilerini üç týrnak içinde belirtmeniz gerektiðidir. Alt alta çift veya tek týrnak ile tanýmladýðýnýz karakter dizilerine __doc__ niteliði aracýlýðýyla eriþmeye çalýþtýðýnýzda sadece ilk satýrdaki karakter dizisine ulaþýrsýnýz. Yani:
+
+"satýr1"
+"satýr2"
+"satýr3"
+
+...þeklinde tanýmladýðýnýz karakter dizileri __doc__ niteliði ile çaðrýldýðýnda yalnýzca “satýr1” görüntülenecektir. Eðer bu üç satýrýn da kapsama alanýna girmesini istiyorsak yukarýdaki karakter dizilerini þöyle tanýmlamalýyýz:
+
+'''
+satýr1
+satýr2
+satýr3
+'''
+

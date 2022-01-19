@@ -1,0 +1,33 @@
+
+int()
+
+Bu fonksiyon birkaç farklı amaç için kullanılabilir. int() fonksiyonunun en temel görevi, bir karakter dizisi veya kayan noktalı sayıyı (eğer mümkünse) tam sayıya dönüştürmektir:
+
+>>> int('10')
+
+10
+
+>>> int(12.4)
+
+12
+
+Bunun dışında bu fonksiyonu, herhangi bir sayma sisteminde temsil edilen bir sayıyı onlu sayma sistemine dönüştürmek için de kullanabiliriz. Örneğin:
+
+>>> int('12', 8)
+
+10
+
+Burada, sekizli sayma sistemine ait sayı değerli bir karakter dizisi olan ‘12’`yi onlu sayma sistemine dönüştürdük ve böylece `10 sayısını elde ettik.
+
+int() fonksiyonunu sayma sistemleri arasında dönüştürme işlemlerinde kullanabilmek için ilk parametrenin bir karakter dizisi olması gerektiğine dikkat ediyoruz.
+
+Bu arada, int('12', 8) komutununun 12 sayısını sekizli sayma sistemine dönüştürmediğine dikkat edin. Bu komutun yaptığı iş sekizli sayma sistemindeki 12 sayısını onlu sayma sistemine dönüştürmektir.
+
+int() fonksiyonunun bu kullanımıyla ilgili bir örnek daha verelim:
+
+>>> int('4cf', 16)
+
+1231
+
+Burada da, onaltılı sayma sistemine ait bir sayı olan 4cf‘yi onlu sayma sistemine çevirdik ve 1231 sayısını elde ettik. 4cf sayısını int() fonksiyonuna parametre olarak verirken bunu karakter dizisi şeklinde yazmayı unutmuyoruz. Aksi halde Python bize bir hata mesajı gösterecektir.
+

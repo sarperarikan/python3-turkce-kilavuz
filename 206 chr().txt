@@ -1,0 +1,23 @@
+
+chr()
+
+Bu fonksiyon, kendisine parametre olarak verilen bir tam sayýnýn karakter karþýlýðýný döndürür. Örneðin:
+
+>>> chr(10)
+
+'\n'
+
+Bildiðiniz gibi 10 sayýsýnýn karakter karþýlýðý satýr baþý karakteridir. Bir de þuna bakalým:
+
+>>> chr(65)
+
+'A'
+
+65 sayýsýnýn karakter karþýlýðý ise ‘A’ harfidir.
+
+Bu fonksiyon sayýlarý karakterlere dönüþtürürken ASCII sistemini deðil, UNICODE sistemini temel alýr. Dolayýsýyla bu fonksiyon ile 128 (veya 255) üstü sayýlarý da dönüþtürebiliriz. Örneðin:
+
+>>> chr(305)
+
+'ý'
+

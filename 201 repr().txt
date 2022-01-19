@@ -1,0 +1,19 @@
+
+repr()
+
+repr() fonksiyonunun yaptýðý iþ, biraz önce gördüðümüz ascii() fonksiyonunun yaptýðý iþe çok benzer. Bu iki fonksiyon, ASCII olmayan karakterlere muameleleri açýsýndan birbirinden ayrýlýr.
+
+Hatýrlarsanýz ascii() fonksiyonu ASCII olmayan karakterlerle karþýlaþtýðýnda bunlarýn UNICODE (veya onaltýlýk) temsillerini gösteriyordu:
+
+>>> ascii('þeker')
+
+"'\\u015feker'"
+
+repr() fonksiyonu ise ASCII olmayan karakterlerle karþýlaþsa bile, bize çýktý olarak bunlarýn da karakter karþýlýklarýný gösterir:
+
+>>> repr('þeker')
+
+"'þeker'"
+
+Geri kalan özellikleri bakýmýndan repr() ve ascii() fonksiyonlarý birbiriyle aynýdýr.
+

@@ -1,0 +1,132 @@
+
+@classmethod Bezeyicisi ve cls
+
+Bildiðiniz gibi, örnek metotlarýný oluþturmak için self adlý bir kelimeden yararlanýyorduk. Tanýmladýðýmýz örnek metotlarýnýn parametre listesinde ilk sýraya yerleþtirdiðimiz bu kelimeyi kullanarak, sýnýf içinde örnek metotlarýna eriþebiliyoruz. Ýþte sýnýf metotlarý için de benzer bir iþlem yapacaðýz.
+
+Çok basit bir örnek verelim:
+
+class Sýnýf():
+sýnýf_niteliði = 0
+
+def __init__(self, param1, param2):
+self.param1 = param1
+self.param2 = param2
+self.örnek_niteliði = 0
+
+def örnek_metodu(self):
+self.örnek_niteliði += 1
+return self.örnek_niteliði
+
+def sýnýf_metodu(cls):
+cls.sýnýf_niteliði += 1
+return cls.sýnýf_niteliði
+
+Burada örnek_metodu() ile sýnýf_metodu() arasýndaki fark, ilkinde self, ikincisinde ise cls kullanmamýz. Ancak hatýrlarsanýz, self kelimesinin Python açýsýndan bir zorunluluk olmadýðýný söylemiþtik. Týpký self gibi, aslýnda cls kelimesi de Python açýsýndan bir zorunluluk deðildir. Yani cls yerine de istediðimiz kelimeyi kullanabilirdik. Bu metotlarda önemli olan, parametre listesinin ilk sýrasýný iþgal eden kelimenin ne olduðudur. Dolayýsýyla yukarýdaki örnekte Python açýsýndan örnek_metodu() ile sýnýf_metodu() arasýnda hiçbir fark bulunmaz. Python her iki metodu da birer örnek metodu olarak deðerlendirir. Bu iki örnek metodu arasýndaki fark, ilkinde sýnýf örneklerini temsil edecek kelimenin self, ikincisinde ise cls olarak belirlenmiþ olmasýdýr. Python self veya cls kelimelerine özel bir önem atfetmez. Ama Python topluluðu içinde, örnek metotlarý için self, sýnýf metotlarý için ise cls kullanmak çok güçlü bir gelenektir.
+
+Sözün özü, sýnýf_metodu() fonksiyonunun ilk parametresini cls yapmýþ olmamýz bu metodun bir sýnýf metodu olabilmesi için gereklidir, ama yeterli deðildir. Python’da bir sýnýf metodu oluþturabilmek için bir parçaya daha ihtiyacýmýz var:
+
+class Sýnýf():
+sýnýf_niteliði = 0
+
+def __init__(self, param1, param2):
+self.param1 = param1
+self.param2 = param2
+self.örnek_niteliði = 0
+
+def örnek_metodu(self):
+self.örnek_niteliði += 1
+return self.örnek_niteliði
+
+@classmethod
+def sýnýf_metodu(cls):
+cls.sýnýf_niteliði += 1
+return cls.sýnýf_niteliði
+
+Ýþte Python’da bir sýnýf metodunu örnek metodundan ayýran asýl öðe, yukarýdaki örnekte gördüðümüz @classmethod ifadesidir. Python’da isminin önünde @ iþareti olan bu tür öðelere ‘bezeyici’ (decorator) adý verilir. Gördüðünüz gibi, @classmethod bezeyicisi, yukarýdaki örnekte bir fonksiyonu sýnýf metoduna dönüþtürme iþlevi görüyor. Ýlerleyen derslerimizde bezeyicilerin baþka özelliklerinden de söz edeceðiz. Gelin isterseniz þimdi yukarýda öðrendiðimiz özelliði Çalýþan() adlý sýnýfa uygulayalým:
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+@classmethod
+def personel_sayýsýný_görüntüle(cls):
+print(len(cls.personel))
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+@classmethod
+def personeli_görüntüle(cls):
+print('Personel listesi:')
+for kiþi in cls.personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Yukarýda personel_sayýsýný_görüntüle() adlý fonksiyonun yanýsýra, personeli_görüntüle() adlý fonksiyonu da bir sýnýf metodu haline getirdik. Çünkü týpký personel_sayýsýný_görüntüle() fonksiyonu gibi, personeli_görüntüle() fonksiyonu da aslýnda tek tek örneklerden ziyade sýnýfýn genelini ilgilendiriyor. Dolayýsýyla bu fonksiyona da sýnýf adý üzerinden eriþebilmek gayet makul ve mantýklý bir iþtir.
+
+Sýnýf metotlarýmýzý baþarýyla tanýmladýðýmýza göre artýk yukarýdaki sýnýfý þu þekilde kullanabiliriz:
+
+>>> from çalýþan import Çalýþan
+>>> Çalýþan.personel_sayýsýný_görüntüle()
+
+0
+
+Bir sýnýf metodu olarak tanýmladýðýmýz personel_sayýsýný_görüntüle() fonksiyonu artýk ilgili sýnýfýn herhangi bir örneðine baðýmlý olmadýðý için, sýnýfý örneklemek zorunda kalmadan, yalnýzca sýnýf adýný kullanarak personel_sayýsýný_görüntüle() fonksiyonuna eriþebiliyoruz. Bu da bize personel sayýsýnýn 0 olduðu durumu görüntüleyebilme imkaný veriyor...
+
+Ayrýca, personel_sayýsýný_görüntüle() adlý sýnýf metodumuz, fiziksel olarak da sýnýfýn içinde yer aldýðý için, seçmeli içe aktarmalarda sýnýfýn öteki öðeleriyle birlikte bu metot da aktarýlacaktýr:
+
+>>> from çalýþan import Çalýþan
+>>> dir(Çalýþan)
+
+Listede sýnýf metodumuzun da olduðunu görüyorsunuz.
+
+Personele üye ekledikten sonra bu metodu nasýl kullanacaðýmýzý biliyorsunuz:
+
+>>> ahmet = Çalýþan('Ahmet')
+
+Ahmet adlý kiþi personele eklendi
+
+>>> mehmet = Çalýþan('Mehmet')
+
+Mehmet adlý kiþi personele eklendi
+
+>>> ayþe = Çalýþan('Ayþe')
+
+Ayþe adlý kiþi personele eklendi
+
+>>> Çalýþan.personel_sayýsýný_görüntüle()
+
+3
+
+Gördüðünüz gibi, sýnýf metodumuza doðrudan sýnýf adýný kullanarak eriþebiliyoruz. Elbette bu durum, sýnýf metoduna örnek adlarý üzerinden de eriþmemize engel deðil. Eðer arzu edersek personel_sayýsýný_görüntüle() adlý sýnýf metodunu þu þekilde de çaðýrabiliriz:
+
+>>> ayþe.personel_sayýsýný_görüntüle()
+
+3
+
+>>> ahmet.personel_sayýsýný_görüntüle()
+
+3
+
+>>> mehmet.personel_sayýsýný_görüntüle()
+
+3
+
+Ancak örnek metotlarýna ve örnek niteliklerine atýfta bulunmak için örnek adlarýný kullanmak, sýnýf metotlarý ve sýnýf niteliklerine atýfta bulunmak için ise sýnýf adlarýný tercih etmek daha akýllýca olabilir.
+
+personel_sayýsýný_görüntüle() fonksiyonu için söylediðimiz bu sözler, personeli_görüntüle() fonksiyonu için de aynen geçerlidir.
+
+Sözün özü, sýnýfýn herhangi bir örneðine baðlý olmayan bir iþlem yapan, ama anlamsal olarak da sýnýfla iliþkili olduðu için sýnýf dýþýnda býrakmak istemediðiniz fonksiyonlarý birer sýnýf metodu olarak tanýmlayabilirsiniz.
+

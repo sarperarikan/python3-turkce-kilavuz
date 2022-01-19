@@ -1,0 +1,21 @@
+
+complex()
+
+Sayýlardan söz ederken, eðer matematikle çok fazla içli dýþlý deðilseniz pek karþýlaþmayacaðýnýz, ‘karmaþýk sayý’ adlý bir sayý türünden de bahsetmiþtik. Karmaþýk sayýlar, bir gerçek, bir de sanal kýsýmdan oluþan sayýlardýr.
+
+Karmaþýk sayýlar Python’da ‘complex’ ifadesiyle gösteriliyor. Mesela þu bir karmaþýk sayýdýr:
+
+>>> 12+0j
+
+Ýþte eðer herhangi bir sayýyý karmaþýk sayýya dönüþtürmeniz gerekirse complex() adlý bir fonksiyondan yararlanabilirsiniz. Örneðin:
+
+>>> complex(15)
+
+(15+0j)
+
+Böyle bir kod yazdýðýmýzda, verdiðimiz parametre karmaþýk sayýnýn gerçek kýsmýný oluþturacak, sanal kýsým ise 0 olarak kabul edilecektir. Elbette isterseniz sanal kýsmý kendiniz de belirleyebilirsiniz:
+
+>>> complex(15, 2)
+
+(15+2j)
+

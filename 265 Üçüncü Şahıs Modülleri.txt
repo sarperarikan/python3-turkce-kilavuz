@@ -1,0 +1,56 @@
+
+Üçüncü Þahýs Modülleri
+
+Buraya kadar Python’daki kütüphane modüllerinden ve kendi yazdýðýmýz modüllerden söz ettik. Artýk modüllerin ne olduðunu ve ne iþe yaradýðýný gayet iyi biliyoruz. Bu bölümde ise, yine bir ‘hazýr modül’ türü olan üçüncü þahýs modüllerinden bahsedeceðiz.
+
+Üçüncü þahýs modülleri, baþka Python programcýlarý tarafýndan yazýlýp hizmetimize sunulmuþ programlardýr. Bu yönüyle bunlar kütüphane modüllerine çok benzer. Ama bu ikisi arasýnda önemli bir fark bulunur: Kütüphane modülleri Python programlama dilinin bir parçasýdýr. Dolayýsýyla kütüphane modüllerini kullanmak için herhangi bir ek yazýlým indirmemiz gerekmez. Üçüncü þahýs modülleri ise dilin bir parçasý deðildir. Bu modülleri kullanabilmek için, öncelikle bunlarý modül geliþtiricisinin koyduðu yerden bilgisayarýmýza indirmemiz gerekir.
+
+Hatýrlarsanýz ilk derslerimizde Cx_Freeze adlý bir yazýlýmdan söz etmiþtik. Ýþte bu yazýlým bir üçüncü þahýs modülüdür. Bu modülü kullanabilmek için öncelikle ilgili yazýlýmý programýmýza kurmamýz gerekmiþti.
+
+Python için yazýlmýþ üçüncü þahýs modüllerine çeþitli kaynaklardan ulaþabilirsiniz. Bu tür modülleri bulabileceðiniz en geniþ kaynak https://pypi.python.org/pypi adresidir. Burada 60.000’in üzerinde modüle ulaþabilirsiniz.
+
+Peki bu modülleri nasýl kuracaðýz?
+
+Eðer bir modül https://pypi.python.org/pypi adresinde ise, bu modülü sistem komut satýrýnda þu þekilde kurabilirsiniz:
+
+pip3 install modül_adý
+
+Not
+
+Python’ýn 2.7.9 ve 3.4.0 sürümlerinden itibaren, pip adlý yazýlým öntanýmlý olarak Python kurulumuyla birlikte geliyor. Dolayýsýyla Python2’deki pip’i kullanmak isterseniz pip2 komutunu, Python3’teki pip’i kullanmak isterseniz de pip3 komutunu kullanabilirsiniz.
+
+Örneðin amacýnýz Django adlý üçüncü þahýs modülünü kurmak ise bu modülü þu komut ile kurabilirsiniz:
+
+pip3 install django
+
+Eðer bir üçüncü þahýs modülünü https://pypi.python.org/pypi adresinden deðil de baþka bir kaynaktan indiriyorsanýz, kurulum için birkaç farklý seçenek olabilir.
+
+Eðer indireceðiniz dosya Windows iþletim sistemine uyumlu bir .exe dosyasýysa, bunu herhangi bir Windows programý gibi kurabilirsiniz.
+
+Eðer indireceðiniz dosya .tar.gz veya .zip gibi sýkýþtýrýlmýþ bir klasör olarak iniyorsa öncelikle bu sýkýþtýrýlmýþ klasörü açýn. Eðer klasör içeriðinde setup.py adlý bir dosya görürseniz bu dosyanýn bulunduðu konumda bir komut satýrý açýn ve þu komutu verin:
+
+python setup.py install
+
+Tabii burada python komutunun python3 mü, py -3 mü yoksa baþka bir þey mi olacaðý tamamen sizin Python kurulumunu nasýl yaptýðýnýza baðlýdýr. Neticede siz oraya, Python’ý hangi komutla baþlatýyorsanýz onu yazacaksýnýz. Yani eðer Python’ý python3 komutuyla baþlatýyorsanýz yukarýdaki komutu þöyle vereceksiniz:
+
+python3 setup.py install
+
+Ayný þekilde, GNU/Linux kullanýcýlarýnýn da bu komutu yetkili kullanýcý olarak vermesi gerekecektir muhtemelen:
+
+sudo python3 setup.py install
+
+Veya önce:
+
+su -
+
+Ardýndan:
+
+python3 setup.py install
+
+Ýndirip kurduðunuz bir üçüncü þahýs modülünü nasýl kullanacaðýnýzý, indirdiðiniz modülün belgelerine bakarak öðrenebilirsiniz.
+
+Not
+
+Paketler konusunu iþlerken üçüncü þahýs modüllerinden daha ayrýntýlý bir þekilde söz edeceðiz.
+
+

@@ -1,0 +1,210 @@
+
+Ýleri Düzey Fonksiyonlar
+
+Buraya gelinceye kadar fonksiyonlara iliþkin epey söz söyledik. Artýk Python programlama dilinde fonksiyonlara dair hemen her þeyi bildiðimizi rahatlýkla söyleyebiliriz. Zira bu noktaya kadar hem fonksiyonlarýn temel (ve orta düzey) özelliklerini öðrendik, hem de ‘gömülü fonksiyon’ kavramýný ve gömülü fonksiyonlarýn kendisini bütün ayrýntýlarýyla inceledik. Dolayýsýyla yazdýðýmýz kodlarda fonksiyonlarý oldukça verimli bir þekilde kullanabilecek kadar fonksiyon bilgisine sahibiz artýk.
+
+Dediðimiz gibi, fonksiyonlara iliþkin en temel bilgileri edindik. Ancak fonksiyonlara dair henüz bilmediðimiz þeyler de var. Ama artýk Python programlama dilinde geldiðimiz aþamayý dikkate alarak ileriye doðru bir adým daha atabilir, fonksiyonlara dair ileri düzey sayýlabilecek konulardan da söz edebiliriz.
+
+Ýlk olarak ‘lambda fonksiyonlarýný’ ele alalým.
+
+
+Lambda Fonksiyonlarý
+
+Þimdiye kadar Python programlama dilinde fonksiyon tanýmlamak için hep def adlý bir ifadeden yararlanmýþtýk. Bu bölümde ise Python programlama dilinde fonksiyon tanýmlamamýzý saðlayacak, týpký def gibi bir ifadeden daha söz edeceðiz. Fonksiyon tanýmlamamýzý saðlayan bu yeni ifadeye lambda denir. Bu ifade ile oluþturulan fonksiyonlara ise ‘lambda fonksiyonlarý’...
+
+Bildiðiniz gibi Python’da bir fonksiyonu def ifadesi yardýmýyla þöyle tanýmlýyoruz:
+
+>>> def fonk(param1, param2):
+... return param1 + param2
+
+Bu fonksiyon, kendisine verilen parametreleri birbiriyle toplayýp bize bunlarýn toplamýný döndürüyor:
+
+>>> fonk(2, 4)
+
+6
+
+Peki ayný iþlemi lambda fonksiyonlarý yardýmýyla yapmak istersek nasýl bir yol izleyeceðiz?
+
+Dikkatlice bakýn:
+
+>>> fonk = lambda param1, param2: param1 + param2
+
+Ýþte burada tanýmladýðýmýz þey bir lambda fonksiyonudur. Bu lambda fonksiyonunu da týpký biraz önce tanýmladýðýmýz def fonksiyonu gibi kullanabiliriz:
+
+>>> fonk(2, 4)
+
+6
+
+Gördüðünüz gibi lambda fonksiyonlarýný tanýmlamak ve kullanmak hiç de zor deðil.
+
+Lambda fonksiyonlarýnýn neye benzediðinden temel olarak bahsettiðimize göre artýk biraz daha derine inebiliriz.
+
+Lambda fonksiyonlarý Python programlama dilinin ileri düzey fonksiyonlarýndan biridir. Yukarýdaki örnek yardýmýyla bu lambda fonksiyonlarýnýn nasýl bir þey olduðunu gördük. Esasýnda biz buraya gelene kadar bu lambda fonksiyonlarýný hiç görmemiþ de deðiliz. Hatýrlarsanýz daha önceki derslerimizde þöyle bir örnek kod yazmýþtýk:
+
+harfler = "abcçdefgðhýijklmnoöprsþtuüvyz"
+çevrim = {i: harfler.index(i) for i in harfler}
+
+isimler = ["ahmet", "ýþýk", "ismail", "çiðdem",
+"can", "þule", "iskender"]
+
+print(sorted(isimler, key=lambda x: çevrim.get(x[0])))
+
+Burada sorted() fonksiyonunun key parametresi içinde kullandýðýmýz ifade bir lambda fonksiyonudur:
+
+lambda x: çevrim.get(x[0])
+
+Peki lambda fonksiyonlarý nedir ve ne iþe yarar?
+
+Lambda fonksiyonlarýný, bir fonksiyonun iþlevselliðine ihtiyaç duyduðumuz, ama konum olarak bir fonksiyon tanýmlayamayacaðýmýz veya fonksiyon tanýmlamanýn zor ya da meþakkatli olduðu durumlarda kullanabiliriz. Yukarýdaki örnek kod, bu tanýma iyi bir örnektir: sorted() fonksiyonunun key parametresi bizden bir fonksiyon tanýmý bekler. Ancak biz elbette oraya def ifadesini kullanarak doðrudan bir fonksiyon tanýmlayamayýz. Ama def yerine lambda ifadesi yardýmýyla key parametresi için bir lambda fonksiyonu tanýmlayabiliriz.
+
+Eðer yukarýdaki kodlarý ‘normal’ bir fonksiyonla yazmak isteseydik þu kodlarý kullanabilirdik:
+
+harfler = "abcçdefgðhýijklmnoöprsþtuüvyz"
+çevrim = {i: harfler.index(i) for i in harfler}
+
+isimler = ["ahmet", "ýþýk", "ismail", "çiðdem",
+"can", "þule", "iskender"]
+
+def sýrala(eleman):
+return çevrim.get(eleman[0])
+
+print(sorted(isimler, key=sýrala))
+
+Burada lambda fonksiyonu kullanmak yerine, sýrala() adlý bir fonksiyon kullandýk.
+
+Eðer yukarýda ‘lambda’ ile yazdýðýmýz örneði sýrala() fonksiyonu ile yazdýðýmýz örnekle kýyaslarsanýz lambda fonksiyonlarýnda hangi parçanýn neye karþýlýk geldiðini veya ne anlama sahip olduðunu rahatlýkla anlayabilirsiniz.
+
+Gelin bir örnek daha verelim:
+
+Diyelim ki bir sayýnýn çift sayý olup olmadýðýný denetleyen bir fonksiyon yazmak istiyorsunuz. Bunun için þöyle bir fonksiyon tanýmlayabileceðimizi biliyorsunuz:
+
+def çift_mi(sayý):
+return sayý % 2 == 0
+
+Eðer çift_mi() fonksiyonuna parametre olarak verilen bir sayý çift ise fonksiyonumuz True çýktýsý verecektir:
+
+print(çift_mi(100))
+
+True
+
+Aksi halde False çýktýsý alýrýz:
+
+print(çift_mi(99))
+
+False
+
+Ýþte yukarýdaki etkiyi lambda fonksiyonlarý yardýmýyla da elde edebiliriz.
+
+Dikkatlice bakýn:
+
+>>> çift_mi = lambda sayý: sayý % 2 == 0
+>>> çift_mi(100)
+
+True
+
+>>> çift_mi(99)
+
+False
+
+Baþka bir örnek daha verelim. Diyelim ki bir liste içindeki bütün sayýlarýn karesini hesaplamak istiyoruz. Elimizdeki liste þu:
+
+>>> l = [2, 5, 10, 23, 3, 6]
+
+Bu listedeki sayýlarýn her birinin karesini hesaplamak için þöyle bir þey yazabiliriz:
+
+>>> for i in l:
+... print(i**2)
+
+4
+25
+100
+529
+9
+36
+
+Veya þöyle bir þey:
+
+>>> [i**2 for i in l]
+
+[4, 25, 100, 529, 9, 36]
+
+Ya da map() fonksiyonuyla birlikte lambda’yý kullanarak þu kodu yazabiliriz:
+
+>>> print(*map(lambda sayý: sayý ** 2, l))
+
+4 25 100 529 9 36
+
+Son örnekte verdiðimiz lambda’lý kodu normal bir fonksiyon tanýmlayarak þöyle de yazabilirdik:
+
+>>> def karesi(sayý):
+... return sayý ** 2
+...
+>>> print(*map(karesi, l))
+
+4 25 100 529 9 36
+
+Sözün özü, mesela þu kod:
+
+lambda x: x + 10
+
+Türkçede þu anlama gelir:
+
+'x' adlý bir parametre alan bir lambda fonksiyonu tanýmla. Bu fonksiyon, bu
+'x parametresine 10 sayýsýný eklesin.
+
+Biz yukarýdaki örneklerde lambda fonksiyonunu tek bir parametre ile tanýmladýk. Ama elbette lambda fonksiyonlarýnýn birden fazla parametre de alabileceðini de biliyorsunuz.
+
+Örneðin:
+
+>>> birleþtir = lambda ifade, birleþtirici: birleþtirici.join(ifade.split())
+
+Burada lambda fonksiyonumuz toplam iki farklý parametre alýyor: Bunlardan ilki ifade, ikincisi ise birleþtirici. Fonksiyonumuzun gövdesinde ifade parametresine split() metodunu uyguladýktan sonra, elde ettiðimiz parçalarý birleþtirici parametresinin deðerini kullanarak birbirleriyle birleþtiriyoruz. Yani:
+
+>>> birleþtir('istanbul büyükþehir belediyesi', '-')
+
+'istanbul-büyükþehir-belediyesi'
+
+Eðer ayný iþlevi ‘normal’ bir fonksiyon yardýmýyla elde etmek isteseydik þöyle bir þey yazabilirdik:
+
+>>> def birleþtir(ifade, birleþtirici):
+... return birleþtirici.join(ifade.split())
+...
+>>> birleþtir('istanbul büyükþehir belediyesi', '-')
+
+'istanbul-büyükþehir-belediyesi'
+
+Yukarýdaki örneklerin dýþýnda, lambda fonksiyonlarý özellikle grafik arayüz çalýþmalarý yaparken iþinize yarayabilir. Örneðin:
+
+import tkinter
+import tkinter.ttk as ttk
+
+pen = tkinter.Tk()
+
+btn = ttk.Button(text='merhaba', command=lambda: print('merhaba'))
+btn.pack(padx=20, pady=20)
+
+pen.mainloop()
+
+Not
+
+Bu kodlardan hiçbir þey anlamamýþ olabilirsiniz. Endiþe etmeyin. Burada amacýmýz size sadece lambda fonksiyonlarýnýn kullanýmýný göstermek. Bu kodlarda yalnýzca lambda fonksiyonuna odaklanmanýz þimdilik yeterli olacaktýr. Eðer bu kodlarý çalýþtýramadýysanýz http://www.istihza.com/forum adresinde sorununuzu dile getirebilirsiniz.
+
+Bu kodlarý çalýþtýrýp ‘deneme’ düðmesine bastýðýnýzda komut satýrýnda ‘merhaba’ çýktýsý görünecektir. Tkinter’de fonksiyonlarýn command parametresi bizden parametresiz bir fonksiyon girmemizi bekler. Ancak bazen, elde etmek istediðimiz iþlevsellik için oraya parametreli bir fonksiyon yazmak durumunda kalabiliriz. Ýþte bunun gibi durumlarda lambda fonksiyonlarý faydalý olabilir. Elbette yukarýdaki kodlarý þöyle de yazabilirdik:
+
+import tkinter
+import tkinter.ttk as ttk
+
+pen = tkinter.Tk()
+
+def merhaba():
+print('merhaba')
+
+btn = ttk.Button(text='merhaba', command=merhaba)
+btn.pack(padx=20, pady=20)
+
+pen.mainloop()
+
+Burada da lambda yerine isimli bir fonksiyon tanýmlayýp, command parametresine doðrudan bu fonksiyonu verdik.
+
+Bütün bu örneklerden gördüðünüz gibi, lambda fonksiyonlarý son derece pratik araçlardýr. Normal, isimli fonksiyonlarla elde ettiðimiz iþlevselliði, lambda fonksiyonlarý yardýmýyla çok daha kýsa bir þekilde elde edebiliriz. Ancak lambda fonksiyonlarý normal fonksiyonlara göre biraz daha okunaksýz yapýlardýr. O yüzden, eðer lambda fonksiyonlarýný kullanmaya mecbur deðilseniz, bunlarýn yerine normal fonksiyonlarý veya yerine göre liste üreteçlerini tercih edebilirsiniz.
+

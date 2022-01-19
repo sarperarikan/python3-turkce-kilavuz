@@ -1,0 +1,5 @@
+
+exit()
+
+Bu fonksiyon, o anda çalýþan programdan çýkmanýzý saðlar. Eðer bu komutu etkileþimli kabukta verirseniz o anda açýk olan oturum kapanacaktýr.
+

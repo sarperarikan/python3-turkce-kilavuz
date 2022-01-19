@@ -1,0 +1,7 @@
+
+Nesne Tabanlý Programlama (Devamý)
+
+Geçen bölümlerde, nesne tabanlý programlamaya iliþkin hem temel, hem orta, hem de ileri düzey sayýlabilecek pek çok konuya deðindik. Þimdiye kadar öðrendiklerimiz, nesne tabanlý programlama yaklaþýmý çerçevesinde yazýlým üretirken yönümüzü bulabilmemiz açýsýndan büyük ölçüde yeterlidir. Ancak daha önce de söylediðimiz gibi, nesne tabanlý programlama çok geniþ kapsamlý bir konudur ve içinde þimdiye kadar adýný bile anmadýðýmýz daha pek çok kavram barýndýrýr. Ýþte bu bölümde, geçen derslerimizde incelemeye fýrsat bulamadýðýmýz, ancak nesne tabanlý programlamayý daha derinlemesine tanýmak bakýmýndan bilmemizin iyi olacaðý birtakým ileri düzey kavramlardan söz edeceðiz.
+
+Bu bölümde inceleyeceðimiz ilk konu ‘sýnýf üyeleri’.
+

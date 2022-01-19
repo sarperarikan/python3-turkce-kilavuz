@@ -1,0 +1,230 @@
+
+Gizli Üyeler
+
+Python’da þimdiye kadar gördüðümüz ve yukarýda andýðýmýz aleni üyelerin dýþýnda, bir de gizli üyeler bulunur. Aleni üyelerin aksine gizli üyeler dýþarýya açýk deðildir. Gizli üyelere, normal yöntemleri kullanarak sýnýf dýþýndan eriþemeyiz.
+
+Konuyu açýklýða kavuþturmak için, aleni üyeleri anlatýrken verdiðimiz sýnýf örneðinde þu deðiþikliði yapalým:
+
+class Sýnýf():
+__gizli = 'gizli'
+
+def örnek_metodu(self):
+print(self.__gizli)
+print('örnek metodu')
+
+@classmethod
+def sýnýf_metodu(cls):
+print('sýnýf metodu')
+
+@staticmethod
+def statik_metot():
+print('statik metot')
+
+Burada __gizli adlý bir gizli sýnýf niteliði tanýmladýk. Bu deðiþkenin yalnýzca baþ tarafýnda iki adet alt çizgi olduðuna, ancak uç tarafýnda alt çizgi bulunmadýðýna dikkat edin. Ýþte Python’da baþ tarafýnda yukarýdaki gibi iki adet alt çizgi olan, ancak uç tarafýnda alt çizgi bulunmayan (veya yalnýzca tek bir alt çizgi bulunan) bütün öðeler birer gizli üyedir. Dýþarýya kapalý olan bu gizli üyelere, normal yöntemleri kullanarak sýnýf dýþýndan eriþemezsiniz.
+
+Ýsterseniz deneyelim:
+
+>>> import sinif
+>>> s = sinif.Sýnýf()
+>>> s.__gizli
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Sýnýf' object has no attribute '__gizli'
+
+Gördüðünüz gibi, örnek adý üzerinden __gizli niteliðine eriþemiyoruz. Bir de sýnýf adý üzerinden eriþmeyi deneyelim:
+
+>>> sinif.Sýnýf.__gizli
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: type object 'Sýnýf' has no attribute '__gizli'
+
+Bu þekilde de eriþemedik. Çünkü dediðimiz gibi, baþýnda çift alt çizgi olan, ancak ucunda herhangi bir çizgi bulunmayan (veya tek bir alt çizgi bulunan) bu gizli öðelere normal yollardan eriþemeyiz.
+
+Dilerseniz gizli üye oluþturma kurallarýný þöyle bir netleþtirelim:
+
+Bir üyenin gizli olabilmesi için baþýnda en az iki adet, ucunda da en fazla bir adet alt çizgi bulunmalýdýr. Yani þunlar birer gizli üyedir:
+
+>>> __gizli = 'gizli'
+>>> __gizli_ = 'gizli'
+>>> __gizli_üye = 'gizli'
+>>> __gizli_üye_ = 'gizli'
+
+Burada önemli bir noktaya dikkatinizi çekmek istiyorum: Gizli üyeler yalnýzca sýnýf dýþýna kapalýdýr. Bu üyelere sýnýf içinden rahatlýkla eriþebiliriz. Mesela yukarýdaki örnekte bu durumu görüyorsunuz. __gizli adlý deðiþkene örnek_metodu() içinden normal bir þekilde eriþebiliyoruz:
+
+def örnek_metodu(self):
+print(self.__gizli)
+print('örnek metodu')
+
+Bu durumda sýnýf dýþýndan bu örnek_metodu()‘na eriþtiðimizde gizli üye olan __gizli‘ye de eriþmiþ oluyoruz:
+
+>>> import sinif
+>>> s = sinif.Sýnýf()
+>>> s.örnek_metodu()
+
+'gizli'
+'örnek metodu'
+
+Burada örnek_metodu(), __gizli adlý gizli üyeye eriþmemiz için bize aracýlýk etmiþ oluyor.
+
+Peki ama bir insan neden bu þekilde birtakým gizli üyeler tanýmlamak istiyor olabilir?
+
+Hatýrlarsanýz geçen bölümde þöyle bir örnek vermiþtik:
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+@classmethod
+def personel_sayýsýný_görüntüle(cls):
+print(len(cls.personel))
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+@classmethod
+def personeli_görüntüle(cls):
+print('Personel listesi:')
+for kiþi in cls.personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Burada personel adlý bir sýnýf niteliðimiz var. Bu niteliðe sýnýf içinde hem personele_ekle() adlý örnek metodundan hem de personel_sayýsýný_görüntüle() ve personeli_görüntüle() adlý sýnýf metotlarýndan eriþmek suretiyle bu nitelik üzerinde çeþitli iþlemler yapýyoruz.
+
+Esasýnda þöyle bir düþününce, personel adlý niteliðin yalnýzca sýnýfýn iç iþleyiþi açýsýndan önem taþýdýðýný rahatlýkla söyleyebiliriz. Bu niteliðe sýnýf dýþýndan doðrudan eriþilerek personel üzerinde iþlem yapýlmaya çalýþýlmasý çok mantýksýz. Yani sýnýfýmýzý kullanacak kiþilerin þu tür bir kod yazmasý biraz abes kaçacaktýr:
+
+>>> from calisan import Çalýþan
+>>> Çalýþan.personel.append('Ahmet')
+
+Zira biz, kodlarýmýzýn yapýsý gereði, personel üzerindeki iþlemlerin yalnýzca çeþitli fonksiyonlar/metotlar aracýlýðýyla yapýlmasýný istiyoruz.
+
+Personele eleman ekleyecek kiþilerin doðrudan personel listesine eriþmesi, kodlarýmýzýn kullaným kurallarýnýn bir bakýma ihlal edilmesi anlamýna geliyor. Çünkü biz personele eleman ekleme iþlemleri için halihazýrda ayrý bir metot tanýmlamýþ durumdayýz. Eðer personele adam eklenecekse, bu iþlem doðrudan personel listesi üzerinden deðil, personele_ekle() adlý örnek metodu üzerinden gerçekleþtirilmeli. Yukarýdaki kodlarda bu personele_ekle() metodu doðrudan sýnýfýn kendi __init__() metodu tarafýndan kullanýlýyor. Dolayýsýyla yukarýdaki sýnýfý kullanmanýn doðru yolu, ilgili sýnýfý örneklemektir:
+
+>>> from calisan import Çalýþan
+>>> ahmet = Çalýþan('Ahmet')
+
+Ayný þekilde personel listesini görüntülemek için de doðrudan personel listesine eriþmeye çalýþmayacaðýz. Yani þöyle bir þey yazmayacaðýz:
+
+>>> Çalýþan.personel
+
+Bunun yerine, bu iþ için özel olarak tasarladýðýmýz personeli_görüntüle() fonksiyonunu kullanacaðýz:
+
+>>> Çalýþan.personeli_görüntüle()
+
+Ýþte yukarýdaki kodlarda yer alan personel listesinin usulsüz bir þekilde kullanýlmasýný önlemek amacýyla bu listeyi bir gizli üye haline getirebilirsiniz:
+
+class Çalýþan():
+__personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+@classmethod
+def personel_sayýsýný_görüntüle(cls):
+print(len(cls.__personel))
+
+def personele_ekle(self):
+self.__personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+def personeli_görüntüle(self):
+print('Personel listesi:')
+for kiþi in self.__personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Burada personel listesinin baþ tarafýna iki alt çizgi ekleyerek bunu sýnýf dýþýndan, normal yollarla eriþilmez hale getirdik:
+
+>>> Çalýþan.__personel
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: type object 'Çalýþan' has no attribute '__personel'
+
+Gördüðünüz gibi, aslýnda sýnýfýmýz içinde __personel adlý bir nitelik olmasýna raðmen, Python bu niteliðe sýnýf dýþýndan eriþilmesine izin vermiyor. Eðer amacýmýz personel üzerinde çeþitli iþlemler yapmaksa, bu iþ için sýnýfýn bize sunduðu metotlarý kullanmamýz gerekiyor:
+
+>>> Çalýþan.personel_sayýsýný_görüntüle()
+
+Bu tip durumlarda gizli üyeler epey iþinize yarayabilir...
+
+Bir örnek daha verelim.
+
+Yukarýdaki kodlarda, týpký personel listesi gibi, aslýnda personele_ekle() fonksiyonu da dýþarýdan eriþilmesine gerek olmayan, hatta dýþarýdan eriþilirse kafa karýþtýrýcý olabilecek bir sýnýf üyesidir.
+
+personele_ekle() adlý örnek metodu, sýnýfýmýz içinde __init__() fonksiyonu tarafýndan kullanýlýyor. Dolayýsýyla sýnýfýmýz örneklendiðinde personele_ekle() metodu devreye girerek yeni elemaný personel listesine ekliyor:
+
+>>> ayþe = Çalýþan('Ayþe')
+
+'Ayþe adlý kiþi personele eklendi'
+
+Öte yandan, bu fonksiyon aleni bir üye olduðu için, buna dýþarýdan eriþmemizin önünde herhangi bir engel yok:
+
+>>> ayþe.personele_ekle()
+
+'Ayþe adlý kiþi personele eklendi'
+
+Bu fonksiyon sýnýf dýþýndan çaðrýldýðýnda, kendisini çaðýran örnek adýný personel listesine tekrar ekleyecektir:
+
+>>> Çalýþan.personeli_görüntüle()
+
+Ayþe
+Ayþe
+
+Yani yukarýdaki komut Ayþe adlý kiþiyi personel listesine tekrar ekler. Dolayýsýyla bu fonksiyona sýnýf dýþýndan eriþilmesi son derece mantýksýz, son derece yanlýþ ve hatta son derece kafa karýþtýrýcýdýr. O yüzden, herhangi bir sýkýntý yaþanmasýný engellemek amacýyla bu fonksiyonu da bir gizli üye olarak tanýmlayabiliriz:
+
+class Çalýþan():
+__personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.__personele_ekle()
+
+@classmethod
+def personel_sayýsýný_görüntüle(cls):
+print(len(cls.__personel))
+
+def __personele_ekle(self):
+self.__personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+@classmethod
+def personeli_görüntüle(cls):
+print('Personel listesi:')
+for kiþi in cls.__personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Bu þekilde personele_ekle() fonksiyonunu da dýþarýya kapatmýþ olduk. Artýk bu fonksiyon da, olmasý gerektiði gibi, yalnýzca sýnýf içinde kullanýlabilecek.
+
+Yukarýdaki örnekler, bazý durumlarda veri gizlemenin epey iþimize yarayabileceðini bariz bir biçimde gösteriyor. Ama elbette, yukarýdaki iþlemlerin hiçbiri zorunlu deðildir. Yani siz, yazdýðýnýz kodlarda hiçbir sýnýf üyesini gizlemek mecburiyetinde deðilsiniz. Yukarýda gösterdiðimiz kullanýmlar tamamen tercih meselesidir. Zaten birkaç nadir durum dýþýnda, Python’da verilerinizi gizlemek zorunda da kalmazsýnýz. Ama tabii kendiniz Python’ýn bu özelliðinden yararlanmasanýz da, sýrf bu özellikten yararlanan baþka programcýlarýn yazdýðý kodlarý anlayabilmek için bile olsa bu özellikten haberdar olmalýsýnýz.
+

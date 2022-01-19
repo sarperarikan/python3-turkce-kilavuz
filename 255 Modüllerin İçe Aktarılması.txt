@@ -1,0 +1,92 @@
+
+Modüllerin Ýçe Aktarýlmasý
+
+Python’da herhangi bir modülü kullanabilmek için öncelikle onu ‘içe aktarmamýz’ gerekir. Ýçe aktarmak, bir modül içindeki fonksiyon ve nitelikleri baþka bir program (veya ortam) içinden kullanýlabilir hale getirmek demektir. Ýsterseniz bu soyut tanýmlamayý bir örnek ile somutlaþtýralým. Mesela, bir Standart Kütüphane modülü olduðunu öðrendiðimiz ve önceki derslerimizde de deðindiðimiz os adlý modülü içe aktaralým. Bunun için öncelikle etkileþimli kabuðu çalýþtýralým ve þu komutu verelim:
+
+>>> import os
+
+Böylece os adlý modülü içe aktarmýþ, yani bu modül içindeki fonksiyon ve nitelikleri kullanýlabilir hale getirmiþ olduk.
+
+Hatýrlarsanýz ‘modül’ kavramýný tanýmlarken, bunlarýn bize birtakým yararlý fonksiyonlar ve nitelikler sunan araçlar olduðunu söylemiþtik. Ýþte, mesela bu os modülünün bize hangi yararlý fonksiyonlarý ve nitelikleri sunduðunu öðrenmek için dir() fonksiyonunu kullanabiliriz:
+
+>>> dir(os)
+
+Gördüðünüz gibi bu modül pek çok fonksiyon ve nitelik barýndýrýyor.
+
+Bu modüle adýný veren os kelimesi operating system (iþletim sistemi) ifadesinin kýsaltmasýdýr. Bu modül, kullandýðýmýz iþletim sistemine iliþkin iþlemler yapabilmemiz için bize çeþitli fonksiyonlar ve nitelikler sunar. Hemen bir örnek verelim.
+
+Diyelim ki bir program yazdýnýz. Ancak yazdýðýnýz bu programýn yalnýzca Windows iþletim sisteminde çalýþmasýný istiyorsunuz. Buna göre, eðer programýnýz Windows iþletim sistemi kurulu bir bilgisayarda çalýþtýrýlýrsa programýnýzýn normal bir þekilde baþlamasýný, ama eðer Windows dýþý bir iþletim sisteminde çalýþtýrýlýrsa da kullanýcýya bir uyarý mesajý verilmesini istiyorsunuz.
+
+Ýþte bunun için os modülünden yararlanabilirsiniz. Þimdi dir(os) komutuyla elde ettiðimiz listeye bakalým. Orada name adlý bir nitelik olduðunu göreceksiniz. Bu nitelik, bize kodlarýmýzýn hangi iþletim sisteminde çalýþtýðýný gösterir. Dolayýsýyla da yukarýda tarif ettiðimiz iþ için gayet uygun bir araçtýr.
+
+Önceden import os komutuyla os modülünü içe aktarmýþ olduðumuzu varsayarsak, modülün bu niteliðini þöyle kullanýyoruz:
+
+>>> os.name
+
+'posix'
+
+os adlý modülün içindeki name niteliðine nasýl eriþtiðimize çok dikkat edin. Önce modülümüzün adý olan ‘os’u yazýyoruz. Ardýndan bir nokta iþareti koyup, ihtiyacýmýz olan niteliðin adýný belirtiyoruz. Yani þöyle bir formül takip ediyoruz:
+
+modül_adý.fonksiyon_veya_nitelik
+
+os.name komutu, kullandýðýnýz iþletim sistemine baðlý olarak farklý çýktýlar verir. Eðer bu komutu bir GNU/Linux daðýtýmýnda veya bir Mac bilgisayarda verirsek yukarýdaki gibi ‘posix’ çýktýsý alýrýz. Ama eðer ayný komutu Windows’ta verirsek ‘nt’ çýktýsý alýrýz. Dolayýsýyla os modülünün name niteliðini kullanarak, yazdýðýmýz bir programýn hangi iþletim sisteminde çalýþtýðýný denetleyebiliriz:
+
+>>> if os.name != 'nt':
+... print('Kusura bakmayýn! Bu programý yalnýzca',
+... 'Windows\'ta kullanabilirsiniz!')
+... else:
+... print('Hoþgeldin Windows kullanýcýsý!')
+
+Etkileþimli kabukta yazdýðýmýz bu programý gelin bir de bir metin dosyasýna kaydedelim. Zira biz henüz modülleri öðrenme aþamasýnda olduðumuz için þimdilik bunlarý etkileþimli kabukta test ediyor olsak da, gerçek hayatta programlarýmýzý etkileþimli kabuða deðil, program dosyalarý içine yazacaðýz.
+
+Yukarýdaki kodlarý bir dosyaya kaydettiðimizde programýmýz þöyle görünür:
+
+import os
+
+if os.name != 'nt':
+print('Kusura bakmayýn! Bu programý yalnýzca',
+'Windows\'ta kullanabilirsiniz!')
+else:
+print('Hoþgeldin Windows kullanýcýsý!')
+
+Gördüðünüz gibi, programýmýzý kaydederken, programýmýzýn en baþýna import os komutunu yazarak öncelikle ilgili modülü içe aktarýyoruz. Python’da modüller genellikle programýn en baþýnda içe aktarýlýr. Ama bu bir zorunluluk deðildir. Modülleri programýn istediðiniz her yerinde içe aktarabilirsiniz (bununla ilgili bir istisnadan biraz sonra söz edeceðiz).
+
+Modül içe aktarmaya iliþkin en önemli kural, modüle ait bir nitelik veya fonksiyonun kullanýlmasýndan önce modülün içe aktarýlmýþ olmasý gerekliliðidir. Yani mesela yukarýdaki programda os modülü içindeki name niteliðini kullanmadan önce os modülünü içe aktarmýþ olmamýz gerekir. Eðer Python, if os.name != 'nt': satýrýndan önce herhangi bir yerde import os gibi bir komutla os modülünün içe aktarýldýðýný göremezse hata verecektir.
+
+Bu programý yukarýdaki gibi bir dosyaya kaydettikten sonra bunu herhangi bir Python programý gibi çalýþtýrabilirsiniz.
+
+Eðer bu programý Windows dýþýndaki bir iþletim sisteminde çalýþtýrýrsanýz þu çýktýyý alýrsýnýz:
+
+Kusura bakmayýn! Bu programý yalnýzca
+Windows'ta kullanabilirsiniz!
+
+Ama eðer bu program Windows iþletim sisteminde çalýþtýrýlýrsa þu çýktýyý verir:
+
+Hoþgeldin Windows kullanýcýsý!
+
+Böylece modül içindeki bir niteliðe eriþmiþ olduk. Yalnýz burada asla unutmamamýz gereken þey, öncelikle kullanacaðýmýz modülü import modül_adý komutuyla içe aktarmak olacaktýr. Modülü içe aktarmazsak tabii ki o modüldeki fonksiyon veya niteliklere de eriþemeyiz. (Sýk yapýlan bir hata olduðu için, bunu tekrar tekrar vurguluyoruz...)
+
+Bu arada bir modülü, her etkileþimli kabuk oturumunda yalnýzca bir kez içe aktarmak yeterlidir. Yani siz etkileþimli kabuðu çalýþtýrdýktan sonra bir kez import os komutuyla modülü içe aktardýktan sonra, o etkileþimli kabuk oturumunu kapatana kadar, ayný modülü tekrar içe aktarmak zorunda kalmadan bu modülün içeriðini kullanabilirsiniz.
+
+Ayný þekilde, eðer bu kodlarý etkileþimli kabuða deðil de bir program dosyasýna yazýyorsanýz, import os komutunu dosyanýn baþýna bir kez yazdýktan sonra ayný modülü programýn ilerleyen kýsýmlarýnda tekrar içe aktarmak zorunda kalmadan, o modülünün içeriðinden yararlanabilirsiniz.
+
+Gördüðünüz gibi, bir Standart Kütüphane Modülü olan os bize name adlý çok kullanýþlý bir nitelik sunuyor. Eðer os modülü olmasaydý, name adlý niteliðin sunduðu iþlevi kendimiz icat etmek zorunda kalýrdýk.
+
+Baþka bir örnek daha verelim...
+
+Diyelim ki yine bir program yazdýnýz. Programýnýzýn çalýþmasý için, programýnýzý kullanan kiþinin bilgisayarýnda birtakým dizinler oluþturmanýz gerekiyor. Ýþte bu iþ için de os modülünden yararlanabilirsiniz.
+
+Bu modül içindeki makedirs() fonksiyonunu kullanarak, o anda içinde bulunduðunuz dizinde yeni bir dizin oluþturabilirsiniz:
+
+>>> os.makedirs('DATA')
+
+Bu komutu verdikten sonra, o anda altýnda bulunduðunuz dizinde DATA adlý bir dizin oluþacaktýr. Eðer o anda hangi dizin altýnda bulunduðunuzu öðrenmek isterseniz de yine os modülünden faydalanabilirsiniz:
+
+>>> os.getcwd()
+
+os modülünün getcwd() fonksiyonu bize o anda hangi dizin altýnda bulunduðumuzu gösterir. Bu komutun çýktýsýnda hangi dizin adýný görüyorsanýz, biraz önce makedirs() fonksiyonu ile oluþturduðunuz DATA dizini de o dizin altýnda oluþmuþtur...
+
+Gördüðünüz gibi, bir çýrpýda os modülünün birkaç özelliðinden birden yararlandýk. Daha önce de söylediðimiz gibi, eðer os modülü olmasaydý yukarýda gerçekleþtirdiðimiz bütün iþlevleri kendiniz icat etmek zorunda kalýrdýnýz.
+
+Böylece Python’daki modüllerin neye benzediðini ve nasýl kullanýldýðýný anlamýþ olduk. Modüllerin faydalý araçlar olduðu konusunda sizleri ikna edebilmiþ olduðumuzu varsayarak bir sonraki bölüme geçelim.
+

@@ -1,0 +1,228 @@
+
+@property Bezeyicisi
+
+Yukarýda aleni, gizli ve yarý-gizli sýnýf üyelerinden söz ettik. Ýsterseniz özellikle yarý-gizli öðelerin kullanýldýðý bir kod örneði vererek yukarýda anlattýklarýmýzý somut bir örnek üzerinden netleþtirmeye çalýþalým.
+
+Diyelim ki þöyle bir kod yazdýk:
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.personele_ekle()
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+@classmethod
+def personeli_görüntüle(cls):
+print('Personel listesi:')
+for kiþi in cls.personel:
+print(kiþi)
+
+Burada personel veritabanýna kiþi eklememizi ve veritabanýndaki kiþileri görüntülememizi saðlayan birtakým metotlar var.
+
+Bu metotlarý þöyle kullanýyoruz:
+
+>>> from calisan import Çalýþan
+>>> ç1 = Çalýþan('Ahmet')
+
+Ahmet adlý kiþi personele eklendi
+
+>>> ç2 = Çalýþan('Mehmet')
+
+Mehmet adlý kiþi personele eklendi
+
+>>> Çalýþan.personeli_görüntüle()
+
+Personel listesi:
+Ahmet
+Mehmet
+
+Peki eðer kodlarýmýzý kullananlar personel listesindeki bir kiþinin ismini sonradan deðiþtirmek isterse ne yapacak?
+
+Kodlarýmýz içinde, isim deðiþikliði yapýlmasýný saðlayan özel bir metot yok. Dolayýsýyla kodlarýmýzý kullananlar, doðrudan isim adlý örnek deðiþkenine eriþerek isim deðiþikliðini þu þekilde yapabilir:
+
+>>> ç1.isim = 'Selim'
+
+Bu þekilde ‘Ahmet’ adlý kiþinin ismini deðiþtirdik. Bunu teyit edelim:
+
+>>> print(ç1.isim)
+
+Selim
+
+Ancak burada þöyle bir sorun var. Bu isim deðiþikliði personel listesine yansýmadý. Kontrol edelim:
+
+>>> Çalýþan.personeli_görüntüle()
+
+Personel listesi:
+Ahmet
+Mehmet
+
+Gördüðünüz gibi, ‘Ahmet’ ismi hâlâ orada duruyor. Bu sorunu gidermek için, personel listesine de müdahale edilmesi gerekir:
+
+>>> kiþi = Çalýþan.personel.index('Ahmet')
+>>> Çalýþan.personel[kiþi] = 'Selim'
+
+Burada öncelikle listelerin index() metodunu kullanarak, deðiþtirmek istediðimiz kiþinin personel listesindeki sýrasýný bulduk. Daha sonra da bu bilgiyi kullanarak listede gerekli deðiþikliði yaptýk.
+
+Personel listesini tekrar kontrol ettiðimizde her þeyin yolunda olduðunu görebiliriz:
+
+>>> Çalýþan.personeli_görüntüle()
+
+Personel listesi:
+Selim
+Mehmet
+
+Ancak bunun hiç kullanýþlý bir yöntem olmadýðý çok açýk. Basit bir isim deðiþikliði için, kullanýcýlarýmýz bir sürü kod yazmak zorunda kalýyor. Kullanýcýlarýmýzýn hayatýný kolaylaþtýrmak için onlara pratik bir metot sunabiliriz:
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.personele_ekle()
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+@classmethod
+def personeli_görüntüle(cls):
+print('Personel listesi:')
+for kiþi in cls.personel:
+print(kiþi)
+
+def isim_deðiþtir(self, yeni_isim):
+kiþi = self.personel.index(self.isim)
+self.personel[kiþi] = yeni_isim
+print('yeni isim:', yeni_isim)
+
+Burada isim_deðiþtir() adlý yeni bir fonksiyon tanýmladýk. Artýk kodlarýmýzdan istifade edenler yalnýzca bu yeni fonksiyonu kullanarak, personele önceden ekledikleri kiþilerin ismini kolayca deðiþtirebilir:
+
+>>> from calisan import Çalýþan
+>>> ç1 = Çalýþan('Ahmet')
+>>> ç2 = Çalýþan('Mehmet')
+>>> ç3 = Çalýþan('Selim')
+>>> Çalýþan.personeli_görüntüle()
+
+Personel listesi:
+Ahmet
+Mehmet
+Selim
+
+>>> ç1.isim_deðiþtir('Emre')
+
+yeni isim: Emre
+
+>>> Çalýþan.personeli_görüntüle()
+
+Personel listesi:
+
+Emre
+Mehmet
+Selim
+
+Gördüðünüz gibi, kodlarýmýz gayet güzel çalýþýyor. Bu noktadan sonra, eðer arzu ederseniz, kullanýcýlarýnýzýn personel ve self.isim adlý deðiþkenlere doðrudan eriþmesini engellemek için bunlarý tek alt çizgi veya çift alt çizgi kullanarak gizleyebilirsiniz.
+
+Çift alt çizgi ile:
+
+class Çalýþan():
+__personel = []
+
+def __init__(self, isim):
+self.__isim = isim
+self.personele_ekle()
+
+def personele_ekle(self):
+self.__personel.append(self.__isim)
+print('{} adlý kiþi personele eklendi'.format(self.__isim))
+
+@classmethod
+def personeli_görüntüle(cls):
+print('Personel listesi:')
+for kiþi in cls.__personel:
+print(kiþi)
+
+def isim_deðiþtir(self, yeni_isim):
+kiþi = self.__personel.index(self.__isim)
+self.__personel[kiþi] = yeni_isim
+print('yeni isim: ', yeni_isim)
+
+Tek alt çizgi ile:
+
+class Çalýþan():
+_personel = []
+
+def __init__(self, isim):
+self._isim = isim
+self.personele_ekle()
+
+def personele_ekle(self):
+self._personel.append(self._isim)
+print('{} adlý kiþi personele eklendi'.format(self._isim))
+
+@classmethod
+def personeli_görüntüle(cls):
+print('Personel listesi:')
+for kiþi in cls._personel:
+print(kiþi)
+
+def isim_deðiþtir(self, yeni_isim):
+kiþi = self._personel.index(self._isim)
+self._personel[kiþi] = yeni_isim
+print('yeni isim: ', yeni_isim)
+
+personel ve self.isim adlý nitelikleri çift alt çizgi ile gizlediðimizde Python’ýn isim bulandýrma mekanizmasýný iþleteceðini, tek alt çizgi ile gizlediðimizde ise bu mekanizmanýn iþletilmeyeceðini biliyorsunuz.
+
+Peki size þöyle bir soru sorayým:
+
+Acaba, personel listesindeki bir ismi, mesela yalnýzca þöyle bir komut vererek deðiþtiremez miyiz?
+
+>>> ç1.isim = 'Emre'
+
+Elbette deðiþtirebiliriz. Ancak bunun için özel bir araçtan yararlanmamýz gerekir. Bu iþ için @property adlý özel bir bezeyiciyi kullanacaðýz.
+
+Dikkatlice bakýn:
+
+class Çalýþan():
+_personel = []
+
+def __init__(self, isim):
+self._isim = isim
+self.personele_ekle()
+
+def personele_ekle(self):
+self._personel.append(self._isim)
+print('{} adlý kiþi personele eklendi'.format(self._isim))
+
+@classmethod
+def personeli_görüntüle(cls):
+print('Personel listesi:')
+for kiþi in cls._personel:
+print(kiþi)
+
+@property
+def isim(self):
+return self._isim
+
+@isim.setter
+def isim(self, yeni_isim):
+kiþi = self._personel.index(self.isim)
+self._personel[kiþi] = yeni_isim
+print('yeni isim: ', yeni_isim)
+
+Bu kodlarý çalýþtýrdýðýnýzda, týpký yukarýda bahsettiðimiz gibi, herhangi bir çalýþanýn ismini yalnýzca þu þekilde deðiþtirebildiðinizi göreceksiniz:
+
+>>> ç1.isim = 'Emre'
+
+Üstelik bu kod, isim deðiþikliðinin personel listesine de yansýmasýný saðlýyor:
+
+>>> Çalýþan.personeli_görüntüle()
+
+Emre
+
+Birazdan bu kodlarý derinlemesine inceleyeceðiz. Ama isterseniz öncelikle þu @property bezeyicisinden biraz söz edelim. Böylelikle yukarýdaki kodlarý anlamamýz kolaylaþýr.
+

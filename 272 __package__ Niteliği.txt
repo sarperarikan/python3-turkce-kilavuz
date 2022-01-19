@@ -1,0 +1,8 @@
+
+__package__ Niteliði
+
+Henüz bu niteliðin ne olduðunu anlayacak bilgiye sahip olmadýðýmýz için, bu niteliðin incelemesini ‘Paketler’ konusunu iþlediðimiz bölüme býrakýyoruz.
+
+Böylece modüller konusunu tamamlamýþ olduk. Bu bölümde modüllere iliþkin epey bilgi verdik. Eðer modüller konusunda aklýnýza yatmayan yerler varsa, hiç ümitsizliðe kapýlmadan okumaya devam edin. Birazdan ‘sýnýflar’ konusunu iþlerken, modüllerden ve modüllerin çeþitli özelliklerinden de söz edeceðiz. O zaman, burada anlamamýþ olabileceðiniz konularý çok daha net bir þekilde anlayacaksýnýz.
+
+

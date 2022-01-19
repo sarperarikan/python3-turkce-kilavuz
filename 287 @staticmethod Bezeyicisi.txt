@@ -1,0 +1,154 @@
+
+@staticmethod Bezeyicisi
+
+Buraya gelene kadar öðrendiðimiz örnek ve sýnýf metotlarýný nasýl kullanacaðýmýzý biliyorsunuz:
+
+class Sýnýf():
+sýnýf_niteliði = 0
+
+def __init__(self, veri):
+self.veri = veri
+
+def örnek_metodu(self):
+return self.veri
+
+@classmethod
+def sýnýf_metodu(cls):
+return cls.sýnýf_niteliði
+
+Burada örnek_metodu(), self yardýmýyla örnek niteliklerine eriþiyor. sýnýf_metodu() ise cls yardýmýyla sýnýf niteliklerine eriþiyor. Sýnýf metodu tanýmlamak için ayrýca @classmethod bezeyicisini de kullanýyoruz. Ýþte eðer sýnýf içinde tanýmlayacaðýnýz fonksiyon herhangi bir örnek ya da sýnýf niteliði üzerinde herhangi bir iþlem yapmayacaksa þöyle bir þey yazabilirsiniz:
+
+class Sýnýf():
+sýnýf_niteliði = 0
+
+def __init__(self, veri):
+self.veri = veri
+
+def örnek_metodu(self):
+return self.veri
+
+@classmethod
+def sýnýf_metodu(cls):
+return cls.sýnýf_niteliði
+
+@staticmethod
+def statik_metot():
+print('merhaba statik metot!')
+
+Gördüðünüz gibi, statik metotlarý tanýmlamak için @staticmethod bezeyicisini kullanýyoruz. Statik metotlar, ilk parametre olarak self veya cls benzeri kelimeler almaz. Çünkü bu tür sýnýflarýn örnek veya sýnýf nitelikleri ile herhangi bir iþi yoktur.
+
+Peki statik metotlar ne iþe yarar?
+
+Bu metotlar sýnýf metotlarýna çok benzer. Týpký sýnýf metotlarýnda olduðu gibi, anlamsal olarak sýnýfla ilgili olan, ancak sýnýf metotlarýnýn aksine bu sýnýfýn herhangi bir niteliðine eriþmesine gerek olmayan fonksiyonlarý, sýnýf dýþýna atmak yerine, birer statik metot olarak sýnýf içine yerleþtirebiliriz.
+
+Basit bir örnek verelim:
+
+class Mat():
+'''Matematik iþlemleri yapmamýzý saðlayan
+    bir sýnýf.'''
+
+@staticmethod
+def pi():
+return 22/7
+
+@staticmethod
+def karekök(sayý):
+return sayý ** 0.5
+
+Burada Mat() adlý bir sýnýf tanýmladýk. Bu sýnýf içinde iki adet statik metodumuz var: pi() ve karekök(). Gördüðünüz gibi, bu iki fonksiyon, örnek ve sýnýf metotlarýnýn aksine ilk parametre olarak self veya cls almýyor. Çünkü bu iki sýnýfýn da sýnýf veya örnek nitelikleriyle herhangi bir iþi yok.
+
+Statik metotlarý hem örnekler hem de sýnýf adlarý üzerinden kullanabiliriz.
+
+Yukarýdaki kodlarýn mat.py adlý bir dosyada yer aldýðýný varsayarsak:
+
+>>> from mat import Mat
+>>> m = Mat()
+>>> m.pi() #örnek üzerinden
+
+3.142857142857143
+
+>>> m.karekök(144) #örnek üzerinden
+
+12.0
+
+>>> Mat.pi() #sýnýf üzerinden
+3.142857142857143
+
+>>> Mat.karekök(144) #sýnýf üzerinden
+
+12.0
+
+Statik metotlarýn özellikle sýnýf adlarý üzerinden kullanýlabilmesi, bu tür metotlarý epey kullanýþlý hale getirir. Böylece sýnýfý örneklemek zorunda kalmadan, sýnýf içindeki statik metotlara ulaþabiliriz.
+
+Elbette eðer isteseydik biz bu fonksiyonlarý þöyle de tanýmlayabilirdik:
+
+class Mat():
+'''Matematik iþlemleri yapmamýzý saðlayan
+    bir sýnýf.'''
+
+def pi(self):
+return 22/7
+
+def karekök(self, sayý):
+return sayý ** 0.5
+
+Burada bu iki fonksiyonu birer örnek metodu olarak tanýmladýk. Bu fonksiyonlarý bu þekilde tanýmladýðýmýzda, bunlara örnekler üzerinden eriþebiliriz:
+
+>>> from mat import Mat
+>>> m = Mat()
+>>> m.pi()
+
+3.142857142857143
+
+>>> m.karekök(144)
+
+12.0
+
+Ancak bildiðiniz gibi, örnek metotlarýna sýnýf adlarý üzerinden eriþemeyiz:
+
+>>> Mat.pi()
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: pi() missing 1 required positional argument: 'self'
+
+Ayný þekilde bunlarý sýnýf metodu olarak da tanýmlayabilirdik:
+
+class Mat():
+'''Matematik iþlemleri yapmamýzý saðlayan
+    bir sýnýf.'''
+
+@classmethod
+def pi(cls):
+return 22/7
+
+@classmethod
+def karekök(cls, sayý):
+return sayý ** 0.5
+
+Bu metotlarý böyle tanýmladýðýmýzda, bu metotlara hem örnekler üzerinden hem de sýnýf adý üzerinden eriþebiliriz:
+
+>>> from mat import Mat
+>>> m = Mat()
+>>> m.pi() #örnek üzerinden
+
+3.142857142857143
+
+>>> m.karekök(144) #örnek üzerinden
+
+12.0
+
+>>> Mat.pi() #sýnýf üzerinden
+3.142857142857143
+
+>>> Mat.karekök(144) #sýnýf üzerinden
+
+12.0
+
+Gördüðünüz gibi, kullaným açýsýndan sýnýf metotlarý ile statik metotlar ayný. Ancak Mat() sýnýfý içindeki fonksiyonlarý birer sýnýf metodu olarak tanýmladýðýmýzda gereksiz yere cls parametresi kullanmýþ oluyoruz. Fonksiyon içinde herhangi bir yerde kullanýlmadýðý için, yukarýdaki örnekte cls parametresinin hiçbir amaca hizmet etmediðine dikkat edin.
+
+Statik metotlarýn çok sýk kullanýlan araçlar olmadýðýný da belirterek yolumuza devam edelim.
+
+Dipnotlarý:
+
+[1]Aslýnda burada inþa edilen þey sýnýftan ziyade nesnedir. Bu durumu ve ‘nesne’ kavramýný bir sonraki bölümde ayrýntýlý olarak ele alacaðýz. 

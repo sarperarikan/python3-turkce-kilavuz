@@ -1,0 +1,127 @@
+
+__all__ Listesi
+
+Önceki baþlýklar altýnda da ifade ettiðimiz gibi, farklý içe aktarma yöntemlerini kullanarak, bir modül içindeki öðeleri farklý þekillerde içe aktarabiliyoruz. Gelin isterseniz Python’ýn içe aktarma mekanizmasýný anlayabilmek için ufak bir test yapalým.
+
+Þimdi masaüstünde, içeriði aþaðýdaki gibi olan, modül.py adlý bir dosya oluþturun:
+
+def fonk1():
+print('fonk1')
+
+def fonk2():
+print('fonk2')
+
+def fonk3():
+print('fonk3')
+
+def fonk4():
+print('fonk4')
+
+def fonk5():
+print('fonk5')
+
+def _fonk6():
+print('_fonk6')
+
+def __fonk7():
+print('__fonk7')
+
+def fonk8_():
+print('fonk8_')
+
+Daha sonra, masaüstünün bulunduðu konumda bir komut penceresi açarak Python’ýn etkileþimli kabuðunu çalýþtýrýn ve orada þu komutu verip bu modül.py adlý dosyayý bir modül olarak içe aktarýn:
+
+>>> import modül
+
+Þimdi de þu komutu kullanarak modül içeriðini kontrol edin:
+
+>>> dir(modül)
+
+Buradan þu çýktýyý alýyoruz:
+
+['__builtins__', '__cached__', '__doc__', '__file__', '__fonk7',
+'__loader__', '__name__', '__package__', '__spec__', '_fonk6',
+'fonk1', 'fonk2', 'fonk3', 'fonk4', 'fonk5', 'fonk8_']
+
+Gördüðünüz gibi, modül içinde tanýmladýðýmýz bütün fonksiyonlar bu listede var. Dolayýsýyla bu fonksiyonlara þu þekilde eriþebiliyoruz:
+
+>>> modül.fonk1()
+
+fonk1
+
+>>> modül.fonk2()
+
+fonk2
+
+>>> modül._fonk6()
+
+_fonk6
+
+>>> modül.__fonk7()
+
+__fonk7
+
+>>> modül.fonk8_()
+
+fonk8_
+
+Bu þekilde, istisnasýz bütün fonksiyonlara eriþim yetkisi elde ettiðimize dikkatinizi çekmek isterim.
+
+Þimdi etkileþimli kabuðu kapatýp tekrar açalým ve bu kez modülümüzü þu þekilde içe aktaralým:
+
+>>> from modül import *
+
+Bu þekilde, ismi _ ile baþlayanlar hariç bütün fonksiyonlarý, modül öneki olmadan mevcut etki alanýna aktardýðýmýzý biliyoruz.
+
+Kontrol edelim:
+
+>>> dir()
+
+Buradan þu çýktýyý alýyoruz:
+
+['__builtins__', '__doc__', '__loader__', '__name__',
+'__package__', '__spec__', 'fonk1', 'fonk2', 'fonk3',
+'fonk4', 'fonk5', 'fonk8_']
+
+Gördüðünüz gibi, gerçekten de ismi _ ile baþlayanlar hariç, bütün fonksiyonlar, modül öneki olmadan kullanýlmaya hazýr bir þekilde mevcut etki alanýmýz içinde görünüyor. Bunlarý þu þekilde kullanabileceðimizi biliyorsunuz:
+
+>>> fonk4()
+
+fonk4
+
+>>> fonk8_()
+
+fonk8_
+
+Elbette, ismi _ ile baþlayan fonksiyonlarý, doðrudan isimlerini kullanarak içe aktarma imkanýna sahipsiniz:
+
+>>> from modül import __fonk7
+>>> from modül import _fonk6
+
+Tabii, bu fonksiyonlarý içe aktarabilmek için bunlarýn isimlerini biliyor olmanýz lazým...
+
+Peki siz, yazdýðýnýz bir programda yalnýzca kendi belirlediðiniz isimlerin içe aktarýlmasýný isterseniz ne yapacaksýnýz? Ýþte bunun için, baþlýkta sözünü ettiðimiz __all__ adlý bir listeden yararlanabilirsiniz.
+
+Þimdi biraz önce oluþturduðunuz modül.py dosyasýnýn en baþýna þu satýrý ekleyin:
+
+__all__ = ['fonk1', 'fonk2', 'fonk3']
+
+Daha sonra etkileþimli kabukta modülünüzü þu þekilde içe aktarýn:
+
+>>> from modül import *
+
+Þimdi de içe aktarýlan fonksiyonlarýn neler olduðunu kontrol edin:
+
+>>> dir()
+
+['__builtins__', '__doc__', '__loader__', '__name__', '__package__',
+ '__spec__', 'fonk1', 'fonk2', 'fonk3']
+
+Gördüðünüz gibi, yalnýzca __all__ listesi içinde belirttiðimiz fonksiyonlar içe aktarýldý. Bu listeyi kullanarak, yýldýzlý içe aktarmalarda nelerin içe aktarýlýp nelerin dýþarýda býrakýlacaðýný kontrol edebilirsiniz. Yalnýz unutmamanýz gereken nokta, bu yöntemin öteki içe aktarma türlerinde hiçbir iþe yaramayacaðýdýr. Yani mesela modül adlý modülümüzü import modül þeklinde içe aktarýrsak __all__ listesi dikkate alýnmayacaktýr.
+
+Peki ya __all__ listesini boþ býrakýrsak ne olur?
+
+__all__ = []
+
+Tabii ki, bu þekilde yýldýzlý aktarmalarda (modülün kendi varsayýlan fonksiyonlarý hariç) hiçbir fonksiyon içe aktarýlmaz...
+

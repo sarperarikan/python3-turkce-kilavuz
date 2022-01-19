@@ -1,0 +1,17 @@
+
+dir()
+
+Eðer dir() fonksiyonunu parametresiz olarak kullanýrsak, mevcut isim alanýndaki öðeleri bir liste halinde elde ederiz:
+
+>>> dir()
+
+['__builtins__', '__doc__', '__loader__', '__name__', '__package__']
+
+Bu bakýmdan dir() fonksiyonu globals() ve locals() fonksiyonlarýna benzer. Ancak onlardan farký, dir() fonksiyonunun çýktý olarak bir liste, globals() ve locals() fonksiyonlarýnýn ise birer sözlük vermesidir.
+
+Ayrýca dir() fonksiyonunu kullanarak nesnelerin metot ve niteliklerini içeren bir listeye ulaþabileceðimizi de biliyorsunuz. Örneðin bu fonksiyonu kullanarak farklý veri tiplerinin metot ve niteliklerini listeleyebiliriz:
+
+>>> dir('')
+>>> dir([])
+>>> dir({})
+

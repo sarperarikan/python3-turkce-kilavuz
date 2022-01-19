@@ -1,0 +1,5 @@
+
+license()
+
+Bu fonksiyon yardýmýyla Python’ýn lisansýna iliþkin epey ayrýntýlý metinlere ulaþabilirsiniz.
+

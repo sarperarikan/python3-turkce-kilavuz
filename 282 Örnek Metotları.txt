@@ -1,0 +1,313 @@
+
+Örnek Metotlarý
+
+Buraya kadar sýnýflar, örnekler, sýnýf nitelikleri ve örnek nitelikleri konusunda epey bilgi edindik. Gelin þimdi isterseniz bu öðrendiklerimizi kullanarak az çok anlamlý bir þeyler yazmaya çalýþalým. Böylece hem þimdiye kadar öðrendiklerimizi gözden geçirmiþ ve pekiþtirmiþ oluruz, hem de bu bölümde ele alacaðýmýz ‘örnek metotlarý’ (instance methods) kavramýný anlamamýz kolaylaþýr:
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+def personeli_görüntüle(self):
+print('Personel listesi:')
+for kiþi in self.personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Sýnýfýmýzý tanýmladýk. Gelin isterseniz bu kodlarý açýklamaya baþlamadan önce nasýl kullanacaðýmýzý görelim.
+
+Bildiðiniz gibi, Python kodlarýný test etmenin en iyi yolu, bunlarý etkileþimli kabuk üzerinde çalýþtýrmaktýr. Özellikle bir program yazarken, tasarladýðýnýz sýnýflarýn, fonksiyonlarýn ve öteki öðelerin düzgün çalýþýp çalýþmadýðýný test etmek için etkileþimli kabuðu sýklýkla kullanacaksýnýz.
+
+O halde, yukarýdaki kodlarý barýndýran dosyanýn bulunduðu dizin altýnda bir etkileþimli kabuk oturumu baþlatalým ve dosya adýnýn çalýþan.py olduðunu varsayarak kodlarýmýzý bir modül þeklinde içe aktaralým:
+
+>>> import çalýþan
+
+Daha sonra sýnýfýmýzýn iki farklý örneðini çýkaralým:
+
+>>> ç1 = çalýþan.Çalýþan('Ahmet')
+
+Ahmet adlý kiþi personele eklendi
+
+>>> ç2 = çalýþan.Çalýþan('Mehmet')
+
+Mehmet adlý kiþi personele eklendi
+
+Bu þekilde çalýþan adlý modül içindeki Çalýþan() adlý sýnýfý sýrasýyla ‘Ahmet’ ve ‘Mehmet’ parametreleri ile çaðýrarak ç1 ve ç2 adlý iki farklý sýnýf örneði oluþturmuþ olduk. Bu arada, sýnýfýmýzý örneklediðimiz anda __init__() fonksiyonunun devreye girdiðine dikkat ediyoruz.
+
+personele_ekle() adlý fonksiyonu self.personele_ekle() þeklinde __init__() fonksiyonu içinden çaðýrdýðýmýz için, sýnýfýmýzý örneklediðimiz anda hem personelin kendisi personel listesine eklendi, hem de bu kiþinin personele eklendiðine dair bir mesaj gösterildi.
+
+Tanýmladýðýmýz sýnýfýn niteliklerine, çýkardýðýmýz örnekler üzerinden eriþebiliriz:
+
+>>> ç1.isim
+
+'Ahmet'
+
+>>> ç2.isim
+
+'Mehmet'
+
+Yine bu örnekler üzerinden, bu nitelikleri deðiþtirebiliriz de:
+
+>>> ç1.isim = 'Mahmut'
+>>> ç1.personel[0] = 'Mahmut'
+
+Böylece ilk çalýþanýn ismini ‘Mahmut’ olarak deðiþtirdik:
+
+>>> ç1.isim
+
+'Mahmut'
+
+>>> ç1.personel
+
+['Mahmut', 'Mehmet']
+
+Tanýmladýðýmýz sýnýf içindeki fonksiyonlarý kullanarak, çalýþanlarýmýza birkaç kabiliyet ekleyelim:
+
+>>> ç1.kabiliyet_ekle('prezantabl')
+>>> ç1.kabiliyet_ekle('konuþkan')
+
+ç1 örneðinin kabiliyetlerini görüntüleyelim:
+
+>>> ç1.kabiliyetleri_görüntüle()
+
+Mahmut adlý kiþinin kabiliyetleri:
+prezantabl
+konuþkan
+
+Þimdi de ç2 örneðine bir kabiliyet ekleyelim ve eklediðimiz kabiliyeti görüntüleyelim:
+
+>>> ç2.kabiliyet_ekle('giriþken')
+>>> ç2.kabiliyetleri_görüntüle()
+
+Mehmet adlý kiþinin kabiliyetleri:
+giriþken
+
+Gördüðünüz gibi, bir sýnýf örneðine eklediðimiz kabiliyet öteki sýnýf örneklerine karýþmýyor. Bu, örnek niteliklerinin sýnýf niteliklerinden önemli bir farkýdýr. Zira sýnýf nitelikleri bir sýnýfýn bütün örnekleri tarafýndan paylaþýlýr. Ama örnek nitelikleri her bir örneðe özgüdür. Bu özellikten biraz sonra daha ayrýntýlý olarak söz edeceðiz. Biz þimdilik okumaya devam edelim.
+
+Sýnýf örneklerimizin herhangi biri üzerinden personel listesine de ulaþabileceðimizi biliyoruz:
+
+>>> ç1.personeli_görüntüle()
+
+Personel listesi:
+Mahmut
+Mehmet
+
+Gayet güzel...
+
+Yukarýda anlattýklarýmýz sýnýflar hakkýnda size epey fikir vermiþ olmalý. Konuyu daha da derinlemesine anlayabilmek için, artýk bu sýnýfý incelemeye geçebiliriz.
+
+Sýnýfýmýzý önümüze alalým:
+
+class Çalýþan():
+personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+def personeli_görüntüle(self):
+print('Personel listesi:')
+for kiþi in self.personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Burada öncelikle her zamanki gibi sýnýfýmýzý tanýmlýyoruz:
+
+class Çalýþan():
+...
+
+Daha sonra bu sýnýfa personel adlý bir sýnýf niteliði ekliyoruz:
+
+class Çalýþan():
+personel = []
+
+Sýnýf niteliklerinin özelliði, o sýnýfýn bütün örnekleri tarafýndan paylaþýlýyor olmasýdýr. Yani herhangi bir örneðin bu nitelik üzerinde yaptýðý deðiþiklik, öteki örneklere de yansýyacaktýr. Hele bir de bu sýnýf niteliði, listeler gibi deðiþtirilebilir (mutable) bir veri tipi ise, bu durum hiç de istemediðiniz sonuçlar doðurabilir. Bununla ilgili bir örneði yukarýda vermiþtik. Hatýrlarsanýz, kabiliyetleri adlý, liste veri tipinde bir sýnýf niteliði oluþturduðumuzda, bu listeye eklediðimiz öðeler, hiç istemediðimiz halde öbür örneklere de sirayet ediyordu. Elbette, sýnýf niteliklerinin bu özelliði, o anda yapmaya çalýþtýðýnýz þey açýsýndan gerekli bir durum da olabilir. Mesela yukarýdaki kodlarda, listelerin ve sýnýf niteliklerinin bu özelliði bizim amacýmýza hizmet ediyor. Yukarýdaki sýnýfý çalýþtýrdýðýmýzda, eklenen her bir kiþiyi bu personel listesine ilave edeceðiz. Dolayýsýyla bu nitelik üzerinde yapýlan deðiþikliklerin bütün örneklere yansýmasý bizim istediðimiz bir þey.
+
+Neyse... Lafý daha fazla uzatmadan, kodlarýmýzý açýklamaya kaldýðýmýz yerden devam edelim...
+
+Sýnýfýmýzý ve sýnýf niteliðimizi tanýmladýktan sonra __init__() adlý özel fonksiyonumuzu oluþturuyoruz:
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.personele_ekle()
+
+Bu fonksiyonun özelliði, sýnýfýn örneklenmesi ile birlikte otomatik olarak çalýþtýrýlacak olmasýdýr. Biz burada, self.isim ve self.kabiliyetleri adlý iki adet örnek niteliði tanýmladýk. Bu örnek niteliklerine sýnýfýmýzýn her tarafýndan eriþebileceðiz.
+
+Yukarýda, tanýmladýðýmýz sýnýfý nasýl kullanacaðýmýzý gösterirken, Çalýþan() sýnýfýný þu þekilde örneklediðimizi hatýrlýyorsunuz:
+
+>>> ç1 = çalýþan.Çalýþan('Ahmet')
+
+Burada sýnýfýmýzý ‘Ahmet’ adlý bir argümanla örneklediðimize dikkatinizi çekmek isterim. Ýþte bu argüman, biraz önce __init__() fonksiyonunu tanýmlarken belirttiðimiz isim parametresine karþýlýk geliyor. Dolayýsýyla, bir sýnýfý çaðýrýrken/örneklerken kullanacaðýmýz argümanlarý, bu __init__() fonksiyonunun parametreleri olarak tanýmlýyoruz.
+
+Daha sonra bu isim parametresini, __init__() fonksiyonunun gövdesi içinde bir örnek niteliði haline getiriyoruz:
+
+self.isim = isim
+
+Bunu yapmamýzýn gerekçesi, isim parametresini sýnýfýmýzýn baþka bölgelerinde de kullanabilmek. self kelimesini parametremizin baþýna yerleþtirerek, bu parametreyi sýnýfýn baþka yerlerinden de eriþilebilir hale getiriyoruz.
+
+isim parametresini, self.isim kodu yardýmýyla bir örnek niteliðine dönüþtürdükten sonra self.kabiliyetleri adlý bir baþka örnek niteliði daha tanýmlýyoruz. Bu liste, sýnýf örneklerine eklediðimiz kabiliyetleri tutacak.
+
+Bunun ardýndan þöyle bir kod görüyoruz:
+
+self.personele_ekle()
+
+Burada, personele_ekle() adlý bir örnek metoduna (instance method) atýfta bulunuyoruz. Örnek metotlarý, bir sýnýfýn örnekleri vasýtasýyla çaðrýlabilen fonksiyonlardýr. Bu fonksiyonlarýn ilk parametresi her zaman self kelimesidir. Ayrýca bu fonksiyonlara sýnýf içinde atýfta bulunurken de yine self kelimesini kullanýyoruz. Týpký yukarýdaki örnekte olduðu gibi...
+
+Bir örnek metodu olduðunu söylediðimiz personele_ekle() fonksiyonunu þu þekilde tanýmladýk:
+
+def personele_ekle(self):
+self.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+Burada, bir sýnýf niteliði olan personel deðiþkenine nasýl eriþtiðimize çok dikkat etmenizi istiyorum. Daha önce de söylediðimiz gibi, sýnýf niteliklerine sýnýf dýþýndayken örnekler üzerinden eriþebiliyoruz. self kelimesi, bir sýnýfýn örneklerini temsil ettiði için, bir örnek niteliðine sýnýf içinden eriþmemiz gerektiðinde self kelimesini kullanabiliriz.
+
+Sýnýf niteliklerine, örnekler dýþýnda, sýnýf adýyla da eriþebileceðinizi biliyorsunuz. Dolayýsýyla isterseniz yukarýdaki kodlarý þöyle de yazabilirdiniz:
+
+def personele_ekle(self):
+Çalýþan.personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+Bir öncekinden farklý olarak, bu defa sýnýf niteliðine doðrudan sýnýf adýný (Çalýþan) kullanarak eriþtik.
+
+Ayrýca bu fonksiyonda, bir örnek niteliði olan self.isim deðiþkenine de eriþebiliyor olduðumuza dikkat edin. Unutmayýn, self sýnýflarýn çok önemli bir öðesidir. Bu öðeyi kullanarak hem örnek niteliklerine, hem sýnýf niteliklerine, hem de örnek metotlarýna ulaþabiliyoruz. Tanýmladýðýmýz bu personele_ekle() adlý örnek metodunu __init__() fonksiyonu içinden self.personele_ekle() kodu ile (yani yine self kelimesini kullanarak) çaðýrdýðýmýzý hatýrlýyorsunuz.
+
+personele_ekle() fonksiyonunun ardýndan arka arkaya üç fonksiyon daha tanýmladýk:
+
+def personeli_görüntüle(self):
+print('Personel listesi:')
+for kiþi in self.personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Bu fonksiyonlar da, týpký personele_ekle() gibi, birer örnek metodudur. Bu örnek metotlarýnýn da ilk parametrelerinin hep self olduðuna dikkat ediyoruz. Örnek metotlarýna sýnýf dýþýndan örnek isimleri (ahmet, mehmet gibi) aracýlýðýyla, sýnýf içinden ise, örnek isimlerini temsil eden self kelimesi aracýlýðýyla eriþtiðimizi biliyorsunuz.
+
+Þimdi bir duralým...
+
+Bu noktaya kadar epey konuþtuk, epey örnek verdik. Sýnýflar hakkýnda yeterince bilgi sahibi olduðumuza göre, nihayet en baþta verdiðimiz harf sayacý kodlarýný rahatlýkla anlayabilecek düzeye eriþtik:
+
+class HarfSayacý:
+def __init__(self):
+self.sesli_harfler = 'aeýioöuü'
+self.sessiz_harfler = 'bcçdfgðhjklmnprsþtvyz'
+self.sayaç_sesli = 0
+self.sayaç_sessiz = 0
+
+def kelime_sor(self):
+return input('Bir kelime girin: ')
+
+def seslidir(self, harf):
+return harf in self.sesli_harfler
+
+def sessizdir(self, harf):
+return harf in self.sessiz_harfler
+
+def artýr(self):
+for harf in self.kelime:
+if self.seslidir(harf):
+self.sayaç_sesli += 1
+if self.sessizdir(harf):
+self.sayaç_sessiz += 1
+return (self.sayaç_sesli, self.sayaç_sessiz)
+
+def ekrana_bas(self):
+sesli, sessiz = self.artýr()
+mesaj = "{} kelimesinde {} sesli {} sessiz harf var."
+print(mesaj.format(self.kelime, sesli, sessiz))
+
+def çalýþtýr(self):
+self.kelime = self.kelime_sor()
+self.ekrana_bas()
+
+if __name__ == '__main__':
+sayaç = HarfSayacý()
+sayaç.çalýþtýr()
+
+Gelin isterseniz bu kodlara da þöyle bir bakalým...
+
+Burada sýnýfýmýzý þu þekilde tanýmladýk:
+
+class HarfSayacý:
+...
+
+Sýnýf adýný parantezli bir þekilde yazabileceðimizi de biliyorsunuz:
+
+class HarfSayacý():
+...
+
+Daha sonra, __init__() fonksiyonu içinde dört adet örnek niteliði tanýmladýk:
+
+self.sesli_harfler = 'aeýioöuü'
+self.sessiz_harfler = 'bcçdfgðhjklmnprsþtvyz'
+self.sayaç_sesli = 0
+self.sayaç_sessiz = 0
+
+Bunlarýn birer örnek niteliði olduðunu, baþlarýna getirdiðimiz self kelimesinden anlýyoruz. Çünkü bildiðiniz gibi, self kelimesi, ilgili sýnýfýn örneklerini temsil ediyor. Bir sýnýf içinde örnek niteliklerine ve örnek metotlarýna hep bu self kelimesi aracýlýðýyla eriþiyoruz.
+
+Bu sýnýf içinde, ilk parametreleri self olan þu örnek metotlarýný görüyoruz:
+
+def kelime_sor(self):
+...
+
+def seslidir(self, harf):
+...
+
+def sessizdir(self, harf):
+...
+
+def artýr(self):
+...
+
+def ekrana_bas(self):
+...
+
+def çalýþtýr(self):
+...
+
+Sýnýfla birlikte bütün örnek deðiþkenlerini ve örnek metotlarýný tanýmladýktan sonra programýmýzý çalýþtýrma aþamasýna geliyoruz:
+
+if __name__ == '__main__':
+sayaç = HarfSayacý()
+sayaç.çalýþtýr()
+
+Buna göre, eðer programýmýz baðýmsýz olarak çalýþtýrýlýyorsa öncelikle HarfSayacý() adlý sýnýfý örneklendiriyoruz:
+
+sayaç = HarfSayacý()
+
+Daha sonra da sayaç örneði üzerinden HarfSayacý() adlý sýnýfýn çalýþtýr() metoduna eriþerek programýmýzý baþlatýyoruz.
+
+Böylece, Python’da nesne tabanlý programlama ve sýnýflara dair öðrenmemiz gereken bütün temel bilgileri edinmiþ olduk. Þu ana kadar öðrendikleriniz sayesinde, etrafta göreceðiniz sýnýflý kodlarýn büyük bölümünü anlayabilecek durumdasýnýz. Bir sonraki bölümde, nesne tabanlý programlamanýn ayrýntýlarýna inmeye baþlayacaðýz.
+

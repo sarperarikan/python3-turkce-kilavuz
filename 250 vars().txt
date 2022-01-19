@@ -1,0 +1,39 @@
+
+vars()
+
+Bu fonksiyon, mevcut isim alaný içindeki metot, fonksiyon ve nitelikleri listeler. Eðer bu fonksiyonu parametresiz olarak kullanýrsak, daha önce gördüðümüz locals() fonksiyonuyla ayný çýktýyý elde ederiz:
+
+>>> vars()
+
+{'__builtins__': <module 'builtins' (built-in)>, '__name__': '__main__',
+ '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>,
+ '__doc__': None}
+
+Bu fonksiyonu, nesnelerin metotlarýný ve niteliklerini öðrenmek için de kullanabilirsiniz:
+
+>>> vars(str)
+>>> vars(list)
+>>> vars(dict)
+
+Yukarýda sýrasýyla karakter dizilerinin, listelerin ve sözlüklerin metotlarýný listeledik. Bu yönüyle vars() fonksiyonu dir() fonksiyonuna benzer.
+
+Böylece Python’daki gömülü fonksiyonlarý tek tek incelemiþ olduk. Bu bölümde incelemediðimiz gömülü fonksiyonlar þunlar:
+
+
+memoryview() 
+iter() 
+next() 
+object() 
+property() 
+staticmethod() 
+super() 
+getattr() 
+hasattr() 
+delattr() 
+classmethod() 
+issubclass() 
+setattr() 
+__import() 
+
+Bu fonksiyonlarý, ilerleyen derslerle birlikte Python bilgimiz biraz daha arttýðýnda ele alacaðýz.
+

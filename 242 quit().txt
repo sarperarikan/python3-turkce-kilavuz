@@ -1,0 +1,5 @@
+
+quit()
+
+Bu fonksiyonu programdan çýkmak için kullanýyoruz. Eðer bu fonksiyonu etkileþimli kabukta verecek olursanýz etkileþimli kabuk kapanacaktýr.
+

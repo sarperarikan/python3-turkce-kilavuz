@@ -1,0 +1,576 @@
+
+Özyinelemeli (Recursive) Fonksiyonlar
+
+Bu bölümde, lambda fonksiyonlarýnýn ardýndan, yine Python’ýn ileri düzey konularýndan biri olan ‘özyinelemeli fonksiyonlar’dan söz edeceðiz. Ýngilizcede recursive functions olarak adlandýrýlan özyinelemeli fonksiyonlarýn, Python programlama dilinin anlamasý en zor konularýndan biri olduðu söylenir. Ama bu söylenti sizi hiç endiþelendirmesin. Zira biz burada bu çapraþýk görünen konuyu size olabildiðince basit ve anlaþýlýr bir þekilde sunmak için elimizden gelen bütün çabayý göstereceðiz.
+
+O halde hemen baþlayalým...
+
+Þimdiye kadar Python’da pek çok fonksiyon gördük. Bu fonksiyonlar kimi zaman Python programcýlarýnca tanýmlanýp dile entegre edilmiþ ‘gömülü fonksiyonlar’ (builtin functions) olarak, kimi zamansa o anda içinde bulunduðumuz duruma ve ihtiyaçlarýmýza göre bizzat kendimizin tanýmladýðý ‘el yapýmý fonksiyonlar’ (custom functions) olarak çýktý karþýmýza.
+
+Þimdiye kadar öðrendiðimiz bütün bu fonksiyonlarýn ortak bir noktasý vardý. Bu ortak nokta, þu ana kadar fonksiyonlarý kullanarak yaptýðýmýz örneklerden de gördüðünüz gibi, bu fonksiyonlar yardýmýyla baþka fonksiyonlarý çaðýrabiliyor olmamýz. Örneðin:
+
+def selamla(kim):
+print('merhaba', kim)
+
+Burada selamla() adlý bir fonksiyon tanýmladýk. Gördüðünüz gibi bu fonksiyon print() adlý baþka bir fonksiyonu çaðýrýyor. Burada sýradýþý bir þey yok. Dediðimiz gibi, þimdiye kadar zaten hep böyle fonksiyonlar görmüþtük.
+
+Python fonksiyonlarý, yukarýdaki örnekte de gördüðünüz gibi, nasýl baþka fonksiyonlarý çaðýrabiliyorsa, ayný þekilde, istenirse, kendi kendilerini de çaðýrabilirler. Ýþte bu tür fonksiyonlara Python programlama dilinde ‘kendi kendilerini yineleyen’, veya daha teknik bir dille ifade etmek gerekirse ‘özyinelemeli’ (recursive) fonksiyonlar adý verilir.
+
+Çok basit bir örnek verelim. Diyelim ki, kendisine parametre olarak verilen bir karakter dizisi içindeki karakterleri teker teker azaltarak ekrana basan bir fonksiyon yazmak istiyorsunuz. Yani mesela elinizde ‘istihza’ adlý bir karakter dizisi var. Sizin amacýnýz bu karakter dizisini þu þekilde basan bir fonksiyon yazmak:
+
+istihza
+stihza
+tihza
+ihza
+hza
+za
+a
+
+Elbette bu iþi yapacak bir fonksiyonu, daha önce öðrendiðiniz döngüler ve baþka yapýlar yardýmýyla rahatlýkla yazabilirsiniz. Ama isterseniz ayný iþi özyinelemeli fonksiyonlar yardýmýyla da yapabilirsiniz.
+
+Þimdi þu kodlara dikkatlice bakýn:
+
+def azalt(s):
+if len(s) < 1:
+return s
+else:
+print(s)
+return azalt(s[1:])
+
+print(azalt('istihza'))
+
+Bu kodlar bize yukarýda bahsettiðimiz çýktýyý verecek:
+
+istihza
+stihza
+tihza
+ihza
+hza
+za
+a
+
+Fonksiyonumuzu yazýp çalýþtýrdýðýmýza ve bu fonksiyonun bize nasýl bir çýktý verdiðini gördüðümüze göre fonksiyonu açýklamaya geçebiliriz.
+
+Bu fonksiyon ilk bakýþta daha önce öðrendiðimiz fonksiyonlardan çok da farklý görünmüyor aslýnda. Ama eðer fonksiyonun son kýsmýna bakacak olursanýz, bu fonksiyonu daha önce öðrendiðimiz fonksiyonlardan ayýran þu satýrý görürsünüz:
+
+return azalt(s[1:])
+
+Gördüðünüz gibi, burada azalt() fonksiyonu içinde yine azalt() fonksiyonunu çaðýrýyoruz. Böylece fonksiyonumuz sürekli olarak kendi kendini yineliyor. Yani ayný fonksiyonu tekrar tekrar uyguluyor.
+
+Peki ama bunu nasýl yapýyor?
+
+Nasýl bir durumla karþý karþýya olduðumuzu daha iyi anlamak için yukarýdaki kodlarý þu þekilde yazalým:
+
+def azalt(s):
+if len(s) < 1:
+return s
+else:
+print(list(s))
+return azalt(s[1:])
+
+Burada fonksiyonun her yineleniþinde, özyinelemeli fonksiyona parametre olarak giden karakter dizisinin nasýl deðiþtiðini birazcýk daha net olarak görebilmek için karakter dizisi içindeki karakterleri bir liste haline getirip ekrana basýyoruz:
+
+print(list(s))
+
+Bu kodlarý çalýþtýrdýðýmýzda þu çýktýyý alacaðýz:
+
+['i', 's', 't', 'i', 'h', 'z', 'a']
+['s', 't', 'i', 'h', 'z', 'a']
+['t', 'i', 'h', 'z', 'a']
+['i', 'h', 'z', 'a']
+['h', 'z', 'a']
+['z', 'a']
+['a']
+
+Yukarýdaki çýktýnýn ilk satýrýnda gördüðünüz gibi, fonksiyon ilk çaðrýldýðýnda listede ‘istihza’ karakter dizisini oluþturan bütün harfler var. Yani fonksiyonumuz ilk çalýþmada parametre olarak karakter dizisinin tamamýný alýyor. Ancak fonksiyonun her yineleniþinde listedeki harfler birer birer düþüyor. Böylece özyinelemeli fonksiyonumuz parametre olarak karakter dizisinin her defasýnda bir eksiltilmiþ biçimini alýyor.
+
+Yukarýdaki sözünü ettiðimiz düþmenin yönü karakter dizisinin baþýndan sonuna doðru. Yani her defasýnda, elde kalan karakter dizisinin ilk harfi düþüyor. Düþme yönünün böyle olmasý bizim kodlarý yazýþ þeklimizden kaynaklanýyor. Eðer bu kodlarý þöyle yazsaydýk:
+
+def azalt(s):
+if len(s) < 1:
+return s
+else:
+print(list(s))
+return azalt(s[:-1])
+
+Harflerin düþme yönü sondan baþa doðru olacaktý:
+
+['i', 's', 't', 'i', 'h', 'z', 'a']
+['i', 's', 't', 'i', 'h', 'z']
+['i', 's', 't', 'i', 'h']
+['i', 's', 't', 'i']
+['i', 's', 't']
+['i', 's']
+['i']
+
+Burada, bir önceki koddaki azalt(s[1:]) satýrýný azalt(s[:-1]) þeklinde deðiþtirdiðimize dikkat edin.
+
+Fonksiyonun nasýl iþlediðini daha iyi anlamak için, ‘istihza’ karakter dizisinin son harfinin her yineleniþ esnasýndaki konumunun nasýl deðiþtiðini de izleyebilirsiniz:
+
+n = 0
+
+def azalt(s):
+global n
+mesaj = '{} harfinin {}. çalýþmadaki konumu: {}'
+if len(s) < 1:
+return s
+else:
+n += 1
+print(mesaj.format('a', n, s.index('a')))
+return azalt(s[1:])
+
+azalt('istihza')
+
+Bu kodlar þu çýktýyý verir:
+
+a harfinin 1. çalýþmadaki konumu: 6
+a harfinin 2. çalýþmadaki konumu: 5
+a harfinin 3. çalýþmadaki konumu: 4
+a harfinin 4. çalýþmadaki konumu: 3
+a harfinin 5. çalýþmadaki konumu: 2
+a harfinin 6. çalýþmadaki konumu: 1
+a harfinin 7. çalýþmadaki konumu: 0
+
+Gördüðünüz gibi ‘istihza’ kelimesinin en sonunda bulunan ‘a’ harfi her defasýnda baþ tarafa doðru ilerliyor.
+
+Ayný þekilde, kodlarý daha iyi anlayabilmek için, fonksiyona parametre olarak verdiðimiz ‘istihza’ kelimesinin her yinelemede ne kadar uzunluða sahip olduðunu da takip edebilirsiniz:
+
+def azalt(s):
+if len(s) < 1:
+return s
+else:
+print(len(s))
+return azalt(s[:-1])
+
+Bu fonksiyonu ‘istihza’ karakter dizisine uyguladýðýmýzda bize þu çýktýyý veriyor:
+
+7
+6
+5
+4
+3
+2
+1
+
+Gördüðünüz gibi, fonksiyonun kendini her yineleyiþinde karakter dizimiz küçülüyor.
+
+Bu durum bize özyinelemeli fonksiyonlar hakkýnda çok önemli bir bilgi veriyor esasýnda:
+
+Özyinelemeli fonksiyonlar; büyük bir problemin çözülebilmesi için, o problemin, problemin bütününü temsil eden daha küçük bir parçasý üzerinde iþlem yapabilmemizi saðlayan fonksiyonlardýr.
+
+Yukarýdaki örnekte de bu ilkeyi uyguluyoruz. Yani biz ‘istihza’ karakter dizisinin öncelikle yalnýzca ilk karakterini düþürüyoruz:
+
+s[1:]
+
+Daha sonra da bu yöntemi özyinelemeli bir þekilde uyguladýðýmýzda, ‘istihza’ karakter dizisinin her defasýnda daha küçük bir parçasý bu yöntemden etkileniyor:
+
+azalt(s[1:])
+
+Yani fonksiyonumuz ilk olarak ‘istihza’ karakter dizisinin ilk harfi olan ‘i’ harfini düþürüyor. Sonra ‘stihza’ kelimesinin ilk harfi olan ‘s’ harfini düþürüyor. Ardýndan ‘tihza’ kelimesinin ilk harfi olan ‘t’ harfini düþürüyor ve kelime tükenene kadar bu iþlemi devam ettiriyor.
+
+Peki ama bunu nasýl yapýyor?
+
+Þimdi yukarýdaki fonksiyondaki þu kýsma dikkatlice bakýn:
+
+if len(s) < 1:
+return s
+
+Ýþte burada özyinelemeli fonksiyonumuzun, karakter dizisi üzerinde ne kadar derine inmesi gerektiðini belirliyoruz. Buna göre, karakter dizisinin uzunluðu 1’in altýna düþtüðünde eldeki karakter dizisini döndürüyoruz. Yani karakter dizisinin uzunluðu 1’in altýna düþtüðünde elde kalan karakter dizisi boþ bir karakter dizisi olduðu için o boþ karakter dizisini döndürüyoruz. Eðer istersek elbette bu durumda baþka bir þey de döndürebiliriz:
+
+def azalt(s):
+if len(s) < 1:
+return 'bitti!'
+else:
+print(s)
+return azalt(s[1:])
+
+Ýþte if len(s) < 1: bloðunun bulunduðu bu kodlara ‘dip nokta’ adý veriyoruz. Fonksiyonumuzun yinelene yinelene (veya baþka bir ifadeyle ‘dibe ine ine’) geleceði en son nokta burasýdýr. Eðer bu dip noktayý belirtmezsek fonksiyonumuz, týpký dipsiz bir kuyuya düþmüþ gibi, sürekli daha derine inmeye çalýþacak, sonunda da hata verecektir. Ne demek istediðimizi daha iyi anlamak için kodlarýmýzý þöyle yazalým:
+
+def azalt(s):
+print(s)
+return azalt(s[1:])
+
+Gördüðünüz gibi burada herhangi bir dip nokta belirtmedik. Bu kodlarý çalýþtýrdýðýmýzda Python bize þöyle bir hata mesajý verecek:
+
+RuntimeError: maximum recursion depth exceeded
+
+Yani:
+
+ÇalýþmaZamanýHatasý: Azami özyineleme derinliði aþýldý
+
+Dediðimiz gibi, özyinelemeli fonksiyonlar her yineleniþte sorunun (yani üzerinde iþlem yapýlan parametrenin) biraz daha derinine iner. Ancak bu derine inmenin de bir sýnýrý vardýr. Bu sýnýrýn ne olduðunu þu kodlar yardýmýyla öðrenebilirsiniz:
+
+>>> import sys
+>>> sys.getrecursionlimit()
+
+Ýþte biz özyinelemeli fonksiyonlarýmýzda dip noktayý mutlaka belirterek, Python’ýn fonksiyonu yinelerken ne kadar derine inip nerede duracaðýný belirlemiþ oluyoruz.
+
+Þimdi son kez, yukarýdaki örnek fonksiyonu, özyineleme mantýðýný çok daha iyi anlamanýzý saðlayacak bir þekilde yeniden yazacaðýz. Dikkatlice bakýn:
+
+def azalt(s):
+if len(s) < 1:
+return s
+else:
+print('özyineleme sürecine girerken:', s)
+azalt(s[1:])
+print('özyineleme sürecinden çýkarken:', s)
+
+azalt('istihza')
+
+Burada, fonksiyon kendini yinelemeye baþlamadan hemen önce bir print() satýrý yerleþtirerek s deðiþkeninin durumunu takip ediyoruz:
+
+print('özyineleme sürecine girerken:', s)
+
+Ayný iþlemi bir de fonksiyonun kendini yinelemeye baþlamasýnýn hemen ardýndan yapýyoruz:
+
+print('özyineleme sürecinden çýkarken:', s)
+
+Yukarýdaki kodlar bize þu çýktýyý verecek:
+
+özyineleme sürecine girerken: istihza
+özyineleme sürecine girerken: stihza
+özyineleme sürecine girerken: tihza
+özyineleme sürecine girerken: ihza
+özyineleme sürecine girerken: hza
+özyineleme sürecine girerken: za
+özyineleme sürecine girerken: a
+özyineleme sürecinden çýkarken: a
+özyineleme sürecinden çýkarken: za
+özyineleme sürecinden çýkarken: hza
+özyineleme sürecinden çýkarken: ihza
+özyineleme sürecinden çýkarken: tihza
+özyineleme sürecinden çýkarken: stihza
+özyineleme sürecinden çýkarken: istihza
+
+Gördüðünüz gibi fonksiyon özyineleme sürecine girerken düþürdüðü her bir karakteri, özyineleme sürecinden çýkarken yeniden döndürüyor. Bu, özyinelemeli fonksiyonlarýn önemli bir özelliðidir. Mesela bu özellikten yararlanarak þöyle bir kod yazabilirsiniz:
+
+def ters_çevir(s):
+if len(s) < 1:
+return s
+else:
+ters_çevir(s[1:])
+print(s[0])
+
+ters_çevir('istihza')
+
+Yazdýðýmýz bu kodda ters_çevir() fonksiyonu, kendisine verilen parametreyi ters çevirecektir. Yani yukarýdaki kod bize þu çýktýyý verir:
+
+a
+z
+h
+i
+t
+s
+i
+
+Burada yaptýðýmýz þey çok basit: Yukarýda da söylediðimiz gibi, özyinelemeli fonksiyonlar, özyineleme sürecine girerken yaptýðý iþi, özyineleme sürecinden çýkarken tersine çevirir. Ýþte biz de bu özellikten yararlandýk. Fonksiyonun kendini yinelediði noktanýn çýkýþýna bir print() fonksiyonu yerleþtirip, geri dönen karakterlerin ilk harfini ekrana bastýk. Böylece s adlý parametrenin tersini elde etmiþ olduk.
+
+Ancak eðer yukarýdaki kodlarý bu þekilde yazarsak, fonksiyondan dönen deðeri her yerde kullanamayýz. Mesela yukarýdaki fonksiyonu aþaðýdaki gibi kullanamayýz:
+
+def ters_çevir(s):
+if len(s) < 1:
+return s
+else:
+ters_çevir(s[1:])
+print(s[0])
+
+kelime = input('kelime girin: ')
+print('Girdiðiniz kelimenin tersi: {}'.format(ters_çevir('istihza')))
+
+Fonksiyonumuzun daha kullanýþlý olabilmesi için kodlarýmýzý þöyle yazabiliriz:
+
+def ters_çevir(s):
+if len(s) < 1:
+return s
+else:
+return ters_çevir(s[1:]) + s[0]
+
+kelime = input('kelime girin: ')
+print('Girdiðiniz kelimenin tersi: {}'.format(ters_çevir('istihza')))
+
+Burada bizim amacýmýzý gerçekleþtirmemizi saðlayan satýr þu:
+
+return ters_çevir(s[1:]) + s[0]
+
+Ýlk bakýþta bu satýrýn nasýl çalýþtýðýný anlamak zor gelebilir. Ama aslýnda son derece basit bir mantýðý var bu kodlarýn. Þöyle düþünün: ters_çevir() fonksiyonunu özyinelemeli olarak iþlettiðimizde, yani þu kodu yazdýðýmýzda:
+
+return ters_çevir(s[1:])
+
+...döndürülecek son deðer boþ bir karakter dizisidir. Ýþte biz özyinelemeden çýkýlýrken geri dönen karakterlerin ilk harflerini bu boþ karakter dizisine ekliyoruz ve böylece girdiðimiz karakter dizisinin ters halini elde etmiþ oluyoruz.
+
+Yukarýdaki iþlevin aynýsýný, özyinelemeli fonksiyonunuzu þöyle yazarak da elde edebilirdiniz:
+
+def ters_çevir(s):
+if not s:
+return s
+else:
+return s[-1] + ters_çevir(s[:-1])
+
+print(ters_çevir('istihza'))
+
+Burada ayný iþ için farklý bir yaklaþým benimsedik. Ýlk olarak, dip noktasýný þu þekilde belirledik:
+
+if not s:
+return s
+
+Bildiðiniz gibi, boþ veri tiplerinin bool deðeri False‘tur. Dolayýsýyla özyineleme sýrasýnda s parametresinin uzunluðunun 1’in altýna düþmesi, s parametresinin içinin boþaldýðýný gösterir. Yani o anda s parametresinin bool deðeri False olur. Biz de yukarýda bu durumdan faydalandýk.
+
+Bir önceki kodlara göre bir baþka farklýlýk da þu satýrda:
+
+return s[-1] + ters_çevir(s[:-1])
+
+Burada benimsediðimiz yaklaþýmýn özü þu: Bildiðiniz gibi bir karakter dizisini ters çevirmek istediðimizde öncelikle bu karakter dizisinin en son karakterini alýp en baþa yerleþtiririz. Yani mesela elimizdeki karakter dizisi ‘istihza’ ise, bu karakter dizisini ters çevirmenin ilk adýmý bunun en son karakteri olan ‘a’ harfini alýp en baþa koymaktýr. Daha sonra da geri kalan harfleri tek tek tersten buna ekleriz:
+
+düz: istihza
+ters: a + z + h + i + t + s + i
+
+Ýþte yukarýdaki fonksiyonda da yaptýðýmýz þey tam anlamýyla budur.
+
+Önce karakter dizisinin son harfini en baþa koyuyoruz:
+
+return s[-1]
+
+Ardýndan da buna geri kalan harfleri tek tek tersten ekliyoruz:
+
+return s[-1] + ters_çevir(s[:-1])
+
+Özyinelemeli fonksiyonlara iliþkin olarak yukarýda tek bir örnek üzerinde epey açýklama yaptýk. Bu örnek ve açýklamalar, özyinelemeli fonksiyonlarýn nasýl çalýþtýðý konusunda size epey fikir vermiþ olmalý. Ancak elbette bu fonksiyonlarý tek bir örnek yardýmýyla tamamen anlayamamýþ olabilirsiniz. O yüzden gelin isterseniz bir örnek daha verelim. Mesela bu kez de basit bir sayaç yapalým:
+
+def sayaç(sayý, sýnýr):
+print(sayý)
+if sayý == sýnýr:
+return 'bitti!'
+else:
+return sayaç(sayý+1, sýnýr)
+
+Not
+
+Bu fonksiyonun yaptýðý iþi elbette baþka þekillerde çok daha kolay bir þekilde halledebilirdik. Bu örneði burada vermemizin amacý yalnýzca özyinelemeli fonksiyonlarýn nasýl iþlediðini göstermek. Yoksa böyle bir iþi özyinelemeli fonksiyonlarla yapmanýzý beklemiyoruz.
+
+Yukarýdaki fonksiyona dikkatlice bakarsanýz aslýnda yaptýðý iþi çok basit bir þekilde gerçekleþtirdiðini göreceksiniz.
+
+Burada öncelikle sayaç() adlý bir fonksiyon tanýmladýk. Bu fonksiyon toplam iki farklý parametre alýyor: sayý ve sýnýr.
+
+Buna göre fonksiyonumuzu þöyle kullanýyoruz:
+
+print(sayaç(0, 100))
+
+Burada sayý parametresine verdiðimiz 0 deðeri sayacýmýzýn saymaya kaçtan baþlayacaðýný gösteriyor. sýnýr parametresine verdiðimiz 100 deðeri ise kaça kadar sayýlacaðýný gösteriyor. Buna göre biz 0‘dan 100‘e kadar olan sayýlarý sayýyoruz...
+
+Gelin þimdi biraz fonksiyonumuzu inceleyelim.
+
+Ýlk olarak þu satýrý görüyoruz fonksiyon gövdesinde:
+
+print(sayý)
+
+Bu satýr, özyinelemeli fonksiyonun her yineleniþinde sayý parametresinin durumunu ekrana basacak.
+
+Sonraki iki satýrda ise þu kodlarý görüyoruz:
+
+if sayý == sýnýr:
+return 'bitti!'
+
+Bu bizim ‘dip nokta’ adýný verdiðimiz þey. Fonksiyonumuz yalnýzca bu noktaya kadar yineleyecek, bu noktanýn ilerisine geçmeyecektir. Yani sayý parametresinin deðeri sýnýr parametresinin deðerine ulaþtýðýnda özyineleme iþlemi de sona erecek. Eðer böyle bir dip nokta belirtmezsek fonksiyonumuz sonsuza kadar kendini yinelemeye çalýþacak, daha önce sözünü ettiðimiz ‘özyineleme limiti’ nedeniyle de belli bir aþamadan sonra hata verip çökecektir.
+
+Sonraki satýrlarda ise þu kodlarý görüyoruz:
+
+else:
+return sayaç(sayý+1, sýnýr)
+
+Bu satýrlar, bir önceki aþamada belirttiðimiz dip noktaya ulaþýlana kadar fonksiyonumuzun hangi iþlemleri yapacaðýný gösteriyor. Buna göre, fonksiyonun her yineleniþinde sayý parametresinin deðerini 1 sayý artýrýyoruz.
+
+Fonksiyonumuzu sayaç(0, 100) gibi bir komutla çalýþtýrdýðýmýzý düþünürsek, fonksiyonun ilk çalýþmasýnda 0 olan sayý deðeri sonraki yinelemede 1, sonraki yinelemede 2, sonraki yinelemede ise 3 olacak ve bu durum sýnýr deðer olan 100‘e varýlana kadar devam edecektir. sayý parametresinin deðeri 100 olduðunda ise dip nokta olarak verdiðimiz ölçüt devreye girecek ve fonksiyonun kendi kendisini yinelemesi iþlemine son verilecektir.
+
+Biz yukarýdaki örnekte yukarýya doðru sayan bir fonksiyon yazdýk. Eðer yukarýdan aþaðýya doðru sayan bir sayaç yapmak isterseniz yukarýdaki fonksiyonu þu þekle getirebilirsiniz:
+
+def sayaç(sayý, sýnýr):
+print(sayý)
+if sayý == sýnýr:
+return 'bitti!'
+else:
+return sayaç(sayý-1, sýnýr)
+
+print(sayaç(100, 0))
+
+Burada, önceki fonksiyonda + olan iþleci - iþlecine çevirdik:
+
+return sayaç(sayý-1, sýnýr)
+
+Fonksiyonumuzu çaðýrýrken de elbette sayý parametresinin deðerini 100 olarak, sýnýr parametresinin deðerini ise 0 olarak belirledik.
+
+Bu arada, daha önce de bahsettiðimiz gibi, özyinelemeli fonksiyonlar, özyinelemeye baþlarken döndürdükleri deðeri, özyineleme iþleminin sonunda tek tek geri döndürür. Bu özelliði göz önünde bulundurarak yukarýdaki fonksiyonu þu þekilde de yazabilirdiniz:
+
+def sayaç(sayý, sýnýr):
+if sayý == sýnýr:
+return 'bitti!'
+else:
+sayaç(sayý+1, sýnýr)
+print(sayý)
+
+print(sayaç(0, 10))
+
+Dikkat ederseniz burada print(sayý) satýrýný özyineleme iþlevinin çýkýþýna yerleþtirdik. Böylece 0‘dan 10‘a kadar olan sayýlarý tersten elde ettik. Ancak tabii ki yukarýdaki anlamlý bir kod yazým tarzý deðil. Çünkü fonksiyonumuzun yazým tarzýyla yaptýðý iþ birbiriyle çok ilgisiz. Sayýlarý yukarý doðru saymak üzere tasarlandýðý belli olan bu kodlar, yalnýzca bir print() fonksiyonunun özyineleme çýkýþýna yerleþtirilmesi sayesinde yaptýðý iþi yapýyor...
+
+Yukarýda verdiðimiz örnekler sayesinde artýk özyinelemeli fonksiyonlar hakkýnda en azýndan fikir sahibi olduðumuzu söyleyebiliriz. Gelin isterseniz þimdi özyinelemeli fonksiyonlarla ilgili (biraz daha mantýklý) bir örnek vererek bu çetrefilli konuyu zihnimizde netleþtirmeye çalýþalým.
+
+Bu defaki örneðimizde iç içe geçmiþ listeleri tek katmanlý bir liste haline getireceðiz. Yani elimizde þöyle bir liste olduðunu varsayarsak:
+
+l = [1, 2, 3, [4, 5, 6], [7, 8, 9, [10, 11], 12], 13, 14]
+
+Yazacaðýmýz kodlar bu listeyi þu hale getirecek:
+
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+
+Bu amacý gerçekleþtirebilmek için þöyle bir fonksiyon yazalým:
+
+def düz_liste_yap(liste):
+if not isinstance(liste, list):
+return [liste]
+elif not liste:
+return []
+else:
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+
+l = [1, 2, 3, [4, 5, 6], [7, 8, 9, [10, 11], 12], 13, 14]
+
+print(düz_liste_yap(l))
+
+Bu fonksiyonu yukarýdaki iç içe geçmiþ listeye uyguladýðýnýzda istediðiniz sonucu aldýðýnýzý göreceksiniz.
+
+Ýlk bakýþta yukarýdaki kodlarý anlamak biraz zor gelmiþ olabilir. Ama endiþe etmenize gerek yok. Zira biz bu kodlarý olabildiðince ayrýntýlý bir þekilde açýklayacaðýz.
+
+Ýlk olarak dip noktamýzý tanýmlýyoruz her zamanki gibi:
+
+if not isinstance(liste, list):
+return [liste]
+
+Fonksiyonumuzun temel çalýþma prensibine göre liste içindeki bütün öðeleri tek tek alýp baþka bir liste içinde toplayacaðýz. Eðer liste elemanlarý üzerinde ilerlerken karþýmýza liste olmayan bir eleman çýkarsa bu elemaný [liste] koduyla bir listeye dönüþtüreceðiz.
+
+Önceki örneklerden farklý olarak, bu kez kodlarýmýzda iki farklý dip noktasý kontrolü görüyoruz. Ýlkini yukarýda açýkladýk. Ýkinci dip noktamýz þu:
+
+elif not liste:
+return []
+
+Burada yaptýðýmýz þey þu: Eðer özyineleme esnasýnda boþ bir liste ile karþýlaþýrsak, tekrar boþ bir liste döndürüyoruz. Peki ama neden?
+
+Bildiðiniz gibi boþ bir listenin 0. elemaný olmaz. Yani boþ bir liste üzerinde þu iþlemi yapamayýz:
+
+>>> a = []
+>>> a[0]
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list index out of range
+
+Gördüðünüz gibi, boþ bir liste üzerinde indeksleme iþlemi yapmaya kalkýþtýðýmýzda hata alýyoruz. Þimdi durumu daha iyi anlayabilmek için isterseniz yukarýdaki kodlarý bir de ikinci dip noktasý kontrolü olmadan yazmayý deneyelim:
+
+def düz_liste_yap(liste):
+if not isinstance(liste, list):
+return [liste]
+else:
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+
+l = [1, 2, 3, [4, 5, 6], [7, 8, 9, [10, 11], 12], 13, 14]
+
+print(düz_liste_yap(l))
+
+Bu kodlarý çalýþtýrdýðýmýzda þu hata mesajýyla karþýlaþýyoruz:
+
+Traceback (most recent call last):
+File "deneme.py", line 9, in <module>
+print(düz_liste_yap(l))
+File "deneme.py", line 5, in düz_liste_yap
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+File "deneme.py", line 5, in düz_liste_yap
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+File "deneme.py", line 5, in düz_liste_yap
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+File "deneme.py", line 5, in düz_liste_yap
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+File "deneme.py", line 5, in düz_liste_yap
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+File "deneme.py", line 5, in düz_liste_yap
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+File "deneme.py", line 5, in düz_liste_yap
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+File "deneme.py", line 5, in düz_liste_yap
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+IndexError: list index out of range
+
+Gördüðünüz gibi, biraz önce boþ bir liste üzerinde indeksleme yapmaya çalýþtýðýmýzda aldýðýmýz hatanýn aynýsý bu. Çünkü kodlarýmýzýn else bloðuna bakarsanýz liste üzerinde indeksleme yaptýðýmýzý görürsünüz:
+
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+
+Elbette boþ bir liste liste[0] veya liste[1:] gibi sorgulamalara IndexError tipinde bir hata mesajýyla cevap verecektir. Ýþte böyle bir durumda hata almamak için þu kodlarý yazýyoruz:
+
+elif not liste:
+return []
+
+Böylece özyineleme esnasýnda boþ bir listeyle karþýlaþtýðýmýzda bu listeyi þu þekle dönüþtürüyoruz:
+
+[[]]
+
+Böyle bir yapý üzerinde indeksleme yapýlabilir:
+
+>>> a = [[]]
+>>> a[0]
+
+[]
+
+Dip noktaya ulaþýlana kadar yapýlacak iþlemler ise þunlar:
+
+return düz_liste_yap(liste[0]) + düz_liste_yap(liste[1:])
+
+Yani listenin ilk öðesine, geri kalan öðeleri teker teker ekliyoruz.
+
+Gelin bir örnek daha verelim:
+
+def topla(sayilar):
+if len(sayilar) < 1:
+return 0
+else:
+ilk, son = sayilar[0], sayilar[1:]
+return ilk+topla(son)
+
+Bu fonksiyonun görevi, kendisine liste olarak verilen sayýlarý birbiriyle toplamak. Biz bu iþi baþka yöntemlerle de yapabileceðimizi biliyoruz, ama bizim burada amacýmýz özyinelemeli fonksiyonlarý anlamak. O yüzden sayýlarý birbiriyle toplama iþlemini bir de bu þekilde yapmaya çalýþacaðýz.
+
+Elimizde þöyle bir liste olduðunu varsayalým:
+
+liste = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+Böyle bir durumda fonksiyonumuz 55 çýktýsý verir.
+
+Gelelim bu fonksiyonu açýklamaya...
+
+Her zamanki gibi ilk olarak dip noktamýzý tanýmlýyoruz:
+
+if len(sayilar) < 1:
+return 0
+
+Buna göre sayilar adlý listenin uzunluðu 1’in altýna düþünce 0 deðerini döndürüyoruz. Burada 0 deðerini döndürmemizin nedeni, listede öðe kalmadýðýnda programýmýzýn hata vermesini önlemek. Eðer 0 dýþýnda baþka bir sayý döndürürsek bu sayý toplama iþleminin sonucuna etki edecektir. Toplama iþleminin sonucunu etkilemeyecek tek sayý 0 olduðu için biz de bu sayýyý döndürüyoruz.
+
+Taban noktaya varýlýncaya kadar yapýlacak iþlemler ise þunlar:
+
+ilk, son = sayilar[0], sayilar[1:]
+return ilk+topla(son)
+
+Burada amacýmýz, listenin ilk sayýsý ile listenin geri kalan öðelerini tek tek birbiriyle toplamak. Bunun için sayilar adlý listenin ilk öðesini, listenin geri kalanýndan ayýrýyoruz ve ilk öðeyi ilk; geri kalan öðeleri ise son adlý bir deðiþkene gönderiyoruz:
+
+ilk, son = sayilar[0], sayilar[1:]
+
+Sonra da ilk öðeyi, geri kalan liste öðeleri ile tek tek topluyoruz. Bunun için de topla() fonksiyonunun kendisini son adlý deðiþken içinde tutulan liste öðelerine özyinelemeli olarak uyguluyoruz:
+
+return ilk+topla(son)
+
+Böylece liste içindeki bütün öðelerin toplam deðerini elde etmiþ oluyoruz.
+
+Bu arada, yeri gelmiþken Python programlama dilinin pratik bir özelliðinden söz edelim. Gördüðünüz gibi sayýlarýn ilk öðesini geri kalan öðelerden ayýrmak için þöyle bir kod yazdýk:
+
+ilk, son = sayilar[0], sayilar[1:]
+
+Aslýnda ayný iþi çok daha pratik bir þekilde de halledebilirdik. Dikkatlice bakýn:
+
+ilk, *son = sayilar
+
+Böylece sayilar deðiþkenin ilk öðesi ilk deðiþkeninde, geri kalan öðeleri ise son deðiþkeninde tutulacaktýr. Ýlerleyen derslerde ‘Yürüyücüler’ (Iterators) konusunu iþlerken bu yapýdan daha ayrýntýlý bir þekilde söz edeceðiz.
+

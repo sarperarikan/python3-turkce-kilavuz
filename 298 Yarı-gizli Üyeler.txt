@@ -1,0 +1,21 @@
+
+Yarý-gizli Üyeler
+
+Buraya kadar Python’a dair anlattýðýmýz þeylerden, yerleþmiþ adetlerin ve geleneklerin Python açýsýndan ne kadar önemli olduðunu anlamýþ olmalýsýnýz. Daha önce verdiðimiz örnekler, bu dildeki pek çok meselenin uzlaþma esasý üzerinden çözüme kavuþturulduðunu bize açýk ve seçik olarak gösterdi. Mesela geçen bölümlerde ele aldýðýmýz self ve cls kelimeleri tamamen uzlaþmaya dayalý kavramlardýr. Python topluluðu içinde, self kelimesinin örnek metotlarý için, cls kelimesinin ise sýnýf metotlarý için kullanýlmasý tamamen bir alýþkanlýk, adet, gelenek ve uzlaþý meselesidir. Python’ýn kendisi bize bu kelimeleri dayatmaz. Ancak topluluk içinde süregelen kuvvetli gelenekler bizi baþka kelimeleri deðil de yukarýdaki kelimeleri kullanmaya teþvik eder. Ayný þekilde kod yazarken girinti sayýsýnýn dört boþluk olarak belirlenmiþ olmasý da bir gelenekten ibarettir. Yazdýðýnýz kodlarda, ayný program içinde hep ayný sayýda olmak þartýyla, istediðiniz sayýda boþluktan oluþan girintiler kullanabilirsiniz. Ama Python’ýn topluluk içi gelenekleri bizi dört boþlukluk bir girintileme sistemi kullanmaya yöneltir.
+
+Ýþte týpký yukarýdakiler gibi, Python’daki sýnýf üyelerinin dýþa açýk veya dýþa kapalý olup olmamasý da hep belli birtakým gelenekler üzerinden belirlenen bir durumdur.
+
+Bunun bir örneðini, yukarýda gizli üyeleri anlatýrken vermiþtik. Bir sýnýf içindeki herhangi bir niteliðin baþýnda çift alt çizgi gördüðümüzde, o sýnýfý yazan kiþinin, bu niteliðe sýnýf dýþýndan eriþilmesini istemediðini anlýyoruz. Python her ne kadar nitelikleri gizlememiz için bize özel bir mekanizma sunmuþ olsa da bu niteliðe eriþmemizi tamamen engellemiyor, ancak ilgili sýnýfý yazan kiþinin niyetine saygý göstereceðimizi varsayýyor.
+
+Python’da sýnýf üyelerinin gizliliði, yukarýda da gördüðümüz gibi, hem özel bir mekanizma ile hem de topluluk içi gelenekler tarafýndan korunur.
+
+Python’da bir de yalnýzca topluluk içi gelenekler tarafýndan korunan ‘yarý-gizli’ üyeler (semi-private members) vardýr. Ýþte bu bölümde, bir gizli üye türü olan yarý-gizli üyelerden söz edeceðiz.
+
+Yarý-gizli üyeler, herhangi bir özel mekanizma aracýlýðýyla deðil de yalnýzca topluluk içi gelenekler tarafýndan korunan niteliklerdir. Herhangi bir üyeyi yarý-gizli olarak iþaretlemek için yapmamýz gereken tek þey baþýna bir adet alt çizgi yerleþtirmektir. Örneðin:
+
+class Falanca():
+_yarýgizli = 'yarýgizli'
+
+Buradaki _yarýgizli adlý niteliðe sýnýf içinden veya dýþýndan eriþmemizi engelleyen veya zorlaþtýran hiçbir mekanizma bulunmaz. Ama biz bir sýnýf içinde tek alt çizgi ile baþlayan bir öðe gördüðümüzde, bunun sýnýfýn iç iþleyiþine iliþkin bir ayrýntý olduðunu, sýnýf dýþýndan bu öðeyi deðiþtirmeye kalkýþmamamýz gerektiðini anlarýz.
+
+

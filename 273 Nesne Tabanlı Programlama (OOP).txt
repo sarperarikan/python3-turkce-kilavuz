@@ -1,0 +1,34 @@
+
+Nesne Tabanlý Programlama (OOP)
+
+Bu bölümde, programlama faaliyetlerimizin önemli bir kýsmýný oluþturacak olan nesne tabanlý programlama yaklaþýmýna bir giriþ yaparak, bu yaklaþýmýn temel kavramlarýndan biri olan sýnýflara deðineceðiz. Bu bölümde amacýmýz, sýnýflar üzerinden hem nesne tabanlý programlamayý tanýmak, hem bu yaklaþýma iliþkin temel bilgileri edinmek, hem de etrafýmýzda gördüðümüz nesne tabanlý yapýlarýn büyük çoðunluðunu anlayabilecek seviyeye gelmek olacaktýr. Bu bölümü tamamladýktan sonra, nesne tabanlý programlamayý orta düzeyde bildiðimizi iddia edebileceðiz.
+
+
+Giriþ
+
+Þimdiye kadar Python programlama dili ile ilgili olarak gördüðümüz konulardan öðrendiðimiz çok önemli bir bilgi var: Aslýna bakarsak, bu programlama dilinin bütün felsefesi, ‘bir kez yazýlan kodlarýn en verimli þekilde tekrar tekrar kullanýlabilmesi,’ fikrine dayanýyor.
+
+Þimdi bir geriye dönüp baktýðýmýzda, esasýnda bu fikrin izlerini ta ilk derslerimize kadar sürebiliyoruz. Mesela deðiþkenleri ele alalým. Deðiþkenleri kullanmamýzdaki temel gerekçe, bir kez yazdýðýmýz bir kodu baþka yerlerde rahatça kullanabilmek. Örneðin, isim = 'Uzun Ýhsan Efendi' gibi bir tanýmlama yaptýktan sonra, bu isim deðiþkeni aracýlýðýyla ‘Uzun Ýhsan Efendi’ adlý karakter dizisini her defasýnda tekrar tekrar yazmak zorunda kalmadan, kodlarýmýzýn her yanýnda kullanabiliyoruz.
+
+Ayný fikrin fonksiyonlar ve geçen bölümde incelediðimiz modüller için de geçerli olduðunu bariz bir þekilde görebilirsiniz. Gömülü fonksiyonlar, kendi tanýmladýðýmýz fonksiyonlar, hazýr modüller, üçüncü þahýs modülleri hep belli bir karmaþýk süreci basitleþtirme, bir kez tanýmlanan bir prosedürün tekrar tekrar kullanýlabilmesini saðlama amacý güdüyor.
+
+Ýþte bu fikir nesne tabanlý programlama ve dolayýsýyla ‘sýnýf’ (class) adý verilen özel bir veri tipi için de geçerlidir. Bu bölümde, bunun neden ve nasýl böyle olduðunu bütün ayrýntýlarýyla ele almaya çalýþacaðýz.
+
+Bu arada, Ýngilizcede Object Oriented Programming olarak ifade edilen programlama yaklaþýmý, Türkçede ‘Nesne Tabanlý Programlama’, ‘Nesne Yönelimli Programlama’ ya da ‘Nesneye Yönelik Programlama’ olarak karþýlýk bulur. Biz bu karþýlýklardan, adý ‘Nesne Tabanlý Programlama’ olaný tercih edeceðiz.
+
+Unutmadan, nesne tabanlý programlamaya girmeden önce deðinmemiz gereken bir þey daha var. Eðer öðrendiðiniz ilk programlama dili Python ise, nesne tabanlý programlamayý öðrenmenin (aslýnda öyle olmadýðý halde) zor olduðunu düþünebilir, bu konuyu biraz karmaþýk bulabilirsiniz. Bu durumda da kaçýnýlmaz olarak kendi kendinize þu soruyu sorarsýnýz: Acaba ben nesne tabanlý programlamayý öðrenmek zorunda mýyým?
+
+Bu sorunun kýsa cevabý, eðer iyi bir programcý olmak istiyorsanýz nesne tabanlý programlamayý öðrenmek zorundasýnýz, olacaktýr.
+
+Uzun cevap ise þu:
+
+Nesne tabanlý programlama, pek çok yazýlým geliþtirme yönteminden yalnýzca biridir. Siz bu yöntemi, yazdýðýnýz programlarda kullanmak zorunda deðilsiniz. Nesne tabanlý programlamadan hiç yararlanmadan da faydalý ve iyi programlar yazabilirsiniz elbette. Python sizi bu yöntemi kullanmaya asla zorlamaz. Ancak nesne tabanlý programlama yaklaþýmý program geliþtirme alanýnda oldukça yaygýn kullanýlan bir yöntemdir. Dolayýsýyla, etrafta nesne tabanlý programlama yaklaþýmýndan yararlanýlarak yazýlmýþ pek çok kodla karþýlaþacaksýnýz. Hiç deðilse karþýlaþtýðýnýz bu kodlarý anlayabilmek için nesne tabanlý programlamayý biliyor ve tanýyor olmanýz lazým. Aksi halde, bu yöntem kullanýlarak geliþtirilmiþ programlarý anlayamazsýnýz.
+
+Mesela, grafik bir arayüze sahip (yani düðmeli, menülü) programlarýn ezici çoðunluðu nesne tabanlý programlama yöntemiyle geliþtiriliyor. Grafik arayüz geliþtirmenizi saðlayacak araçlarý tanýmanýzý, öðrenmenizi saðlayan kitaplar ve makaleler de bu konularý hep nesne tabanlý programlama yaklaþýmý üzerinden anlatýyor.
+
+Uyarý
+
+Yalnýz bu söylediðimizden, nesne tabanlý programlama sadece grafik arayüzlü programlar geliþtirmeye yarar gibi bir anlam çýkarmamalýsýnýz. Nesne tabanlý programlama, komut arayüzlü programlar geliþtirmek için de kullanýþlý bir programlama yöntemidir.
+
+Sözün özü, nesne tabanlý programlamadan kaçamazsýnýz! Ýyi bir programcý olmak istiyorsanýz, kendiniz hiç kullanmasanýz bile, nesne tabanlý programlamayý öðrenmek zorundasýnýz. Hem þimdi nesne tabanlý programlamaya dudak bükseniz bile, bunu kullandýkça ve size saðladýðý faydalarý gördükçe onu siz de seveceksiniz...
+

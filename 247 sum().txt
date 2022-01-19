@@ -1,0 +1,19 @@
+
+sum()
+
+Bu fonksiyonun temel görevi, bir dizi içindeki deðerlerin toplamýný bulmaktýr. Örneðin:
+
+>>> l = [1, 2, 3]
+>>> sum(l)
+
+6
+
+Bu fonksiyon genellikle yukarýdaki gibi tek parametreyle kullanýlýr. Ama aslýnda bu fonksiyon ikinci bir parametre daha alýr. Dikkatlice bakýn:
+
+>>> l = [1, 2, 3]
+>>> sum(l, 10)
+
+16
+
+Gördüðünüz gibi, Python sum() fonksiyonuna verilen ikinci parametreyi, birinci parametredeki toplam deðerin üzerine ekliyor.
+

@@ -1,0 +1,45 @@
+
+Sýnýf Tanýmlamak
+
+Nesne tabanlý programlama yaklaþýmý, özellikle birtakým ortak niteliklere ve davranýþ þekillerine sahip gruplar tanýmlamak gerektiðinde son derece kullanýþlýdýr. Mesela þöyle bir örnek düþünün: Diyelim ki çalýþtýðýnýz iþyerinde, iþe alýnan kiþilerin kayýtlarýný tutan bir veritabanýnýz var. Bir kiþi iþe alýndýðýnda, o kiþiye dair belli birtakým bilgileri bu veritabanýna iþliyorsunuz. Mesela iþe alýnan kiþinin adý, soyadý, unvaný, maaþý ve buna benzer baþka bilgiler...
+
+Çalýþmaya baþlayacak kiþileri temsil eden bir ‘Çalýþan’ grubunu, bu grubun nitelikleri ile faaliyetlerini tutacak yapýyý ve bu grubun bütün öðelerinin taþýyacaðý özellikleri nesne tabanlý programlama yaklaþýmý ile kolayca kodlayabilirsiniz.
+
+Ayný þekilde, mesela yazdýðýnýz bir oyun programý için, bir ‘Asker’ grubunu nesne tabanlý programlama mantýðý içinde tanýmlayarak, bu grubun her bir üyesinin sahip olacaðý nitelikleri, kabiliyetleri ve davranýþ þekillerini kodlayabilir; mesela askerlerin saða sola nasýl hareket edeceklerini, hangi durumlarda puan/enerji/güç kazanacaklarýný veya kaybedeceklerini, bir asker ilk kez oluþturulduðunda hangi özellikleri taþýyacaðýný ve aklýnýza gelebilecek baþka her türlü özelliði tek tek belirleyebilirsiniz.
+
+Amacýnýz ne olursa olsun, atmanýz gereken ilk adým, ilgili sýnýfý tanýmlamak olmalýdýr. Zira fonksiyonlarda olduðu gibi, bir sýnýfý kullanabilmek için de öncelikle o sýnýfý tanýmlamamýz gerekiyor. Mesela, yukarýda bahsettiðimiz iþe uygun olarak, Çalýþan adlý bir sýnýf tanýmlayalým:
+
+class Çalýþan:
+pass
+
+Yukarýdaki, boþ bir sýnýf tanýmýdýr. Hatýrlarsanýz fonksiyonlarý tanýmlamak için def adlý bir ifadeden yararlanýyorduk. Ýþte sýnýflarý tanýmlamak için de class adlý bir ifadeden yararlanýyoruz. Bu ifadenin ardýndan gelen Çalýþan kelimesi ise bu sýnýfýn adýdýr.
+
+Eðer arzu ederseniz, yukarýdaki sýnýfý þu þekilde de tanýmlayabilirsiniz:
+
+class Çalýþan():
+pass
+
+Yani sýnýf adýndan sonra parantez kullanmayabileceðiniz gibi, kullanabilirsiniz de. Her ikisi de ayný kapýya çýkar. Ayrýca sýnýf adlarýnda, yukarýda olduðu gibi büyük harf kullanmak ve birden fazla kelimeden oluþan sýnýf adlarýnýn ilk harflerini büyük yazýp bunlarý birleþtirmek adettendir. Yani:
+
+class ÇalýþanSýnýfý():
+pass
+
+Veya parantezsiz olarak:
+
+class ÇalýþanSýnýfý:
+pass
+
+Gördüðünüz gibi sýnýf tanýmlamak fonksiyon tanýmlamaya çok benziyor. Fonksiyonlarý tanýmlarken nasýl def deyimini kullanýyorsak, sýnýflarý tanýmlamak için de class deyimini kullanýyoruz.
+
+Örnek olmasý açýsýndan, yukarýda bahsettiðimiz ‘Asker’ grubu için de bir sýnýf tanýmlayalým:
+
+class Asker:
+pass
+
+... veya:
+
+class Asker():
+pass
+
+Python’da sýnýflarý nasýl tanýmlayacaðýmýzý öðrendiðimize göre, bu sýnýflarý nasýl kullanacaðýmýzý incelemeye geçebiliriz.
+

@@ -1,0 +1,20 @@
+
+dict()
+
+Bu fonksiyon, farklý veri tiplerinden sözlükler üretmemizi saðlar. Örneðin bu fonksiyonu kullanarak boþ bir sözlük oluþturabiliriz:
+
+>>> s = dict()
+
+Bu fonksiyon, deðiþkenlerden sözlükler oluþturmamýzý da saðlar:
+
+>>> s = dict(a=1, b=2, c=3)
+
+{'a': 1, 'b': 2, 'c': 3}
+
+dict() fonksiyonuna parametre olarak iç içe geçmiþ listeler veya demetler vererek de sözlük üretebiliriz:
+
+>>> öðeler = (['a', 1], ['b', 2], ['c', 3])
+>>> dict(öðeler)
+
+{'a': 1, 'b': 2, 'c': 3}
+

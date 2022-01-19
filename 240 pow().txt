@@ -1,0 +1,31 @@
+
+pow()
+
+Daha önceki derslerimizde pek çok kez örneklerini verdiðimiz bu fonksiyon Ýngilizcedeki power (kuvvet) kelimesinin kýsaltmasýndan oluþur. Adýnýn anlamýna uygun olarak, bu fonksiyonu bir sayýnýn kuvvetlerini hesaplamak için kullanýyoruz.
+
+Bu fonksiyon en temel þekilde þöyle kullanýlýr:
+
+>>> pow(2, 3)
+
+8
+
+Bu komutla 2 sayýsýnýn 3. kuvvetini hesaplamýþ oluyoruz.
+
+pow() fonksiyonu toplamda üç farklý parametre alýr. Ýlk iki parametrenin ne olduðunu yukarýda örnekledik. Üçüncü parametre ise kuvvet hesaplamasý sonucu elde edilen sayýnýn modülüsünü hesaplayabilmemizi saðlar. Yani:
+
+>>> pow(2, 3, 2)
+
+0
+
+Burada yaptýðýmýz þey þu: Öncelikle 2 sayýsýnýn 3. kuvvetini hesapladýk. Elde ettiðimiz sayý 8. Ardýndan da bu sayýnýn 2‘ye bölünmesi iþleminden kalan sayýyý elde ettik. Yani 0. Çünkü bildiðiniz gibi 8 % 2 iþleminin sonucu 0‘dýr. Dolayýsýyla yukarýdaki komut þuna eþdeðerdir:
+
+>>> (2 ** 3) % 2
+
+0
+
+Ancak önceki derslerimizde de söylediðimiz gibi, pow() fonksiyonu çoðunlukla yanlýzca ilk iki parametresi ile birlikte kullanýlýr:
+
+>>> pow(12, 2)
+
+144
+

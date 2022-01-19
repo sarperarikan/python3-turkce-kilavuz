@@ -1,0 +1,18 @@
+
+format()
+
+Bu gömülü fonksiyonun görevi, daha önce karakter dizilerini iþlerken, karakter dizilerinin bir metodu olarak öðrendiðimiz format() metodununa benzer bir þekilde, karakter dizilerini biçimlendirmektir. Ancak format() fonksiyonu, daha önce öðrendiðimiz format() metoduna göre daha dar kapsamlýdýr. format() metodunu kullanarak oldukça karmaþýk karakter dizisi biçimlendirme iþlemlerini gerçekleþtirebiliriz, ama birazdan inceleyeceðimiz format() gömülü fonksiyonu yalnýzca tek bir deðeri biçimlendirmek için kullanýlýr.
+
+Basit bir örnek verelim:
+
+>>> format(12, '.2f')
+
+‘12.00’
+
+
+Yukarýdaki ifadeyi daha önce gördüðümüz format() metodu ile þu þekilde yazabiliriz:
+
+>>> '{:.2f}'.format(12)
+
+'12.00'
+

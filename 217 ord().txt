@@ -1,0 +1,13 @@
+
+ord()
+
+Bu fonksiyon, bir karakterin karþýlýk geldiði ondalýk sayýyý verir. Örneðin:
+
+>>> ord('a')
+
+97
+
+>>> ord('ý')
+
+305
+

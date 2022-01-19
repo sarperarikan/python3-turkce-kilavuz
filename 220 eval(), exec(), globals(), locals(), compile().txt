@@ -1,0 +1,172 @@
+
+eval(), exec(), globals(), locals(), compile()
+
+Bu bölümde beþ farklý fonksiyonu bir arada inceleyeceðiz. Bu fonksiyonlarý birlikte ele almamýzýn nedeni bunlarýn birbiriyle yakýndan baðlantýlý olmasý.
+
+Burada iþleyeceðimiz bu beþ fonksiyon þunlardan oluþuyor:
+
+eval() 
+exec() 
+globals() 
+locals() 
+compile() 
+Ancak bu fonksiyonlardan söz etmeye baþlamadan önce Python’daki iki önemli kavramý açýklýða kavuþturmamýz gerekiyor: Bu kavramlar þunlar:
+
+ifade 
+deyim 
+Öncelikle ‘ifade’ kavramýndan baþlayalým.
+
+Ýngilizcede expression denen ‘ifadeler’, bir deðer üretmek için kullanýlan kod parçalarýdýr. Karakter dizileri, sayýlar, iþleçler, öteki veri tipleri, liste üreteçleri, sözlük üreteçleri, küme üreteçleri, fonksiyonlar hep birer ifadedir. Örneðin:
+
+>>> 5
+
+>>> 23 + 4
+
+>>> [i for i in range(10)]
+
+>>> len([1, 2, 3])
+
+Ýngilizcede statement olarak adlandýrýlan ‘deyimler’ ise ifadeleri de kapsayan daha geniþ bir kavramdýr. Buna göre bütün ifadeler ayný zamanda birer deyimdir. Daha doðrusu, ifadelerin bir araya gelmesi ile deyimler oluþturulabilir.
+
+Deyimlere birkaç örnek verelim:
+
+>>> a = 5
+
+>>> if a:
+... print(a)
+
+>>> for i in range(10):
+... print(i)
+
+Python programlama dilinde deyimlerle ifadeleri ayýrt etmenin kolay bir yolu da eval() fonksiyonundan yararlanmaktýr. Eðer deyim mi yoksa ifade mi olduðundan emin olamadýðýnýz bir þeyi eval() fonksiyonuna parametre olarak verdiðinizde hata almýyorsanýz o parametre bir ifadedir. Eðer hata alýyorsanýz o parametre bir deyimdir. Çünkü eval() fonksiyonuna parametre olarak yalnýzca ifadeler verilebilir.
+
+Birkaç örnek verelim:
+
+>>> eval('a = 5')
+
+  File "<string>", line 1
+a = 5
+^
+SyntaxError: invalid syntax
+
+Gördüðünüz gibi, eval() fonksiyonu bize bir hata mesajý verdi. Çünkü a = 5 kodu bir deyimdir. Unutmayýn, Python’da bütün deðer atama iþlemleri birer deyimdir. Dolayýsýyla eval() fonksiyonu bu deyimi parametre olarak alamaz.
+
+Bir de þuna bakalým:
+
+>>> eval('5 + 25')
+
+30
+
+Bu defa hata almadýk. Çünkü eval() fonksiyonuna, olmasý gerektiði gibi, parametre olarak bir ifade verdik. Bildiðiniz gibi, 5 + 25 kodu bir ifadedir.
+
+Dediðimiz gibi, eval() fonksiyonu deyimleri parametre olarak alamaz. Ama exec() fonksiyonu alabilir:
+
+>>> exec('a = 5')
+
+Bu þekilde, deðeri 5 olan a adlý bir deðiþken oluþturmuþ olduk. Ýsterseniz kontrol edelim:
+
+>>> print(a)
+
+5
+
+Gördüðünüz gibi, exec() fonksiyonu, mevcut isim alaný içinde a adlý bir deðiþken oluþturdu. Yalnýz elbette mevcut isim alaný içinde yeni deðiþkenler ve yeni deðerler oluþtururken dikkatli olmamýz gerektiðini biliyorsunuz. Zira mesela yukarýdaki komutu vermeden önce mevcut isim alanýnda zaten a adlý bir deðiþken varsa, o deðiþkenin deðeri deðiþecektir:
+
+>>> a = 20
+
+Elimizde, deðeri 20 olan a adlý bir deðiþken var. Þimdi exec() fonksiyonu yardýmýyla a deðiþkeninin de içinde yer aldýðý mevcut isim alanýna müdahale ediyoruz:
+
+>>> exec('a = 10')
+
+Böylece a deðiþkeninin eski deðerini silmiþ olduk. Kontrol edelim:
+
+>>> print(a)
+
+10
+
+Bu tür durumlarda, exec() ile oluþturduðunuz deðiþkenleri global isim alanýna deðil de, farklý bir isim alanýna göndermeyi tercih edebilirsiniz. Peki ama bunu nasýl yapacaðýz?
+
+Python programlama dilinde isim alanlarý sözlük tipinde bir veridir. Örneðin global isim alaný basit bir sözlükten ibarettir.
+
+Global isim alanýný gösteren sözlükte hangi anahtar ve deðerlerin olduðunu görmek için globals() adlý bir fonksiyonu kullanabilirsiniz:
+
+>>> globals()
+
+Bu fonksiyonu çalýþtýrdýðýmýzda þuna benzer bir çýktý alýrýz:
+
+{'__doc__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>,
+'__name__': '__main__', '__package__': None, '__builtins__': <module 'builtins'>}
+
+Gördüðünüz gibi, elimizdeki þey gerçekten de bir sözlük. Dolayýsýyla bir sözlük ile ne yapabilirsek bu sözlükle de ayný þeyi yapabiliriz...
+
+‘globals’ adlý bu sözlüðün içeriði, o anda global isim alanýnda bulunan nesnelere göre farklýlýk gösterecektir. Örneðin:
+
+>>> x = 10
+
+þeklinde 10 deðerine sahip bir x nesnesi tanýmladýktan sonra globals() fonksiyonunu tekrar çalýþtýrýrsanýz global isim alanýna bu nesnenin de eklenmiþ olduðunu görürsünüz.
+
+Dediðimiz gibi, globals() fonksiyonundan dönen nesne bir sözlüktür. Bu sözlüðe, herhangi bir sözlüðe veri ekler gibi deðer de ekleyebilirsiniz:
+
+>>> globals()['z'] = 23
+
+Bu þekilde global isim alanýna z adlý bir deðiþken eklemiþ oldunuz:
+
+>>> z
+
+23
+
+Yalnýz, Python programlama dili bize bu þekilde global isim alanýna nesne ekleme imkaný verse de, biz mecbur deðilsek bu yöntemi kullanmaktan kaçýnmalýyýz. Çünkü bu þekilde sýradýþý bir yöntemle deðiþken tanýmladýðýmýz için aslýnda global isim alanýný, nerden geldiðini kestirmenin güç olduðu deðerlerle ‘kirletmiþ’ oluyoruz.
+
+Bildiðiniz gibi, Python’da global isim alaný dýþýnda bir de lokal isim alaný bulunur. Lokal isim alanlarýnýn, fonksiyonlara (ve ileride göreceðimiz gibi sýnýflara) ait bir isim alaný olduðunu biliyorsunuz. Ýþte bu isim alanlarýna ulaþmak için de locals() adlý bir fonksiyondan yararlanacaðýz:
+
+def fonksiyon(param1, param2):
+x = 10
+print(locals())
+
+fonksiyon(10, 20)
+
+Bu fonksiyonu çalýþtýrdýðýnýzda þu çýktýyý alacaksýnýz:
+
+{'param2': 20, 'param1': 10, 'x': 10}
+
+Gördüðünüz gibi, locals() fonksiyonu gerçekten de bize fonksiyon() adlý fonksiyon içindeki lokal deðerleri veriyor.
+
+globals() ve locals() fonksiyonlarýnýn ne iþe yaradýðýný incelediðimize göre exec() fonksiyonunu anlatýrken kaldýðýmýz yere dönebiliriz.
+
+Ne diyorduk?
+
+Elimizde, deðeri 20 olan a adlý bir deðiþken vardý:
+
+>>> a = 20
+
+exec() fonksiyonu yardýmýyla a deðiþkeninin de içinde yer aldýðý mevcut isim alanýna müdahale edelim:
+
+>>> exec('a = 3')
+
+Bu þekilde a deðiþkeninin varolan deðerini silmiþ olduk:
+
+>>> print(a)
+
+3
+
+Dediðimiz gibi, bu tür durumlarda, exec() ile oluþturduðunuz deðiþkenleri global isim alaný yerine farklý bir isim alanýna göndermeyi tercih etmemiz daha uygun olacaktýr. Python’da isim alanlarýnýn basit bir sözlük olduðunu öðrendiðimize göre, exec() ile oluþturduðumuz deðiþkenleri global isim alaný yerine nasýl farklý bir isim alanýna göndereceðimizi görebiliriz.
+
+Önce yeni bir isim alaný oluþturalým:
+
+>>> ia = {}
+
+Þimdi exec() ile oluþturacaðýmýz deðerleri bu isim alanýna gönderebiliriz:
+
+>>> exec('a = 3', ia)
+
+Böylece global isim alanýndaki a deðiþkeninin deðerine dokunmamýþ olduk:
+
+>>> a
+
+20
+
+Yeni oluþturduðumuz deðer ise ia adlý yeni isim alanýna gitti:
+
+>>> ia['a']
+
+3
+

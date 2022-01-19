@@ -1,0 +1,10 @@
+
+Sýnýf Üyeleri
+
+Python’da bir sýnýf içinde bulunan nitelikler, deðiþkenler, metotlar, fonksiyonlar ve buna benzer baþka veri tipleri, o sýnýfýn üyelerini meydana getirir. Bir sýnýfýn üyelerini genel olarak üçe ayýrarak inceleyebiliriz:
+
+Aleni üyeler (public members) 
+Gizli üyeler (private members) 
+Yarý-gizli üyeler (semi-private members). 
+Bu bölümde bu üç üye türünü ve bunlarýn birbirinden farkýný ele alacaðýz. Öncelikle aleni üyelerden baþlayalým.
+

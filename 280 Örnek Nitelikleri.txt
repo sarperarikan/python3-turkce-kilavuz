@@ -1,0 +1,5 @@
+
+Örnek Nitelikleri
+
+Þimdiye kadar öðrendiklerimiz, sýnýflarla faydalý iþler yapmamýz için pek yeterli deðildi. Sýnýflar konusunda ufkumuzun geniþleyebilmesi için, sýnýf niteliklerinin (class attributes) yanýsýra, nesne tabanlý programlamanýn önemli bir parçasý olan örnek niteliklerinden (instance attributes) de söz etmemiz gerekiyor. Hem örnek niteliklerini öðrendikten sonra, bunlarýn sýnýf nitelikleri ile arasýndaki farklarý görünce sýnýf niteliklerini de çok daha iyi anlamýþ olacaksýnýz.
+

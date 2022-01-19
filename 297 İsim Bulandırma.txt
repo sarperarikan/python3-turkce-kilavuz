@@ -1,0 +1,131 @@
+
+Ýsim Bulandýrma
+
+Gelin isterseniz gizli üyelere iliþkin ilginç bir özellikten söz edelim.
+
+Python’da ‘gizli’ olarak adlandýrdýðýmýz öðeler aslýnda o kadar da gizli deðildir... Çünkü Python’da gerçek anlamda gizli ve dýþarýya tamamen kapalý üyeler bulunmaz. Peki bu ne anlama geliyor?
+
+Bu þu anlama geliyor: Her ne kadar yukarýdaki örneklerde üyeleri dýþarýya kapatmak için kullandýðýmýz alt çizgi iþaretleri ilgili deðiþkeni gizlese de, bunu tamamen eriþilmez hale getirmez. Dediðimiz gibi, Python’da gerçek anlamda dýþa kapalý sýnýf üyeleri bulunmadýðý için biz bu üyelere bir þekilde eriþme imkanýna sahibiz. Peki ama nasýl?
+
+Python, kodlar içinde gizli bir üye ile karþýlaþtýðýnda özel bir ‘isim bulandýrma’ (name mangling) iþlemi gerçekleþtirir ve ilgili gizli üyenin görünüþünü deðiþtirir. Eðer Python’ýn arkaplanda neler çevirdiðini bilirseniz, gizli üyeye de eriþebilirsiniz.
+
+Örnek sýnýfýmýz þöyleydi:
+
+class Sýnýf():
+__gizli = 'gizli'
+
+def örnek_metodu(self):
+print(self.__gizli)
+print('örnek metodu')
+
+@classmethod
+def sýnýf_metodu(cls):
+print('sýnýf metodu')
+
+@staticmethod
+def statik_metot():
+print('statik metot')
+
+Þimdi, bu sýnýf içindeki gizli üyeye eriþeceðiz.
+
+Dikkatlice bakýn:
+
+>>> import sinif
+>>> s = sinif.Sýnýf()
+>>> s._Sýnýf__gizli
+
+'gizli'
+
+Ne kadar da tuhaf, deðil mi?
+
+Ýþte Python, siz bir sýnýf üyesini __gizli þeklinde tanýmladýðýnýzda, bu öðe üzerinde þu iþlemleri gerçekleþtirir:
+
+Öncelikle deðiþkenin baþ tarafýna bir alt çizgi ekler:
+
+_
+
+Daha sonra, bu alt çizginin sað tarafýna bu gizli üyeyi barýndýran sýnýfýn adýný iliþtirir:
+
+_Sýnýf
+
+Son olarak da gizli üyeyi sýnýf adýnýn sað tarafýna yapýþtýrýr:
+
+_Sýnýf__gizli
+
+Dolayýsýyla _Sýnýf__gizli kodunu kullanarak, __gizli adlý üyeye sýnýf dýþýndan eriþebilirsiniz.
+
+Pratik olmasý bakýmýndan bir örnek daha verelim. Mesela þu örneði ele alalým:
+
+class Çalýþan():
+__personel = []
+
+def __init__(self, isim):
+self.isim = isim
+self.kabiliyetleri = []
+self.__personele_ekle()
+
+@classmethod
+def personel_sayýsýný_görüntüle(cls):
+print(len(cls.__personel))
+
+def __personele_ekle(self):
+self.__personel.append(self.isim)
+print('{} adlý kiþi personele eklendi'.format(self.isim))
+
+@classmethod
+def personeli_görüntüle(cls):
+print('Personel listesi:')
+for kiþi in cls.__personel:
+print(kiþi)
+
+def kabiliyet_ekle(self, kabiliyet):
+self.kabiliyetleri.append(kabiliyet)
+
+def kabiliyetleri_görüntüle(self):
+print('{} adlý kiþinin kabiliyetleri:'.format(self.isim))
+for kabiliyet in self.kabiliyetleri:
+print(kabiliyet)
+
+Burada __personele_ekle() adlý fonksiyon bir gizli üyedir. Dolayýsýyla buna dýþarýdan normal yöntemlerle eriþemeyiz.
+
+Bunu test etmek için önce gerekli verileri oluþturalým:
+
+>>> from calisan import Çalýþan
+>>> ahmet = Çalýþan('Ahmet')
+
+Ahmet adlý kiþi personele eklendi.
+
+Þimdi ahmet örneði üzerinden bu gizli üyeye eriþmeye çalýþalým:
+
+>>> ahmet.__personele_ekle()
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Çalýþan' object has no attribute '__personele_ekle'
+
+Gördüðünüz gibi, Python bu üyeye normal yollardan eriþmemize izin vermiyor. Ama biz biliyoruz ki, Python bu üyeyi gizlerken özel bir isim bulandýrma iþlemi gerçekleþtiriyor. Bu bulandýrma iþleminin nasýl gerçekleþtirildiðini bildiðimize göre gizli üyeye eriþebiliriz.
+
+Öncelikle örneðimizin adýný yazalým. Zira gizli üyeye bu ad üzerinden eriþeceðiz:
+
+>>> ahmet.
+
+Þimdi bulandýrma iþlemini uygulamaya geçebiliriz.
+
+Öncelikle bir alt çizgi ekleyelim:
+
+>>> ahmet._
+
+Daha sonra sýnýf adýný iliþtirelim:
+
+>>> ahmet._Çalýþan
+
+Son olarak da gizli üyenin kendisini yazalým:
+
+>>> ahmet._Çalýþan__personele_ekle()
+
+Ahmet adlý kiþi personele eklendi.
+
+Gayet baþarýlý...
+
+Yalnýz buraya þöyle bir not düþelim: Her ne kadar Python bize gizli üyelere eriþme imkaný sunsa da, baþkasýnýn yazdýðý kodlarý kullanýrken, o kodlardaki gizli üyelere eriþmeye çalýþmamak çoðu zaman iyi bir fikirdir. Nihayetinde eðer bir programcý, bir sýnýf üyesini gizlemiþse bunun bir nedeni vardýr. Eðer eriþmenizin istenmediði bir üyeye eriþirseniz ve bunun sonucunda birtakým sorunlarla karþýlaþýrsanýz bu durum o programý yazan programcýnýn deðil, tamamen sizin kabahatinizdir. Python programcýlarýnýn da sýk sýk söylediði gibi: ‘Neticede hepimiz, doðruyu yanlýþý bilen, yetiþkin insanlarýz.’
+

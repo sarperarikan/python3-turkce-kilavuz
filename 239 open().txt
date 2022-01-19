@@ -1,0 +1,154 @@
+
+open()
+
+Bu fonksiyon herhangi bir dosyayý açmak veya oluþturmak için kullanýlýr. Eðer dosyanýn açýlmasý veya oluþturulmasý esnasýnda bir hata ortaya çýkarsa IOError türünde bir hata mesajý verilir.
+
+Bu fonksiyonun formülü þudur:
+
+>>> open(dosya_adi, mode='r', buffering=-1, encoding=None,
+... errors=None, newline=None, closefd=True, opener=None)
+
+Gördüðünüz gibi, bu fonksiyon pek çok farklý parametre alabiliyor. Biz þimdiye kadar bu parametrelerin yalnýzca en sýk kullanýlanlarýný iþlemiþtik. Þimdi ise geri kalan parametrelerin ne iþe yaradýðýný da ele alacaðýz.
+
+Yukarýdaki formülden de görebileceðiniz gibi, open() fonksiyonunun ilk parametresi dosya_adi‘dýr. Yani açmak veya oluþturmak istediðimiz dosya adýný bu parametre ile belirtiyoruz:
+
+>>> open('falanca_dosya.txt')
+
+Elbette eðer açmak istediðiniz dosya, o anda içinde bulunduðunuz dizinde deðilse dosya adý olarak, o dosyanýn tam adresini yazmanýz gerekir. Mesela:
+
+>>> open('/home/istihza/Desktop/dosya.txt')
+
+Bu arada, dosya adresini yazarken ters taksim yerine düz taksim iþaretlerini kullanmak daha doðru olacaktýr. Bu taksim türü hem Windows’ta hem de GNU/Linux’ta çalýþýr. Ancak eðer ters taksim iþaretlerini kullanacaksanýz, dosya yolu içindeki sinsi kaçýþ dizilerine karþý dikkatli olmalýsýnýz:
+
+>>> f = open('test\nisan.txt')
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+OSError: [Errno 22] Invalid argument: 'test\nisan.txt'
+
+Burada problemin nisan.txt adlý dosyanýn ilk harfi ile, bundan önce gelen ters taksim iþaretinin birleþerek tesadüfen bir kaçýþ dizisi oluþturmasý olduðunu biliyorsunuz. Bu tür hatalara karþý ters taksim yerine düz taksim iþaretlerini kullanabileceðiniz gibi r adlý kaçýþ dizisinden de yararlanabilirsiniz:
+
+f = open(r'test\nisan.txt')
+
+open() fonksiyonunun ikinci parametresi olan mode‘un da ne olduðunu biliyorsunuz. Bu parametre yardýmýyla, herhangi bir dosyayý hangi kipte açmak istediðimizi belirtebiliyoruz.
+
+Bildiðiniz gibi, eðer mode parametresine herhangi bir deðer vermezseniz Python ilgili dosyayý okuma kipinde açacaktýr.
+
+Bu parametreye verebileceðiniz deðerleri þöyle özetleyebiliriz:
+
+
+Karakter Anlamý 
+‘r’ Okuma kipidir. Öntanýmlý deðer budur. 
+‘w’ Yazma kipidir. Eðer belirtilen adda dosya zaten varsa o dosya silinir. 
+‘x’ Yeni bir dosya oluþturulup yazma kipinde açýlýr. 
+‘a’ Dosya ekleme kipinde açýlýr. Bu kip ile, varolan bir dosyanýn sonuna eklemeler yapýlabilir. 
+‘b’ Dosyalarý ikili kipte açmak için kullanýlýr. 
+‘t’ Dosyalarý metin kipinde açmak için kullanýlýr. Öntanýmlý deðerdir. 
+‘+’ Ayný dosya üzerinde hem okuma hem de yazma iþlemleri yapýlmasýný saðlar. 
+
+open() fonksiyonunun alabileceði bir baþka parametre de buffering parametresidir. Bildiðiniz gibi, open() fonksiyonuyla bir dosyayý açýp bu dosyaya veri girdiðimizde bu veriler önce tampona alýnacak, dosya kapandýktan sonra ise tamponda bekletilen veriler dosyaya iþlenecektir. Ýþte bu buffering parametresi yardýmýyla bu tampona alma iþleminin nasýl yürüyeceðini belirleyebiliriz.
+
+Eðer dosyaya iþlenecek verilerin tampona alýnmadan doðrudan dosyaya iþlenmesini isterseniz buffering deðerini 0 olarak belirlersiniz. Yalnýz bu deðer sadece ikili kipte etkindir. Yani bir dosyayý eðer metin kipinde açýyorsanýz buffering parametresinin deðerini 0 yapamazsýnýz.
+
+Eðer dosyaya veri iþlerken tampona alýnan verilerin satýr satýr dosyaya eklenmesini isterseniz buffering deðerini 1 olarak belirlersiniz. Bunun nasýl çalýþtýðýný anlamak için þu örneði dikkatlice inceleyin:
+
+>>> f = open('ni.txt', 'w', buffering=1)
+>>> f.write('birinci satýr\n')
+
+14
+
+>>> f.write('ikinci satýr\n')
+
+13
+
+>>> f.write('aaa')
+
+3
+
+>>> f.write('\n')
+
+1
+
+Burada her write() komutundan sonra ni.txt adlý dosyayý açýp bakarsanýz, þu durumu görürsünüz:
+
+f.write('birinci satýr\n') komutuyla dosyaya bir satýrlýk veri ekledik ve bu veri dosyaya anýnda iþlendi. 
+f.write('ikinci satýr\n') komutuyla dosyaya bir satýrlýk baþka bir veri daha ekledik ve bu veri de dosyaya anýnda iþlendi. 
+f.write('aaa') komutuyla eklenen veri satýr deðil. Çünkü satýr sonuna iþaret eden satýr baþý kaçýþ dizisini kullanmadýk. 
+f.write('\n') komutuyla satýr baþý kaçýþ dizisini eklediðimiz anda bir önceki karakter dizisi ('aaa') de dosyaya eklenecektir. 
+Ancak buffering parametresi bu 1 deðerini yalnýzca metin kipinde alabilir. Bu kýsýtlamayý da aklýmýzýn bir kenarýna not edelim...
+
+0 ve 1 dýþýnda buffering parametresine 1’den büyük bir deðer verdiðinizde ise tampon boyutunun ne kadar olacaðýný kendiniz belirlemiþ olursunuz.
+
+Yalnýz çoðu durumda buffering parametresine herhangi bir özel deðer atamanýz gerekmeyecektir. Bu parametreye herhangi bir deðer atamadýðýnýzda, kullandýðýnýz iþletim sistemi tampona alma iþlemlerininin nasýl yürütüleceðine ve tampon boyutuna kendisi karar verecektir. Ýþletim sisteminin sizin yerinize verdiði bu karar da çoðunlukla istediðiniz þey olacaktýr... Eðer kendi sisteminizde öntanýmlý tampon boyutunun ne olduðunu merak ediyorsanýz þu komutlarý kullanabilirsiniz:
+
+>>> import io
+>>> io.DEFAULT_BUFFER_SIZE
+
+Çoðu sistemde bu deðer 4096 ve 8192 bayt olacaktýr.
+
+open() fonksiyonunun alabileceði bir baþka parametre de encoding parametresidir. Bu parametre, dosyanýn hangi karakter kodlamasý ile açýlacaðýný belirler. Örneðin bir dosyayý ‘UTF-8’ karakter kodlamasý ile açmak için þu komutu kullanýyoruz:
+
+>>> f = open('dosya', encoding='utf-8')
+
+Üzerinde iþlem yaptýðýnýz dosyalarda özellikle Türkçe karakter sorunlarý yaþamak istemiyorsanýz, bir dosyayý açarken mutlaka encoding parametresinin deðerini de ayarlamanýzý tavsiye ederim.
+
+Bir dosyayý açarken veya okurken herhangi bir karakter kodlama hatasý ile karþýlaþtýðýnýzda Python’ýn ne tepki vermesi gerektiðini ise errors adlý parametre yardýmýyla belirleyebilirsiniz.
+
+Eðer bu parametreye strict deðerini verirseniz karakter kodlama hatalarý programýnýzýn ValueError türünde bir hata vererek çalýþmayý kesmesine neden olacaktýr. Bu parametreye herhangi bir deðer vermediðinizde de Python sanki strict deðerini vermiþsiniz gibi davranýr.
+
+Eðer errors parametresine ignore deðerini verirseniz kodlama hatalarý görmezden gelinecek, bu hataya sebep olan karakter silinecektir. Yalnýz bu deðerin veri kaybýna yol açma ihtimalini de göz önünde bulundurmalýsýnýz.
+
+Eðer errors parametresine replace deðerini verirseniz kodlama hatasýna yol açan karater ‘?’ veya ‘ufffd’ karakterleri ile deðiþtirilecektir.
+
+open() fonksiyonunun kabul ettiði bir baþka parametre de newline adlý parametredir. Peki bu parametre ne iþe yarar?
+
+Windows ve GNU/Linux iþletim sistemleri satýr sonlarýný birbirlerinden farklý þekilde gösterir. GNU/Linux’ta yazýlmýþ dosyalarda satýr sonlarý \n karakteri ile gösterilirken, Windows’ta yazýlmýþ dosyalarda satýr sonunda \r\n karakterleri bulunur. Eðer Windows ve GNU/Linux sistemleri arasýnda dosya alýþveriþi yapýyorsanýz kimi durumlarda bu farklýlýk çeþitli sorunlarýn ortaya çýkmasýna yol açabilir. Ýþte dosyalarýnýzýn hangi satýr sonu karakterine sahip olacaðýný yukarýda bahsettiðimiz newline adlý parametre ile belirleyebilirsiniz. Örneðin:
+
+>>> f = open('dosya', newline='\n')
+
+Bu þekilde dosyanýz hangi iþletim sisteminde olursa olsun satýr sonlarýnda \n karakterine sahip olacaktýr.
+
+Dosyalarýn metotlarýný incelerseniz o listede fileno() adlý bir metodun olduðunu göreceksiniz. Bu metot, bize bir dosyanýn ‘dosya tanýmlayýcýsýný’ (file descriptor) verir. Dosya tanýmlayýcýlarý, dosyaya iþaret eden pozitif tam sayýlardýr. 0, 1 ve 2 sayýlarý standart girdi, standart çýktý ve standart hata dosyalarýna ayrýlmýþ olduðu için, sizin açtýðýnýz ve üzerinde iþlem yaptýðýnýz dosyalarýn tanýmlayýcýlarý 2 sayýsýndan büyük olacaktýr.
+
+Bir örnek verelim:
+
+>>> f = open('ni.txt')
+>>> f.fileno()
+
+3
+
+Ýþte burada gördüðünüz sayý, ni.txt adlý dosyanýn ‘dosya tanýmlayýcýsýdýr. Her dosyanýn dosya tanýmlayýcýsý benzersizdir:
+
+>>> g = open('zi.txt')
+>>> g.fileno()
+
+4
+
+Python’da bir dosyayý open() fonksiyonuyla açarken dosya adýný vermenin yanýsýra, dosyanýn tanýmlayýcýsýný da kullanabilirsiniz:
+
+>>> z = open(4)
+
+veya:
+
+>>> z = open(g.fileno())
+
+Bu sayede, eðer isterseniz, elinizdeki dosyalarla daha ileri düzeyli iþlemler yapabilirsiniz. Bir örnek verelim.
+
+Dediðimiz gibi, bir dosyanýn tanýmlayýcýsý tek ve benzersizdir. Farklý dosyalar ayný tanýmlayýcýlara sahip olmaz:
+
+>>> a = open('aaa.txt')
+>>> a.fileno()
+
+3
+
+>>> b = open('bbb.txt')
+>>> b.fileno()
+
+4
+
+Þimdi þu örneklere bakýn:
+
+>>> c = open(b.fileno(), closefd=False)
+
+Bu þekilde b adlý dosyanýn tanýmlayýcýsýný kullanarak, ayný dosyayý bir de c adýyla açtýk. Ancak burada kullandýðýmýz closefd=False parametresine dikkat edin. Normalde dosyayý kapattýðýmýzda dosyanýn tanýmlayýcýsý serbest kalýr ve baþka bir dosya açýldýðýnda bu tanýmlayýcý yeni dosyaya atanýr. Ama closefd parametresine False deðeri verdiðimizde dosya kapansa bile, o dosyaya ait dosya tanýmlayýcýsý varolmaya devam edecektir.
+

@@ -1,0 +1,5 @@
+
+Statik Metotlar
+
+Python’da örnek metotlarý ve sýnýf metotlarý dýþýnda bir de statik metotlar bulunur. Bildiðiniz gibi, örnek nitelikleri üzerinde iþlem yapacaðýmýz zaman örnek metotlarýný kullanýyoruz. Ayný þekilde sýnýf nitelikleri üzerinde iþlem yapacaðýmýz zaman ise sýnýf metotlarýndan faydalanýyoruz. Örnek metotlarý içinde herhangi bir örnek niteliðine eriþmek istediðimizde self kelimesini kullanýyoruz. Sýnýf metotlarý içinde bir sýnýf niteliðine eriþmek için ise cls kelimesini kullanýyoruz. Ýþte eðer bir sýnýf içindeki herhangi bir fonksiyonda örnek veya sýnýf niteliklerinin hiçbirine eriþmeniz gerekmiyorsa, statik metotlarý kullanabilirsiniz.
+

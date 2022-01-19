@@ -1,0 +1,52 @@
+
+
+from modül_adý import isim1, isim2
+
+Þimdiye kadar verdiðimiz örneklerden de gördüðünüz gibi, Standart Kütüphane Modülleri’nin içinde çok sayýda fonksiyon ve nitelik bulunuyor. Mesela os modülünü ele alalým:
+
+>>> import os
+>>> dir(os)
+
+Listede epey isim var...
+
+Biz import os komutunu verdiðimizde, listedeki bütün o isimleri ‘os’ ismi altýnda içe aktarmýþ oluyoruz. Bunun bir sakýncasý yok, ancak yazdýðýmýz programlarda bu fonksiyon ve niteliklerin hepsine ihtiyaç duymayýz. O yüzden, eðer arzu ederseniz, import os gibi bir komutla bütün o isimleri içe aktarmak yerine, yalnýzca kullanacaðýnýz isimleri içe aktarmayý tercih de edebilirsiniz. Mesela os modülünün yalnýzca name niteliðini kullanacaksanýz, modülü þu þekilde içe aktarabilirsiniz:
+
+>>> from os import name
+
+Bu þekilde os modülünden yalnýzca name ismi içe aktarýlmýþ olur ve yalnýzca bu ismi kullanabiliriz:
+
+>>> name
+
+'posix'
+
+Bu durumda os.name komutu hata verecektir:
+
+>>> os.name
+
+NameError: name 'os' is not defined
+
+Çünkü biz from os import name komutunu verdiðimizde, os modülünü deðil, bu modül içindeki bir nitelik olan name‘i içe aktarmýþ oluyoruz. Dolayýsýyla os ismini kullanamýyoruz.
+
+Bu þekilde, ayný modül içinden birkaç farklý nitelik ve fonksiyonu da içe aktarabilirsiniz:
+
+>>> from os import name, listdir, getcwd
+
+Bu komutla os modülü içinden yalnýzca name niteliðini, listdir() fonksiyonunu ve getcwd() fonksiyonunu aktarmýþ olduk:
+
+>>> listdir()
+
+Bu fonksiyon, o anda içinde bulunduðumuz dizindeki dosyalarý listeler.
+
+name ve getcwd() isimlerinin görevini ise daha önce öðrenmiþtik:
+
+>>> name
+
+'nt'
+
+>>> getcwd()
+
+'C:\\Documents and Settings\\fozgul\\'
+
+Gelelim bir baþka modül aktarma biçimine...
+
+

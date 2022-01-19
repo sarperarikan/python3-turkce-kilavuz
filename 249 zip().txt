@@ -1,0 +1,51 @@
+
+zip()
+
+Gelin isterseniz bu fonksiyonu bir örnek üzerinden açýklamaya çalýþalým.
+
+Diyelim ki elimizde þöyle iki farklý liste var:
+
+>>> a1 = ['a', 'b', 'c']
+>>> a2 = ['d', 'e', 'f']
+
+Eðer bu listelerin öðelerini birbirleriyle eþleþtirmek istersek zip() fonksiyonundan yararlanabiliriz.
+
+Dikkatlice bakýn:
+
+>>> zip(a1, a2)
+
+<zip object at 0x00FD0BE8>
+
+Gördüðünüz gibi, yukarýdaki kod bize bir ‘zip’ nesnesi veriyor. Bu nesnenin öðelerine nasýl ulaþabileceðinizi biliyorsunuz:
+
+>>> print(*zip(a1, a2))
+
+('a', 'd') ('b', 'e') ('c', 'f')
+
+>>> list(zip(a1, a2))
+
+[('a', 'd'), ('b', 'e'), ('c', 'f')]
+
+>>> for a, b in zip(a1, a2):
+... print(a, b)
+...
+a d
+b e
+c f
+
+Yukarýdaki çýktýlarý incelediðimizde, ilk listenin ilk öðesinin, ikinci listenin ilk öðesiyle; ilk listenin ikinci öðesinin, ikinci listenin ikinci öðesiyle; ilk listenin üçüncü öðesinin ise, ikinci listenin üçüncü öðesiyle eþleþtiðini görüyoruz.
+
+Bu özellikten pek çok farklý þekilde yararlanabilirsiniz. Örneðin:
+
+>>> isimler = ['ahmet', 'mehmet', 'zeynep', 'ilker']
+>>> yaþlar = [25, 40, 35, 20]
+>>> for i, y in zip(isimler, yaþlar):
+... print('isim: {} / yaþ: {}'.format(i, y))
+...
+isim: ahmet / yaþ: 25
+isim: mehmet / yaþ: 40
+isim: zeynep / yaþ: 35
+isim: ilker / yaþ: 20
+
+Burada isimler ve yaþlar adlý listelerin öðelerini zip() fonksiyonu yardýmýyla birbirleriyle eþleþtirdik.
+

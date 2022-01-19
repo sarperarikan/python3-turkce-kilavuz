@@ -1,0 +1,9 @@
+
+oct()
+
+Bu fonksiyon, bir sayýyý sekizli düzendeki karþýlýðýna çevirmemizi saðlar:
+
+>>> oct(10)
+
+'0o12'
+

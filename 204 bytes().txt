@@ -1,0 +1,143 @@
+
+bytes()
+
+Bu fonksiyon bytes türünde nesneler oluþturmak için kullanýlýr. Bu fonksiyonu ‘bayt’ adlý veri tipini incelerken ayrýntýlý olarak ele almýþtýk. Gelin isterseniz burada da bu fonksiyona þöyle bir deðinelim.
+
+Dediðimiz gibi, bytes() adlý fonksiyon, bytes türünde veriler oluþturmaya yarar. Bu fonksiyon iþlev olarak, daha önce öðrendiðimiz list(), str(), int(), set(), dict() gibi fonksiyonlara çok benzer. Týpký bu fonksiyonlar gibi, bytes() fonksiyonunun görevi de farklý veri tiplerini ‘bayt’ adlý veri tipine dönüþtürmektir.
+
+Bu fonksiyon, kendisine verilen parametrelerin türüne baðlý olarak birbirinden farklý sonuçlar ortaya çýkarýr. Örneðin eðer bu fonksiyona parametre olarak bir tam sayý verecek olursanýz, bu fonksiyon size o tam sayý miktarýnca bir bayt nesnesi verecektir. Gelin isterseniz bu durumu örnekler üzerinde göstermeye çalýþalým:
+
+>>> bytes(10)
+
+b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+
+Yukarýdaki komut bize, her bir öðesinin deðeri 0 olan 10 baytlýk bir veri döndürdü:
+
+>>> a = bytes(10)
+
+>>> a
+
+b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+
+>>> a[0]
+
+0
+
+>>> a[1]
+
+0
+
+>>> a[2]
+
+0
+
+Gördüðünüz gibi, bytes(10) komutuyla oluþturduðumuz a deðiþkeni içinde toplam 10 adet bayt var ve bu baytlarýn her birinin deðeri 0.
+
+Yukarýda, bytes() fonksiyonuna bir tam sayý deðerli parametre verdiðimizde nasýl bir sonuç alacaðýmýzý öðrendik. Peki biz bu fonksiyona parametre olarak bir karakter dizisi verirsek ne olur?
+
+Hemen görelim:
+
+>>> bytes('istihza')
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: string argument without an encoding
+
+Bu fonksiyona karakter dizilerini doðrudan parametre olarak veremeyiz. Eðer verirsek yukarýdaki gibi bir hata alýrýz. Peki acaba bu hatayý almamýzýn nedeni ne olabilir?
+
+Dediðimiz gibi, bytes() fonksiyonu, çeþitli veri tiplerini bayta dönüþtürmeye yarar. Ancak bildiðiniz gibi, bayta dönüþtürme iþlemi her kod çözücü tarafýndan farklý biçimde yapýlýr. Örneðin:
+
+>>> 'ýþýk'.encode('utf-8')
+
+b'\xc4\xb1\xc5\x9f\xc4\xb1k'
+
+>>> 'ýþýk'.encode('cp857')
+
+b'\x8d\x9f\x8dk'
+
+>>> 'ýþýk'.encode('cp1254')
+
+b'\xfd\xfe\xfdk'
+
+Dolayýsýyla, bytes() fonksiyonunun bir karakter dizisini bayta çevirirken nasýl davranmasý gerektiðini anlayabilmesi için, bayta dönüþtürme iþlemini hangi kod çözücü ile yapmak istediðimizi açýkça belirtmemiz gerekir:
+
+>>> bytes('ýþýk', 'utf-8')
+
+b'\xc4\xb1\xc5\x9f\xc4\xb1k'
+
+>>> bytes('ýþýk', 'cp1254')
+
+b'\xfd\xfe\xfdk'
+
+>>> bytes('ýþýk', 'cp857')
+
+b'\x8d\x9f\x8dk'
+
+Gördüðünüz gibi, bytes() fonksiyonuna parametre olarak bir karakter dizisi verebilmek için, bu karakter dizisi ile birlikte bir kod çözücü de belirtmemiz gerekiyor. Böylece bytes() fonksiyonu kendisine verdiðimiz karakter dizisini, belirttiðimiz kod çözücünün kurallarýna göre bayta dönüþtürüyor.
+
+Bu arada, çýktýda görünen ‘b’ harflerinin, elimizdeki verinin bir bayt olduðunu gösteren bir iþaret olduðunu biliyorsunuz.
+
+Ayrýca, bytes() fonksiyonuna verdiðimiz ikinci parametrenin isminin encoding olduðunu ve bu parametreyi isimli bir parametre olarak da kullanabileceðimizi belirtelim:
+
+>>> bytes('istihza', encoding='ascii')
+
+Bu noktada size þöyle bir soru sorayým: Acaba bytes() fonksiyonuna ilk parametre olarak verdiðimiz karakter dizisi, ikinci parametrede belirttiðimiz kod çözücü tarafýndan tanýnmazsa ne olur?
+
+Cevabý tahmin edebilirsiniz: Böyle bir durumda elbette Python bize bir hata mesajý gösterir:
+
+>>> bytes('þeker', 'ascii')
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeEncodeError: 'ascii' codec can't encode character '\u015f' in position 0:
+ ordinal not in range(128)
+
+... veya:
+
+>>> bytes('€', 'cp857')
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python33\lib\encodings\cp857.py", line 12, in encode
+return codecs.charmap_encode(input,errors,encoding_map)
+UnicodeEncodeError: 'charmap' codec can't encode character '\u20ac' in position
+0: character maps to <undefined>
+
+‘þ’ harfi ‘ASCII’ karakter kümesinde; ‘€’ iþareti ise ‘CP857’ adlý karakter kümesinde tanýmlanmamýþ birer karakter olduðu için, ilgili kod çözücüler bu karakterleri çözüp bayta dönüþtüremiyor. Yazdýðýmýz kodlarýn bu tür durumlarda tamamen çökmesini engellemek için, önceki derslerimizde de çeþitli vesilelerle öðrenmiþ olduðumuz errors adlý bir parametreden yararlanabiliriz:
+
+>>> bytes('ýþýk', encoding='ascii', errors='replace')
+
+b'???k'
+
+>>> bytes('þeker', encoding='ascii', errors='replace')
+
+b'?eker'
+
+>>> bytes('€', encoding='cp857', errors='replace')
+
+b'?'
+
+>>> bytes('€', encoding='cp857', errors='ignore')
+
+b''
+
+>>> bytes('€', encoding='cp857', errors='xmlcharrefreplace')
+
+b'&#8364;'
+
+>>> bytes('þeker', encoding='cp857', errors='xmlcharrefreplace')
+
+b'\x9feker'
+
+Gördüðünüz gibi, errors parametresine verdiðimiz çeþitli deðerler yardýmýyla, bytes() fonksiyonunun, encoding parametresinde belirtilen kod çözücü ile çözülemeyen karakterlerle karþýlaþtýðýnda nasýl davranacaðýný belirleyebiliyoruz.
+
+errors parametresine verdiðimiz bütün bu deðerleri önceki derslerimizde öðrenmiþtik. Dolayýsýyla yukarýda gösterdiðimiz kodlarý rahatlýkla anlayabilecek kadar Python bilgisine sahibiz.
+
+Son olarak, bytes() fonksiyonuna parametre olarak 0-256 arasý sayýlardan oluþan diziler de verebiliriz:
+
+>>> bytes([65, 10, 12, 11, 15, 66])
+
+b'A\n\x0c\x0b\x0fB'
+
+Bu yapý içinde Python, 0 ile 128 arasý sayýlar için standart ASCII tablosunu, 128 ile 256 arasý sayýlar için ise Latin-1 karakter kümesini temel alarak sayýlarý birer bayta dönüþtürecektir.
+

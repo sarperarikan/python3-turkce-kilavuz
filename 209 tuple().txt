@@ -1,0 +1,9 @@
+
+tuple()
+
+tuple() fonksiyonu da, tıpkı list(), set() ve benzerleri gibi bir dönüştürücü fonksiyondur. Bu fonksiyon farklı veri tiplerini demete dönüştürür:
+
+>>> tuple('a')
+
+('a',)
+

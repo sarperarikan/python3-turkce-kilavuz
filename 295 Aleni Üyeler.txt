@@ -1,0 +1,60 @@
+
+Aleni Üyeler
+
+Eðer bir sýnýf üyesi dýþarýya açýksa, yani bu üyeye sýnýf dýþýndan normal yöntemlerle eriþilebiliyorsa bu tür üyelere ‘aleni üyeler’ adý verilir. Programlama maceranýz boyunca karþýnýza çýkacak veri üyelerinin tamamýna yakýný alenidir. Biz de bu kitapta þimdiye kadar yalnýzca aleni üyeleri gördük.
+
+Eðer bildiðiniz tek programlama dili Python ise, þu anda tam olarak neden bahsediyor olduðumuza anlam verememiþ olabilirsiniz. Dilerseniz durumu zihninizde biraz olsun netleþtirebilmek için basit bir örnek verelim.
+
+Diyelim ki elimizde þöyle bir sýnýf var:
+
+class Sýnýf():
+sýnýf_niteliði = 'sýnýf niteliði'
+
+def örnek_metodu(self):
+print('örnek metodu')
+
+@classmethod
+def sýnýf_metodu(cls):
+print('sýnýf metodu')
+
+@staticmethod
+def statik_metot():
+print('statik metot')
+
+Bu kodlarýn sinif.py adlý bir dosya içinde yer aldýðýný varsayarsak þöyle bir þeyler yazabiliriz:
+
+>>> import sinif
+>>> s = sinif.Sýnýf()
+>>> dir(s)
+
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__',
+ '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__',
+ '__hash__', '__init__', '__le__', '__lt__', '__module__',
+ '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+ '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__',
+ 'statik_metot', 'sýnýf_metodu', 'sýnýf_niteliði', 'örnek_metodu']
+
+Burada öncelikle kodlarýmýzý barýndýran modülü içe aktardýk. Daha sonra, içe aktardýðýmýz modülün içindeki Sýnýf() adlý sýnýfýmýzý s örneðine atadýk ve ardýndan dir() komutunu kullanarak, içe aktardýðýmýz bu sýnýfýn içeriðini sorguladýk.
+
+Gördüðünüz gibi, içe aktardýðýmýz sýnýfýn bütün öðeleri listede var. Yani biz bu sýnýf içindeki bütün öðelere normal yollardan eriþme imkanýna sahibiz:
+
+>>> s.statik_metot()
+
+'statik metot'
+
+>>> s.örnek_metodu()
+
+'örnek metodu'
+
+>>> s.sýnýf_metodu()
+
+'sýnýf metodu'
+
+>>> s.sýnýf_niteliði
+
+'sýnýf niteliði'
+
+Ýþte dir() komutunun çýktýsýnda görünen ve normal yollardan eriþebildiðimiz bütün bu öðeler birer aleni üyedir.
+
+Yukarýda da ifade ettiðimiz gibi, program yazarken çoðu zaman yalnýzca aleni üyelerle muhatap olacaksýnýz. Ancak bazý durumlarda, yazdýðýnýz bir sýnýftaki bütün sýnýf üyelerinin dýþarýya açýk olmasýný istemeyebilirsiniz. Eðer kodlarýnýzda, sýnýfýn yalnýzca iç iþleyiþini ilgilendiren, bu yüzden de dýþarýdan eriþilmesine gerek olmadýðýný veya eriþilirse problem çýkacaðýný düþündüðünüz birtakým öðeler varsa bunlarý dýþarýya kapatarak bir ‘gizli üye’ haline getirmek isteyebilirsiniz. Peki ama nasýl?
+

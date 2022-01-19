@@ -1,0 +1,251 @@
+
+Sýnýflarýn Örneklenmesi
+
+Biraz önce þöyle bir sýnýf tanýmlamýþtýk:
+
+class Çalýþan():
+kabiliyetleri = []
+unvaný = 'iþçi'
+maaþý = 1500
+memleketi = ''
+doðum_tarihi = ''
+
+Daha önce de söylediðimiz gibi, sýnýflar belli birtakým ortak özelliklere sahip gruplar tanýmlamak için biçilmiþ kaftandýr. Burada da, herbir çalýþan için ortak birtakým nitelikler tanýmlayan Çalýþan() adlý bir sýnýf oluþturduk. Ancak elbette bu sýnýfýn bir iþe yarayabilmesi için, biraz önce de deðindiðimiz gibi, bu sýnýfý temel alarak, bu sýnýfta belirtilen nitelikleri taþýyan birden fazla sýnýf üyesi meydana getirebilmemiz lazým.
+
+Þimdi dikkatlice bakýn:
+
+class Çalýþan():
+kabiliyetleri = []
+unvaný = 'iþçi'
+maaþý = 1500
+memleketi = ''
+doðum_tarihi = ''
+
+ahmet = Çalýþan()
+
+Burada sýnýfýmýzý ahmet adlý bir deðiþkene atadýk.
+
+Ýþte bu iþleme teknik dilde ‘örnekleme’ veya ‘örneklendirme’ (instantiation) adý verilir. Bu iþlemi fonksiyon çaðýrma ile kýyaslayabiliriz: Python programlama dilinde bir fonksiyonu kullanýþlý hale getirme iþlemine ‘çaðýrma’, bir sýnýfý kullanýþlý hale getirme iþlemine ise ‘örnekleme’ adý veriyoruz.
+
+Örnekleme kavramýný daha iyi anlayabilmek için baþka bir sýnýf daha oluþturalým:
+
+class Asker():
+rütbesi = 'Er'
+standart_teçhizat = ['G3', 'kasatura', 'süngü', 'el bombasý']
+gücü = 60
+birliði = ''
+
+Burada da belli birtakým niteliklere sahip Asker() adlý bir sýnýf tanýmladýk. Bu sýnýfýn niteliklerine doðrudan sýnýf adýný kullanarak eriþebileceðimizi biliyorsunuz:
+
+Asker.rütbesi
+Asker.standart_teçhizat
+Asker.gücü
+Asker.birliði
+
+Ama bu sýnýfýn bir iþe yarayabilmesi için, bu sýnýfa bir ‘referans’ oluþturmamýz lazým, ki daha sonra bu sýnýfa bu referans üzerinden atýfta bulunabilelim. Yani bu sýnýfý çaðýrýrken buna bir isim vermeliyiz, ki bu isim üzerinden sýnýfa ve niteliklerine eriþebilelim.
+
+Mesela bu sýnýfa daha sonra atýfta bulunabilmek amacýyla, bu sýnýf için mehmet adlý bir referans noktasý oluþturalým:
+
+mehmet = Asker()
+
+Ýþte, teknik olarak ifade etmemiz gerekirse, sýnýflarý bir isme atama iþlemine örnekleme (veya örneklendirme) adý veriyoruz.
+
+Burada ahmet ve mehmet, ait olduklarý sýnýflarýn birer ‘sureti’ veya baþka bir deyiþle ‘örneði’dir (instance). mehmet‘in, Asker() adlý sýnýfýn bir örneði, ahmet‘inse Çalýþan() adlý sýnýfýn bir örneði olmasý demek, mehmet‘in ve ahmet‘in, ilgili sýnýflarýn bütün özelliklerini taþýyan birer üyesi olmasý demektir.
+
+Uyarý
+
+Bu baðlamda ‘örnek’ kelimesini ‘misal’ anlamýnda kullanmadýðýmýza özellikle dikkatinizi çekmek isterim. Türkçede ‘örnek’ kelimesi ile karþýladýðýmýz ‘instance’ kavramý, nesne tabanlý programlamanýn önemli teknik kavramlarýndan biridir.
+
+Biz bir sýnýfý çaðýrdýðýmýzda (yani Asker() veya Çalýþan() komutunu verdiðimizde), o sýnýfý örneklemiþ oluyoruz. Örneklediðimiz sýnýfý bir deðiþkene atadýðýmýzda ise o sýnýfýn bir örneðini çýkarmýþ, yani o sýnýfýn bütün özelliklerini taþýyan bir üye meydana getirmiþ oluyoruz.
+
+Bu arada, elbette bu teknik terimleri ezberlemek zorunda deðilsiniz. Ancak nesne tabanlý programlamaya iliþkin metinlerde bu terimlerle sýk sýk karþýlaþacaksýnýz. Eðer bu terimlerin anlamýný bilirseniz, okuduðunuz þey zihninizde daha kolay yer edecek, aksi halde, sürekli ne demek olduðunu bilmediðiniz terimlerle karþýlaþmak öðrenme motivasyonunuza zarar verecektir.
+
+Esasýnda nesne tabanlý programlamayý öðrencilerin gözünde zor kýlan þey, bu programlama yaklaþýmýnýn özünden ziyade, içerdiði terimlerdir. Gerçekten de nesne tabanlý programlama, pek çok çetrefilli teknik kavramý bünyesinde barýndýran bir sistemdir. Bu nedenle öðrenciler bu konuya iliþkin bir þeyler okurken, muðlak kavramlarýn arasýnda kaybolup konunun esasýný gözden kaçýrabiliyor. Eðer nesne tabanlý programlamaya iliþkin kavramlarý hakkýyla anlarsanýz, bu yaklaþýma dair önemli bir engeli aþmýþsýnýz demektir.
+
+Öte yandan, nesne tabanlý programlamaya iliþkin kavramlarý anlamak sadece Türkçe okuyup yazanlar için deðil, ayný zamanda Ýngilizce bilip ilgili makaleleri özgün dilinden okuyanlar için de zor olabilir. O yüzden biz bu bölümde, kavramlarýn Türkçeleri ile birlikte Ýngilizcelerini de vererek, Ýngilizce bilenlerin özgün metinleri okurken konuyu daha iyi anlamalarýný saðlamaya çalýþacaðýz. Dolayýsýyla, bir kavramdan bahsederken onun aslýnýn ne olduðunu da belirtmemiz, Ýngilizce bilip de konuyu daha ileri bir düzeyde araþtýrmak isteyenlere kolaylýk saðlayacaktýr.
+
+Ne diyorduk? Eðer elimizde þöyle bir kod varsa:
+
+class Sipariþ():
+firma = ''
+miktar = 0
+sipariþ_tarihi = ''
+teslim_tarihi = ''
+stok_adedi = 0
+
+
+jilet = Sipariþ()
+
+Burada class, sýnýfý tanýmlamamýza yarayan bir öðedir. Týpký fonksiyonlardaki def gibi, sýnýflarý tanýmlamak için de class adlý bir parçacýðý kullanýyoruz.
+
+Sipariþ ise, sýnýfýmýzýn adý oluyor. Biz sýnýfýmýzýn adýný parantezli veya parantezsiz olarak kullanma imkanýna sahibiz.
+
+Sýnýfýn gövdesinde tanýmladýðýmýz þu deðiþkenler birer sýnýf niteliðidir (class atribute):
+
+firma = ''
+miktar = 0
+sipariþ_tarihi = ''
+teslim_tarihi = ''
+stok_adedi = 0
+
+jilet = Sipariþ() komutunu verdiðimizde ise, biraz önce tanýmladýðýmýz sýnýfý örnekleyip (instantiation), bunu jilet adlý bir örneðe (instance) atamýþ oluyoruz. Yani jilet, Sipariþ() adlý sýnýfýn bir örneði olmuþ oluyor. Bir sýnýftan istediðimiz sayýda örnek çýkarabiliriz:
+
+kalem = Sipariþ()
+pergel = Sipariþ()
+çikolata = Sipariþ()
+
+Bu þekilde Sipariþ() sýnýfýný üç kez örneklemiþ, yani bu sýnýfýn bütün özelliklerini taþýyan üç farklý üye meydana getirmiþ oluyoruz.
+
+Bu sýnýf örneklerini kullanarak, ilgili sýnýfýn niteliklerine (attribute) eriþebiliriz:
+
+kalem = Sipariþ()
+
+kalem.firma
+kalem.miktar
+kalem.sipariþ_tarihi
+kalem.teslim_tarihi
+kalem.stok_adedi
+
+Bildiðiniz gibi, eriþtiðimiz bu nitelikler birer sýnýf niteliði olduðu için, sýnýfý hiç örneklemeden, bu niteliklere doðrudan sýnýf adý üzerinden de eriþebilirdik:
+
+Sipariþ.firma
+Sipariþ.miktar
+Sipariþ.sipariþ_tarihi
+Sipariþ.teslim_tarihi
+Sipariþ.stok_adedi
+
+Özellikle, örneklenmesine gerek olmayan, yalnýzca bir kez çalýþacak sýnýflarda, sýnýf niteliklerine örnekler üzerinden deðil de doðrudan sýnýf adý üzerinden eriþmek daha pratik olabilir. Ancak yukarýda olduðu gibi, tek bir sýnýftan, ortak niteliklere sahip birden fazla üye oluþturmamýz gereken durumlarda sýnýfý bir örneðe atayýp, sýnýf niteliklerine bu örnek üzerinden eriþmek çok daha akýllýca olacaktýr. Ancak her koþulda sýnýflarýn niteliklerine doðrudan sýnýf adlarý üzerinden eriþmek yerine örnekler üzerinden eriþmeyi tercih etmenizin de hiçbir sakýncasý olmadýðýný bilin.
+
+Gelin þimdi yukarýda öðrendiklerimizi kullanarak ufak tefek uygulama çalýþmalarý yapalým.
+
+Sýnýfýmýz þu olsun:
+
+class Sipariþ():
+firma = ''
+miktar = 0
+sipariþ_tarihi = ''
+teslim_tarihi = ''
+stok_adedi = 0
+
+Bildiðiniz gibi, ufak tefek kod çalýþmalarý yapmak için Python’ýn etkileþimli kabuðu son derece uygun bir ortamdýr. O halde yukarýdaki sýnýfý sipariþ.py adlý bir dosyaya kaydedelim, bu dosyanýn bulunduðu konumda bir etkileþimli kabuk ortamý açalým ve sipariþ.py dosyasýný bir modül olarak içe aktaralým:
+
+>>> import sipariþ
+
+Böylece sipariþ modülü içindeki nitelik ve metotlara eriþim saðladýk. Bunu teyit edelim:
+
+>>> dir(sipariþ)
+
+['Sipariþ', '__builtins__', '__cached__', '__doc__', '__file__',
+ '__loader__', '__name__', '__package__', '__spec__']
+
+Sipariþ() adlý sýnýfý listenin en baþýnda görebilirsiniz. O halde gelin bu sýnýfý örnekleyerek kullanýlabilir hale getirelim:
+
+>>> gofret = sipariþ.Sipariþ()
+
+Elbette Sipariþ() adlý sýnýf sipariþ adlý modül içinde bulunduðundan, bu sýnýfa sipariþ önekiyle eriþiyoruz. Tabii biz isteseydik modülü þu þekilde de içe aktarabilirdik:
+
+>>> from sipariþ import Sipariþ
+
+Böylece Sipariþ() sýnýfýna öneksiz olarak eriþebilirdik:
+
+>>> gofret = Sipariþ()
+
+Ancak mevcut isim alanýný kirletmemek ve bu alaný nereden geldiði belli olmayan birtakým nitelik ve metotlarla doldurmamak için biz import modül_adý biçimini tercih ediyoruz. Aksi halde, bu kodlarý okuyanlar, Sipariþ() adlý sýnýfýn sipariþ adlý bir modüle ait olduðunu anlamayacak, bu sýnýfý ilk olarak mevcut dosya içinde bulmaya çalýþacaklardýr. Ama biz modül adýný sýnýf adýna eklediðimizde modülün nereden geldiði gayet açýk bir þekilde anlaþýlabiliyor. Böylece hem kodlarý okuyan baþkalarýnýn iþini hem de birkaç ay sonra kendi kodlarýmýza tekrar bakmak istediðimizde kendi iþimizi kolaylaþtýrmýþ oluyoruz.
+
+Neyse... Lafý daha fazla dolandýrmadan kaldýðýmýz yerden devam edelim...
+
+Sýnýfýmýzý þu þekilde içe aktarmýþ ve örneklemiþtik:
+
+>>> import sipariþ
+>>> gofret = sipariþ.Sipariþ()
+
+Gelin þimdi bir de gofret örneðinin (instance) içeriðini kontrol edelim:
+
+>>> dir(gofret)
+
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__',
+ '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__',
+ '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__',
+ '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__',
+ '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'firma',
+ 'miktar', 'sipariþ_tarihi', 'stok_adedi', 'teslim_tarihi']
+
+Gördüðünüz gibi, sýnýf içinde tanýmladýðýmýz bütün sýnýf nitelikleri (firma, miktar, sipariþ_tarihi, stok_adedi ve teslim_tarihi) bu liste içinde var.
+
+Bu sýnýf niteliklerinden, adý firma olaný kullanarak sipariþin hangi firmadan yapýlacaðýný belirleyebiliriz:
+
+>>> gofret.firma = 'Öz Ýstihza ve Þerikleri Gýda, Ticaret Anonim Þirketi'
+
+Böylece, sýnýf içindeki bir niteliðe yeni bir deðer atamýþ olduk. Ýsterseniz þipariþ miktarýný da belirleyelim:
+
+>>> gofret.miktar = 1000
+
+Öteki sýnýf niteliklerini de ihtiyacýnýza göre ayarlayabilir, hatta bu sýnýfa yeni nitelikler de ekleyebilirsiniz.
+
+Gelin isterseniz pratik olmasý bakýmýndan bir örnek daha verelim.
+
+Elimizde þöyle bir sýnýf olsun:
+
+class Çalýþan():
+kabiliyetleri = []
+unvaný = 'iþçi'
+maaþý = 1500
+memleketi = ''
+doðum_tarihi = ''
+
+Burada kabiliyetleri, unvaný, maaþý, memleketi ve doðum_tarihi adlý beþ adet deðiþken tanýmladýk. Teknik dilde bu deðiþkenlere ‘sýnýf niteliði’ (class attribute) adý verildiðini biliyorsunuz.
+
+Çalýþan() sýnýfý içindeki niteliklere eriþmek için birkaç tane örnek çýkaralým:
+
+ahmet = Çalýþan()
+mehmet = Çalýþan()
+ayþe = Çalýþan()
+
+Bu þekilde Çalýþan() sýnýfýnýn üç farklý örneðini oluþturmuþ olduk. Bu sýnýfýn niteliklerine, oluþturduðumuz bu örnekler üzerinden eriþebiliriz:
+
+print(ahmet.kabiliyetleri)
+print(ahmet.unvaný)
+
+print(mehmet.maaþý)
+print(mehmet.memleketi)
+
+print(ayþe.kabiliyetleri)
+print(ayþe.doðum_tarihi)
+
+Çýkardýðýmýz örnekler aracýlýðýyla sýnýf nitelikleri üzerinde deðiþiklik de yapabiliyoruz:
+
+ahmet.kabiliyetleri.append('prezantabl')
+
+Þimdi burada bir duralým. Çünkü burada çok sinsi bir sorunla karþý karþýyayýz. Dikkatlice bakýn.
+
+Çalýþan() sýnýfý için bir ahmet örneði oluþturalým:
+
+ahmet = Çalýþan()
+
+Buna ‘prezantabl’ kabiliyetini ekleyelim:
+
+ahmet.kabiliyetleri.append('prezantabl')
+
+Bu kabiliyetin eklendiðini teyit edelim:
+
+print(ahmet.kabiliyetleri)
+
+Þimdi Çalýþan() sýnýfýnýn bir baþka örneðini oluþturalým:
+
+selim = Çalýþan()
+
+Bu örneðin kabiliyetlerini kontrol edelim:
+
+print(selim.kabiliyetleri)
+
+Gördüðünüz gibi, yalnýzca ahmet örneðine eklemek istediðimiz ‘prezantabl’ kabiliyeti selim örneðine de eklenmiþ. Ancak normal þartlarda arzu edilen bir þey deðildir bu. Zira bu durum aslýnda programýmýzdaki bir tasarým hatasýna iþaret eder. Peki ama bu durumun sebebi nedir?
+
+Hatýrlarsanýz, sýnýf niteliklerinden bahsederken, bu niteliklerin önemli bir özelliðinin, sýnýf çaðrýlmadan çalýþmaya baþlamalarý olduðunu söylemiþtik. Sýnýf niteliklerinin bir baþka önemli özelliði de, bu niteliklere atanan deðerlerin ve eðer yapýlabiliyorsa bu deðerler üzerinde sonradan yapýlan deðiþikliklerin o sýnýfýn bütün örneklerini etkiliyor olmasýdýr. Eðer ilgili sýnýf niteliði; karakter dizisi, demet ve sayý gibi deðiþtirilemeyen (immutable) bir veri tipi ise bu sýnýf niteliði üzerinde zaten deðiþiklik yapamazsýnýz. Yaptýðýnýz þey ancak ilgili sýnýf niteliðini yeniden tanýmlamak olacaktýr. Ancak eðer sýnýf niteliði, liste, sözlük ve küme gibi deðiþtirilebilir (mutable) bir veri tipi ise bu nitelik üzerinde yapacaðýnýz deðiþiklikler bütün sýnýf örneklerine yansýyacaktýr. Yazdýðýnýz program açýsýndan bu özellik arzu ettiðiniz bir þey olabilir veya olmayabilir. Önemli olan, sýnýf niteliklerinin bu özelliðinin farkýnda olmanýz ve kodlarýnýzý bu bilgi çerçevesinde yazmanýzdýr. Mesela yukarýdaki örnekte kabiliyetleri listesine eklenen öðelerin bütün örneklere yansýmasý istediðimiz bir þey deðil. Ama eðer sýnýfýmýz þöyle olsaydý:
+
+class Çalýþan():
+personel_listesi = []
+
+Burada personel_listesi adlý bir sýnýf niteliði tanýmladýk. Eðer bu listenin, personele eklenen bütün elemanlarý barýndýrmasýný planlýyorsak bu listenin her örneklemede büyümesi elbette istediðimiz bir þey olacaktýr.
+
+Peki o halde biz deðerinin her örnekte ortak deðil de her örneðe özgü olmasýný istediðimiz nitelikleri nasýl tanýmlayacaðýz? Elbette sýnýf nitelikleri yerine örnek nitelikleri denen baþka bir kavramdan yararlanarak...
+

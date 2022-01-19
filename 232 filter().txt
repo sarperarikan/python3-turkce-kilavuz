@@ -1,0 +1,146 @@
+
+filter()
+
+Bu gömülü fonksiyon yardýmýyla dizi niteliði taþýyan nesneler içindeki öðeler üzerinde belirli bir ölçüte göre bir süzme iþlemi uygulayabiliriz. Dilerseniz filter() fonksiyonunun görevini bir örnek üzerinden anlamaya çalýþalým.
+
+Diyelim ki elimizde þöyle bir liste var:
+
+>>> [400, 176, 64, 175, 355, 13, 207, 298, 397, 386, 31, 120, 120, 236,
+     241, 123, 249, 364, 292, 153]
+
+Amacýmýz bu liste içindeki tek sayýlarý süzmek.
+
+Daha önce öðrendiðimiz yöntemleri kullanarak bu görevi þu þekilde yerine getirebiliriz:
+
+>>> for i in l:
+... if i % 2 == 1:
+... print(i)
+...
+175
+355
+13
+207
+397
+31
+241
+123
+249
+153
+
+Hatta eðer istersek liste üreteçlerini kullanarak ayný iþlemi daha kýsa bir yoldan da halledebiliriz:
+
+>>> [i for i in l if i % 2 == 1]
+
+[175, 355, 13, 207, 397, 31, 241, 123, 249, 153]
+
+Ýþte Python, yukarýdaki iþlemi yapabilmemiz için bize üçüncü bir yol daha sunar. Bu üçüncü yolun adý filter() fonksiyonudur. Dikkatlice bakýn:
+
+def tek(sayý):
+return sayý % 2 == 1
+
+print(*filter(tek, l))
+
+Dilerseniz bu kodlarý daha iyi anlayabilmek için filter() fonksiyonuna biraz daha yakýndan bakalým...
+
+filter() fonksiyonu toplam iki parametre alýr. Bu parametrelerden ilki ölçütü belirleyen fonksiyon, ikincisi ise bu ölçütün uygulanacaðý öðedir. Yukarýdaki örneðe baktýðýmýzda, tek() adlý fonksiyonun, l adlý öðe üzerine uygulandýðýný görüyoruz.
+
+Yukarýdaki örnekte ilk olarak tek() adlý bir fonksiyon tanýmladýk:
+
+def tek(sayý):
+return sayý % 2 == 1
+
+Bu fonksiyonun görevi, kendisine parametre olarak verilen bir sayýnýn tek sayý olup olmadýðýný sorgulamak. Eðer verilen parametre bir tek sayý ise fonksiyonumuz True deðerini, tek sayý deðilse False deðerini döndürecektir. Ýsterseniz fonksiyonumuzu test edelim:
+
+print(tek(12))
+
+12 sayýsý bir tek sayý olmadýðý için fonksiyonumuz bize False çýktýsý verir.
+
+Bir de þuna bakalým:
+
+print(tek(117))
+
+117 sayýsý ise bir tek sayýdýr. Bu nedenle fonksiyonumuz bize True deðerini verecektir.
+
+Ýþte biz bu fonksiyonu, filter() fonksiyonu yardýmýyla þu liste üzerine uygulayacaðýz:
+
+l = [400, 176, 64, 175, 355, 13, 207, 298, 397, 386, 31,
+120, 120, 236, 241, 123, 249, 364, 292, 153]
+
+Dediðimiz gibi, filter() fonksiyonu, dizi özelliði taþýyan nesneler üzerinde belli bir ölçüte göre filtreleme iþlemi yapmamýzý saðlar. Biz de biraz önce tanýmladýðýmýz tek() adlý fonksiyonu l adlý bu listeye uygulayarak liste içindeki tek sayýlarý filtreleyeceðiz.
+
+filter() fonksiyonunu çalýþtýralým:
+
+>>> filter(tek, l)
+
+Burada filter() fonksiyonuna ilk parametre olarak tek() fonksiyonunu verdik. Ýkinci parametremiz ise bu fonksiyonu uygulayacaðýmýz l adlý liste. Amacýmýz, l adlý liste üzerine tek() fonksiyonunu uygulayarak, bu liste içindeki öðelerden True çýktýsý verenleri (yani tek sayýlarý) ayýklamak.
+
+Þimdi de yukarýdaki koddan aldýðýmýz çýktýya bakalým:
+
+<filter object at 0x00F74F30>
+
+Gördüðünüz gibi, bu fonksiyonu bu þekilde kullandýðýmýzda elde ettiðimiz þey bir ‘filtre nesnesi’. Bu nesne içindeki öðeleri görebilmek için ne yapabileceðimizi biliyorsunuz:
+
+>>> list(filter(tek, l))
+
+[175, 355, 13, 207, 397, 31, 241, 123, 249, 153]
+
+veya:
+
+>>> print(*filter(tek, l))
+
+175 355 13 207 397 31 241 123 249 153
+
+ya da:
+
+>>> [i for i in filter(tek, l)]
+
+[175, 355, 13, 207, 397, 31, 241, 123, 249, 153]
+
+Gördüðünüz gibi, gerçekten de l adlý liste içindeki bütün tek sayýlar süzüldü.
+
+Gelin isterseniz filter() fonksiyonunu biraz daha iyi anlayabilmek için basit bir çalýþma yapalým.
+
+Elimizde bir sýnýftaki öðrencilerin Matematik sýnavýndan aldýðý notlarý içeren bir sözlük var:
+
+notlar = {'Ahmet' : 60,
+'Sinan' : 50,
+'Mehmet' : 45,
+'Ceren' : 87,
+'Selen' : 99,
+'Cem' : 98,
+'Can' : 51,
+'Kezban' : 100,
+'Hakan' : 66,
+'Mahmut' : 80}
+
+Okulda kullanýlan not sistemine göre yukarýdaki notlarý þu þekilde sýnýflandýrabiliyoruz:
+
+def not_durumu(n):
+if n in range(0, 50): return 'F'
+if n in range(50, 70): return 'D'
+if n in range(70, 80): return 'C'
+if n in range(80, 90): return 'B'
+if n in range(90, 101): return 'A'
+
+Buna göre mesela print(not_durumu(54)) gibi bir kod yazdýðýmýzda bu notun karþýlýk geldiði ‘D’ sayýsýný alabiliyoruz. Peki biz bu notlarý belli bir ölçüte göre süzmek, ayýklamak istersek ne yapabiliriz? Örneðin notu 70’ten yukarý olan öðrencileri listelemek istersek nasýl bir kod yazabiliriz?
+
+Ýþte böyle bir durumda filter() adlý gömülü fonksiyonu kullanabiliriz:
+
+notlar = {'Ahmet' : 60,
+'Sinan' : 50,
+'Mehmet' : 45,
+'Ceren' : 87,
+'Selen' : 99,
+'Cem' : 98,
+'Can' : 51,
+'Kezban' : 100,
+'Hakan' : 66,
+'Mahmut' : 80}
+
+def süz(n):
+return n >= 70
+
+print(*filter(süz, notlar.values()))
+
+Gördüðünüz gibi, filter() fonksiyonu, süz() adlý fonksiyon ile belirlediðimiz ölçütü notlar adlý sözlüðün deðerleri üzerine tek tek uygulamamýzý saðlýyor.
+

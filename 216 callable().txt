@@ -1,0 +1,22 @@
+
+callable()
+
+Bu fonksiyon, bir nesnenin ‘çaðrýlabilir’ olup olmadýðýný denetler. Peki hangi nesneler çaðrýlabilir özelliktedir. Mesela fonksiyonlar çaðrýlabilir nesnelerdir. Deðiþkenler ise çaðrýlabilir nesneler deðildir.
+
+Birkaç örnek verelim bununla ilgili:
+
+>>> callable(open)
+
+True
+
+Python’ýn open() adlý bir fonksiyonu olduðu için, doðal olarak callable() fonksiyonu True çýktýsý veriyor.
+
+Bir de þuna bakalým:
+
+>>> import sys
+>>> callable(sys.version)
+
+False
+
+Burada da sys modülü içindeki version adlý nesnenin çaðrýlabilir özellikte olup olmadýðýný sorguladýk. Daha önceki derslerimizde de gördüðünüz gibi, sys modülü içindeki version adlý araç bir fonksiyon deðil, deðiþkendir. Dolayýsýyla bu deðiþken callable(sys.version) sorgusuna False yanýtý verir.
+

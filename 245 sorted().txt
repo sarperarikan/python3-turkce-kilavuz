@@ -1,0 +1,299 @@
+
+sorted()
+
+Bu metot, daha önceki derslerimizden de bildiðiniz gibi, bir dizi içindeki öðeleri belirli bir ölçüte göre sýraya dizmemizi saðlýyor. Bununla ilgili çok basit bir örnek verelim:
+
+>>> sorted('ahmet')
+
+['a', 'e', 'h', 'm', 't']
+
+Bu kodlar yardýmýyla ahmet adlý karakter dizisi içindeki harfleri alfabe sýrasýna dizdik.
+
+Elbette bu fonksiyonu sadece karakter dizileri üzerine uygulamýyoruz. sorted() adlý fonksiyon, dizi özelliði taþýyan her türlü nesne üzerine uygulanabilir. Mesela demetlerin ve listelerin bir dizi olduðunu biliyoruz. Dolayýsýyla:
+
+>>> sorted(('elma', 'armut', 'kiraz', 'badem'))
+
+['armut', 'badem', 'elma', 'kiraz']
+
+>>> sorted(['elma', 'armut', 'kiraz', 'badem'])
+['armut', 'badem', 'elma', 'kiraz']
+
+sorted() fonksiyonuna hangi türde bir veri tipi verirseniz verin, aldýðýnýz çýktý her zaman bir liste olacaktýr. Bunu unutmayýn.
+
+Gördüðünüz gibi, sorted() fonksiyonu nesneler üzerinde bir sýralama iþlemi gerçekleþtiriyor. Ancak bu fonksiyonun bir problemi var.
+
+Dikkatlice bakýn:
+
+>>> isimler = ['ahmet', 'çiðdem', 'ýþýk', 'þebnem', 'zeynep', 'selin']
+>>> sorted(isimler)
+
+['ahmet', 'selin', 'zeynep', 'çiðdem', 'ýþýk', 'þebnem']
+
+Bu fonksiyon, Türkçe karakter içeren öðeleri düzgün sýralayamaz.
+
+Bu sorunu kýsmen çözebilmek için locale adlý bir modül içindeki strxfrm() adlý bir fonksiyondan yararlanabilirsiniz:
+
+>>> import locale
+
+Henüz modülleri öðrenmemiþ de olsak, bir modülü kullanabilmek için öncelikle o modülü ‘içe aktarmamýz’ gerektiðini artýk biliyorsunuz. Bu iþlemi import adlý bir komut yardýmýyla yaptýðýmýzý da biliyorsunuz.
+
+Þimdi de yerelimizi (locale) ‘Türkçe’ olarak ayarlayalým:
+
+>>> locale.setlocale(locale.LC_ALL, 'tr_TR') #GNU/Linux
+>>> locale.setlocale(locale.LC_ALL, 'Turkish_Turkey.1254') #Windows
+
+Bu iþlemleri yaptýktan sonra, sorted() fonksiyonunun key adlý bir parametresini kullanarak ve yine locale modülünün strxfrm() adlý fonksiyonundan faydalanarak Türkçe karakterler içeren listemizi sýralamayý deneyebiliriz:
+
+>>> sorted(isimler, key=locale.strxfrm)
+
+['ahmet', 'çiðdem', 'ýþýk', 'selin', 'þebnem', 'zeynep']
+
+locale modülü içinde bulunan strxfrm() adlý fonksiyon, karakter dizilerinin, o anda etkin yerel neyse, ona göre muamele görmesini saðlar. Biz yukarýda yerelimizi Türkçe olarak ayarladýðýmýz için strxfrm() fonksiyonu, sorted() ile yapýlan alfabe sýrasýna dizme iþleminin Türkçenin kurallarýna göre yapýlmasýný saðlýyor.
+
+Ancak bu yöntemin de sorunlu olduðunu bir süre sonra kendiniz de farkedeceksiniz. Mesela þu örneði inceleyin:
+
+>>> sorted('afgdhkýi', key=locale.strxfrm)
+
+['a', 'd', 'f', 'g', 'h', 'i', 'ý', 'k']
+
+Gördüðünüz gibi, listede ‘i’ harfi ‘ý’ harfinden önce geliyor. Ama aslýnda bunun tersi olmalýydý.
+
+Ýþte böyle bir durumda, kendi sýralama mekanizmamýzý kendimiz icat etmeliyiz. Peki ama nasýl?
+
+Bilgisayarlar farklý dillerdeki karakterleri her zaman doðru sýralayamasa da, sayýlarý her zaman doðru sýralar:
+
+>>> sorted([10, 9, 4, 14, 20])
+
+[4, 9, 10, 14, 20]
+
+Bilgisayarlarýn bu özelliðinden ve Python’daki sözlük veri tipinden yararlanarak kendi sýralama mekanizmamýzý rahatlýkla icat edebiliriz.
+
+Öncelikle harflerimizi yazalým:
+
+>>> harfler = "abcçdefgðhýijklmnoöprsþtuüvyz"
+
+Burada Türk alfabesini oluþturan harfleri sýrasýna göre dizdik. Þimdi bu harflerin her birine bir sayý vereceðiz:
+
+>>> çevrim = {'a': 0, 'b': 1, 'c': 2, 'ç': 3, 'd': 4,
+... 'e': 5, 'f': 6, 'g': 7, 'ð': 8, 'h': 9,
+... 'ý': 10, 'i': 11, 'j': 12, 'k': 13,
+... 'l': 14, 'm': 15, 'n': 16, 'o': 17,
+... 'ö': 18, 'p': 19, 'r': 20, 's': 21,
+... 'þ': 22, 't': 23, 'u': 24, 'ü': 25,
+... 'v': 26, 'y': 27, 'z': 28}
+
+Yalnýz böyle her harfe karþýlýk gelen sayýyý elle yazmak yorucu olacaktýr. Bu iþlemi daha kolay bir þekilde yapabilmek için farklý teknikleri kullanabilirsiniz. Mesela daha önce öðrendiðimiz sözlük üreteçlerinden yararlanabilirsiniz:
+
+>>> çevrim = {i: harfler.index(i) for i in harfler}
+
+Bu þekilde harfler deðiþkeni içindeki herbir harfin bir anahtar; bu harflerin harfler deðiþkeni içindeki sýrasýný gösteren herbir sayýnýn ise bir deðer olduðu bir sözlük oluþturmuþ olduk.
+
+Þimdi isim listemizi alalým karþýmýza:
+
+isimler = ["ahmet", "ýþýk", "ismail",
+"çiðdem", "can", "þule"]
+
+Normal bir sorted() iþleminin yanlýþ sonuç döndüreceðini biliyoruz:
+
+>>> sorted(isimler)
+
+['ahmet', 'can', 'ismail',
+ 'çiðdem', 'ýþýk', 'þule']
+
+Ayný þekilde key parametresine locale.strxfrm deðerinin verilmesi de yetersiz kalacaktýr:
+
+>>> sorted(isimler, key=locale.strxfrm)
+
+['ahmet', 'can', 'çiðdem', 'ismail',
+ 'ýþýk', 'þule']
+
+Ama biraz önce oluþturduðumuz çevrim anahtarýný kullanýrsak durum bambaþka olacaktýr:
+
+>>> sorted(isimler, key=lambda x: çevrim.get(x[0]))
+
+['ahmet', 'can', 'çiðdem', 'ýþýk', 'ismail', 'þule']
+
+Ancak aslýnda burada da oldukça sinsi bir problem var. Bu metot ile kelime listesini oluþturan kelimeleri yalnýzca ilk harflerine göre sýralýyoruz (x[0]). Peki ya ayný liste içinde ilk harfleri ayný olup, sonraki harflerde farklýlaþan kelimeler varsa ne olacak? Yani mesela bu metot acaba ‘ismail’ ve ‘iskender’ kelimelerini doðru bir þekilde sýralayabilir mi? Bakalým:
+
+harfler = "abcçdefgðhýijklmnoöprsþtuüvyz"
+çevrim = {i: harfler.index(i) for i in harfler}
+
+isimler = ["ahmet", "ýþýk", "ismail", "çiðdem",
+"can", "þule", "iskender"]
+
+print(sorted(isimler, key=lambda x: çevrim.get(x[0])))
+
+Buradan þu çýktýyý alýyoruz:
+
+['ahmet', 'can', 'çiðdem', 'ýþýk', 'ismail', 'iskender', 'þule']
+
+Gördüðünüz gibi ‘ismail’ ve ‘iskender’ kelimeleri doðru bir þekilde sýralanmadý; ‘iskender’ kelimesinin ‘ismail’ kelimesinden önce gelmesi gerekiyordu...
+
+Demek ki þimdiye kadar kullandýðýmýz bütün sýralama yöntemlerinin bir eksiði varmýþ. O halde baþka bir metot bulmaya çalýþalým.
+
+Dikkatlice bakýn:
+
+harfler = 'abcçdefgðhýijklmnoöprsþtuüvyz'
+çevrim = {i: harfler.index(i) for i in harfler}
+
+def sýrala(kelime):
+return ([çevrim.get(kelime[i]) for i in range(len(kelime))])
+
+isimler = ['ahmet', 'can', 'iskender', 'cigdem',
+'ismet', 'ismail', 'ismit', 'çiðdem',
+'ismýt', 'ýþýk', 'þule']
+
+print(*sorted(isimler, key=sýrala), sep='\n')
+
+Gelin bu kodlarý biraz inceleyelim.
+
+Burada ilk gördüðümüz kodlar þunlar:
+
+harfler = 'abcçdefgðhýijklmnoöprsþtuüvyz'
+çevrim = {i: harfler.index(i) for i in harfler}
+
+Esasýnda siz bu kodlarýn anlamýný biliyorsunuz. Önceki derslerimizde de ayný kodlarý birkaç kez kullanmýþtýk. Yalnýz biz burada, örnek olmasý açýsýndan, harfler deðiþkeni için deðer olarak yalnýzca küçük harfleri kullandýk. Bu kodlarý daha kapsamlý bir program içinde kullanacaksanýz bu deðiþkenin uygun yerlerine mesela büyük harfleri ve noktalama iþaretleriyle sayýlarý da eklemek isteyebilirsiniz.
+
+Sonraki satýrlarda sýrala() adlý bir fonksiyon tanýmladýk:
+
+def sýrala(kelime):
+return ([çevrim.get(kelime[i]) for i in range(len(kelime))])
+
+Burada liste üreteçlerinden yararlandýðýmýza dikkatinizi çekmek isterim:
+
+[çevrim.get(kelime[i]) for i in range(len(kelime))]
+
+Bu kod yardýmýyla kelime içinde geçen herbir harfi çevrim adlý sözlükte sorgulayarak, sözlükte ilgili harfe karþýlýk gelen sayýyý buluyoruz.
+
+Aslýnda bu kodlarý daha iyi anlayabilmek için Python’daki sorted() fonksiyonunun mantýðýný biraz daha derinlemesine incelememiz gerekiyor. Gelin þimdi bu inceleme iþini yapalým:
+
+Diyelim ki elimizde þöyle bir liste var:
+
+elemanlar = [('ahmet', 33, 'karataþ'),
+('mehmet', 45, 'arpaçbahþiþ'),
+('sevda', 24, 'arsuz'),
+('arzu', 40, 'siverek'),
+('abdullah', 30, 'payas'),
+('ilknur', 40, 'kilis'),
+('abdurrezzak', 40, 'bolvadin')]
+
+Bu liste, her biri ‘isim’, ‘yaþ’ ve ‘memleket’ bilgilerini içeren üç öðeli birer demetten oluþuyor. Eðer biz bu liste üzerine sorted() fonksiyonunu uygularsak:
+
+print(*sorted(elemanlar), sep='\n')
+
+Python elemanlarý demetlerin ilk öðesine göre sýralayacaktýr. Yani isme göre.
+
+Peki ya biz bu elemanlarý yaþa göre sýralamak istersek ne yapacaðýz?
+
+Bu amacý gerçekleþtirmek için þöyle bir kod yazabiliriz:
+
+def sýrala(liste):
+return liste[1]
+
+elemanlar = [('ahmet', 33, 'karataþ'),
+('mehmet', 45, 'arpaçbahþiþ'),
+('sevda', 24, 'arsuz'),
+('arzu', 40, 'siverek'),
+('abdullah', 30, 'payas'),
+('ilknur', 40, 'kilis'),
+('abdurrezzak', 40, 'bolvadin')]
+
+print(*sorted(elemanlar, key=sýrala), sep='\n')
+
+Bu örnek bize key parametresinin de ne iþe yaradýðýný açýk seçik gösteriyor. Eðer Python’ýn kendi sýralama yönteminin dýþýnda bir sýralama yöntemi uygulayacaksak, bu sýralama yönteminin ne olduðunu bir fonksiyon yardýmýyla tarif edip bunu key parametresine deðer olarak veriyoruz. Örneðin biz yukarýdaki Python’ýn elemanlar adlý listeyi ilk sütuna (‘isim’ sütunu) göre deðil, ikinci sütuna (‘yaþ’ sütunu) göre sýralamasýný istedik. Bunun için de þöyle bir fonksiyon yazdýk:
+
+def sýrala(liste):
+return liste[1]
+
+Bu fonksiyon, kendisine parametre olarak verilen nesnenin ikinci öðesini döndürüyor. Ýþte biz sorted() fonksiyonunun key parametresine bu fonksiyonu verdiðimizde Python sýralama iþleminde elemanlar listesinin ikinci öðesini dikkate alacaktýr. Eðer Python’ýn sýralama iþleminde mesela üçüncü sütunu dikkate almasýný isterseniz sýrala() fonksiyonunu þöyle yazabilirsiniz:
+
+def sýrala(liste):
+return liste[2]
+
+Gördüðünüz gibi, elemanlar listesinin ikinci sütununda deðeri ayný olan öðeler var. Mesela ‘arzu’, ‘ilknur’ ve ‘abdurrezzak’ 40 yaþýnda. Python bu öðeleri sýralarken, bunlarýn listede geçtiði sýrayý dikkate alacaktýr. Ama bazen biz sýralamanýn böyle olmasýný istemeyebiliriz. Mesela bizim istediðimiz þey, deðeri ayný olan öðeler için üçüncü sütunun (veya birinci sütunun) dikkate alýnmasý olabilir. Ýþte bunun için de sýrala() fonksiyonunu þu þekilde tanýmlayabiliriz:
+
+def sýrala(liste):
+return (liste[1], liste[2])
+
+Gördüðünüz gibi burada sýrala() fonksiyonu bize iki öðeli bir demet döndürüyor.
+
+Kodlarýmýz tam olarak þöyle görünecek:
+
+def sýrala(liste):
+return (liste[1], liste[2])
+
+elemanlar = [('ahmet', 33, 'karataþ'),
+('mehmet', 45, 'arpaçbahþiþ'),
+('sevda', 24, 'arsuz'),
+('arzu', 40, 'siverek'),
+('abdullah', 30, 'payas'),
+('ilknur', 40, 'kilis'),
+('abdurrezzak', 40, 'bolvadin')]
+
+print(*sorted(elemanlar, key=sýrala), sep='\n')
+
+Kodlarýmýzý böyle yazdýðýmýzda Python listeyi ilk olarak ikinci sütundaki ‘yaþ’ deðerlerine göre sýralar. Deðeri ayný olan öðelerle karþýlaþtýðýnda ise üçüncü sütundaki ‘memleket’ deðerlerine bakar ve sýralamayý ona göre yapar.
+
+Bütün bu açýklamalardan sonra yukarýdaki þu kodlarý daha iyi anlýyor olmalýsýnýz:
+
+harfler = 'abcçdefgðhýijklmnoöprsþtuüvyz'
+çevrim = {i: harfler.index(i) for i in harfler}
+
+def sýrala(kelime):
+return ([çevrim.get(kelime[i]) for i in range(len(kelime))])
+
+isimler = ['ahmet', 'can', 'iskender', 'cigdem',
+'ismet', 'ismail', 'ismit', 'çiðdem',
+'ismýt', 'ýþýk', 'þule']
+
+print(*sorted(isimler, key=sýrala), sep='\n')
+
+Biz yine de her þeyin iyiden iyine anlaþýldýðýndan emin olmak için durumu kýsaca açýklayalým. Öncelikle ilgili fonksiyonu önümüze alalým:
+
+def sýrala(kelime):
+return ([çevrim.get(kelime[i]) for i in range(len(kelime))])
+
+Burada yaptýðýmýz þey biraz önce yaptýðýmýz þeyle tamamen ayný aslýnda. Tek fark, Python’ýn sýralamada kullanmasýný istediðimiz öðeleri tek tek elle yazmak yerine, bunlarý bir liste üreteci yardýmýyla otomatik olarak belirlemek.
+
+Eðer yukarýdaki kodlarý þöyle yazsaydýk:
+
+def sýrala(kelime):
+return (çevrim.get(kelime[0]))
+
+Bu durumda Python sýralamada kelimelerin yalnýzca ilk harflerini dikkate alacaktý. Ýlk harfi ayný olan kelimeleri ise bu yüzden düzgün sýralayamayacaktý. Elbette Python’ýn önce ilk harfe, sonra ikinci harfe, sonra da üçüncü harfe bakmasýný saðlayabiliriz:
+
+def sýrala(kelime):
+return (çevrim.get(kelime[0]), çevrim.get(kelime[1]), çevrim.get(kelime[2]))
+
+Ancak bu yöntemin uygulanabilir ve pratik olmadýðý ortada. Kendi kendinize bazý denemeler yaparak bunu kendiniz de rahatlýkla görebilirsiniz.
+
+Python’ýn, sýralama yaparken kelimelerin önce ilk harflerini, sonra ikinci, sonra üçüncü, vb. harflerini karþýlaþtýrmasýný saðlamanýn en uygun yolu þu olacaktýr:
+
+def sýrala(kelime):
+return ([çevrim.get(kelime[i]) for i in range(len(kelime))])
+
+Gördüðünüz gibi, burada kelimelerdeki harflerin sýrasýný tek tek elle yazmak yerine, bunu bir for döngüsü içinde otomatik olarak yaptýrýyoruz. Dolayýsýyla sýrala() fonksiyonuna verilen parametrenin mesela ahmet olduðu bir durumda yukarýdaki fonksiyon þu demeti döndürüyor:
+
+def sýrala('ahmet'):
+return (çevrim.get('ahmet'[0]),
+çevrim.get('ahmet'[1]),
+çevrim.get('ahmet'[2]),
+çevrim.get('ahmet'[3]),
+çevrim.get('ahmet'[4]))
+
+Mesela ‘can’ için ise þunu:
+
+def sýrala('can'):
+return (çevrim.get('can'[0]),
+çevrim.get('can'[1]),
+çevrim.get('can'[2]))
+
+Böylece Python, hangi uzunlukta bir isimle karþýlaþýrsa karþýlaþsýn, sýralama iþlemini düzgün bir þekilde gerçekleþtirebiliyor.
+
+Bu bölümde Python’da sýralama konusunu epey ayrýntýlý bir þekilde ele aldýk.
+
+Not
+
+‘Sýralama’ konusuna iliþkin bir tartýþma için http://www.istihza.com/forum/viewtopic.php?f=25&t=1523 adresindeki konuyu inceleyebilirsiniz.
+
+

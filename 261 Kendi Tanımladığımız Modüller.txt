@@ -1,0 +1,7 @@
+
+Kendi Tanýmladýðýmýz Modüller
+
+Buraya gelene kadar sadece Python’daki hazýr modüllerden söz ettik. Hazýr modüllerin, ‘Standart Kütüphane Modülleri’ ve ‘Üçüncü Þahýs Modülleri’ olarak ikiye ayrýldýðýný öðrenmiþtiniz. Yukarýda bu hazýr modüllerin ‘Standart Kütüphane Modülleri’ adýný verdiðimiz alt baþlýðýný halihazýrda ele aldýk. Dolayýsýyla artýk standart modüllerin neler olduðunu ve genel olarak bunlarýn nasýl kullanýldýðýný biliyoruz.
+
+Hazýr modül baþlýðý altýnda bir de ‘üçüncü þahýs modülleri’nin bulunduðunu da söylemiþtik. Birazdan üçüncü þahýs modüllerinden de söz edeceðiz. Ama isterseniz ondan önce hazýr modüllere bir ara verelim ve biraz da kendi modüllerimizi nasýl yazabileceðimize bakalým. Kendi modüllerimizi yazmak, modül konusunu biraz daha net bir þekilde anlamamýzý saðlayacaktýr.
+

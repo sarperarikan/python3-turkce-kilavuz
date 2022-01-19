@@ -1,0 +1,5 @@
+
+min()
+
+min() fonksiyonu max() fonksiyonunun tam tersini yapar. Bildiðiniz gibi max() fonksiyonu bir dizi içindeki en büyük öðeyi buluyordu. Ýþte min() fonksiyonu da bir dizi içindeki en küçük öðeyi bulur. Bu fonksiyonun kullanýmý max() ile aynýdýr.
+

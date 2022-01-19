@@ -1,0 +1,79 @@
+
+Sýnýf Nitelikleri
+
+Yukarýda, boþ bir sýnýfý nasýl tanýmlayacaðýmýzý öðrendik. Elbette tanýmladýðýmýz sýnýflar hep boþ kalmayacak. Bu sýnýflara birtakým nitelikler ekleyerek bu sýnýflarý kullanýþlý hale getirebiliriz. Mesela:
+
+class Çalýþan():
+kabiliyetleri = []
+unvaný = 'iþçi'
+
+Burada unvaný ve kabiliyetleri adlý iki deðiþken tanýmladýk. Teknik dilde bu deðiþkenlere ‘sýnýf niteliði’ (class attribute) adý verilir.
+
+Biraz önce, sýnýf tanýmlamayý öðrenirken sýnýf tanýmlamanýn fonksiyon tanýmlamaya çok benzediðini söylemiþtik. Gerçekten de öyledir. Ancak fonksiyonlarla sýnýflar arasýnda (baþka farklarýn dýþýnda) çok önemli bir fark bulunur. Bildiðiniz gibi, bir fonksiyonu tanýmladýktan sonra, o fonksiyonun iþlemeye baþlamasý için, o fonksiyonun mutlaka çaðrýlmasý gerekir. Çaðrýlmayan fonksiyonlar çalýþmaz. Mesela yukarýdaki sýnýfa benzeyen þöyle bir fonksiyon tanýmladýðýmýzý düþünün:
+
+def çalýþan():
+kabiliyetleri = []
+unvaný = 'iþçi'
+
+print(kabiliyetleri)
+print(unvaný)
+
+Bu fonksiyonun çalýþmasý için, kodlarýmýzýn herhangi bir yerinde bu fonksiyonu çaðýrmamýz lazým:
+
+çalýþan()
+
+Ancak sýnýflar farklýdýr. Bunu görmek için yukarýdaki fonksiyonu bir sýnýf haline getirelim:
+
+class Çalýþan():
+kabiliyetleri = []
+unvaný = 'iþçi'
+
+print(kabiliyetleri)
+print(unvaný)
+
+Bu kodlarý mesela deneme.py adlý bir dosyaya kaydedip çalýþtýrdýðýnýzda, unvaný ve kabiliyetleri deðiþkenlerinin deðerinin ekrana basýldýðýný göreceksiniz.
+
+Ayný þey, yukarýdaki kodlarýn bir modül olarak içe aktarýldýðý durumlarda da geçerlidir. Yani yukarýdaki kodlarýn deneme.py adlý bir dosyada bulunduðunu varsayarsak, bu modülü þu komutla içe aktardýðýmýzda, sýnýfý kodlarýmýzýn herhangi bir yerinde çaðýrmamýþ olmamýza raðmen sýnýf içeriði çalýþmaya baþlayacaktýr:
+
+>>> import deneme
+
+[]
+iþçi
+
+Eðer sýnýf niteliklerinin ne zaman çalýþacaðýný kendiniz kontrol etmek isterseniz, bu nitelikleri sýnýf dýþýnda kullanabilirsiniz:
+
+class Çalýþan():
+kabiliyetleri = []
+unvaný = 'iþçi'
+
+print(Çalýþan.kabiliyetleri)
+print(Çalýþan.unvaný)
+
+Burada Çalýþan() adlý sýnýfýn niteliklerine nasýl eriþtiðimize dikkat edin. Gördüðünüz gibi, sýnýf niteliklerine eriþmek için doðrudan sýnýfýn adýný parantezsiz bir þekilde kullanýyoruz. Eðer sýnýf adlarýný parantezli bir þekilde yazarsak baþka bir þey yapmýþ oluruz. Bundan biraz sonra bahsedeceðiz. Biz þimdilik, sýnýf niteliklerine eriþmek için sýnýf adlarýný parantezsiz kullanmamýz gerektiðini bilelim yeter.
+
+Hatýrlarsanýz, bu bölüme baþlarken, nesne tabanlý programlama yaklaþýmýnýn, özellikle birtakým ortak niteliklere ve davranýþ þekillerine sahip gruplar tanýmlamak gerektiðinde son derece kullanýþlý olduðunu söylemiþtik. Gelin isterseniz yukarýdaki Çalýþan() sýnýfýna birkaç nitelik daha ekleyerek bu iddiamýzý destekleyelim:
+
+class Çalýþan():
+kabiliyetleri = []
+unvaný = 'iþçi'
+maaþý = 1500
+memleketi = ''
+doðum_tarihi = ''
+
+Burada belli kabiliyetleri, unvaný, maaþý, memleketi ve doðum_tarihi olan bir Çalýþan() sýnýfý tanýmladýk. Yani ‘Çalýþan’ adlý bir grubun ortak niteliklerini belirledik. Elbette her çalýþanýn memleketi ve doðum tarihi farklý olacaðý için sýnýf içinde bu deðiþkenlere belli bir deðer atamadýk. Bunlarýn birer karakter dizisi olacaðýný belirten bir iþaret olmasý için yalnýzca memleketi ve doðum_tarihi adlý birer boþ karakter dizisi tanýmladýk.
+
+Yukarýda tanýmladýðýmýz sýnýf niteliklerine, doðrudan sýnýf adýný kullanarak eriþebileceðimizi biliyorsunuz:
+
+print(Çalýþan.maaþý)
+print(Çalýþan.memleketi)
+print(Çalýþan.doðum_tarihi)
+
+Eðer isterseniz bu sýnýfa yeni sýnýf nitelikleri de ekleyebilirsiniz:
+
+Çalýþan.isim = 'Ahmet'
+Çalýþan.yaþ = 40
+
+Gayet güzel...
+
+Ancak burada þöyle bir sorun var: Biz yukarýdaki gibi doðrudan sýnýf adýný kullanarak öðelere eriþtiðimizde kodlarýmýz tek kullanýmlýk olmuþ oluyor. Yani bu þekilde ancak tek bir Çalýþan() nesnesi (‘nesne’ kavramýna ilerde deðineceðiz), dolayýsýyla da tek bir çalýþan oluþturma imkaný elde edebiliyoruz. Ama biz, mantýken, sýnýf içinde belirtilen özellikleri taþýyan, Ahmet, Mehmet, Veli, Selim, Selin ve buna benzer, istediðimiz sayýda çalýþan oluþturabilmeliyiz. Peki ama nasýl?
+

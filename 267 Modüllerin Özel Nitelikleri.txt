@@ -1,0 +1,160 @@
+
+Modüllerin Özel Nitelikleri
+
+Python’da bütün modüllerin ortak olarak sahip olduðu bazý nitelikler vardýr. Bu niteliklerin hangileri olduðunu görmek için kesiþim kümelerinden yararlanarak þöyle bir kod yazabiliriz:
+
+import os, sys, random
+
+set_os = set(dir(os))
+set_sys = set(dir(sys))
+set_random = set(dir(random))
+
+print(set_os & set_sys & set_random)
+
+Bu kodlar, os, sys ve random modüllerinin kesiþim kümesini, yani her üç modülde ortak olarak bulunan nitelikleri verecektir. Bu kodlarý çalýþtýrdýðýmýzda þu çýktýyý alýyoruz:
+
+{'__doc__', '__package__', '__loader__', '__name__', '__spec__'}
+
+Demek ki hem os hem sys hem de random modülünde ortak olarak bulunan nitelikler bunlarmýþ... Eðer bu üç modülün bütün modülleri temsil etmiyor olabileceðinden endiþe ediyorsanýz, bildiðiniz baþka modülleri de bu kodlara ekleyerek testinizin kapsamýný geniþletebilirsiniz.
+
+Mesela bu kodlara bir de subprocess modülünü ekleyelim:
+
+import os, sys, random, subprocess
+
+set_os = set(dir(os))
+set_sys = set(dir(sys))
+set_random = set(dir(random))
+set_subprocess = set(dir(subprocess))
+
+print(set_os & set_sys & set_random & set_subprocess)
+
+Yalnýz burada þöyle bir þey dikkatinizi çekmiþ olmalý: Kesiþim kümesini bulmak istediðimiz öðelere baþka öðeler de eklemek istediðimizde her defasýnda birkaç farklý iþlem yapmak zorunda kalýyoruz. Bu da hem kodlarýmýzý hatalara açýk hale getiriyor, hem de aslýnda kolayca halledebileceðimiz bir iþi gereksiz yere uzatmamýza yol açýyor.
+
+Gelin bu kodlarý biraz daha genel amaçlý bir hale getirelim. Zira ‘kodlarýn yeniden kullanýlabilir özellikte olmasý’ (code reusability) programcýlýkta aranan bir niteliktir:
+
+modüller = ['os', 'sys', 'random']
+
+def kesiþim_bul(modüller):
+kümeler = [set(dir(__import__(modül))) for modül in modüller]
+return set.intersection(*kümeler)
+
+print(kesiþim_bul(modüller))
+
+Eðer bu kodlara yeni bir modül eklemek istersek, yapmamýz gereken tek þey en baþtaki modüller listesini güncellemek olacaktýr. Mesela bu listeye bir de subprocess modülünü ekleyelim:
+
+modüller = ['os', 'sys', 'random', 'subprocess']
+
+def kesiþim_bul(modüller):
+kümeler = [set(dir(__import__(modül))) for modül in modüller]
+return set.intersection(*kümeler)
+
+print(kesiþim_bul(modüller))
+
+Gördüðünüz gibi, bu kodlar iþimizi epey kolaylaþtýrdý. Sadece tek bir noktada deðiþiklik yaparak istediðimiz sonucu elde ettik.
+
+Bu arada, __import__() fonksiyonu hariç, bu kodlardaki her þeyi daha önceki derslerimizde öðrenmiþtik. Ama gelin isterseniz biz yine de bu kodlarýn üzerinden þöyle bir geçelim.
+
+Burada ilk yaptýðýmýz iþ, kullanmak istediðimiz modül adlarýný tutmasý için bir liste tanýmlamak:
+
+modüller = ['os', 'sys', 'random', 'subprocess']
+
+Bu listede modül adlarýnýn birer karakter dizisi olarak gösterildiðine dikkat edin. Zaten bu modülleri henüz içe aktarmadýðýmýz için, bunlarý doðrudan týrnaksýz isimleriyle kullanamayýz.
+
+Daha sonra, asýl iþi yapacak olan kesiþim_bul() adlý fonksiyonumuzu tanýmlýyoruz:
+
+def kesiþim_bul(modüller):
+kümeler = [set(dir(__import__(modül))) for modül in modüller]
+return set.intersection(*kümeler)
+
+Bu fonksiyon, modüller adlý tek bir parametre alýyor.
+
+Fonksiyonumuzun gövdesinde ilk olarak þöyle bir kod yazýyoruz:
+
+kümeler = [set(dir(__import__(modül))) for modül in modüller]
+
+Burada modüller adlý listedeki her öðe üzerine sýrasýyla __import() fonksiyonunu, dir() fonksiyonunu ve set() fonksiyonunu uyguluyoruz. Daha sonra elde ettiðimiz sonucu bir liste üreteci yardýmýyla liste haline getirip kümeler deðiþkenine atýyoruz.
+
+Gelelim __import__() fonksiyonunun ne olduðuna...
+
+Bir gömülü fonksiyon olan __import__() fonksiyonu, modül adlarýný içeren karakter dizilerini kullanarak, herhangi bir modülü içe aktarmamýzý saðlayan bir araçtýr. Bu fonksiyonunu þöyle kullanýyoruz:
+
+>>> __import__('os')
+>>> __import__('sys')
+
+Bu fonksiyonun parametre olarak bir karakter dizisi alýyor olmasýnýn bize nasýl bir esneklik saðladýðýna dikkatinizi çekmek isterim. Bu fonksiyon sayesinde modül aktarma iþlemini, kod parçalarý içine programatik olarak yerleþtirebilme imkaný elde ediyoruz. Yani, modül aktarma iþlemini mesela bir for döngüsü içine alamýyorken:
+
+>>> modüller = ['os', 'sys', 'random']
+>>> for modül in modüller:
+... import modül
+...
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+ImportError: No module named 'modül'
+
+__import__() fonksiyonu bize böyle bir iþlem yapabilme olanaðý sunuyor:
+
+>>> modüller = ['os', 'sys', 'random']
+>>> for modül in modüller:
+... __import__(modül)
+
+<module 'os' from 'C:\\Python34\\lib\\os.py'>
+<module 'sys' (built-in)>
+<module 'random' from 'C:\\Python34\\lib\\random.py'>
+
+Yalnýz, __import__('os') gibi bir komut verdiðimizde, ‘os’ ismi doðrudan kullanýlabilir hale gelmiyor. Yani:
+
+>>> __import__('os')
+
+...komutunu verdiðimizde, mesela os modülünün bir niteliði olan name‘i kullanamýyoruz:
+
+>>> os.name
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'os' is not defined
+
+‘os’ ismini kullanabilmemiz için þöyle bir þey yazmýþ olmalýydýk:
+
+>>> os = __import__('os')
+
+Eðer __import__() fonksiyonu yardýmýyla içe aktardýðýmýz os modülünü bu þekilde bir isme atamazsak, __import__('os') komutu ile içe aktarýlan bütün os fonksiyon ve nitelikleri, bu komut bir kez çalýþtýktan sonra unutulacaktýr. Eðer __import__() fonksiyonunu bir isme atamadan, içe aktarýlan modülün niteliklerine eriþmek isterseniz içe aktarma iþlemi ile niteliðe eriþme iþlemini ayný satýrda gerçekleþtirmeniz gerekir:
+
+>>> __import__('os').name
+
+'nt'
+
+__import__() fonksiyonu çok sýk kullanacaðýnýz bir araç deðildir. Ancak özellikle tek satýrda hem bir modülü içe aktarmanýz, hem de hemen ardýndan baþka iþlemler yapmanýz gereken durumlarda bu fonksiyon iþinize yarayabilir:
+
+>>> open('den.txt', 'w').write('merhaba'); __import__('subprocess').call('notepad.exe den.txt')
+
+Gerekli modülleri içe aktardýktan ve kümemimizi tanýmladýktan sonra da fonksiyon tanýmýný þu kodla bitiriyoruz:
+
+return set.intersection(*kümeler)
+
+Burada kümelerin intersection() metodundan faydalandýk. Bu metodu önceki derslerimizde ele almýþtýk. Bu metot yardýmýyla birden fazla kümenin kesiþimini bulabiliyoruz.
+
+Bu fonksiyonu normalde þöyle kullanýyorduk:
+
+>>> küme1.intersection(küme2)
+
+Bu komut, küme1 ile küme2 adlý kümelerin kesiþimini bulacaktýr. Eðer bizim kodlarýmýzda olduðu gibi küme ismi belirtmeksizin birden fazla kümenin kesiþimini bulmak isterseniz bu metodu doðrudan küme veri tipi (set) üzerine uygulayabilirsiniz:
+
+>>> set.intersection(küme1, küme2)
+
+Eðer intersection() metoduna parametreleri bir liste içinden atamak isterseniz bu listeyi yýldýz iþleci yardýmýyla çözmeniz gerekir:
+
+>>> liste = [küme1, küme2, küme3]
+>>> set.intersection(*liste)
+
+Ýþte bizim yukarýda return set.intersection(*kümeler) komutuyla yaptýðýmýz þey de tam olarak budur. Burada intersection() metodunu doðrudan set veri tipi üzerine uyguladýk ve bu metodun parametrelerini kümeler adlý listeden yýldýz iþleci yardýmýyla çözdük.
+
+Son olarak da, tanýmladýðýmýz kesiþim_bul() fonksiyonunu modüller adlý parametre ile çaðýrdýk:
+
+print(kesiþim_bul(modüller))
+
+Bütün bu kodlarý çalýþtýrdýktan sonra ise þöyle bir çýktý elde ettik:
+
+{'__doc__', '__name__', '__loader__', '__spec__', '__package__'}
+
+Ýþte bu bölümün konusu, bütün modüllerde ortak olan bu beþ özel nitelik. Ýlk olarak __doc__ niteliði ile baþlayalým.
+

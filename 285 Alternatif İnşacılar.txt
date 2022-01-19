@@ -1,0 +1,442 @@
+
+Alternatif Ýnþacýlar
+
+Sýnýf metotlarýnýn, iþimize yarayabilecek bir baþka özelliði ise, bunlarýn bir ‘alternatif inþacý’ (alternative constructor) olarak kullanýlabilecek olmasýdýr. “Alternatif neyci?” diye sorduðunuzu rahatlýkla duyabiliyorum...
+
+Gelin isterseniz ‘alternatif inþacý’ kavramýný bir dizi örnek üzerinde kabataslak da olsa açýklamaya çalýþalým.
+
+Þimdi elinizde þöyle bir kitap listesi olduðunu düþünün:
+
+liste = [('9789753424080', 'Greenberg', 'Sana Gül Bahçesi Vadetmedim', 'Metis'),
+('975872519X', 'Evren', 'Postmodern Bir Kýz Sevdim', 'Ýthaki'),
+('9789754060409', 'Nietzsche', 'Böyle Buyurdu Zerdüþt', 'Cem')]
+
+Bu liste, her bir kitap için, sýrasýyla o kitabýn ISBN numarasýný, yazarýný, ismini ve yayýnevini gösteren birer demetten oluþuyor. Amacýmýz, bu listeden çeþitli ölçütlere göre sorgulama yapabilen bir program yazmak. Yazdýðýmýz program; isbn, isim, eser ve yayýnevi ölçütlerine göre bu listeden veri alabilmemizi saðlayacak.
+
+Ýlk denememizi yapalým:
+
+liste = [('9789753424080', 'Greenberg', 'Sana Gül Bahçesi Vadetmedim', 'Metis'),
+('975872519X', 'Evren', 'Postmodern Bir Kýz Sevdim', 'Ýthaki'),
+('9789754060409', 'Nietzsche', 'Böyle Buyurdu Zerdüþt', 'Cem')]
+
+def sorgula(ölçüt=None, deðer=None):
+for li in liste:
+if not ölçüt and not deðer:
+print(*li, sep=', ')
+
+elif ölçüt == 'isbn':
+if deðer == li[0]:
+print(*li, sep=', ')
+
+elif ölçüt == 'yazar':
+if deðer == li[1]:
+print(*li, sep=', ')
+
+elif ölçüt == 'eser':
+if deðer == li[2]:
+print(*li, sep=', ')
+
+elif ölçüt == 'yayýnevi':
+if deðer == li[3]:
+print(*li, sep=', ')
+
+Burada öncelikle kitap listemizi tanýmladýk. Daha sonra da sorgulama iþlemini gerçekleþtirecek sorgula() adlý bir fonksiyon yazdýk.
+
+Bu fonksiyon toplam iki parametre alýyor: ölçüt ve deðer. Bu parametrelerin öntanýmlý deðerlerini None olarak belirledik. Böylece bu fonksiyonu herhangi bir argüman vermeden de çalýþtýrabileceðiz.
+
+Fonksiyon gövdesinde ilk yaptýðýmýz iþ, fonksiyon argümansýz çalýþtýrýldýðýnda, yani ölçüt ve deðer için herhangi bir deðer belirlenmediðinde ne olacaðýný ayarlamak:
+
+for li in liste:
+if not ölçüt and not deðer:
+print(*li, sep=', ')
+
+Eðer ölçüt ve deðer parametreleri için herhangi bir deðer belirtilmemiþse, yani bunlar None olarak býrakýlmýþsa, kitap listesinin tamamýný, her bir öðe arasýna birer virgül yerleþtirerek ekrana basýyoruz.
+
+Eðer sorgula() fonksiyonu çaðrýlýrken ölçüt parametresine ‘isbn’ argümaný, deðer parametresine ise bir ISBN deðeri verilmiþse þu iþlemi yapýyoruz:
+
+elif ölçüt == 'isbn':
+if deðer == li[0]:
+print(*li, sep=', ')
+
+Burada yaptýðýmýz þey þu: Eðer ölçüt ‘isbn’ ise, fonksiyona verilen deðer argümanýný, kitap listesi içindeki her bir demetin ilk sýrasýnda arýyoruz. Çünkü ISBN bilgileri demetlerin ilk sýrasýnda yer alýyor. Eðer bu koþul saðlanýrsa listenin ilgili kýsmýný ekrana basýyoruz:
+
+if deðer == li[0]:
+print(*li, sep=', ')
+
+Bu mantýðý kullanarak öteki ölçütler için de birer sorgu kodu yazýyoruz:
+
+elif ölçüt == 'yazar':
+if deðer == li[1]:
+print(*li, sep=', ')
+
+elif ölçüt == 'eser':
+if deðer == li[2]:
+print(*li, sep=', ')
+
+elif ölçüt == 'yayýnevi':
+if deðer == li[3]:
+print(*li, sep=', ')
+
+Her bir deðer‘i, listenin ilgili sýrasýnda aradýðýmýza dikkat edin. Yazar bilgisi demetlerin ikinci sýrasýnda yer aldýðý için li[1]‘i, ayný gerekçeyle eser için li[2]‘yi, yayýnevi için ise li[3]‘ü sorguluyoruz.
+
+Gelelim bu fonksiyonu nasýl kullanacaðýmýza...
+
+Her zaman söylediðimiz gibi, Python’ýn etkileþimli kabuðu mükemmel bir test ortamýdýr. O halde þimdi bu kodlarý klist.py adlý bir dosyaya kaydedelim ve dosyanýn bulunduðu dizinde bir etkileþimli kabuk oturumu baþlatarak modülümüzü içe aktaralým:
+
+>>> import klist
+
+Önce klist modülü içindeki sorgula() fonksiyonunu argümansýz olarak çaðýralým:
+
+>>> klist.sorgula()
+
+9789753424080, Greenberg, Sana Gül Bahçesi Vadetmedim, Metis
+975872519X, Evren, Postmodern Bir Kýz Sevdim, Ýthaki
+9789754060409, Nietzsche, Böyle Buyurdu Zerdüþt, Cem
+
+Tam da beklediðimiz gibi, fonksiyon argümansýz çaðrýldýðýnda bütün kitap listesini, her bir öðe arasýnda bir virgül olacak þekilde ekrana basýyor.
+
+Þimdi de mesela ISBN numarasýna göre birkaç sorgu iþlemi gerçekleþtirelim:
+
+>>> klist.sorgula('isbn', '9789754060409')
+
+9789754060409, Nietzsche, Böyle Buyurdu Zerdüþt , Cem
+
+>>> klist.sorgula('isbn', '975872519X')
+
+975872519X, Evren, Postmodern Bir Kýz Sevdim, Ýthaki
+
+>>> klist.sorgula('isbn', '9789753424080')
+
+9789753424080, Greenberg, Sana Gül Bahçesi Vadetmedim, Metis
+
+Burada, sorgula() fonksiyonunun ilk parametresine argüman olarak ‘isbn’ deðerini verdik. Böylece programýmýz ISBN numarasýna göre sorgu yapmak istediðimizi anladý. Daha sonra da ikinci argüman olarak istediðimiz bir ISBN numarasýný yazdýk ve sorgu iþlemini tamamladýk.
+
+Bir de yayýnevine göre sorgulama yapalým:
+
+>>> klist.sorgula('yayýnevi', 'Metis')
+
+9789753424080, Greenberg, Sana Gül Bahçesi Vadetmedim, Metis
+
+>>> klist.sorgula('yayýnevi', 'Ýthaki')
+
+975872519X, Evren, Postmodern Bir Kýz Sevdim, Ýthaki
+
+>>> klist.sorgula('yayýnevi', 'Cem')
+
+9789754060409, Nietzsche, Böyle Buyurdu Zerdüþt, Cem
+
+Gördüðünüz gibi, fonksiyonumuz gayet güzel çalýþýyor...
+
+Yukarýda verdiðimiz kodlar, bahsettiðimiz amaç için yazýlabilecek tek alternatif deðildir elbette. Mesela yukarýdaki if-else yapýsýný bir sözlük içine yerleþtirerek çok daha sade bir program elde edebiliriz.
+
+Dikkatlice inceleyin:
+
+liste = [('9789753424080', 'Greenberg', 'Sana Gül Bahçesi Vadetmedim', 'Metis'),
+('975872519X', 'Evren', 'Postmodern Bir Kýz Sevdim', 'Ýthaki'),
+('9789754060409', 'Nietzsche', 'Böyle Buyurdu Zerdüþt', 'Cem')]
+
+
+def sorgula(ölçüt=None, deðer=None):
+d = {'isbn' : [li for li in liste if deðer == li[0]],
+'yazar' : [li for li in liste if deðer == li[1]],
+'eser' : [li for li in liste if deðer == li[2]],
+'yayýnevi' : [li for li in liste if deðer == li[3]]}
+
+for öðe in d.get(ölçüt, liste):
+print(*öðe, sep = ', ')
+
+Burada bütün if-else cümleciklerini birer liste üretecine dönüþtürüp, d adlý sözlüðün anahtarlarý olarak belirledik. Artýk sorgulama iþlemlerini bir if-else yapýsý içinde deðil de, bir sözlük içinden gerçekleþtireceðiz.
+
+Hangi parametrenin hangi listeyi çaðýracaðýný belirleyen sözlüðümüzü yazdýktan sonra, sözlüklerin get() metodunu kullanarak, ölçüt argümanýnýn deðerine göre sözlükten veri çekiyoruz. Eðer sözlükte bulunmayan bir ölçüt deðeri verilirse tüm listeyi ekrana basýyoruz.
+
+Bu arada, eðer d sözlüðü içindeki liste üreteçlerinin birbirini tekrar eder bir yapýda olmasý sizi rahatsýz ediyorsa, bu kýsmý bir yardýmcý fonksiyon aracýlýðýyla sadeleþtirebilirsiniz:
+
+liste = [('9789753424080', 'Greenberg', 'Sana Gül Bahçesi Vadetmedim', 'Metis'),
+('975872519X', 'Evren', 'Postmodern Bir Kýz Sevdim', 'Ýthaki'),
+('9789754060409', 'Nietzsche', 'Böyle Buyurdu Zerdüþt', 'Cem')]
+
+def bul(deðer, sýra):
+return [li for li in liste if deðer == li[sýra]]
+
+def sorgula(ölçüt=None, deðer=None):
+d = {'isbn' : bul(deðer, 0),
+'yazar' : bul(deðer, 1),
+'eser' : bul(deðer, 2),
+'yayýnevi' : bul(deðer, 3)}
+
+for öðe in d.get(ölçüt, liste):
+print(*öðe, sep = ', ')
+
+Burada bütün liste üreteçlerini tek bir bul() fonksiyonu içinde oluþturarak, sorgula() fonksiyonu içindeki d sözlüðüne gönderdik.
+
+Bu kodlarý da ayný ilk program örneðinde olduðu gibi kullanýyoruz:
+
+>>> import klist
+>>> klist.sorgula()
+
+9789753424080, Greenberg, Sana Gül Bahçesi Vadetmedim, Metis
+975872519X, Evren, Postmodern Bir Kýz Sevdim, Ýthaki
+9789754060409, Nietzsche, Böyle Buyurdu Zerdüþt, Cem
+
+>>> klist.sorgula('yazar', 'Nietzsche')
+
+9789754060409, Nietzsche, Böyle Buyurdu Zerdüþt, Cem
+
+>>> klist.sorgula('eser', 'Sana Gül Bahçesi Vadetmedim')
+
+9789753424080, Greenberg, Sana Gül Bahçesi Vadetmedim, Metis
+
+Yukarýdaki kodlarý yazmanýn daha baþka alternatifleri de var. Mesela, eðer arzu ederseniz, yukarýdaki kodlarý bir sýnýf yapýsý içinde de ifade edebilirsiniz:
+
+class Sorgu():
+def __init__(self):
+self.liste = [('9789753424080', 'Greenberg', 'Sana Gül Bahçesi Vadetmedim', 'Metis'),
+('975872519X', 'Evren', 'Postmodern Bir Kýz Sevdim', 'Ýthaki'),
+('9789754060409', 'Nietzsche', 'Böyle Buyurdu Zerdüþt', 'Cem')]
+
+def bul(self, deðer, sýra):
+return [li for li in self.liste if deðer == li[sýra]]
+
+def sorgula(self, ölçüt=None, deðer=None):
+d = {'isbn' : self.bul(deðer, 0),
+'yazar' : self.bul(deðer, 1),
+'eser' : self.bul(deðer, 2),
+'yayýnevi' : self.bul(deðer, 3)}
+
+for öðe in d.get(ölçüt, self.liste):
+print(*öðe, sep = ', ')
+
+Burada kitap listesini bir örnek niteliði olarak tanýmlamak suretiyle sýnýfýn her yerinden kullanýlabilir hale getirdik.
+
+Ardýndan da bul() ve sorgula() adlý fonksiyonlarý, birer örnek metodu biçiminde sýnýf içine yerleþtirdik.
+
+Bu sýnýfý da þu þekilde kullanabiliriz:
+
+>>> import klist
+>>> sorgu = klist.Sorgu()
+>>> sorgu.sorgula()
+
+9789753424080, Greenberg, Sana Gül Bahçesi Vadetmedim, Metis
+975872519X, Evren, Postmodern Bir Kýz Sevdim, Ýthaki
+9789754060409, Nietzsche, Böyle Buyurdu Zerdüþt, Cem
+
+>>> sorgu.sorgula('yazar', 'Evren')
+
+975872519X, Evren, Postmodern Bir Kýz Sevdim, Ýthaki
+
+Elbette, bu örnekte, ilk yazdýðýmýz kodlarý bir sýnýf yapýsý içinde tarif etmenin bize pek bir katkýsý yok. Burada yaptýðýmýz þey esasýnda bütün kodlarý ‘Sorgu’ adlý bir etki alaný içine taþýmaktan fazlasý deðil. Ama böyle bir imkanýnýzýn da olduðunu bilmeniz her halükarda sizin için faydalý olacaktýr.
+
+Gelelim yukarýdaki kodlarý yazmanýn son alternatifine:
+
+class Sorgu():
+def __init__(self, deðer=None, sýra=None):
+self.liste = [('9789753424080', 'Greenberg', 'Sana Gül Bahçesi Vadetmedim', 'Metis'),
+('975872519X', 'Evren', 'Postmodern Bir Kýz Sevdim', 'Ýthaki'),
+('9789754060409', 'Nietzsche', 'Böyle Buyurdu Zerdüþt', 'Cem')]
+
+if not deðer and not sýra:
+l = self.liste
+else:
+l = [li for li in self.liste if deðer == li[sýra]]
+
+for i in l:
+print(*i, sep=', ')
+
+@classmethod
+def isbnden(cls, isbn):
+cls(isbn, 0)
+
+@classmethod
+def yazardan(cls, yazar):
+cls(yazar, 1)
+
+@classmethod
+def eserden(cls, eser):
+cls(eser, 2)
+
+@classmethod
+def yayýnevinden(cls, yayýnevi):
+cls(yayýnevi, 3)
+
+Burada da, her bir ölçütü ayrý birer sýnýf metodu olarak tanýmladýk. Böylece bu ölçütleri yapýsal olarak birbirinden ayýrmýþ olduk. Yukarýdaki sýnýfý þu þekilde kullanabiliriz:
+
+Önce modülümüzü içe aktaralým:
+
+>>> from klist import Sorgu
+
+ISBN numarasýna göre bir sorgu gerçekleþtirelim:
+
+>>> Sorgu.isbnden("9789753424080")
+
+9789753424080, Greenberg, Sana Gül Bahçesi Vadetmedim, Metis
+
+Gördüðünüz gibi, sýnýf metodu yaklaþýmý, gayet temiz bir sorgu kodu üretmemize imkan tanýyor.
+
+Bir de yazara ve esere göre sorgulayalým:
+
+>>> Sorgu.yazardan("Greenberg")
+
+9789753424080, Greenberg, Sana Gül Bahçesi Vadetmedim, Metis
+
+>>> Sorgu.eserden("Postmodern Bir Kýz Sevdim")
+
+975872519X, Evren, Postmodern Bir Kýz Sevdim, Ýthaki
+
+Bunlar da gayet güzel görünüyor.
+
+Þimdi bir de bütün listeyi alalým:
+
+>>> hepsi = Sorgu()
+
+9789753424080, Greenberg, Sana Gül Bahçesi Vadetmedim, Metis
+975872519X, Evren, Postmodern Bir Kýz Sevdim, Ýthaki
+9789754060409, Nietzsche, Böyle Buyurdu Zerdüþt, Cem
+
+Gördüðünüz gibi, sýnýfý parametresiz olarak örneklediðimizde bütün listeyi elde ediyoruz.
+
+Ýþte ‘alternatif inþa’ denen iþlem tam olarak budur. Yukarýdaki örnekte isbnden(), yazardan(), eserden() ve yayýnevinden() adlý sýnýf metotlarý, Sorgu() adlý sýnýfý alternatif þekillerde inþa etmemizi saðlýyor 1.
+
+Normal þartlarda, bir sýnýfý, __init__() fonksiyonuna verdiðimiz parametreler aracýlýðýyla inþa ediyoruz (birkaç sayfa sonra ‘inþa’ kavramýndan daha ayrýntýlý olarak bahsedeceðiz).
+
+Mesela:
+
+class Giriþ():
+def __init__(self, mesaj='Müþteri numaranýz: '):
+cevap = input(mesaj)
+print('Hoþgeldiniz!')
+
+Burada tanýmladýðýmýz Giriþ() sýnýfý, bir müþteri numarasý aracýlýðýyla sisteme giriþ imkaný saðlýyor:
+
+>>> from sistem import Giriþ #kodlarýmýz sistem.py dosyasý içinde
+>>> Giriþ()
+
+Eðer biz ayný zamanda bir parola ve TC Kimlik Numarasý ile de giriþ imkaný saðlamak istersek, baþka yöntemlerin yanýsýra, sýnýf metotlarýndan da yararlanabiliriz:
+
+class Giriþ():
+def __init__(self, mesaj='Müþteri numaranýz: '):
+cevap = input(mesaj)
+print('Hoþgeldiniz!')
+
+@classmethod
+def paroladan(cls):
+mesaj = 'Lütfen parolanýzý giriniz: '
+cls(mesaj)
+
+@classmethod
+def tcknden(cls):
+mesaj = 'Lütfen TC kimlik numaranýzý giriniz: '
+cls(mesaj)
+
+Bu þekilde yukarýdaki sýnýfý aþaðýdaki gibi de inþa etme imkanýna kavuþuyoruz:
+
+>>> Giriþ.paroladan()
+
+veya:
+
+>>> Giriþ.tcknden()
+
+Sýnýf metotlarý içinde kullandýðýmýz cls(mesaj) satýrlarý, Giriþ() adlý sýnýfý farklý bir parametre ile çaðýrmamýzý saðlýyor. Gördüðünüz gibi, bu sýnýfýn mesaj parametresinin öntanýmlý deðeri ‘Müþteri numaranýz: ‘. Sýnýfýmýzý farklý bir þekilde çaðýrabilmek için, cls(mesaj) kodlarý yardýmýyla sýnýfýn mesaj parametresini ‘Lütfen parolanýzý giriniz: ‘ ve ‘Lütfen TC kimlik numaranýzý giriniz: ‘ deðerleri ile yeniden çalýþtýrýyoruz.
+
+Daha önce de birkaç kez vurguladýðýmýz gibi, cls kelimesi Python açýsýndan bir zorunluluk deðildir. Yani yukarýdaki sýnýfý mesela þöyle de yazabilirdik:
+
+class Giriþ():
+def __init__(self, mesaj='Müþteri numaranýz: '):
+cevap = input(mesaj)
+print('Hoþgeldiniz!')
+
+@classmethod
+def paroladan(snf):
+mesaj = 'Lütfen parolanýzý giriniz: '
+snf(mesaj)
+
+@classmethod
+def tcknden(snf):
+mesaj = 'Lütfen TC kimlik numaranýzý giriniz: '
+snf(mesaj)
+
+Ancak, týpký self kelimesinde olduðu gibi, cls de Python topluluðu içinde son derece yerleþik bir gelenektir. Bu geleneði bozmak isteyeceðinizi zannetmiyorum.
+
+Ýlk bakýþta sýnýf metotlarý size pek gerekli deðilmiþ gibi gelebilir. Ama eðer bu metotlarýn gerçek dünyadaki kullanýmýna iliþkin bir örnek verirsek belki fikriniz deðiþir.
+
+Sýnýf metotlarýnýn kullanýmýna iliþkin güzel bir örneði datetime modülünde görebilirsiniz.
+
+Ayrýca bkz.
+
+Aþaðýdaki örneði daha iyi anlayabilmek için datetime Modülü ve time Modülü belgelerine bakýnýz.
+
+Bir standart kütüphane modülü olan datetime‘ýn kaynak dosyasýný açarsanýz (kaynak dosyanýn nerede olduðunu nasýl öðrenebilirim diye soran arkadaþlara teessüflerimi iletiyorum...), orada date sýnýfýnýn þöyle yazýldýðýný göreceksiniz:
+
+class date:
+__slots__ = '_year', '_month', '_day'
+
+def __new__(cls, year, month=None, day=None):
+if (isinstance(year, bytes) and len(year) == 4 and
+1 <= year[2] <= 12 and month is None): # Month is sane
+# Pickle support
+self = object.__new__(cls)
+self.__setstate(year)
+return self
+_check_date_fields(year, month, day)
+self = object.__new__(cls)
+self._year = year
+self._month = month
+self._day = day
+return self
+
+@classmethod
+def fromtimestamp(cls, t):
+y, m, d, hh, mm, ss, weekday, jday, dst = _time.localtime(t)
+return cls(y, m, d)
+
+@classmethod
+def today(cls):
+t = _time.time()
+return cls.fromtimestamp(t)
+
+@classmethod
+def fromordinal(cls, n):
+y, m, d = _ord2ymd(n)
+return cls(y, m, d)
+
+Gördüðünüz gibi, burada üç tane sýnýf metodu var:
+
+@classmethod
+def fromtimestamp(cls, t):
+...
+
+@classmethod
+def today(cls):
+...
+
+@classmethod
+def fromordinal(cls, n):
+...
+
+Normal þartlarda datetime modülü içindeki date sýnýfýný þu þekilde kullanýyoruz:
+
+>>> import datetime
+>>> bugün = datetime.date(2015, 6, 16)
+
+Bu þekilde, date sýnýfýna sýrasýyla yýl, ay ve gün bilgisi girerek bugün adlý bir tarih nesnesi oluþturmuþ oluyoruz. Bu þekilde herhangi bir tarihi elle oluþturabilirsiniz.
+
+Eðer amacýnýz bugünün tarihini oluþturmaksa, yýl, ay ve gün bilgilerini yukarýdaki gibi date sýnýfýna elle girebileceðiniz gibi, today() adlý sýnýf metodunu da kullanabilirsiniz:
+
+>>> bugün = datetime.date.today()
+
+Ýþte böylece, date sýnýfýnýn size sunduðu bir alternatif inþacý (today()) vasýtasýyla bugünün tarihini otomatik olarak elde etmiþ oldunuz.
+
+Ayný þekilde, eðer elinizde bir zaman damgasý varsa ve siz bu zaman damgasýndan bir tarih elde etmek istiyorsanýz yine date sýnýfýnýn sunduðu bir baþka alternatif inþacýdan yararlanabilirsiniz:
+
+>>> import time
+>>> zaman_damgasý = time.time()
+>>> bugün = datetime.date.fromtimestamp(zaman_damgasý)
+
+Eðer elinizde tam sayý biçimli bir Gregoryen tarih verisi varsa bu veriyi kullanarak da bir tarih nesnesi elde edebilirsiniz:
+
+>>> gregoryen = 735765
+>>> bugün = datetime.date.fromordinal(gregoryen)
+
+datetime.date(2015, 6, 16)
+
+Uzun lafýn kýsasý, alternatif inþacýlar, bir sýnýftan nesne oluþturmak için bize alternatif yollar sunan son derece faydalý araçlardýr. Bu arada, eðer bu bölümde deðindiðimiz bazý kavramlarý anlamakta zorlandýysanýz hiç canýnýzý sýkmayýn. Bir sonraki bölümü iþledikten sonra, burada anlatýlanlar kafanýza çok daha saðlam bir þekilde yerleþmiþ olacak.
+

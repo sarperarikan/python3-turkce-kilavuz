@@ -1,0 +1,93 @@
+
+range()
+
+Bu fonksiyonu belli bir aralýktaki sayýlarý listelemek için kullanýyoruz. Yani mesela 0 ile 10 arasý sayýlarýn listesini almak istersek þöyle bir komut yazabiliriz:
+
+>>> l = range(0, 10)
+
+Ancak burada dikkat etmemiz gereken bir özellik var: Bu fonksiyon aslýnda doðrudan herhangi bir sayý listesi oluþturmaz. Yukarýda l deðiþkenine atadýðýmýz komutu ekrana yazdýrýrsak bunu daha net görebilirsiniz:
+
+>>> print(l)
+
+range(0, 10)
+
+Bir de bu verinin tipine bakalým:
+
+>>> type(l)
+
+<class 'range'>
+
+Gördüðünüz gibi, elimizdeki þey aslýnda bir sayý listesi deðil, bir ‘range’ (aralýk) nesnesidir. Biz bu nesneyi istersek baþka veri tiplerine dönüþtürebiliriz. Mesela bunu bir listeye dönüþtürelim:
+
+>>> list(l)
+
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+veya bir demete:
+
+>>> tuple(l)
+
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+ya da bir kümeye veya dondurulmuþ kümeye:
+
+>>> set(l) #küme
+
+{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+>>> frozenset(l) #dondurulmuþ küme
+
+frozenset({0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+
+Bu ‘range’ nesnesini istediðiniz veri tipine dönüþtürdükten sonra, dönüþtürdüðünüz veri tipinin kurallarý çerçevesinde elinizdeki veriyi iþleyebilirsiniz.
+
+range() fonksiyonundan elde ettiðiniz ‘range’ nesnesinin içeriðini elde etmek için bunu baþka bir veri tipine dönüþtürmenin yanýsýra, bu nesne üzerinde bir for döngüsü de kurabilirsiniz:
+
+>>> for i in range(10):
+... print(i)
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+Ya da yýldýzlý parametreler yardýmýyla bu nesneyi print() fonksiyonuna göndererek, bu nesneyi istediðiniz gibi evirip çevirebilirsiniz:
+
+>>> print(*range(10), sep=', ')
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+Esasýnda, yukarýda nasýl kullanýlacaðýna dair bazý örnekler verdiðimiz bu range() fonksiyonunu temel olarak þu þekilde formüle edebiliriz:
+
+range(baþlangýç_deðer, bitiþ_deðeri, atlama_deðeri)
+
+Aþaðýdaki örneði tekrar ele alalým:
+
+>>> range(0, 10)
+
+Burada 0 baþlangýç deðeri, 10 ise bitiþ deðeridir. Buna göre oluþturulacak sayýlar 0 ile 10 arasýnda olacaktýr. Yalnýz burada üretilecek sayý listesinde 0 sayýsýnýn dahil, 10 sayýsýnýn ise hariç olduðunu unutmuyoruz. Yani bu komutun bize vereceði ilk sayý 0; son sayý ise 9 olacaktýr.
+
+range() fonksiyonunda baþlangýç deðerinin öntanýmlý deðeri 0‘dýr. Dolayýsýyla istersek biz yukarýdaki komutu þöyle de yazabiliriz:
+
+>>> range(10)
+
+Böylece Python bizim range(0, 10) komutunu kastettiðimizi varsayacaktýr. Elbette eðer baþlangýç deðerinin 0 dýþýnda bir deðer olmasýný istiyorsanýz bunu özellikle belirtmeniz gerekir:
+
+>>> range(10, 100)
+
+Bu komut bize 10 ile (10 dahil) 100 arasý (100 hariç) sayýlarý içeren bir ‘range’ nesnesi verecektir.
+
+Yukarýda verdiðimiz formülden de göreceðiniz gibi, baþlangýç_deðer ve bitiþ_deðer dýþýnda range() fonksiyonu üçüncü bir parametre daha alabiliyor. Bu parametreye atlama_deðeri adý verdik. Bu parametreyi þöyle kullanýyoruz:
+
+>>> list(range(0, 10, 2))
+
+[0, 2, 4, 6, 8]
+
+Gördüðünüz gibi, range() fonksiyonuna üçüncü parametre olarak verdiðimiz 2 sayýsý, 0 ile 10 arasý sayýlarýn ikiþer ikiþer atlanarak üretilmesini saðladý.
+

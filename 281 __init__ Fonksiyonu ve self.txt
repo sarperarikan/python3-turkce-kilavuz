@@ -1,0 +1,243 @@
+
+__init__ Fonksiyonu ve self
+
+Buraya gelene kadar, sýnýflar ile ilgili verdiðimiz kod parçalarý yalnýzca sýnýf niteliklerini içeriyordu. Mesela yukarýda tanýmladýðýmýz Çalýþan() sýnýfý içindeki unvaný ve kabiliyetleri adlý deðiþkenlerin birer sýnýf niteliði olduðunu biliyoruz.
+
+Sýnýf nitelikleri dýþýnda, Python’da bir de örnek nitelikleri bulunur.
+
+Bildiðiniz gibi, Python’da sýnýf niteliklerini tanýmlamak için yapmamýz gereken tek þey, sýnýf tanýmýnýn hemen altýna bunlarý alelade birer deðiþken gibi yazmaktan ibarettir:
+
+class Sýnýf():
+sýnýf_niteliði1 = 0
+sýnýf_niteliði2 = 1
+
+Örnek niteliklerini tanýmlamak için ise iki yardýmcý araca ihtiyacýmýz var: __init__() fonksiyonu ve self.
+
+Bu iki aracý þu þekilde kullanýyoruz:
+
+class Çalýþan():
+def __init__(self):
+self.kabiliyetleri = []
+
+Bu arada, __init__() fonksiyonunun nasýl yazýldýðýna dikkat ediyoruz. init kelimesinin saðýnda ve solunda ikiþer adet alt çizgi (_) bulunduðunu gözden kaçýrmýyoruz. Ayrýca, __init__() fonksiyonunu def ifadesine bitiþik yazmamaya da bilhassa özen gösteriyoruz.
+
+‘init’ kelimesinin solunda ve saðýnda bulunan alt çizgiler sizi sakýn ürkütmesin. Aslýnda __init__(), alelade bir fonksiyondan baþka bir þey deðildir. Bu fonksiyonun öteki fonksiyonlardan tek farký, sýnýflar açýsýndan biraz özel bir anlam taþýyor olmasýdýr. Bu özel fonksiyonun görevi, sýnýfýmýzý örneklediðimiz sýrada, yani mesela ahmet = Çalýþan() gibi bir komut verdiðimiz anda oluþturulacak nitelikleri ve gerçekleþtirilecek iþlemleri tanýmlamaktýr. Bu fonksiyonun ilk parametresi her zaman self olmak zorundadýr. Bu açýklama ilk anda kulaðýnýza biraz anlaþýlmaz gelmiþ olabilir. Ama hiç endiþe etmeyin. Bu bölümün sonuna vardýðýnýzda bu iki öðeyi, adýnýzý bilir gibi biliyor olacaksýnýz.
+
+Hatýrlarsanýz, sýnýf niteliklerini anlatýrken bunlarýn önemli bir özelliðinin, sýnýfýn çaðrýlmasýna gerek olmadan çalýþmaya baþlamasý olduðunu söylemiþtik:
+
+class Çalýþan():
+selam = 'merhaba'
+print(selam)
+
+Bu kodlarý çalýþtýrdýðýmýz anda ekrana ‘merhaba’ çýktýsý verilecektir. Örnek nitelikleri ise farklýdýr:
+
+class Çalýþan():
+def __init__(self):
+self.kabiliyetleri = []
+print(self.kabiliyetleri)
+
+Bu kodlarý çalýþtýrdýðýnýzda herhangi bir çýktý almazsýnýz. Bu kodlarýn çýktý verebilmesi için sýnýfýmýzý mutlaka örneklememiz lazým:
+
+class Çalýþan():
+def __init__(self):
+self.kabiliyetleri = []
+print(self.kabiliyetleri)
+
+Çalýþan()
+
+Çünkü self.kabiliyetleri bir sýnýf niteliði deðil, bir örnek niteliðidir. Örnek niteliklerine eriþebilmek için de ilgili sýnýfý mutlaka örneklememiz gerekir. Ayrýca sýnýf niteliklerinin aksine, örnek niteliklerine sýnýf adlarý üzerinden eriþemeyiz. Yani self.kabiliyetleri adlý örnek niteliðine eriþmeye yönelik þöyle bir giriþim bizi hüsrana uðratacaktýr:
+
+Çalýþan.kabiliyetleri
+
+Bu örnek niteliðine eriþmek için örneklendirme mekanizmasýndan yararlanmamýz lazým:
+
+Çalýþan().kabiliyetleri #parantezlere dikkat!
+
+Gelin isterseniz, örneklendirme iþlemini daha kullanýþlý bir hale getirmek için, örneklendirdiðimiz sýnýfý bir örneðe atayalým, yani bu sýnýfýn bir örneðini çýkaralým:
+
+ahmet = Çalýþan()
+
+ahmet = Çalýþan() kodu yardýmýyla, Çalýþan sýnýfýnýn bir örneðini çýkardýk ve buna ahmet adýný verdik. Ýþte tam bu anda __init__() fonksiyonu çalýþmaya baþladý ve ahmet örneði için, kabiliyetleri adlý boþ bir örnek niteliði oluþturdu.
+
+Peki yukarýda kodlarýmýzý yazarken __init__() fonksiyonuna parametre olarak verdiðimiz ve kabiliyetleri listesinin baþýnda kullandýðýmýz self kelimesi ne oluyor?
+
+Öncelikle bilmemiz gereken þey, self kelimesinin, Python programlama dilinin söz diziminin gerektirdiði bir öðe olduðudur. Bu kelime, Çalýþan() adlý sýnýfýn örneklerini temsil eder. Peki ‘self kelimesinin bir sýnýfýn örneklerini temsil ediyor olmasý’ ne anlama geliyor?
+
+Bildiðiniz gibi, bir sýnýfýn örneðini þu þekilde çýkarýyoruz:
+
+ahmet = Çalýþan()
+
+Bu ahmet örneðini kullanarak, Çalýþan() sýnýfýnýn içindeki kabiliyetleri adlý örnek niteliðine sýnýf dýþýndan eriþebiliriz:
+
+print(ahmet.kabiliyetleri)
+
+Ýþte self kelimesi, yukarýdaki kodda yer alan ahmet kelimesini temsil ediyor. Yani ahmet.kabiliyetleri þeklinde bir kod yazabilmemizi saðlayan þey, __init__() fonksiyonu içinde belirttiðimiz self kelimesidir. Eðer bu kelimeyi kullanmadan þöyle bir kod yazarsak:
+
+class Çalýþan():
+def __init__():
+kabiliyetleri = []
+
+...artýk aþaðýdaki kodlar yardýmýyla kabiliyetleri niteliðine eriþemeyiz:
+
+ahmet = Çalýþan()
+print(ahmet.kabiliyetleri)
+
+Þimdi ayný kodlarý bir de þöyle yazalým:
+
+class Çalýþan():
+def __init__(self):
+kabiliyetleri = []
+
+ahmet = Çalýþan()
+print(ahmet.kabiliyetleri)
+
+Burada __init__() fonksiyonunda ilk parametre olarak self‘i belirttik. Ama kabiliyetleri niteliðinin baþýna self eklemedik. Dolayýsýyla yazdýðýmýz kodlar yine hata verdi. Çünkü, ahmet.kabiliyetleri þeklinde ifade ettiðimiz kodlardaki ahmet kelimesini karþýlayacak herhangi bir öðe sýnýf içinde bulunmuyor...
+
+Bu arada, örnek isimlerini (mesela ahmet) yalnýzca örnek niteliklerine eriþmek için kullanmýyoruz. Bunlarý ayný zamanda sýnýf niteliklerine eriþmek için de kullanabiliyoruz. Dolayýsýyla eðer yukarýdaki sýnýf tanýmý içinde, self.kabiliyetleri adlý örnek niteliði‘nin yanýsýra personel adlý bir sýnýf niteliði de bulunsaydý:
+
+class Çalýþan():
+personel = ['personel']
+
+def __init__(self):
+self.kabiliyetleri = []
+
+Þu kodlarý yazdýðýmýzda:
+
+ahmet = Çalýþan()
+print(ahmet.personel)
+
+...o sýnýf niteliðine eriþebilirdik. Ancak eðer __init__() fonksiyonu altýndaki kabiliyetleri niteliðine eriþmek istiyorsak, bu niteliðin baþýna self kelimesini getirerek, bu niteliði bir örnek niteliði haline getirmeli ve böylece, ahmet.kabiliyetleri kodundaki ahmet kelimesini temsil edecek bir öðeyi sýnýf içinde oluþturmalýyýz.
+
+Bu süreç tam olarak þöyle iþler:
+
+Biz ahmet.kabiliyetleri þeklinde bir komut verdiðimizde, Python ilk olarak ilgili sýnýfýn __init__() fonksiyonu içinde kabiliyetleri adlý bir örnek niteliði arar. Elbette Python’ýn bu örnek niteliðini bulabilmesi için, __init__() fonksiyonu içinde, bu fonksiyonun ilk parametresi ile ayný öneki taþýyan bir niteliðin yer almasý gerekir. Yani eðer __init__() fonksiyonunun ilk parametresi self ise, Python bu fonksiyon içinde self.kabiliyetleri adlý bir örnek niteliði bulmaya çalýþýr. Eðer bulamazsa, Python bu kez kabiliyetleri adlý bir sýnýf niteliði arar. Eðer onu da bulamazsa tabii ki hata verir...
+
+Gelin isterseniz bu mekanizmayý teyit edelim:
+
+class Çalýþan():
+kabiliyetleri = ['sýnýf niteliði']
+
+def __init__(self):
+self.kabiliyetleri = ['örnek niteliði']
+
+Gördüðünüz gibi, burada ayný adý taþýyan bir sýnýf niteliði ile bir örnek niteliðimiz var. Python’da hem sýnýf niteliklerine, hem de örnek niteliklerine örnek isimleri üzerinden eriþebileceðimizi söylemiþtik. Yani eðer örneðimizin ismi ahmet ise, hem kabiliyetleri adlý sýnýf niteliðine hem de self.kabiliyetleri adlý örnek niteliðine ayný þekilde eriþiyoruz:
+
+ahmet = Çalýþan()
+print(ahmet.kabiliyetleri)
+
+Peki ama acaba yukarýdaki kodlar bize örnek niteliðini mi verir, yoksa sýnýf niteliðini mi?
+
+Böyle bir durumda, yukarýda bahsettiðimiz mekanizma nedeniyle, self.kabiliyetleri þeklinde ifade ettiðimiz örnek niteliði, kabiliyetleri adlý sýnýf niteliðini gölgeler. Bu yüzden de print(ahmet.kabiliyetleri) komutu, örnek niteliðini, yani self.kabiliyetleri listesini verir. Yukarýdaki kodlarý çalýþtýrarak siz de bu durumu teyit edebilirsiniz. Zira bu kodlar bize, self.kabiliyetleri listesinin deðeri olan ‘örnek niteliði’ çýktýsýný verecektir...
+
+Peki ya siz sýnýf niteliði olan kabiliyetleri listesine eriþmek isterseniz ne olacak?
+
+Ýþte bunun için, sýnýf örneðini deðil de, sýnýf adýný kullanacaksýnýz:
+
+class Çalýþan():
+kabiliyetleri = ['sýnýf niteliði']
+
+def __init__(self):
+self.kabiliyetleri = ['örnek niteliði']
+
+#sýnýf niteliðine eriþmek için
+#sýnýf adýný kullanýyoruz
+print(Çalýþan.kabiliyetleri)
+
+#örnek niteliðine eriþmek için
+#örnek adýný kullanýyoruz
+ahmet = Çalýþan()
+print(ahmet.kabiliyetleri)
+
+Ancak elbette, ayný adý taþýyan bir sýnýf niteliði ile bir örnek niteliðini ayný sýnýf içinde tanýmlamak daha baþtan iyi bir fikir deðildir, ama yazdýðýnýz bir sýnýf yanlýþlýkla ayný ada sahip sýnýf ve örnek nitelikleri tanýmlamanýz nedeniyle beklenmedik bir çýktý veriyorsa, siz Python’ýn bu özelliðinden haberdar olduðunuz için, hatanýn nereden kaynaklandýðýný kolayca kestirebilirsiniz.
+
+Sözün kýsasý, Python’ýn söz dizimi kurallarý açýsýndan, eðer bir örnek niteliði tanýmlýyorsak, bu niteliðin baþýna bir self getirmemiz gerekir. Ayrýca bu self kelimesini de, örnek niteliðinin bulunduðu fonksiyonun parametre listesinde ilk sýraya yerleþtirmiþ olmalýyýz. Unutmayýn, örnek nitelikleri sadece fonksiyonlar içinde tanýmlanabilir. Fonksiyon dýþýnda örnek niteliði tanýmlayamazsýnýz. Yani þöyle bir þey yazamazsýnýz:
+
+class Çalýþan():
+self.n = 0
+
+def __init__(self):
+self.kabiliyetleri = []
+
+Çünkü self kelimesi ancak ve ancak, içinde geçtiði fonksiyonun parametre listesinde ilk sýrada kullanýldýðýnda anlam kazanýr.
+
+Bu noktada size çok önemli bir bilgi verelim: Python sýnýflarýnda örnek niteliklerini temsil etmesi için kullanacaðýnýz kelimenin self olmasý þart deðildir. Bunun yerine istediðiniz baþka bir kelimeyi kullanabilirsiniz. Mesela:
+
+class Çalýþan():
+def __init__(falanca):
+falanca.kabiliyetleri = []
+
+Dediðimiz gibi, self kelimesi, bir sýnýfýn örneklerini temsil ediyor. Siz sýnýf örneklerini hangi kelimenin temsil edeceðini kendiniz de belirleyebilirsiniz. Mesela yukarýdaki örnekte, __init__() fonksiyonunun ilk parametresini falanca olarak belirleyerek, örnek niteliklerinin falanca kelimesi ile temsil edilmesini saðlamýþ olduk. Python’da bu konuya iliþkin kural þudur: Sýnýf içindeki bir fonksiyonun ilk parametresi ne ise, o fonksiyon içindeki örnek niteliklerini temsil eden kelime de odur. Örneðin, eðer þöyle bir sýnýf tanýmlamýþsak:
+
+class XY():
+def __init__(a, b, c):
+a.örnek_niteliði = []
+
+Burada __init__() fonksiyonunun ilk parametresi a olduðu için, örnek niteliðini temsil eden kelime de a olur. Dolayýsýyla örnek_niteliði adlý örnek niteliðimizin baþýna da önek olarak bu a kelimesini getiriyoruz.
+
+__init__() fonksiyonunun ilk parametresi a olarak belirlendikten sonra, bu fonksiyon içindeki bütün örnek nitelikleri, önek olarak a kelimesini alacaktýr:
+
+class XY():
+def __init__(a, b, c):
+a.örnek_niteliði1 = []
+a.örnek_niteliði2 = 23
+a.örnek_niteliði3 = 'istihza'
+
+ANCAK! Her ne sebeple olursa olsun, örnek niteliklerini temsil etmek için self dýþýnda bir kelime kullanmayýn. Python bu kelimeyi bize dayatmasa da, self kullanýmý Python topluluðu içinde çok güçlü ve sýký sýkýya yerleþmiþ bir gelenektir. Bu geleneði kimse bozmaz. Siz de bozmayýn.
+
+Sözün özü, tek baþýna self kelimesinin hiçbir anlamýnýn olmadýðýný asla aklýnýzdan çýkarmayýn. Bu kelimenin Python açýsýndan bir anlam kazanabilmesi için, ilgili fonksiyonun parametre listesinde ilk sýrada belirtiliyor olmasý lazým. Zaten bu yüzden, dediðimiz gibi, self kelimesinin Python açýsýndan bir özelliði yoktur. Yani þöyle bir kod yazmamýzýn, Python söz dizimi açýsýndan hiçbir sakýncasý bulunmaz:
+
+class Çalýþan():
+def __init__(osman):
+osman.kabiliyetleri = []
+
+Çünkü Python, örnek niteliklerini temsil eden kelimenin ne olduðuyla asla ilgilenmez. Python için önemli olan tek þey, temsil iþi için herhangi bir kelimenin belirlenmiþ olmasýdýr. Tabii, biz, daha önce de ýsrarla söylediðimiz gibi, örnek niteliklerini self dýþýnda bir kelime ile temsil etmeye teþebbüs etmeyeceðiz ve kodlarýmýzý þu þekilde yazmaktan þaþmayacaðýz:
+
+class Çalýþan():
+def __init__(self):
+self.kabiliyetleri = []
+
+Ýþte yukarýdaki kodda gördüðümüz self parametresi ve self öneki, birbirlerine baðýmlý kavramlardýr. Fonksiyonun ilk parametresi ne ise, örnek niteliklerinin öneki de o olacaktýr.
+
+Bu arada, örnek niteliklerini anlatmaya baþlamadan önce sýnýf niteliklerine iliþkin sinsi bir durumdan söz etmiþtik hatýrlarsanýz. Buna göre, eðer elimizde þöyle bir kod varsa:
+
+class Çalýþan():
+kabiliyetleri = []
+
+Biz bu sýnýf içindeki kabiliyetleri listesine ekleme yaptýðýmýzda, bu durum o sýnýfýn bütün örneklerini etkiliyordu.
+
+Yukarýdaki kodlarý deneme.py adlý bir dosyaya kaydettiðimizi varsayarsak:
+
+>>> import deneme
+>>> ahmet = deneme.Çalýþan()
+>>> ahmet.kabiliyetleri.append('konuþkan')
+>>> ahmet.kabiliyetleri
+
+['konuþkan']
+
+>>> mehmet = deneme.Çalýþan()
+>>> print(mehmet.kabiliyetleri)
+
+['konuþkan']
+
+Ýþte bu durumu önlemek için örnek metotlarýndan yararlanabiliyoruz:
+
+class Çalýþan():
+def __init__(self):
+self.kabiliyetleri = []
+
+Yukarýdaki kodlarý yine deneme.py adlý bir dosyaya kaydettiðimizi varsayarsak:
+
+>>> import deneme
+>>> ahmet = deneme.Çalýþan()
+>>> ahmet.kabiliyetleri.append('konuþkan')
+>>> ahmet.kabiliyetleri
+
+['konuþkan']
+
+>>> mehmet = deneme.Çalýþan()
+>>> print(mehmet.kabiliyetleri)
+
+[]
+
+Gördüðünüz gibi, ahmet örneðine eklediðimiz ‘konuþkan’ öðesi, olmasý gerektiði gibi, mehmet örneðinde bulunmuyor. Birazdan bu konu üzerine birkaç kelam daha edeceðiz.
+

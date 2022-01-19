@@ -1,0 +1,80 @@
+
+Modüllerin Tanýmlanmasý
+
+Hatýrlarsanýz bu bölümün baþýnda, ‘modül nedir?’ sorusuna þu cevabý vermiþtik:
+
+Bazý iþlevleri kolaylýkla yerine getirmemizi saðlayan birtakým fonksiyonlarý ve nitelikleri içinde barýndýran araçlar...
+
+Esasýnda Python’daki modülleri þöyle de tanýmlayabiliriz:
+
+Diyelim ki bir program yazýyorsunuz. Yazdýðýnýz bu programýn içinde karakter dizileri, sayýlar, deðiþkenler, listeler, demetler, sözlükler ve fonksiyonlar var. Programýnýz da .py uzantýlý bir metin dosyasý içinde yer alýyor. Ýþte bütün bu öðeleri ve veri tiplerini içeren .py uzantýlý dosyaya ‘modül’ adý verilir. Yani þimdiye kadar yazdýðýnýz ve yazacaðýnýz bütün Python programlarý ayný zamanda birer modül adayýdýr.
+
+Gelin isterseniz yukarýdaki bu tanýmýn doðruluðunu test edelim.
+
+Þimdi Python’ýn etkileþimli kabuðunu çalýþtýrýn ve kütüphane modüllerinden biri olan os modülünü içe aktarýn:
+
+>>> import os
+
+dir(os) komutunu kullanarak modülün içeriðini kontrol ettiðinizde, o listede __file__ adlý bir niteliðin olduðunu göreceksiniz. Bu nitelik Python ile yazýlmýþ tüm modüllerde bulunur. Bu niteliði þu þekilde kullanýyoruz:
+>>> os.__file__ 'C:\Python35\lib\os.py' 
+Ýþte buradan aldýðýmýz çýktý bize os modülünün kaynak dosyasýnýn nerede olduðunu gösteriyor. Hemen çýktýda görünen konuma gidelim ve os.py dosyasýný açalým.
+
+Dosyayý açtýðýnýzda, gerçekten de bu modülün aslýnda sýradan bir Python programý olduðunu göreceksiniz. Dosyanýn içeriðini incelediðinizde, dir(os) komutuyla elde ettiðimiz nitelik ve fonksiyonlarýn dosya içinde nasýl tanýmlandýðýný görebilirsiniz. Mesela yeni dizinler oluþturmak için os.makedirs() þeklinde kullandýðýmýz makedirs fonksiyonunun os.py içinde tanýmlanmýþ alelade bir fonksiyon olduðunu görebilirsiniz.
+
+Ayný þekilde, önceki sayfalarda örneklerini verdiðimiz webbrowser modülü de, bilgisayarýmýzdaki sýradan bir Python programýndan ibarettir. Bu modülün nerede olduðunu da þu komutla görebilirsiniz:
+
+>>> import webbrowser
+>>> webbrowser.__file__
+
+Gördüðünüz gibi, webbrowser modülü de, týpký os modülü gibi, bilgisayarýmýzdaki .py uzantýlý bir dosyadan baþka bir þey deðil. Ýsterseniz bu dosyanýn da içini açýp inceleyebilirsiniz.
+
+Yalnýz þu gerçeði de unutmamalýyýz: Python’daki bütün modüller Python programlama dili ile yazýlmamýþtýr. Bazý modüller C ile yazýlmýþtýr. Dolayýsýyla C ile yazýlmýþ bir modülün .py uzantýlý bir Python dosyasý bulunmaz. Mesela sys böyle bir modüldür. Bu modül C programlama dili ile yazýldýðý için, kayýtlý bir .py dosyasýna sahip deðildir. Dolayýsýyla bu modülün bir __file__ niteliði de bulunmaz:
+
+>>> import sys
+>>> sys.__file__
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute '__file__'
+
+Ama tabii ki, Python’daki standart kütüphane modüllerinin çok büyük bölümü Python ile yazýlmýþtýr ve bu modüllerin kaynak dosyalarýný os ve webbrowser modüllerini bulduðunuz dizinde görebilirsiniz. Örneðin önceki derslerimizde bahsi geçen locale ve random gibi modüllerin kaynak dosyalarýný da burada bulabilirsiniz.
+
+Gelelim asýl konumuz olan ‘modül tanýmlama’ya...
+
+Hatýrlarsanýz, Python’da bir fonksiyon tanýmlamak için þu söz dizimini kullanýyorduk:
+
+def fonksiyon_adý(parametreler):
+fonksiyon_gövdesi
+
+Ancak yukarýdaki örneklerden de rahatlýkla görebileceðiniz gibi, modüller için böyle özel bir söz dizimi yoktur. Yazdýðýnýz her Python programý ayný zamanda potansiyel bir modüldür.
+
+O halde þimdi gelin bir tane de kendimiz modül yazalým.
+
+Mesela bir program dosyasý oluþturalým ve adýný da sözlük.py koyalým. Ýþte bu program, ayný zamanda bir Python modülüdür. Bu modülün adý da ‘sözlük’tür. Dediðimiz gibi, Python’da modüller genellikle .py uzantýsýna sahiptir. Ancak bir modülün adý söylenirken bu .py uzantýsý dikkate alýnmaz. Bu yüzden elinizdeki ‘sözlük.py’ adlý programýn modül adý ‘sözlük’ olacaktýr.
+
+Gördüðünüz gibi, modül tanýmlamakta herhangi bir özel zorluk yok. Yazdýðýmýz her program, otomatik olarak, ayný zamanda bir modül oluyor.
+
+sözlük.py adlý programýmýzýn içeriði þöyle olsun:
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming"}
+
+def ara(sözcük):
+hata = "{} kelimesi sözlükte yok!"
+return sözlük.get(sözcük, hata.format(sözcük))
+
+Ýþte böylece ilk modülümüzü tanýmlamýþ olduk. Þimdi de, yazdýðýmýz bu modülü nasýl kullanacaðýmýzý öðrenelim.
+
+Esasýnda kütüphane modülleriyle kendi yazdýðýmýz modüller arasýnda kullaným açýsýndan pek bir fark yoktur. Bu bölümün baþýnda gördüðümüz kütüphane modüllerini nasýl kullanýyorsak, kendi modüllerimizi de öyle kullanýyoruz.
+
+Kütüphane modüllerini anlatýrken gördüðümüz gibi, modül sistemi sayesinde, bir program içinde bulunan fonksiyon (ve nitelikleri) baþka Python programlarý içine aktarabiliyoruz. Böylece bir Python programýndaki (veya modülündeki) iþlevsellikten, baþka bir Python programýnda da yararlanabiliyoruz.
+
+Þimdi, eðer bu sözlük.py dosyasýný, mesela masaüstüne kaydettiyseniz, masaüstünün bulunduðu konumda bir komut satýrý açýn ve Python’ýn etkileþimli kabuðunu baþlatýn. Týpký kütüphane modüllerinde olduðu gibi, etkileþimli kabukta þu komutu vererek sözlük adlý modülü içe aktarýn:
+
+>>> import sözlük
+
+Eðer hiçbir þey olmadan bir alt satýra geçildiyse modülünüzü baþarýyla içe aktardýnýz demektir. Eðer No module named sözlük gibi bir hata mesajýyla karþýlaþýyorsanýz, muhtemelen Python’ý sözlük.py dosyasýnýn olduðu dizinde baþlatamamýþsýnýzdýr.
+
+import sözlük komutunun baþarýlý olduðunu varsayarak yolumuza devam edelim...
+

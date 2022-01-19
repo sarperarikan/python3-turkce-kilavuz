@@ -1,0 +1,77 @@
+
+from modül_adý import *
+
+Python’daki modülleri from modül_adý import * formülüne göre içe aktarmak da mümkündür (bu yönteme ‘yýldýzlý içe aktarma’ diyebilirsiniz). Bu þekilde bir modül içindeki bütün fonksiyon ve nitelikleri içe aktarmýþ oluruz (ismi _ ile baþlayanlar hariç):
+
+>>> from sys import *
+
+Böylece sys modülü içindeki bütün fonksiyon ve nitelikleri, baþlarýna modül adýný eklemeye gerek olmadan kullanabiliriz:
+
+>>> version
+
+Ancak bu yöntem pek tavsiye edilmez. Çünkü bu þekilde, modül içindeki bütün isimleri kontrolsüz bir þekilde mevcut ortama ‘boþaltmýþ’ oluyoruz. Mesela eðer modül bu þekilde içe aktarýlmadan önce version diye baþka bir deðiþken tanýmlamýþsanýz, modül içe aktarýldýktan sonra, önceden tanýmladýðýnýz bu version deðiþkeninin deðeri kaybolacaktýr:
+
+>>> version = '1.0'
+>>> print(version)
+
+1.0
+
+Bu ortama from sys import * komutuyla sys modülünün bütün içeriðini aktaralým:
+
+>>> from sys import *
+
+Þimdi de version deðiþkeninin deðerini yazdýralým:
+
+>>> print(version)
+
+Burada alacaðýmýz çýktý þu olur:
+'3.5.1 (default, 20.04.2016, 12:24:55) [GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux' 
+Gördüðünüz gibi, sys modülünün içindeki version niteliði bizim önceden tanýmladýðýmýz version deðiþkeniyle çakýþtý ve herhangi bir uyarý vermeden, bizim tanýmladýðýmýz version deðerini silip kendi version deðerini bizimkinin yerine geçirdi...
+
+from modül_adý import * komutunun yaptýðý þeyi, sýkýþtýrýlmýþ bir klasörün bütün içeriðini olduðu gibi masaüstüne açmaya benzetebilirsiniz. Böyle bir durumda, eðer masaüstünde sýkýþtýrýlmýþ klasördekilerle ayný adlý dosyalar varsa, sýkýþtýrýlmýþ klasör içindeki dosya adlarý, masaüstünde halihazýrda varolan dosya adlarýyla çakýþacaktýr.
+
+Bir sonraki konuya geçmeden önce, yýldýzlý içe aktarma ile ilgili önemli bir noktaya deðinelim.
+
+Hatýrlarsanýz, bu konunun baþýnda, modülleri programýmýzýn her yerinden içe aktarabileceðimizi söylemiþtik. Mesela bir modülü, program dosyamýzýn en baþýnda içe aktarabiliriz:
+
+from os import *
+
+Ama bunun bir istisnasý var. Bir modülü yýldýzlý olarak içe aktaracaksak, bu iþlemi lokal etki alanlarý içinden gerçekleþtiremeyiz. Yani mesela bir fonksiyonun lokal isim alaný içinde þöyle bir kod yazabiliriz:
+
+def fonksiyon():
+import os
+
+Veya:
+
+def fonksiyon():
+import subprocess as sp
+
+Ama þöyle bir kod yazamayýz:
+
+def fonksiyon():
+from os import *
+
+Bu kodlarý bir dosyaya kaydedip çalýþtýrdýðýmýzda þuna benzer bir hata alýrýz:
+
+File "falanca.py", line 1
+def fonksiyon():
+SyntaxError: import * only allowed at module level
+
+Bunun anlamý þu: Yýldýzlý içe aktarma iþlemleri ancak modül seviyesinde, yani global isim alanýnda gerçekleþtirilebilir. Dolayýsýyla yukarýdaki içe aktarma iþlemini ancak fonksiyonun dýþýnda gerçekleþtirebiliriz:
+
+from os import *
+
+def fonksiyon():
+pass
+
+Veya:
+
+def fonksiyon():
+pass
+
+from os import *
+
+Bu istisnai duruma dikkat ediyoruz. Elbette modül içe aktarma iþlemlerini gerçekleþtirmenin en saðlýklý yolu bütün modülleri program dosyasýnýn en baþýnda içe aktarmaktýr.
+
+
+

@@ -1,0 +1,47 @@
+
+str()
+
+Bu fonksiyonun, farklý veri tiplerini karakter dizisine dönüþtürmek için kullanýldýðýný biliyorsunuz. Örneðin:
+
+>>> str(12)
+
+'12'
+
+Burada 12 sayýsýný bir karakter dizisine dönüþtürdük. Þimdi de bir baytý karakter dizisine dönüþtürelim:
+
+>>> bayt = b'istihza'
+
+Bayt nesnemizi tanýmladýk. Þimdi bunu bir karakter dizisine dönüþtürelim:
+
+>>> kardiz = str(bayt, encoding='utf-8')
+>>> print(kardiz)
+
+istihza
+
+Gördüðünüz gibi, bir baytý karakter dizisine dönüþtürmek için str() fonksiyonuna encoding adlý bir parametre veriyoruz. Fonksiyonumuz, bu parametrede hangi kodlama biçimi belirtildiyse, baytlarý bu kodlama biçiminin kurallarýna göre bir karakter dizisine dönüþtürüyor.
+
+Tahmin edebileceðiniz gibi, belirttiðiniz kodlama biçiminin herhangi bir baytý karakter dizisine dönüþtüremediði durumlara karþý bir errors parametresi de verebiliriz str() fonksiyonuna. Örneðin elimizde bayt tipinde þöyle bir veri olduðunu varsayalým:
+
+>>> bayt = bytes('kadýn', encoding='utf-8')
+>>> print(bayt)
+
+b'kad\xc4\xb1n'
+
+Þimdi bu bayt veri tipini bir karakter dizisine dönüþtürmeye çalýþalým:
+
+>>> kardiz = str(bayt, encoding='ascii')
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xc4 in position 3: ordinal
+not in range(128)
+
+ASCII adlý kod çözücü, b'kadýn' içindeki baytlardan birini tanýyamadýðý için bize bir hata mesajý gösterdi. Bildiðiniz gibi ASCII 128’den büyük baytlarý dönüþtüremez. Ýþte bu tür durumlara karþý errors parametresinden yararlanabilirsiniz:
+
+>>> kardiz = str(bayt, encoding='ascii', errors='ignore')
+>>> print(kardiz)
+
+kadn
+
+errors parametresine verdiðimiz ‘ignore’ deðeri sayesinde Python bize hata mesajý göstermek yerine, ASCII ile çözülemeyen baytý görmezden geldi. errors parametresinin hangi deðerleri alabileceðini önceki derslerimizden hatýrlýyor olmalýsýnýz.
+

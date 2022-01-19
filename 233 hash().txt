@@ -1,0 +1,15 @@
+
+hash()
+
+Bu fonksiyon, belirli türdeki nesnelere bir karma deðeri vermemizi saðlar. Örneðin:
+
+>>> hash('istihza')
+
+-840510580
+
+>>> hash('python')
+
+212829695
+
+Ancak bu fonksiyonun ürettiði çýktý ayný nesne için bütün sistemlerde ayný olmayabilir. Yani örneðin yukarýdaki hash('istihza') komutu 32 bitlik ve 64 bitlik iþletim sistemlerinde birbirinden farklý sonuçlar verebilir. Ayrýca bu fonksiyonun ürettiði karma deðerlerinin birbiriyle çakýþma ihtimali de yüksektir. Dolayýsýyla bu fonksiyonu kullanarak, mesela parola giriþleri için karma deðeri üretmek doðru olmaz.
+

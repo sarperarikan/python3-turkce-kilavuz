@@ -1,0 +1,65 @@
+
+Birinci Sýnýf Öðeler
+
+Týpký ‘her þey bir nesnedir’ sözü gibi, yine saðda solda sýklýkla duyabileceðiniz bir söz de Python’da nesnelerin ‘birinci sýnýf öðeler’ olduðudur. Peki burada ‘birinci sýnýf’ (first class) ifadesiyle kastedilen þey tam olarak nedir?
+
+Programlama dillerinde herhangi bir öðenin birinci sýnýf bir öðe olmasý, o öðenin, dil içindeki herhangi bir deðer ile ayný kabiliyetlere sahip olmasý anlamýna gelir. ‘Bunun birinci sýnýf olmakla ne alakasý var?’ diye sorduðunuzu duyar gibiyim...
+
+Þöyle bir cümle kurduðunuzu düþünün: ‘Geliþmiþ bir toplumda kadýnlar birinci sýnýf vatandaþlardýr.’ Bu cümleden, bir toplumun geliþmiþ sayýlabilmesi için kadýnlarýn erkeklerle eþit haklara sahip olmasý gerektiðini anlýyoruz. Yani kadýnlarýn birinci sýnýf vatandaþlar olmasý, erkeklerle eþit haklara sahip olmasý anlamýna geliyor. Ýþte týpký bunun gibi, Python’daki sýnýf yapýlarýnýn ‘birinci sýnýf’ öðeler olmasý, bu yapýlarýn, dil içindeki öteki deðerlerle ayný özelliklere ve kabiliyetlere sahip olmasý demektir. Yani Python’daki sýnýflar þu özelliklere sahiptir:
+
+
+Baþka bir fonksiyona veya sýnýfa parametre olarak atanabilirler 
+Bir fonksiyondan döndürülebilirler 
+Bir deðiþkene atanabilirler 
+
+Yani, bir öðenin ‘birinci sýnýf’ olmasý demek, dil içindeki baþka öðelerle yapabildiðiniz her þeyi o öðeyle de yapabilmeniz demektir.
+
+Durumu biraz daha netleþtirebilmek için, konu hakkýnda Guido Van Rossum’un ne dediðine bir bakalým:
+
+Python’a iliþkin hedeflerimden bir tanesi de, bu dili, bütün nesneler “birinci sýnýf” olacak þekilde tasarlamaktý. Bununla kastettiðim, dil içinde kendisine bir isim verilebilen bütün nesnelerin (örn. tam sayýlar, karakter dizileri, fonksiyonlar, sýnýflar, modüller, metotlar, vb.) eþit statüye sahip olmasýdýr. Yani, bütün nesnelerin deðiþkenlere atanabilmesi, listelerin içine yerleþtirilebilmesi, sözlükler içinde depolanabilmesi, argüman olarak atanabilmesi ve saire...
+
+kaynak: http://python-history.blogspot.com.tr/2009/02/first-class-everything.html
+
+
+Gelin bütün bu tanýmlarý somutlaþtýran birkaç örnek verelim.
+
+Mesela Deneme() adlý basit bir sýnýf tanýmlayalým:
+
+class Deneme():
+def __init__(self):
+self.deðer = 0
+def metot(self):
+self.metot_deðeri = 1
+
+Yukarýdaki tanýmlara göre, bu sýnýfýn birinci sýnýf bir nesne olabilmesi için baþka bir fonksiyona veya sýnýfa parametre olarak atanabilmesi gerekiyor. Bakalým acaba gerçekten öyle mi?
+
+print(Deneme())
+
+Gördüðünüz gibi, gerçekten de sýnýfýmýzý print() fonksiyonuna parametre olarak atayabildik.
+
+Yine yukarýdaki tanýma göre birinci sýnýf nesnelerin bir fonksiyondan döndürülebilmesi gerekiyor:
+
+def fonksiyon():
+return Deneme()
+
+print(fonksiyon())
+
+Bu testi de baþarýyla geçtik.
+
+Son olarak, bir nesnenin birinci sýnýf olabilmesi için bir deðiþkene atanabilmesi gerekiyor:
+
+deðiþken = Deneme()
+
+Gördüðünüz gibi, Python için bu da oldukça basit bir görev.
+
+Ýlk bakýþta bu özellikten pek etkilenmemiþ olabilirsiniz... Þöyle bir düþününce, aslýnda çok da önemli bir özellik deðilmiþ gibi gelebilir bu size. Ancak baþka programlama dillerinin;
+
+
+Öðelerin kullanýmýna iliþkin çeþitli kýsýtlamalar koyduðunu, 
+Yani öðeler arasýnda ayrým yaptýðýný, 
+Deðiþkenlerle fonksiyonlarýn ve fonksiyonlarla sýnýflarýn ayný haklara sahip olmadýðýný, 
+Mesela bir deðiþkeni veya herhangi bir deðeri kullanabildiðiniz her yerde fonksiyon veya sýnýf kullanamadýðýnýzý, 
+Yani fonksiyonlarýn ve/veya sýnýflarýn birinci sýnýf öðeler olmadýðýný 
+
+gördüðünüzde Python’daki bu esneklik daha bir anlam kazanacaktýr.
+

@@ -1,0 +1,85 @@
+
+Her Þey Bir Nesnedir
+
+Belki saðda solda þu sözü duymuþsunuzdur: Python’da her þey bir nesnedir. Gerçekten de (if, def, and, or gibi deyim ve iþleçler hariç) Python’da her þey bir nesnedir. Peki her þeyin nesne olmasý tam olarak ne anlama geliyor?
+
+Hatýrlarsanýz nesnenin ne olduðunu tanýmlarken, belli bir durumda bulunan ve belli birtakým davranýþlarý olan öðelere nesne adý verildiðini söylemiþtik. Ýþte Python’daki her þey, bu taným doðrultusunda bir nesnedir.
+
+Mesela, aþaðýdaki komutu verdiðimiz anda bir nesne oluþturmuþ oluyoruz:
+
+>>> 'istihza'
+
+‘istihza’ karakter dizisi, str adlý sýnýfýn...
+
+>>> type('istihza')
+
+<class 'str'>
+
+...bütün özelliklerini taþýyan bir nesnedir:
+
+>>> dir('istihza')
+
+['__add__', '__class__', '__contains__', '__delattr__',
+ '__dir__', '__doc__', '__eq__', '__format__', '__ge__',
+ '__getattribute__', '__getitem__', '__getnewargs__',
+ '__gt__', '__hash__', '__init__', '__iter__', '__le__',
+ '__len__', '__lt__', '__mod__', '__mul__', '__ne__',
+ '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+ '__rmod__', '__rmul__', '__setattr__', '__sizeof__',
+ '__str__', '__subclasshook__', 'capitalize', 'casefold',
+ 'center', 'count', 'encode', 'endswith', 'expandtabs',
+ 'find', 'format', 'format_map', 'index', 'isalnum',
+ 'isalpha', 'isdecimal', 'isdigit', 'isidentifier',
+ 'islower', 'isnumeric', 'isprintable', 'isspace',
+ 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip',
+ 'maketrans', 'partition', 'replace', 'rfind', 'rindex',
+ 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split',
+ 'splitlines', 'startswith', 'strip', 'swapcase',
+ 'title', 'translate', 'upper', 'zfill']
+
+Ayný þekilde, ['elma', 'armut'] listesi de, list adlý sýnýfýn...
+
+>>> type(['elma', 'armut'])
+
+<class 'list'>
+
+...bütün özelliklerini taþýyan bir nesnedir:
+
+>>> dir(['elma', 'armut'])
+
+['__add__', '__class__', '__contains__', '__delattr__',
+ '__delitem__', '__dir__', '__doc__', '__eq__',
+ '__format__', '__ge__', '__getattribute__', '__getitem__',
+ '__gt__', '__hash__', '__iadd__', '__imul__', '__init__',
+ '__iter__', '__le__', '__len__', '__lt__', '__mul__',
+ '__ne__', '__new__', '__reduce__', '__reduce_ex__',
+ '__repr__', '__reversed__', '__rmul__', '__setattr__',
+ '__setitem__', '__sizeof__', '__str__', '__subclasshook__',
+ 'append', 'clear', 'copy', 'count', 'extend', 'index',
+ 'insert', 'pop', 'remove', 'reverse', 'sort']
+
+Hatta mesela 1 gibi alelade bir sayý bile, dýþ dünyayla iletiþim kurmasýný ve dýþ dünyanýn kendisiyle iletiþim kurabilmesini saðlayan pek çok nitelik ve metoda sahip bir nesnedir:
+
+>>> dir(1)
+
+['__abs__', '__add__', '__and__', '__bool__', '__ceil__',
+ '__class__', '__delattr__', '__dir__', '__divmod__',
+ '__doc__', '__eq__', '__float__', '__floor__',
+ '__floordiv__', '__format__', '__ge__', '__getattribute__',
+ '__getnewargs__', '__gt__', '__hash__', '__index__',
+ '__init__', '__int__', '__invert__', '__le__', '__lshift__',
+ '__lt__', '__mod__', '__mul__', '__ne__', '__neg__',
+ '__new__', '__or__', '__pos__', '__pow__', '__radd__',
+ '__rand__', '__rdivmod__', '__reduce__', '__reduce_ex__',
+ '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__',
+ '__rmul__', '__ror__', '__round__', '__rpow__', '__rrshift__',
+ '__rshift__', '__rsub__', '__rtruediv__', '__rxor__',
+ '__setattr__', '__sizeof__', '__str__', '__sub__',
+ '__subclasshook__', '__truediv__', '__trunc__', '__xor__',
+ 'bit_length', 'conjugate', 'denominator', 'from_bytes',
+ 'imag', 'numerator', 'real', 'to_bytes']
+
+Ýþte konuya bu noktadan baktýðýmýzda, Python’da her þey bir nesnedir. Yani Python’daki her þeyle, sahip olduklarý metotlar ve nitelikler aracýlýðýyla etkileþebilirsiniz.
+
+Python’ýn bu özelliðini bilmek, muhatap olduðunuz programlama dilini ve onun kabiliyetlerini tanýmak açýsýndan önemlidir. Python’da her þeyin bir nesne olduðunu anladýðýnýz anda, {'a': 0, 'b': 1} gibi bir kodla yalnýzca basit bir sözlük tanýmlamadýðýnýzý, bunun arkaplanýnda, bu sözlükle etkileþim kurmanýzý saðlayacak koca bir mekanizma bulunduðunu bilirsiniz.
+

@@ -1,0 +1,199 @@
+
+Modüllerde Deðiþiklik Yapmak
+
+Python’da bir modül baþka bir ortama aktarýldýðýnda, o modülün içinde yer alan nitelik ve fonksiyonlarýn o ortam içinden kullanýlabilir hale geldiðini biliyorsunuz. Yukarýdaki örnekte biz import sözlük komutuyla, sözlük adlý modülün bütün içeriðini etkileþimli kabuk ortamýna (veya program dosyasýna) aktarmýþ olduk. Dolayýsýyla da artýk bu modülün bütün içeriðine eriþebiliriz. Peki acaba bu modül içinde bizim eriþebileceðimiz hangi nitelik ve fonksiyonlar bulunuyor?
+
+Týpký kütüphane modüllerini iþlerken yaptýðýmýz gibi, dir() fonksiyonundan yararlanarak, içe aktardýðýmýz bu modül içindeki kullanýlabilir fonksiyon ve nitelikleri görebilirsiniz:
+
+>>> dir(sözlük)
+
+Bu komut bize þöyle bir çýktý verir:
+
+['__builtins__', '__cached__', '__doc__',
+'__file__', '__loader__', '__name__',
+'__package__', '__spec__', 'ara', 'sözlük']
+
+Gördüðünüz gibi, nasýl os modülünün içinde name, listdir() ve getcwd() gibi nitelik ve fonksiyonlar varsa, kendi yazdýðýmýz sözlük modülü içinde de ara() adlý bir fonksiyon ve sözlük adlý bir nitelik var.
+
+Ýþte biz bu fonksiyon ve niteliði kullanma imkanýna sahibiz. Gelin birkaç deneme çalýþmasý yapalým:
+
+>>> sözlük.sözlük
+
+Bu komutun, bir kütüphane modülündeki niteliklere eriþmekten hiçbir farký olmadýðýna dikkatinizi çekmek isterim. Mesela sys modülünün version niteliðine nasýl eriþiyorsak, sözlük modülünün sözlük niteliðine de ayný þekilde eriþiyoruz.
+
+sözlük.sözlük komutu bize sözlük modülü içindeki sözlük adlý deðiþkenin içeriðini verecektir.
+
+Þimdi de ayný modül içindeki ara() fonksiyonuna eriþelim:
+
+>>> sözlük.ara('kitap')
+
+Bu da bize ara() fonksiyonunu kitap argümanýyla birlikte çaðýrma imkaný veriyor.
+
+Yukarýda verdiðimiz örnekte sözlük modülünü etkileþimli kabuk üzerinde kullandýk. Elbette program yazarken modülleri etkileþimli kabukta deðil, program dosyalarý içinde kullanacaðýz. Ancak özellikle bir modülün geliþtirilme aþamasýnda o modülü test etmek için etkileþimli kabuk üzerinde çalýþmak oldukça pratik ve faydalý bir yoldur. Mesela yazmakta olduðunuz bir programýn (diðer bir deyiþle modülün) nitelik ve fonksiyonlarýný test etmek için, o programý etkileþimli kabukta bir modül olarak içe aktarýp çeþitli deneme çalýþmalarý yapabilirsiniz.
+
+Dilerseniz yine yukarýdaki örnek üzerinden gidelim:
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming"}
+
+def ara(sözcük):
+hata = "{} kelimesi sözlükte yok!"
+return sözlük.get(sözcük, hata.format(sözcük))
+
+Bu modülü içe aktaralým:
+
+>>> import sözlük
+
+Modülün içeriðini kontrol edelim:
+
+>>> dir(sözlük)
+
+Bu komutun çýktýsýnda sözlük niteliðini ve ara() fonksiyonunu görüyoruz. Gelin þimdi programýmýza bir ekleme yapalým:
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming"}
+
+def ara(sözcük):
+hata = "{} kelimesi sözlükte yok!"
+return sözlük.get(sözcük, hata.format(sözcük))
+
+def ekle(sözcük, anlam):
+mesaj = "{} kelimesi sözlüðe eklendi!"
+sözlük[sözcük] = anlam
+print(mesaj.format(sözcük))
+
+Burada sözlük modülüne ekle() adlý bir fonksiyon ilave ettik. Bu fonksiyon, sözlüðe yeni kelimeler eklememizi saðlayacak. Þimdi tekrar modülümüzün içeriðini kontrol edelim:
+
+>>> dir(sözlük)
+
+Ancak gördüðünüz gibi, modüle yeni eklediðimiz ekle() fonksiyonu bu çýktýda görünmüyor. Bunun nedeni, etkileþimli kabukta modül bir kez içe aktarýldýktan sonra, o modülde yapýlan deðiþikliklerin otomatik olarak etkinleþmiyor oluþudur. Yani deðiþikliklerin etkileþimli kabukta etkinleþebilmesi için o modülü yeniden yüklememiz lazým. Bunu iki þekilde yapabiliriz:
+
+Birincisi, etkileþimli kabuðu kapatýp yeniden açtýktan sonra import sözlük komutuyla sözlük modülünü tekrar içe aktarabiliriz.
+
+Ýkincisi, importlib adlý bir kütüphane modülünden yararlanarak kendi modülümüzün tekrar yüklenmesini saðlayabiliriz. Bu modülü þöyle kullanýyoruz:
+
+>>> import importlib
+>>> importlib.reload(sözlük)
+
+Bu iki komutu verdikten sonra, sözlük üzerinde tekrar dir() fonksiyonunu uygularsak, yeni eklediðimiz ekle() fonksiyonunun çýktýya yansýdýðýný görürüz:
+
+>>> dir(sözlük)
+
+['__builtins__', '__cached__', '__doc__', '__file__',
+'__loader__', '__name__', '__package__', '__spec__',
+'ara', 'ekle', 'sözlük']
+
+Týpký önceki derslerimizde gördüðümüz sys, os ve keyword modülleri gibi, importlib de bir kütüphane modülüdür. Bu modülün bizim yukarýda yazdýðýmýz sözlük adlý modülden farký, Python geliþtiricileri tarafýndan yazýlýp dile entegre edilmiþ bir ‘hazýr modül’ olmasýdýr. Yani sözlük modülünü biz kendimiz yazdýk, importlib modülünü ise Python geliþtiricileri yazdý. Ýkisi arasýndaki tek fark bu.
+
+Ne diyorduk? Evet, sözlük adlý modüle ekle() adlý yeni bir fonksiyon ilave ettik. Bu fonksiyona da, týpký sözlük niteliðinde ve ara() fonksiyonunda olduðu gibi, modül adýný kullanarak eriþebiliriz:
+
+>>> sözlük.ekle('araba', 'car')
+
+araba kelimesi sözlüðe eklendi!
+
+Sözlüðümüze, ‘araba’ adlý yeni bir kelimeyi, ‘car’ karþýlýðý ile birlikte ekledik. Hemen bunu sorgulayalým:
+
+>>> sözlük.ara('araba')
+
+'car'
+
+Gayet güzel! Þimdi sözlüðümüze bir ekleme daha yapalým:
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming"}
+
+def ara(sözcük):
+hata = "{} kelimesi sözlükte yok!"
+return sözlük.get(sözcük, hata.format(sözcük))
+
+def ekle(sözcük, anlam):
+mesaj = "{} kelimesi sözlüðe eklendi!"
+sözlük[sözcük] = anlam
+print(mesaj.format(sözcük))
+
+def sil(sözcük):
+try:
+sözlük.pop(sözcük)
+except KeyError as err:
+print(err, "kelimesi bulunamadý!")
+else:
+print("{} kelimesi sözlükten silindi!".format(sözcük))
+
+Bu defa da modülümüze sil() adlý baþka bir fonksiyon ekledik. Bu fonksiyon, sözlükten öðe silmemizi saðlayacak:
+
+>>> sözlük.sil('kitap')
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute 'sil'
+
+Gördüðünüz gibi, bu kez bir hata mesajý aldýk. Peki sizce neden? Elbette deðiþiklik yaptýktan sonra modülü yeniden yüklemediðimizden... O halde önce modülümüzü yeniden yükleyelim:
+
+>>> importlib.reload(sözlük)
+
+Þimdi bu fonksiyonu kullanabiliriz:
+
+>>> sözlük.sil('kitap')
+
+kitap kelimesi sözlükten silindi!
+
+Bu noktada, importlib modülünün reload() fonksiyonunun çalýþma sistemine iliþkin birkaç önemli bilgi verelim.
+
+importlib modülünün reload() fonksiyonu, bir modüle yeni eklenen öðeleri yeniden yükleyerek, bunlarýn etkileþimli kabukta kullanýlabilir hale gelmesini saðlar. Bunun ne demek olduðunu biliyoruz. Yukarýda bunun örneklerini vermiþtik.
+
+Eðer bir modüldeki bazý nitelik veya fonksiyonlarý silerseniz, importlib modülünün reload() fonksiyonu ile bu modülü yeniden yükledikten sonra bile bu nitelik ve fonksiyonlar önbellekte tutulmaya devam eder. Örneðin, yukarýdaki sözlük modülünü önce içe aktaralým:
+
+>>> import sözlük
+
+Þimdi modülün içeriðini kontrol edelim:
+
+>>> dir(sözlük)
+
+['__builtins__', '__cached__', '__doc__', '__file__',
+'__loader__', '__name__', '__package__', '__spec__',
+'ara', 'ekle', 'sil', 'sözlük']
+
+Modül dosyasýndan sil() adlý fonksiyonu çýkaralým. Yani modülümüzün son hali þöyle olsun:
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming"}
+
+def ara(sözcük):
+hata = "{} kelimesi sözlükte yok!"
+return sözlük.get(sözcük, hata.format(sözcük))
+
+def ekle(sözcük, anlam):
+mesaj = "{} kelimesi sözlüðe eklendi!"
+sözlük[sözcük] = anlam
+print(mesaj.format(sözcük))
+
+Tekrar etkileþimli kabuða dönüp, importlib modülünün reload() fonksiyonu aracýlýðýyla modülümüzü yeniden yükleyelim:
+
+>>> import importlib
+>>> importlib.reload(sözlük)
+
+Þimdi sözlük modülünün içeriðini tekrar kontrol edelim:
+
+>>> dir(sözlük)
+
+['__builtins__', '__cached__', '__doc__', '__file__',
+'__loader__', '__name__', '__package__', '__spec__',
+'ara', 'ekle', 'sil', 'sözlük']
+
+Gördüðünüz gibi, biz sil() fonksiyonunu çýkarmýþ olduðumuz halde, dir(sözlük) çýktýsýnda bu öðe görünmeye devam ediyor. Üstelik bu fonksiyon halen kullanýlabilir durumda!
+
+>>> sözlük.sil('programlama')
+
+programlama kelimesi sözlükten silindi!
+
+Ancak bu durumu rahatlýkla görmezden gelebilirsiniz. Ama eðer o öðenin orada olmasý sizi rahatsýz ediyorsa, þu komutla o öðeyi silebilirsiniz:
+
+>>> del sözlük.sil
+
+Dediðimiz gibi, modülden silinen öðeler, reload() ile yeniden yüklendikten sonra dahi kullanýlýr durumda kalmaya devam eder. Ama eðer modül içinde varolan bir öðe üzerinde deðiþiklik yaparsanýz o deðiþiklik, reload() sonrasý modülün görünümüne yansýyacaktýr. Yani mesela, modülde halihazýrda varolan sil() fonksiyonu üzerinde bir deðiþiklik yaparsanýz, bu deðiþiklik reload() ile yeniden yükleme sonrasýnda etkileþimli kabuða yansýyacaktýr.
+
+

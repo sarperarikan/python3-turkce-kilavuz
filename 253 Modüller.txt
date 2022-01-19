@@ -1,0 +1,93 @@
+
+Modüller
+
+Bu bölümde, geçen derste ayrýntýlý olarak incelediðimiz ‘Fonksiyonlar’ kadar önemli bir konuyu ele alacaðýz. Bu önemli konunun adý ‘modüller’.
+
+Biz þimdiye kadar modül konusunu hiç ayrýntýlý olarak ele almamýþ olsak da esasýnda siz modül kavramýna büsbütün yabancý sayýlmazsýnýz. Zira biz önceki derslerimizde zaman zaman modüllerden söz etmiþ, hatta yeri geldiðinde bunlarý kodlarýmýz içinde kullanmaktan da çekinmemiþtik.
+
+Bu konuya gelene kadar, çeþitli bölümlerde þu modüllerden bahsettiðimizi hatýrlýyorsunuzdur:
+
+
+sys 
+os 
+keyword 
+random 
+unicodedata 
+locale 
+
+Ýþte þimdi, daha önce farklý bölümlerde þöyle bir temas edip geçtiðimiz modüller konusunu bu bölümde derinlemesine incelemeye çalýþacaðýz.
+
+
+Modül Nedir?
+
+Dediðimiz gibi, bu bölümde Python’daki en önemli konulardan biri olan modüllerden söz edeceðiz. Ancak modülleri kullanabilmek için elbette öncelikle ‘modül’ denen þeyin ne olduðunu iyice bir anlamamýz gerekiyor. Peki, nedir bu modül denen þey?
+
+Bu soruyu, þimdiye kadar gördüðümüz modüllere bakarak cevaplayacak olursak, modüllerin, bazý iþlevleri kolaylýkla yerine getirmemizi saðlayan birtakým fonksiyonlarý ve nitelikleri içinde barýndýran araçlar olduðunu söyleyebiliriz.
+
+Mesela ‘Kümeler ve Dondurulmuþ Kümeler’ adlý bölümde random adlý bir modüle deðindiðimizi hatýrlýyor olmalýsýnýz. Orada bu modülle ilgili þöyle bir örnek vermiþtik:
+
+liste = [random.randint(0, 10000) for i in range(1000)]
+
+Bu örnekte, random adlý modülün içindeki randint() adlý faydalý bir fonksiyondan yararlanarak 0 ile 10.000 sayýlarý arasýnda 1000 adet rastgele sayý içeren bir liste oluþturmuþtuk. Dolayýsýyla, yukarýdaki tanýmda da belirttiðimiz gibi, bir modül olan random, örnekte bahsettiðimiz iþlevi kolaylýkla yerine getirmemizi saðlayan bir fonksiyon barýndýrýyor. Biz de bu fonksiyonu kullanarak amacýmýzý rahatlýkla yerine getirebiliyoruz.
+
+random modülünün dýþýnda, önceki derslerimizde þöyle bir deðinip geçtiðimiz, sys, os ve locale gibi modüllerin de çeþitli görevleri kolayca yerine getirmemizi saðlayan birtakým araçlar barýndýrdýðýný görmüþtük.
+
+Ýþin doðrusu, modül denen þey Python programlama dilinin bel kemiðidir. Eðer modüller olmasaydý, Python programlama dili hem çok kullanýþsýz bir dil olurdu, hem de modüller sayesinde çok kolay bir þekilde üstesinden gelebildiðimiz zorluklar için her defasýnda kendimiz yeniden bir çözüm icat etmek zorunda kalýrdýk.
+
+Belki bu iddialý laf size þu anda pek anlamlý gelmemiþ olabilir. Þu ana kadar modüllerle ilgili öðrendikleriniz, henüz zihninizde bu lafýn iddiasýný teyit etmiyor olabilir. Ama modüllerin neden bu kadar önemli olduðunu birazdan çok daha net bir þekilde anlayacaksýnýz. Þimdilik okumaya devam edin.
+
+Hatýrlarsanýz bir önceki bölümde Python’daki fonksiyonlardan bahsetmiþtik. Yine hatýrlarsanýz o bölümde pek çok örnek fonksiyon da tanýmlamýþtýk. Mesela kayýt_oluþtur() adlý þöyle bir fonksiyon tanýmladýðýmýzý hatýrlýyor olmalýsýnýz:
+
+def kayýt_oluþtur(isim, soyisim, iþsis, þehir):
+print("-"*30)
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+print("-"*30)
+
+Bu fonksiyonu bir kez tanýmladýktan sonra, bu fonksiyonu ayný program içinde istediðimiz kadar kullanabiliyoruz. Yani kayýt_oluþtur adlý bir fonksiyon tanýmlamýþ olmamýz sayesinde, bu fonksiyonun gövdesinde belirttiðimiz iþlemleri her defasýnda tekrar tekrar yapmak zorunda kalmýyoruz; bütün bu iþlemleri tek bir ‘kayýt_oluþtur’ ismine atamýþ olduðumuz için, bu fonksiyonun bize sunduðu iþleve ihtiyaç duyduðumuz her yerde bu fonksiyonu kullanabiliyoruz. Örneðin:
+
+kayýt_oluþtur('Fýrat', 'Özgül', 'Debian', 'Arsuz')
+
+Ya da:
+
+kayýt_oluþtur('Zerrin', 'Söz', 'Ubuntu', 'Bolvadin')
+
+Eðer yukarýdaki iþlevselliði bir fonksiyon olarak tanýmlamýþ olmasaydýk, kayýt_oluþtur('Fýrat', 'Özgül', 'Debian', 'Arsuz') kodunun verdiði çýktýyý elde etmek için þu kodlarý yazmak zorunda kalacaktýk:
+
+print("-"*30)
+
+print("isim           : ", "Fýrat")
+print("soyisim        : ", "Özgül")
+print("iþletim sistemi: ", "Debian")
+print("þehir          : ", "Arsuz")
+
+print("-"*30)
+
+Burada isim, soyisim, iþletim sistemi ve þehir bilgileri deðiþtiðinde de her defasýnda ayný þeyleri uzun uzadýya tekrar tekrar yazmamýz gerekecekti:
+
+print("-"*30)
+
+print("isim           : ", "Zerrin")
+print("soyisim        : ", "Söz")
+print("iþletim sistemi: ", "Ubuntu")
+print("þehir          : ", "Bolvadin")
+
+print("-"*30)
+
+Ýþte modüller de buna benzer bir vazife görür. Yani Python’ýn fonksiyon sistemi nasýl bize bir iþlevselliði ayný dosya içinde tekrar tekrar kullanma imkaný veriyorsa, modül sistemi de bir fonksiyonu farklý dosyalar ve programlar içinde tekrar tekrar kullanma imkaný verir.
+
+Dolayýsýyla, eðer modül sistemi olmasaydý, biz bir kez yazdýðýmýz (veya baþka bir Python programcýsý tarafýndan yazýlmýþ) kayýt_oluþtur() fonksiyonunu baþka bir programda da kullanmak istediðimizde, bu fonksiyonu alýp her defasýnda yeni programa elle kopyalamak zorunda kalýrdýk. Ama modül sistemi sayesinde, bir program içinde bulunan fonksiyonlarý (ve diðer nitelikleri) baþka Python programlarý içine ‘aktarabiliyoruz’. Böylece bir Python programýndaki (veya modülündeki) iþlevsellikten, baþka bir Python programýnda da yararlanabiliyoruz. Dolayýsýyla modüller sayesinde, bir kez yazdýðýmýz kodlarý pek çok farklý program içinde kullanma imkaný elde ediyoruz. Bu da bizim;
+
+
+Daha az kod yazmamýzý, 
+Bir kez yazdýðýmýz kodlarý tekrar tekrar kullanabilmemizi, 
+Daha düzenli, daha derli toplu bir þekilde çalýþabilmemizi 
+
+saðlýyor.
+
+Ýþte bu bölümde, modüllerin bütün bu iþlevleri nasýl yerine getirdiðini, modül denen þeyden nasýl faydalanabileceðimizi ve modüllerin neden bu kadar önemli olduðunu öðreneceðiz. Dilerseniz lafý daha fazla dolandýrmadan modüller konusuna hýzlý bir giriþ yapalým.
+

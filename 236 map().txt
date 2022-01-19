@@ -1,0 +1,32 @@
+
+map()
+
+Diyelim ki elimizde şöyle bir liste var:
+
+>>> l = [1, 4, 5, 4, 2, 9, 10]
+
+Amacımız bu liste içindeki her öğenin karesini hesaplamak. Bunun için şöyle bir yol izleyebiliriz:
+
+>>> for i in l:
+... i ** 2
+...
+1
+16
+25
+16
+4
+81
+100
+
+Böylece, istediğimiz gibi, bütün öğelerin karesini bulmuş olduk. Bu tür bir işlemi yapmanın bir başka yolu da map() adlı bir gömülü fonksiyondan yararlanmaktır. Dikkatlice bakın:
+
+>>> def karesi(n):
+... return n ** 2
+...
+
+Burada bir n sayısının karesini hesaplayan bir fonksiyon tanımladık. Şimdi bu fonksiyonu l listesinin bütün öğeleri üzerine uygulayacağız:
+
+>>> list(map(karesi, l))
+
+[1, 16, 25, 16, 4, 81, 100]
+

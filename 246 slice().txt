@@ -1,0 +1,55 @@
+
+slice()
+
+Bildiðiniz gibi, birtakým öðelerden oluþan bir nesnenin yalnýzca belli kýsýmlarýný ayýrýp alma iþlemine ‘dilimleme’ adý veriliyor. Örneðin elimizde þöyle bir liste olduðunu düþünelim:
+
+>>> l = ['ahmet', 'mehmet', 'ayþe', 'senem', 'salih']
+
+5 öðeli bu listenin yalnýzca ilk iki öðesini almak, yani dilimlemek için þu yapýyý kullanýyoruz:
+
+>>> l[0:2]
+
+['ahmet', 'mehmet']
+
+Dilimleme iþleminin þöyle bir formülden oluþtuðunu biliyoruz:
+
+l[baþlangýç:bitiþ:atlama_deðeri]
+
+Baþlangýç parametresinin öntanýmlý deðeri 0 olduðu için yukarýdaki kodu þöyle de yazabilirdik:
+
+>>> l[:2]
+
+['ahmet', 'mehmet']
+
+Ayný listenin, ilk öðeden itibaren sonuna kadar olan bütün öðelerini almak için ise þunu yazýyoruz:
+
+>>> l[1:]
+
+Eðer bu listeyi, öðelerini ikiþer ikiþer atlayarak dilimlemek istersek de þu yolu takip ediyoruz:
+
+>>> l[::2]
+
+['ahmet', 'ayþe', 'salih']
+
+Bu örnekte baþlangýç ve bitiþ parametrelerinin öntanýmlý deðerlerini kullandýk. O yüzden o kýsýmlarý boþ býraktýk. Öðeleri ikiþer ikiþer atlayabilmek için ise atlama_deðeri olarak 2 sayýsýný kullandýk.
+
+Ýþte yukarýdakine benzer dilimleme iþlemleri için slice() adlý bir gömülü fonksiyondan da yararlanabiliriz. Dikkatlice bakýn:
+
+Listemiz þu:
+
+>>> l = ['ahmet', 'mehmet', 'ayþe', 'senem', 'salih']
+
+Bir ‘dilimleme’ (slice) nesnesi oluþturuyoruz:
+
+>>> dl = slice(0, 3)
+
+Bu nesneyi liste üzerine uyguluyoruz:
+
+>>> l[dl]
+
+['ahmet', 'mehmet', 'ayþe']
+
+Gördüðünüz gibi, slice() fonksiyonunu yukarýda iki parametre ile kullandýk. Tahmin edebileceðiniz gibi, bu fonksiyonunu formülü þu þekildedir:
+
+slice(baþlangýç, bitiþ, atlama)
+

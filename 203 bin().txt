@@ -1,0 +1,11 @@
+
+bin()
+
+Bu fonksiyon, bir sayýnýn ikili düzendeki karþýlýðýný verir:
+
+>>> bin(12)
+
+'0b1100'
+
+Bu fonksiyonun verdiði çýktýnýn bir sayý deðil, karakter dizisi olduðuna dikkat etmelisiniz.
+

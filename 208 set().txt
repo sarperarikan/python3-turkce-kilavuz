@@ -1,0 +1,14 @@
+
+set()
+
+set() fonksiyonu list() fonksiyonuna çok benzer. Bu fonksiyon da tıpkı list() fonksiyonu gibi, veri tipleri arasında dönüştürme işlemleri gerçekleştirmek için kullanılabilir. set() fonksiyonunun görevi farklı veri tiplerini kümeye dönüştürmektir:
+
+>>> k = set()
+
+Burada boş bir küme oluşturduk. Şimdi de mesela bir karakter dizisini kümeye dönüştürelim:
+
+>>> i = 'istihza'
+>>> set(i)
+
+{'t', 's', 'z', 'a', 'i', 'h'}
+

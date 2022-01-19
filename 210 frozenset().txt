@@ -1,0 +1,11 @@
+
+frozenset()
+
+Bu fonksiyonu kullanarak farklý veri tiplerini dondurulmuþ kümeye dönüþtürebilirsiniz:
+
+>>> s = set('istihza')
+>>> df = frozenset(s)
+>>> df
+
+frozenset({'t', 's', 'a', 'z', 'i', 'h'})
+

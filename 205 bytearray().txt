@@ -1,0 +1,32 @@
+
+bytearray()
+
+Bildiðiniz gibi baytlar deðiþtirilemeyen bir veri tipidir. Dolayýsýyla bir bayt veri tipi üzerinde herhangi bir deðiþiklik yapamayýz. Örneðin bir baytýn herhangi bir öðesini baþka bir deðerle deðiþtiremeyiz:
+
+>>> a = bytes('istihza', 'ascii')
+>>> a[0]
+
+105
+
+>>> a[0] = 106
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'bytes' object does not support item assignment
+
+Ama eðer hem baytlarla çalýþmak, hem de bu baytlarýn üzerinde deðiþiklik yapabilmek isterseniz baytlar yerine bayt dizileri ile çalýþabilirsiniz. Ýþte bunun için bytearray() adlý bir fonksiyondan yararlanýyoruz.
+
+Yaptýklarý iþ bakýmýndan bytearray() ve bytes() fonksiyonlarý birbirlerine çok benzer. Bu ikisi arasýndaki tek fark, bytearray() ile oluþturulan veri tipinin, bytes() ile oluþturulan veri tipinin aksine, deðiþtirilebilir nitelikte olmasýdýr:
+
+>>> a = bytearray('adana', 'ascii')
+
+>>> a
+
+bytearray(b'adana')
+
+>>> a[0] = 65
+
+>>> a
+
+bytearray(b'Adana')
+

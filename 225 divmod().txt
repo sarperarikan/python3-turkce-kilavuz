@@ -1,0 +1,19 @@
+
+divmod()
+
+Bu fonksiyonun iþlevini bir örnek üzerinden göstermeye çalýþalým:
+
+>>> divmod(10, 2)
+
+(5, 0)
+
+Gördüðünüz gibi divmod(10, 2) komutu bize iki öðeli bir demet veriyor. Bu demetin ilk öðesi, divmod() fonksiyonuna verilen ilk parametrenin ikinci parametreye bölünmesi iþleminin sonucudur. Demetimizin ikinci öðesi ise, ilk parametrenin ikinci parametreye bölünmesi iþleminden kalan sayýdýr. Yani demetin ilk parametresi bölme iþleminin ‘bölüm’ kýsmýný, ikinci öðesi ise ‘kalan’ kýsmýný verir.
+
+Bu fonksiyonun bölme iþlemininin sonucunu tamsayý cinsinden verdiðine dikkat ediyoruz:
+
+>>> divmod(10, 3)
+
+(3, 1)
+
+10 sayýsý 3 sayýsýna bölündüðünde tamsayý cinsinden sonuç 3‘tür. Bu bölme iþleminin kalaný ise 1‘dir.
+

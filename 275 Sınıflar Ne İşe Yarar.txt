@@ -1,0 +1,72 @@
+
+Sýnýflar Ne Ýþe Yarar?
+
+Buraya gelene kadar Python’da pek çok veri tipi olduðunu öðrendik. Mesela önceki derslerimizde incelediðimiz listeler, demetler, karakter dizileri, sözlükler ve hatta fonksiyonlar hep birer veri tipidir. Bu tiplerin, verileri çeþitli þekillerde evirip çevirmemizi saðlayan birtakým araçlar olduðunu biliyoruz. Ýþte sýnýflar da, týpký yukarýda saydýðýmýz öteki veri tipleri gibi, verileri manipüle etmemizi saðlayan bir veri tipidir.
+
+Peki bu bölümde ele alacaðýmýz ‘sýnýf’ (class) veri tipi ne iþe yarar?
+
+Dilerseniz bunu basit bir örnek üzerinde anlatmaya çalýþalým.
+
+Diyelim ki, kullanýcýnýn girdiði bir kelimedeki sesli harfleri sayan bir kod yazmak istiyorsunuz. Bu amacý gerçekleþtirebilmek için yazabileceðiniz en basit kod herhalde þu olacaktýr:
+
+sesli_harfler = 'aeýioöuü'
+sayaç = 0
+
+kelime = input('Bir kelime girin: ')
+
+for harf in kelime:
+if harf in sesli_harfler:
+sayaç += 1
+
+mesaj = '{} kelimesinde {} sesli harf var.'
+print(mesaj.format(kelime, sayaç))
+
+Düzgün bir þekilde çalýþan, gayet basit kodlardýr bunlar. Ayrýca amacýmýzý da kusursuz bir þekilde yerine getirir. Üstelik kodlardaki bütün öðeler tek bir isim/etki alaný (namespace, scope) içinde bulunduðu için, bunlara eriþimde hiçbir zorluk çekmeyiz. Yani mesela sesli_harfler, sayaç, kelime, harf, mesaj deðiþkenlerine kodlar içinde her yerden eriþebiliriz.
+
+Not
+
+Eðer isim/etki alaný ile ilgili söylediðimiz þeyi anlamadýysanýz endiþe etmeyin. Birazdan vereceðimiz örnekle durumu daha net kavrayacaksýnýz.
+
+Ancak bu kodlarýn önemli bir dezavantajý, kodlarda benimsediðimiz yaklaþýmýn geniþlemeye pek müsait olmamasýdýr. Daha doðrusu, yukarýdaki kodlara yeni kodlar ekledikçe programýmýz karmaþýk hale gelecek, kodlarý anlamak zorlaþacaktýr.
+
+Kod yapýsýný biraz olsun rahatlatmak için bazý önlemler alabiliriz. Mesela kullanýcý tarafýndan girilen kelimedeki bir harfin sesli olup olmadýðýný denetleyen kodlarý bir fonksiyon içine alarak, o kýsmý daha belirgin hale getirebiliriz:
+
+sesli_harfler = 'aeýioöuü'
+sayaç = 0
+
+kelime = input('Bir kelime girin: ')
+
+def seslidir(harf):
+return harf in sesli_harfler
+
+for harf in kelime:
+if seslidir(harf):
+sayaç += 1
+
+mesaj = '{} kelimesinde {} sesli harf var.'
+print(mesaj.format(kelime, sayaç))
+
+Burada, kontrol ettiðimiz harfin sesli_harfler adlý deðiþken içinde bulunup bulunmamasýna göre True veya False çýktýsý veren, seslidir() adlý bir fonksiyon tanýmladýk. Eðer kontrol ettiðimiz harf sesli_harfler deðiþkeni içinde geçiyorsa, yani bu bir sesli harf ise, seslidir() fonksiyonu True çýktýsý verecektir. Aksi durumda ise bu fonksiyondan False çýktýsý alacaðýz. Böylece sesli harf kontrolü yapmak istediðimiz her yerde yalnýzca seslidir() fonksiyonunu kullanabileceðiz. Bu da bize, bir kez yazdýðýmýz kodlarý tekrar tekrar kullanma imkaný verecek.
+
+Eðer yukarýdaki kodlarý daha da genel amaçlý bir hale getirmek istersek, sayacý artýran kodlarý da bir fonksiyon içine almayý düþünebiliriz:
+
+sesli_harfler = 'aeýioöuü'
+sayaç = 0
+
+kelime = input('Bir kelime girin: ')
+
+def seslidir(harf):
+return harf in sesli_harfler
+
+def artýr():
+global sayaç
+for harf in kelime:
+if seslidir(harf):
+sayaç += 1
+return sayaç
+
+mesaj = '{} kelimesinde {} sesli harf var.'
+print(mesaj.format(kelime, artýr()))
+
+Hatýrlarsanýz, ilk baþta yazdýðýmýz kodlarýn en büyük avantajýnýn, kodlarda geçen bütün öðelerin tek bir isim/etki alanýnda bulunmasý olduðunu söylemiþtik. Bu sayede bütün öðelere her yerden eriþebiliyorduk. Yukarýdaki kodlarda ise birden fazla isim/etki alaný var:
+

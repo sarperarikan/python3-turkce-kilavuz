@@ -1,0 +1,13 @@
+
+float()
+
+Bu fonksiyonu, sayıları veya karakter dizilerini kayan noktalı sayıya dönüştürmek için kullanıyoruz:
+
+>>> float('134')
+
+134.0
+
+>>> float(12)
+
+12.0
+

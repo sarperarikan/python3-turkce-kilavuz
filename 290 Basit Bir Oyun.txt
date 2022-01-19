@@ -1,0 +1,476 @@
+
+Basit Bir Oyun
+
+Gelin isterseniz nesne denen kavramý daha iyi anlayabilmek, bir nesneyi nesne yapan metot ve nitelikler arasýndaki iliþkiyi daha net bir þekilde kavrayabilmek için, komut satýrý üzerinde çalýþan çok basit bir oyun tasarlayalým. Bu þekilde hem eski bilgilerimizi tekrar etmiþ oluruz, hem teorik bilgilerimizi uygulama sahasýna dökmüþ oluruz, hem de yeni þeyler öðrenmiþ oluruz.
+
+Oyunumuzun kodlarý þöyle:
+
+import time
+import random
+import sys
+
+class Oyuncu():
+def __init__(self, isim, can=5, enerji=100):
+self.isim = isim
+self.darbe = 0
+self.can = can
+self.enerji = enerji
+
+def mevcut_durumu_görüntüle(self):
+print('darbe: ', self.darbe)
+print('can: ', self.can)
+print('enerji: ', self.enerji)
+
+def saldýr(self, rakip):
+print('Bir saldýrý gerçekleþtirdiniz.')
+print('Saldýrý sürüyor. Bekleyiniz.')
+
+for i in range(10):
+time.sleep(.3)
+print('.', end='', flush=True)
+
+sonuç = self.saldýrý_sonucunu_hesapla()
+
+if sonuç == 0:
+print('\nSONUÇ: kazanan taraf yok')
+
+if sonuç == 1:
+print('\nSONUÇ: rakibinizi darbelediniz')
+self.darbele(rakip)
+
+if sonuç == 2:
+print('\nSONUÇ: rakibinizden darbe aldýnýz')
+self.darbele(self)
+
+def saldýrý_sonucunu_hesapla(self):
+return random.randint(0, 2)
+
+def kaç(self):
+print('Kaçýlýyor...')
+for i in range(10):
+time.sleep(.3)
+print('\n', flush=True)
+
+print('Rakibiniz sizi yakaladý')
+
+def darbele(self, darbelenen):
+darbelenen.darbe += 1
+darbelenen.enerji -= 1
+if (darbelenen.darbe % 5) == 0:
+darbelenen.can -= 1
+if darbelenen.can < 1:
+darbelenen.enerji = 0
+print('Oyunu {} kazandý!'.format(self.isim))
+self.oyundan_çýk()
+
+def oyundan_çýk(self):
+print('Çýkýlýyor...')
+sys.exit()
+
+##################################
+
+# Oyuncular
+siz = Oyuncu('Ahmet')
+rakip = Oyuncu('Mehmet')
+
+# Oyun baþlangýcý
+while True:
+print('Þu anda rakibinizle karþý karþýyasýnýz.',
+'Yapmak istediðiniz hamle: ',
+'Saldýr:  s',
+'Kaç:     k',
+'Çýk:     q', sep='\n')
+
+hamle = input('\n> ')
+if hamle == 's':
+siz.saldýr(rakip)
+
+print('Rakibinizin durumu')
+rakip.mevcut_durumu_görüntüle()
+
+print('Sizin durumunuz')
+siz.mevcut_durumu_görüntüle()
+
+if hamle == 'k':
+siz.kaç()
+
+if hamle == 'q':
+siz.oyundan_çýk()
+
+Komut satýrý üzerinde çalýþan basit bir oyundur bu. Dilerseniz bu kodlarý incelemeye baþlamadan önce, bir dosyaya kaydedip çalýþtýrýn. Karþýnýza þöyle bir ekran gelecek:
+
+Þu anda rakibinizle karþý karþýyasýnýz.
+Yapmak istediðiniz hamle:
+Saldýr: s
+Kaç: k
+Çýk: q
+
+>
+
+Programýmýz bize burada üç farklý seçenek sunuyor. Eðer rakibimize saldýrmak istiyorsak klavyedeki ‘s’ tuþuna; rakibimizden kaçmak istiyorsak klavyedeki ‘k’ tuþuna; yok eðer oyundan çýkmak istiyorsak da klavyedeki ‘q’ tuþuna basacaðýz. Tercihinizi belirleyip neler olduðunu inceleyin ve oyunu iyice tanýmaya çalýþýn.
+
+Oyunu iyice anlayýp tanýdýktan sonra oyun kodlarýný incelemeye geçebiliriz.
+
+Yukarýda ilk olarak Oyuncu adlý bir sýnýf tanýmladýk:
+
+class Oyuncu():
+def __init__(self, isim, can=5, enerji=100):
+self.isim = isim
+self.darbe = 0
+self.can = can
+self.enerji = enerji
+
+class kelimesinin sýnýf tanýmlamamýzý saðlayan bir araç, Oyuncu kelimesinin ise tanýmladýðýmýz sýnýfýn adý olduðunu biliyoruz. Bu satýrýn hemen ardýndan gelen __init__() fonksiyonu, sýnýfýmýz örneklendiðinde neler olacaðýný tanýmladýðýmýz yerdir. Bu sýnýfýn, örnekleme sýrasýnda hangi parametreleri alacaðýný da __init__() fonksiyonu içinde belirliyoruz. Parametre listesinde gördüðümüz ilk öðe, yani self, sýnýfýn o anki örneðini temsil ediyor. Python’ýn sözdizimi kurallarý gereðince bu kelimeyi oraya yazmamýz gerektiðini biliyoruz.
+
+Yukarýdaki fonksiyon, self dýþýnda toplam üç parametre alýyor: isim, can ve enerji. Bunlardan ilki, yani isim parametresinin öntanýmlý bir deðeri yok. Dolayýsýyla sýnýfý çaðýrýrken (yani örneklerken) bu parametrenin deðerini belirtmemiz gerekecek. Öteki iki parametre olan can ve enerji ise birtakým öntanýmlý deðerlere sahip. Dolayýsýyla sýnýfý örneklendirirken bu parametrelere farklý bir deðer atamadýðýmýz sürece, bu parametreler, listede belirtilen deðerleri taþýyacak.
+
+Parametre olarak belirlediðimiz deðerleri sýnýf içinde kullanabilmek için, bunlarý __init__() fonksiyonunun gövdesinde birer örnek niteliðine dönüþtürüyoruz:
+
+self.isim = isim
+self.darbe = 0
+self.can = can
+self.enerji = enerji
+
+Burada ilave olarak bir de deðeri 0 olan self.darbe adlý bir deðiþken tanýmladýk. Bu da sýnýfýmýzýn örnek niteliklerinden biri olup, ilgili oyuncu (yani sýnýfýn o anki örneði) darbe aldýkça bunun deðeri yükselecektir.
+
+Gelin isterseniz bu aþamada sýnýfýmýzý örnekleyerek neler olup bittiðini daha net anlamaya çalýþalým:
+
+class Oyuncu():
+def __init__(self, isim, can=5, enerji=100):
+self.isim = isim
+self.darbe = 0
+self.can = can
+self.enerji = enerji
+
+#Sýnýfýmýzý örnekliyoruz
+oyuncu = Oyuncu('Ahmet')
+
+Burada oyuncu = Oyuncu('Ahmet') komutunu verdiðimiz anda __init__() fonksiyonu çalýþmaya baþlýyor ve oyuncu adlý nesne için sýrasýyla þu deðiþkenleri oluþturuyor:
+
+isim = 'Ahmet'
+darbe = 0
+can = 5
+enerji = 100
+
+Bu örnek niteliklerine nasýl ulaþabileceðinizi biliyorsunuz:
+
+print('Ýsim: ', oyuncu.isim)
+print('Darbe: ', oyuncu.darbe)
+print('Can: ', oyuncu.can)
+print('Enerji: ', oyuncu.enerji)
+
+Baþta da söylediðimiz gibi, Oyuncu() sýnýfýný örnekleyerek meydana getireceðiniz bütün sýnýf örnekleri, yani nesneler, __init__() fonksiyonu içinde tanýmladýðýnýz örnek niteliklerini taþýyacaktýr:
+
+class Oyuncu():
+def __init__(self, isim, can=5, enerji=100):
+self.isim = isim
+self.darbe = 0
+self.can = can
+self.enerji = enerji
+
+oyuncu1 = Oyuncu('Ahmet')
+oyuncu2 = Oyuncu('Mehmet')
+oyuncu3 = Oyuncu('Veli')
+oyuncu4 = Oyuncu('Ayþe')
+
+Burada oyuncu1, oyuncu2, oyuncu3 ve oyuncu4 olmak üzere dört farklý nesne oluþturduk. Bu nesnelerin hangi niteliklere sahip olacaðýný ise Oyuncu() sýnýfýnýn tanýmý içinde belirttik. Yani sýnýfýmýz týpký bir fabrika gibi çalýþarak, bizim için, ayný nitelikleri taþýyan dört farklý nesne üretti.
+
+Ýþte nesne tabanlý programlamanýn özünü oluþturan ‘nesne’ budur. Bir nesnenin hangi niteliklere sahip olacaðýný belirleyen veri tipine sýnýf (class) derken, o sýnýfýn ortaya çýkardýðý ürüne ise nesne (object) adý veriyoruz. Bunu þuna benzetebilirsiniz: Eðer ‘Ýnsan’ bir sýnýfsa, ‘Mahmut’ bu sýnýfýn bir örneðidir. Dolayýsýyla Mahmut, Ýnsan sýnýfýndan türemiþ bir nesnedir. Ayný þekilde eðer ‘Köpek’ bir sýnýfsa, ‘Karabaþ’ da bu sýnýfýn bir örneðidir. Yani Karabaþ, Köpek sýnýfýndan türemiþ bir nesnedir. Mahmut’un hangi özelliklere sahip olacaðýný Ýnsan sýnýfýnýn nasýl tanýmlandýðý, Karabaþ’ýn hangi özelliklere sahip olacaðýný ise Köpek sýnýfýnýn nasýl tanýmlandýðý belirler. Ýþte ayný bunun gibi, Oyuncu() sýnýfýndan türeyen nesnelerin hangi özelliklere sahip olacaðýný da Oyuncu() sýnýfýnýn nasýl tanýmlandýðý belirler.
+
+Kodlarýmýzý incelemeye devam edelim...
+
+def mevcut_durumu_görüntüle(self):
+print('darbe: ', self.darbe)
+print('can: ', self.can)
+print('enerji: ', self.enerji)
+
+Burada mevcut_durumu_görüntüle() adlý bir örnek metodu tanýmladýk. Örnek metotlarýnýn ilk parametresinin her zaman self olmasý gerektiðini biliyoruz.
+
+Tanýmladýðýmýz örnek metodunun görevi, Oyuncu() sýnýfýndan oluþturduðumuz nesnelerin (yani örneklerin) o anki darbe, can ve enerji durumlarýný görüntülemek. Birer örnek niteliði olan darbe, can ve enerji deðiþkenlerine self aracýlýðýyla eriþtiðimize özellikle dikkat ediyoruz.
+
+Gelelim sýnýfýmýzýn önemli örnek metotlarýndan biri olan saldýr() fonksiyonunu incelemeye:
+
+def saldýr(self, rakip):
+print('Bir saldýrý gerçekleþtirdiniz.')
+print('Saldýrý sürüyor. Bekleyiniz.')
+
+for i in range(10):
+time.sleep(.3)
+print('.', end='', flush=True)
+
+sonuç = self.saldýrý_sonucunu_hesapla()
+
+if sonuç == 0:
+print('\nSONUÇ: kazanan taraf yok')
+
+if sonuç == 1:
+print('\nSONUÇ: rakibinizi darbelediniz')
+self.darbele(rakip)
+
+if sonuç == 2:
+print('\nSONUÇ: rakibinizden darbe aldýnýz')
+self.darbele(self)
+
+Bu fonksiyon, self dýþýnda tek bir parametre alýyor. Fonksiyonu çalýþtýrýrken kullanacaðýmýz rakip parametresi, saldýrýnýn kime karþý (yani sýnýf örneklerinden hangisine karþý) düzenleneceðini belirleyecek.
+
+Fonksiyon gövdesinde ilk olarak þöyle bir kýsým görüyoruz:
+
+print('Bir saldýrý gerçekleþtirdiniz.')
+print('Saldýrý sürüyor. Bekleyiniz.')
+
+for i in range(10):
+time.sleep(.3)
+print('.', end='', flush=True)
+
+Burada saldýrýnýn gerçekleþtiðine dair kullanýcýyý bilgilendirdikten sonra þöyle bir kod parçasý yazdýk:
+
+for i in range(10):
+time.sleep(.3)
+print('.', end='', flush=True)
+
+Bu kodlarda time adlý bir standart kütüphane modülünün sleep() adlý bir metodundan yararlandýðýmýzý görüyorsunuz. Elbette bu modülü kullanabilmek için öncelikle bu modülü içe aktarmýþ olmamýz gerekiyor. Bu iþlemi dosyanýn en baþýnda import time satýrý yardýmýyla gerçekleþtirdiðimizi görebilirsiniz.
+
+Yukarýdaki satýrlar, 300’er milisaniye aralýklarla, yan yana nokta iþaretleri yerleþtirecektir. Dilerseniz etkileþimli kabukta bu kodlarý þu þekilde test edebilirsiniz:
+
+>>> import time
+>>> for i in range(10):
+... time.sleep(.3)
+... print('.', end='', flush=True)
+
+print() fonksiyonu içinde kullandýðýmýz end ve flush parametrelerinin ne olduðunu ve ne iþe yaradýðýný ilk derslerimizden hatýrlýyor olmalýsýnýz. Eðer hatýrlamýyorsanýz, bu parametreleri tek tek kodlardan çýkarýp, bu kodlarý bir de öyle çalýþtýrýn. Sonucun ne olduðunu takip ederek, end ve flush parametrelerinin görevini daha iyi anlayabilirsiniz.
+
+Bu kodlarýn ardýndan þöyle bir satýr yazdýk:
+
+sonuç = self.saldýrý_sonucunu_hesapla()
+
+Burada, saldýrý_sonucunu_hesapla() adlý bir örnek metodunu çaðýrdýðýmýzý görüyorsunuz:
+
+def saldýrý_sonucunu_hesapla(self):
+return random.randint(0, 2)
+
+Biraz önce time adlý bir standart kütüphane modülünü kullanmýþtýk. Þimdi ise random adlý baþka bir standart kütüphane modülünü kullanýyoruz. Elbette bu modülü de kullanabilmek için öncelikle bu modülü import random komutuyla içe aktarmýþ olmamýz gerekiyor. Bu zorunluluðu da, týpký time modülünde olduðu gibi, dosyanýn en baþýnda yerine getirmiþtik.
+
+Yukarýda random modülünü, 0 ile 2 arasý rastgele sayýlar üretmek için kullandýk. random.randint(0, 2) komutu her çalýþýþýnda 0, 1 ve 2 sayýlarýndan birini rastgele üretecektir. Buradan elde ettiðimiz sonucu sonuç adlý bir deðiþkene atayarak saldýr() fonksiyonu içinde þu þekilde kullanýyoruz:
+
+sonuç = self.saldýrý_sonucunu_hesapla()
+
+if sonuç == 0:
+print('\nSONUÇ: kazanan taraf yok')
+
+if sonuç == 1:
+print('\nSONUÇ: rakibinizi darbelediniz')
+self.darbele(rakip)
+
+if sonuç == 2:
+print('\nSONUÇ: rakibinizden darbe aldýnýz')
+self.darbele(self)
+
+Eðer randint() metodu 0 sayýsýný üretirse, rakibimize karþý gerçekleþtirdiðimiz saldýrýnýn sonuçsuz kaldýðýna hükmediyoruz:
+
+if sonuç == 0:
+print('\nSONUÇ: kazanan taraf yok')
+
+Eðer randint() metodu 1 sayýsýný üretirse, rakibimizi baþarýyla darbelediðimize, 2 sayýsýný üretirse de rakibimiz tarafýndan darbelendiðimize hükmediyoruz:
+
+if sonuç == 1:
+print('\nSONUÇ: rakibinizi darbelediniz')
+self.darbele(rakip)
+
+if sonuç == 2:
+print('\nSONUÇ: rakibinizden darbe aldýnýz')
+self.darbele(self)
+
+Saldýrý sonucunda rakibimizi darbelediðimizde ve rakibimizden darbe yediðimizde darbele() adlý bir baþka örnek metodunu çaðýrdýðýmýzý da gözden kaçýrmayýn.
+
+Bu arada, örnek metotlarýna da self öneki ile eriþtiðimize dikkatinizi çekmek isterim. Ayrýca her ne kadar örnek metotlarýný tanýmlarken parantez listesi içinde self kelimesini belirtsek de, bu metotlarý çaðýrýrken bunlarý argüman olarak kullanmadýðýmýza da özellikle dikkat etmelisiniz. Yani biz bu metotlarý þöyle tanýmlýyoruz:
+
+def saldýrý_sonucunu_hesapla(self):
+return random.randint(0, 2)
+
+Burada parametre listesinde self‘i görüyoruz. Ama bu fonksiyonlarý çaðýrýrken parantez içinde bu self‘i kullanmýyoruz:
+
+self.saldýrý_sonucunu_hesapla()
+
+self‘i parantez içinde bir argüman olarak kullanmak yerine, bu kelimeyi fonksiyon adýnýn baþýna bir önek olarak takýyoruz.
+
+Ne diyorduk? Evet, saldýr() fonksiyonu içinde darbele() adlý bir fonksiyona atýfta bulunduk. Yani saldýrý sonucunda rakibimizi darbelediðimizde ve rakibimizden darbe yediðimizde darbele() adlý bir baþka örnek metodunu çaðýrdýk:
+
+def darbele(self, darbelenen):
+darbelenen.darbe += 1
+darbelenen.enerji -= 1
+if (darbelenen.darbe % 5) == 0:
+darbelenen.can -= 1
+if darbelenen.can < 1:
+darbelenen.enerji = 0
+print('Oyunu {} kazandý!'.format(self.isim))
+self.oyundan_çýk()
+
+Bu fonksiyon içinde, herhangi bir darbe alma durumunda oyuncunun darbe, can ve enerji miktarlarýnda meydana gelecek deðiþiklikleri tanýmlýyoruz.
+
+Buna göre herhangi bir darbe alma durumunda aþaðýdaki iþlemler gerçekleþtirilecek:
+
+Darbelenen oyuncunun darbe deðeri 1 birim artacak:
+
+darbelenen.darbe += 1
+
+enerji deðeri 1 birim azalacak:
+
+darbelenen.enerji -= 1
+
+Darbelenen oyuncu her 5 darbede 1 can kaybedecek:
+
+if (darbelenen.darbe % 5) == 0:
+darbelenen.can -= 1
+
+Burada her 5 darbede 1 can kaybetme kriterini nasýl belirlediðimize dikkat edin. Bildiðiniz gibi, oyuncu darbe yedikçe darbe deðiþkeninin deðeri artýyor. Bu deðer 5 sayýsýna ulaþtýðýnda, 5 % 5 iþleminin sonucu 0 olacaktýr. Yani bu sayý 5’e bölündüðünde bölme iþleminden kalan deðer 0 olacaktýr. 5’in tüm katlarý için (5, 10, 15, 20 gibi...) bu durum geçerlidir. Eðer darbe deðiþkenin ulaþtýðý deðer 5’in katý deðilse, bu sayý 5’e tam bölünmediði için, bölmeden kalan deðer 0 dýþýnda bir sayý olur. Dolayýsýyla darbe deðerinin ulaþtýðý sayýnýn 5’e bölünmesinden kalan deðerin 0 olup olmadýðýný kontrol ederek oyuncunun 5 darbede 1 can kaybetmesini saðlayabiliyoruz.
+
+Oyuncunun can deðeri 1’in altýna düþtüðünde ise enerji deðeri 0’a inecek ve oyunu kimin kazandýðý ilan edildikten sonra oyun kapatýlacak:
+
+if darbelenen.can < 1:
+darbelenen.enerji = 0
+print('Oyunu {} kazandý!'.format(self.isim))
+self.oyundan_çýk()
+
+Burada oyundan_çýk() adlý bir örnek metoduna daha atýfta bulunduk:
+
+def oyundan_çýk(self):
+print('Çýkýlýyor...')
+sys.exit()
+
+Gayet basit bir fonksiyon. Herhangi bir þekilde oyundan çýkmak gerektiðinde sys modülünün exit() fonksiyonunu kullanarak oyunu terk ediyoruz.
+
+Ýlerlemeden önce, darbele() fonksiyonunu kullandýðýmýz kýsma tekrar bakalým:
+
+sonuç = self.saldýrý_sonucunu_hesapla()
+
+if sonuç == 0:
+print('\nSONUÇ: kazanan taraf yok')
+
+if sonuç == 1:
+print('\nSONUÇ: rakibinizi darbelediniz')
+self.darbele(rakip)
+
+if sonuç == 2:
+print('\nSONUÇ: rakibinizden darbe aldýnýz')
+self.darbele(self)
+
+Bildiðiniz gibi, darbele() fonksiyonu, self dýþýnda 1 adet parametre daha alýyor. Bu parametre, darbeyi hangi oyuncunun alacaðýný gösteriyor. Yani darbeyi alan oyuncu biz miyiz yoksa rakibimiz mi? Ýþte bunu tespit etmek için darbelenen adlý bir parametre belirledik. Gördüðünüz gibi, darbele() fonksiyonu saldýr() adlý baþka bir fonksiyonun içinden çaðrýlýyor. saldýr() fonksiyonu da rakip adlý bir parametre alýyor. Ýþte darbe alan oyuncunun can ve enerji deðerlerini yenilemek istediðimizde bu parametreyi, darbele() fonksiyonuna gönderiyoruz:
+
+self.darbele(rakip)
+
+Burada darbelenen oyuncu karþý taraf. Yani rakibimiz darbe yemiþ. Eðer darbelenen kiþi kendimizsek, kendimize atýfta bulunmak için de self parametresini kullanýyoruz:
+
+self.darbele(self)
+
+Pek çok kez söylediðimiz gibi, self kelimesi mevcut sýnýf örneðini temsil eder. Dolayýsýyla kendimize atýfta bulunmak istediðimiz durumlarda, yukarýda olduðu gibi self‘i kullanabiliriz.
+
+Eðer arzu ederseniz, darbele() fonksiyonunu þöyle de yazabilirsiniz:
+
+def darbele(self):
+self.darbe += 1
+self.enerji -= 1
+if (self.darbe % 5) == 0:
+self.can -= 1
+if self.can < 1:
+self.enerji = 0
+print('Oyunu {} kazandý!'.format(self.isim))
+self.oyundan_çýk()
+
+Burada darbelenen parametresini iptal ettik. Kimin durumunun yenileceðini self‘in kim olduðu belirleyecek:
+
+if sonuç == 1:
+print('\nSONUÇ: rakibinizi darbelediniz')
+rakip.darbele()
+
+if sonuç == 2:
+print('\nSONUÇ: rakibinizden darbe aldýnýz')
+self.darbele()
+
+Gördüðünüz gibi, eðer rakibi darbeleyip onun can ve enerji durumunu yenilemek istiyorsak, ilgili fonksiyonu rakip.darbele() þeklinde çaðýrýyoruz. Kendimizin durumunu yenilemek istediðimizde ise self.darbele() komutunu kullanýyoruz.
+
+Sýnýfýmýzý tanýmladýðýmýza göre artýk bu sýnýfý nasýl kullanacaðýmýzý incelemeye geçebiliriz:
+
+siz = Oyuncu('Ahmet')
+rakip = Oyuncu('Mehmet')
+
+Burada öncelikle Oyuncu() sýnýfý için iki farklý nesne/örnek oluþturuyoruz:
+
+siz = Oyuncu('Ahmet')
+rakip = Oyuncu('Mehmet')
+
+Bu iki nesne, Oyuncu() sýnýfýnýn bütün niteliklerini taþýyor. Nesneleri oluþtururken, zorunlu argüman olan isim deðerini mutlaka belirtmemiz gerektiðini unutmuyoruz.
+
+Daha sonra bir while döngüsü içinde, oyunumuzun kullanýcý tarafýndan görüntülenecek kýsmýný kodluyoruz:
+
+while True:
+print('Þu anda rakibinizle karþý karþýyasýnýz.',
+'Yapmak istediðiniz hamle: ',
+'Saldýr:  s',
+'Kaç:     k',
+'Çýk:     q', sep='\n')
+
+hamle = input('\n> ')
+if hamle == 's':
+siz.saldýr(rakip)
+
+print('Rakibinizin durumu')
+rakip.mevcut_durumu_görüntüle()
+
+print('Sizin durumunuz')
+siz.mevcut_durumu_görüntüle()
+
+if hamle == 'k':
+siz.kaç()
+
+if hamle == 'q':
+siz.oyundan_çýk()
+
+Oyunun nasýl oynanacaðý konusunda kullanýcýlarýmýzý bilgilendiriyoruz:
+
+print('Þu anda rakibinizle karþý karþýyasýnýz.',
+'Yapmak istediðiniz hamle: ',
+'Saldýr:  s',
+'Kaç:     k',
+'Çýk:     q', sep='\n')
+
+Kullanýcýlarýmýzýn klavyede hangi tuþa bastýðýný þu þekilde alýyoruz:
+
+hamle = input('\n> ')
+
+Eðer kullanýcý ‘s’ tuþuna basarsa rakibimize saldýrýyoruz:
+
+if hamle == 's':
+siz.saldýr(rakip)
+
+Saldýrýnýn ardýndan hem kendi durumumuzu hem de rakibimizin durumunu görüntülüyoruz:
+
+print('Rakibinizin durumu')
+rakip.mevcut_durumu_görüntüle()
+
+print('Sizin durumunuz')
+siz.mevcut_durumu_görüntüle()
+
+Eðer kullanýcý ‘k’ tuþuna basarsa:
+
+if hamle == 'k':
+...
+
+...sýnýf içinde tanýmladýðýmýz kaç() metodunu çalýþtýrýyoruz:
+
+def kaç(self):
+print('Kaçýlýyor...')
+for i in range(10):
+time.sleep(.3)
+print('\n', flush=True)
+
+print('Rakibiniz sizi yakaladý')
+
+Burada 300’er milisaniyelik aralýklarla ‘\n’ kaçýþ dizisini kullanarak bir alt satýra geçiyoruz.
+
+Kullanýcýnýn ‘q’ tuþuna basmasý halinde ise oyundan derhal çýkýyoruz:
+
+if hamle == 'q':
+siz.oyundan_çýk()
+
+Bu örnek kodlar bize sýnýflar ve nesneler hakkýnda epey bilgi verdi. Ayrýca bu kodlar sayesinde önceki bilgilerimizi de pekiþtirmiþ olduk.
+

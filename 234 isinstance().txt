@@ -1,0 +1,27 @@
+
+isinstance()
+
+Hatýrlarsanýz daha ilk derslerimizde öðrendiðimiz type() adlý bir fonksiyon vardý. Bu fonksiyonu bir nesnenin hangi veri tipinde olduðunu tespit etmek için kullanýyorduk:
+
+>>> type('istihza')
+
+<class 'str'>
+
+Ýþte buna benzer þekilde, tip denetimi için kullanabileceðimiz bir fonksiyon daha var. Bu fonksiyonun adý isinstance().
+
+Bu fonksiyonu þöyle kullanýyoruz:
+
+>>> isinstance('istihza', str)
+
+True
+
+Gördüðünüz gibi 'istihza' gerçekten bir karakter dizisi (str) olduðu için komutumuz True çýktýsý veriyor.
+
+Bir de þuna bakalým:
+
+>>> isinstance('istihza', list)
+
+False
+
+'istihza' bir liste (list) olmadýðý için komutumuz bu kez False çýktýsý verdi.
+

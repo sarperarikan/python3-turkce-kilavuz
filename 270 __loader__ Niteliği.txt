@@ -1,0 +1,30 @@
+
+__loader__ Niteliði
+
+Python’da içe aktarýlan bütün modüllerin __loader__ adlý bir niteliði bulunur. Bu nitelik, ilgili modülü içe aktaran mekanizma hakkýnda bize çeþitli bilgiler veren birtakým araçlar sunar:
+
+>>> import os
+>>> yükleyici = os.__loader__
+
+>>> dir(yükleyici)
+
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__',
+ '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__',
+ '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__',
+ '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__',
+ '__str__', '__subclasshook__', '__weakref__', '_cache_bytecode',
+ 'exec_module', 'get_code', 'get_data', 'get_filename', 'get_source',
+ 'is_package', 'load_module', 'name', 'path', 'path_mtime', 'path_stats',
+ 'set_data', 'source_to_code']
+
+Mesela, içe aktardýðýnýz bir modülün kaynak kodlarýný görüntülemek için bu modülden yararlanabilirsiniz:
+
+>>> import webbrowser
+>>> yükleyici = webbrowser.__loader__
+>>> kaynak = yükleyici.get_data(webbrowser.__file__)
+>>> kaynak
+
+Burada, daha önce öðrendiðimiz __file__ niteliðini kullandýðýmýza dikkat edin. __loader__ niteliðinin get_data() adlý metodu, parametre olarak, sorgulayacaðýmýz modülün dizin adresini ister. Bir modülün dizin adresini __file__ niteliði yardýmýyla elde edebileceðimizi biliyoruz. Dolayýsýyla da get_data() metoduna parametre olarak webbrowser.__file__ kodunu veriyoruz. Elde ettiðimiz þey ise, sorguladýðýmýz modülün kaynak kodlarýný içeren bir bayt (bytes) veri tipi oluyor.
+
+__loader__, günlük olarak kullanacaðýmýz bir araç deðil. Eðer yazdýðýnýz kodlarda bu niteliðin sunduðu olanaklara ihtiyaç duyarsanýz, doðrudan bu nitelik yerine pkgutil adlý bir modülü kullanabilirsiniz.
+

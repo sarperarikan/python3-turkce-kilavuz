@@ -1,0 +1,19 @@
+
+Farklý Ýçe Aktarma Yöntemleri
+
+Biz þimdiye kadar, modülleri import modül_adý þeklinde içe aktardýk. Esasýnda standart içe aktarma yöntemi de budur. Bir modülü bu þekilde içe aktardýðýmýz zaman, modül adýný kullanarak, o modülün içeriðine eriþebiliriz:
+
+>>> import sys
+>>> sys.version #Python'ýn sürümünü verir
+
+veya:
+
+>>> import os
+>>> os.name #Ýþletim sistemimizin adýný verir
+
+gibi...
+
+Ancak Python’da bir modülü içe aktarmanýn tek yöntemi bu deðildir. Eðer istersek modülleri daha farklý þekillerde de içe aktarabiliriz.
+
+Gelin þimdi bu alternatif modül aktarma biçimlerinin neler olduðunu görelim.
+

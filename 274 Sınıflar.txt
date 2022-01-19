@@ -1,0 +1,11 @@
+
+Sýnýflar
+
+Nesne tabanlý programlamanýn temelinde, yukarýdaki giriþ bölümünde de adýný andýðýmýz ‘sýnýf’ (class) adlý bir kavram bulunur. Bu bölümde, bu temel kavramý hakkýyla ele almaya çalýþacaðýz.
+
+Peki tam olarak nedir bu sýnýf denen þey?
+
+Çok kaba ve oldukça soyut bir þekilde tanýmlayacak olursak, sýnýflar, nesne üretmemizi saðlayan veri tipleridir. Ýþte nesne tabanlý programlama, adýndan da anlaþýlacaðý gibi, nesneler (ve dolayýsýyla sýnýflar) temel alýnarak gerçekleþtirilen bir programlama faaliyetidir.
+
+‘Hiçbir þey anlamadým!’ dediðinizi duyar gibiyim. Çünkü yukarýdaki taným, ‘nesne’ ne demek, ‘sýnýf’ ne anlama geliyor gibi sorulara cevap vermiyor. Yani programcýlýk açýsýndan ‘nesne’ ve ‘sýnýf’ kelimelerini burada ne anlamda kullandýðýmýzý, yukarýdaki tanýma bakarak kestiremiyoruz. Eðer siz de bu fikirdeyseniz okumaya devam edin...
+
