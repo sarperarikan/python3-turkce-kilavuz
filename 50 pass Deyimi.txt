@@ -1,0 +1,73 @@
+
+pass Deyimi
+
+pass kelimesi Ýngilizcede ‘geçmek, pas geçmek’ gibi anlamlara gelir. Python’daki kullanýmý da bu anlama oldukça yakýndýr. Biz bu deyimi Pyhon’da ‘görmezden gel, hiçbir þey yapma’ anlamýnda kullanacaðýz.
+
+Dilerseniz pass deyimini tarif etmeye çalýþmak yerine bu deyimi bir örnek üzerinde açýklamaya çalýþalým.
+
+Hatýrlarsanýz yukarýda þöyle bir örnek vermiþtik:
+
+while True:
+parola = input("parola belirleyin: ")
+
+if not parola:
+print("parola bölümü boþ geçilemez!")
+
+elif len(parola) in range(3, 8): #eðer parolanýn uzunluðu 3 ile 8 karakter
+#aralýðýnda ise...
+print("Yeni parolanýz", parola)
+break
+
+else:
+print("parola 8 karakterden uzun 3 karakterden kýsa olmamalý")
+
+Burada mesela eðer kullanýcý parolayý boþ býrakýrsa ‘parola bölümü boþ geçilemez!’ uyarýsý gösteriyoruz. Þimdi o if bloðunu þöyle yazdýðýmýzý düþünün:
+
+while True:
+parola = input("parola belirleyin: ")
+
+if not parola:
+pass
+
+elif len(parola) in range(3, 8): #eðer parolanýn uzunluðu 3 ile 8 karakter
+#aralýðýnda ise...
+print("Yeni parolanýz", parola)
+break
+
+else:
+print("parola 8 karakterden uzun 3 karakterden kýsa olmamalý")
+
+Burada, eðer kullanýcý parolayý boþ býrakýrsa programýmýz hiçbir þey yapmadan yoluna devam edecektir. Yani burada pass deyimi yardýmýyla programýmýza þu emri vermiþ oluyoruz:
+
+Eðer kullanýcý parolayý boþ geçerse görmezden gel. Hiçbir þey yapmadan yoluna devam et!
+
+Baþka bir örnek daha verelim:
+
+while True:
+sayý = int(input("Bir sayý girin: "))
+
+if sayý == 0:
+break
+
+elif sayý < 0:
+pass
+
+else:
+print(sayý)
+
+Burada eðer kullanýcý 0 sayýsýný girerse programýmýz sona erer (break deyimini biraz sonra inceleyeceðiz). Eðer kullanýcý 0‘dan küçük bir sayý girerse, yani kullanýcýnýn girdiði sayý eksi deðerli ise, pass deyimininin etkisiyle programýmýz hiçbir þey yapmadan yoluna devam eder. Bu koþullarýn dýþýndaki durumlarda ise programýmýz kullanýcýnýn girdiði sayýlarý ekrana yazdýracaktýr.
+
+Yukarýda anlatýlan durumlarýn dýþýnda, pass deyimini kodlarýnýz henüz taslak aþamasýnda olduðu zaman da kullanabilirsiniz. Örneðin, diyelim ki bir kod yazýyorsunuz. Programýn gidiþatýna göre, bir noktada yapmanýz gereken bir iþlem var, ama henüz ne yapacaðýnýza karar vermediniz. Böyle bir durumda pass deyiminden yararlanabilirsiniz. Mesela birtakým if deyimleri yazmayý düþünüyor olun:
+
+if .....:
+böyle yap
+
+elif .....:
+þöyle yap
+
+else:
+pass
+
+Burada henüz else bloðunda ne yapýlacaðýna karar vermemiþ olduðunuz için, oraya bir pass koyarak durumu þimdilik geçiþtiriyorsunuz. Program son haline gelene kadar oraya bir þeyler yazmýþ olacaksýnýz.
+
+Sözün özü, pass deyimlerini, herhangi bir iþlem yapýlmasýnýn gerekli olmadýðý durumlar için kullanýyoruz. Ýlerde iþe yarar programlar yazdýðýnýzda, bu pass deyiminin göründüðünden daha faydalý bir araç olduðunu anlayacaksýnýz.

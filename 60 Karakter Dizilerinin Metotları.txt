@@ -1,0 +1,699 @@
+
+Karakter Dizilerinin Metotlarý
+
+Geçen bölümde karakter dizilerinin genel özelliklerinden söz ettik. Bu ikinci bölümde ise karakter dizilerini biraz daha ayrýntýlý bir þekilde incelemeye ve karakter dizilerinin yepyeni özelliklerini görmeye baþlayacaðýz.
+
+Hatýrlarsanýz, geçen bölümün en baþýnda, metot diye bir þeyden söz edeceðimizi söylemiþtik. Orada da kabaca tarif ettiðimiz gibi, metotlar Python’da nesnelerin niteliklerini deðiþtirmemizi, sorgulamamýzý veya bu nesnelere yeni özellikler katmamýzý saðlayan araçlardýr. Metotlar sayesinde karakter dizilerini istediðimiz gibi eðip bükebileceðiz.
+
+Geçen bölümün sonlarýna doðru, bir karakter dizisinin hangi metotlara sahip olduðunu þu komut yardýmýyla listeleyebileceðimizi öðrenmiþtik:
+
+>>> dir("")
+
+Bu komutu verdiðinizde aldýðýnýz çýktýdan da gördüðünüz gibi, karakter dizilerinin 40‘ýn üzerinde metodu var. Dolayýsýyla metot sayýsýnýn çokluðu gözünüzü korkutmuþ olabilir. Ama aslýnda buna hiç lüzum yok. Çünkü programcýlýk maceranýzda bu metotlarýn bazýlarýný ya çok nadiren kullanacaksýnýz, ya da hiç kullanmayacaksýnýz. Çok kullanýlan metotlar belli baþlýdýr. Elbette bütün metotlar hakkýnda fikir sahibi olmak gerekir. Zaten siz de göreceksiniz ki, bu metotlar kullandýkça aklýnýzda kalacak. Doðal olarak çok kullandýðýnýz metotlarý daha kolay öðreneceksiniz. Eðer bir program yazarken hangi metodu kullanmanýz gerektiðini veya kullanacaðýnýz metodun ismini hatýrlayamazsanýz etkileþimli kabukta dir("") gibi bir komut verip çýkan sonucu incelemek pek zor olmasa gerek. Ayrýca hatýrlayamadýðýnýz bir metot olmasý durumunda dönüp bu sayfalarý tekrar gözden geçirme imkanýna da sahipsiniz. Unutmayýn, bütün metotlarý ve bu metotlarýn nasýl kullanýldýðýný ezbere bilmeniz zaten beklenmiyor. Metotlarý hatýrlayamamanýz gayet normal. Böyle bir durumda referans kitaplarýna bakmak en doðal hakkýnýz.
+
+
+replace()
+
+Karakter dizisi metotlarý arasýnda inceleyeceðimiz ilk metot replace() metodu olacak. replace kelimesi Türkçede ‘deðiþtirmek, yerine koymak’ gibi anlamlar taþýr. Ýþte bu metodun yerine getirdiði görev de tam olarak budur. Yani bu metodu kullanarak bir karakter dizisi içindeki karakterleri baþka karakterlerle deðiþtirebileceðiz.
+
+Peki bu metodu nasýl kullanacaðýz? Hemen bir örnek verelim:
+
+>>> kardiz = "elma"
+
+Burada “elma” deðerini taþýyan kardiz adlý bir karakter dizisi tanýmladýk. Þimdi bu karakter dizisinin içinde geçen “e” harfini “E” ile deðiþtirelim. Dikkatlice bakýn:
+
+>>> kardiz.replace("e", "E")
+
+'Elma'
+
+Gördüðünüz gibi, replace() son derece yararlý ve kullanýmý oldukça kolay bir metot. Bu arada bu ilk metodumuz sayesinde Python’daki metotlarýn nasýl kullanýlacaðý konusunda da bilgi edinmiþ olduk. Yukarýdaki örneklerin bize gösterdiði gibi þöyle bir formülle karþý karþýyayýz:
+
+karakter_dizisi.metot(parametre)
+
+Metotlar karakter dizilerinden nokta ile ayrýlýr. Python’da bu yönteme ‘noktalý gösterim’ (dot notation) adý verilir.
+
+Bu arada metotlarýn görünüþ ve kullaným olarak fonksiyonlara ne kadar benzediðine dikkat edin. Týpký fonksiyonlarda olduðu gibi, metotlar da birtakým parametreler alabiliyor.
+
+Yukarýdaki örnekte, replace() metodunun iki farklý parametre aldýðýný görüyoruz. Bu metoda verdiðimiz ilk parametre deðiþtirmek istediðimiz karakter dizisini gösteriyor. Ýkinci parametre ise birinci parametrede belirlediðimiz karakter dizisinin yerine ne koyacaðýmýzý belirtiyor. Yani replace() metodu þöyle bir formüle sahiptir:
+
+karakter_dizisi.replace(eski_karakter_dizisi, yeni_karakter_dizisi)
+
+Gelin isterseniz elimizin alýþmasý için replace() metoduyla birkaç örnek daha verelim:
+
+>>> kardiz = "memleket"
+>>> kardiz.replace("ket", "KET")
+
+'memleKET'
+
+Burada gördüðünüz gibi, replace() metodu ayný anda birden fazla karakteri deðiþtirme yeteneðine de sahip.
+
+replace() metodunun iki parametreden oluþtuðunu, ilk parametrenin deðiþtirilecek karakter dizisini, ikinci parametrenin ise ilk karakter dizisinin yerine geçecek yeni karakter dizisini gösterdiðini söylemiþtik. Aslýnda replace() metodu üçüncü bir parametre daha alýr. Bu parametre ise bir karakter dizisi içindeki karakterlerin kaç tanesinin deðiþtirileceðini gösterir. Eðer bu parametreyi belirtmezsek replace() metodu ilgili karakterlerin tamamýný deðiþtirir. Yani:
+
+>>> kardiz = "memleket"
+
+>>> kardiz.replace("e", "")
+
+'mmlkt'
+
+Gördüðünüz gibi, replace() metodunu iki parametre ile kullanýp üçüncü parametreyi belirtmediðimizde, “memleket” kelimesi içindeki bütün “e” harfleri boþ karakter dizisi ile deðiþtiriliyor (yani bir anlamda siliniyor).
+
+Þimdi þu örneðe bakalým:
+
+>>> kardiz.replace("e", "", 1)
+
+'mmleket'
+
+Burada replace() metodunu üçüncü bir parametre ile birlikte kullandýk. Üçüncü parametre olarak 1 sayýsýný verdiðimiz için replace() metodu sadece tek bir “e” harfini sildi.
+
+Bu üçüncü parametreyi, silmek istediðiniz harf sayýsý kadar artýrabilirsiniz. Mesela:
+
+>>> kardiz.replace("e", "", 2)
+
+'mmlket'
+
+>>> kardiz.replace("e", "", 3)
+
+'mmlkt'
+
+Burada ilk örnekte üçüncü parametre olarak 2 sayýsýný kullandýðýmýz için, ‘replace’ iþleminden karakter dizisi içindeki 2 adet “e” harfi etkilendi. Üçüncü örnekte ise “memleket” adlý karakter dizisi içinde geçen üç adet “e” harfi deðiþiklikten etkilendi.
+
+Karakter dizileri konusunun ilk bölümünde ‘deðiþtirilebilirlik’ (mutability) üzerine söylediðimiz þeylerin burada da geçerli olduðunu unutmayýn. Orada da söylediðimiz gibi, karakter dizileri deðiþtirilemeyen veri tipleridir. Dolayýsýyla eðer bir karakter dizisi üzerinde deðiþiklik yapmak istiyorsanýz, o karakter dizisini baþtan tanýmlamalýsýnýz. Örneðin:
+
+>>> meyve = "elma"
+>>> meyve = meyve.replace("e", "E")
+>>> meyve
+
+'Elma'
+
+Böylece replace() metodunu incelemiþ olduk. Sýrada üç önemli metot var.
+
+
+split(), rsplit(), splitlines()
+
+Þimdi size þöyle bir soru sorduðumu düþünün: Acaba aþaðýdaki karakter dizisinde yer alan bütün kelimelerin ilk harfini nasýl alýrýz?
+
+>>> kardiz = "Ýstanbul Büyükþehir Belediyesi"
+
+Yani diyorum ki burada “ÝBB” gibi bir çýktýyý nasýl elde ederiz?
+
+Sadece bu karakter dizisi söz konusu ise, elbette karakter dizilerinin dilimlenme özelliðinden yararlanarak, kardiz deðiþkeni içindeki “Ý”, “B”, ve “B” harflerini tek tek alabiliriz:
+
+>>> print(kardiz[0], kardiz[9], kardiz[20], sep="")
+
+ÝBB
+
+Ancak bu yöntemin ne kadar kullanýþsýz olduðu ortada. Çünkü bu metot yalnýzca “Ýstanbul Büyükþehir Belediyesi” adlý karakter dizisi için geçerlidir. Eðer karakter dizisi deðiþirse bu yöntem de çöpe gider. Bu soruna genel bir çözüm üretebilsek ne güzel olurdu, deðil mi?
+
+Ýþte Python’da bu sorunu çözmemizi saðlayacak çok güzel bir metot bulunur. Bu metodun adý split().
+
+Bu metodun görevi karakter dizilerini belli noktalardan bölmektir. Zaten split kelimesi Türkçede ‘bölmek, ayýrmak’ gibi anlamlara gelir. Ýþte bu metot, üzerine uygulandýðý karakter dizilerini parçalarýna ayýrýr. Örneðin:
+
+>>> kardiz = "Ýstanbul Büyükþehir Belediyesi"
+>>> kardiz.split()
+
+['Ýstanbul', 'Büyükþehir', 'Belediyesi']
+
+Gördüðünüz gibi bu metot sayesinde “Ýstanbul Büyükþehir Belediyesi” adlý karakter dizisini kelimelere bölmeyi baþardýk. Eðer bu çýktý üzerine bir for döngüsü uygularsak þöyle bir sonuç elde ederiz:
+
+>>> for i in kardiz.split():
+... print(i)
+...
+Ýstanbul
+Büyükþehir
+Belediyesi
+
+Artýk bu bilgiyi kullanarak þöyle bir program yazabiliriz:
+
+kardiz = input("Kýsaltmasýný öðrenmek istediðiniz kurum adýný girin: ")
+
+for i in kardiz.split():
+print(i[0], end="")
+
+Burada kullanýcý hangi kurum adýný girerse girsin, bu kurum adýnýn her kelimesinin ilk harfi ekrana dökülecektir. Örneðin kullanýcý burada “Türkiye Büyük Millet Meclisi” ifadesini girmiþse split() metodu öncelikle bu ifadeyi alýp þu þekle dönüþtürür:
+
+['Türkiye', 'Büyük', 'Millet', 'Meclisi']
+
+Daha sonra biz bu çýktý üzerinde bir for döngüsü kurarsak bu kelime grubunun her bir öðesine tek tek müdahale etme imkanýna eriþiriz. Örneðin yukarýdaki programda bu kelime grubunun her bir öðesinin ilk harfini tek tek ekrana döktük ve “TBMM” çýktýsýný elde ettik.
+
+Yukarýdaki örneklerde split() metodunu herhangi bir parametre içermeyecek þekilde kullandýk. Yani metodun parantezleri içine herhangi bir þey eklemedik. split() metodunu bu þekilde parametresiz olarak kullandýðýmýzda bu metot karakter dizilerini bölerken boþluk karakterini ölçüt alacaktýr. Yani karakter dizisi içinde karþýlaþtýðý her boþluk karakterinde bir bölme iþlemi uygulayacaktýr. Ama bazen istediðimiz þey, bir karakter dizisini boþluklardan bölmek deðildir. Mesela þu örneðe bakalým:
+
+>>> kardiz = "Bolvadin, Kilis, Siverek, Ýskenderun, Ýstanbul"
+
+Eðer bu karakter dizisi üzerine split() metodunu parametresiz olarak uygularsak þöyle bir çýktý elde ederiz:
+
+['Bolvadin,', 'Kilis,', 'Siverek,', 'Ýskenderun,', 'Ýstanbul']
+
+split() metoduna herhangi bir parametre vermediðimiz için bu metot karakter dizisi içindeki kelimeleri boþluklardan böldü. Bu yüzden karakter dizisi içindeki virgül iþaretleri de bölünen kelimeler içinde görünüyor:
+
+>>> kardiz = kardiz.split()
+>>> for i in kardiz:
+... print(i)
+...
+Bolvadin,
+Kilis,
+Siverek,
+Ýskenderun,
+Ýstanbul
+
+Bu arada týpký replace() metodunu anlatýrken gösterdiðimiz gibi, kardiz.split() ifadesini de yine kardiz adýný taþýyan bir deðiþkene atadýk. Böylece kardiz.split() komutu ile elde ettiðimiz deðiþiklik kaybolmamýþ oldu. Karakter dizilerinin deðiþtirilemeyen bir veri tipi olduðunu biliyorsunuz. Dolayýsýyla yukarýdaki karakter dizisi üzerine split() metodunu uyguladýðýmýzda aslýnda orijinal karakter dizisi üzerinde herhangi bir deðiþiklik yapmýþ olmuyoruz. Çýktýda görünen deðiþikliðin orijinal karakter dizisini etkileyebilmesi için eski karakter dizisini silip, yerine yeni deðerleri yazmamýz gerekiyor. Bunu da kardiz = kardiz.split() gibi bir komutla hallediyoruz.
+
+Nerede kalmýþtýk? Gördüðünüz gibi split() metodu parametresiz olarak kullanýldýðýnda karakter dizisini boþluklardan bölüyor. Ama yukarýdaki örnekte karakter dizisini boþluklardan deðil de virgüllerden bölsek çok daha anlamlý bir çýktý elde edebiliriz.
+
+Dikkatlice inceleyin:
+
+>>> kardiz = "Bolvadin, Kilis, Siverek, Ýskenderun, Ýstanbul"
+>>> kardiz = kardiz.split(",")
+>>> print(kardiz)
+
+['Bolvadin', ' Kilis', ' Siverek', ' Ýskenderun', ' Ýstanbul']
+
+>>> for i in kardiz:
+... print(i)
+...
+Bolvadin
+Kilis
+Siverek
+Ýskenderun
+Ýstanbul
+
+Gördüðünüz gibi, split() metodu tam da istediðimiz gibi, karakter dizisini bu kez boþluklardan deðil virgüllerden böldü. Peki bunu nasýl baþardý? Aslýnda bu sorunun cevabý gayet net bir þekilde görünüyor. Dikkat ederseniz yukarýdaki örnekte split() metoduna parametre olarak virgül karakter dizisini verdik. Yani þöyle bir þey yazdýk:
+
+kardiz.split(",")
+
+Bu sayede split() metodu karakter dizisini virgüllerden bölmeyi baþardý. Tahmin edebileceðiniz gibi, split() metoduna hangi parametreyi verirseniz bu metot ilgili karakter dizisini o karakterin geçtiði yerlerden bölecektir. Yani mesela siz bu metoda “l” parametresini verirseniz, bu metot da ‘l’ harfi geçen yerden karakter dizisini bölecektir:
+
+>>> kardiz.split("l")
+
+['Bo', 'vadin, Ki', 'is, Siverek, Ýskenderun, Ýstanbu', '']
+
+>>> for i in kardiz.split("l"):
+... print(i)
+...
+Bo
+vadin, Ki
+is, Siverek, Ýskenderun, Ýstanbu
+
+Eðer parametre olarak verdiðiniz deðer karakter dizisi içinde hiç geçmiyorsa karakter dizisi üzerinde herhangi bir deðiþiklik yapýlmaz:
+
+>>> kardiz.split("z")
+
+['Bolvadin, Kilis, Siverek, Ýskenderun, Ýstanbul']
+
+Ayný þey, split() metodundan önce öðrendiðimiz replace() metodu için de geçerlidir. Yani eðer deðiþtirilmek istenen karakter, karakter dizisi içinde yer almýyorsa herhangi bir iþlem yapýlmaz.
+
+split() metodu çoðunlukla, yukarýda anlattýðýmýz þekilde parametresiz olarak veya tek parametre ile kullanýlýr. Ama aslýnda bu metot ikinci bir parametre daha alýr. Bu ikinci parametre, karakter dizisinin kaç kez bölüneceðini belirler:
+
+>>> kardiz = "Ankara Büyükþehir Belediyesi"
+
+>>> kardiz.split(" ", 1)
+
+['Ankara', 'Büyükþehir Belediyesi']
+
+>>> kardiz.split(" ", 2)
+
+['Ankara', 'Büyükþehir', 'Belediyesi']
+
+Gördüðünüz gibi, ilk örnekte kullandýðýmýz 1 sayýsý sayesinde bölme iþlemi karakter dizisi üzerine bir kez uygulandý. Ýkinci örnekte ise 2 sayýsýnýn etkisiyle karakter dizimiz iki kez bölme iþlemine maruz kaldý.
+
+Elbette, split() metodunun ikinci parametresini kullanabilmek için ilk parametreyi de mutlaka yazmanýz gerekir. Aksi halde Python ne yapmaya çalýþtýðýnýzý anlayamaz:
+
+>>> kardiz.split(2)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: Can't convert 'int' object to str implicitly
+
+Gördüðünüz gibi, ilk parametreyi es geçip doðrudan ikinci parametreyi yazmaya çalýþtýðýmýzda Python parametre olarak verdiðimiz 2 sayýsýnýn bölme ölçütü olduðunu zannediyor. Yukarýdaki hatayý engellemek için bölme ölçütünü de açýkça belirtmemiz gerekir. Yukarýdaki örnekte bölme ölçütümüz bir adet boþluk karakteri idi. Bildiðiniz gibi, bölme ölçütü herhangi bir þey olabilir. Mesela virgül.
+
+>>> arkadaþlar = "Ahmet, Mehmet, Kezban, Mualla, Süreyya, Veli"
+>>> arkadaþlar.split(",", 3)
+
+['Ahmet', ' Mehmet', ' Kezban', ' Mualla, Süreyya, Veli']
+
+Burada da bölme ölçütü olarak virgül karakterini kullandýk ve arkadaþlar adlý karakter dizisi üzerine 3 kez bölme iþlemi uyguladýk. Ýlk bölme iþlemi “Ahmet” karakter dizisini; ikinci bölme iþlemi “Mehmet” karakter dizisini; üçüncü bölme iþlemi ise “Kezban” karakter dizisini ayýrdý. arkadaþlar adlý karakter dizisinin geri kalanýný oluþturan “Mualla, Süreyya, Veli” kýsmý ise herhangi bir bölme iþlemine tabi tutulmadan tek parça olarak kaldý.
+
+split() metoduyla son bir örnek verip yolumuza devam edelim.
+
+Bildiðiniz gibi sys modülünün version deðiþkeni bize bir karakter dizisi veriyor:
+'3.5.1 (default, 20.04.2016, 12:24:55) [GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux' 
+Bu karakter dizisi içinden yalnýzca sürüm kýsmýný ayýklamak için karakter dizilerinin dilimlenme özelliðinden yararlanabiliyoruz:
+>>> sürüm = sys.version >>> print(sürüm[:5]) 3.5.1 
+Bu iþlemin bir benzerini split() metoduyla da yapabiliriz. Dikkatlice inceleyin:
+
+>>> sürüm = sys.version
+>>> sürüm.split()
+
+['3.3.0', '(v3.3.0:bd8afb90ebf2,', 'Sep', '29', '2012,', '10:55:48)',
+ '[MSC', 'v.1600', '32', 'bit', '(Intel)]']
+
+Gördüðünüz gibi, sys.version komutuna split() metodunu uyguladýðýmýzda, üzerinde iþlem yapmasý çok daha kolay olan bir veri tipi elde ediyoruz. Bu veri tipinin adý ‘liste’. Önceki derslerimizde öðrendiðimiz dir() fonksiyonunun da liste adlý bu veri tipini verdiðini hatýrlýyor olmalýsýnýz. Ýlerleyen derslerde, týpký karakter dizileri ve sayýlar adlý veri tipleri gibi, liste adlý veri tipini de bütün ayrýntýlarýyla inceleyeceðiz. Þimdilik biz sadece bazý durumlarda liste veri tipinin karakter dizilerine kýyasla daha kullanýþlý bir veri tipi olduðunu bilelim yeter.
+
+Yukarýdaki örnekten de gördüðünüz gibi, sys.version komutunun çýktýsýný split() metodu yardýmýyla boþluklardan bölerek bir liste elde ettik. Bu listenin ilk öðesi, kullandýðýmýz Python serisinin sürüm numarasýný verecektir:
+>>> print(sürüm.split()[0]) 3.5.1 
+Böylece split() metodunu öðrenmiþ olduk. Gelelim rsplit() metoduna...
+
+rsplit() metodu her yönüyle split() metoduna benzer. split() ile rsplit() arasýndaki tek fark, split() metodunun karakter dizisini soldan saða, rsplit() metodunun ise saðdan sola doðru okumasýdýr. Þu örnekleri dikkatlice inceleyerek bu iki metot arasýndaki farký bariz bir þekilde görebilirsiniz:
+
+>>> kardiz.split(" ", 1)
+
+['Ankara', 'Büyükþehir Belediyesi']
+
+>>> kardiz.rsplit(" ", 1)
+
+['Ankara Büyükþehir', 'Belediyesi']
+
+Gördüðünüz gibi, split() metodu karakter dizisini soldan saða doðru okuduðu için bölme iþlemini “Ankara” karakter dizisine uyguladý. rsplit() metodu ise karakter dizisini saðdan sola soðru okuduðu için bölme iþlemini “Belediyesi” adlý karakter dizisine uyguladý.
+
+rsplit() metodunun pek yaygýn kullanýlan bir metot olmadýðýný belirterek splitlines() metoduna geçelim.
+
+Bildiðiniz gibi, split() metodunu bir karakter dizisini kelime kelime ayýrabilmek için kullanabiliyoruz. splitlines() metodunu ise bir karakter dizisini satýr satýr ayýrmak için kullanabiliriz. Mesela elinizde uzun bir metin olduðunu ve amacýnýzýn bu metin içindeki herbir satýrý ayrý ayrý almak olduðunu düþünün. Ýþte splitlines() metoduyla bu amacýnýzý gerçekleþtirebilirsiniz. Hemen bir örnek verelim:
+
+metin = """Python programlama dili Guido Van Rossum adlý Hollandalý bir programcý
+tarafýndan 90'lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan, isminin
+Python olmasýna bakarak, bu programlama dilinin, adýný piton yýlanýndan aldýðýný
+düþünür. Ancak zannedildiðinin aksine bu programlama dilinin adý piton yýlanýndan
+gelmez. Guido Van Rossum bu programlama dilini, The Monty Python adlý bir Ýngiliz
+komedi grubunun, Monty Python's Flying Circus adlý gösterisinden esinlenerek
+adlandýrmýþtýr. Ancak her ne kadar gerçek böyle olsa da, Python programlama
+dilinin pek çok yerde bir yýlan figürü ile temsil edilmesi neredeyse bir gelenek
+halini almýþtýr diyebiliriz."""
+
+print(metin.splitlines())
+
+Bu programý çalýþtýrdýðýnýzda þöyle bir çýktý alýrsýnýz:
+
+['Python programlama dili Guido Van Rossum adlý Hollandalý bir programcý ',
+"tarafýndan 90'lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan,
+isminin", 'Python olmasýna bakarak, bu programlama dilinin, adýný piton
+yýlanýndan aldýðýný ', 'düþünür. Ancak zannedildiðinin aksine bu programlama
+dilinin adý piton yýlanýndan ', 'gelmez. Guido Van Rossum bu programlama
+dilini, The Monty Python adlý bir Ýngiliz ', "komedi grubunun, Monty Python's
+Flying Circus adlý gösterisinden esinlenerek ", 'adlandýrmýþtýr. Ancak her ne
+kadar gerçek böyle olsa da, Python programlama ', 'dilinin pek çok yerde bir
+yýlan figürü ile temsil edilmesi neredeyse bir gelenek ', 'halini almýþtýr
+diyebiliriz.']
+
+Gördüðünüz gibi, metnimiz Enter tuþuna bastýðýmýz noktalardan bölündü. Biz henüz bu çýktýyý nasýl deðerlendireceðimizi ve bu çýktýdan nasýl yararlanacaðýmýzý bilmiyoruz. Ayrýca þu anda bu çýktý gözünüze çok anlamlý görünmemiþ olabilir. Ama ‘Listeler’ adlý konuyu öðrendiðimizde bu çýktý size çok daha anlamlý görünecek.
+
+splitlines() metodu yukarýdaki gibi parametresiz olarak kullanýlabileceði gibi, bir adet parametre ile de kullanýlabilir. Bunu bir örnek üzerinde gösterelim:
+
+metin = """Python programlama dili Guido Van Rossum adlý Hollandalý bir programcý
+tarafýndan 90'lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan, isminin
+Python olmasýna bakarak, bu programlama dilinin, adýný piton yýlanýndan aldýðýný
+düþünür. Ancak zannedildiðinin aksine bu programlama dilinin adý piton yýlanýndan
+gelmez. Guido Van Rossum bu programlama dilini, The Monty Python adlý bir Ýngiliz
+komedi grubunun, Monty Python's Flying Circus adlý gösterisinden esinlenerek
+adlandýrmýþtýr. Ancak her ne kadar gerçek böyle olsa da, Python programlama
+dilinin pek çok yerde bir yýlan figürü ile temsil edilmesi neredeyse bir gelenek
+halini almýþtýr diyebiliriz."""
+
+print(metin.splitlines(True))
+
+Bu programý çalýþtýrdýðýmýzda þuna benzer bir sonuç elde ederiz:
+
+['Python programlama dili Guido Van Rossum adlý Hollandalý bir programcý \n',
+"tarafýndan 90'lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan,
+isminin \n", 'Python olmasýna bakarak, bu programlama dilinin, adýný piton
+yýlanýndan aldýðýný \n', 'düþünür. Ancak zannedildiðinin aksine bu programlama
+dilinin adý piton yýlanýndan \n', 'gelmez. Guido Van Rossum bu programlama
+dilini, The Monty Python adlý bir Ýngiliz \n', "komedi grubunun, Monty
+Python's Flying Circus adlý gösterisinden esinlenerek \n", 'adlandýrmýþtýr.
+Ancak her ne kadar gerçek böyle olsa da, Python programlama \n', 'dilinin pek
+çok yerde bir yýlan figürü ile temsil edilmesi neredeyse bir gelenek \n',
+'halini almýþtýr diyebiliriz.']
+
+Gördüðünüz gibi, parametresiz kullanýmda, program çýktýsýnda satýr baþý karakterleri (\n) görünmüyor. Ama eðer splitlines() metoduna parametre olarak True verirsek program çýktýsýnda satýr baþý karakterleri de görünüyor. Yazdýðýnýz programlarda ihtiyacýnýza göre splitlines() metodunu parametreli olarak veya parametresiz bir þekilde kullanabilirsiniz.
+
+
+lower()
+
+Mutlaka karþýlaþmýþsýnýzdýr. Bazý programlarda kullanýcýdan istenen veriler büyük-küçük harfe duyarlýdýr. Yani mesela kullanýcýdan bir parola isteniyorsa, kullanýcýnýn bu parolayý büyük-küçük harfe dikkat ederek yazmasý gerekir. Bu programlar açýsýndan, örneðin ‘parola’ ve ‘Parola’ ayný kelimeler deðildir. Mesela kullanýcýnýn parolasý ‘parola’ ise, bu kullanýcý programa ‘Parola’ yazarak giremez.
+
+Bazý baþka programlarda ise bu durumun tam tersi söz konusudur. Yani büyük-küçük harfe duyarlý programlarýn aksine bazý programlar da kullanýcýdan gelen verinin büyük harfli mi yoksa küçük harfli mi olduðunu önemsemez. Kullanýcý doðru kelimeyi büyük harfle de yazsa, küçük harfle de yazsa program istenen iþlemi gerçekleþtirir. Mesela Google’da yapýlan aramalar bu mantýk üzerine çalýþýr. Örneðin ‘kitap’ kelimesini Google’da aratýyorsanýz, bu kelimeyi büyük harfle de yazsanýz, küçük harfle de yazsanýz Google size ayný sonuçlarý gösterecektir. Google açýsýndan, aradýðýnýz kelimeyi büyük ya da küçük harfle yazmanýzýn bir önemi yoktur.
+
+Þimdi þöyle bir program yazdýðýmýzý düþünün:
+
+kiþi = input("Aradýðýnýz kiþinin adý ve soyadý: ")
+
+if kiþi == "Ahmet Öz":
+print("email: aoz@hmail.com")
+print("tel  : 02121231212")
+print("þehir: istanbul")
+
+elif kiþi == "Mehmet Söz":
+print("email: msoz@zmail.com")
+print("tel  : 03121231212")
+print("þehir: ankara")
+
+elif kiþi == "Mahmut Göz":
+print("email: mgoz@jmail.com")
+print("tel  : 02161231212")
+print("þehir: istanbul")
+
+else:
+print("Aradýðýnýz kiþi veritabanýnda yok!")
+
+Bu programýn doðru çalýþabilmesi için kullanýcýnýn, örneðin, Ahmet Öz adlý kiþiyi ararken büyük-küçük harfe dikkat etmesi gerekir. Eðer kullanýcý Ahmet Öz yazarsa o kiþiyle ilgili bilgileri alabilir, ama eðer mesela Ahmet öz yazarsa bilgileri alamaz. Peki acaba biz bu sorunun üstesinden nasýl gelebiliriz? Yani programýmýzýn büyük-küçük harfe duyarlý olmamasýný nasýl saðlayabiliriz?
+
+Bu iþi yapmanýn iki yolu var: Birincisi if bloklarýný her türlü ihtimali düþünerek yazabiliriz. Mesela:
+
+if kiþi == "Ahmet Öz" or "Ahmet öz" or "ahmet öz":
+...
+
+Ama burada bazý problemler var. Birincisi, kullanýcýnýn kaç türlü veri girebileceðini kestiremeyebilirsiniz. Ýkincisi, kestirebilseniz bile, her kiþi için olasýlýklarý girmeye çalýþmak eziyetten baþka bir þey deðildir...
+
+Ýþte burada imdadýmýza lower() metodu yetiþecek. Dikkatlice inceleyin:
+
+kiþi = input("Aradýðýnýz kiþinin adý ve soyadý: ")
+kiþi = kiþi.lower()
+
+if kiþi == "ahmet öz":
+print("email: aoz@hmail.com")
+print("tel  : 02121231212")
+print("þehir: istanbul")
+
+elif kiþi == "mehmet söz":
+print("email: msoz@zmail.com")
+print("tel  : 03121231212")
+print("þehir: ankara")
+
+elif kiþi == "mahmut göz":
+print("email: mgoz@jmail.com")
+print("tel  : 02161231212")
+print("þehir: istanbul")
+
+else:
+print("Aradýðýnýz kiþi veritabanýnda yok!")
+
+Artýk kullanýcý ‘ahmet öz’ de yazsa, ‘Ahmet Öz’ de yazsa, hatta ‘AhMeT öZ’ de yazsa programýmýz doðru çalýþacaktýr. Peki bu nasýl oluyor? Elbette lower() metodu sayesinde...
+
+Yukarýdaki örneklerin de bize gösterdiði gibi, lower() metodu, karakter dizisindeki bütün harfleri küçük harfe çeviriyor. Örneðin:
+
+>>> kardiz = "ELMA"
+>>> kardiz.lower()
+
+'elma'
+
+>>> kardiz = "arMuT"
+>>> kardiz.lower()
+
+'armut'
+
+>>> kardiz = "PYTHON PROGRAMLAMA"
+>>> kardiz.lower()
+
+'python programlama'
+
+Eðer karakter dizisi zaten tamamen küçük harflerden oluþuyorsa bu metot hiçbir iþlem yapmaz:
+
+>>> kardiz = "elma"
+>>> kardiz.lower()
+
+'elma'
+
+Ýþte verdiðimiz örnek programda da lower() metodunun bu özelliðinden yararlandýk. Bu metot sayesinde, kullanýcý ne tür bir kelime girerse girsin, bu kelimeler her halükarda küçük harfe çevrileceði için, if bloklarý kullanýcýdan gelen veriyi yakalayabilecektir.
+
+Gördüðünüz gibi, son derece kolay ve kullanýþlý bir metot bu. Ama bu metodun bir problemi var. Þu örneði dikkatlice inceleyin:
+
+>>> il = "ÝSTANBUL"
+>>> print(il.lower())
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python33\lib\encodings\cp857.py", line 19, in encode
+return codecs.charmap_encode(input,self.errors,encoding_map)[0]
+UnicodeEncodeError: 'charmap' codec can't encode character '\u0307' in position
+1: character maps to <undefined>
+
+Buradaki problem ‘Ý’ harfinden kaynaklanýyor. Python programlama dili bu harfi Türkçeye uygun bir þekilde küçültemediði için yukarýdaki hatayý alýyoruz. Yukarýdaki hatanýn tam olarak ne anlama geldiðini birkaç bölüm sonra anlayacaksýnýz. Biz þimdilik sadece Python’ýn ‘Ý’ harfini Türkçeye uygun olarak küçültemediðini bilelim yeter.
+
+Bir de þu örneðe bakalým:
+
+>>> il = "ADIYAMAN"
+>>> print(il.lower())
+
+adiyaman
+
+Gördüðünüz gibi, Python programlama dili ‘I’ harfini de düzgün küçültemiyor. ‘I’ harfinin küçük biçimi ‘ý’ olmasý gerekirken, bu metot ‘I’ harfini ‘i’ diye küçültüyor. Yani:
+
+>>> "I".lower()
+
+'i'
+
+Peki bu durumda ne yapacaðýz? Elimiz kolumuz baðlý oturacak mýyýz? Elbette hayýr! Biz bu tür küçük sorunlarý aþabilecek kadar Python bilgisine sahibiz. ‘Ý’ ve ‘I’ harfleri ile ilgili problemi, yalnýzca mevcut bilgilerimizi kullanarak rahatlýkla çözebiliriz:
+
+iller = "ISPARTA, ADIYAMAN, DÝYARBAKIR, AYDIN, BALIKESÝR, AÐRI"
+
+iller = iller.replace("I", "ý").replace("Ý", "i").lower()
+print(iller)
+
+Bu kodlarla yaptýðýmýz þey çok basit:
+
+
+Ýlk replace() metoduyla karakter dizisi içinde geçen bütün ‘I’ harflerini, ‘ý’ ile deðiþtiriyoruz. 
+Ýkinci replace() metoduyla karakter dizisi içinde geçen bütün ‘Ý’ harflerini ‘i’ ile deðiþtiriyoruz. 
+Bu iki iþlemin ardýndan karakter dizisi içinde geçen ‘I’ ve ‘Ý’ harflerini küçültmüþ olduk. Ancak öteki harfler henüz küçülmedi. O yüzden de karakter dizimiz üzerine bir de lower() metodunu uyguluyoruz. Böylece bütün harfler düzgün bir þekilde küçülmüþ oluyor. 
+Bu kodlarda farklý metotlarý uç uca nasýl eklediðimize dikkat edin. 
+
+Bu örnek size þunu göstermiþ olmalý: Aslýnda programlama dediðimiz þey gerçekten de çok basit parçalarýn uygun bir þekilde birleþtirilmesinden ibaret. Týpký bir yap-bozun parçalarýný birleþtirmek gibi...
+
+Ayrýca bu örnek sizi bir gerçekle daha tanýþtýrýyor: Gördüðünüz gibi, artýk Python’da o kadar ilerlediniz ki Python’ýn problemlerini tespit edip bu problemlere çözüm dahi üretebiliyorsunuz!
+
+
+upper()
+
+Bu metot biraz önce öðrendiðimiz lower() metodunun yaptýðý iþin tam tersini yapar. Hatýrlarsanýz lower() metodu yardýmýyla karakter dizileri içindeki harfleri küçültüyorduk. upper() metodu ise bu harfleri büyütmemizi saðlar.
+
+Örneðin:
+
+>>> kardiz = "kalem"
+>>> kardiz.upper()
+
+'KALEM'
+
+lower() metodunu anlatýrken, kullanýcýdan gelen verileri belli bir düzene sokmak konusunda bu metodun oldukça faydalý olduðunu söylemiþtik. Kullanýcýdan gelen verilerin lower() metodu yardýmýyla standart bir hale getirilmesi sayesinde, kullanýcýnýn girdiði kelimelerin büyük-küçük harfli olmasýnýn önemli olmadýðý programlar yazabiliyoruz. Elbette eðer isterseniz kullanýcýdan gelen bütün verileri lower() metoduyla küçük harfe çevirmek yerine, upper() metoduyla büyük harfe çevirmeyi de tercih edebilirsiniz. Python programcýlarý genellikle kullanýcý verilerini standart bir hale getirmek için bütün harfleri küçültmeyi tercih eder, ama tabii ki sizin bunun tersini yapmak istemenizin önünde hiçbir engel yok.
+
+Diyelim ki, þehirlere göre hava durumu bilgisi veren bir program yazmak istiyorsunuz. Bunun için þöyle bir kod yazarak iþe baþlayabilirsiniz:
+
+þehir = input("Hava durumunu öðrenmek için bir þehir adý girin: ")
+
+if þehir == "ADANA":
+print("parçalý bulutlu")
+
+elif þehir == "ERZURUM":
+print("karla karýþýk yaðmurlu")
+
+elif þehir == "ANTAKYA":
+print("açýk ve güneþli")
+
+else:
+print("Girdiðiniz þehir veritabanýnda yok!")
+
+Burada programýmýzýn doðru çalýþabilmesi, kullanýcýnýn þehir adlarýný büyük harfle girmesine baðlýdýr. Örneðin programýmýz ‘ADANA’ cevabýný kabul edecek, ama mesela ‘Adana’ cevabýný kabul etmeyecektir. Bunu engellemek için lower() metodunu kullanabileceðimizi biliyoruz. Bu sorunu çözmek için ayný þekilde upper() metodunu da kullanabiliriz:
+
+þehir = input("Hava durumunu öðrenmek için bir þehir adý girin: ")
+
+þehir = þehir.upper()
+
+if þehir == "ADANA":
+print("parçalý bulutlu")
+
+elif þehir == "ERZURUM":
+print("karla karýþýk yaðmurlu")
+
+elif þehir == "ANTAKYA":
+print("açýk ve güneþli")
+
+else:
+print("Girdiðiniz þehir veritabanýnda yok!")
+
+Burada yazdýðýmýz þehir = þehir.upper() kodu sayesinde artýk kullanýcý þehir adýný büyük harfle de girse, küçük harfle de girse programýmýz düzgün çalýþacaktýr.
+
+Hatýrlarsanýz lower() metodunu anlatýrken bu metodun bazý Türkçe karakterlerle problemi olduðunu söylemiþtik. Ayný sorun, tahmin edebileceðiniz gibi, upper() metodu için de geçerlidir.
+
+Dikkatlice inceleyin:
+
+>>> kardiz = "istanbul"
+>>> kardiz.upper()
+
+'ISTANBUL'
+
+lower() metodu Türkçe’deki ‘I’ harfini ‘i’ þeklinde küçültüyordu. upper() metodu ise ‘i’ harfini yanlýþ olarak ‘I’ þeklinde büyütüyor. Elbette bu sorun da çözülemeyecek gibi deðil. Burada da lower() metodu için uyguladýðýmýz yöntemin bir benzerini uygulayacaðýz:
+
+iller = "istanbul, izmir, siirt, mersin"
+
+iller = iller.replace("i", "Ý").upper()
+print(iller)
+
+Bu kodlarla, önce karakter dizisi içinde geçen ‘i’ harflerini ‘Ý’ ile deðiþtiriyoruz. Böylece þöyle bir þey elde etmiþ oluyoruz:
+
+Ýstanbul, ÝzmÝr, sÝÝrt, mersÝn
+
+Gördüðünüz gibi öteki harfler eski hallerinde kaldý. Öteki harfleri de büyütebilmek için karakter dizisine upper() metodunu uygulamamýz yeterli olacaktýr.
+
+Bir sorunun daha üstesinden geldiðimize göre kendimizden emin bir þekilde bir sonraki metodumuzu incelemeye geçebiliriz.
+
+
+islower(), isupper()
+
+Yukarýda öðrendiðimiz lower() ve upper() adlý metotlar karakter dizileri üzerinde bazý deðiþiklikler yapmamýza yardýmcý oluyor. Karakter dizileri üzerinde birtakým deðiþiklikler yapmamýzý saðlayan bu tür metotlara ‘deðiþtirici metotlar’ adý verilir. Bu tür metotlarýn dýþýnda bir de ‘sorgulayýcý metotlar’dan söz edebiliriz. Sorgulayýcý metotlar, deðiþtirici metotlarýn aksine, bir karakter dizisi üzerinde deðiþiklik yapmamýzý saðlamaz. Bu tür metotlarýn görevi karakter dizilerinin durumunu sorgulamaktýr. Sorgulayýcý metotlara örnek olarak islower() ve isupper() metotlarýný verebiliriz.
+
+Bildiðiniz gibi, lower() metodu bir karakter dizisini tamamen küçük harflerden oluþacak þekle getiriyordu. islower() metodu ise bir karakter dizisinin tamamen küçük harflerden oluþup oluþmadýðýný sorguluyor.
+
+Hemen bir örnek verelim:
+
+>>> kardiz = "istihza"
+>>> kardiz.islower()
+
+True
+
+“istihza” tamamen küçük harflerden oluþan bir karakter dizisi olduðu için islower() sorgusu True çýktýsý veriyor. Bir de þuna bakalým:
+
+>>> kardiz = "Ankara"
+>>> kardiz.islower()
+
+False
+
+“Ankara” ise içinde bir adet büyük harf barýndýrdýðý için islower() sorgusuna False cevabý veriyor.
+
+Yazdýðýnýz programlarda, örneðin, kullanýcýdan gelen verinin sadece küçük harflerden oluþmasýný istiyorsanýz bu metottan yararlanarak kullanýcýdan gelen verinin gerçekten tamamen küçük harflerden oluþup oluþmadýðýný denetleyebilirsiniz:
+
+veri = input("Adýnýz: ")
+
+if not veri.islower():
+print("Lütfen isminizi sadece küçük harflerle yazýn")
+
+isupper() metodu da islower() metodunun yaptýðý iþin tam tersini yapar. Bildiðiniz gibi, upper() metodu bir karakter dizisini tamamen büyük harflerden oluþacak þekle getiriyordu. isupper() metodu ise bir karakter dizisinin tamamen büyük harflerden oluþup oluþmadýðýný sorguluyor:
+
+>>> kardiz = "ÝSTÝHZA"
+>>> kardiz.isupper()
+
+True
+
+>>> kardiz = "python"
+>>> kardiz.isupper()
+
+False
+
+Týpký islower() metodunda olduðu gibi, isupper() metodunu da kullanýcýdan gelen verinin büyük harfli mi yoksa küçük harfli mi olduðunu denetlemek için kullanabilirsiniz.
+
+Örneðin, internet kültüründe kullanýcýlarýn forum ve e.posta listesi gibi yerlerde tamamý büyük harflerden oluþan kelimelerle yazmasý kaba bir davranýþ olarak kabul edilir. Kullanýcýlarýn tamamý büyük harflerden oluþan kelimeler kullanmasýný engellemek için yukarýdaki metotlardan yararlanabilirsiniz:
+
+veri = input("mesajýnýz: ")
+böl = veri.split()
+
+for i in böl:
+if i.isupper():
+print("Tamamý büyük harflerden oluþan kelimeler kullanmayýn!")
+
+Burada kullanýcýnýn girdiði mesaj içindeki her kelimeyi tek tek sorgulayabilmek için öncelikle split() metodu yardýmýyla karakter dizisini parçalarýna ayýrdýðýmýza dikkat edin. böl = veri.split() satýrýnýn tam olarak ne iþe yaradýðýný anlamak için bu programý bir de o satýr olmadan çalýþtýrmayý deneyebilirsiniz.
+
+islower() ve isupper() metotlarý programlamada sýklýkla kullanýlan karakter dizisi metotlarýndan ikisidir. Dolayýsýyla bu iki metodu iyi öðrenmek programlama maceranýz sýrasýnda iþlerinizi epey kolaylaþtýracaktýr.
+
+
+endswith()
+
+Týpký isupper() ve islower() metotlarý gibi, endswith() metodu da sorgulayýcý metotlardan biridir. endswith() metodu karakter dizileri üzerinde herhangi bir deðiþiklik yapmamýzý saðlamaz. Bu metodun görevi karakter dizisinin durumunu sorgulamaktýr.
+
+Bu metot yardýmýyla bir karakter dizisinin hangi karakter dizisi ile bittiðini sorgulayabiliyoruz. Yani örneðin:
+
+>>> kardiz = "istihza"
+>>> kardiz.endswith("a")
+
+True
+
+Burada, deðeri “istihza” olan kardiz adlý bir karakter dizisi tanýmladýk. Daha sonra da kardiz.endswith("a") ifadesiyle bu karakter dizisinin “a” karakteri ile bitip bitmediðini sorguladýk. Gerçekten de “istihza” karakter dizisinin sonunda “a” karakteri bulunduðu için Python bize True cevabý verdi. Bir de þuna bakalým:
+
+>>> kardiz.endswith("z")
+
+False
+
+Bu defa da False çýktýsý aldýk. Çünkü karakter dizimiz ‘z’ harfiyle bitmiyor.
+
+Gelin isterseniz elimizi alýþtýrmak için bu metotla birkaç örnek daha yapalým:
+
+d1 = "python.ogg"
+d2 = "tkinter.mp3"
+d3 = "pygtk.ogg"
+d4 = "movie.avi"
+d5 = "sarki.mp3"
+d6 = "filanca.ogg"
+d7 = "falanca.mp3"
+d8 = "dosya.avi"
+d9 = "perl.ogg"
+d10 = "c.avi"
+d11 = "c++.mp3"
+
+for i in d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11:
+if i.endswith(".mp3"):
+print(i)
+
+Bu örnekte, elimizde farklý uzantýlara sahip bazý dosyalar olduðunu varsaydýk ve bu dosya adlarýnýn herbirini ayrý birer deðiþken içinde depoladýk. Gördüðünüz gibi, dosya uzantýlarý .ogg, .mp3 veya .avi. Bizim burada amacýmýz elimizdeki mp3 dosyalarýný listelemek. Bu iþlem için endswith() metodundan yararlanabiliyoruz. Burada yaptýðýmýz þey þu:
+
+Öncelikle d1, d2, d3, d4, d5, d6, d7, d8, d9, d10 ve d11 adlý deðiþkenleri bir for döngüsü içine alýyoruz ve bu deðiþkenlerinin herbirinin içeriðini tek tek kontrol ediyoruz (for i in d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11:). Ardýndan, eðer baktýðýmýz bu deðiþkenlerin deðerleri ”.mp3” ifadesi ile bitiyorsa (if i.endswith(".mp3"):), ölçüte uyan bütün karakter dizilerini ekrana döküyoruz (print(i)).
+
+Yukarýdaki örneði, dilerseniz, endswith() metodunu kullanmadan þöyle de yazabilirsiniz:
+
+for i in d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11:
+if i[-4:len(i)] == ".mp3":
+print(i)
+
+Burada karakter dizilerinin dilimlenebilme özelliðinden yararlandýk. Ancak gördüðünüz gibi, dilimlenecek kýsmý ayarlamaya uðraþmak yerine endswith() metodunu kullanmak çok daha mantýklý ve kolay bir yöntemdir.
+
+Yukarýdaki örnekte de gördüðünüz gibi, endswith() metodu özellikle dosya uzantýlarýna göre dosya türlerini tespit etmede oldukça iþe yarar bir metottur.
+
+
+startswith()
+
+Bu metot, biraz önce gördüðümüz endswith() metodunun yaptýðý iþin tam tersini yapar. Hatýrlarsanýz endswith() metodu bir karakter dizisinin hangi karakter veya karakterlerle bittiðini denetliyordu. startswith() metodu ise bir karakter dizisinin hangi karakter veya karakterlerle baþladýðýný denetler:
+
+>>> kardiz = "python"
+>>> kardiz.startswith("p")
+
+True
+
+>>> kardiz.startswith("a")
+
+False
+
+Gördüðünüz gibi, eðer karakter dizisi gerçekten belirtilen karakterle baþlýyorsa Python True çýktýsý, yok eðer belirtilen karakterle baþlamýyorsa False çýktýsý veriyor.
+
+Bu metodun gerçek hayatta nasýl kullanýlabileceðine dair bir örnek verelim:
+
+d1 = "python.ogg"
+d2 = "tkinter.mp3"
+d3 = "pygtk.ogg"
+d4 = "movie.avi"
+d5 = "sarki.mp3"
+d6 = "filanca.ogg"
+d7 = "falanca.mp3"
+d8 = "dosya.avi"
+d9 = "perl.ogg"
+d10 = "c.avi"
+d11 = "c++.mp3"
+
+for i in d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11:
+if i.startswith("p"):
+print(i)
+
+Burada ‘p’ harfiyle baþlayan bütün dosyalarý listeledik. Elbette ayný etkiyi þu þekilde de elde edebilirsiniz:
+
+for i in d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11:
+if i[0] == "p":
+print(i)
+
+Sadece tek bir harfi sorguluyorsanýz yukarýdaki yöntem de en az startswith() metodunu kullanmak kadar pratiktir. Ama birden fazla karakteri sorguladýðýnýz durumlarda elbette startswith() çok daha mantýklý bir tercih olacaktýr:
+
+for i in d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11:
+if i.startswith("py"):
+print(i)
+
+Yukarýda yazdýðýmýz kodu dilimleme tekniðinden yararlanarak yeniden yazmak isterseniz þöyle bir þeyler yapmanýz gerekiyor:
+
+for i in d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11:
+if i[:2] == "py":
+print(i)
+
+Dediðim gibi, birden fazla karakteri sorguladýðýnýz durumlarda, dilimlemek istediðiniz kýsmýn karakter dizisi içinde hangi aralýða denk geldiðini hesaplamaya uðraþmak yerine, daha kolay bir yöntem olan startswith() metodundan yararlanmayý tercih edebilirsiniz.
+
+Böylece karakter dizilerinin 2. bölümünü de bitirmiþ olduk. Sonraki bölümde yine karakter dizilerinin metotlarýndan söz etmeye devam edeceðiz.

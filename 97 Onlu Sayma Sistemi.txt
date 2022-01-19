@@ -1,0 +1,27 @@
+
+Onlu Sayma Sistemi
+
+Biz insanlar genellikle hesap iþlemleri için onlu sayma sistemini kullanýrýz. Hepinizin bildiði gibi bu sistem; 0, 1, 2, 3, 4, 5, 6, 7, 8 ve 9 olmak üzere toplam on rakamdan oluþur. Yani sayýlarý gösteren, birbirinden farklý toplam on simge (rakam) vardýr bu sistemde. Bu on simgeyi kullanarak, olasý bütün sayýlarý gösterebiliriz.
+
+Bu arada terminoloji ile ilgili ufak bir açýklama yapalým:
+
+Rakamlar, sayýlarý göstermeye yarayan simgelerdir. Onlu sayma sisteminde toplam on farklý rakam vardýr. Bütün rakamlar birer sayýdýr, ama bütün sayýlar birer rakam deðildir. Örneðin 8 hem bir rakam hem de bir sayýdýr. Ancak mesela 32 bir sayý olup bu sayý, 3 ve 2 adlý iki farklý rakamýn bir araya getirilmesi ile gösterilir. Yani 32 sayýsý tek baþýna bir rakam deðildir.
+
+Açýklamamýzý da yaptýðýmýza göre yolumuza devam edebiliriz.
+
+Ýnsanlar yukarýda bahsettiðimiz bu onlu sisteme ve bu sistemi oluþturan rakamlara/simgelere o kadar alýþmýþtýr ki, çoðu zaman baþka bir sistemin varlýðýndan veya var olma olasýlýðýndan haberdar bile deðildir.
+
+Ama elbette dünya üzerindeki tek sayma sistemi onlu sistem olmadýðý gibi, sayýlarý göstermek için kullanýlabilecek rakamlar da yukarýdakilerle sýnýrlý deðildir.
+
+Nihayetinde rakam dediðimiz þeyler insan icadý birtakým simgelerden ibarettir. Elbette doðada ‘2’ veya ‘7’ diye bir þey bulunmaz. Bizim yaygýn olarak yukarýdaki þekilde gösterdiðimiz rakamlar Arap rakamlarýdýr. Mesela Romalýlar yukarýdakiler yerine I, II, III, IV, V, VI, VII, VIII, IX ve X gibi farklý simgeler kullanýyordu... Neticede 2 ve II ayný kavrama iþaret ediyor. Sadece kullanýlan simgeler birbirinden farklý, o kadar.
+
+Onlu sayma sisteminde bir sayýyý oluþturan rakamlar 10‘un kuvvetleri olarak hesaplanýr. Örneðin 1980 sayýsýný ele alalým. Bu sayýyý 10‘un kuvvetlerini kullanarak þu þekilde hesaplayabiliriz:
+
+>>> (0 * (10 ** 0)) + (8 * (10 ** 1)) + (9 * (10 ** 2)) + (1 * (10 ** 3))
+
+1980
+
+Gördüðünüz gibi, sayýnýn en saðýndaki basamak 10‘un 0. kuvveti olacak þekilde, sola doðru kuvveti artýrarak ilerliyoruz.
+
+Gelelim öteki sayma sistemlerine...
+

@@ -1,0 +1,20 @@
+
+Farklý Python Sürümleri
+
+Eðer daha önce Python programlama dili ile ilgili araþtýrma yaptýysanýz, þu anda piyasada iki farklý Python serisinin olduðu dikkatinizi çekmiþ olmalý. 20.04.2016 tarihi itibariyle piyasada olan en yeni Python sürümleri Python 2.7.11 ve Python 3.5.1‘dir.
+
+Eðer bir Python sürümü 2 sayýsý ile baþlýyorsa (mesela 2.7.11), o sürüm Python 2.x serisine aittir. Yok eðer bir Python sürümü 3 sayýsý ile baþlýyorsa (mesela 3.5.1), o sürüm Python 3.x serisine aittir.
+
+Peki neden piyasada iki farklý Python sürümü var ve bu bizim için ne anlama geliyor?
+
+Python programlama dili 1990 yýlýndan bu yana geliþtirilen bir dil. Bu süre içinde pek çok Python programý yazýldý ve insanlarýn kullanýmýna sunuldu. Þu anda piyasada Python’ýn 2.x serisinden bir sürümle yazýlmýþ pek çok program bulunuyor. 3.x serisi ise ancak son yýllarda yaygýnlýk kazanmaya baþladý.
+
+Not
+
+Biz bu kitapta kolaylýk olsun diye Python’ýn 3.x serisini Python3; 2.x serisini ise Python2 olarak adlandýracaðýz.
+
+Python3, Python2’ye göre hem çok daha güçlüdür, hem de Python2’nin hatalarýndan arýndýrýlmýþtýr. Python3’teki büyük deðiþikliklerden ötürü, Python2 ile yazýlmýþ bir program Python3 altýnda çalýþmayacaktýr. Ayný durum bunun tersi için de geçerlidir. Yani Python3 kullanarak yazdýðýnýz bir program Python2 altýnda çalýþmaz.
+
+Dediðimiz gibi, piyasada Python2 ile yazýlmýþ çok sayýda program var. Ýþte bu sebeple Python geliþtiricileri uzun bir süre daha Python2’yi geliþtirmeye devam edecek. Elbette geliþtiriciler bir yandan da Python3 üzerinde çalýþmayý ve bu yeni seriyi geliþtirmeyi sürdürecek.
+
+Farklý Python serilerinin var olmasýndan ötürü, Python ile program yazarken hangi seriye ait sürümlerden birini kullandýðýnýzý bilmeniz, yazacaðýnýz programýn kaderi açýsýndan büyük önem taþýr.

@@ -1,0 +1,143 @@
+
+Biçimlendirme Karakterleri
+
+Hatýrlarsanýz Python2’de geçerli olan eski biçimlendirme yönteminde % karakteri ile bazý harfleri birlikte kullanarak karakter dizileri üzerinde biçimlendirme ve dönüþtürme iþlemleri yapabiliyorduk. Ayný þey Python3 ile birlikte gelen bu format() metodu için de geçerlidir. Yani benzer harfleri kullanarak format() metodu ile de karakter dizileri üzerinde biçimlendirme ve dönüþtürme iþlemleri yapabiliriz.
+
+format() metodu ile birlikte þu harfleri kullanabiliyoruz:
+
+
+s
+
+Bu harf karakter dizilerini temsil eder.
+
+Yalnýz bu biçimlendirici karakterlerin {} iþaretleri içindeki kullanýmý ilk bakýþta gözünüze biraz karýþýk gelebilir:
+
+>>> print("{:s}".format("karakter dizisi"))
+
+karakter dizisi
+
+Bu arada, harfleri {} yapýsýnýn içinde nasýl kullandýðýmýza dikkat edin. Gördüðünüz gibi biçimlendirme karakterini kullanýrken, karakterin sol tarafýna bir adet : iþareti de yerleþtiriyoruz. Bir örnek verelim:
+
+print("{:s} ve {:s} iyi bir ikilidir!".format("Python", "Django"))
+
+Yalnýz, s harfi karakter dizilerini temsil ettiði için, {} iþaretleri arasýnda bu harfi kullandýðýmýzda, format() metodunun alabileceði parametreyi karakter dizisiyle sýnýrlandýrmýþ oluruz. Dolayýsýyla bu harfi kullandýktan sonra format() metodu içinde sadece karakter dizilerini kullanabiliriz. Eðer sayý kullanýrsak Python bize bir hata mesajý gösterecektir:
+
+>>> print("{:s}".format(12))
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: Unknown format code 's' for object of type 'int'
+
+Bu yüzden, eðer amacýnýz format() metoduna parametre olarak karakter dizisi vermekse, {} iþaretleri içinde herhangi bir harf kullanmamak daha akýllýca olabilir:
+
+print("{} ve {} iyi bir ikilidir!".format("Python", "Django"))
+
+
+c
+
+Bu harf 0 ile 256 arasý sayýlarýn ASCII tablosundaki karþýlýklarýný temsil eder:
+
+>>> print("{:c}".format(65))
+
+A
+
+
+d
+
+Bu harf sayýlarý temsil eder:
+
+>>> print("{:d}".format(65))
+
+65
+
+Eðer sayý dýþýnda bir deðer kullanýrsanýz Python size bir hata mesajý gösterir:
+
+>>> print("{:d}".format("65"))
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: Unknown format code 'd' for object of type 'str'
+
+
+o
+
+Bu harf onlu düzendeki sayýlarý sekizli düzendeki karþýlýklarýna çevirir:
+
+>>> print("{:o}".format(65))
+
+101
+
+
+x
+
+Bu harf onlu düzendeki sayýlarý onaltýlý düzendeki karþýlýklarýna çevirir:
+
+>>> print("{:x}".format(65))
+
+41
+
+
+X
+
+Týpký x harfinde olduðu gibi, bu harf de onlu düzendeki sayýlarý onaltýlý düzendeki karþýlýklarýna çevirir:
+
+>>> "{:X}".format(65)
+
+'41'
+
+Peki x ile X harfi arasýnda ne fark var? Fark þudur: x; onaltýlý düzende harfle gösterilen sayýlarý küçük harf þeklinde temsil eder. X iþareti bu sayýlarý büyük harf þeklinde temsil eder. Bu ikisi arasýndaki farký daha net görmek için þöyle bir kod yazabilirsiniz:
+
+>>> for i in range(20):
+... print("{:x}{:10X}".format(i, i))
+...
+0         0
+1         1
+2         2
+3         3
+4         4
+5         5
+6         6
+7         7
+8         8
+9         9
+a         A
+b         B
+c         C
+d         D
+e         E
+f         F
+10        10
+11        11
+12        12
+13        13
+
+Gördüðünüz gibi gerçekten de x harfi onaltýlý düzende harflerle gösterilen sayýlarý küçük harf olarak; X harfi ise büyük harf olarak temsil ediyor.
+
+
+b
+
+Bu iþaret, onlu düzendeki sayýlarý ikili düzendeki karþýlýklarýna çevirir:
+
+>>> "{:b}".format(2)
+
+'10'
+
+
+f
+
+Bu iþaret, eski biçimlendirme yöntemini anlatýrken gösterdiðimiz f iþaretiyle benzer bir iþleve sahiptir:
+
+print("{:.2f}".format(50))
+
+50.00
+
+
+,
+
+: iþaretini , iþareti (basamak ayracý) ile birlikte kullanarak, sayýlarý basamaklarýna ayýrabilirsiniz:
+
+>>> "{:,}".format(1234567890)
+
+'1,234,567,890'
+
+Böylece Python’da karakter dizisi biçimlendirmenin hem eski hem de yeni yöntemini, þu ana kadarki Python bilgimiz elverdiði ölçüde ayrýntýlý bir þekilde incelemiþ olduk. Buradaki bilgileri kullanarak bol bol örnek yapmak bu konuyu daha iyi anlamanýza yardýmcý olacaktýr.

@@ -1,0 +1,340 @@
+
+Karakter Dizilerini Biçimlendirmek
+
+Bu bölüme gelinceye kadar, Python’da karakter dizilerinin biçimlendirilmesine iliþkin epey söz söyledik. Ancak bu konu ile ilgili bilgilerimiz hem çok daðýnýk, hem de çok yüzeysel. Ýþte bu bölümde amacýmýz, daha önce farklý yerlerde dile getirdiðimiz bu önemli konuya ait bilgi kýrýntýlarýný bir araya toplayýp, karakter dizisi biçimlendirme konusunu, Python bilgimiz elverdiði ölçüde ayrýntýlý bir þekilde ele almak olacak.
+
+Þu ana kadar yaptýðýmýz örneklere bakarak, programlama maceranýz boyunca karakter dizileriyle bol bol haþýr neþir olacaðýnýzý anlamýþ olmalýsýnýz. Bundan sonra yazdýðýnýz programlarda da karakter dizilerinin size pek çok farklý biçimlerde geldiðine tanýk olacaksýnýz. Farklý farklý biçimlerde elinize ulaþan bu karakter dizilerini, muhtemelen, sadece alt alta ve rastgele bir þekilde ekrana yazdýrmakla yetinmeyeceksiniz. Bu karakter dizilerini, yazdýðýnýz programlarda kullanabilmek için, programýnýza uygun þekillerde biçimlendirmeniz gerekecek. Dilerseniz neden bahsettiðimizi daha net bir þekilde anlatabilmek için çok basit bir örnek verelim.
+
+Diyelim ki, yazdýðýnýz bir programda kullanmak üzere, kullanýcýdan isim bilgisi almanýz gerekiyor. Programýnýzýn iþleyiþi gereðince, eðer isim 5 karakterse veya bundan küçükse ismin tamamý görüntülenecek, ama eðer isim 5 karakterden büyükse 5 karakteri aþan kýsým yerine üç nokta iþareti koyulacak. Yani eðer isim Fýrat ise bu ismin tamamý görüntülenecek. Ama eðer isim mesela Abdullah ise, o zaman bu isim Abdul... þeklinde görüntülenecek.
+
+Bu amaca ulaþmak için ilk denememizi yapalým:
+
+isim = input("isminiz: ")
+
+if len(isim) <= 5:
+print(isim[:5])
+else:
+print(isim[:5], "...")
+
+Buradan elde ettiðimiz çýktý ihtiyacýmýzý kýsmen karþýlýyor. Ama çýktý tam istediðimiz gibi deðil. Çünkü normalde isme bitiþik olmasý gereken üç nokta iþareti, isimden bir boþluk ile ayrýlmýþ. Yani biz þöyle bir çýktý isterken:
+
+Abdul...
+
+Þöyle bir çýktý elde ediyoruz:
+
+Abdul ...
+
+Bu sorunu þu þekilde halledebiliriz:
+
+isim = input("isminiz: ")
+
+if len(isim) <= 5:
+print(isim[:5])
+else:
+print(isim[:5] + "...")
+
+veya:
+
+isim = input("isminiz: ")
+
+if len(isim) <= 5:
+print(isim[:5])
+else:
+print(isim[:5], "...", sep="")
+
+Yukarýdaki gibi basit durumlarda klasik karakter dizisi birleþtirme yöntemlerini kullanarak iþinizi halledebilirsiniz. Ama daha karmaþýk durumlarda, farklý kaynaklardan gelen karakter dizilerini ihtiyaçlarýnýza göre bir araya getirmek, karakter dizisi birleþtirme yöntemleri ile pek mümkün olmayacak veya çok zor olacaktýr.
+
+Mesela þöyle bir durum düþünün:
+
+Yazdýðýnýz programda kullanýcýya bir parola soruyorsunuz. Amacýnýz bu parolanýn, programýnýzda belirlediðiniz ölçütlere uyup uymadýðýný tespit etmek. Eðer kullanýcý tarafýndan belirlenen parola uygunsa ona þu çýktýyý göstermek istiyorsunuz (parolanýn b5tY6g olduðunu varsayalým):
+
+Girdiðiniz parola (b5tY6g) kurallara uygun bir paroladýr!
+
+Bu çýktýyý elde etmek için þöyle bir kod yazabilirsiniz:
+
+parola = input("parola: ")
+
+print("Girdiðiniz parola (" + parola + ") kurallara uygun bir paroladýr!")
+
+Gördüðünüz gibi, sadece karakter dizisi birleþtirme yöntemlerini kullanarak istediðimiz çýktýyý elde ettik, ama farkettiyseniz bu defa iþler biraz da olsa zorlaþtý.
+
+Bir de uzun ve karmaþýk bir metnin içine dýþarýdan deðerler yerleþtirmeniz gereken þöyle bir metinle karþý karþýya olduðunuzu düþünün:
+
+Sayýn .........
+
+.... tarihinde yapmýþ olduðunuz, ........ hakkýndaki baþvurunuz incelemeye alýnmýþtýr.
+
+Size .... iþgünü içinde cevap verilecektir.
+
+
+Saygýlarýmýzla,
+
+......
+
+Böyle bir metin içine dýþarýdan deðer yerleþtirmek için karakter dizisi birleþtirme yöntemlerine baþvurmak iþinizi epey zorlaþtýracaktýr.
+
+Ýþte klasik karakter dizisi birleþtirme iþlemlerinin yetersiz kaldýðý veya iþleri büsbütün zorlaþtýrdýðý bu tür durumlarda Python’ýn size sunduðu ‘karakter dizisi biçimlendirme’ araçlarýndan yararlanabilirsiniz.
+
+Bunun için biz bu bölümde iki farklý yöntemden söz edeceðiz:
+
+% iþareti ile biçimlendirme 
+format() metodu ile biçimlendirme. 
+% iþareti ile biçimlendirme, karakter dizisi biçimlendirmenin eski yöntemidir. Bu yöntem aðýrlýklý olarak Python’ýn 3.x sürümlerinden önce kullanýlýyordu. Ama Python’ýn 3.x sürümlerinde de bu yöntemi kullanma imkanýmýz var. Her ne kadar bu yöntem Python3’te geçerliliðini korusa da muhtemelen ileride dilden tamamen kaldýrýlacak. Ancak hem etrafta bu yöntemle yazýlmýþ eski programlar olmasý, hem de bu yöntemin halen geçerliliðini korumasý nedeniyle bu yöntemi (kendimiz kullanmayacak bile olsak) mutlaka öðrenmemiz gerekiyor.
+
+format() metodu ise Python’ýn 3.x sürümleri ile dile dahil olan bir özelliktir. Python’ýn 2.x sürümlerinde bu metodu kullanamazsýnýz. Dilin geleceðinde bu metot olduðu için, yeni yazýlan kodlarda format() metodunu kullanmak daha akýllýca olacaktýr.
+
+Biz bu sayfalarda yukarýda adýný andýðýmýz her iki yöntemi de inceleyeceðiz. Ýlk olarak % iþareti ile biçimlendirmeden söz edelim.
+
+
+% Ýþareti ile Biçimlendirme (Eski Yöntem)
+
+Daha önce de söylediðimiz gibi, Python programlama dilinin 3.x sürümlerinden önce, bir karakter dizisini biçimlendirebilmek için % iþaretinden yararlanýyorduk. Bununla ilgili basit bir örnek verelim:
+
+parola = input("parola: ")
+
+print("Girdiðiniz parola (%s) kurallara uygun bir paroladýr!" %parola)
+
+Bu programý çalýþtýrýp parola girdiðinizde, yazdýðýnýz parola çýktýda parantez içinde görünecektir.
+
+Yukarýdaki yapýyý incelediðimizde iki nokta gözümüze çarpýyor:
+
+Ýlk olarak, karakter dizisinin içinde bir % iþareti ve buna bitiþik olarak yazýlmýþ bir s harfi görüyoruz. 
+Ýkincisi, karakter dizisinin dýþýnda %parola gibi bir ifade daha var. 
+Rahatlýkla tahmin edebileceðiniz gibi, bu ifadeler birbiriyle doðrudan baðlantýlýdýr. Dilerseniz bu yapýyý açýklamaya geçmeden önce bir örnek daha verelim. Bu örnek sayesinde benim açýklamama gerek kalmadan karakter dizisi biçimlendirme mantýðýný derhal kavrayacaðýnýzý zannediyorum:
+
+print("%s ve %s iyi bir ikilidir!" %("Python", "Django"))
+
+Dediðim gibi, bu basit örnek karakter dizilerinin nasýl biçimlendirildiðini gayet açýk bir þekilde gösteriyor. Dilerseniz yapýyý þöyle bir inceleyelim:
+
+Python’da %s yapýsý, karakter dizisi içinde bir yer tutma vazifesi görür.
+
+%s yapýsý bir anlamda deðiþkenlere benzer. Týpký deðiþkenlerde olduðu gibi, %s yapýsýnýn deðeri deðiþebilir.
+
+Bir karakter dizisi içindeki her %s ifadesi için, karakter dizisi dýþýnda bu ifadeye karþýlýk gelen bir deðer olmalýdýr. Python, karakter dizisi içinde geçen her %s ifadesinin yerine, karakter dizisi dýþýndaki her bir deðeri tek tek yerleþtirir. Bizim örneðimizde karakter dizisi içindeki ilk %s ifadesinin karakter dizisi dýþýndaki karþýlýðý “Python”; karakter dizisi içindeki ikinci %s ifadesinin karakter dizisi dýþýndaki karþýlýðý ise “Django”‘dur.
+
+Eðer karakter dizisi içindeki %s iþaretlerinin sayýsý ile karakter dizisi dýþýnda bu iþaretlere karþýlýk gelen deðerlerin sayýsý birbirini tutmazsa Python bize bir hata mesajý gösterecektir. Mesela:
+
+>>> print("Benim adým %s, soyadým %s" %"istihza")
+
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+TypeError: not enough arguments for format string
+
+Gördüðünüz gibi bu kodlar hata verdi. Çünkü karakter dizisi içindeki iki adet %s ifadesine karþýlýk, karakter dizisinin dýþýnda tek bir deðer var (“istihza”). Halbuki bizim þöyle bir kod yazmamýz gerekiyordu:
+
+>>> isim = "istihza"
+>>> print("%s adlý kiþinin mekaný www.%s.com adresidir." %(isim, isim))
+
+Bu defa herhangi bir hata mesajý almadýk. Çünkü bu kodlarda, olmasý gerektiði gibi, karakter dizisi içindeki iki adet %s ifadesine karþýlýk, dýþarýda da iki adet deðer var.
+
+Eðer karakter dizisi içinde tek bir %s ifadesi varsa, karakter dizisi dýþýnda buna karþýlýk gelen deðeri gösterirken, bu deðeri parantez içine almamýza gerek yok. Ama eðer karakter dizisi içinde birden fazla %s iþareti varsa, bunlara karþýlýk gelen deðerleri parantez içinde gösteriyoruz. Mesela yukarýdaki parola örneðinde, karakter dizisinin içinde tek bir %s ifadesi var. Dolayýsýyla karakter dizisi dýþýnda bu ifadeye karþýlýk gelen parola deðiþkenini parantez içine almýyoruz. Ama “Python” ve “Django” örneðinde karakter dizisi içinde iki adet %s ifadesi yer aldýðý için, karakter dizisi dýþýnda bu ifadelere karþýlýk gelen “Python” ve “Django” kelimelerini parantez içinde gösteriyoruz.
+
+Bütün bu anlattýklarýmýzý sindirebilmek için dilerseniz bir örnek verelim:
+
+kardiz = "istihza"
+
+for sýra, karakter in enumerate(kardiz, 1):
+print("%s. karakter: '%s'" %(sýra, karakter))
+
+Gördüðünüz gibi, “istihza” adlý karakter dizisi içindeki her bir harfin sýrasýný ve harfin kendisini uygun bir düzen içinde ekrana yazdýrdýk. Karakter sýrasýnýn ve karakterin kendisinin cümle içinde geleceði yerleri %s iþaretleri ile gösteriyoruz. Python da her bir deðeri, ilgili konumlara tek tek yerleþtiriyor.
+
+Hatýrlarsanýz önceki derslerimizde basit bir hesap makinesi örneði vermiþtik. Ýþte þimdi öðrendiklerimizi o programa uygularsak karakter dizisi biçimlendiricileri üzerine epey pratik yapmýþ oluruz:
+
+giriþ = """
+    (1) topla
+    (2) çýkar
+    (3) çarp
+    (4) böl
+    (5) karesini hesapla
+    (6) karekök hesapla
+    """
+print(giriþ)
+
+a = 1
+
+while a == 1:
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin (Çýkmak için q): ")
+
+if soru == "q":
+print("çýkýlýyor...")
+a = 0
+
+elif soru == "1":
+sayý1 = int(input("Toplama iþlemi için ilk sayýyý girin: "))
+sayý2 = int(input("Toplama iþlemi için ikinci sayýyý girin: "))
+
+#Ýlk %s'ye karþýlýk gelen deðer   : sayý1
+#Ýkinci %s'ye karþýlýk gelen deðer: sayý2
+#Üçüncü %s'ye karþýlýk gelen deðer: sayý1 + sayý2
+print("%s + %s = %s" %(sayý1, sayý2, sayý1 + sayý2))
+
+elif soru == "2":
+sayý3 = int(input("Çýkarma iþlemi için ilk sayýyý girin: "))
+sayý4 = int(input("Çýkarma iþlemi için ikinci sayýyý girin: "))
+print("%s - %s = %s" %(sayý3, sayý4, sayý3 - sayý4))
+
+elif soru == "3":
+sayý5 = int(input("Çarpma iþlemi için ilk sayýyý girin: "))
+sayý6 = int(input("Çarpma iþlemi için ikinci sayýyý girin: "))
+print("%s x %s = %s" %(sayý5, sayý6, sayý5 * sayý6))
+
+elif soru == "4":
+sayý7 = int(input("Bölme iþlemi için ilk sayýyý girin: "))
+sayý8 = int(input("Bölme iþlemi için ikinci sayýyý girin: "))
+print("%s / %s = %s" %(sayý7, sayý8, sayý7 / sayý8))
+
+elif soru == "5":
+sayý9 = int(input("Karesini hesaplamak istediðiniz sayýyý girin: "))
+
+#Ýlk %s'ye karþýlýk gelen deðer   : sayý9
+#Ýkinci %s'ye karþýlýk gelen deðer: sayý9 ** 2
+print("%s sayýsýnýn karesi = %s" %(sayý9, sayý9 ** 2))
+
+elif soru == "6":
+sayý10 = int(input("Karekökünü hesaplamak istediðiniz sayýyý girin: "))
+print("%s sayýsýnýn karekökü = %s" %(sayý10, sayý10 ** 0.5))
+
+else:
+print("Yanlýþ giriþ.")
+print("Aþaðýdaki seçeneklerden birini giriniz:", giriþ)
+
+Bu arada, gördüðünüz gibi, Python’da biçim düzenleyici olarak kullanýlan simge ayný zamanda ‘yüzde’ (%) anlamýna da geliyor. O halde size þöyle bir soru sorayým: Acaba 0‘dan 100‘e kadar olan sayýlarýn baþýna birer yüzde iþareti koyarak bu sayýlarý nasýl gösterirsiniz? %0, %1, %10, %15 gibi... Önce þöyle bir þey deneyelim:
+
+>>> for i in range(100):
+... print("%s" %i)
+...
+
+Bu kodlar tabii ki sadece 0‘dan 100‘e kadar olan sayýlarý ekrana dökmekle yetinecektir. Sayýlarýn baþýnda % iþaretini göremeyeceðiz.
+
+Bir de þöyle bir þey deneyelim:
+
+>>> for i in range(100):
+... print("%%s" %i)
+...
+Traceback (most recent call last):
+File "<stdin>", line 2, in <module>
+TypeError: not all arguments converted during string formatting
+
+Bu defa da hata mesajý aldýk. Halbuki doðru cevap þu olmalýydý:
+
+>>> for i in range(100):
+... print("%%%s" %i)
+...
+
+Burada % iþaretini arka arkaya iki kez kullanarak bir adet % iþareti elde ettik. Daha sonra da normal bir þekilde %s biçimini kullandýk. Yani üç adet ‘%’ iþaretini yan yana getirmiþ olduk.
+
+Bütün bu örneklerden sonra, karakter dizisi biçimlendiricilerinin iþimizi ne kadar kolaylaþtýrdýðýný görmüþ olmalýsýnýz. Ýstediðimiz etkiyi elde etmek için karakter dizisi biçimlendiricilerini kullanmak, karakter dizilerini birleþtirme iþlemlerinden yararlanmaya göre çok daha esnek bir yöntemdir. Hatta bazý durumlarda karakter dizisi biçimlendiricilerini kullanmak makul tek yöntemdir.
+
+Yukarýda verdiðimiz örnekler, %s ile biçimlendirme konusunun en temel yönlerini gösteriyor. Ama aslýnda bu aracý kullanarak çok daha karmaþýk biçimlendirme iþlemleri de yapabiliriz.
+
+Yani yukarýdaki örneklerde %s yapýsýný en basit þekilde mesela þöyle kullandýk:
+
+>>> print("Karakter dizilerinin toplam %s adet metodu vardýr" %len(dir(str)))
+
+Ama eðer istersek bundan daha karmaþýk biçimlendirme iþlemleri de gerçekleþtirebiliriz. Þu örneðe bakýn:
+
+>>> for i in dir(str):
+... print("%15s" %i)
+
+Gördüðünüz gibi % ile s iþaretleri arasýna bir sayý yerleþtirdik. Bu sayý, biçimlendirilecek karakter dizisinin toplam kaç karakterlik yer kaplayacaðýný gösteriyor. Durumu daha net görebilmeniz için þöyle bir örnek verelim:
+
+>>> print("|%15s|" %"istihza")
+
+|        istihza|
+
+Karakter dizisinin baþýna ve sonuna eklediðimiz ‘|’ iþaretleri sayesinde karakter dizisinin nasýl ve ne þekilde hizalandýðýný daha belirgin bir þekilde görebiliyoruz. Aslýnda yukarýdaki örneðin yaptýðý iþ size hiç yabancý deðil. Ayný etkiyi, karakter dizisi metotlarýndan rjust() ile de yapabileceðimizi biliyorsunuz:
+
+>>> print("istihza".rjust(15))
+
+Aynen yukarýdaki çýktýyý rjust() metodunu kullanarak elde etmek için ise þöyle bir þey yazabilirsiniz:
+
+>>> print("|%s|" %"istihza".rjust(15))
+
+|        istihza|
+
+Yukarýdaki örnekte “istihza” karakter dizisini saða doðru yasladýk. Sola yaslamak için ise negatif sayýlardan yararlanabilirsiniz:
+
+>>> print("|%-15s|" %"istihza")
+
+|istihza        |
+
+Týpký biraz önce verdiðimiz örnekteki gibi, ayný etkiyi ljust() metoduyla da elde edebilirsiniz:
+
+>>> print("|%s|" %"istihza".ljust(15))
+
+|istihza        |
+
+Gördüðünüz gibi, %s yapýsýný farklý þekillerde kullanarak epey karmaþýk çýktýlar elde edebiliyoruz. Ama aslýnda karakter dizisi biçimlendiricilerini kullanarak yapabileceklerimiz bunlarla da sýnýrlý deðildir. Mesela size þöyle bir soru sorduðumu düþünün: Acaba aþaðýdaki içeriðe sahip bir HTML þablonunu nasýl elde edebiliriz?
+
+<html>
+    <head>
+        <title> {{ sayfa baþlýðý }} </title>
+    </head>
+
+    <body>
+        <h1> {{ birinci seviye baþlýk }} </h1>
+        <p>Web sitemize hoþgeldiniz! Konumuz: {{ konu }}</p>
+    </body>
+</html>
+
+Burada bütün deðiþkenler tek bir deðere sahip olacak. Örneðin deðiþkenimiz Python Programlama Dili ise yukarýdaki þablon þöyle bir HTML sayfasý üretecek:
+
+<html>
+    <head>
+        <title> Python Programlama Dili </title>
+    </head>
+
+    <body>
+        <h1> Python Programlama Dili </h1>
+        <p>Web sitemize hoþgeldiniz! Konumuz: Python Programlama Dili</p>
+    </body>
+</html>
+
+Aklýnýza ilk olarak þöyle bir çözüm gelmiþ olabilir:
+
+sayfa = """
+<html>
+    <head>
+        <title> %s </title>
+    </head>
+
+    <body>
+        <h1> %s </h1>
+        <p>Web sitemize hoþgeldiniz! Konumuz: %s</p>
+    </body>
+</html>
+"""
+
+print(sayfa % ("Python Programlama Dili",
+"Python Programlama Dili",
+"Python Programlama Dili"))
+
+Bu gayet makul ve doðru bir çözümdür. Ancak gördüðünüz gibi yukarýdaki kodlarda bizi rahatsýz eden bir nokta var. Bu kodlarda ayný karakter dizisini (“Python Programlama Dili”) üç kez tekrar ediyoruz. En baþtan beri söylediðimiz gibi, kod yazarken tekrarlardan olabildiðince kaçýnmaya çalýþmamýz programýmýzýn performansýný artýracaktýr. Burada da tekrardan kaçýnmak amacýyla þöyle bir kod yazmayý tercih edebiliriz. Dikkatlice inceleyin:
+
+sayfa = """
+<html>
+    <head>
+        <title> %(dil)s </title>
+    </head>
+
+    <body>
+        <h1> %(dil)s </h1>
+        <p>Web sitemize hoþgeldiniz! Konumuz: %(dil)s</p>
+    </body>
+</html>
+"""
+
+print(sayfa % {"dil": "Python Programlama Dili"})
+
+Gördüðünüz gibi, yukarýdaki kodlar bizi ayný karakter dizisini tekrar tekrar yazma zahmetinden kurtardý. Peki ama nasýl? Gelin isterseniz bu yapýyý daha iyi anlayabilmek için daha basit bir örnek verelim:
+
+print("depoda %(miktar)s kilo %(ürün)s kaldý" %{"miktar": 25,
+"ürün": "elma"})
+
+Burada þöyle bir yapýyla karþý karþýyayýz:
+
+"%(deðiþken_adý)s" % {"deðiþken_adý": "deðiþken_deðeri"}
+
+{“deðiþken_adý”: “deðiþken_deðeri”} yapýsýyla önceki derslerimizde karþýlaþmýþtýnýz. Dolayýsýyla bu yapýnýn temel olarak ne iþe yaradýðýný biliyorsunuz. Hatta bu yapýnýn adýnýn ‘sözlük’ olduðunu da öðrenmiþtiniz. Ýþte burada, sözlük adlý veri tipinden yararlanarak deðiþken adlarý ile deðiþken deðerlerini eþleþtirdik. Böylece ayný þeyleri tekrar tekrar yazmamýza gerek kalmadý. Ayrýca yukarýdaki örnekte deðerleri sýrasýna göre deðil, ismine göre çaðýrdýðýmýz için, karakter dizisi içindeki deðerlerin sýrasýný takip etme zahmetinden de kurtulmuþ olduk.
+
+Böylece % yapýsýnýn tüm temel ayrýntýlarýný öðrenmiþ olduk. Artýk % iþaretinin baþka yönlerini incelemeye baþlayabiliriz.

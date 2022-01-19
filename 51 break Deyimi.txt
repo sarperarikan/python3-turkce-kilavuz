@@ -1,0 +1,22 @@
+
+break Deyimi
+
+Python’da break özel bir deyimdir. Bu deyim yardýmýyla, devam eden bir süreci kesintiye uðratabiliriz. Bu deyimin kullanýldýðý basit bir örnek verelim:
+
+>>> while True:
+... parola = input("Lütfen bir parola belirleyiniz:")
+... if len(parola) < 5:
+... print("Parola 5 karakterden az olmamalý!")
+... else:
+... print("Parolanýz belirlendi!")
+... break
+
+Burada, eðer kullanýcýnýn girdiði parolanýn uzunluðu 5 karakterden azsa, Parola 5 karakterden az olmamalý! uyarýsý gösterilecektir. Eðer kullanýcý 5 karakterden uzun bir parola belirlemiþse, kendisine ‘Parolanýz belirlendi!’ mesajýný gösterip, break deyimi yardýmýyla programdan çýkýyoruz.
+
+Gördüðünüz gibi, break ifadesinin temel görevi bir döngüyü sona erdirmek. Buradan anlayacaðýmýz gibi, break ifadesinin her zaman bir döngü içinde yer almasý gerekiyor. Aksi halde Python bize þöyle bir hata verecektir:
+
+SyntaxError: 'break' outside loop
+
+Yani:
+
+SözDizimiHatasý: ``break`` döngü dýþýnda ..

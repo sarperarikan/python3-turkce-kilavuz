@@ -1,0 +1,149 @@
+
+Karakter Dizilerine Giriþ
+
+Dediðimiz gibi, yukarýda yazdýðýmýz küçücük kod parçasý sizi heyecanlandýrmamýþ olabilir, ama aslýnda bu kod Python programlama dili ve bu dilin yapýsý hakkýnda çok önemli bilgileri içinde barýndýrýyor.
+
+Teknik olarak söylemek gerekirse, yukarýda yazdýðýmýz “Merhaba Zalim Dünya!” ifadesi bir karakter dizisidir. Ýngilizcede buna string adý verilir ve programlama açýsýndan son derece önemli bir kavramdýr bu. Kavramýn adýndan da rahatlýkla anlayabileceðiniz gibi, bir veya daha fazla karakterden oluþan öðelere karakter dizisi (string) diyoruz.
+
+Karakter dizileri bütün programcýlýk maceramýz boyunca karþýmýza çýkacak. O yüzden bu kavramý ne kadar erken öðrenirsek o kadar iyi.
+
+Peki bir verinin karakter dizisi olup olmamasýnýn bize ne faydasý var? Yani yukarýdaki cümle karakter dizisi olmuþ olmamýþ bize ne?
+
+Python’da, o anda elinizde bulunan bir verinin hangi tipte olduðunu bilmek son derece önemlidir. Çünkü bir verinin ait olduðu tip, o veriyle neler yapýp neler yapamayacaðýnýzý belirler. Python’da her veri tipinin belli baþlý özellikleri vardýr. Dolayýsýyla, elimizdeki bir verinin tipini bilmezsek o veriyi programlarýmýzda etkin bir þekilde kullanamayýz. Ýþte yukarýda örneðini verdiðimiz “Merhaba Zalim Dünya!” adlý karakter dizisi de bir veri tipidir. Python’da karakter dizileri dýþýnda baþka veri tipleri de bulunur. Biraz sonra baþka veri tiplerini de inceleyeceðiz.
+
+Dikkat ederseniz “Merhaba Zalim Dünya!” adlý karakter dizisini týrnak içinde gösterdik. Bu da çok önemli bir bilgidir. Eðer bu cümleyi týrnak içine almazsak programýmýz hata verecektir:
+
+>>> Merhaba Zalim Dünya!
+
+  File "<stdin>", line 1
+    Merhaba Zalim Dünya!
+                ^
+SyntaxError: invalid syntax
+
+Zaten týrnak iþaretleri, karakter dizilerinin ayýrt edici özelliðidir. Öyle ki, Python’da týrnak içinde gösterdiðiniz her þey bir karakter dizisidir. Örneðin þu bir karakter dizisidir:
+
+>>> "a"
+
+Gördüðünüz gibi, týrnak içinde gösterilen tek karakterlik bir öðe de Python’da karakter dizisi sýnýfýna giriyor.
+
+Mesela þu, içi boþ bir karakter dizisidir:
+
+>>> ""
+
+Þu da içinde bir adet boþluk karakteri barýndýran bir karakter dizisi...
+
+>>> " "
+
+Bu ikisi arasýndaki farka dikkat ediyoruz: Python’da ‘boþ karakter dizisi’ ve ‘bir adet boþluktan oluþan karakter dizisi’ birbirlerinden farklý iki kavramdýr. Adýndan da anlaþýlacaðý gibi, boþ karakter dizileri içlerinde hiçbir karakter (baþka bir deyiþle ‘öðe’) barýndýrmayan karakter dizileridir. Bir (veya daha fazla) boþluktan oluþan karakter dizileri ise içlerinde boþluk karakteri barýndýran karakter dizileridir. Yani bu karakter dizilerinden biri boþ, öteki ise doludur. Ama neticede her ikisi de karakter dizisidir. Þu anda oldukça anlamsýz bir konu üzerinde vakit kaybediyormuþuz hissine kapýlmýþ olabilirsiniz, ama emin olun, Python programlama diline yeni baþlayanlarýn önemli tökezleme noktalarýndan biridir bu söylediðimiz þey...
+
+Dilerseniz biz karakter dizilerine elimizin alýþmasý için birkaç örnek verelim:
+
+>>> "Elma"
+
+'Elma'
+
+>>> "Guido Van Rossum"
+
+'Guido Van Rossum'
+
+>>> "Python programlama dili"
+
+'Python programlama dili'
+
+>>> "ömnhbgfgh"
+
+'ömnhbgfgh'
+
+>>> "$5&"
+
+'$5&'
+
+>>> ""
+
+''
+
+>>> " "
+
+' '
+
+>>> " "
+
+' '
+
+Yukarýdaki örneklerin hepsi birer karakter dizisidir. Dikkat ettiyseniz yukarýdaki karakter dizilerinin hepsinin ortak özelliði týrnak içinde gösteriliyor olmasýdýr. Dediðimiz gibi, týrnak iþaretleri karakter dizilerinin ayýrt edici özelliðidir.
+
+Peki bir verinin karakter dizisi olup olmadýðýndan nasýl emin olabilirsiniz?
+
+Eðer herhangi bir verinin karakter dizisi olup olmadýðý konusunda tereddütünüz varsa, type() adlý bir fonksiyondan yararlanarak o verinin tipini sorgulayabilirsiniz. Bu fonksiyonu þöyle kullanýyoruz:
+
+>>> type("Elma")
+
+<class 'str'>
+
+Not
+
+Bu ‘fonksiyon’ kelimesinin kafanýzý karýþtýrmasýna izin vermeyin. Ýlerde fonksiyonlarý oldukça ayrýntýlý bir þekilde inceleyeceðimiz için, type() ifadesinin bir fonksiyon olduðunu bilmeniz þimdilik yeterli olacaktýr. Üstelik fonksiyon konusunu ayrýntýlý bir þekilde anlatma vakti geldiðinde siz fonksiyonlara dair pek çok þeyi zaten öðrenmiþ olacaksýnýz.
+
+Burada amacýmýz “Elma” adlý öðenin tipini denetlemek. Denetlenecek öðeyi type() fonksiyonunun parantezleri arasýnda belirttiðimize dikkat edin. (Fonksiyonlarýn parantezleri içinde belirtilen deðerlere teknik dilde parametre adý verilir.)
+
+Yukarýdaki çýktýda bizi ilgilendiren kýsým, sondaki ‘str’ ifadesi. Tahmin edebileceðiniz gibi, bu ifade string kelimesinin kýsaltmasýdýr. Bu kelimenin Türkçede karakter dizisi anlamýna geldiðini söylemiþtik. O halde yukarýdaki çýktýya bakarak, “Elma” öðesinin bir karakter dizisi olduðunu söyleyebiliyoruz.
+
+type() fonksiyonu yardýmýyla kendi kendinize bazý denemeler yaparak konuyu iyice sindirmenizi tavsiye ederim. Mesela “½{656$#gfd” ifadesinin hangi sýnýfa girdiðini kontrol etmekle baþlayabilirsiniz.
+
+Peki karakter dizileri ile neler yapabiliriz? Þu anda Python bilgimiz kýsýtlý olduðu için karakter dizileri ile çok fazla þey yapamayýz, ama ilerde bilgimiz arttýkça, karakter dizileriyle sýký fýký olacaðýz.
+
+Esasýnda, henüz bilgimiz kýsýtlý da olsa karakter dizileriyle yine de ufak tefek bazý þeyler yapamayacak durumda deðiliz. Mesela þu anki bilgilerimizi ve görür görmez size tanýdýk gelecek bazý basit parçalarý kullanarak, karakter dizilerini birbirleriyle birleþtirebiliriz:
+
+>>> "istihza" + ".com"
+
+'istihza.com'
+
+Burada + iþaretini kullanarak karakter dizilerini nasýl birleþtirebildiðimize dikkat edin. Ýki karakter dizisini + iþareti ile birleþtirdiðimizde karakter dizilerinin arasýnda boþluk olmadýðýna özellikle dikkatinizi çekmek isterim. Bu durumu þu örnekte daha net görebiliriz:
+
+>>> "Fýrat" + "Özgül"
+
+'FýratÖzgül'
+
+Gördüðünüz gibi, bu iki karakter dizisi, arada boþluk olmadan birbiriyle bitiþtirildi. Araya boþluk eklemek için birkaç farklý yöntemden yararlanabilirsiniz:
+
+>>> "Fýrat" + " " + "Özgül"
+
+'Fýrat Özgül'
+
+Burada iki karakter dizisi arasýna bir adet boþluk karakteri yerleþtirdik. Ayný etkiyi þu þekilde de elde edebilirsiniz:
+
+>>> "Fýrat" + " Özgül"
+
+Burada da Özgül karakter dizisinin baþýna bir adet boþluk yerleþtirerek istediðimiz çýktýyý elde ettik.
+
+Bu arada, karakter dizilerini birleþtirmek için mutlaka + iþareti kullanmak zorunda deðilsiniz. Siz + iþaretini kullanmasanýz da Python sizin karakter dizilerini birleþtirmek istediðinizi anlayacak kadar zekidir:
+
+>>> "www" "." "google" "." "com"
+
+'www.google.com'
+
+Ancak gördüðünüz gibi, + iþaretini kullandýðýnýzda kodlarýnýz daha okunaklý oluyor.
+
++ iþareti dýþýnda karakter dizileri ile birlikte * (çarpý) iþaretini de kullanabiliriz. O zaman þöyle bir etki elde ederiz:
+
+>>> "w" * 3
+
+'www'
+
+>>> "yavaþ " * 2
+
+'yavaþ yavaþ '
+
+>>> "-" * 10
+
+'----------'
+
+>>> "uzak" + " " * 5 + "çok uzak..."
+
+'uzak     çok uzak...'
+
+Gördüðünüz gibi, çok basit parçalarý bir araya getirerek karmaþýk çýktýlar elde edebiliyoruz. Mesela son örnekte “uzak” adlý karakter dizisine önce 5 adet boþluk karakteri (" " * 5), ardýndan da “çok uzak...” adlý karakter dizisini ekleyerek istediðimiz çýktýyý aldýk.
+
+Burada + ve * adlý iki yeni araç görüyoruz. Bunlar aslýnda sayýlarla birlikte kullanýlan birer aritmetik iþleçtir. Normalde + iþleci toplama iþlemleri için, * iþleci ise çarpma iþlemleri için kullanýlýr. Ama yukarýdaki örneklerde, + iþaretinin ‘birleþtirme’; * iþaretinin ise ‘tekrarlama’ anlamýndan ötürü bu iki iþleci bazý durumlarda karakter dizileri ile birlikte de kullanabiliyoruz. Bunlarýn dýþýnda bir de - (eksi) ve / (bölü) iþleçleri bulunur. Ancak bu iþaretleri karakter dizileri ile birlikte kullanamýyoruz.
+
+Karakter dizilerini sonraki bir bölümde bütün ayrýntýlarýyla inceleyeceðiz. O yüzden þimdilik bu konuya bir ara verelim.

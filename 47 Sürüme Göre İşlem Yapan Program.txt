@@ -1,0 +1,173 @@
+
+Sürüme Göre Ýþlem Yapan Program
+
+Bildiðiniz gibi, þu anda piyasada iki farklý Python serisi bulunuyor: Python2 ve Python3. Daha önce de söylediðimiz gibi, Python’ýn 2.x serisi ile çalýþan bir program Python’ýn 3.x serisi ile muhtemelen çalýþmayacaktýr. Ayný þekilde bunun tersi de geçerlidir. Yani 3.x ile çalýþan bir program 2.x ile büyük ihtimalle çalýþmayacaktýr.
+
+Bu durum, yazdýðýnýz programlarýn farklý Python sürümleri ile çalýþtýrýlma ihtimaline karþý bazý önlemler almanýzý gerektirebilir. Örneðin yazdýðýnýz bir programda kullanýcýlarýnýzdan beklentiniz, programýnýzý Python’ýn 3.x sürümlerinden biri ile çalýþtýrmalarý olabilir. Eðer programýnýz Python’ýn 2.x sürümlerinden biri ile çalýþtýrýlýrsa kullanýcýya bir uyarý mesajý göstermek isteyebilirsiniz.
+
+Hatta yazdýðýnýz bir program, ayný serinin farklý sürümlerinde dahi çalýþmayý engelleyecek özellikler içeriyor olabilir. Örneðin print() fonksiyonunun flush adlý parametresi dile 3.3 sürümü ile birlikte eklendi. Dolayýsýyla bu parametreyi kullanan bir program, kullanýcýnýn 3.3 veya daha yüksek bir Python sürümü kullanmasýný gerektirir. Böyle bir durumda, programýnýzý çalýþtýran Python sürümünün en düþük 3.3 olmasýný temin etmeniz gerekir.
+
+Peki bunu nasýl yapacaksýnýz?
+
+Burada aklýnýzda ilk olarak, kodlarýnýza #!/usr/bin/env python3.3 veya #! python3.3 gibi bir satýr eklemek gelmiþ olabilir. Ama unutmayýn, bu çözüm ancak kýsýtlý bir iþlevsellik sunabilir. Programýmýza böyle bir satýr eklediðimizde, programýmýzýn Python’ýn 3.3 sürümü ile çalýþtýrýlmasý gerektiðini belirtiyoruz. Ama 3.3 dýþý bir sürümle çalýþtýrýldýðýnda ne olacaðýný belirtmiyoruz. Böyle bir durumda, eðer programýmýz 3.3 dýþý bir sürümle çalýþtýrýlýrsa çökecektir. Bizim burada daha kapsamlý ve esnek bir çözüm bulmamýz gerekiyor.
+
+Hatýrlarsanýz önceki derslerden birinde sys adlý bir modülden söz etmiþtik. Bildiðiniz gibi, bu modül içinde pek çok yararlý deðiþken ve fonksiyon bulunuyor. Önceki derslerimizde, bu modül içinde bulunan exit() fonksiyonu ile stdout ve version deðiþkenlerini gördüðümüzü hatýrlýyor olmalýsýnýz. sys modülü içinde bulunan exit() fonksiyonunun programdan çýkmamýzý saðladýðýný, stdout deðiþkeninin standart çýktý konumu bilgisini tuttuðunu ve version deðiþkeninin de kullandýðýmýz Python sürümü hakkýnda bilgi verdiðini biliyoruz. Ýþte yukarýda bahsettiðimiz programda da bu sys modülünden yararlanacaðýz.
+
+Bu iþ için, version deðiþkenine çok benzeyen version_info adlý bir deðiþkeni kullanacaðýz.
+
+Bu deðiþkenin nasýl kullanýldýðýna etkileþimli kabukta beraberce bakalým...
+
+sys modülü içindeki araçlarý kullanabilmek için öncelikle bu modülü içe aktarmamýz gerektiðini biliyorsunuz:
+
+>>> import sys
+
+Þimdi de bu modül içindeki version_info adlý deðiþkene eriþelim:
+
+>>> sys.version_info
+
+Bu komut bize þöyle bir çýktý verir:
+sys.version_info(major=|major3|, minor=|minor3|, micro=|micro3|, releaselevel='final', serial=0) 
+Gördüðünüz gibi, bu deðiþken de bize týpký version adlý deðiþken gibi, kullandýðýmýz Python sürümü hakkýnda bilgi veriyor.
+
+Ben yukarýdaki komutu Python3’te verdiðinizi varsaydým. Eðer yukarýdaki komutu Python3 yerine Python2’de verseydik þöyle bir çýktý alacaktýk:
+sys.version_info(major=|major2|, minor=|minor2|, micro=|micro2|, releaselevel='final', serial=0) 
+version_info ve version deðiþkenlerinin verdikleri çýktýnýn birbirlerinden farklý yapýda olduðuna dikkat edin. version deðiþkeni, version_info deðiþkeninden farklý olarak þöyle bir çýktý verir:
+'3.5.1 (default, 20.04.2016, 12:24:55) [GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux' 
+version_info deðiþkeninin verdiði çýktý bizim þu anda yazmak istediðimiz programa daha uygun. Bunun neden böyle olduðunu biraz sonra siz de anlayacaksýnýz.
+
+Gördüðünüz gibi, version_info deðiþkeninin çýktýsýnda major ve minor gibi bazý deðerler var. Çýktýdan da rahatlýkla anlayabileceðiniz gibi, major, kullanýlan Python serisinin ana sürüm numarasýný; minor ise alt sürüm numarasýný verir. Çýktýda bir de micro adlý bir deðer var. Bu da kullanýlan Python serisinin en alt sürüm numarasýný verir.
+
+Bu deðere þu þekilde eriþiyoruz:
+
+>>> sys.version_info.major
+
+Öteki deðerlere de ayný þekilde ulaþýyoruz:
+
+>>> sys.version_info.minor
+>>> sys.version_info.micro
+
+Ýþte bu çýktýlardaki major (ve yerine göre bununla birlikte minor ve micro) deðerini kullanarak, programýmýzýn hangi Python sürümü ile çalýþtýrýlmasý gerektiðini kontrol edebiliriz. Þimdi programýmýzý yazalým:
+
+import sys
+
+_2x_metni = """
+Python'ýn 2.x sürümlerinden birini kullanýyorsunuz.
+Programý çalýþtýrabilmek için sisteminizde Python'ýn
+3.x sürümlerinden biri kurulu olmalý."""
+
+_3x_metni = "Programa hoþgeldiniz."
+
+if sys.version_info.major < 3:
+print(_2x_metni)
+else:
+print(_3x_metni)
+
+Gelin isterseniz öncelikle bu kodlarý biraz inceleyelim.
+
+Ýlk olarak modülümüzü içe aktarýyoruz. Bu modül içindeki araçlarý kullanabilmemiz için bunu yapmamýz þart:
+
+import sys
+
+Ardýndan Python’ýn 2.x sürümlerinden herhangi birini kullananlar için bir uyarý metni oluþturuyoruz:
+
+_2x_metni = """
+Python'ýn 2.x sürümlerinden birini kullanýyorsunuz.
+Programý çalýþtýrabilmek için sisteminizde Python'ýn
+3.x sürümlerinden biri kurulu olmalý."""
+
+Bildiðiniz gibi Python’da deðiþken adlarý bir sayýyla baþlamaz. O yüzden deðiþken isminin baþýna bir tane alt çizgi iþareti koyduðumuza dikkat edin.
+
+Bu da Python3 kullanýcýlarý için:
+
+_3x_metni = "Programa hoþgeldiniz."
+
+Artýk sürüm kontrolü kýsmýna geçebiliriz. Eðer major parametresinin deðeri 3’ten küçükse _2x_metnini yazdýrýyoruz. Bunun dýþýndaki bütün durumlar için ise _3x_metnini basýyoruz:
+
+if sys.version_info.major < 3:
+print(_2x_metni)
+else:
+print(_3x_metni)
+
+Gördüðünüz gibi, kullanýlan Python sürümünü kontrol etmek ve eðer program istenmeyen bir Python sürümüyle çalýþtýrýlýyorsa ne yapýlacaðýný belirlemek son derece kolay.
+
+Yukarýdaki çok basit bir kod parçasý olsa da bize Python programlama diline ve bu dilin farklý sürümlerine dair son derece önemli bazý bilgiler veriyor.
+
+Eðer bu programý Python’ýn 3.x sürümlerinden biri ile çalýþtýrdýysanýz þu çýktýyý alacaksýnýz:
+
+Programa hoþgeldiniz.
+
+Ama eðer bu programý Python’ýn 2.x sürümlerinden biri ile çalýþtýrdýysanýz, beklentinizin aksine, þöyle bir hata mesajý alacaksýnýz:
+
+File "test.py", line 5
+SyntaxError: Non-ASCII character '\xc4' in file test.py on line 6, but no
+encoding declared; see http://www.python.org/peps/pep-0263.html for details
+
+Biz _2x_metni adlý deðiþkenin ekrana basýlmasýný beklerken Python bize bir hata mesajý gösterdi. Aslýnda siz bu hata mesajýna hiç yabancý deðilsiniz. Bunu daha önce de görmüþtünüz. Hatýrlarsanýz önceki derslerimizde karakter kodlamalarýndan bahsederken, Python’ýn 2.x sürümlerinde öntanýmlý karakter kodlamasýnýn ASCII olduðundan söz etmiþtik. Bu yüzden programlarýmýzda Türkçe karakterleri kullanýrken bazý ilave iþlemler yapmamýz gerekiyordu.
+
+Burada ilk olarak karakter kodlamasýný UTF-8 olarak deðiþtirmemiz gerekiyor. Bunun nasýl yapýlacaðýný biliyorsunuz. Programýmýzýn ilk satýrýna þu kodu ekliyoruz:
+
+# -*- coding: utf-8 -*-
+
+Bu satýr Python3 için gerekli deðil. Çünkü Python3’te öntanýmlý karakter kodlamasý zaten UTF-8. Ama Python2’de öntanýmlý karakter kodlamasý ASCII. O yüzden Python2 kullanýcýlarýný da düþünerek UTF-8 kodlamasýný açýkça belirtiyoruz. Böylece programýmýzýn Python’ýn 2.x sürümlerinde Türkçe karakterler yüzünden çökmesini önlüyoruz.
+
+Ama burada bir problem daha var. Programýmýz Türkçe karakterler yüzünden çökmüyor çökmemesine ama, bu defa da Türkçe karakterleri düzgün göstermiyor:
+
+Python'Ä±n 2.x sÃ¼rÃ¼mlerinden birini kullanÄ±yorsunuz.
+ProgramÄ± Ã§alÄ±ÅŸtÄ±rabilmek iÃ§in sisteminizde Python'Ä±n
+3.x sÃ¼rÃ¼mlerinden biri kurulu olmalÄ±.
+
+Programýmýzý Python’ýn 2.x sürümlerinden biri ile çalýþtýranlarýn uyarý mesajýný düzgün bir þekilde görüntüleyebilmesini istiyorsanýz, Türkçe karakterler içeren karakter dizilerinin en baþýna bir ‘u’ harfi eklemelisiniz. Yani _2x_metni adlý deðiþkeni þöyle yazmalýsýnýz:
+
+_2x_metni = u"""
+Python'ýn 2.x sürümlerinden birini kullanýyorsunuz.
+Programý çalýþtýrabilmek için sisteminizde Python'ýn
+3.x sürümlerinden biri kurulu olmalý."""
+
+Bu karakter dizisinin en baþýna bir ‘u’ harfi ekleyerek bu karakter dizisini ‘unicode’ olarak tanýmlamýþ olduk. Eðer ‘unicode’ kavramýný bilmiyorsanýz endiþe etmeyin. Ýlerde bu kavramdan bolca söz edeceðiz. Biz þimdilik, içinde Türkçe karakterler geçen karakter dizilerinin Python2 kullanýcýlarý tarafýndan düzgün görüntülenebilmesi için baþlarýna bir ‘u’ harfi eklenmesi gerektiðini bilelim yeter.
+
+Eðer siz bir Windows kullanýcýsýysanýz ve bütün bu iþlemlerden sonra bile Türkçe karakterleri düzgün görüntüleyemiyorsanýz, bu durum muhtemelen MS-DOS komut satýrýnýn kullandýðý yazý tipinin Türkçe karakterleri gösterememesinden kaynaklanýyordur. Bu problemi çözmek için MS-DOS komut satýrýnýn baþlýk çubuðuna sað týklayýp ‘özellikler’ seçeneðini seçerek yazý tipini ‘Lucida Console’ olarak deðiþtirin. Bu iþlemin ardýndan da komut satýrýnda þu komutu verin:
+
+chcp 1254
+
+Böylece Türkçe karakterleri düzgün görüntüleyebilirsiniz.
+
+Not
+
+MS-DOS’taki Türkçe karakter problemi hakkýnda daha ayrýntýlý bilgi için http://goo.gl/eRY1P adresindeki makalemizi inceleyebilirsiniz.
+
+Þimdiye kadar anlattýklarýmýzdan öðrendiðiniz gibi, sys modülü içinde sürüm denetlemeye yarayan iki farklý deðiþken var. Bunlardan biri version, öbürü ise version_info.
+
+Python3’te bu deðiþkenlerin þu çýktýlarý verdiðiniz biliyoruz:
+
+version:
+'3.5.1 (default, 20.04.2016, 12:24:55) [GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux' 
+version_info:
+sys.version_info(major=|major3|, minor=|minor3|, micro=|micro3|, releaselevel='final', serial=0) 
+Gördüðünüz gibi, çýktýlarýn hem yapýlarý birbirinden farklý, hem de verdikleri bilgiler arasýnda bazý farklar da var. Mesela version deðiþkeni, kullandýðýmýz Python sürümünün hangi tarih ve saatte, hangi iþletim sistemi üzerinde derlendiði bilgisini de veriyor. Ancak kullanýlan Python sürümünün ne olduðunu tespit etmek konusunda version_info biraz daha pratik görünüyor. Bu deðiþkenin bize major, minor ve micro gibi parametreler aracýlýðýyla sunduðu sayý deðerli verileri iþleçlerle birlikte kullanarak bu sayýlar üzerinde aritmetik iþlemler yapýp, kullanýlan Python sürümünü kontrol edebiliyoruz.
+
+version deðiþkeni bize bir karakter dizisi verdiði için, bu deðiþkenin deðerini kullanarak herhangi bir aritmetik iþlem yapamýyoruz. Mesela version_info deðiþkeniyle yukarýda yaptýðýmýz büyüktür-küçüktür sorgulamasýný version deðiþkeniyle tabii ki yapamayýz.
+
+Yukarýdaki örnekte seriler arasý sürüm kontrolünü nasýl yapacaðýmýzý gördük. Bunun için kullandýðýmýz kod þuydu:
+
+if sys.version_info.major < 3:
+...
+
+Burada kullanýlan Python serisinin 3.x‘ten düþük olduðu durumlarý sorguladýk. Peki ayný serinin farklý sürümlerini denetlemek istersek ne yapacaðýz? Mesela Python’ýn 3.2 sürümünü sorgulamak istersek nasýl bir kod kullanacaðýz?
+
+Bunun için þöyle bir þey yazabiliriz:
+
+if sys.version_info.major == 3 and sys.version_info.minor == 2:
+...
+
+Gördüðünüz gibi burada version_info deðiþkeninin hem major hem de minor parametrelerini kullandýk. Ayrýca hem ana sürüm, hem de alt sürüm için belli bir koþul talep ettiðimizden ötürü and adlý Bool iþlecinden de yararlandýk. Çünkü koþulun gerçekleþmesi, ana sürümün 3 ve alt sürümün 2 olmasýna baðlý.
+
+Yukarýdaki iþlem için version deðiþkenini de kullanabilirdik. Dikkatlice bakýn:
+
+if "3.2" in sys.version:
+...
+
+Bildiðiniz gibi, version deðiþkeni Python’ýn 3.x sürümlerinde þuna benzer bir çýktý veriyor:
+'3.5.1 (default, 20.04.2016, 12:24:55) [GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux' 
+Ýþte biz burada in iþlecini kullanarak, version deðiþkeninin verdiði karakter dizisi içinde ‘3.2’ diye bir ifade aradýk.
+
+Bu konuyu daha iyi anlamak için kendi kendinize bazý denemeler yapmanýzý tavsiye ederim. Ne kadar çok örnek kod yazarsanýz, o kadar çok tecrübe kazanýrsýnýz.

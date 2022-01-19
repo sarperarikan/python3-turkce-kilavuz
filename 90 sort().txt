@@ -1,0 +1,62 @@
+
+sort()
+
+Yine listelerin önemli bir metodu ile karþý karþýyayýz. sort() adlý bu önemli metot bir listenin öðelerini belli bir ölçüte göre sýraya dizmemizi saðlar. Basit bir örnek verelim. Diyelim ki elimizde þöyle bir liste var:
+
+üyeler = ['Ahmet', 'Mehmet', 'Ceylan', 'Seyhan', 'Mahmut', 'Zeynep',
+'Abdullah', 'Kadir', 'Kemal', 'Kamil', 'Selin', 'Senem',
+'Sinem', 'Tayfun', 'Tuna', 'Tolga']
+
+Bu listedeki isimleri mesela alfabe sýrasýna dizmek için sort() metodunu kullanabiliriz:
+
+>>> üyeler.sort()
+>>> print(üyeler)
+
+['Abdullah', 'Ahmet', 'Ceylan', 'Kadir', 'Kamil', 'Kemal', 'Mahmut',
+ 'Mehmet', 'Selin', 'Senem', 'Seyhan', 'Sinem', 'Tayfun', 'Tolga',
+ 'Tuna', 'Zeynep']
+
+Bu metot elbette yalnýzca harfleri alfabe sýrasýna dizmek için deðil sayýlarý sýralamak için de kullanýlabilir:
+
+>>> sayýlar = [1, 0, -1, 4, 10, 3, 6]
+>>> sayýlar.sort()
+>>> print(sayýlar)
+
+[-1, 0, 1, 3, 4, 6, 10]
+
+Gördüðünüz gibi, sort() metodu öðeleri artan sýralamaya tabi tutuyor. Yani öðeler ‘a, b, c’ veya 1, 2, 3 þeklinde sýralanýyor. Bunun tersini yapmak da mümkündür. Yani istersek Python’ýn sýralama iþlemini ‘c, b, a’ þeklinde yapmasýný da saðlayabiliriz. Bunun için sort() metodunun reverse parametresini kullanacaðýz:
+
+>>> üyeler = ['Ahmet', 'Mehmet', 'Ceylan', 'Seyhan', 'Mahmut', 'Zeynep',
+              'Abdullah', 'Kadir', 'Kemal', 'Kamil', 'Selin', 'Senem',
+             'Sinem', 'Tayfun', 'Tuna', 'Tolga']
+
+>>> üyeler.sort(reverse=True)
+
+Gördüðünüz gibi sort() metodunun reverse adlý bir parametresine verdiðimiz True deðeri sayesinde liste öðelerini ters sýraladýk. Bu parametrenin öntanýmlý deðeri False‘tur. Yani sort() metodu öntanýmlý olarak öðeleri artýra artýra sýralar. Öðeleri azalta azalta sýralamak için reverse parametresinin False olan öntanýmlý deðerini True yapmamýz yeterli olacaktýr.
+
+Gelin isterseniz sort() metodunu kullanarak bir örnek daha verelim. Elimizde þöyle bir liste olsun:
+
+>>> isimler = ["Ahmet", "Iþýk", "Ýsmail", "Çiðdem", "Can", "Þule"]
+
+Bu listedeki isimleri alfabe sýrasýna dizelim:
+
+>>> isimler.sort()
+>>> isimler
+
+['Ahmet', 'Can', 'Iþýk', 'Çiðdem', 'Ýsmail', 'Þule']
+
+Gördüðünüz gibi, çýktý pek beklediðimiz gibi deðil. Týpký karakter dizilerini anlatýrken öðrendiðimiz sorted() fonksiyonunda olduðu gibi, listelerin sort() metodu da Türkçe karakterleri düzgün sýralayamaz. Eðer Türkçe karakterleri sýralamamýz gereken bir program yazýyorsak bizim sort() metodunun iþleyiþine müdahale etmemiz gerekir. Temel olarak, sorted() fonksiyonunu anlatýrken söylediklerimiz burada da geçerlidir. Orada bahsettiðimiz locale modülü burada da çoðu durumda iþimizi halletmemizi saðlar. Ama sorted() fonksiyonunu anlatýrken de söylediðimiz gibi, locale modülü burada da ‘i’ ve ‘ý’ harflerini düzgün sýralayamaz. Türkçe harflerin tamamýný düzgün sýralayabilmek için þöyle bir kod yazabiliriz:
+
+harfler = "abcçdefgðhýijklmnoöprsþtuüvyz"
+çevrim = {harf: harfler.index(harf) for harf in harfler}
+
+
+isimler = ["ahmet", "ýþýk", "ismail", "çiðdem", "can", "þule"]
+
+isimler.sort(key=lambda x: çevrim.get(x[0]))
+
+print(isimler)
+
+Bu kodlarýn bir kýsmýný anlayabiliyor, bir kýsmýný ise anlayamýyor olabilirsiniz. Çünkü burada henüz iþlemediðimiz konular var. Zamaný geldiðinde bu kodlarýn tamamýný anlayabilecek duruma geleceksiniz. Siz þimdilik sadece bu kodlardan ne çýkarabildiðinize bakýn yeter. Zaten bizim buradaki amacýmýz, sort() metodunun Türkçe harfleri de düzgün bir þekilde sýralayabileceðini göstermekten ibarettir.
+
+Bu arada ufak bir uyarý yapmadan geçmeyelim: Yukarýdaki kodlar da esasýnda Türkçe kelimeleri tam anlamýyla düzgün bir þekilde sýralamak için yeterli deðil. ‘Gömülü Fonksiyonlar’ konusunu incelerken, yeri geldiðinde bu konuya tekrar deðinip, Türkçe kelimelerin nasýl doðru, tam ve eksiksiz bir biçimde sýralanacaðýný da tüm ayrýntýlarýyla inceleyeceðiz.

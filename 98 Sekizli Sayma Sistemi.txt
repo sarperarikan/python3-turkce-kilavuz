@@ -1,0 +1,75 @@
+
+Sekizli Sayma Sistemi
+
+Onlu sayma sisteminin aksine sekizli sayma sisteminde toplam sekiz rakam bulunur. Bu rakamlar þunlardýr:
+
+0, 1, 2, 3, 4, 5, 6, 7
+
+Gördüðünüz gibi, onlu sistemde toplam on farklý simge varken, sekizli sistemde toplam sekiz farklý simge var.
+
+Bu bölümün en baþýnda da söylediðimiz gibi, insanlar onlu sayma sistemine ve bu sistemi oluþturan simgelere o kadar alýþmýþtýr ki, çoðu zaman baþka bir sistemin varlýðýndan veya var olma olasýlýðýndan haberdar bile deðildir. Hatta baþka sayma sistemlerinden bir vesileyle haberdar olup, bu sistemleri öðrenmeye çalýþanlar onlu sayma sistemine olan alýþkanlýklarý nedeniyle yeni sayma sistemlerini anlamakta dahi zorluk çekebilirler. Bunun birincil nedeni, iyi tanýdýklarýný zannettikleri onlu sistemi de aslýnda o kadar iyi tanýmýyor olmalarýdýr.
+
+O halde baþka sayma sistemlerini daha iyi anlayabilmek için öncelikle yaygýn olarak kullandýðýmýz sayma sisteminin nasýl iþlediðini anlamaya çalýþalým:
+
+Onlu sistemde toplam on farklý simge bulunur:
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+9‘dan büyük bir sayýyý göstermek gerektiðinde simge listesinin en baþýna dönülür ve basamak sayýsý bir artýrýlarak, semboller birleþtirilir:
+
+10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ..., 99, 100, ..., 999, 1000
+
+Ýþte bu kural öteki sayma sistemleri için de geçerlidir. Mesela sekizli sayma sistemini ele alalým.
+
+Dediðimiz gibi, sekizli sistemde toplam sekiz farklý simge bulunur:
+
+0, 1, 2, 3, 4, 5, 6, 7
+
+Bu sistemde 7‘den büyük bir sayýyý göstermek gerektiðinde, týpký onlu sistemde olduðu gibi, simge listesinin en baþýna dönüyoruz ve basamak sayýsýný bir artýrarak sembolleri birleþtiriyoruz:
+
+10, 11, 12, 13, 14, 15, 16, 17, 20, ..., 77, 100
+
+Onlu sayma sistemi ile sekizli sayma sistemi arasýndaki farký daha belirgin bir þekilde görebilmek için þu kodlarý yazalým:
+
+sayý_sistemleri = ["onlu", "sekizli"]
+
+print(("{:^5} "*len(sayý_sistemleri)).format(*sayý_sistemleri))
+
+for i in range(17):
+print("{0:^5} {0:^5o}".format(i))
+
+Bu kodlarda öðrenmediðimiz ve anlayamayacaðýmýz hiçbir þey yok. Bu kodlarý oluþturan bütün parçalarý önceki derslerimizde ayrýntýlý olarak incelemiþtik.
+
+Bu kodlardan þöyle bir çýktý alacaðýz:
+
+onlu sekizli
+0 0
+1 1
+2 2
+3 3
+4 4
+5 5
+6 6
+7 7
+8 10
+9 11
+10 12
+11 13
+12 14
+13 15
+14 16
+15 17
+16 20
+
+Gördüðünüz gibi, onlu sistemde elimizde toplam on farklý simge olduðu için, elimizdeki simgeleri kullanarak 10. sayýya kadar ilerleyebiliyoruz. Bu noktadan sonra simge stoðumuz tükendiði için en baþa dönüp bir basamak artýrýyoruz ve simgeleri birbiriyle birleþtirerek yeni sayýlar elde ediyoruz.
+
+Sekizli sistemde ise elimizde yalnýzca sekiz farklý simge olduðu için, elimizdeki simgeleri kullanarak ancak 8. sayýya kadar gelebiliyoruz. Öteki sayýlarý gösterebilmek için bu noktadan sonra baþa dönüp bir artýrmamýz ve simgeleri birbiriyle birleþtirerek yeni sayýlar elde etmemiz gerekiyor.
+
+Sekizli sayma sisteminde bir sayýyý oluþturan rakamlar 8‘in kuvvetleri olarak hesaplanýr. Örneðin sekizli sayma sistemindeki 3674 sayýsýný ele alalým. Bu sayýyý 8‘in kuvvetlerini kullanarak þu þekilde hesaplayabiliriz:
+
+>>> (4 * (8 ** 0)) + (7 * (8 ** 1)) + (6 * (8 ** 2)) + (3 * (8 ** 3))
+
+1980
+
+Bu hesaplama þeklini onlu sayma sisteminden hatýrlýyor olmalýsýnýz. Gördüðünüz gibi, sekizli sistemdeki bir sayýnýn her bir basamaðýný 8‘in kuvvetleri olarak hesapladýðýmýzda, bu sayýnýn onlu sistemdeki karþýlýðýný elde ediyoruz.
+

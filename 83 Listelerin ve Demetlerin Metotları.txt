@@ -1,0 +1,38 @@
+
+Listelerin ve Demetlerin Metotlarý
+
+
+Listelerin Metotlarý
+
+Burada, geçen bölümde kaldýðýmýz yerden devam edeceðiz listeleri anlatmaya. Aðýrlýklý olarak bu bölümde listelerin metotlarýndan söz edeceðiz. ‘Metot’ kavramýný karakter dizilerinden hatýrlýyorsunuz. Karakter dizilerini anlatýrken bol miktarda metot görmüþtük.
+
+Python’da bütün veri tipleri bize birtakým metotlar sunar. Bu metotlar yardýmýyla, ilgili veri tipi üzerinde önemli deðiþiklikler veya sorgulamalar yapabiliyoruz.
+
+Hatýrlarsanýz bir veri tipinin hangi metotlara sahip olduðunu görmek için dir() fonksiyonundan yararlanýyorduk. Listelerde de durum farklý deðil. Dolayýsýyla þu komut bize listelerin metotlarýný sýralayacaktýr:
+
+>>> dir(list)
+
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__',
+ '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
+ '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__',
+ '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__',
+ '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__',
+ '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__',
+ 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop',
+ 'remove', 'reverse', 'sort']
+
+Gördüðünüz gibi, týpký karakter dizilerinde olduðu gibi, listelerin metotlarýný görmek için de dir() fonksiyonuna parametre olarak veri tipinin teknik adýný veriyoruz. Python’da listelerin teknik adý list olduðu için bu komutu dir(list) þeklinde kullanýyoruz. Elbette, eðer istersek, listelerin metotlarýný almak için herhangi bir listeyi de kullanabiliriz. Mesela boþ bir liste kullanalým:
+
+>>> dir([])
+
+Bu komut da dir(list) ile ayný çýktýyý verecektir. Bu listede bizi ilgilendiren metotlar ise þunlardýr:
+
+>>> [i for i in dir(list) if not "_" in i]
+
+['append', 'clear', 'copy', 'count', 'extend', 'index',
+ 'insert', 'pop', 'remove', 'reverse', 'sort']
+
+Metotlar, bir programcýnýn hayatýný önemli ölçüde kolaylaþtýran araçlardýr. Bu yüzden, ‘Listeler’ konusunun ilk bölümünde öðrendiðimiz listeye öðe ekleme, öðe çýkarma, öðe deðiþtirme, öðe silme gibi iþlemleri orada anlattýðýmýz yöntemlerle deðil, biraz sonra göreceðimiz metotlar aracýlýðýyla yapmayý tercih edeceðiz. Ama tabii ki, metotlarý tercih edecek olmamýz, birinci bölümde anlattýðýmýz yöntemleri bir kenara atmanýzý gerektirmez. Unutmayýn, bir dildeki herhangi bir özelliði siz kullanmasanýz bile, etrafta bu özelliði kullanan baþka programcýlar var. Dolayýsýyla en azýndan baþkalarýnýn yazdýðý kodlarý anlayabilmek için dahi olsa, kendinizin kullanmayacaðýnýz yöntem ve yollarý öðrenmeniz gerekir.
+
+append() metoduyla baþlayalým...
+

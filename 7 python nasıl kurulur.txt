@@ -1,0 +1,8 @@
+
+Python Nasýl Kurulur?
+
+Python ile program yazabilmemiz için bu programlama dilinin bilgisayarýmýzda kurulu olmasý gerekiyor. Bu programlama dilini kurmanýzýn gerekip gerekmediði, kullandýðýnýz iþletim sistemine baðlýdýr. Biz burada hem GNU/Linux hem de Windows kullanýcýlarýnýn durumunu sýrasýyla ve ayrý ayrý inceleyeceðiz. Dilerseniz öncelikle GNU/Linux kullanýcýlarýnýn durumuna bakalým:
+
+Not
+
+Bu kitap boyunca bazý konularýn GNU/Linux ve Windows kullanýcýlarý için ayrý ayrý anlatýldýðýný göreceksiniz. Ancak konular bu þekilde ayrýlmýþ da olsa, ben size her ikisini de okumanýzý tavsiye ederim. Çünkü bu bölümlerde her iki kullanýcý grubunun da ilgisini çekebilecek bilgilere rastlayacaksýnýz. Ayrýca bu bölümler farklý kullanýcý gruplarýna hitap ediyor olsa da, aslýnda bu bölümlerin birbirini tamamlayýcý nitelikte olduðunu göreceksiniz.

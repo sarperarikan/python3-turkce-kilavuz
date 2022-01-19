@@ -1,0 +1,756 @@
+
+Karakter Dizileri
+
+Buraya gelene kadar Python programlama diline iliþkin epey bilgi edindik. Artýk yazdýðýmýz programlarda input() fonksiyonu sayesinde kullanýcýyla iletiþim kurabiliyor; if, elif, else deyimleri yardýmýyla programlarýmýzýn karar vermesini saðlayabiliyor; iþleçler ve döngüler yoluyla programlarýmýzý istediðimiz sayýda çalýþtýrabiliyoruz. Eðer buraya kadar olan bölümleri dikkatlice takip ettiyseniz, þu ana kadar öðrendiklerinize dayanarak, Python’ý giriþ düzeyinde bildiðinizi rahatlýkla iddia edebilirsiniz. Zira þimdiye kadar öðrendiklerinizi kullanarak ufak tefek de olsa iþe yarar programlar yazabilecek durumdasýnýz.
+
+Buraya kadar öðrendiðimiz bilgiler Python programlama dilinin temellerini oluþturuyordu. Temel Python bilgilerini edindiðimize göre, artýk baþlangýç-orta düzey arasý konularý incelemeye baþlayabileceðiz.
+
+Bu bölümde, önceki derslerde üstünkörü bakýp geçtiðimiz bir konu olan karakter dizilerini çok daha derinlemesine ele alacaðýz. Python programlama dili içindeki önemi nedeniyle bu bölüm epey uzun olacak.
+
+Aslýnda biz karakter dizisi kavramýnýn ne olduðunu biliyoruz. Çok kaba bir þekilde ifade etmek gerekirse, karakter dizileri, adýndan da anlaþýlacaðý gibi, karakterlerin bir araya gelmesiyle oluþan bir dizidir. Karakter dizileri; tek, çift veya üç týrnak içinde gösterilen, öteki veri tiplerinden de bu týrnaklar aracýlýðýyla ayýrt edilen özel bir veri tipidir. Teknik olarak ifade etmek gerekirse, bir nesneyi type() fonksiyonu yardýmýyla sorguladýðýmýzda, eðer <class ‘str’> çýktýsý alýyorsak bu nesne bir karakter dizisidir.
+
+Her ne kadar ayrýntýlarýna girmemiþ de olsak, dediðimiz gibi, biz karakter dizilerini daha ilk bölümlerden bu yana her fýrsatta kullanýyoruz. Dolayýsýyla bu veri tipinin ne olduðu konusunda bir sýkýntýmýz yok. Bu bölümde, þimdiye kadar karakter dizileri ile ilgili öðrendiðimiz þeylere ek olarak, karakter dizilerin metotlarýndan da söz edeceðiz.
+
+Peki bu ‘metot’ denen þey de ne oluyor?
+
+Kabaca ifade etmek gerekirse, metotlar Python’da nesnelerin niteliklerini deðiþtirmemizi, sorgulamamýzý veya bu nesnelere yeni özellikler katmamýzý saðlayan araçlardýr. Metotlar sayesinde karakter dizilerini istediðimiz gibi eðip bükebileceðiz.
+
+Elbette bu bölümde bahsedeceðimiz tek þey karakter dizilerinin metotlarý olmayacak. Bu bölümde ayný zamanda karakter dizilerinin yapýsý ve özelliklerine dair söyleyeceklerimiz de olacak.
+
+Python’da þimdiye kadar yapabildiðimiz þeylerin sizi tatmin etmekten uzak olduðunu, daha fazlasýný yapabilmek için sabýrsýzlandýðýnýzý tahmin edebiliyorum. O halde ne duruyoruz, hiç vakit kaybetmeden yola koyulalým.
+
+
+Karakter Dizilerinin Öðelerine Eriþmek
+
+Python ile programlama yaparken karakter dizileri ile iki þekilde karþýlaþabilirsiniz: Birincisi, bir karakter dizisini doðrudan kendiniz tanýmlamýþ olabilirsiniz. Ýkincisi, karakter dizisi size baþka bir kaynak aracýlýðýyla gelmiþ olabilir (mesela input() fonksiyonu yardýmýyla kullanýcýdan aldýðýnýz bir veri).
+
+Python’da kendi tanýmladýðýnýz ya da herhangi baþka bir kaynaktan gelen karakter dizilerine eriþmenin birkaç farklý yolu vardýr. Örneðin:
+
+>>> nesne = "karakter dizisi"
+
+Burada deðeri “karakter dizisi” olan nesne adlý bir deðiþken tanýmladýk. Yazdýðýmýz programlarda bu deðiþkene eriþmek için, deðiþkenin adýný kullanmamýz yeterlidir. Örneðin:
+
+>>> print(nesne)
+
+Bu komut bize karakter dizisinin tamamýný verecektir.
+
+Bir karakter dizisini yukarýda gördüðümüz gibi kendimiz tanýmlayabiliriz. Bunun dýþýnda, mesela input() fonksiyonuyla kullanýcýdan aldýðýmýz verilerin de birer karakter dizisi olacaðýný biliyoruz:
+
+veri = input("Herhangi bir þey: ")
+
+Týpký kendi tanýmladýðýmýz karakter dizilerinde olduðu gibi, kullanýcýdan gelen karakter dizilerini de aþaðýdaki komut yardýmýyla ekranda görüntüleyebiliriz:
+
+print(veri)
+
+Bu komut da bize veri deðiþkeninin tuttuðu karakter dizisinin tamamýný verecektir.
+
+Ayrýca istersek bu karakter dizilerini bir for döngüsü içine alabilir, böylece bu dizinin öðelerine tek tek de eriþebiliriz:
+
+for karakter in nesne:
+print(karakter)
+
+for döngüsüyle elde ettiðimiz bu etkiyi þu kodlar yardýmýyla da elde edebileceðimizi gayet iyi biliyor olmalýsýnýz:
+
+print(*nesne, sep="\n")
+
+Önceki derslerde verdiðimiz örneklerden de bildiðiniz gibi, karakter dizilerinin öðelerine yukarýdaki yöntemlerle tek tek eriþebilmemiz sayesinde herhangi bir iþlemi karakter dizilerinin bütün öðelerine bir çýrpýda uygulayabiliyoruz. Mesela:
+
+nesne = "123456789"
+
+for n in nesne:
+print(int(n) * 2)
+
+Burada nesne deðiþkeni içindeki sayý deðerli karakter dizilerini n olarak adlandýrdýktan sonra, n deðiþkenlerinin her birini tek tek 2 sayýsý ile çarptýk. Yani çarpma iþlemini karakter dizisinin bütün öðelerine tek seferde uygulayabildik. Bu arada, yukarýdaki örnekte nesne deðiþkeninin her bir öðesini for döngüsü içinde int() fonksiyonu yardýmýyla tam sayýya çevirdiðimizi görüyorsunuz. Daha önce de defalarca söylediðimiz gibi, Python’da o anda elinizde olan verinin tipini bilmeniz çok önemlidir. Eðer kendi yazdýðýnýz veya mesela input() fonksiyonundan gelen bir verinin karakter dizisi olduðunu bilmezseniz yukarýdaki kodlarý þu þekilde yazma gafletine düþebilirsiniz:
+
+nesne = "123456789"
+
+for n in nesne:
+print(n * 2)
+
+Bu kodlar çalýþtýrýldýktan sonra hiç beklemediðiniz sonuçlar verecektir:
+
+11
+22
+33
+44
+55
+66
+77
+88
+99
+
+Gördüðünüz gibi, aslýnda nesne içindeki öðeleri 2 ile çarpmak isterken, biz her bir öðeyi iki kez ekrana yazdýrmýþ olduk. Çünkü bildiðiniz gibi karakter dizileri ile aritmetik iþlemler yapamýyoruz. Eðer sayý deðerli karakter dizileri arasýnda aritmetik iþlem yapacaksak öncelikle bu karakter dizilerini sayýya çevirmemiz gerekir. Ayrýca gerçek bir program içinde yukarýdaki gibi bir durumun ne kadar yýkýcý sonuçlar doðuracabileceðini düþünün. Yukarýdaki program çalýþma sýrasýnda hiçbir hata vermeyeceði için, siz programýnýzýn düzgün çalýþtýðýný zannederek hayatýnýza devam edeceksiniz. Ama belki de yukarýdaki sinsi hata yüzünden, programýnýzý kullanan bir þirket veri, zaman ve para kaybýna uðrayacak.
+
+Yukarýdaki örneklerde bir þey daha dikkatinizi çekmiþ olmalý: Gördüðünüz gibi, karakter dizisinin öðelerine eriþirken bu öðelerin tamamýný elde ediyoruz. Mesela print(nesne) komutunu verdiðimizde veya nesne deðiþkenini bir döngü içine aldýðýmýzda sonuç olarak elde ettiðimiz þey, ilgili karakter dizisinin tamamýdýr. Yani aslýnda karakter dizisinin hangi öðesine eriþeceðimizi seçemiyoruz. Peki ya biz bir karakter dizisinin öðelerinin tamamýna deðil de, sadece tek bir öðesine eriþmek istersek ne yapacaðýz? Mesela yukarýdaki örnekte nesne adlý deðiþken içindeki sayýlarýn tamamýný deðil de sadece tek bir öðesini (veya belli bir ölçüte göre yalnýzca bazý öðelerini) 2 ile çarpmak istersek nasýl bir yol izleyeceðiz?
+
+Python’da karakter dizilerinin içindeki öðelerin bir sýrasý vardýr. Örneðin “Python” dediðimizde, bu karakter dizisinin ilk öðesi olan “P” karakterinin sýrasý 0‘dýr. “y” karakteri ise 1. sýradadýr. Ayný þekilde devam edersek, “t” karakteri 2., “h” karakteri 3., “o” karakteri 4., “n” karakteri ise 5. sýrada yer alýr.
+
+Bu anlattýðýmýz soyut durumu bir örnekle somutlaþtýrmaya çalýþalým:
+
+Dedik ki, “Python” gibi bir karakter dizisinin her bir öðesinin belli bir sýrasý vardýr. Ýþte eðer biz bu karakter dizisinin bütün öðelerini deðil de, sadece belli karakterlerini almak istersek, karakter dizisindeki öðelerin sahip olduðu bu sýradan yararlanacaðýz.
+
+Diyelim ki “Python” karakter dizisinin ilk karakterini almak istiyoruz. Yani biz bu karakter dizisinin sadece “P” harfine ulaþmayý amaçlýyoruz.
+
+Bu isteðimizi nasýl yerine getirebileceðimizi basit bir örnek üzerinde göstermeye çalýþalým:
+
+>>> kardiz = "Python"
+
+Burada deðeri “Python” olan kardiz adlý bir deðiþken tanýmladýk. Þimdi bu karakter dizisinin ilk öðesine eriþeceðiz:
+
+>>> kardiz[0]
+
+'P'
+
+Burada yaptýðýmýz iþleme çok dikkat edin. Karakter dizisinin istediðimiz bir öðesine ulaþmak için, ilgili öðenin sýrasýný köþeli parantezler içinde belirttik. Biz bu örnekte karakter dizisinin ilk öðesine ulaþmak istediðimiz için köþeli parantez içinde 0 sayýsýný kullandýk.
+
+Þimdi de, ilk verdiðimiz örnekteki nesne deðiþkeni içinde yer alan sayýlar arasýndan sadece birini 2 ile çarpmak istediðimizi düþünelim:
+
+>>> nesne = "123456789"
+>>> int(nesne[1]) * 2
+
+4
+
+Burada da öncelikle nesne deðiþkeninin birinci sýrasýnda yer alan öðeyi (dikkat: sýfýrýncý sýrada yer alan öðeyi deðil!) elde etmek için köþeli parantezler içinde 1 sayýsýný kullandýk. Daha sonra int() fonksiyonu yardýmýyla bu karakter dizisini tam sayýya çevirdik, ki bununla aritmetik iþlem yapabilelim... Son olarak da elimizdeki tam sayýyý 2 ile çarparak istediðimiz sonuca ulaþtýk.
+
+Elbette yukarýdaki kodlarý þöyle de yazabilirdik:
+
+>>> nesne = "123456789"
+>>> sayý = int(nesne[1])
+>>> sayý * 2
+
+4
+
+Belki farkýndasýnýz, belki de deðilsiniz, ama aslýnda þu noktada karakter dizilerinin çok önemli bir özelliði ile karþý karþýyayýz. Gördüðünüz gibi, yukarýda bahsettiðimiz sýra kavramý sayesinde Python’da karakter dizilerinin bütün öðelerine tek tek ve herhangi bir sýra gözetmeksizin eriþmemiz mümkün. Mesela yukarýdaki ilk örnekte kardiz[0] gibi bir yapý kullanarak karakter dizisinin sýfýrýncý (yani ilk) öðesini, nesne[1] gibi bir yapý kullanarak da karakter dizisinin birinci (yani aslýnda ikinci) öðesini alabildik.
+
+Bu yapýnýn mantýðýný kavramak için þu örnekleri dikkatlice inceleyin:
+
+>>> kardiz = "Python"
+
+>>> kardiz[0]
+
+'P'
+
+>>> kardiz[1]
+
+'y'
+
+>>> kardiz[3]
+
+'h'
+
+>>> kardiz[5]
+
+'n'
+
+>>> kardiz[2]
+
+'t'
+
+>>> kardiz[4]
+
+'o'
+
+>>> nesne = "123456789"
+
+>>> nesne[0]
+
+'1'
+
+>>> nesne[1]
+
+'2'
+
+>>> nesne[2]
+
+'3'
+
+>>> nesne[3]
+
+'4'
+
+>>> nesne[4]
+
+'5'
+
+>>> nesne[5]
+
+'6'
+
+>>> nesne[6]
+
+'7'
+
+>>> nesne[7]
+
+'8'
+
+>>> nesne[8]
+
+'9'
+
+Burada þöyle bir formül yazabiliriz:
+
+karakter_dizisi[öðe_sýrasý]
+
+Bu formülü uygulayarak karakter dizilerinin her bir öðesine tek tek eriþmemiz mümkün. Burada çok önemli bir noktaya daha dikkatinizi çekmek isterim. Yukarýdaki örneklerden de gördüðünüz gibi, Python’da öðe sýralamasý 0‘dan baþlýyor. Yani bir karakter dizisinin ilk öðesinin sýrasý 0 oluyor. Python programlama dilini özellikle yeni öðrenenlerin en sýk yaptýðý hatalardan biri de bir karakter dizisinin ilk öðesine ulaþmak için 1 sayýsýný kullanmalarýdýr. Asla unutmayýn, Python saymaya her zaman 0‘dan baþlar. Dolayýsýyla bir karakter dizisinin ilk öðesinin sýrasý 0‘dýr. Eðer ilk öðeye ulaþayým derken 1 sayýsýný kullanýrsanýz ulaþtýðýnýz öðe ilk öðe deðil, ikinci öðe olacaktýr. Bu ayrýntýyý gözden kaçýrmamaya dikkat etmelisiniz.
+
+Karakter dizilerinin öðelerine tek tek eriþirken dikkat etmemiz gereken önemli noktalardan biri de, öðe sýrasý belirtirken, karakter dizisinin toplam uzunluðu dýþýna çýkmamaktýr. Yani mesela 7 karakterlik bir karakter dizimiz varsa, bu karakter dizisinin son öðesinin sýrasý 6 olacaktýr. Çünkü biliyorsunuz, Python saymaya 0‘dan baþlýyor. Dolayýsýyla ilk karakterin sýrasý 0 olacaðý için, 7 karakterlik bir karakter dizisinde son öðenin sýrasý 6 olacaktýr. Örneðin:
+
+>>> kardiz = "istihza"
+>>> len(kardiz)
+
+7
+
+Gördüðünüz gibi, “istihza” adlý karakter dizisinin uzunluðu 7. Yani bu karakter dizisi içinde 7 adet karakter var. Bu karakter dizisini incelemeye devam edelim:
+
+>>> kardiz[0]
+
+'i'
+
+Dediðimiz gibi, karakter dizisinin ilk öðesinin sýrasý 0. Dolayýsýyla son öðenin sýrasý 6 olacaktýr:
+
+>>> kardiz[6]
+
+'a'
+
+Bu durumu þöyle formüle edebiliriz:
+
+>>> kardiz[len(kardiz)-1]
+
+Yani;
+
+Bir karakter dizisinin uzunluðunun 1 eksiði, o karakter dizisinin son öðesini verir.
+
+Yukarýdaki formülü eðer þöyle yazsaydýk hata alýrdýk:
+
+>>> kardiz[len(kardiz)]
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: string index out of range
+
+Çünkü len(kardiz) kodu bize karakter dizisinin uzunluðunu veriyor. Yani yukarýdaki “istihza” karakter dizisini göz önüne alýrsak, len(kardiz) çýktýsý 7 olacaktýr. Dolayýsýyla “istihza” karakter dizisinin son öðesine ulaþmak istersek bu deðerin 1 eksiðini almamýz gerekiyor. Yani len(kardiz)-1.
+
+Þu ana kadar öðe sýrasý olarak hep artý deðerli sayýlar kullandýk. Ancak istersek öðe sýrasý olarak eksi deðerli sayýlarý da kullanabiliriz. Eðer bir karakter dizisine öðe sýrasý olarak eksi deðerli bir sayý verirsek Python o karakter dizisini sondan baþa doðru okumaya baþlayacaktýr. Yani:
+
+>>> kardiz[-1]
+
+'a'
+
+Gördüðünüz gibi -1 sayýsý karakter dizisini tersten okuyup, sondan baþa doðru ilk öðeyi veriyor. Dolayýsýyla, yukarýda anlattýðýmýz len(kardiz)-1 yönteminin yanýsýra, -1 sayýsýný kullanarak da karakter dizilerinin son karakterini elde edebiliyoruz. Bir de þuna bakalým:
+
+>>> kardiz[-2]
+
+'z'
+
+Dediðimiz gibi, eksi deðerli sayýlar karakter dizisindeki karakterleri sondan baþa doðru elde etmemizi saðlar. Dolayýsýyla -2 sayýsý, karakter dizisinde sondan bir önceki karakteri verecektir.
+
+Karakter dizilerinin öðelerine tek tek eriþmek amacýyla öðe sýrasý belirtirken, karakter dizisinin toplam uzunluðu dýþýna çýkmamamýz gerektiðini söylemiþtik. Peki karakter dizisinin uzunluðunu aþan bir sayý verirsek ne olur? Ne olacaðýný yukarýdaki örneklerden birinde görmüþtük aslýnda. Ama konunun öneminden dolayý bir kez daha tekrar edelim.
+
+>>> kardiz = "istihza"
+>>> kardiz[7]
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: string index out of range
+
+...veya:
+
+>>> kardiz[-8]
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: string index out of range
+
+Eðer karakter dizisinin uzunluðunu aþan bir sayý belirtirsek Python bize IndexError türünde bir hata mesajý verecektir.
+
+Gördüðünüz gibi, kardiz[0], kardiz[1], kardiz[2], vb. komutlarla karakter dizisinin öðelerine eriþebiliyoruz. Burada öðe sýralarýný tek tek yazmak yerine range() fonksiyonunu kullanarak da öðelere tek tek eriþebilirsiniz:
+
+for i in range(7):
+print(kardiz[i])
+
+Bu kodlarda, kardiz[0], kardiz[1], kardiz[2] þeklinde öðe sýralarýný tek tek elle yazmak yerine, range(7) aralýðýndaki sayýlarý bir for döngüsüne alýyoruz. Böylece Python kardiz[öðe_sýrasý] gibi bir yapý içinde öðe_sýrasý yerine range(7) aralýðýndaki bütün sayýlarý (yani 0, 1, 2, 3, 4, 5, 6 sayýlarýný) tek tek uyguluyor.
+
+Burada aklýnýza hemen þöyle bir soru gelmiþ olabilir:
+
+Biz kendi tanýmladýðýmýz karakter dizisinin uzunluðunun toplam 7 karakter olduðunu bildiðimiz için yukarýdaki örnekte range() fonksiyonunu range(7) þeklinde kullanabildik. Ama baþka kaynaktan gelen bir karakter dizisinin uzunluðunu nasýl bileceðiz?
+
+Aslýnda bu sorunun cevabý çok basit. Uzunluðunu bilmediðiniz karakter dizileri için range() fonksiyonuyla birlikte len() fonksiyonundan yararlanabilirsiniz. Nasýl mý? Hemen bir örnek verelim:
+
+for karakter in range(len(kardiz)):
+print(kardiz[karakter])
+
+Burada range() fonksiyonuna verdiðimiz len(kardiz) parametresine dikkatlice bakýn. Biz kardiz adlý deðiþkenin tuttuðu karakter dizisinin 7 karakterden oluþtuðunu biliyoruz. Ama eðer bu karakter dizisini biz belirlememiþsek, karakter dizisinin tam olarak kaç karakterden oluþacaðýný bilemeyiz. Bu kodlarda len(kardiz) ifadesini kullanarak, sabit bir deðer belirlemekten kaçýnmýþ oluyoruz. Böylece, mesela kullanýcýdan aldýðýmýz bir karakter dizisinin kaç karakterden oluþtuðunu belirleme görevini Python’a býrakmýþ oluyoruz. Karakter dizisinin uzunluðu ne ise (len(kardiz)), Python range() fonksiyonuna o sayýyý parametre olarak kendisi atayacaktýr.
+
+Yukarýdaki durumu daha iyi anlayabilmek için bir örnek daha verelim. Diyelim ki kullanýcýya ismini sorup, kendisine þöyle bir çýktý vermek istiyorsunuz:
+
+isminizin 1. harfi ...
+isminizin 2. harfi ...
+isminizin 3. harfi ...
+...
+
+Bunu yapabilmek için þöyle bir uygulama yazabilirsiniz:
+
+isim = input("isminiz: ")
+
+for i in range(len(isim)):
+print("isminizin {}. harfi: {}".format(i, isim[i]))
+
+Gördüðünüz gibi, kullanýcýnýn girdiði kelimenin uzunluðu kaç ise o sayý otomatik olarak range() fonksiyonuna atanýyor. Diyelim ki kullanýcý Ferhat ismini girmiþ olsun. Bu kelimede toplam 6 karakter var. Dolayýsýyla Python for satýrýný þöyle yorumlayacaktýr:
+
+for i in range(6):
+...
+
+Python for döngüsünün ilk turunda þöyle bir iþlem gerçekleþtirir:
+
+print("isminizin {}. harfi: {}".format(0, isim[0]))
+
+Ýkinci turda ise þöyle bir iþlem:
+
+print("isminizin {}. harfi: {}".format(1, isim[1]))
+
+Annenizin kýzlýk soyadýnýn 0. harfi [kaynak]
+
+Bu döngü 6 sayýsýna gelene kadar devam eder. Burada i adlý deðiþkenin deðerinin her döngüde nasýl deðiþtiðine dikkat edin. Python i adýný verdiðimiz deðiþkene, for döngüsünün her turunda sýrasýya 0, 1, 2, 3, 4 ve 5 sayýlarýný atayacaðý için isim adlý deðiþkenin öðeleri isim[öðe_sýrasý] formülü sayesinde tek tek ekrana dökülecektir.
+
+Yalnýz bu kodlarýn çýktýsýnda iki nokta dikkatinizi çekmiþ olmalý. Birincisi, isminizin 0. harfi f gibi bir çýktýyý kullanýcýlarýnýz yadýrgayabilir. Çünkü ‘0. harf’ çok yapay duran bir ifade. Onun yerine ilk harfi ‘1. harf’ olarak adlandýrmamýz çok daha mantýklý olacaktýr. Bunun için kodlarýnýza þu basit eklemeyi yapabilirsiniz:
+
+isim = input("isminiz: ")
+
+for i in range(len(isim)):
+print("isminizin {}. harfi: {}".format(i+1, isim[i]))
+
+Burada ilk i deðiþkeninin deðerini 1 sayý artýrdýk. Böylece 0 sayýsý 1‘e, 1 sayýsý 2‘ye, 2 sayýsý 3‘e... dönüþmüþ oldu. Bu þekilde kullanýcýlarýnýza çok daha doðal görünen bir çýktý verebilmiþ oluyorsunuz. Eðer bu iþlemi yapmazsanýz, kullanýcýlarýnýzýn ‘doðal görünmeyen’ bir çýktý almalarýnýn yanýsýra, programýnýzýn verdiði çýktý kimi durumlarda epey yanýltýcý da olabilir...
+
+
+Karakter Dizilerini Dilimlemek
+
+Bir önceki bölümde bir karakter dizisinin istediðimiz öðesini, o öðenin sýrasýný belirterek nasýl elde edebileceðimizi gördük. Bu bölümde de benzer bir þey yapacaðýz. Ama burada yapacaðýmýz þey, bir önceki bölümde yaptýðýmýz iþleme göre biraz daha kapsamlý bir iþlem olacak.
+
+Bu bölümde karakter dizilerini ‘dilimlemekten’ söz edeceðiz. Peki ‘dilimlemek’ derken neyi kastediyoruz? Aslýnda burada gerçek anlamda ‘karpuz gibi dilimlemekten’ söz ediyoruz... Þu örnek, ne demek istediðimizi daha net ortaya koyacaktýr:
+
+>>> site = "www.istihza.com"
+>>> site[4:11]
+
+'istihza'
+
+>>> site[12:16]
+
+'com'
+
+>>> site[0:3]
+
+'www'
+
+Gördüðünüz gibi, karakter dizisine köþeli parantez içinde bazý deðerler vererek bu karakter dizisini dilim dilim ayýrdýk. Peki bunu nasýl yaptýk? Yukarýdaki örneklerde þöyle bir yapý gözümüze çarpýyor:
+
+karakter_dizisi[alýnacak_ilk_öðenin_sýrasý:alýnacak_son_öðenin_sýrasýnýn_bir_fazlasý]
+
+Bu formülü çok basit bir örneðe uygulayalým:
+
+>>> karakter_dizisi = "istanbul"
+>>> karakter_dizisi[0:3]
+
+'ist'
+
+Burada alacaðýmýz ilk öðenin sýra numarasý 0. Yani “istanbul” karakter dizisindeki ‘i’ harfi. Alacaðýmýz son öðenin sýra numarasýnýn 1 fazlasý ise 3. Yani 2. sýradaki ‘t’ harfi. Ýþte karakter_dizisi[0:3] dediðimizde, Python 0. öðe ile 3. öðe arasýnda kalan bütün öðeleri bize verecektir. Bizim örneðimizde bu aralýktaki öðeler ‘i’, ‘s’ ve ‘t’ harfleri. Dolayýsýyla Python bize ‘istanbul’ kelimesindeki ‘ist’ kýsmýný dilimleyip veriyor.
+
+Bu bilgileri kullanarak þöyle bir uygulama yazalým:
+
+site1 = "www.google.com"
+site2 = "www.istihza.com"
+site3 = "www.yahoo.com"
+site4 = "www.gnu.org"
+
+for isim in site1, site2, site3, site4:
+print("site: ", isim[4:-4])
+
+Bu örnek Python’da dilimleme iþlemlerinin yapýsý ve özellikleri hakkýnda bize epey bilgi veriyor. Gördüðünüz gibi, hem artý hem de eksi deðerli sayýlarý kullanabiliyoruz. Önceki bölümden hatýrlayacaðýnýz gibi, eðer verilen sayý eksi deðerliyse Python karakter dizisini saðdan sola (yani sondan baþa doðru) okuyacaktýr. Yukarýdaki örnekte isim[4:-4] yapýsýný kullanarak, site1, site2, site3, site4 adlý karakter dizilerini, ilk dört ve son dört karakterler hariç olacak þekilde dilimledik. Böylece elimizde ilk dört ve son dört karakter arasýndaki bütün karakterler kalmýþ oldu. Yani “google”, “istihza”, “yahoo” ve “gnu”.
+
+Bütün bu anlattýklarýmýzý daha iyi anlayabilmek için bir örnek daha verelim:
+
+ata1 = "Akýllý bizi arayýp sormaz deli bacadan akar!"
+ata2 = "Aða güçlü olunca  kul suçlu olur!"
+ata3 = "Avcý ne kadar hile bilirse ayý da o kadar yol bilir!"
+ata4 = "Lafla pilav piþse deniz kadar yað benden!"
+ata5 = "Zenginin gönlü oluncaya kadar fukaranýn caný çýkar!"
+
+Burada beþ adet atasözü verdik. Bizim görevimiz, bu atasözlerinin sonunda bulunan ünlem iþaretlerini ortadan kaldýrmak:
+
+for ata in ata1, ata2, ata3, ata4, ata5:
+print(ata[0:-1])
+
+Burada yaptýðýmýz þey þu: ata1, ata2, ata3, ata4 ve ata5 adlý deðiþkenlerin her birini ata olarak adlandýrdýktan sonra ata adlý deðiþkenin en baþýndan en sonuna kadar olan kýsmý dilimleyip aldýk. Yani ata[0] ile ata[-1] arasýnda kalan bütün karakterleri elde etmiþ olduk. Peki bu ünlem iþaretlerini kaldýrdýktan sonra bunlarýn yerine birer nokta koymak istersek ne yapacaðýz?
+
+O da çok basit bir iþlem:
+
+for ata in ata1, ata2, ata3, ata4, ata5:
+print(ata[0:-1] + ".")
+
+Gördüðünüz gibi, son karakter olan ünlem iþaretini attýktan sonra onun yerine bir nokta iþareti koymak için yaptýðýmýz tek þey, dilimlediðimiz karakter dizisine, artý iþareti (+) yardýmýyla bir . karakteri eklemekten ibarettir.
+
+Böylece karakter dizilerini nasýl dilimleyeceðimizi öðrenmiþ olduk. Bu konuyu kapatmadan önce dilimlemeye iliþkin bazý ayrýntýlardan söz edelim. Diyelim ki elimizde þöyle bir karakter dizisi var:
+
+>>> kardiz = "Sana Gül Bahçesi Vadetmedim"
+
+Bu karakter dizisi içinden sadece ‘Sana’ kýsmýný dilimlemek için þöyle bir þey yazabileceðimizi biliyorsunuz:
+
+>>> kardiz[0:4]
+
+'Sana'
+
+Burada 0. karakterden 4. karaktere kadar olan kýsmý dilimlemiþ oluyoruz. Python bize bu tür durumlarda þöyle bir kolaylýk saðlar: Eðer karakter dizisi içinden alýnan ilk karakterin sýrasýný gösteren sayý 0 ise, bu sayýyý belirtmesek de olur. Yani kardiz[0:4] kodunu þöyle de yazabiliriz:
+
+>>> kardiz[:4]
+
+'Sana'
+
+Gördüðünüz gibi, ilk sýra sayýsýný yazmazsak Python ilk sayýyý 0 kabul ediyor.
+
+Þimdi de ayný karakter dizisi içindeki ‘Vadetmedim’ kýsmýný dilimlemeye çalýþalým:
+
+>>> kardiz[17:27]
+
+'Vadetmedim'
+
+Burada da 17. karakter ile 27. karakter arasýnda kalan bütün karakterleri dilimledik. Týpký, alacaðýmýz ilk karakterin sýrasý 0 olduðunda bu sayýyý belirtmemize gerek olmadýðý gibi, alacaðýmýz son karakterin sýrasý karakter dizisinin sonuncu karakterine denk geliyorsa o sayýyý da yazmamýza gerek yok. Yani yukarýdaki kardiz[17:27] kodunu þöyle de yazabiliriz:
+
+>>> kardiz[17:]
+
+'Vadetmedim'
+
+Python’daki bu dilimleme özelliðini kullanarak karakter dizilerini istediðiniz gibi eðip bükebilir, evirip çevirebilirsiniz.
+
+Python’daki bu dilimleme yapýsý ilk bakýþta gözünüze biraz karmaþýkmýþ gibi görünebilir. Ama aslýnda hiç de öyle deðildir. Bu yapýnýn mantýðýný bir kez kavradýktan sonra kodlarýnýzý hatasýz bir þekilde yazabilirsiniz.
+
+Dilimleme yapýsýný daha iyi anlayabilmek için kendi kendinize bazý denemeler yapmanýzý tavsiye ederim. Bu yapýnýn nasýl çalýþtýðýný anlamanýn en iyi yolu bol bol örnek kod yazmaktýr.
+
+
+Karakter Dizilerini Ters Çevirmek
+
+Eðer amacýnýz bir karakter dizisini ters çevirmek, yani karakter dizisi içindeki her bir öðeyi tersten yazdýrmaksa biraz önce öðrendiðimiz dilimleme yöntemini kullanabilirsiniz. Dikkatlice bakýn:
+
+>>> kardiz[::-1]
+
+'midemtedaV iseçhaB lüG anaS'
+
+Gördüðünüz gibi, “Sana Gül Bahçesi Vadetmedim” adlý karakter dizisi içindeki bütün karakterler sondan baþa doðru ekrana dizildi.
+
+Aslýnda bu komutla Python’a þöyle bir emir vermiþ oluyoruz:
+
+kardiz deðiþkeni içindeki bütün karakterleri, en son karakterden ilk karaktere kadar sondan baþa doðru tek tek ekrana yazdýr!
+
+Bildiðiniz gibi, eðer almak istediðimiz karakter, dizi içindeki ilk karakterse bu karakterin dizi içindeki sýrasýný belirtmemize gerek yok. Ayný þekilde, eðer almak istediðimiz karakter, dizi içindeki son karakterse, bu karakterin de dizi içindeki sýrasýný belirtmemize gerek yok. Ýþte yukarýdaki örnekte bu kuraldan yararlandýk.
+
+Eðer bir karakter dizisinin tamamýnýn deðil de, sadece belli bir kýsmýnýn ters çevrilmiþ halini elde etmek istiyorsanýz elbette yapmanýz gereken þey, almak istediðiniz ilk ve son karakterlerin sýrasýný parantez içinde belirtmek olacaktýr. Mesela yukarýdaki karakter dizisinde sadece ‘Gül’ kelimesini ters çevirmek istersek þöyle bir þey yazabiliriz:
+
+>>> kardiz[7:4:-1]
+
+'lüG'
+
+Yukarýdaki örnek, karakter dizisi dilimlemeye iliþkin olarak bize bazý baþka ipuçlarý da veriyor. Gördüðünüz gibi, köþeli parantez içinde toplam üç adet parametre kullanabiliyoruz. Yani formülümüz þöyle:
+
+kardiz[ilk_karakter:son_karakter:atlama_sayýsý]
+
+Bir örnek verelim:
+
+>>> kardiz = "istanbul"
+>>> kardiz[0:8:1]
+
+'istanbul'
+
+Burada “istanbul” adlý karakter dizisinin bütün öðelerini birer birer ekrana döktük. Bir de þuna bakalým:
+
+>>> kardiz[0:8:2]
+
+'itnu'
+
+Burada ise “istanbul” adlý karakter dizisinin bütün öðelerini ikiþer ikiþer atlayarak ekrana döktük. Yani bir karakter yazýp bir karakter atladýk (istanbul).
+
+Python’ýn kurallarý gereðince yukarýdaki kodu þöyle yazabileceðimizi de biliyorsunuz:
+
+>>> kardiz[::2]
+
+'itnu'
+
+Eðer karakter dizisini ters çevirmek istiyorsak, yukarýdaki örneði eksi deðerli bir atlama sayýsý ile yazmamýz gerekir:
+
+>>> kardiz = "istanbul"
+>>> kardiz[::-1]
+
+'lubnatsi'
+
+>>> kardiz[::-2]
+
+'lbas'
+
+Dediðimiz gibi, yukarýdaki yöntemi kullanarak karakter dizilerini ters çevirebilirsiniz. Ama eðer isterseniz reversed() adlý bir fonksiyondan da yararlanabiliriz.
+
+Gelelim bu fonksiyonun nasýl kullanýlacaðýna... Önce þöyle bir deneme yapalým:
+
+>>> reversed("Sana Gül Bahçesi Vadetmedim")
+
+<reversed object at 0x00E8E250>
+
+Gördüðünüz gibi, bu fonksiyonu düz bir þekilde kullandýðýmýzda bize bir ‘reversed’ nesnesi vermekle yetiniyor. Buna benzer bir olguyla range() fonksiyonunda da karþýlaþmýþtýk:
+
+>>> range(10)
+
+range(0, 10)
+
+Hatýrlarsanýz, range(10) gibi bir komutun içeriðini görebilmek için bu komut üzerinde bir for döngüsü kurmamýz gerekiyordu:
+
+for i in range(10):
+print(i)
+
+...veya:
+
+print(*range(10))
+
+Ayný durum reversed() fonksiyonu için de geçerlidir:
+
+for i in reversed("Sana Gül Bahçesi Vadetmedim"):
+print(i, end="")
+
+...veya:
+
+print(*reversed("Sana Gül Bahçesi Vadetmedim"), sep="")
+
+Dilimleme veya reversed() fonksiyonunu kullanma yöntemlerinden hangisi kolayýnýza geliyorsa onu tercih edebilirsiniz.
+
+
+Karakter Dizilerini Alfabe Sýrasýna Dizmek
+
+Python’da karakter dizilerinin öðelerine tek tek ulaþma, öðeleri dilimleme ve ters çevirmenin yanýsýra, bu öðeleri alfabe sýrasýna dizmek de mümkündür. Bunun için sorted() adlý bir fonksiyondan yararlanacaðýz:
+
+>>> sorted("kitap")
+
+['a', 'i', 'k', 'p', 't']
+
+Nasýl input() fonksiyonu çýktý olarak bir karakter dizisi ve len() fonksiyonu bir sayý veriyorsa, sorted() fonksiyonu da bize çýktý olarak, birkaç bölüm sonra inceleyeceðimiz ‘liste’ adlý bir veri tipi verir.
+
+Ama tabii eðer isterseniz bu çýktýyý alýþtýðýnýz biçimde alabilirsiniz:
+
+print(*sorted("kitap"), sep="")
+
+...veya:
+
+for i in sorted("kitap"):
+print(i, end="")
+
+Bir örnek daha verelim:
+
+>>> sorted("elma")
+
+['a', 'e', 'l', 'm']
+
+Gördüðünüz gibi, sorted() fonksiyonunu kullanmak çok kolay, ama aslýnda bu fonksiyonun önemli bir problemi var. Dikkatlice bakýn:
+
+>>> sorted("çiçek")
+
+['e', 'i', 'k', 'ç', 'ç']
+
+Burada Türkçe bir karakter olan ‘ç’ harfinin düzgün sýralanamadýðýný görüyoruz. Bu sorun bütün Türkçe karakterler için geçerlidir.
+
+Bu sorunu aþmak için þöyle bir yöntem deneyebilirsiniz:
+
+>>> import locale
+>>> locale.setlocale(locale.LC_ALL, "Turkish_Turkey.1254") #Windows için
+>>> locale.setlocale(locale.LC_ALL, "tr_TR") #GNU/Linux için
+>>> sorted("çiçek", key=locale.strxfrm)
+
+['ç', 'ç', 'e', 'i', 'k']
+
+Burada locale adlý bir modülden yararlandýk. locale de týpký sys, os ve keyword gibi bir modül olup, içinde pek çok deðiþken ve fonksiyon barýndýrýr.
+
+locale modülü bize belli bir dilin kendine has özelliklerine göre programlama yapma imkaný verir. Örneðin bu modülünün içinde yer alan fonksiyonlardan biri olan setlocale() fonksiyonunu kullanarak, programýmýzda öntanýmlý dil ayarlarýna uygun bir þekilde programlama yapma olanaðý saðlarýz.
+
+Bu modülü ilerleyen derslerde daha ayrýntýlý bir þekilde inceleyeceðiz. O yüzden locale modülünü bir kenara býrakýp yolumuza devam edelim.
+
+Yukarýdaki örnekte Türkçe karakterleri doðru sýralayabilmek için sorted() fonksiyonunu nasýl kullandýðýmýza dikkat edin:
+
+>>> sorted("çiçek", key=locale.strxfrm)
+
+Burada sorted() metodunun key adlý özel bir parametresine locale.strxfrm deðerini vererek Türkçeye duyarlý bir sýralama yapýlmasýný saðladýk. Yukarýdaki yöntem pek çok durumda iþinize yarar. Ancak bu yöntem tek bir yerde iþe yaramaz. Dikkatlice bakýn:
+
+>>> sorted("afgdhkýi", key=locale.strxfrm)
+
+['a', 'd', 'f', 'g', 'h', 'i', 'ý', 'k']
+
+Gördüðünüz gibi, bu yöntem ‘i’ harfini ‘ý’ harfinden önce getiriyor. Halbuki Türk alfabesine göre bunun tersi olmalýydý. Buna benzer problemlerle Ýngiliz alfabesi dýþýndaki pek çok alfabede karþýlaþýrsýnýz. Dolayýsýyla bu sadece Türkçeye özgü bir sorun deðil.
+
+Bu soruna karþý þöyle bir kod da yazabilirsiniz:
+
+>>> harfler = "abcçdefgðhýijklmnoöprsþtuüvyz"
+>>> çevrim = {i: harfler.index(i) for i in harfler}
+>>> sorted("afgdhkýi", key=çevrim.get)
+
+['a', 'd', 'f', 'g', 'h', 'ý', 'i', 'k']
+
+Gördüðünüz gibi burada ilk iþ olarak Türk alfabesindeki bütün harfleri harfler adlý bir deðiþkene atadýk. Daha sonra ise þöyle bir kod yazdýk:
+
+>>> çevrim = {i: harfler.index(i) for i in harfler}
+
+Burada henüz öðrenmediðimiz bir yapý var, ama ne olup bittiðini daha iyi anlamak için bu çevrim deðiþkeninin içeriðini kontrol etmeyi deneyebilirsiniz:
+
+>>> print(çevrim)
+
+{'ð': 8, 'ý': 10, 'v': 26, 'g': 7, 'þ': 22, 'a': 0, 'c': 2, 'b': 1, 'e': 5,
+'d': 4, 'ç': 3, 'f': 6, 'i': 11, 'h': 9, 'k': 13, 'j': 12, 'm': 15, 'l': 14,
+'o': 17, 'n': 16, 'p': 19, 's': 21, 'r': 20, 'u': 24, 't': 23, 'ö': 18,
+'y': 27, 'z': 28, 'ü': 25}
+
+Bu çýktýya dikkatlice bakarsanýz, her bir harfin bir sayýya karþýlýk gelecek þekilde birbiriyle eþleþtirildiðini göreceksiniz. Mesela ‘ð’ harfi 8 ile, ‘f’ harfi 6 ile eþleþmiþ. Yine dikkatlice bakarsanýz, biraz önce bize sorun çýkaran ‘ý’ harfinin 10, ‘i’ harfinin ise 11 ile eþleþtiðini göreceksiniz. Evet, doðru tahmin ettiniz. Harfleri sayýlarla eþleþtirerek, Python’ýn harfler yerine sayýlarý sýralamasýný saðlayacaðýz. Bunu da yine key parametresini kullanarak yapýyoruz:
+
+>>> sorted("afgdhkýi", key=çevrim.get)
+
+Bu yapýyý daha iyi anlayabilmek için kendi kendinize bazý denemeler yapýn. Eðer burada olan biteni anlamakta zorlanýyorsanýz hiç endiþe etmeyin. Bir-iki bölüm sonra bunlarý da kolayca anlayabilecek duruma geleceksiniz. Bizim burada bu bilgileri vermekteki amacýmýz, Python’ýn Türkçe harflerle sýralama iþlemini sorunsuz bir þekilde yapabileceðini göstermektir. Bu esnada bir-iki yeni bilgi kýrýntýsý da kapmanýzý saðlayabildiysek kendimizi baþarýlý sayacaðýz.
+
+
+Karakter Dizileri Üzerinde Deðiþiklik Yapmak
+
+Bu kýsýmda karakter dizilerinin çok önemli bir özelliðinden söz edeceðiz. Konumuz karakter dizileri üzerinde deðiþiklik yapmak. Ýsterseniz neyle karþý karþýya olduðumuzu anlayabilmek için çok basit bir örnek verelim.
+
+Elimizde þöyle bir karakter dizisi olduðunu düþünün:
+
+>>> meyve = "elma"
+
+Amacýmýz bu karakter dizisinin ilk harfini büyütmek olsun.
+
+Bunun için dilimleme yönteminden yararlanabileceðimizi biliyorsunuz:
+
+>>> "E" + meyve[1:]
+
+'Elma'
+
+Burada “E” harfi ile, meyve deðiþkeninin ilk harfi dýþýnda kalan bütün harfleri birleþtirdik.
+
+Bir örnek daha verelim.
+
+Elimizde þöyle dört adet internet sitesi adresi olsun:
+
+site1 = "www.google.com"
+site2 = "www.istihza.com"
+site3 = "www.yahoo.com"
+site4 = "www.gnu.org"
+
+Bizim amacýmýz bu adreslerin her birinin baþ tarafýna http:// ifadesini eklemek. Bunun için de yine karakter dizisi birleþtirme iþlemlerinden yararlanabiliriz. Dikkatlice inceleyin:
+
+site1 = "www.google.com"
+site2 = "www.istihza.com"
+site3 = "www.yahoo.com"
+site4 = "www.gnu.org"
+
+for i in site1, site2, site3, site4:
+print("http://", i, sep="")
+
+Eðer www. kýsýmlarýný atmak isterseniz karakter dizisi birleþtirme iþlemleri ile birlikte dilimleme yöntemini de kullanmanýz gerekir:
+
+for i in site1, site2, site3, site4:
+print("http://", i[4:], sep="")
+
+Belki farkýndayýz, belki de deðiliz, ama aslýnda yukarýdaki örnekler karakter dizileri hakkýnda bize çok önemli bir bilgi veriyor. Dikkat ettiyseniz yukarýdaki örneklerde karakter dizileri üzerinde bir deðiþiklik yapmýþýz gibi görünüyor. Esasýnda öyle de denebilir. Ancak burada önemli bir ayrýntý var. Yukarýdaki örneklerde gördüðümüz deðiþiklikler kalýcý deðildir. Yani aslýnda bu deðiþikliklerin orijinal karakter dizisi üzerinde hiçbir etkisi yoktur. Gelin isterseniz bunu teyit edelim:
+
+>>> kardiz = "istihza"
+>>> "Ý" + kardiz[1:]
+
+'Ýstihza'
+
+Dediðimiz gibi, sanki burada “istihza” karakter dizisini “Ýstihza” karakter dizisine çevirmiþiz gibi duruyor. Ama aslýnda öyle deðil:
+
+>>> print(kardiz)
+
+istihza
+
+Gördüðünüz gibi, kardiz deðiþkeninin orijinalinde hiçbir deðiþiklik yok. Ayrýca burada "Ý" + kardiz[1:] satýrý ile elde ettiðiniz sonuca tekrar ulaþmanýzýn imkaný yok. Bu deðiþiklik kaybolmuþ durumda. Peki bunun sebebi nedir?
+
+Bunun nedeni, karakter dizilerinin deðiþtirilemeyen (immutable) bir veri tipi olmasýdýr. Python’da iki tür veri tipi bulunur: deðiþtirilemeyen veri tipleri (immutable datatypes) ve deðiþtirilebilen veri tipleri (mutable datatypes). Bizim þimdiye kadar gördüðümüz veri tipleri (sayýlar ve karakter dizileri), deðiþtirilemeyen veri tipleridir. Henüz deðiþtirilebilen bir veri tipi görmedik. Ama birkaç bölüm sonra deðiþtirilebilen veri tiplerini de inceleyeceðiz.
+
+Neyse... Dediðimiz gibi, karakter dizileri üzerinde yaptýðýmýz deðiþikliklerin kalýcý olmamasýný nedeni, karakter dizilerinin deðiþtirilemeyen bir veri tipi olmasýdýr. Python’da bir karakter dizisini bir kez tanýmladýktan sonra bu karakter dizisi üzerinde artýk deðiþiklik yapamazsýnýz. Eðer bir karakter dizisi üzerinde deðiþiklik yapmanýz gerekiyorsa, yapabileceðiniz tek þey o karakter dizisini yeniden tanýmlamaktýr. Mesela yukarýdaki örnekte kardiz deðiþkeninin tuttuðu karakter dizisini deðiþtirmek isterseniz þöyle bir kod yazabilirsiniz:
+
+>>> kardiz = "Ý" + kardiz[1:]
+>>> print(kardiz)
+
+Ýstihza
+
+Burada yaptýðýmýz þey kardiz deðiþkeninin deðerini deðiþtirmek deðildir. Biz burada aslýnda bambaþka bir kardiz deðiþkeni daha tanýmlýyoruz. Yani ilk kardiz deðiþkeni ile sonraki kardiz deðiþkeni ayný þeyler deðil. Bunu teyit etmek için önceki derslerimizde gördüðümüz id() fonksiyonundan yararlanabilirsiniz:
+
+>>> kardiz = "istihza"
+>>> id(kardiz)
+
+3075853248
+
+>>> kardiz = "Ý" + kardiz[1:]
+>>> id(kardiz)
+
+3075853280
+
+Gördüðünüz gibi, ilk kardiz deðiþkeni ile sonraki kardiz deðiþkeni farklý kimlik numaralarýna sahip. Yani bu iki deðiþken bellek içinde farklý adreslerde tutuluyor. Daha doðrusu, ikinci kardiz, ilk kardiz‘i silip üzerine yazýyor.
+
+Her ne kadar kardiz = "Ý" + kardiz[1:] kodu kardiz‘in deðerini aslýnda deðiþtirmiyor olsa da, sanki kardiz deðiþkeninin tuttuðu karakter dizisi deðiþiyormuþ gibi bir etki elde ediyoruz. Bu da bizi memnun etmeye yetiyor...
+
+Yukarýdaki örnekte karakter dizisinin baþ kýsmý üzerinde deðiþiklik yaptýk. Eðer karakter dizisinin ortasýnda kalan bir kýsmý deðiþtirmek isterseniz de þöyle bir þey yazabilirsiniz:
+
+>>> kardiz = "istihza"
+>>> kardiz = kardiz[:3] + "ÝH" + kardiz[5:]
+>>> kardiz
+
+'istÝHza'
+
+Gördüðünüz gibi, yukarýdaki kodlarda karakter dizilerini dilimleyip birleþtirerek, yani bir bakýma kesip biçerek istediðimiz çýktýyý elde ettik.
+
+Mesela ilk örnekte kardiz deðiþkeninin ilk karakteri dýþýnda kalan kýsmýný (kardiz[1:]) “Ý” harfi ile birleþtirdik ("Ý" + kardiz[1:]").
+
+Ýkinci örnekte ise kardiz deðiþkeninin ilk üç karakterine “ÝH” ifadesini ekledik ve sonra buna kardiz deðiþkeninin 5. karakterinden sonraki kýsmýný ilave ettik.
+
+Karakter dizileri üzerinde deðiþiklik yapmanýzýn hangi durumlarda gerekli olacaðýný gösteren bir örnek daha verip bu konuyu kapatalým.
+
+Diyelim ki, bir kelime içindeki sesli ve sessiz harfleri birbirinden ayýrmanýz gereken bir program yazýyorsunuz. Yani mesela amacýnýz ‘istanbul’ kelimesi içinde geçen ‘i’, ‘a’ ve ‘u’ harflerini bir yerde, ‘s’, ‘t’, ‘n’, ‘b’ ve ‘l’ harflerini ise ayrý bir yerde toplamak. Bunun için þöyle bir program yazabilirsiniz:
+
+sesli_harfler = "aeýioöuü"
+sessiz_harfler = "bcçdfgðhjklmnprsþtvyz"
+
+sesliler = ""
+sessizler = ""
+
+kelime = "istanbul"
+
+for i in kelime:
+if i in sesli_harfler:
+sesliler += i
+else:
+sessizler += i
+
+print("sesli harfler: ", sesliler)
+print("sessiz harfler: ", sessizler)
+
+Burada öncelikle þu kodlar yardýmýyla Türkçedeki sesli ve sessiz harfleri belirliyoruz:
+
+sesli_harfler = "aeýioöuü"
+sessiz_harfler = "bcçdfgðhjklmnprsþtvyz"
+
+Ardýndan da, sesli ve sessiz harflerini ayýklayacaðýmýz kelimedeki sesli harfler ve sessiz harfler için boþ birer karakter dizisi tanýmlýyoruz:
+
+sesliler = ""
+sessizler = ""
+
+Programýmýz içinde ilgili harfleri, o harfin ait olduðu deðiþkene atayacaðýz.
+
+Kelimemiz “istanbul”:
+
+kelime = "istanbul"
+
+Þimdi bu kelime üzerinde bir for döngüsü kuruyoruz ve kelime içinde geçen herbir harfe tek tek bakýyoruz. Kelime içinde geçen harflerden, sesli_harfler deðiþkeninde tanýmlý karakter dizisinde geçenleri sesliler adlý deðiþkene atýyoruz. Aksi durumda ise, yani kelime içinde geçen harflerden, sessiz_harfler deðiþkeninde tanýmlý karakter dizisinde geçenleri, sessizler adlý deðiþkene gönderiyoruz:
+
+for i in kelime:
+if i in sesli_harfler:
+sesliler += i
+else:
+sessizler += i
+
+Bunun için for döngüsü içinde basit bir ‘if-else’ bloðu tanýmladýðýmýzý görüyorsunuz. Ayrýca bunu yaparken, sesliler ve sessizler adlý deðiþkenlere, for döngüsünün her bir dönüþünde yeni bir harf gönderip, bu deðiþkenleri, döngünün her dönüþünde yeni baþtan tanýmladýðýmýza dikkat edin. Çünkü, dediðimiz gibi, karakter dizileri deðiþtirilemeyen veri tipleridir. Bir karakter dizisi üzerinde deðiþiklik yapmak istiyorsak, o karakter dizisini baþtan tanýmlamamýz gerekir.
+
+
+Üç Önemli Fonksiyon
+
+Karakter dizilerinin temel özellikleri hakkýnda söyleyeceklerimizin sonuna geldik sayýlýr. Biraz sonra karakter dizilerinin çok önemli bir parçasý olan metotlardan söz edeceðiz. Ama isterseniz metotlara geçmeden önce, çok önemli üç fonksiyondan söz edelim. Bu fonksiyonlar sadece karakter dizileri ile deðil, baþka veri tipleri ile çalýþýrken de iþlerimizi bir hayli kolaylaþtýracak.

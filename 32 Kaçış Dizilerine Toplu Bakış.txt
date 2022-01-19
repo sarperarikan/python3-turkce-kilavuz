@@ -1,0 +1,24 @@
+
+Kaçýþ Dizilerine Toplu Bakýþ
+
+Biraz sonra bu önemli konuyu kapatacaðýz. Ama dilerseniz kapatmadan önce, bu bölümde öðrendiðimiz kaçýþ dizilerini þöyle bir topluca görelim:
+
+Kaçýþ Dizisi Anlamý 
+\’ Karakter dizisi içinde tek týrnak iþaretini kullanabilmemizi saðlar. 
+\” Karakter dizisi içinde çift týrnak iþaretini kullanabilmemizi saðlar. 
+\\ Karakter dizisi içinde \ iþaretini kullanabilmemizi saðlar. 
+\n Yeni bir satýra geçmemizi saðlar. 
+\t Karakterler arasýnda sekme boþluðu býrakmamýzý saðlar. 
+\u UNICODE kod konumlarýný gösterebilmemizi saðlar. 
+\U UNICODE kod konumlarýný gösterebilmemizi saðlar. 
+\N Karakterleri UNICODE adlarýna göre kullanabilmemizi saðlar. 
+\x Onaltýlý sistemdeki bir sayýnýn karakter karþýlýðýný gösterebilmemizi saðlar. 
+\a Destekleyen sistemlerde, kasa hoparlöründen bir ‘bip’ sesi verilmesini saðlar. 
+\r Ayný satýrýn baþýna dönülmesini saðlar. 
+\v Destekleyen sistemlerde düþey sekme oluþturulmasýný saðlar. 
+\b Ýmlecin sola doðru kaydýrýlmasýný saðlar 
+\f Yeni bir sayfaya geçilmesini saðlar. 
+r Karakter dizisi içinde kaçýþ dizilerini kullanabilmemizi saðlar. 
+Kaçýþ dizileriyle ilgili son olarak þunu söyleyebiliriz: Kaçýþ dizileri, görmezden gelebileceðiniz, ‘öðrenmesem de olur,’ diyebileceðiniz önemsiz birtakým iþaretler deðildir. Bu konu boyunca verdiðimiz örneklerden de gördüðünüz gibi, kaçýþ dizileri, kullanýcýya göstereceðiniz metinlerin biçimini doðrudan etkiliyor. Bütün bu örnekler, bu kaçýþ dizilerinin yersiz veya yanlýþ kullanýlmasýnýn ya da bunlarýn bir metin içinde gözden kaçmasýnýn, yazdýðýnýz programlarýn hata verip çökmesine, yani programýnýzýn durmasýna sebep olabileceðini de gösteriyor bize.
+
+Böylece bir bölümü daha bitirmiþ olduk. Artýk Python’la ‘gerçek’ programlar yazmamýzýn önünde hiçbir engel kalmadý.

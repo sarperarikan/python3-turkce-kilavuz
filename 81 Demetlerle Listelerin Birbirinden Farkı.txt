@@ -1,0 +1,39 @@
+
+Demetlerle Listelerin Birbirinden Farký
+
+En baþta da söylediðimiz gibi, demetlerle listeler birbirine çok benzer. Ama demetlerle listelerin birbirinden çok önemli bazý farklarý da vardýr. Bu iki veri tipi arasýndaki en önemli fark, listelerin deðiþtirilebilir (mutable) bir veri tipi iken, demetlerin deðiþtirilemez (immutable) bir veri tipi olmasýdýr. Yani týpký karakter dizileri gibi, demetler de bir kez tanýmlandýktan sonra bunlarýn üzerinde deðiþiklik yapmak mümkün deðildir:
+
+>>> demet = ('elma', 'armut', 'kiraz')
+>>> demet[0] = 'karpuz'
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+
+Gördüðünüz gibi, demetin herhangi bir öðesini deðiþtirmeye çalýþtýðýmýzda Python bize bir hata mesajý gösteriyor.
+
+Bu bakýmdan, eðer programýn akýþý esnasýnda üzerinde deðiþiklik yapmayacaðýnýz veya deðiþiklik yapýlmasýný istemediðiniz birtakým veriler varsa ve eðer siz bu verileri liste benzeri bir taþýyýcý içine yerleþtirmek istiyorsanýz, listeler yerine demetleri kullanabilirsiniz. Ayrýca demetler üzerinde iþlem yapmak listelere kýyasla daha hýzlýdýr. Dolayýsýyla, performans avantajý nedeniyle de listeler yerine demetleri kullanmak isteyebilirsiniz.
+
+Tahmin edebileceðiniz gibi, týpký karakter dizilerinde olduðu gibi, önceden tanýmlanmýþ bir demetin üzerinde deðiþiklik yapabilmek için, örneðin bir demetle baþka bir demeti birleþtirmek için o demeti yeniden tanýmlamak da mümkündür:
+
+>>> demet = ('ahmet', 'mehmet')
+>>> demet = demet + ('selin',)
+
+Eðer sadece demet + ('selin',) demiþ olsaydýk özgün demet üzerinde herhangi bir deðiþiklik yapmýþ olmayacaktýk. Siz bu olguya karakter dizilerinden de aþinasýnýz. O yüzden, özgün demet üzerinde herhangi bir deðiþiklik yapabilmek için, daha doðrusu özgün demet üzerinde bir deðiþiklik yapmýþ gibi görünebilmek için, özgün demeti sýfýrdan tanýmlamamýz gerekiyor...
+
+Burada ayrýca ‘ahmet’ ve ‘mehmet’ öðelerinden oluþan bir demete ‘selin’ öðesini nasýl eklediðimize de dikkat edin. Asla unutmamalýsýnýz: Python programlama dilinde sadece ayný tür verileri birbiriyle birleþtirebilirsiniz. Mesela yukarýdaki örnekte ‘selin’ adlý öðeyi demet adlý demete bir karakter dizisi olarak ekleyemezsiniz:
+
+>>> demet = demet + 'selin'
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate tuple (not "str") to tuple
+
+Bu arada, yukarýdaki kodu þöyle yazdýðýnýzda da aslýnda bir demetle karakter dizisini birleþtirmeye çalýþýyor olduðunuza dikkat edin:
+
+>>> demet = demet + ('selin')
+
+Hatýrlarsanýz, tek öðeli bir demet tanýmlayabilmek için parantez içindeki tek öðenin yanýna bir virgül iþareti yerleþtirmemiz gerekiyordu. Aksi halde demet deðil, karakter dizisi tanýmlamýþ oluyorduk. Zaten bir Python programcýsý olarak, demetler üzerinde çalýþýrken en sýk yapacaðýnýz hata da demet tanýmlamaya çalýþýrken yanlýþlýkla karakter dizisi tanýmlamak olacaktýr.
+
+Dediðimiz ve yukarýda da örneklerle gösterdiðimiz gibi, bir demeti yeni baþtan tanýmlayarak da o demet üzerinde deðiþiklik yapmýþ etkisi elde edebilirsiniz. Ancak elbette bir araya topladýðýnýz veriler üzerinde sýk sýk deðiþiklikler yapacaksanýz demetler yerine listeleri tercih etmelisiniz.
+

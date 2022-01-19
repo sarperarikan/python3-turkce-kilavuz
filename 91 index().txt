@@ -1,0 +1,11 @@
+
+index()
+
+Karakter dizileri konusunu anlatýrken bu veri tipinin index() adlý bir metodu olduðundan söz etmiþtik hatýrlarsanýz. Ýþte liste veri tipinin de index() adýnda ve karakter dizilerinin index() metoduyla ayný iþi yapan bir metodu bulunur. Bu metot bir liste öðesinin liste içindeki konumunu söyler bize:
+
+>>> liste = ["elma", "armut", "çilek"]
+>>> liste.index("elma")
+
+0
+
+Karakter dizilerinin index() metoduyla ilgili söylediðimiz her þey listelerin index() metodu için de geçerlidir.

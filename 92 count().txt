@@ -1,0 +1,12 @@
+
+count()
+
+Karakter dizileri ile listelerin ortak metotlarýndan biri de count() metodudur. Týpký karakter dizilerinde olduðu gibi, listelerin count() metodu da bir öðenin o veri tipi içinde kaç kez geçtiðini söyler:
+
+>>> liste = ["elma", "armut", "elma", "çilek"]
+>>> liste.count("elma")
+
+2
+
+Karakter dizilerinin count() metoduyla ilgili söylediðimiz her þey listelerin count() metodu için de geçerlidir.
+

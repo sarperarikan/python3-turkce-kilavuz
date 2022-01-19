@@ -1,0 +1,234 @@
+
+Uygulama Örnekleri
+
+
+Basit Bir Hesap Makinesi
+
+Þu ana kadar Python’da pek çok þey öðrendik. Bu öðrendiðimiz þeylerle artýk kýsmen yararlý bazý programlar yazabiliriz. Elbette henüz yazacaðýmýz programlar pek yetenekli olamayacak olsa da, en azýndan bize öðrendiklerimizle pratik yapma imkaný saðlayacak. Bu bölümde, if, elif, else yapýlarýný ve öðrendiðimiz temel aritmetik iþleçleri kullanarak çok basit bir hesap makinesi yapmayý deneyeceðiz. Bu arada, bu derste yeni þeyler öðrenerek ufkumuzu ve bilgimizi geniþletmeyi de ihmal etmeyeceðiz.
+
+Ýsterseniz önce kullanýcýya bazý seçenekler sunarak iþe baþlayalým:
+
+giriþ = """
+(1) topla
+(2) çýkar
+(3) çarp
+(4) böl
+(5) karesini hesapla
+(6) kare kök hesapla
+"""
+
+print(giriþ)
+
+Burada kullanýcýya bazý seçenekler sunduk. Bu seçenekleri ekrana yazdýrmak için üç týrnak iþaretlerinden yararlandýðýmýza dikkat edin. Birden fazla satýra yayýlmýþ bu tür ifadeleri en kolay üç týrnak iþaretleri yardýmýyla yazdýrabileceðimizi biliyorsunuz artýk.
+
+Biz burada bütün seçenekleri tek bir deðiþken içine yerleþtirdik. Esasýnda her bir seçenek için ayrý bir deðiþken tanýmlamak da mümkündür. Yani aslýnda yukarýdaki kodlarý þöyle de yazabiliriz:
+
+seçenek1 = "(1) topla"
+seçenek2 = "(2) çýkar"
+seçenek3 = "(3) çarp"
+seçenek4 = "(4) böl"
+seçenek5 = "(5) karesini hesapla"
+seçenek6 = "(6) karekök hesapla"
+
+print(seçenek1, seçenek2, seçenek3, seçenek4, seçenek5)
+
+Yalnýz burada dikkat ederseniz, seçenekler hep yan yana diziliyor. Eðer programýnýzda yukarýdaki þekli kullanmak isterseniz, bu seçeneklerin yan yana deðil de, alt alta görünmesini saðlamak için, önceki derslerimizde öðrendiðimiz sep parametresini kullanabilirsiniz:
+
+seçenek1 = "(1) topla"
+seçenek2 = "(2) çýkar"
+seçenek3 = "(3) çarp"
+seçenek4 = "(4) böl"
+seçenek5 = "(5) karesini hesapla"
+seçenek6 = "(6) karekök hesapla"
+
+print(seçenek1, seçenek2, seçenek3, seçenek4, seçenek5, seçenek6, sep="\n")
+
+Burada sep parametresinin deðeri olarak \n kaçýþ dizisini belirlediðimize dikkat edin. \n kaçýþ dizisinin ne iþe yaradýðýný hatýrlýyorsunuz. Bu dizi, satýr baþýna geçmemizi saðlýyordu. Burada, ayraç olarak satýr baþý kaçýþ dizisini belirlediðimiz için her bir seçenek yan yana deðil, alt alta görünecektir. Elbette sep parametresi için istediðiniz deðeri belirleyebilirsiniz. Mesela her bir seçeneði satýr baþý iþaretiyle ayýrmak yerine, çift tire gibi bir iþaretle ayýrmayý da tercih edebilirsiniz:
+
+print(seçenek1, seçenek2, seçenek3, seçenek4, seçenek5, sep="--")
+
+Programýnýzda nasýl bir giriþ paragrafý belirleyeceðiniz konusunda özgürsünüz. Gelin isterseniz biz birinci þekille yolumuza devam edelim:
+
+giriþ = """
+(1) topla
+(2) çýkar
+(3) çarp
+(4) böl
+(5) karesini hesapla
+(6) karekök hesapla
+"""
+
+print(giriþ)
+
+Burada giriþ adlý bir deðiþken oluþturduk. Bu deðiþkenin içinde barýndýrdýðý deðeri kullanýcýlarýn görebilmesi için print() fonksiyonu yardýmýyla bu deðiþkeni ekrana yazdýrýyoruz. Devam edelim:
+
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin: ")
+
+Bu kod yardýmýyla kullanýcýya bir soru soruyoruz. Kullanýcýdan yapmasýný istediðimiz þey, yukarýda belirlediðimiz giriþ seçenekleri içinden bir sayý seçmesi. Kullanýcý 1, 2, 3, 4, 5 veya 6 seçeneklerinden herhangi birini seçebilir. Kullanýcýyý, seçtiði numaranýn karþýsýnda yazan iþleme yönlendireceðiz. Yani mesela eðer kullanýcý klavyedeki 1 tuþuna basarsa hesap makinemiz toplama iþlemi yapacaktýr. 2 tuþu ise kullanýcýyý çýkarma iþlemine yönlendirir...
+
+input() fonksiyonunu iþlediðimiz bölümde, bu fonksiyonun deðer olarak her zaman bir karakter dizisi (string) verdiðini söylemiþtik. Yukarýdaki kodun çýktýsý da doðal olarak bir karakter dizisi olacaktýr. Bizim þu aþamada kullanýcýdan karakter dizisi almamýzýn bir sakýncasý yok. Çünkü kullanýcýnýn gireceði 1, 2, 3, 4, 5 veya 6 deðerleriyle herhangi bir aritmetik iþlem yapmayacaðýz. Kullanýcýnýn gireceði bu deðerler, yalnýzca bize onun hangi iþlemi yapmak istediðini belirtecek. Dolayýsýyla input() fonksiyonunu yukarýdaki þekilde kullanýyoruz.
+
+Ýsterseniz þimdiye kadar gördüðümüz kýsma topluca bakalým:
+
+giriþ = """
+(1) topla
+(2) çýkar
+(3) çarp
+(4) böl
+(5) karesini hesapla
+(6) karekök hesapla
+"""
+
+print(giriþ)
+
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin: ")
+
+Bu kodlarý çalýþtýrdýðýmýzda, ekranda giriþ paragrafýmýz görünecek ve kullanýcýya, yapmak istediði iþlemin ne olduðu sorulacaktýr. Henüz kodlarýmýz eksik olduðu için, kullanýcý hangi sayýyý girerse girsin, programýmýz hiç bir iþ yapmadan kapanacaktýr. O halde yolumuza devam edelim:
+
+if soru == "1":
+
+Böylece ilk if deyimimizi tanýmlamýþ olduk. Buradaki yazým þekline çok dikkat edin. Bu kodlarla Python’a þu emri vermiþ oluyoruz:
+
+Eðer soru adlý deðiþkenin deðeri 1 ise, yani eðer kullanýcý klavyede 1 tuþuna basarsa...
+
+if deyimlerinin en sonuna : iþaretini koymayý unutmuyoruz. Python’a yeni baþlayanlarýn en çok yaptýðý hatalardan birisi, sondaki bu : iþaretini koymayý unutmalarýdýr. Bu iþaret bize çok ufak bir ayrýntýymýþ gibi görünse de Python için manevi deðeri çok büyüktür! Python’un bize öfkeli mesajlar göstermesini istemiyorsak bu iþareti koymayý unutmayacaðýz. Bu arada, burada == iþaretini kullandýðýmýza da dikkat edin. Bunun ne anlama geldiðini önceki derslerimizde öðrenmiþtik. Bu iþaret, iki þeyin ayný deðere sahip olup olmadýðýný sorgulamamýzý saðlýyor. Biz burada soru adlý deðiþkenin deðerinin 1 olup olmadýðýný sorguladýk. soru deðiþkeninin deðeri kullanýcý tarafýndan belirleneceði için henüz bu deðiþkenin deðerinin ne olduðunu bilmiyoruz. Bizim programýmýzda kullanýcý klavyeden 1, 2, 3, 4, 5 veya 6 deðerlerinden herhangi birini seçebilir. Biz yukarýdaki kod yardýmýyla, eðer kullanýcý klavyede 1 tuþuna basarsa ne yapýlacaðýný belirleyeceðiz. O halde devam edelim:
+
+if soru == "1":
+sayý1 = int(input("Toplama iþlemi için ilk sayýyý girin: "))
+sayý2 = int(input("Toplama iþlemi için ikinci sayýyý girin: "))
+print(sayý1, "+", sayý2, "=", sayý1 + sayý2)
+
+Böylece ilk if bloðumuzu tanýmlamýþ olduk.
+
+if deyimimizi yazdýktan sonra ne yaptýðýmýz çok önemli. Buradaki girintileri, programýmýz güzel görünsün diye yapmýyoruz. Bu girintilerin Python için bir anlamý var. Eðer bu girintileri vermezsek programýmýz çalýþmayacaktýr. Eðer Python kodlarýna duyarlý bir metin düzenleyici kullanýyorsanýz, : iþaretini koyup Enter tuþuna bastýktan sonra otomatik olarak girinti verilecektir. Eðer kullandýðýnýz metin düzenleyici size böyle bir kolaylýk sunmuyorsa Enter tuþuna bastýktan sonra klavyedeki boþluk (SPACE) tuþunu kullanarak dört vuruþluk bir girinti oluþturabilirsiniz. Bu girintiler, ilk satýrda belirlediðimiz if deyimiyle gösterilecek iþlemlere iþaret ediyor. Dolayýsýyla burada yazýlan kodlarý Pythoncadan Türkçeye çevirecek olursak þöyle bir þey elde ederiz:
+
+eðer sorunun deðeri '1' ise:
+    Toplama iþlemi için ilk sayý girilsin. Bu deðere 'sayý1' diyelim.
+    Sonra ikinci sayý girilsin. Bu deðere de 'sayý2' diyelim.
+    En son, 'sayý1', '+' iþleci, 'sayý2', '=' iþleci ve 'sayý1 + sayý2'
+    ekrana yazdýrýlsýn...
+
+Gelin isterseniz buraya kadar olan bölümü yine topluca görelim:
+
+giriþ = """
+(1) topla
+(2) çýkar
+(3) çarp
+(4) böl
+(5) karesini hesapla
+(6) karekök hesapla
+"""
+
+print(giriþ)
+
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin: ")
+
+if soru == "1":
+sayý1 = int(input("Toplama iþlemi için ilk sayýyý girin: "))
+sayý2 = int(input("Toplama iþlemi için ikinci sayýyý girin: "))
+print(sayý1, "+", sayý2, "=", sayý1 + sayý2)
+
+Bu kodlarý çalýþtýrýp, klavyede 1 tuþuna bastýðýmýzda, bizden bir sayý girmemiz istenecektir. Ýlk sayýmýzý girdikten sonra bize tekrar bir sayý girmemiz söylenecek. Bu emre de uyup Enter tuþuna basýnca, girdiðimiz bu iki sayýnýn toplandýðýný göreceðiz. Fena sayýlmaz, deðil mi?
+
+Þimdi programýmýzýn geri kalan kýsmýný yazýyoruz. Ýþin temelini kavradýðýmýza göre birden fazla kod bloðunu ayný anda yazabiliriz:
+
+elif soru == "2":
+sayý3 = int(input("Çýkarma iþlemi için ilk sayýyý girin: "))
+sayý4 = int(input("Çýkarma iþlemi için ikinci sayýyý girin: "))
+print(sayý3, "-", sayý4, "=", sayý3 - sayý4)
+
+elif soru == "3":
+sayý5 = int(input("Çarpma iþlemi için ilk sayýyý girin: "))
+sayý6 = int(input("Çarpma iþlemi için ikinci sayýyý girin: "))
+print(sayý5, "x", sayý6, "=", sayý5 * sayý6)
+
+elif soru == "4":
+sayý7 = int(input("Bölme iþlemi için ilk sayýyý girin: "))
+sayý8 = int(input("Bölme iþlemi için ikinci sayýyý girin: "))
+print(sayý7, "/", sayý8, "=", sayý7 / sayý8)
+
+elif soru == "5":
+sayý9 = int(input("Karesini hesaplamak istediðiniz sayýyý girin: "))
+print(sayý9, "sayýsýnýn karesi =", sayý9 ** 2)
+
+elif soru == "6":
+sayý10 = int(input("Karekökünü hesaplamak istediðiniz sayýyý girin: "))
+print(sayý10, "sayýsýnýn karekökü = ", sayý10 ** 0.5)
+
+Bunlarla birlikte kodlarýmýzýn büyük bölümünü tamamlamýþ oluyoruz. Bu bölümdeki tek fark, ilk if bloðunun aksine, burada elif bloklarýný kullanmýþ olmamýz. Eðer burada bütün bloklarý if kullanarak yazarsanýz, biraz sonra kullanacaðýmýz else bloðu her koþulda çalýþacaðý için beklentinizin dýþýnda sonuçlar elde edersiniz.
+
+Yukarýdaki kodlarda az da olsa farklýlýk gösteren tek yer son iki elif bloðumuz. Esasýnda buradaki fark da pek büyük bir fark sayýlmaz. Neticede tek bir sayýnýn karesini ve karekökünü hesaplayacaðýmýz için, kullanýcýdan yalnýzca tek bir giriþ istiyoruz.
+
+Þimdi de son bloðumuzu yazalým. Az evvel çýtlattýðýmýz gibi, bu son blok bir else bloðu olacak:
+
+else:
+print("Yanlýþ giriþ.")
+print("Aþaðýdaki seçeneklerden birini giriniz:", giriþ)
+
+Çok basit bir else bloðu ile iþimizi bitirdik. Bu bloðun ne iþe yaradýðýný biliyorsunuz:
+
+Eðer kullanýcýnýn girdiði deðer yukarýdaki bloklardan hiç birine uymuyorsa bu else bloðunu iþlet!
+
+gibi bir emir vermiþ oluyoruz bu else bloðu yardýmýyla. Mesela kullanýcýmýz 1, 2, 3, 4, 5 veya 6 seçeneklerini girmek yerine 7 yazarsa, bu blok iþletilecek.
+
+Gelin isterseniz son kez kodlarýmýzý topluca bir görelim:
+
+giriþ = """
+(1) topla
+(2) çýkar
+(3) çarp
+(4) böl
+(5) karesini hesapla
+(6) karekök hesapla
+"""
+
+print(giriþ)
+
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin: ")
+
+if soru == "1":
+sayý1 = int(input("Toplama iþlemi için ilk sayýyý girin: "))
+sayý2 = int(input("Toplama iþlemi için ikinci sayýyý girin: "))
+print(sayý1, "+", sayý2, "=", sayý1 + sayý2)
+
+elif soru == "2":
+sayý3 = int(input("Çýkarma iþlemi için ilk sayýyý girin: "))
+sayý4 = int(input("Çýkarma iþlemi için ikinci sayýyý girin: "))
+print(sayý3, "-", sayý4, "=", sayý3 - sayý4)
+
+elif soru == "3":
+sayý5 = int(input("Çarpma iþlemi için ilk sayýyý girin: "))
+sayý6 = int(input("Çarpma iþlemi için ikinci sayýyý girin: "))
+print(sayý5, "x", sayý6, "=", sayý5 * sayý6)
+
+elif soru == "4":
+sayý7 = int(input("Bölme iþlemi için ilk sayýyý girin: "))
+sayý8 = int(input("Bölme iþlemi için ikinci sayýyý girin: "))
+print(sayý7, "/", sayý8, "=", sayý7 / sayý8)
+
+elif soru == "5":
+sayý9 = int(input("Karesini hesaplamak istediðiniz sayýyý girin: "))
+print(sayý9, "sayýsýnýn karesi =", sayý9 ** 2)
+
+elif soru == "6":
+sayý10 = int(input("Karekökünü hesaplamak istediðiniz sayýyý girin: "))
+print(sayý10, "sayýsýnýn karekökü = ", sayý10 ** 0.5)
+
+else:
+print("Yanlýþ giriþ.")
+print("Aþaðýdaki seçeneklerden birini giriniz:", giriþ)
+
+Genel olarak baktýðýmýzda, bütün programýn aslýnda basit bir ‘if, elif, else’ yapýsýndan ibaret olduðunu görüyoruz. Ayrýca bu kodlardaki simetriye de dikkatinizi çekmek isterim. Gördüðünüz gibi her ‘paragraf’ bir if, elif veya else bloðundan oluþuyor ve her blok kendi içinde girintili bir yapý sergiliyor. Temel olarak þöyle bir þeyle karþý karþýyayýz:
+
+Eðer böyle bir durum varsa:
+þöyle bir iþlem yap
+
+Yok eðer þöyle bir durum varsa:
+böyle bir iþlem yap
+
+Eðer bambaþka bir durum varsa:
+þöyle bir þey yap
+
+Böylelikle þirin bir hesap makinesine sahip olmuþ olduk! Hesap makinemiz pek yetenekli deðil, ama olsun... Henüz bildiklerimiz bunu yapmamýza müsaade ediyor. Yine de baþlangýçtan bu noktaya kadar epey yol katettiðimizi görüyorsunuz.
+
+Þimdi bu programý çalýþtýrýn ve neler yapabildiðine göz atýn. Bu arada kodlarý da iyice inceleyin. Programý yeterince anladýktan sonra, program üzerinde kendinize göre bazý deðiþiklikler yapýn, yeni özellikler ekleyin. Eksikliklerini, zayýf yönlerini bulmaya çalýþýn. Böylece bu dersten azami faydayý saðlamýþ olacaksýnýz.

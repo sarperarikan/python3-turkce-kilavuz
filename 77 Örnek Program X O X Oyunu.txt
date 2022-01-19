@@ -1,0 +1,447 @@
+
+Örnek Program: X.O.X Oyunu
+
+Þu ana kadar Python programlama dili hakkýnda epey bilgi edindik. Buraya kadar öðrendiklerimizi kullanarak iþe yarar programlar yazabiliyoruz. Belki farkýndasýnýz, belki de deðilsiniz, ama özellikle listeler konusunu öðrenmemiz bize çok þey kazandýrdý.
+
+Bir önceki bölümde, bir X.O.X Oyunu yazacaðýmýzdan söz etmiþ ve bu oyunun Python’la nasýl yazýlabileceðine dair bazý ipuçlarý da vermiþtik. Ýþte bu bölümde, Python programlama dilinde þimdiye kadar öðrendiklerimizi kullanarak bu oyunu yazacaðýz.
+
+Yazacaðýmýz oyunun Ýngilizce adý Tic Tac Toe. Bu oyunun ne olduðunu ve kurallarýný bir önceki bölümde kabataslak bir þekilde vermiþtik. Eðer isterseniz oyun kurallarýna wikipedia.org/wiki/Çocuk_oyunlarý#X_O_X_OYUNU adresinden de bakabilirsiniz.
+
+Oyunu ve kurallarýný bildiðinizi varsayarak kodlamaya baþlayalým.
+
+Burada ilk yapmamýz gereken þey, üzerinde oyun oynanacak tahtayý çizmek olmalý. Amacýmýz þöyle bir görüntü elde etmek:
+
+___ ___ ___
+
+___ ___ ___
+
+___ ___ ___
+
+Bu tahtada oyuncu soldan saða ve yukarýdan aþaðýya doðru iki adet konum bilgisi girecek ve oyunu oynayan kiþinin gireceði bu konumlara “X” ve “O” harfleri iþaretlenecek.
+
+Böyle bir görüntü oluþturmak için pek çok farklý yöntem kullanýlabilir. Ama oyuncunun her konum bilgisi giriþinde, X veya O iþaretini tahta üzerinde göstereceðimiz için tahta üzerinde oyun boyunca sürekli birtakým deðiþiklikler olacak. Bildiðiniz gibi karakter dizileri, üzerinde deðiþiklik yapmaya müsait bir veri tipi deðil. Böyle bir görev için listeler daha uygun bir araç olacaktýr. O yüzden tahtayý oluþturmada listeleri kullanmayý tercih edeceðiz.
+
+tahta = [["___", "___", "___"],
+["___", "___", "___"],
+["___", "___", "___"]]
+
+Gördüðünüz gibi, burada iç içe geçmiþ üç adet listeden oluþan bir liste var. print(tahta) komutunu kullanarak bu listeyi ekrana yazdýrýrsanýz listenin yapýsý daha belirgin bir þekilde ortaya çýkacaktýr:
+
+[['___', '___', '___'], ['___', '___', '___'], ['___', '___', '___']]
+
+Oyun tahtasýný oluþturduðumuza göre, þimdi yapmamýz gereken þey bu oyun tahtasýný düzgün bir þekilde oyuncuya göstermek olmalý. Dediðimiz gibi, oyuncu þöyle bir çýktý görmeli:
+
+___ ___ ___
+
+___ ___ ___
+
+___ ___ ___
+
+Bu görüntüyü elde etmek için þu kodlarý yazýyoruz:
+
+print("\n"*15)
+
+for i in tahta:
+print("\t".expandtabs(30), *i, end="\n"*2)
+
+Bu kodlarda bilmediðiniz hiçbir þey yok. Burada gördüðünüz her þeyi önceki derslerde öðrenmiþtiniz.
+
+Yukarýdaki kodlarý yazarken tamamen, elde etmek istediðimiz görüntüye odaklanýyoruz. Mesela print("\n"*15) kodunu yazmamýzýn nedeni, oyun tahtasý için ekranda boþ bir alan oluþturmak. Bu etkiyi elde etmek için 15 adet yeni satýr karakteri bastýk ekrana. Bu kodla elde edilen etkiyi daha iyi görebilmek için bu kodu programdan çýkarmayý deneyebilirsiniz.
+
+Alttaki satýrda ise bir for döngüsü tanýmladýk. Bu döngünün amacý tahta adlý listedeki “__” öðelerini düzgün bir þekilde oyuncuya gösterebilmek. Oyun tahtasýnýn, ekraný (yaklaþýk olarak da olsa) ortalamasýný istiyoruz. O yüzden, tahta öðelerine soldan girinti verebilmek için print() fonksiyonunun ilk parametresini "\t".expandtabs(30) þeklinde yazdýk. Karakter dizilerinin expandtabs() adlý metodunu önceki derslerimizden hatýrlýyor olmalýsýnýz. Bu metodu kullanarak sekme (TAB) karakterlerini geniþletebiliyorduk. Burada da “\t” karakterini bu metot yardýmýyla geniþleterek liste öðelerini sol baþtan girintiledik.
+
+print() fonksiyonunun ikinci parametresi ise *i. Bu parametrenin ne iþ yaptýðýný anlamak için þöyle bir kod yazalým:
+
+tahta = [["___", "___", "___"],
+["___", "___", "___"],
+["___", "___", "___"]]
+
+for i in tahta:
+print(i)
+
+Bu kodlarý çalýþtýrdýðýmýzda þöyle bir çýktý elde ederiz:
+
+['___', '___', '___']
+['___', '___', '___']
+['___', '___', '___']
+
+Gördüðünüz gibi, iç içe geçmiþ üç adet listeden oluþan tahta adlý liste içindeki bu iç listeler ekrana döküldü. Bir de þuna bakýn:
+
+tahta = [["___", "___", "___"],
+["___", "___", "___"],
+["___", "___", "___"]]
+
+for i in tahta:
+print(*i)
+
+Bu kodlar çalýþtýrýldýðýnda þu çýktýyý verir:
+
+___ ___ ___
+___ ___ ___
+___ ___ ___
+
+Bu defa liste yapýsýný deðil, listeyi oluþturan öðelerin kendisini görüyoruz. Yýldýz iþaretinin, birlikte kullanýldýðý öðeler üzerinde nasýl bir etkiye sahip olduðunu yine önceki derslerimizden hatýrlýyorsunuz. Mesela þu örneðe bakýn:
+
+kardiz = "istihza"
+
+for i in kardiz:
+print(i, end=" ")
+print()
+
+Bu kodlar þu çýktýyý veriyor:
+
+i s t i h z a
+
+Ayný çýktýyý basitçe þu þekilde de elde edebileceðimizi biliyorsunuz:
+
+kardiz = "istihza"
+print(*kardiz)
+
+Ýþte oyun tahtasýný ekrana dökmek için kullandýðýmýz kodda da benzer bir þey yaptýk. Yýldýz iþareti yardýmýyla, tahta adlý listeyi oluþturan iç içe geçmiþ listeleri liste dýþýna çýkarýp düzgün bir þekilde kullanýcýya gösterdik.
+
+print() fonksiyonu içindeki son parametremiz þu: end="\n"*2
+
+Bu parametrenin ne iþe yaradýðýný kolaylýkla anlayabildiðinizi zannediyorum. Bu parametre de istediðimiz çýktýyý elde etmeye yönelik bir çabadan ibarettir. tahta adlý liste içindeki iç içe geçmiþ listelerin her birinin sonuna ikiþer adet “\n” karakteri yerleþtirerek, çýktýdaki satýrlar arasýnda yeterli miktarda aralýk býraktýk. Eðer oyun tahtasýndaki satýrlarýn biraz daha aralýklý olmasýný isterseniz bu parametredeki 2 çarpanýný artýrabilirsiniz. Mesela: end="\n"*3
+
+Þimdi yapmamýz gereken þey, oyundaki kazanma ölçütlerini belirlemek. Hatýrlarsanýz bu konuya bir önceki bölümde deðinmiþtik. O yüzden aþaðýda söyleyeceklerimizin bir bölümüne zaten aþinasýnýz. Burada önceden söylediðimiz bazý þeylerin yeniden üzerinden geçeceðiz.
+
+Dediðim gibi, kodlarýn bu bölümünde, hangi durumda oyunun biteceðini ve kazananýn kim olacaðýný tespit edebilmemiz gerekiyor. Mesela oyun sýrasýnda þöyle bir görüntü ortaya çýkarsa hemen oyunu durdurup “O KAZANDI!” gibi bir çýktý verebilmemiz lazým:
+
+O O O
+
+___ X X
+
+___ ___ ___
+
+Veya þöyle bir durumda “X KAZANDI!” diyebilmeliyiz:
+
+X O ___
+
+X O O
+
+X ___ ___
+
+Yukarýdaki iki örnek üzerinden düþünecek olursak, herhangi bir iþaretin þu konumlarda bulunmasý o iþaretin kazandýðýný gösteriyor:
+
+yukarýdan aþaðýya 0; soldan saða 0
+yukarýdan aþaðýya 1; soldan saða 0
+yukarýdan aþaðýya 2; soldan saða 0
+
+veya:
+
+yukarýdan aþaðýya 0; soldan saða 0
+yukarýdan aþaðýya 0; soldan saða 1
+yukarýdan aþaðýya 0; soldan saða 2
+
+Ýþte bizim yapmamýz gereken þey, bir iþaretin oyun tahtasý üzerinde hangi konumlarda bulunmasý halinde oyunun biteceðini tespit etmek. Yukarýdaki örnekleri göz önüne alarak bunun için þöyle bir liste hazýrlayabiliriz:
+
+kazanma_ölçütleri = [[[0, 0], [1, 0], [2, 0]],
+[[0, 0], [0, 1], [0, 2]]]
+
+Burada iki adet listeden oluþan, kazanma_ölçütleri adlý bir listemiz var. Liste içinde, her biri üçer öðeden oluþan þu listeleri görüyoruz:
+
+[[0, 0], [1, 0], [2, 0]]
+[[0, 0], [0, 1], [0, 2]]
+
+Bu listeler de kendi içinde ikiþer öðeli bazý listelerden oluþuyor. Mesela ilk liste içinde þu listeler var:
+
+[0, 0], [1, 0], [2, 0]
+
+Ýkinci liste içinde ise þu listeler:
+
+[0, 0], [0, 1], [0, 2]
+
+Burada her bir liste içindeki ilk sayý oyun tahtasýnda yukarýdan aþaðýya doðru olan düzlemi; ikinci sayý ise soldan saða doðru olan düzlemi gösteriyor.
+
+Tabii ki oyun içindeki tek kazanma ölçütü bu ikisi olmayacak. Öteki kazanma ölçütlerini de tek tek tanýmlamalýyýz:
+
+kazanma_ölçütleri = [[[0, 0], [1, 0], [2, 0]],
+[[0, 1], [1, 1], [2, 1]],
+[[0, 2], [1, 2], [2, 2]],
+[[0, 0], [0, 1], [0, 2]],
+[[1, 0], [1, 1], [1, 2]],
+[[2, 0], [2, 1], [2, 2]],
+[[0, 0], [1, 1], [2, 2]],
+[[0, 2], [1, 1], [2, 0]]]
+
+Ýþte X veya O iþaretleri kazanma_ölçütleri adlý listede belirtilen koordinatlarda bulunduðunda, ilgili iþaretin oyunu kazandýðýný ilan edip oyundan çýkabileceðiz.
+
+Yukarýdaki açýklamalardan da anlayacaðýnýz gibi, X ve O iþaretlerinin oyun tahtasýndaki konumu, oyunun gidiþatý açýsýndan önem taþýyor. O yüzden þu þekilde iki farklý liste daha tanýmlamamýzda fayda var:
+
+x_durumu = []
+o_durumu = []
+
+Bu deðiþkenler sýrasýyla X iþaretinin ve O iþaretinin oyun içinde aldýklarý konumlarý kaydedecek. Bu konumlarla, bir önceki adýmda tanýmladýðýmýz kazanma ölçütlerini karþýlaþtýrarak oyunu kimin kazandýðýný tespit edebileceðiz.
+
+Gördüðünüz gibi, oyunda iki farklý iþaret var: X ve O. Dolayýsýyla oynama sýrasý sürekli olarak bu iki iþaret arasýnda deðiþmeli. Mesela oyuna 0 iþareti ile baþlanacaksa, 0 iþaretinin yerleþtirilmesinden sonra sýranýn X iþaretine geçmesi gerekiyor. X iþareti de yerleþtirildikten sonra sýra tekrar 0 iþaretine geçmeli ve oyun süresince bu böyle devam edebilmeli.
+
+Bu sürekliliði saðlamak için þöyle bir kod yazabiliriz:
+
+sýra = 1
+
+while True:
+if sýra % 2 == 0:
+iþaret = "X".center(3)
+else:
+iþaret = "O".center(3)
+
+sýra += 1
+
+print()
+print("ÝÞARET: {}\n".format(iþaret))
+
+Burada sayýlarýn tek veya çift olma özelliðinden yararlanarak X ve O iþaretleri arasýnda geçiþ yaptýk. Önce sýra adlý bir deðiþken tanýmlayýp bunun deðerini 1 olarak belirledik. while döngüsünde ise bu deðiþkenin deðerini her defasýnda 1 artýrdýk. Eðer sayýnýn deðeri çiftse iþaret X; tekse O olacak. Bu arada X ve O adlý karakter dizilerini, center() metodu yardýmýyla ortaladýðýmýza dikkat edin.
+
+Yukarýdaki kodlarý bu þekilde çalýþtýrdýðýnýzda X ve O harflerinin çok hýzlý bir þekilde ekrandan geçtiðini göreceksiniz. Eðer ekranda son hýz akýp giden bu verileri yavaþlatmak ve neler olup bittiðini daha net görmek isterseniz yukarýdaki kodlarý þöyle yazabilirsiniz:
+
+from time import sleep
+
+sýra = 1
+
+while True:
+if sýra % 2 == 0:
+iþaret = "X".center(3)
+else:
+iþaret = "O".center(3)
+sýra += 1
+
+print()
+print("ÝÞARET: {}\n".format(iþaret))
+sleep(0.3)
+
+Bu kodlarda henüz öðrenmediðimiz parçalar var. Ama þimdilik bu bilmediðiniz parçalara deðil, sonuca odaklanýn. Burada yaptýðýmýz þey, while döngüsü içinde her bir print() fonksiyonu arasýna 0.3 saniyelik duraklamalar eklemek. Böylece programýn akýþý yavaþlamýþ oluyor. Biz de iþaret deðiþkeninin her döngüde bir X, bir O oluþunu daha net bir þekilde görebiliyoruz.
+
+Not
+
+Asýl program içinde X ve O karakterlerinin geçiþini özellikle yavaþlatmamýza gerek kalmayacak. Programýn ilerleyen satýrlarýnda input() fonksiyonu yardýmýyla kullanýcýdan veri giriþi isteyeceðimiz için X ve O’larýn akýþý zaten doðal olarak duraklamýþ olacak.
+
+while döngümüzü yazmaya devam edelim:
+
+x = input("yukarýdan aþaðýya [1, 2, 3]: ".ljust(30))
+if x == "q":
+break
+
+y = input("soldan saða [1, 2, 3]: ".ljust(30))
+if y == "q":
+break
+
+x = int(x)-1
+y = int(y)-1
+
+Burada X veya O iþaretlerini tahta üzerinde uygun yerlere yerleþtirebilmek için kullanýcýnýn konum bilgisi girmesini istiyoruz. x deðiþkeni yukarýdan aþaðýya doðru olan düzlemdeki konumu, y deðiþkeni ise soldan saða doðru olan düzlemdeki konumu depolayacak. Oyunda kullanýcýnýn girebileceði deðerler 1, 2 veya 3 olacak. Mesela oyuncu O iþareti için yukarýdan aþaðýya 1; soldan saða 2 deðerini girmiþse þöyle bir görüntü elde edeceðiz:
+
+___ O ___
+
+___ ___ ___
+
+___ ___ ___
+
+Burada ljust() metotlarýný, kullanýcýya gösterilecek verinin düzgün bir þekilde hizalanmasý amacýyla kullandýk.
+
+Eðer kullanýcý x veya y deðiþkenlerinden herhangi birine “q” cevabý verirse oyundan çýkýyoruz.
+
+Yukarýdaki kodlarýn son iki satýrýnda ise kullanýcýdan gelen karakter dizilerini birer sayýya dönüþtürüyoruz. Bu arada, bildiðiniz gibi Python saymaya 0’dan baþlýyor. Ama insanlar açýsýndan doðal olan saymaya 1’den baþlamaktýr. O yüzden mesela kullanýcý 1 sayýsýný girdiðinde Python’ýn bunu 0 olarak algýlamasýný saðlamamýz gerekiyor. Bunun için x ve y deðerlerinden 1 çýkarýyoruz.
+
+Kullanýcýdan gerekli konum bilgilerini aldýðýmýza göre, bu bilgilere dayanarak X ve O iþaretlerini oyun tahtasý üzerine yerleþtirebiliriz. Þimdi þu kodlarý dikkatlice inceleyin:
+
+print("\n"*15)
+
+if tahta[x][y] == "___":
+tahta[x][y] = iþaret
+if iþaret == "X".center(3):
+x_durumu += [[x, y]]
+elif iþaret == "O".center(3):
+o_durumu += [[x, y]]
+sýra += 1
+else:
+print("\nORASI DOLU! TEKRAR DENEYÝN\n")
+
+Burada öncelikle 15 adet satýr baþý karakteri basýyoruz. Böylece oyun tahtasý için ekranda boþ bir alan oluþturmuþ oluyoruz. Bu satýr tamamen güzel bir görüntü elde etmeye yönelik bir uygulamadýr. Yani bu satýrý yazmasanýz da programýnýz çalýþýr. Veya siz kendi zevkinize göre daha farklý bir görünüm elde etmeye çalýþabilirsiniz.
+
+Ýkinci satýrda gördüðümüz if tahta[x][y] == "___": kodu, oyun tahtasý üzerindeki bir konumun halihazýrda boþ mu yoksa dolu mu olduðunu tespit etmemizi saðlýyor. Amacýmýz oyuncunun ayný konuma iki kez giriþ yapmasýný engellemek. Bunun için tahta üzerinde x ve y konumlarýna denk gelen yerde “___” iþaretinin olup olmadýðýna bakmamýz yeterli olacaktýr. Eðer bakýlan konumda “___” iþareti varsa orasý boþ demektir. O konuma iþaret koyulabilir. Ama eðer o konumda “___” iþareti yoksa X veya O iþaretlerinden biri var demektir. Dolayýsýyla o konuma iþaret koyulamaz. Böyle bir durumda kullanýcýya “ORASI DOLU! TEKRAR DENEYÝN” uyarýsýný gösteriyoruz.
+
+Oyun tahtasý üzerinde deðiþiklik yapabilmek için nasýl bir yol izlediðimize dikkat edin:
+
+tahta[x][y] = iþaret
+
+Mesela oyuncu yukarýdan aþaðýya 1; soldan saða 2 sayýsýný girmiþse, kullanýcýdan gelen sayýlardan 1 çýkardýðýmýz için, Python yukarýdaki kodu þöyle deðerlendirecektir:
+
+tahta[0][1] = iþaret
+
+Yani tahta adlý liste içindeki ilk listenin ikinci sýrasýna ilgili iþaret yerleþtirilecektir.
+
+Ayrýca yukarýdaki kodlarda þu satýrlarý da görüyoruz:
+
+if iþaret == "X".center(3):
+x_durumu += [[x, y]]
+elif iþaret == "O".center(3):
+o_durumu += [[x, y]]
+
+Eðer iþaret sýrasý X’te ise oyuncunun girdiði konum bilgilerini x_durumu adlý deðiþkene, eðer iþaret sýrasý O’da ise konum bilgilerini o_durumu adlý deðiþkene yolluyoruz. Oyunu hangi iþaretin kazandýðýný tespit edebilmemiz açýsýndan bu kodlar büyük önem taþýyor. x_durumu ve o_durumu deðiþkenlerini kazanma_ölçütleri adlý liste ile karþýlaþtýrarak oyunu kimin kazandýðýna karar vereceðiz.
+
+Bu arada, oyunun en baþýnda tanýmladýðýmýz sýra adlý deðiþkeni if bloðu içinde artýrdýðýmýza dikkat edin. Bu sayede, kullanýcýnýn yanlýþlýkla ayný konuma iki kez iþaret yerleþtirmeye çalýþmasý halinde iþaret sýrasý deðiþmeyecek. Yani mesela o anda sýra X’te ise ve oyuncu yanlýþ bir konum girdiyse sýra yine X’te olacak. Eðer sýra deðiþkenini if bloðu içine yazmazsak, yanlýþ konum girildiðinde iþaret sýrasý O’a geçecektir.
+
+Ýsterseniz þimdiye kadar yazdýðýmýz kodlarý þöyle bir topluca görelim:
+
+tahta = [["___", "___", "___"],
+["___", "___", "___"],
+["___", "___", "___"]]
+
+print("\n"*15)
+
+for i in tahta:
+print("\t".expandtabs(30), *i, end="\n"*2)
+
+kazanma_ölçütleri = [[[0, 0], [1, 0], [2, 0]],
+[[0, 1], [1, 1], [2, 1]],
+[[0, 2], [1, 2], [2, 2]],
+[[0, 0], [0, 1], [0, 2]],
+[[1, 0], [1, 1], [1, 2]],
+[[2, 0], [2, 1], [2, 2]],
+[[0, 0], [1, 1], [2, 2]],
+[[0, 2], [1, 1], [2, 0]]]
+
+x_durumu = []
+o_durumu = []
+
+sýra = 1
+while True:
+if sýra % 2 == 0:
+iþaret = "X".center(3)
+else:
+iþaret = "O".center(3)
+
+print()
+print("ÝÞARET: {}\n".format(iþaret))
+
+x = input("yukarýdan aþaðýya [1, 2, 3]: ".ljust(30))
+if x == "q":
+break
+
+y = input("soldan saða [1, 2, 3]: ".ljust(30))
+if y == "q":
+break
+
+x = int(x)-1
+y = int(y)-1
+
+print("\n"*15)
+
+if tahta[x][y] == "___":
+tahta[x][y] = iþaret
+if iþaret == "X".center(3):
+x_durumu += [[x, y]]
+elif iþaret == "O".center(3):
+o_durumu += [[x, y]]
+sýra += 1
+else:
+print("\nORASI DOLU! TEKRAR DENEYÝN\n")
+
+Gördüðünüz gibi epey kod yazmýþýz. Kodlarýmýzý topluca incelediðimize göre yazmaya devam edebiliriz:
+
+for i in tahta:
+print("\t".expandtabs(30), *i, end="\n"*2)
+
+Bu kodlarýn ne iþe yaradýðýnýz biliyorsunuz. Oyun tahtasýnýn son durumunu kullanýcýya göstermek için kullanýyoruz bu kodlarý.
+
+Sýra geldi oyunun en önemli kýsmýna. Bu noktada oyunu kimin kazandýðýný belirlememiz gerekiyor. Dikkatlice inceleyin:
+
+for i in kazanma_ölçütleri:
+o = [z for z in i if z in o_durumu]
+x = [z for z in i if z in x_durumu]
+if len(o) == len(i):
+print("O KAZANDI!")
+quit()
+if len(x) == len(i):
+print("X KAZANDI!")
+quit()
+
+Bu kodlarý anlayabilmek için en iyi yol uygun yerlere print() fonksiyonlarý yerleþtirerek çýktýlarý incelemektir. Mesela bu kodlarý þöyle yazarak o ve x deðiþkenlerinin deðerlerini izleyebilirsiniz:
+
+for i in kazanma_ölçütleri:
+o = [z for z in i if z in o_durumu]
+x = [z for z in i if z in x_durumu]
+print("o: ", o)
+print("x: ", x)
+if len(o) == len(i):
+print("O KAZANDI!")
+quit()
+if len(x) == len(i):
+print("X KAZANDI!")
+quit()
+
+Bu kodlar içindeki en önemli öðeler o ve x adlý deðiþkenlerdir. Burada, o_durumu veya x_durumu adlý listelerdeki deðerlerle kazanma_ölçütleri adlý listedeki deðerleri karþýlaþtýrarak, ortak deðerleri o veya x deðiþkenlerine yolluyoruz. Eðer ortak öðe sayýsý 3’e ulaþýrsa (if len(o) == len(i): veya if len(x) == len(i):), bu sayýyý yakalayan ilk iþaret hangisiyse oyunu o kazanmýþ demektir.
+
+Kodlarýmýzýn son hali þöyle oldu:
+
+tahta = [["___", "___", "___"],
+["___", "___", "___"],
+["___", "___", "___"]]
+
+print("\n"*15)
+
+for i in tahta:
+print("\t".expandtabs(30), *i, end="\n"*2)
+
+kazanma_ölçütleri = [[[0, 0], [1, 0], [2, 0]],
+[[0, 1], [1, 1], [2, 1]],
+[[0, 2], [1, 2], [2, 2]],
+[[0, 0], [0, 1], [0, 2]],
+[[1, 0], [1, 1], [1, 2]],
+[[2, 0], [2, 1], [2, 2]],
+[[0, 0], [1, 1], [2, 2]],
+[[0, 2], [1, 1], [2, 0]]]
+
+x_durumu = []
+o_durumu = []
+
+sýra = 1
+while True:
+if sýra % 2 == 0:
+iþaret = "X".center(3)
+else:
+iþaret = "O".center(3)
+
+print()
+print("ÝÞARET: {}\n".format(iþaret))
+
+x = input("yukarýdan aþaðýya [1, 2, 3]: ".ljust(30))
+if x == "q":
+break
+
+y = input("soldan saða [1, 2, 3]: ".ljust(30))
+if y == "q":
+break
+
+x = int(x)-1
+y = int(y)-1
+
+print("\n"*15)
+
+if tahta[x][y] == "___":
+tahta[x][y] = iþaret
+if iþaret == "X".center(3):
+x_durumu += [[x, y]]
+elif iþaret == "O".center(3):
+o_durumu += [[x, y]]
+sýra += 1
+else:
+print("\nORASI DOLU! TEKRAR DENEYÝN\n")
+
+for i in tahta:
+print("\t".expandtabs(30), *i, end="\n"*2)
+
+for i in kazanma_ölçütleri:
+o = [z for z in i if z in o_durumu]
+x = [z for z in i if z in x_durumu]
+
+if len(o) == len(i):
+print("O KAZANDI!")
+quit()
+if len(x) == len(i):
+print("X KAZANDI!")
+quit()
+
+Gördüðünüz gibi, sadece þu ana kadar öðrendiðimiz bilgileri kullanarak bir oyun yazabilecek duruma geldik. Burada küçük parçalarý birleþtirerek bir bütüne nasýl ulaþtýðýmýzý özellikle görmenizi isterim. Dikkat ederseniz, yukarýdaki programda sadece karakter dizileri, sayýlar, listeler ve birkaç fonksiyon var. Nasýl sadece 7 nota ile müzik þaheserleri meydana getirilebiliyorsa, yalnýzca 4-5 veri tipi ile de dünyayý ayaða kaldýracak programlar da yazýlabilir.
+
+Listeleri temel olarak incelediðimize göre biraz da demetlerden söz edebiliriz.

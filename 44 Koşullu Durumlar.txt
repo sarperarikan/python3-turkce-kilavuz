@@ -1,0 +1,518 @@
+
+Koþullu Durumlar
+
+Artýk Python programlama dilinde belli bir noktaya geldik sayýlýr. Ama eðer farkettiyseniz, yine de elimizi kolumuzu baðlayan, istediðimiz þeyleri yapmamýza engel olan bir þeyler var. Ýþte bu bölümde, Python programlama dilinde hareket alanýmýzý bir hayli geniþletecek araçlarý tanýyacaðýz.
+
+Aslýnda sadece bu bölümde deðil, bu bölümü takip eden her bölümde, hareket alanýmýzý kýsýtlayan duvarlarý tek tek yýktýðýmýza þahit olacaksýnýz. Özellikle bu bölümde inceleyeceðimiz ‘koþullu durumlar’ konusu, tabir yerindeyse, Python’da boyut atlamamýzý saðlayacak.
+
+O halde hiç vakit kaybetmeden yola koyulalým...
+
+Þimdiye kadar öðrendiðimiz Python bilgilerini kullanarak þöyle bir program yazabileceðimizi biliyorsunuz:
+
+yaþ = 15
+
+print("""Programa hoþgeldiniz!
+
+Programýmýzý kullanabilmek için en az
+13 yaþýnda olmalýsýnýz.""")
+
+print("Yaþýnýz: ", yaþ)
+
+Burada yaptýðýmýz þey çok basit. Öncelikle, deðeri 15 olan, yaþ adlý bir deðiþken tanýmladýk. Daha sonra, programýmýzý çalýþtýran kullanýcýlar için bir hoþgeldin mesajý hazýrladýk. Son olarak da yaþ deðiþkeninin deðerini ekrana yazdýrdýk.
+
+Bu programýn özelliði tek sesli bir uygulama olmasýdýr. Yani bu programda kullanýcýyla herhangi bir etkileþim yok. Burada bütün deðerleri/deðiþkenleri programcý olarak kendimiz belirliyoruz. Bu programýn ne kadar yavan olduðunu herhalde söylemeye gerek yok.
+
+Ancak yine önceki derslerde öðrendiðimiz input() fonksiyonu yardýmýyla yukarýdaki programýn üzerindeki yavanlýðý bir nebze de olsa atabilir, bu programý rahatlýkla çok sesli bir hale getirebilir, yani kullanýcýyla etkileþim içine girebiliriz.
+
+Yukarýdaki tek sesli uygulamayý, input() fonksiyonunu kullanarak çok sesli bir hale nasýl getireceðimizi gayet iyi bildiðinize eminim:
+
+print("""Programa hoþgeldiniz!
+
+Programýmýzý kullanabilmek için en az
+13 yaþýnda olmalýsýnýz.""")
+
+print("Lütfen yaþýnýzý girin.\n")
+
+yaþ = input("Yaþýnýz: \t")
+
+print("Yaþýnýz: ", yaþ)
+
+Týpký bir önceki uygulamada olduðu gibi, burada da yaptýðýmýz þey çok basit. Ýlk örnekte yaþ deðiþkeninin deðerini kendimiz elle yazmýþtýk. Ýkinci örnekte ise bu yaþ deðiþkenini kullanýcýdan alýyoruz ve týpký ilk örnekte olduðu gibi, bu deðiþkenin deðerini ekrana yazdýrýyoruz.
+
+Bu arada, yukarýdaki uygulamada yer verdiðimiz \n ve \t adlý kaçýþ dizileri de artýk sizin için oldukça tanýdýk. \n kaçýþ dizisi yardýmýyla bir alt satýra geçtiðimizi, \t adlý kaçýþ dizisi yardýmýyla da bir sekmelik boþluk býraktýðýmýzý biliyorsunuz.
+
+Gördüðünüz gibi, þu ana kadar öðrendiklerimizle ancak kullanýcýdan gelen yaþ bilgisini ekrana yazdýrabiliyoruz. Öðrendiðimiz input() fonksiyonu bize kullanýcýdan bilgi alma imkaný saðlýyor. Ama kullanýcýdan gelen bu bilgiyi þimdilik ancak olduðu gibi kullanabiliyoruz. Yani mesela yukarýdaki örneði dikkate alarak konuþacak olursak, kullanýcýnýn yaþý eðer 13’ün üzerindeyse onu programa kabul edecek, yok eðer 13 yaþýn altýndaysa da programdan atacak bir mekanizma üretemiyoruz. Yapabildiðimiz tek þey, kullanýcýnýn girdiði veriyi ekrana yazdýrmak.
+
+Yukarýda verdiðimiz örneklerle nereye varmaya çalýþtýðýmýzý az çok tahmin etmiþsinizdir. Dikkat ederseniz yukarýda sözünü ettiðimiz þey koþullu bir durum. Yani aslýnda yapmak istediðimiz þey, kullanýcýnýn yaþýný denetleyip, onun programa kabul edilmesini 13 yaþýndan büyük olma koþuluna baðlamak.
+
+Ýsterseniz tam olarak neden bahsettiðimizi anlayabilmek için, birkaç vaka örneði verelim.
+
+Diyelim ki Google’ýn Gmail hizmeti aracýlýðýyla bir e.posta hesabý aldýnýz. Bu hesaba gireceðiniz zaman Gmail size bir kullanýcý adý ve parola sorar. Siz de kendinize ait kullanýcý adýný ve parolayý sayfadaki kutucuklara yazarsýnýz. Eðer yazdýðýnýz kullanýcý adý ve parola doðruysa hesabýnýza eriþebilirsiniz. Ama eðer kullanýcý adýnýz ve parolanýz doðru deðilse hesabýnýza eriþemezsiniz. Yani e.posta hesabýnýza eriþmeniz, kullanýcý adý ve parolayý doðru girme koþuluna baðlýdýr.
+
+Ya da þu vaka örneðini düþünelim: Diyelim ki Pardus’ta komut satýrý aracýlýðýyla güncelleme iþlemi yapacaksýnýz. sudo pisi up komutunu verdiðiniz zaman güncellemelerin listesi size bildirilecek, bu güncellemeleri yapmak isteyip istemediðiniz sorulacaktýr. Eðer evet cevabý verirseniz güncelleme iþlemi baþlar. Ama eðer hayýr cevabý verirseniz güncelleme iþlemi baþlamaz. Yani güncelleme iþleminin baþlamasý kullanýcýnýn evet cevabý vermesi koþuluna baðlýdýr.
+
+Ýþte bu bölümde biz bu tür koþullu durumlardan söz edeceðiz.
+
+
+Koþul Deyimleri
+
+Hiç kuþkusuz, koþula baðlý durumlar Python’daki en önemli konulardan biridir. Giriþ bölümünde bahsettiðimiz koþullu iþlemleri yapabilmek için ‘koþul deyimleri’ adý verilen birtakým araçlardan yararlanacaðýz. Gelin þimdi bu araçlarýn neler olduðunu görelim.
+
+
+if
+
+Python programlama dilinde koþullu durumlarý belirtmek için üç adet deyimden yararlanýyoruz:
+
+if 
+elif 
+else 
+Ýsterseniz önce if deyimi ile baþlayalým...
+
+Eðer daha önceden herhangi bir programlama dilini az da olsa kurcalama fýrsatýnýz olduysa, bir programlama dilinde if deyimlerinin ne iþe yaradýðýný az çok biliyorsunuzdur. Daha önceden hiç programcýlýk deneyiminiz olmamýþsa da ziyaný yok. Zira bu bölümde if deyimlerinin ne iþe yaradýðýný ve nerelerde kullanýldýðýný enine boyuna tartýþacaðýz.
+
+Ýngilizce bir kelime olan ‘if‘, Türkçede ‘eðer’ anlamýna gelir. Anlamýndan da çýkarabileceðimiz gibi, bu kelime bir koþul bildiriyor. Yani ‘eðer bir þey falanca ise...‘ ya da ‘eðer bir þey filanca ise...‘ gibi... Ýþte biz Python’da bir koþula baðlamak istediðimiz durumlarý if deyimi aracýlýðýyla göstereceðiz.
+
+Gelin isterseniz bu deyimi nasýl kullanacaðýmýza dair ufacýk bir örnek vererek iþe baþlayalým:
+
+Öncelikle elimizde þöyle bir deðiþken olsun:
+
+n = 255
+
+Yukarýda verdiðimiz deðiþkenin deðerinin bir karakter dizisi deðil, aksine bir sayý olduðunu görüyoruz. Þimdi bu deðiþkenin deðerini sorgulayalým:
+
+if n > 10:
+
+Burada sayýnýn 10’dan büyük olup olmadýðýna bakýyoruz.
+
+Burada gördüðümüz > iþaretinin ne demek olduðunu açýklamaya gerek yok sanýrým. Hepimizin bildiði ‘büyüktür’ iþareti Python’da da aynen bildiðimiz þekilde kullanýlýyor. Mesela ‘küçüktür’ demek isteseydik, < iþaretini kullanacaktýk. Ýsterseniz hemen þurada araya girip bu iþaretleri yeniden hatýrlayalým:
+
+
+Ýþleç Anlamý 
+> büyüktür 
+< küçüktür 
+>= büyük eþittir 
+<= küçük eþittir 
+== eþittir 
+!= eþit deðildir 
+
+Gördüðünüz gibi hiçbiri bize yabancý gelecek gibi deðil. Yalnýzca en sondaki ‘eþittir’ (==) ve ‘eþit deðildir’ (!=) iþaretleri biraz deðiþik gelmiþ olabilir. Burada ‘eþittir’ iþaretinin = olmadýðýna dikkat edin. Python’da = iþaretini deðer atama iþlemleri için kullanýyoruz. == iþaretini ise iki adet deðerin birbirine eþit olup olmadýðýný denetlemek için... Mesela:
+
+>>> a = 26
+
+Burada deðeri 26 olan a adlý bir deðiþken belirledik. Yani a deðiþkenine deðer olarak 26 sayýsýný atadýk. Ayrýca burada, deðer atama iþleminin ardýndan Enter tuþuna bastýktan sonra Python hiçbir þey yapmadan bir alt satýra geçti. Bir de þuna bakalým:
+
+>>> a == 26
+
+True
+
+Burada ise yaptýðýmýz þey a deðiþkeninin deðerinin 26 olup olmadýðýný sorgulamak a == 26 komutunu verdikten sonra Python bize True diye bir çýktý verdi. Bu çýktýnýn anlamýný biraz sonra öðreneceðiz. Ama þimdi isterseniz konuyu daha fazla daðýtmayalým. Biz þimdilik sadece = ve == iþaretlerinin birbirinden tamamen farklý anlamlara geldiðini bilelim yeter.
+
+Ne diyorduk?
+
+if n > 10:
+
+Bu ifadeyle Python’a þöyle bir þey demiþ oluyoruz:
+
+Eðer n sayýsýnýn deðeri 10’dan büyükse...
+
+Burada kullandýðýmýz iþaretlere dikkat edin. En sonda bir adet : iþaretinin olduðunu gözden kaçýrmýyoruz. Bu tür iþaretler Python için çok önemlidir. Bunlarý yazmayý unutursak Python gözümüzün yaþýna bakmayacaktýr.
+
+Dedik ki, if n > 10: ifadesi, ‘eðer n deðiþkeninin deðeri 10’dan büyükse...’ anlamýna gelir. Bu ifadenin eksik olduðu apaçýk ortada. Yani belli ki bu cümlenin bir de devamý olmasý gerekiyor. O halde biz de devamýný getirelim:
+
+if n > 10:
+print("sayý 10'dan büyüktür!")
+
+Burada çok önemli bir durumla karþý karþýyayýz. Dikkat ederseniz, ikinci satýrý ilk satýra göre girintili yazdýk. Elbette bunu þirinlik olsun diye yapmadýk. Python programlama dilinde girintiler çok büyük önem taþýr. Hatta ne kadarlýk bir girinti verdiðiniz bile önemlidir. Eðer Python kodlarýna duyarlý bir metin düzenleyici kullanýyorsanýz, kullandýðýnýz metin düzenleyici çoðu durumda sizin yerinize uygun bir þekilde girintilemeyi yapacaktýr. Mesela IDLE adlý geliþtirme ortamýný kullananlar, ilk satýrdaki : iþaretini koyup Enter tuþuna bastýklarýnda otomatik olarak girinti verildiðini farkedeceklerdir. Eðer kullandýðýnýz metin düzenleyici, satýrlarý otomatik olarak girintilemiyorsa sizin bu girintileme iþlemini elle yapmanýz gerekecektir. Yalnýz elle girintilerken, ne kadar girinti vereceðimize dikkat etmeliyiz. Genel kural olarak 4 boþlukluk bir girintileme uygun olacaktýr. Girintileme iþlemini klavyedeki sekme (Tab) tuþuna basarak da yapabilirsiniz. Ama ayný program içinde sekmelerle boþluklarý karýþtýrmayýn. Yani eðer girintileme iþlemini klavyedeki boþluk (Space) tuþuna basarak yapýyorsanýz, program boyunca ayný þekilde yapýn. (Ben size girinti verirken Tab tuþu yerine Space tuþunu kullanmanýzý tavsiye ederim). Kýsaca söylemek gerekirse; Python’da girintileme ve girintilemede tutarlýlýk çok önemlidir. Özellikle büyük programlarda, girintilemeler açýsýndan tutarsýzlýk gösterilmesi programýn çalýþmamasýna sebep olabilir.
+
+Not
+
+Python’da girintileme konusuyla ilgili daha ayrýntýlý bilgi için: http://www.istihza.com/blog/python-ve-metin-duzenleyiciler.html/
+
+Eðer yukarýdaki if bloðunu bir metin düzenleyici içine deðil de doðrudan etkileþimli kabuða yazmýþsanýz bazý þeyler dikkatinizi çekmiþ olmalý. Etkileþimli kabukta if sayý > 10: satýrýný yazýp Enter tuþuna bastýðýnýzda þöyle bir görüntüyle karþýlaþmýþ olmalýsýnýz:
+
+>>> if n > 10:
+...
+
+Dikkat ederseniz, >>> iþareti, ... iþaretine dönüþtü. Eðer bu noktada herhangi bir þey yazmadan Enter tuþuna basacak olursanýz Python size þöyle bir hata mesajý verecektir:
+
+File "<stdin>", line 2
+^
+IndentationError: expected an indented block
+
+Hata mesajýnda da söylendiði gibi, Python bizden girintilenmiþ bir blok beklerken, biz onun bu beklentisini karþýlamamýþýz. Dolayýsýyla bize yukarýdaki hata mesajýný göstermiþ. ... iþaretini gördükten sonra yapmamýz gereken þey, dört kez boþluk (Space) tuþuna basarak girinti oluþturmak ve if bloðunun devamýný yazmak olmalýydý. Yani þöyle:
+
+>>> if n > 10:
+... print("sayý 10'dan büyüktür!")
+...
+
+Gördüðünüz gibi, print() fonksiyonunu yazýp Enter tuþuna bastýktan sonra yine ... iþaretini gördük. Python burada bizden yeni bir satýr daha bekliyor. Ama bizim yazacak baþka bir kodumuz olmadýðý için tekrar Enter tuþuna basýyoruz ve nihai olarak þöyle bir görüntü elde ediyoruz:
+
+>>> if n > 10:
+... print("sayý 10'dan büyüktür!")
+...
+sayý 10'dan büyüktür!
+>>>
+
+Demek ki 250 sayýsý 10‘dan büyükmüþ! Ne büyük bir buluþ! Merak etmeyin, daha çok þey öðrendikçe daha mantýklý programlar yazacaðýz. Burada amacýmýz iþin temelini kavramak. Bunu da en iyi, (çok mantýklý olmasa bile) basit programlar yazarak yapabiliriz.
+
+Þimdi metin düzenleyicimizi açarak daha mantýklý þeyler yazmaya çalýþalým. Zira yukarýdaki örnekte deðiþkeni kendimiz belirlediðimiz için, bu deðiþkenin deðerini if deyimleri yardýmýyla denetlemek pek akla yatkýn görünmüyor. Ne de olsa deðiþkenin deðerinin ne olduðunu biliyoruz. Dolayýsýyla bu deðiþkenin 10 sayýsýndan büyük olduðunu da biliyoruz! Bunu if deyimiyle kontrol etmek çok gerekli deðil. Ama þimdi daha makul bir iþ yapacaðýz. Deðiþkeni biz belirlemek yerine kullanýcýya belirleteceðiz:
+
+sayý = int(input("Bir sayý giriniz: "))
+
+if sayý > 10:
+print("Girdiðiniz sayý 10'dan büyüktür!")
+
+if sayý < 10:
+print("Girdiðiniz sayý 10'dan küçüktür!")
+
+if sayý == 10:
+print("Girdiðiniz sayý 10'dur!")
+
+Gördüðünüz gibi, art arda üç adet if bloðu kullandýk. Bu kodlara göre, eðer kullanýcýnýn girdiði sayý 10‘dan büyükse, ilk if bloðu iþletilecek; eðer sayý 10‘dan küçükse ikinci if bloðu iþletilecek; eðer sayý 10’a eþit ise üçüncü if bloðu iþletilecektir. Peki ya kullanýcý muziplik yapýp sayý yerine harf yazarsa ne olacak? Böyle bir ihtimal için programýmýza herhangi bir denetleyici yerleþtirmedik. Dolayýsýyla eðer kullanýcý sayý yerine harf girerse programýmýz hata verecek, yani çökecektir. Bu tür durumlara karþý nasýl önlem alacaðýmýzý ilerleyen derslerimizde göreceðiz. Biz þimdilik bildiðimiz yolda yürüyelim.
+
+Yukarýdaki örnekte input() ile gelen karakter dizisini, int() fonksiyonu yardýmýyla bir sayýya dönüþtürdüðümüze dikkat edin. Kullanýcýdan gelen veriyi büyüklük-küçüklük ölçütüne göre inceleyeceðimiz için, gelen veriyi bir sayýya dönüþtürmemiz gerekiyor. Bunu da int() fonksiyonu ile yapabileceðimizi biliyorsunuz.
+
+Elbette yukarýdaki dönüþtürme iþlemini þöyle de yapabilirdik:
+
+sayý = input("Bir sayý giriniz: ")
+sayý = int(sayý)
+
+Burada önce input() fonksiyonuyla veriyi aldýk, daha sonra bu veriyi ayrý bir yerde sayýya dönüþtürüp tekrar sayý adlý deðiþkene atadýk.
+
+if deyimlerini kullanýcý adý veya parola denetlerken de kullanabiliriz. Mesela þöyle bir program taslaðý yazabiliriz:
+
+print("""
+Dünyanýn en geliþmiþ e.posta hizmetine
+hoþgeldiniz. Yalnýz hizmetimizden
+yararlanmak için önce sisteme giriþ
+yapmalýsýnýz.
+""")
+
+parola = input("Parola: ")
+
+if parola == "12345678":
+print("Sisteme Hoþgeldiniz!")
+
+Gördüðünüz gibi, programýn baþýnda üç týrnak iþaretlerinden yararlanarak uzun bir metni kullanýcýya gösterdik. Bu bölümü, kendiniz göze hoþ gelecek bir þekilde süsleyebilirsiniz de. Eðer kullanýcý, kendisine parola sorulduðunda cevap olarak “12345678” yazarsa kullanýcýyý sisteme alýyoruz.
+
+Yukarýdaki örnekte, kullanýcýnýn girdiði parola “12345678” ise kendisine “Sisteme Hoþgeldiniz!” mesajýný gösteriyoruz. Mantýk olarak bunun tersini yapmak da mümkündür. Yani:
+
+if parola != "12345678":
+print("Ne yazýk ki yanlýþ parola girdiniz!")
+
+Burada ise bir önceki örneðin mantýðýný ters çevirdik. Önceki örnekte parola deðiþkeni “12345678” adlý karakter dizisine eþitse (if parola == "12345678") bir iþlem yapýyorduk. Yukarýdaki örnekte ise parola deðiþkeni “12345678” adlý karakter dizisine eþit deðilse (if parola != "12345678") bir iþlem yapýyoruz.
+
+Bu iki örneðin de aslýnda ayný kapýya çýktýðýný görüyorsunuz. Tek deðiþiklik, kullanýcýya gösterilen mesajlardadýr.
+
+Böylece Python’daki koþullu durumlar üzerindeki incelememizin ilk ve en önemli aþamasýný geride býrakmýþ olduk. Dikkat ettiyseniz if deyimi sayesinde programlarýmýza karar vermeyi öðrettik. Bu deyim yardýmýyla, kullanýcýdan aldýðýmýz herhangi bir verinin niteliði üzerinde kapsamlý bir karar verme iþlemi yürütebiliyoruz. Yani artýk programlarýmýz kullanýcýdan alýnan veriyi olduðu gibi kabul etmekle yetinmiyor. Kullanýcýnýn girdiði verinin ne olduðuna baðlý olarak programlarýmýzýn farklý iþlemler yapmasýný da saðlayabiliyoruz.
+
+Daha önce de söylediðimiz gibi, if deyimi dýþýnda Python’da koþullu durumlarý ifade etmek için kullandýðýmýz, elif ve else adlý iki deyim daha vardýr. Bunlar if ile birlikte kullanýlýrlar. Gelin isterseniz bu iki deyimden, adý elif olana bakalým.
+
+
+elif
+
+Python’da, if deyimleriyle birlikte kullanýlan ve yine koþul belirten bir baþka deyim de elif deyimidir. Buna þöyle bir örnek verebiliriz:
+
+yaþ = int(input("Yaþýnýz: "))
+
+if yaþ == 18:
+print("18 iyidir!")
+
+elif yaþ < 0:
+print("Yok caným, daha neler!...")
+
+elif yaþ < 18:
+print("Genç bir kardeþimizsin!")
+
+elif yaþ > 18:
+print("Eh, artýk yaþ yavaþ yavaþ kemale eriyor!")
+
+Yukarýdaki örneði þöyle yazmayý da deneyebilirsiniz:
+
+yaþ = int(input("Yaþýnýz: "))
+
+if yaþ == 18:
+print("18 iyidir!")
+
+if yaþ < 0:
+print("Yok caným, daha neler!...")
+
+if yaþ < 18:
+print("Genç bir kardeþimizsin!")
+
+if yaþ > 18:
+print("Eh, artýk yaþ yavaþ yavaþ kemale eriyor!")
+
+Bu iki programýn da ayný iþlevi gördüðünü düþünebilirsiniz. Ancak ilk bakýþta pek belli olmasa da, aslýnda yukarýdaki iki program birbirinden farklý davranacaktýr. Örneðin ikinci programda eðer kullanýcý eksi deðerli bir sayý girerse hem if yaþ < 0 bloðu, hem de if yaþ < 18 bloðu çalýþacaktýr. Ýsterseniz yukarýdaki programý çalýþtýrýp, cevap olarak eksi deðerli bir sayý verin. Ne demek istediðimiz gayet net anlaþýlacaktýr.
+
+Bu durum if ile elif arasýndaki çok önemli bir farktan kaynaklanýr. Buna göre if bize olasý bütün sonuçlarý listeler, elif ise sadece doðru olan ilk sonucu verir. Bu soyut tanýmlamayý biraz daha somutlaþtýralým:
+
+a = int(input("Bir sayý giriniz: "))
+
+if a < 100:
+print("verdiðiniz sayý 100'den küçüktür.")
+
+if a < 50:
+print("verdiðiniz sayý 50'den küçüktür.")
+
+if a == 100:
+print("verdiðiniz sayý 100'dür.")
+
+if a > 100:
+print("verdiðiniz sayý 100'den büyüktür.")
+
+if a > 150:
+print("verdiðiniz sayý 150'den büyüktür.")
+
+Yukarýdaki kodlarý çalýþtýrdýðýmýzda, doðru olan bütün sonuçlar listelenecektir. Yani mesela kullanýcý 40 sayýsýný girmiþse, ekrana verilecek çýktý þöyle olacaktýr:
+
+verdiðiniz sayý 100'den küçüktür.
+verdiðiniz sayý 50'den küçüktür.
+
+Burada 40 sayýsý hem 100‘den, hem de 50‘den küçük olduðu için iki sonuç da çýktý olarak verilecektir. Ama eðer yukarýdaki kodlarý þöyle yazarsak:
+
+a = int(input("Bir sayý giriniz: "))
+
+if a < 100:
+print("verdiðiniz sayý 100'den küçüktür.")
+
+elif a < 50:
+print("verdiðiniz sayý 50'den küçüktür.")
+
+elif a == 100:
+print("verdiðiniz sayý 100'dür.")
+
+elif a > 150:
+print("verdiðiniz sayý 150'den büyüktür.")
+
+elif a > 100:
+print("verdiðiniz sayý 100'den büyüktür.")
+
+Kullanýcýnýn 40 sayýsýný girdiðini varsaydýðýmýzda, bu defa programýmýmýz yalnýzca þu çýktýyý verecektir:
+
+verdiðiniz sayý 100'den küçüktür.
+
+Gördüðünüz gibi, elif deyimlerini kullandýðýmýz zaman, ekrana yalnýzca doðru olan ilk sonuç veriliyor. Yukarýda 40 sayýsý hem 100‘den hem de 50‘den küçük olduðu halde, Python bu sayýnýn 100‘den küçük olduðunu görür görmez sonucu ekrana basýp, öteki koþul bloklarýný incelemeyi býrakýyor. if deyimlerini arka arkaya sýraladýðýmýzda ise, Python bütün olasýlýklarý tek tek deðerlendirip, geçerli olan bütün sonuçlarý ekrana döküyor.
+
+Bir sonraki bölümde else deyimini öðrendiðimiz zaman, elif‘in tam olarak ne iþe yaradýðýný çok daha iyi anlamanýzý saðlayacak bir örnek vereceðiz.
+
+Not
+
+Þimdiye kadar verdiðimiz örneklerden de rahatlýkla anlayabileceðiniz gibi, ilk koþul bloðunda asla elif deyimi kullanýlamaz. Bu deyimin kullanýlabilmesi için kendisinden önce en az bir adet if bloðu olmalýdýr. Yani Python’da koþullu durumlarý ifade ederken ilk koþul bloðumuz her zaman if deyimi ile baþlamalýdýr.
+
+elif‘i de incelediðimize göre, koþul bildiren deyimlerin sonuncusuna göz atabiliriz: else
+
+
+else
+
+Þimdiye kadar Python’da koþul bildiren iki deyimi öðrendik. Bunlar if ve elif idi. Bu bölümde ise koþul deyimlerinin sonuncusu olan else deyimini göreceðiz. Öðrendiðimiz þeyleri þöyle bir gözden geçirecek olursak, temel olarak þöyle bir durumla karþý karþýya olduðumuzu görürüz:
+
+if falanca:
+bu iþlemi yap
+
+if filanca:
+þu iþlemi yap
+
+Veya þöyle bir durum:
+
+if falanca:
+bu iþlemi yap
+
+elif filanca:
+þu iþlemi yap
+
+if ile elif arasýndaki farký biliyoruz. Eðer if deyimlerini art arda sýralayacak olursak, Python doðru olan bütün sonuçlarý listeleyecektir. Ama eðer if deyiminden sonra elif deyimini kullanýrsak, Python doðru olan ilk sonucu listelemekle yetinecektir.
+
+Bu bölümde göreceðimiz else deyimi, yukarýdaki tabloya bambaþka bir boyut kazandýrýyor. Dikkat ederseniz þimdiye kadar öðrendiðimiz deyimleri kullanabilmek için ilgili bütün durumlarý tanýmlamamýz gerekiyordu. Yani:
+
+eðer böyle bir durum varsa:
+bunu yap
+
+eðer þöyle bir durum varsa:
+þunu yap
+
+eðer filancaysa:
+þöyle git
+
+eðer falancaysa:
+böyle gel
+
+gibi...
+
+Ancak her durum için bir if bloðu yazmak bir süre sonra yorucu ve sýkýcý olacaktýr. Ýþte bu noktada devreye else deyimi girecek. else‘in anlamý kabaca þudur:
+
+Eðer yukarýdaki koþullarýn hiçbiri gerçekleþmezse...
+
+Gelin isterseniz bununla ilgili þöyle bir örnek verelim:
+
+soru = input("Bir meyve adý söyleyin bana:")
+
+if soru == "elma":
+print("evet, elma bir meyvedir...")
+
+elif soru == "karpuz":
+print("evet, karpuz bir meyvedir...")
+
+elif soru == "armut":
+print("evet, armut bir meyvedir...")
+
+else:
+print(soru, "gerçekten bir meyve midir?")
+
+Eðer kullanýcý soruya ‘elma’, ‘karpuz’ veya ‘armut’ cevabý verirse, evet, ... bir meyvedir çýktýsý verilecektir. Ama eðer kullanýcý bu üçü dýþýnda bir cevap verirse, ... gerçekten bir meyve midir? çýktýsýný görürüz. Burada else deyimi, programýmýza þu anlamý katýyor:
+
+Eðer kullanýcý yukarýda belirlenen meyve adlarýndan hiç birini girmez, bunlarýn yerine bambaþka bir þey yazarsa, o zaman else bloðu içinde belirtilen iþlemi gerçekleþtir.
+
+Dikkat ederseniz yukarýdaki kodlarda if deyimlerini art arda sýralamak yerine ilk if‘ten sonra elif ile devam ettik. Peki þöyle bir þey yazarsak ne olur?
+
+soru = input("Bir meyve adý söyleyin bana:")
+
+if soru == "elma":
+print("evet, elma bir meyvedir...")
+
+if soru == "karpuz":
+print("evet, karpuz bir meyvedir...")
+
+if soru == "armut":
+print("evet, armut bir meyvedir...")
+
+else:
+print(soru, "gerçekten bir meyve midir?")
+
+Bu kodlar beklediðiniz sonucu vermeyecektir. Ýsterseniz yukarýdaki kodlarý çalýþtýrýp ne demek istediðimizi daha iyi anlayabilirsiniz. Eðer yukarýda olduðu gibi if deyimlerini art arda sýralar ve son olarak da bir else bloðu tanýmlarsak, ekrana ilk bakýþta anlamsýz gibi görünen bir çýktý verilecektir:
+
+evet, elma bir meyvedir...
+elma gerçekten bir meyve midir?
+
+Burada olan þey þu:
+
+Soruya ‘elma’ cevabýný verdiðimizi düþünelim. Bu durumda, Python ilk olarak ilk if bloðunu deðerlendirecek ve soruya verdiðimiz cevap ‘elma’ olduðu için evet, elma bir meyvedir... çýktýsýný verecektir.
+
+if ile elif arasýndaki farký anlatýrken, hatýrlarsanýz art arda gelen if bloklarýnda Python’ýn olasý bütün sonuçlarý deðerlendireceðini söylemiþtik. Ýþte burada da böyle bir durum söz konusu. Gördüðünüz gibi, ilk if bloðundan sonra yine bir if bloðu geliyor. Bu nedenle Python olasý bütün sonuçlarý deðerlendirebilmek için bloklarý okumaya devam edecek ve sorunun cevabý ‘karpuz’ olmadýðý için ikinci if bloðunu atlayacaktýr.
+
+Sonraki blok yine bir if bloðu olduðu için Python kodlarý okumaya devam ediyor. Ancak sorunun cevabý ‘armut’ da olmadýðý için, Python sonraki if bloðunu da geçiyor ve böylece else bloðuna ulaþýyor.
+
+Yukarýda verdiðimiz örnekteki gibi art arda if deyimlerinin sýralanýp en sona else deyiminin yerleþtirildiði durumlarda else deyimi sadece bir önceki if deyimini dikkate alarak iþlem yapar. Yani yukarýdaki örnekte kullanýcýnýn verdiði cevap ‘armut’ olmadýðý için else deyiminin olduðu blok çalýþmaya baþlar. Yukarýdaki örneðe ‘armut’ cevabýný verirseniz ne demek istediðimi biraz daha iyi anlayabilirsiniz. ‘armut’ cevabý verilmesi durumunda sadece if soru == "armut" ifadesinin olduðu blok çalýþýr, else bloðu ise çalýþmaz. Çünkü dediðim gibi, eðer else bloðundan önce art arda gelen if bloklarý varsa, else deyimi yalnýzca kendisinden önceki son if bloðunu dikkate alýr ve sanki yukarýdaki örnek þöyleymiþ gibi davranýr:
+
+if soru == "armut":
+print("evet, armut bir meyvedir...")
+
+else:
+print(soru, "gerçekten bir meyve midir?")
+
+Bu tür durumlarda else deyimi bir önceki if bloðundan önce gelen bütün if bloklarýný görmezden gelir ve böylece þu anlamsýz görünen çýktý elde edilir:
+
+evet, elma bir meyvedir...
+elma gerçekten bir meyve midir?
+
+Sözün özü, kullanýcýnýn cevabý ‘elma’ olduðu için, yukarýdaki çýktýda yer alan ilk cümle ilk if bloðunun çalýþmasý sonucu ekrana basýlýyor. Ýkinci cümle ise else bloðundan bir önceki if bloðu kullanýcýnýn cevabýyla uyuþmadýðý için ekrana basýlýyor.
+
+Yalnýz bu dediðimizden, else ifadesi if ile birlikte kullanýlmaz, anlamý çýkarýlmamalý. Mesela þöyle bir örnek yapýlabilir:
+
+soru = input("Programdan çýkmak istediðinize emin misiniz? \
+Eminseniz 'e' harfine basýn : ")
+
+if soru == "e":
+print("Güle güle!")
+
+else:
+print("Peki, biraz daha sohbet edelim!")
+
+Burada eðer kullanýcýnýn cevabý ‘e’ ise if bloðu iþletilecek, eðer cevap ‘e’ dýþýnda herhangi bir þey ise else bloðu çalýþacaktýr. Gayet mantýklý bir süreç. Ama eðer yukarýdaki örneðe bir if bloðu daha eklerseniz iþler beklediðiniz gibi gitmez:
+
+soru = input("Programdan çýkmak istediðinize emin misiniz? \
+Eminseniz 'e' harfine basýn : ")
+
+if soru == "e":
+print("Güle güle!")
+
+if soru == "b":
+print("Kararsýz kaldým þimdi!")
+
+else:
+print("Peki, biraz daha sohbet edelim!")
+
+Bu soruya ‘e’ cevabý verdiðimizi düþünelim. Bu cevap ilk if bloðuyla uyuþuyor ve böylece ekrana Güle güle! çýktýsý veriliyor. Ýlk if bloðundan sonra tekrar bir if bloðu daha geldiði için Python bütün olasýlýklarý deðerlendirmek amacýyla bloklarý okumaya devam ediyor ve cevap ‘b’ olmadýðý için ikinci if bloðunu atlýyor ve böylece else bloðuna ulaþýyor. Bir önceki örnekte de söylediðimiz gibi, else bloðu art arda gelen if bloklarý gördüðünde sadece bir önceki if bloðunu dikkate aldýðý ve kullanýcýnýn cevabý da ‘b’ olmadýðý için ekrana Peki, biraz daha sohbet edelim! çýktýsýný veriyor ve ilk bakýþta tuhaf görünen þöyle bir çýktý üretiyor:
+
+Güle güle!
+Peki, biraz daha sohbet edelim!
+
+Dolayýsýyla, eðer programýnýzda bir else bloðuna yer verecekseniz, ondan önce gelen koþullu durumlarýn ilkini if ile sonrakileri ise elif ile baðlayýn. Yani:
+
+if koþul_1:
+sonuç_1
+
+elif koþul_2:
+sonuç_2
+
+elif koþul_3:
+sonuç_3
+
+else:
+sonuç_4
+
+Ama eðer else bloðundan önce sadece tek bir koþul bloðu yer alacaksa bunu if ile baðlayýn. Yani:
+
+if koþul_1:
+sonuç_1
+
+else:
+sonuç_2
+
+Programlarýmýzýn doðru çalýþmasý ve istediðimiz sonucu verebilmesi için bu tür ayrýntýlara olabildiðince dikkat etmemiz gerekiyor. Neticede koþullu durumlar mantýkla ilgilidir. Dolayýsýyla koþullu durumlarla muhatap olurken mantýðýnýzý hiçbir zaman devre dýþý býrakmamalýsýnýz.
+
+Bir önceki bölümde elif deyiminin tam olarak ne iþe yaradýðýný anlamamýzý saðlayacak bir örnek vereceðimizi söylemiþtik. Þimdi bu örneðe bakalým:
+
+boy = int(input("boyunuz kaç cm?"))
+
+if boy < 170:
+print("boyunuz kýsa")
+
+elif boy < 180:
+print("boyunuz normal")
+
+else:
+print("boyunuz uzun")
+
+Yukarýda yedi satýrla hallettiðimiz iþi sadece if deyimleriyle yapmaya çalýþýrsanýz bunun ne kadar zor olduðunu göreceksiniz. Diyelim ki kullanýcý ‘165’ cevabýný verdi. Python bu 165 sayýsýnýn 170‘ten küçük olduðunu görünce boyunuz kýsa cevabýný verecek, öteki satýrlarý deðerlendirmeyecektir. 165 sayýsý, elif ile gösterdiðimiz koþullu duruma da uygun olduðu halde (165 < 180), koþul ilk blokta karþýlandýðý için ikinci blok deðerlendirmeye alýnmayacaktýr.
+
+Kullanýcýnýn ‘175’ cevabýný verdiðini varsayalým: Python 175 sayýsýný görünce önce ilk koþula bakacak, verilen 175 sayýsýnýn ilk koþulu karþýlamadýðýný görecektir (175 > 170). Bunun üzerine Python kodlarý incelemeye devam edecek ve elif bloðunu deðerlendirmeye alacaktýr. 175 sayýsýnýn 180‘den küçük olduðunu görünce de çýktý olarak boyunuz normal cevabýný verecektir.
+
+Peki ya kullanýcý ‘190’ cevabýný verirse ne olacak? Python yine önce ilk if bloðuna bakacak ve 190 cevabýnýn bu bloða uymadýðýný görecektir. Dolayýsýyla ilk bloðu býrakýp ikinci bloða bakacaktýr. 190 cevabýnýn bu bloða da uymadýðýný görünce, bir sonraki bloðu deðerlendirmeye alacaktýr. Bir sonraki blokta ise else deyimimiz var. Bu bölümde öðrendiðimiz gibi, else deyimi, ‘eðer kullanýcýnýn cevabý yukarýdaki koþullarýn hiçbirine uymazsa bu bloðu çalýþtýr,’ anlamýna geliyor. Kullanýcýnýn girdiði 190 cevabý ne birinci ne de ikinci bloktaki koþula uyduðu için, normal bir þekilde else bloðu iþletilecek, dolayýsýyla da ekrana boyunuz uzun çýktýsý verilecektir.
+
+Böylece Python’da if, elif ve else deyimlerini incelemiþ olduk. Ancak tabii ki bu deyimlerle iþimiz henüz bitmedi. Elimizdeki bilgiler þimdilik bu deyimleri ancak bu kadar incelememize yetiyor, ama ilerleyen sayfalarda bazý baþka araçlarý da bilgi daðarcýðýmýza kattýktan sonra bu deyimlerin daha farklý yönlerini öðrenme imkanýna kavuþacaðýz.
+
+
+Örnek Uygulama
+
+Önceki derslerimizde len() fonksiyonunu anlatýrken þöyle bir program tasarýsýndan bahsetmiþtik hatýrlarsanýz:
+
+Diyelim ki sisteme kayýt için kullanýcý adý ve parola belirlenmesini isteyen bir program yazýyorsunuz. Yazacaðýnýz bu programda, belirlenebilecek kullanýcý adý ve parolanýn toplam uzunluðu 40 karakteri geçmeyecek.
+
+O zaman henüz koþullu durumlarý öðrenmemiþ olduðumuz için, yukarýda bahsettiðimiz programýn ancak þu kadarlýk kýsmýný yazabilmiþtik:
+
+kullanýcý_adý = input("Kullanýcý adýnýz: ")
+parola = input("Parolanýz       : ")
+
+toplam_uzunluk = len(kullanýcý_adý) + len(parola)
+
+Burada yapabildiðimiz tek þey, kullanýcýdan kullanýcý adý ve parola bilgilerini alýp, bu bilgilerin karakter uzunluðunu ölçebilmekti. Ama artýk koþullu durumlarý öðrendiðimize göre bu programý eksiksiz olarak yazabiliriz. Þu kodlarý dikkatlice inceleyin:
+
+kullanýcý_adý = input("Kullanýcý adýnýz: ")
+parola = input("Parolanýz       : ")
+
+toplam_uzunluk = len(kullanýcý_adý) + len(parola)
+
+mesaj = "Kullanýcý adý ve parolanýz toplam {} karakterden oluþuyor!"
+
+print(mesaj.format(toplam_uzunluk))
+
+if toplam_uzunluk > 40:
+print("Kullanýcý adýnýz ile parolanýzýn ",
+"toplam uzunluðu 40 karakteri geçmemeli!")
+else:
+print("Sisteme hoþgeldiniz!")
+
+Burada öncelikle kullanýcýdan kullanýcý adý ve parola bilgilerini alýyoruz. Daha sonra da kullanýcýdan gelen bu bilgilerin toplam karakter uzunluðunu hesaplýyoruz. Bunun için len() fonksiyonundan yararlanmamýz gerektiðini hatýrlýyor olmalýsýnýz.
+
+Eðer toplam uzunluk 40 karakterden fazla ise, if bloðunda verilen mesajý gösteriyoruz. Bunun dýþýndaki bütün durumlarda ise else bloðunu devreye sokuyoruz.

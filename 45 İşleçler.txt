@@ -1,0 +1,1089 @@
+
+Ýþleçler
+
+Bu bölümde, aslýnda pek de yabancýsý olmadýðýmýz ve hatta önceki derslerimizde üstünkörü de olsa deðindiðimiz bir konuyu çok daha ayrýntýlý bir þekilde ele alacaðýz. Burada anlatacaðýmýz konu size yer yer sýkýcý gelebilir. Ancak bu konuyu hakkýyla öðrenmenizin, programcýlýk maceranýz açýsýndan hayati önemde olduðunu rahatlýkla söyleyebilirim.
+
+Gelelim konumuza...
+
+Bu bölümün konusu iþleçler. Peki nedir bu ‘iþleç’ denen þey?
+
+Ýngilizce’de operator adý verilen iþleçler, saðýnda ve solunda bulunan deðerler arasýnda bir iliþki kuran iþaretlerdir. Bir iþlecin saðýnda ve solunda bulunan deðerlere ise iþlenen (operand) adý veriyoruz.
+
+Not
+
+Türkçede iþleç yerine operatör, iþlenen yerine de operant dendiðine tanýk olabilirsiniz.
+
+Biz bu bölümde iþleçleri altý baþlýk altýnda inceleyeceðiz:
+
+
+Aritmetik Ýþleçler 
+Karþýlaþtýrma Ýþleçleri 
+Bool Ýþleçleri 
+Deðer Atama Ýþleçleri 
+Aitlik Ýþleçleri 
+Kimlik Ýþleçleri 
+
+Gördüðünüz gibi, iþlememiz gereken konu çok, gitmemiz gereken yol uzun. O halde hiç vakit kaybetmeden, aritmetik iþleçlerle yolculuðumuza baþlayalým.
+
+
+Aritmetik Ýþleçler
+
+Dedik ki, saðýnda ve solunda bulunan deðerler arasýnda bir iliþki kuran iþaretlere iþleç (operator) adý verilir. Önceki derslerimizde temel iþleçlerin bazýlarýný öðrenmiþtik. Ýsterseniz bunlarý þöyle bir hatýrlayalým:
+
+
++ toplama 
+- çýkarma 
+* çarpma 
+/ bölme 
+** kuvvet 
+
+Bu iþleçlere aritmetik iþleçler adý verilir. Aritmetik iþleçler; matematikte kullanýlan ve sayýlarla aritmetik iþlemler yapmamýzý saðlayan yardýmcý araçlardýr.
+
+Dilerseniz bu tanýmý bir örnekle somutlaþtýralým:
+
+>>> 45 + 33
+
+78
+
+Burada 45 ve 33 deðerlerine iþlenen (operand) adý verilir. Bu iki deðer arasýnda yer alan + iþareti ise bir iþleçtir (operator). Dikkat ederseniz + iþleci 45 ve 33 adlý iþlenenler arasýnda bir toplama iliþkisi kuruyor.
+
+Bir örnek daha verelim:
+
+>>> 23 * 46
+
+1058
+
+Burada da 23 ve 46 deðerleri birer iþlenendir. Bu iki deðer arasýnda yer alan * iþareti ise, iþlenenler arasýnda bir çarpma iliþkisi kuran bir iþleçtir.
+
+Ancak bir noktaya özellikle dikkatinizi çekmek istiyorum. Daha önceki derslerimizde de deðindiðimiz gibi, + ve * iþleçleri Python’da birden fazla anlama gelir. Örneðin yukarýdaki örnekte + iþleci, iþlenenler arasýnda bir toplama iliþkisi kuruyor. Ama aþaðýdaki durum biraz farklýdýr:
+
+>>> "istihza" + ".com"
+
+'istihza.com'
+
+Burada + iþleci iþlenenler (“istihza” ve ”.com”) arasýnda bir birleþtirme iliþkisi kuruyor.
+
+Týpký + iþlecinde olduðu gibi, * iþleci de Python’da birden fazla anlama gelir. Bu iþlecin, çarpma iliþkisi kurma iþlevi dýþýnda tekrar etme iliþkisi kurma iþlevi de vardýr. Yani:
+
+>>> "hýzlý " * 2
+
+'hýzlý hýzlý '
+
+...veya:
+
+>>> "-" * 30
+
+'------------------------------'
+
+Burada * iþlecinin, sayýlar arasýnda çarpma iþlemi yapmak dýþýnda bir görev üstlendiðini görüyoruz.
+
+Python’da bu tür farklar, yazacaðýnýz programýn saðlýklý çalýþabilmesi açýsýndan büyük önem taþýr. O yüzden bu tür farklara karþý her zaman uyanýk olmamýz gerekiyor.
+
++ ve * iþleçlerinin aksine / ve - iþleçleri ise iþlenenler arasýnda sadece bölme ve çýkarma iliþkisi kurar. Bu iþleçler tek iþlevlidir:
+
+>>> 25 / 4
+
+6.25
+
+>>> 10 - 5
+
+5
+
+Önceki derslerde gördüðümüz ve yukarýda da tekrar ettiðimiz dört adet temel aritmetik iþlece þu iki aritmetik iþleci de ekleyelim:
+
+
+% modülüs 
+// taban bölme 
+
+Ýlk önce modülüsün ne olduðunu ve ne iþe yaradýðýný anlamaya çalýþalým.
+
+Þu bölme iþlemine bir bakýn:
+
+Burada 02 sayýsý bölme iþleminin kalanýdýr. Ýþte modülüs denen iþleç de bölme iþleminden kalan bu deðeri gösterir. Yani:
+
+>>> 30 % 4
+
+2
+
+Gördüðünüz gibi modülüs iþleci (%) gerçekten de bölme iþleminden kalan sayýyý gösteriyor... Peki bu bilgi ne iþimize yarar?
+
+Mesela bu bilgiyi kullanarak bir sayýnýn tek mi yoksa çift mi olduðunu tespit edebiliriz:
+
+sayý = int(input("Bir sayý girin: "))
+
+if sayý % 2 == 0:
+print("Girdiðiniz sayý bir çift sayýdýr.")
+else:
+print("Girdiðiniz sayý bir tek sayýdýr.")
+
+Eðer bir sayý 2‘ye bölündüðünde kalan deðer 0 ise o sayý çifttir. Aksi halde o sayý tektir. Mesela:
+
+>>> 14 % 2
+
+0
+
+Gördüðünüz gibi, bir çift sayý olan 14‘ü 2‘ye böldüðümüzde kalan sayý 0 oluyor. Çünkü çift sayýlar 2‘ye tam bölünürler.
+
+Bir de þuna bakalým:
+
+>>> 15 % 2
+
+1
+
+Bir tek sayý olan 15 ise 2‘ye bölündüðünde kalan sayý 1 oluyor. Yani 15 sayýsý 2‘ye tam bölünmüyor. Bu bilgiden yola çýkarak 15 sayýsýnýn bir tek sayý olduðunu söyleyebiliyoruz.
+
+Bir sayýnýn tek mi yoksa çift mi olduðunu tespit etme iþlemini küçümsememenizi tavsiye ederim. Bir sayýnýn tek mi yoksa çift mi olduðu bilgisinin, arayüz geliþtirirken dahi iþinize yarayacaðýndan emin olabilirsiniz.
+
+Elbette modülüs iþlecini bir sayýnýn yalnýzca 2‘ye tam bölünüp bölünmediðini denetlemek için kullanmýyoruz. Bu iþleci kullanarak herhangi bir sayýnýn herhangi bir sayýya tam bölünüp bölünmediðini de denetleyebilirsiniz. Örneðin:
+
+>>> 45 % 4
+
+1
+
+>>> 36 % 9
+
+0
+
+Bu bilgiyi kullanarak mesela þöyle bir program yazabilirsiniz:
+
+bölünen = int(input("Bir sayý girin: "))
+bölen = int(input("Bir sayý daha girin: "))
+
+þablon = "{} sayýsý {} sayýsýna tam".format(bölünen, bölen)
+
+if bölünen % bölen == 0:
+print(þablon, "bölünüyor!")
+else:
+print(þablon, "bölünmüyor!")
+
+Programýmýz, kullanýcýnýn girdiði ilk sayýnýn ikinci sayýya tam bölünüp bölünmediðini hesaplýyor ve sonuca göre kullanýcýyý bilgilendiriyor. Bu kodlarda özellikle þu satýra dikkat edin:
+
+if bölünen % bölen == 0:
+...
+
+Programýmýzýn temelini bu kod oluþturuyor. Çünkü bir sayýnýn bir sayýya tam bölünüp bölünmediðini bu kodla belirliyoruz. Eðer bir sayý baþka bir sayýya bölündüðünde kalan deðer, yani modülüs 0 ise, o sayý öbür sayýya tam bölünüyor demektir.
+
+Ayrýca bir sayýnýn son basamaðýný elde etmek için de modülüsten yararlanabilirsiniz. Herhangi bir tamsayý 10‘a bölündüðünde kalan (yani modülüs), bölünen sayýnýn son basamaðý olacaktýr:
+
+>>> 65 % 10
+
+5
+
+>>> 543 % 10
+
+3
+
+Programlama tecrübeniz arttýkça, aslýnda modülüsün ne kadar faydalý bir araç olduðunu kendi gözlerinizle göreceksiniz.
+
+Modülüs iþlecini örnekler eþliðinde ayrýntýlý bir þekilde incelediðimize göre sýra geldi taban bölme iþlecini açýklamaya...
+
+Öncelikle þu örneði inceleyelim:
+
+>>> 5 / 2
+
+2.5
+
+Burada, bildiðimiz bölme iþlecini (/) kullanarak basit bir bölme iþlemi yaptýk. Elde ettiðimiz sonuç doðal olarak 2.5.
+
+Matematikte bölme iþleminin sonucunun kesirli olmasý durumuna ‘kesirli bölme’ adý verilir. Bunun tersi ise tamsayýlý bölme veya taban bölmedir. Eðer herhangi bir sebeple kesirli bölme iþlemi deðil de taban bölme iþlemi yapmanýz gerekirse // iþlecinden yararlanabilirsiniz:
+
+>>> 5 // 2
+
+2
+
+Gördüðünüz gibi, // iþleci sayesinde bölme iþleminin sonucu kesirli deðil, tamsayý olarak elde ediliyor.
+
+Yukarýda yaptýðýmýz taban bölme iþlemi þununla ayný anlama gelir:
+
+>>> int(5 / 2)
+
+2
+
+Daha açýk ifade etmemiz gerekirse:
+
+>>> a = 5 / 2
+>>> a
+
+2.5
+
+>>> int(a)
+
+2
+
+Burada olan þu: 5 / 2 iþleminin sonucu bir kayan noktalý sayýdýr (2.5). Bunu þu þekilde teyit edebiliriz:
+
+>>> a = 5 / 2
+>>> type(a)
+
+<class 'float'>
+
+Buradaki float çýktýsýnýn floating point number, yani kayan noktalý sayý anlamýna geldiðini biliyorsunuz.
+
+Bu kayan noktalý sayýnýn sadece tabanýný elde etmek için bu sayýyý tamsayýya (integer) çevirmemiz yeterli olacaktýr. Yani:
+
+>>> int(a)
+
+2
+
+Bu arada yeri gelmiþken round() adlý bir gömülü fonksiyondan bahsetmeden geçmeyelim. Eðer bir sayýnýn deðerini yuvarlamanýz gerekirse round() fonksiyonundan yararlanabilirsiniz. Bu fonksiyon þöyle kullanýlýr:
+
+>>> round(2.55)
+
+3
+
+Gördüðünüz gibi, round() fonksiyonuna parametre olarak bir sayý veriyoruz. Bu fonksiyon da bize o sayýnýn yuvarlanmýþ halini döndürüyor. Bu fonksiyonu kullanarak yuvarlanacak sayýnýn noktadan sonraki hassasiyetini de belirleyebilirsiniz. Örneðin:
+
+>>> round(2.55, 1)
+
+2.5
+
+Burada ikinci parametre olarak 1 sayýsýný verdiðimiz için, noktadan sonraki bir basamak görüntüleniyor. Bir de þuna bakalým:
+
+>>> round(2.68, 1)
+
+2.7
+
+Burada da yuvarlama iþlemi yapýlýrken noktadan sonra bir basamak korunuyor. Eðer 1 sayýsý yerine 2 sayýsýný kullanýrsanýz, yukarýdaki örnek þu çýktýyý verir:
+
+>>> round(2.68, 2)
+
+2.68
+
+round() fonksiyonunun çalýþma prensibini anlamak için kendi kendinize örnekler yapabilirsiniz.
+
+Þimdiye kadar öðrendiðimiz ve yukarýdaki tabloda andýðýmýz bir baþka aritmetik iþleç de kuvvet iþleci (**) idi. Mesela bu iþleci kullanarak bir sayýnýn karesini hesaplayabileceðimizi biliyorsunuz:
+
+>>> 25 ** 2
+
+625
+
+Bir sayýnýn 2. kuvveti o sayýnýn karesidir. Bir sayýnýn 0.5. kuvveti ise o sayýnýn kareköküdür:
+
+>>> 625 ** 0.5
+
+25.0
+
+Bu arada, eðer karekökün kayan noktalý sayý cinsinden olmasý hoþunuza gitmediyse, bu sayýyý int() fonksiyonu ile tam sayýya çevirebileceðinizi biliyorsunuz:
+
+>>> int(625 ** 0.5)
+
+25
+
+Kuvvet hesaplamalarý için ** iþlecinin yanýsýra pow() adlý bir fonksiyondan da yararlanabileceðimizi öðrenmiþtik:
+
+>>> pow(25, 2)
+
+625
+
+Bildiðiniz gibi pow() fonksiyonu aslýnda toplam üç parametre alabiliyor:
+
+>>> pow(25, 2, 5)
+
+0
+
+Bu iþlemin þununla ayný anlama geliyor:
+
+>>> (25 ** 2) % 5
+
+0
+
+Yani pow(25, 2, 5) gibi bir komut verdiðimizde, 25 sayýsýnýn 2. kuvvetini alýp, elde ettiðimiz sayýnýn 5‘e bölünmesinden kalan sayýyý hesaplamýþ oluyoruz.
+
+Böylece aritmetik iþleçleri tamamlamýþ olduk. Artýk karþýlaþtýrma iþleçlerini inceleyebiliriz.
+
+
+Karþýlaþtýrma Ýþleçleri
+
+Adýndan da anlaþýlacaðý gibi, karþýlaþtýrma iþleçleri, iþlenenler (operands) arasýnda bir karþýlaþtýrma iliþkisi kuran iþleçlerdir. Bu iþleçleri þöyle sýralayabiliriz:
+
+
+== eþittir 
+!= eþit deðildir 
+> büyüktür 
+< küçüktür 
+>= büyük eþittir 
+<= küçük eþittir 
+
+Bu iþleçlerin hiçbiri size yabancý deðil, zira bunlarýn hepsini aslýnda daha önceki derslerde verdiðimiz örneklerde kullanmýþtýk. Burada da bunlarla ilgili basit bir örnek vererek yolumuza devam edelim:
+
+parola = "xyz05"
+
+soru = input("parolanýz: ")
+
+if soru == parola:
+print("doðru parola!")
+
+elif soru != parola:
+print("yanlýþ parola!")
+
+Burada soru deðiþkeniyle kullanýcýdan alýnan verinin, programýn baþýnda tanýmladýðýmýz parola deðiþkeninin deðerine eþit olup olmadýðýný sorguluyoruz. Buna göre, eðer kullanýcýdan gelen veri parolayla eþleþiyorsa (if soru == parola), kullanýcýyý parolanýn doðru olduðu konusunda bilgilendiriyoruz (print("doðru parola!")). Ama eðer kullanýcýdan gelen veri parolayla eþleþmiyorsa (elif soru != parola), o zaman da kullanýcýya parolanýn yanlýþ olduðunu bildiriyoruz (print("yanlýþ parola!")).
+
+Yukarýdaki örnekte == (eþittir) ve != (eþit deðildir) iþleçlerinin kullanýmýný örneklendirdik. Öteki karþýlaþtýrma iþleçlerinin de nasýl kullanýldýðýný biliyorsunuz. Basit bir örnek verelim:
+
+sayý = input("sayý: ")
+
+if int(sayý) <= 100:
+print("sayý 100 veya 100'den küçük")
+
+elif int(sayý) >= 100:
+print("sayý 100 veya 100'den büyük")
+
+Böylece karþýlaþtýrma iþleçlerini de incelemiþ olduk. O halde gelelim bool iþleçlerine...
+
+
+Bool Ýþleçleri
+
+Bu bölümde bool iþleçlerinden söz edeceðiz, ancak bool iþleçlerine geçmeden önce biraz bool kavramýndan bahsetmemiz yerinde olacaktýr.
+
+Nedir bu bool denen þey?
+
+Bilgisayar bilimi iki adet deðer üzerine kuruludur: 1 ve 0. Yani sýrasýyla True ve False. Bilgisayar biliminde herhangi bir þeyin deðeri ya True, ya da False‘tur. Ýþte bu True ve False olarak ifade edilen deðerlere bool deðerleri adý verilir (George Boole adlý Ýngiliz matematikçi ve filozofun adýndan). Türkçe olarak söylemek gerekirse, True deðerinin karþýlýðý Doðru, False deðerinin karþýlýðý ise Yanlýþ‘týr.
+
+Örneðin:
+
+>>> a = 1
+
+Burada a adlý bir deðiþken tanýmladýk. Bu deðiþkenin deðeri 1. Þimdi bu deðiþkenin deðerini sorgulayalým:
+
+>>> a == 1 #a deðeri 1'e eþit mi?
+
+True
+
+Gördüðünüz gibi, a == 1 sorgusu True (Doðru) çýktýsý veriyor. Çünkü a deðiþkeninin deðeri gerçekten de 1. Bir de þunu deneyelim:
+
+>>> a == 2
+
+False
+
+Burada da a deðiþkeninin deðerinin 2 sayýsýna eþdeðer olup olmadýðýný sorguladýk. a deðiþkeninin deðeri 2 olmadýðý için de Python bize False (Yanlýþ) çýktýsý verdi.
+
+Gördüðünüz gibi, bool iþleçleri herhangi bir ifadenin doðruluðunu veya yanlýþlýðýný sorgulamak için kullanýlabiliyor. Buna göre, eðer bir sorgulamanýn sonucu doðru ise True, eðer yanlýþ ise False çýktýsý alýyoruz.
+
+Bool iþleçleri sadece yukarýda verdiðimiz örneklerdeki gibi, salt bir doðruluk-yanlýþlýk sorgulamaya yarayan araçlar deðildir. Bilgisayar biliminde her þeyin bir bool deðeri vardýr. Bununla ilgili genel kuralýmýz þu: 0 deðeri ve boþ veri tipleri False‘tur. Bunlar dýþýnda kalan her þey ise True‘dur.
+
+Bu durumu bool() adlý özel bir fonksiyondan yararlanarak teyit edebiliriz:
+
+>>> bool(3)
+
+True
+
+>>> bool("elma")
+
+True
+
+>>> bool(" ")
+
+True
+
+>>> bool("     ")
+
+True
+
+>>> bool("fdsdfsdg")
+
+True
+
+>>> bool("0")
+
+True
+
+>>> bool(0)
+
+False
+
+>>> bool("")
+
+False
+
+Gördüðünüz gibi, gerçekten de 0 sayýsýnýn ve boþ karakter dizilerinin bool deðeri False‘tur. Geri kalan her þey ise True‘dur.
+
+Not
+
+0‘ýn bir sayý, “0”‘ýn ise bir karakter dizisi olduðunu unutmayýn. Sayý olan 0‘ýn bool deðeri False‘tur, ama karakter dizisi olan “0”‘ýn deðeri True‘dur.
+
+Yukarýdaki örneklere göre, içinde herhangi bir deðer barýndýran karakter dizileri (0 hariç) True çýktýsý veriyor. Burada söylediðimiz þey bütün veri tipleri için geçerlidir. Eðer herhangi bir veri tipi herhangi bir deðer içermiyorsa o veri tipi False çýktýsý verir.
+
+Peki bu bilgi bizim ne iþimize yarar? Yani mesela boþ veri tiplerinin False, içinde bir veri barýndýran veri tiplerinin ise True olmasý bizim için neden bu kadar önemli? Bunu birazdan açýklayacaðýz. Ama önce isterseniz, bool deðerleri ile ilgili çok önemli bir konuya deðinelim.
+
+Belki kendiniz de farketmiþsinizdir; bool deðerleri Python’da koþul belirten if, elif ve else deyimlerinin de temelini oluþturur. Þu örneði ele alalým mesela:
+
+isim = input("Ýsminiz: ")
+
+if isim == "Ferhat":
+print("Ne güzel bir isim bu!")
+else:
+print(isim, "ismini pek sevmem!")
+
+Burada if isim == "Ferhat" dediðimizde, aslýnda Python’a þu emri vermiþ oluyoruz:
+
+Eðer isim == "Ferhat" ifadesi True ise...
+
+Bunu teyit etmek için þöyle bir kod yazabilirsiniz:
+
+isim = input("Ýsminiz: ")
+
+print(isim == "Ferhat")
+
+Eðer burada kullanýcý ‘Ferhat’ ismini girecek olursa programýmýz True çýktýsý verir. Ama eðer kullanýcý baþka bir isim girerse bu kez False çýktýsýný alýrýz. Ýþte koþul bildiren deyimler, karar verme görevini, kendilerine verilen ifadelerin bool deðerlerine bakarak yerine getirir. Dolayýsýyla yukarýdaki örneði þu þekilde Türkçeye çevirebiliriz:
+
+Eðer isim == "Ferhat" ifadesinin bool deðeri True ise, Ne güzel bir isim bu! çýktýsý ver! Ama eðer isim == "Ferhat" ifadesinin bool deðeri True dýþýnda herhangi bir þey ise (yani False ise), ... ismini pek sevmem! çýktýsý ver!
+
+Koþul bildiren deyimlerle bool deðerleri arasýndaki iliþkiyi daha iyi anlamak için bir örnek daha verelim:
+
+Hatýrlarsanýz içi boþ veri tiplerinin bool deðerinin her zaman False olacaðýný söylemiþtik. Yani:
+
+>>> a = ""
+
+>>> bool(a)
+
+False
+
+Herhangi bir deðere sahip veri tiplerinin bool deðeri ise her zaman True olur (0 hariç):
+
+>>> a = "gdfg"
+
+>>> bool(a)
+
+True
+
+Ýçi boþ veri tiplerinin bool deðerinin her zaman False olacaðý bilgisini kullanarak þöyle bir uygulama yazabiliriz:
+
+kullanýcý = input("Kullanýcý adýnýz: ")
+
+if bool(kullanýcý) == True:
+print("Teþekkürler!")
+else:
+print("Kullanýcý adý alaný boþ býrakýlamaz!")
+
+Burada þöyle bir emir verdik:
+
+“Eðer kullanýcý deðiþkeninin bool deðeri True ise Teþekkürler! çýktýsý ver! Deðilse Kullanýcý adý alaný boþ býrakýlamaz! uyarýsýný göster!
+
+Eðer kullanýcý, kullanýcý adýna herhangi bir þey yazdýktan sonra Enter tuþuna basarsa kullanýcý deðiþkeni, kullanýcýnýn girdiði deðeri gösterecek ve böylece bool(kullanýcý) komutu True çýktýsý verecektir. Bu sayede de kodlarýmýzýn içindeki if bloðu çalýþmaya baþlayacaktýr.
+
+Ama eðer kullanýcý, kullanýcý adýný yazmadan Enter tuþuna basarsa, kullanýcý deðiþkeni boþ kalacaðý için (yani kullanýcý = "" gibi bir durum ortaya çýkacaðý için) bool(kullanýcý) komutu False çýktýsý verecek ve böylece else bloðu çalýþacaktýr.
+
+Yalnýz bu noktada þöyle bir uyarý yapalým. Yukarýdaki komutlar sözdizimi açýsýndan tamamen doðru olsa da, etrafta yukarýdakine benzer bir kullanýmý pek görmezsiniz. Ayný iþ için genellikle þöyle bir þeyler yazýlýr:
+
+kullanýcý = input("Kullanýcý adýnýz: ")
+
+if kullanýcý:
+print("Teþekkürler!")
+
+Gördüðünüz gibi, if bool(kullanýcý) == True: kodunu if kullanýcý: þeklinde kýsaltabiliyoruz. Bu ikisi tamamen ayný anlama gelir. Yani ikisi de ‘kullanýcý deðiþkeninin bool deðeri True ise...’ demektir.
+
+Bool kavramýna aþinalýk kazandýðýmýza göre þimdi bool iþleçlerini incelemeye baþlayabiliriz.
+
+Bool iþleçleri, bool deðerlerinden birini elde etmemizi saðlayan iþleçlerdir. Bu iþleçler þunlardýr:
+
+and
+
+or
+
+not
+
+
+Eðer mantýk dersleri aldýysanýz bu iþleçler size hiç yabancý gelmeyecektir. Eðer lisede mantýk dersleri almadýysanýz veya aldýðýnýz derslerden hiçbir þey hatýrlamýyorsanýz, yine de ziyaný yok. Biz burada bu iþleçleri bütün ayrýntýlarýyla inceleyeceðiz.
+
+Önce and ile baþlayalým...
+
+Türkçe söylemek gerekirse and ‘ve’ anlamýna gelir. Peki bu and ne iþimize yarar? Çok basit bir örnek verelim:
+
+Hatýrlarsanýz geçen bölümde koþullu durumlara örnek verirken þöyle bir durumdan bahsetmiþtik:
+
+Diyelim ki Google’ýn Gmail hizmeti aracýlýðýyla bir e.posta hesabý aldýnýz. Bu hesaba gireceðiniz zaman Gmail size bir kullanýcý adý ve parola sorar. Siz de kendinize ait kullanýcý adýný ve parolayý sayfadaki kutucuklara yazarsýnýz. Eðer yazdýðýnýz kullanýcý adý ve parola doðruysa hesabýnýza eriþebilirsiniz. Ama eðer kullanýcý adýnýz ve parolanýz doðru deðilse hesabýnýza eriþemezsiniz. Yani e.posta hesabýnýza eriþmeniz, kullanýcý adý ve parolayý doðru girme koþuluna baðlýdýr.
+
+Burada çok önemli bir nokta var. Kullanýcýnýn Gmail sistemine girebilmesi için hem kullanýcý adýný hem de parolayý doðru yazmasý gerekiyor. Yani kullanýcý adý veya paroladan herhangi biri yanlýþ ise sisteme giriþ mümkün olmayacaktýr.
+
+Yukarýdaki durumu taklit eden bir programý, þu ana kadar olan bilgilerimizi kullanarak þöyle yazabiliyoruz:
+
+kullanýcý_adý = input("Kullanýcý adýnýz: ")
+parola = input("Parolanýz: ")
+
+if kullanýcý_adý == "aliveli":
+if parola == "12345678":
+print("Programa hoþgeldiniz")
+else:
+print("Yanlýþ kullanýcý adý veya parola!")
+
+else:
+print("Yanlýþ kullanýcý adý veya parola!")
+
+Burada yeni bir bilgiyle daha karþýlaþýyoruz. Gördüðünüz gibi, burada if deyimlerini iç içe kullandýk. Python’da istediðiniz kadar iç içe geçmiþ if deyimi kullanabilirsiniz. Ancak yazdýðýnýz bir programda eðer üçten fazla iç içe if deyimi kullandýysanýz, benimsediðiniz yöntemi yeniden gözden geçirmenizi tavsiye ederim. Çünkü iç içe geçmiþ if deyimleri bir süre sonra anlaþýlmasý güç bir kod yapýsý ortaya çýkarabilir. Neyse... Biz konumuza dönelim.
+
+Yukarýdaki yazdýðýmýz programda kullanýcýnýn sisteme giriþ yapabilmesi için hem kullanýcý adýný hem de parolayý doðru girmesi gerekiyor. Kullanýcý adý ve paroladan herhangi biri yanlýþsa sisteme giriþe izin verilmiyor. Ancak yukarýdaki yöntem dolambaçlýdýr. Halbuki ayný iþlevi yerine getirmenin, Python’da çok daha kolay bir yolu var. Bakalým:
+
+kullanýcý_adý = input("Kullanýcý adýnýz: ")
+parola = input("Parolanýz: ")
+
+if kullanýcý_adý == "aliveli" and parola == "12345678":
+print("Programa hoþgeldiniz")
+
+else:
+print("Yanlýþ kullanýcý adý veya parola!")
+
+Burada and iþlecini nasýl kullandýðýmýzý görüyorsunuz. Bu iþleci kullanarak iki farklý ifadeyi birbirine baðladýk. Böylece kullanýcýnýn sisteme giriþini hem kullanýcý adýnýn hem de parolanýn doðru olmasý koþuluna dayandýrdýk.
+
+Peki and iþlecinin çalýþma mantýðý nedir? Dediðim gibi, and Türkçede ‘ve’ anlamýna geliyor. Bu iþleci daha iyi anlayabilmek için þu cümleler arasýndaki farký düþünün:
+
+
+Toplantýya Ali ve Veli katýlacak. 
+Toplantýya Ali veya Veli katýlacak. 
+
+Ýlk cümlede ‘ve’ baðlacý kullanýldýðý için, bu cümlenin gereðinin yerine getirilebilmesi, hem Ali’nin hem de Veli’nin toplantýya katýlmasýna baðlýdýr. Sadece Ali veya sadece Veli’nin toplantýya katýlmasý durumunda bu cümlenin gereði yerine getirilememiþ olacaktýr.
+
+Ýkinci cümlede ise toplantýya Ali ve Veli’den herhangi birisinin katýlmasý yeterlidir. Toplantýya sadece Ali’nin katýlmasý, sadece Veli’nin katýlmasý veya her ikisinin birden katýlmasý, bu cümlenin gereðinin yerine getirilebilmesi açýsýndan yeterlidir.
+
+Ýþte Python’daki and iþleci de ayný bu þekilde iþler. Þu örneklere bir bakalým:
+
+>>> a = 23
+>>> b = 10
+>>> a == 23
+
+True
+
+>>> b == 10
+
+True
+
+>>> a == 23 and b == 10
+
+True
+
+Burada deðeri 23 olan bir adet a deðiþkeni ve deðeri 10 olan bir adet b deðiþkeni tanýmladýk. Daha sonra bu iki deðiþkenin deðerini tek tek sorguladýk ve bunlarýn gerçekten de sýrasýyla 23 ve 10 sayýsýna eþit olduðunu gördük. Son olarak da bunlarý and iþleci ile birbirine baðlayarak sorguladýk. a deðiþkeninin deðeri 23, b deðiþkeninin deðeri de 10 olduðu için, yani and ile baðlanan her iki önerme de True çýktýsý verdiði için a == 23 and b == 10 ifadesi True deðeri verdi.
+
+Bir de þuna bakalým:
+
+>>> a = 23
+>>> b = 10
+>>> a == 23
+
+True
+
+>>> b == 54
+
+False
+
+>>> a == 23 and b == 54
+
+False
+
+Burada ise a deðiþkenin deðeri 23‘tür. Dolayýsýyla a == 23 ifadesi True çýktýsý verir. Ancak b deðiþkeninin deðeri 54 deðildir. O yüzden de b == 54 komutu False çýktýsý verir. Gördüðünüz gibi, and iþleci ile baðlanan önermelerden herhangi biri False olduðunda çýktýmýz da False oluyor. Unutmayýn: and iþlecinin True çýktýsý verebilmesi için bu iþleç tarafýndan baðlanan her iki önermenin de True olmasý gerekir. Eðer önermelerden biri bile True deðilse çýktý da True olmayacaktýr.
+
+Tahmin edebileceðiniz gibi, and iþleci en yaygýn if deyimleriyle birlikte kullanýlýr. Mesela yukarýda kullanýcýdan kullanýcý adý ve parola alýrken de bu and iþlecinden yararlanmýþtýk.
+
+Gelelim or iþlecine...
+
+Týpký and gibi bir bool iþleci olan or‘un Türkçede karþýlýðý ‘veya’dýr. Yukarýda ‘Toplantýya Ali veya Veli katýlacak.’ cümlesini tartýþýrken aslýnda bu or kelimesinin anlamýný açýklamýþtýk. Hatýrlarsanýz and iþlecinin True çýktýsý verebilmesi için bu iþleçle baðlanan bütün önermelerin True deðerine sahip olmasý gerekiyordu. or iþlecinin True çýktýsý verebilmesi için ise or iþleciyle baðlanan önermelerden herhangi birinin True çýktýsý vermesi yeterli olacaktýr. Söylediðimiz bu þeyleri birkaç örnek üzerinde somutlaþtýralým:
+
+>>> a = 23
+>>> b = 10
+>>> a == 23
+
+True
+
+>>> b == 10
+
+True
+
+>>> a == 11
+
+False
+
+>>> a == 11 or b == 10
+
+True
+
+Gördüðünüz gibi, a == 11 ifadesinin bool deðeri False olduðu halde, b == 10 ifadesinin bool deðeri True olduðu için a == 11 or b == 10 ifadesi True deðerini veriyor.
+
+and ve or iþleçlerini öðrendiðimize göre, bir sýnavdan alýnan notlarýn harf karþýlýklarýný gösteren bir uygulama yazabiliriz:
+
+x = int(input("Notunuz: "))
+
+if x > 100 or x < 0:
+print("Böyle bir not yok")
+
+elif x >= 90 and x <= 100:
+print("A aldýnýz.")
+
+elif x >= 80 and x <= 89:
+print("B aldýnýz.")
+
+elif x >= 70 and x <= 79:
+print("C aldýnýz.")
+
+elif x >= 60 and x <= 69:
+print("D aldýnýz.")
+
+elif x >= 0 and x <= 59:
+print("F aldýnýz.")
+
+Bu programda eðer kullanýcý 100‘den büyük ya da 0‘dan küçük bir sayý girerse Böyle bir not yok uyarýsý alacaktýr. 0-100 arasý notlarda ise, her bir not aralýðýna karþýlýk gelen harf görüntülecektir. Eðer isterseniz yukarýdaki kodlarý þu þekilde de kýsaltabilirsiniz:
+
+x = int(input("Notunuz: "))
+
+if x > 100 or x < 0:
+print("Böyle bir not yok")
+
+elif x >= 90 <= 100:
+print("A aldýnýz.")
+
+elif x >= 80 <= 89:
+print("B aldýnýz.")
+
+elif x >= 70 <= 79:
+print("C aldýnýz.")
+
+elif x >= 60 <= 69:
+print("D aldýnýz.")
+
+elif x >= 0 <= 59:
+print("F aldýnýz.")
+
+Gördüðünüz gibi, and x kýsýmlarýný çýkardýðýmýzda da bir önceki kodlarla ayný anlamý yakalayabiliyoruz.
+
+Hatta yukarýdaki kodlarý þöyle de yazabilirsiniz:
+
+x = int(input("Notunuz: "))
+
+if x > 100 or x < 0:
+print("Böyle bir not yok")
+
+#90 sayýsý x'ten küçük veya x'e eþit,
+#x sayýsý 100'den küçük veya 100'e eþit ise,
+#Yani x, 90 ile 100 arasýnda bir sayý ise
+elif 90 <= x <= 100:
+print("A aldýnýz.")
+
+#80 sayýsý x'ten küçük veya x'e eþit,
+#x sayýsý 89'dan küçük veya 89'a eþit ise,
+#Yani x, 80 ile 89 arasýnda bir sayý ise
+elif 80 <= x <= 89:
+print("B aldýnýz.")
+
+elif 70 <= x <= 79:
+print("C aldýnýz.")
+
+elif 60 <= x <= 69:
+print("D aldýnýz.")
+
+elif 0 <= x <= 59:
+print("F aldýnýz.")
+
+Bu kodlar bir öncekiyle ayný iþi yapar. Yorumlardan da göreceðiniz gibi, bu iki kod arasýnda sadece mantýk farký var.
+
+Son bool iþlecimiz not. Bu kelimenin Ýngilizce’deki anlamý ‘deðil’dir. Bu iþleci þöyle kullanýyoruz:
+
+>>> a = 23
+>>> not a
+
+False
+
+>>> a = ""
+>>> not a
+
+True
+
+Bu iþleç, özellikle kullanýcý tarafýndan bir deðiþkene veri girilip girilmediðini denetlemek için kullanýlabilir. Örneðin:
+
+parola = input("parola: ")
+
+if not parola:
+print("Parola boþ býrakýlamaz!")
+
+Eðer kullanýcý herhangi bir parola belirlemeden doðrudan Enter tuþuna basacak olursa parola deðiþkeninin deðeri boþ bir karakter dizisi olacaktýr. Yani parola = "". Boþ veri tiplerinin bool deðerinin False olacaðýný biliyoruz. Dolayýsýyla, yukarýdaki gibi bir örnekte, kullanýcý parolayý boþ geçtiðinde not parola kodu True verecek ve böylece ekrana “Parola boþ býrakýlamaz!” karakter dizisi yazdýrýlacaktýr. Eðer yukarýdaki örneðin mantýðýný kavramakta zorluk çekiyorsanýz þu örnekleri incelemenizi öneririm:
+
+>>> parola = ""
+>>> bool(parola)
+
+False
+
+>>> bool(not parola)
+
+True
+
+>>> parola = "1243"
+>>> bool(parola)
+
+True
+
+>>> bool(not parola)
+
+False
+
+Aslýnda yukarýdaki örneklerde þuna benzer sorular sormuþ gibi oluyoruz:
+
+>>> parola = ""
+>>> bool(parola) #parola boþ býrakýlmamýþ, deðil mi?
+
+>>> False #Hayýr, parola boþ býrakýlmýþ.
+
+>>> bool(not parola) #parola boþ býrakýlmýþ, deðil mi?
+
+>>> True #Evet, parola boþ býrakýlmýþ
+
+Kendi kendinize pratik yaparak bu iþlecin görevini daha iyi anlayabilirsiniz.
+
+Böylece kýsmen çetrefilli bir konu olan bool iþleçlerini de geride býrakmýþ olduk. Sýrada deðer atama iþleçleri var.
+
+
+Deðer Atama Ýþleçleri
+
+Bu noktaya kadar yaptýðýmýz çalýþmalarda sadece tek bir deðer atama iþleci gördük. Bu iþleç = iþlecidir. Adýndan da anlaþýlacaðý gibi, bu iþlecin görevi bir deðiþkene deðer atamaktýr. Mesela:
+
+>>> a = 23
+
+Burada = iþleci a deðiþkenine 23 deðerini atama iþlevi görüyor.
+
+Python’daki tek deðer atama iþleci elbette = deðildir. Bunun dýþýnda baþka deðer atama iþleçleri de bulunur. Tek tek inceleyelim:
+
++= iþleci
+
+Bu iþlecin ne iþe yaradýðýný anlamak için þöyle bir örnek düþünün:
+
+>>> a = 23
+
+a deðerine mesela 5 ekleyip bu deðeri 28‘e eþitlemek için ne yapmamýz lazým? Tabii ki þunu:
+
+>>> a = a + 5
+>>> print(a)
+
+28
+
+Burada yaptýðýmýz þey çok basit: a deðiþkeninin taþýdýðý deðere 5 ilave ediyoruz ve daha sonra bu deðeri tekrar a deðiþkenine atýyoruz. Ayný iþlemi çok daha kolay bir þekilde de yapabiliriz:
+
+>>> a += 5
+>>> print(a)
+
+28
+
+Bu kod, yukarýdakiyle tamamen ayný anlama gelir. Ama bir önceki koda göre çok daha verimlidir. Çünkü a += 5 kodunda Python a deðiþkeninin deðerini sadece bir kez kontrol ettiði için, iþlemi a = a + 5 koduna göre daha hýzlý yapacaktýr.
+
+-= iþleci
+
+Bir önceki += iþleci toplama iþlemi yapýp, ortaya çýkan deðeri tekrar ayný deðiþkene atýyordu. -= iþleci de buna benzer bir iþlem gerçekleþtirir:
+
+>>> a = 23
+>>> a -= 5
+>>> print(a)
+
+18
+
+Yukarýdaki kullaným þununla tamamen aynýdýr:
+
+>>> a = 23
+>>> a = a - 5
+>>> print(a)
+
+18
+
+Ancak týpký += iþlecinde olduðu gibi, -= iþleci de alternatifine göre daha hýzlý çalýþan bir araçtýr.
+
+/= iþleci
+
+Bu iþlecin çalýþma mantýðý da yukarýdaki iþleçlerle aynýdýr:
+
+>>> a = 30
+>>> a /= 3
+>>> print(a)
+
+10
+
+Yukarýdaki iþlem de þununla tamamen aynýdýr:
+
+>>> a = 30
+>>> a = a / 3
+>>> print(a)
+
+10
+
+*= iþleci
+
+Bu da ötekiler gibi, çarpma iþlemi yapýp, bu iþlemin sonucunu ayný deðiþkene atar:
+
+>>> a = 20
+>>> a *= 2
+>>> print(a)
+
+40
+
+Bu iþlecin eþdeðeri de þudur:
+
+>>> a = 20
+>>> a = a * 2
+>>> print(a)
+
+40
+
+%= iþleci
+
+Bu iþlecimiz ise bölme iþleminden kalan sayýyý ayný deðiþkene atar:
+
+>>> a = 40
+>>> a %= 3
+>>> print(a)
+
+1
+
+Bu iþleç de þuna eþdeðerdir:
+
+>>> a = 40
+>>> a = a % 3
+>>> print(a)
+
+1
+
+**= iþleci
+
+Bu iþlecin ne yaptýðýný tahmin etmek zor deðil. Bu iþlecimiz, bir sayýnýn kuvvetini hesapladýktan sonra çýkan deðeri ayný deðiþkene atýyor:
+
+>>> a = 12
+>>> a **= 2
+>>> print(a)
+
+144
+
+Eþdeðeri:
+
+>>> a = 12
+>>> a = a ** 2
+>>> print(a)
+
+144
+
+//= iþleci
+
+Deðer atama iþleçlerinin sonuncusu olan //= iþlecinin görevi ise taban bölme iþleminin sonucunu ayný deðiþkene atamaktýr:
+
+>>> a = 5
+>>> a //= 2
+>>> print(a)
+
+2
+
+Eþdeðeri:
+
+>>> a = 5
+>>> a = a // 2
+>>> print(a)
+
+2
+
+Bu iþleçler arasýndan, özellikle += ve -= iþleçleri iþinize bir hayli yarayacak.
+
+Bu arada eðer bu iþleçleri kullanýrken mesela += mi yoksa =+ mý yazacaðýnýzý karýþtýrýyorsanýz, þöyle düþünebilirsiniz:
+
+>>> a = 5
+>>> a += 5
+>>> print(a)
+
+10
+
+Burada, deðeri 5 olan bir a deðiþkenine 5 daha ekleyip, çýkan sonucu tekrar a deðiþkenine atadýk. Böylece deðeri 10 olan bir a deðiþkeni elde ettik. += iþlecinin doðru kullanýmý yukarýdaki gibidir. Bir de yukarýdaki örneði þöyle yazmayý deneyelim:
+
+>>> a = 5
+>>> a =+ 5
+>>> print(a)
+
+5
+
+Burada + iþleci ile = iþlecinin yerini deðiþtirdik.
+
+a =+ 5 satýrýna dikkatlice bakýn. Aslýnda burada yaptýðýmýz þeyin a = +5 iþlemi olduðunu, yani a deðiþkenine +5 gibi bir deðer verdiðimizi göreceksiniz. Durum þu örnekte daha net görünecektir:
+
+>>> a = 5
+>>> a =- 5
+>>> print(a)
+>>> -5
+
+Gördüðünüz gibi, a =- 5 yazdýðýmýzda, aslýnda yaptýðýmýz þey a deðiþkenine -5 deðerini vermekten ibarettir. Yani a = -5.
+
+
+Aitlik Ýþleçleri
+
+Aitlik iþleçleri, bir karakter dizisi ya da sayýnýn, herhangi bir veri tipi içinde bulunup bulunmadýðýný sorgulamamýzý saðlayan iþleçlerdir.
+
+Python’da bir tane aitlik iþleci bulunur. Bu iþleç de in iþlecidir. Bu iþleci þöyle kullanýyoruz:
+
+>>> a = "abcd"
+>>> "a" in a
+
+True
+
+>>> "f" in a
+
+False
+
+Gördüðünüz gibi, in adlý bu iþleç, bir öðenin, veri tipi içinde bulunup bulunmadýðýný sorguluyor. Eðer bahsedilen öðe, veri tipi içinde geçiyorsa True çýktýsý, eðer geçmiyorsa False çýktýsý alýyoruz.
+
+Henüz bu in iþlecini verimli bir þekilde kullanmamýzý saðlayacak araçlardan yoksunuz. Ancak birkaç sayfa sonra öðreneceðimiz yeni araçlarla birlikte bu iþleci çok daha düzgün ve verimli bir þekilde kullanabilecek duruma geleceðiz.
+
+
+Kimlik Ýþleçleri
+
+Python’da her þeyin (ya da baþka bir deyiþle her nesnenin) bir kimlik numarasý (identity) vardýr. Kabaca söylemek gerekirse, bu kimlik numarasý denen þey esasýnda o nesnenin bellekteki adresini gösterir.
+
+Peki bir nesnenin kimlik numarasýna nasýl ulaþýrýz?
+
+Python’da bu iþi yapmamýzý saðlayacak id() adlý bir fonksiyon bulunur (Ýngilizcedeki identity (kimlik) kelimesinin kýsaltmasý). Þimdi bir örnek üzerinde bu id() fonksiyonunu nasýl kullanacaðýmýza bakalým:
+
+>>> a = 100
+>>> id(a)
+
+137990748
+
+Çýktýda gördüðümüz 137990748 sayýsý a deðiþkeninin tuttuðu 100 sayýsýnýn kimlik numarasýný gösteriyor.
+
+Bir de þu örneklere bakalým:
+
+>>> a = 50
+>>> id(a)
+
+505494576
+
+>>> kardiz = "Elveda Zalim Dünya!"
+>>> id(kardiz)
+
+14461728
+
+Gördüðünüz gibi, Python’daki her nesnenin kimliði eþþiz, tek ve benzersizdir.
+
+Yukarýda verdiðimiz ilk örnekte bir a deðiþkeni tanýmlayýp bunun deðerini 100 olarak belirlemiþ ve id(a) komutuyla da bu nesnenin kimlik numarasýna ulaþmýþtýk. Yani:
+
+>>> a = 100
+>>> id(a)
+137990748
+
+Bir de þu örneðe bakalým:
+
+>>> b = 100
+>>> id(b)
+
+137990748
+
+Gördüðünüz gibi, Python a ve b deðiþkenlerinin deðeri için ayný kimlik numarasýný gösterdi. Bu demek oluyor ki, Python iki adet 100 sayýsý için bellekte iki farklý nesne oluþturmuyor. Ýlk kullanýmda önbelleðine aldýðý sayýyý, ikinci kez ihtiyaç olduðunda bellekten alýp kullanýyor. Bu tür bir önbellekleme mekanizmasýnýn gerekçesi performansý artýrmaktýr.
+
+Ama bir de þu örneklere bakalým:
+
+>>> a = 1000
+>>> id(a)
+
+15163440
+
+>>> b = 1000
+>>> id(b)
+
+14447040
+
+>>> id(1000)
+
+15163632
+
+Bu defa Python a deðiþkeninin tuttuðu 1000 sayýsý, b deðiþkeninin tuttuðu 1000 sayýsý ve tek baþýna yazdýðýmýz 1000 sayýsý için farklý kimlik numaralarý gösterdi. Bu demek oluyor ki, Python a deðiþkeninin tuttuðu 1000 sayýsý için, b deðiþkeninin tuttuðu 1000 sayýsý için ve doðrudan girdiðimiz 1000 sayýsý için bellekte üç farklý nesne oluþturuyor. Yani bu üç adet 1000 sayýsý Python açýsýndan birbirinden farklý...
+
+Yukarýdaki durumu görebileceðimiz baþka bir yöntem de Python’daki is adlý kimlik iþlecini kullanmaktýr. Deneyelim:
+
+>>> a is 1000
+
+False
+
+>>> b is 1000
+
+False
+
+Gördüðünüz gibi, Python False (Yanlýþ) çýktýsýný suratýmýza bir tokat gibi çarptý... Peki bu ne anlama geliyor?
+
+Bu þu anlama geliyor: Demek ki görünüþte ayný olan iki nesne aslýnda birbirinin ayný olmayabiliyor. Bunun neden bu kadar önemli olduðunu ilerleyen derslerde çok daha iyi anlayacaðýz.
+
+Yukarýdaki durumun bir baþka yansýmasý daha vardýr. Özellikle Python’a yeni baþlayýp da bu dilde yer alan is iþlecini öðrenenler, bu iþlecin == iþleciyle ayný iþleve sahip olduðu yanýlgýsýna kapýlabiliyor ve is iþlecini kullanarak iki nesne arasýnda karþýlaþtýrma iþlemi yapmaya kalkýþabiliyor.
+
+Ancak Python’da is iþlecini kullanarak iki nesne arasýnda karþýlaþtýrma yapmak güvenli deðildir. Yani is ve == iþleçleri birbirleriyle ayný iþlevi görmez. Bu iki iþleç nesnelerin farklý yönlerini sorgular: is iþleci nesnelerin kimliklerine bakýp o nesnelerin ayný nesneler olup olmadýðýný kontrol ederken, == iþleci nesnelerin içeriðine bakarak o nesnelerin ayný deðere sahip olup olmadýklarýný sorgular. Bu iki taným arasýndaki ince farka dikkat edin.
+
+Yani:
+
+>>> a is 1000
+
+False
+
+Ama:
+
+>>> a == 1000
+
+True
+
+Burada is iþleci a deðiþkeninin tuttuðu veri ile 1000 sayýsýnýn ayný kimlik numarasýna sahip olup olmadýðýný sorgularken, == iþleci a deðiþkeninin tuttuðu verinin 1000 olup olmadýðýný denetliyor. Yani is iþlecinin yaptýðý þey kabaca þu oluyor:
+
+>>> id(a) == id(1000)
+
+False
+
+Þimdiye kadar denediðimiz örnekler hep sayýydý. Þimdi isterseniz bir de karakter dizilerinin durumuna bakalým:
+
+>>> a = "python"
+>>> a is "python"
+
+True
+
+Burada True çýktýsýný aldýk. Bir de == iþleci ile bir karþýlaþtýrma yapalým:
+
+>>> a == "python"
+
+True
+
+Bu da normal olarak True çýktýsý veriyor. Ama þu örneðe bakarsak:
+
+>>> a = "python güçlü ve kolay bir programlama dilidir"
+>>> a is "python güçlü ve kolay bir programlama dilidir"
+
+False
+
+Ama:
+
+>>> a == "python güçlü ve kolay bir programlama dilidir"
+
+True
+
+is ve == iþleçlerinin nasýl da farklý sonuçlar verdiðini görüyorsunuz. Çünkü bunlardan biri nesnelerin kimliðini sorgularken, öbürü nesnelerin içeriðini sorguluyor. Ayrýca burada dikkatimizi çekmesi gereken baþka bir nokta da “python” karakter dizisinin önbelleðe alýnýp gerektiðinde tekrar tekrar kullanýlýyorken, “python güçlü ve kolay bir programlama dilidir” karakter dizisinin ise önbelleðe alýnmýyor olmasýdýr. Ayný karakter dizisinin tekrar kullanýlmasý gerektiðinde Python bunun için bellekte yeni bir nesne daha oluþturuyor.
+
+Peki neden Python, örneðin, 100 sayýsýný ve “python” karakter dizisini önbelleklerken 1000 sayýsýný ve “python güçlü ve kolay bir programlama dilidir” karakter dizisini önbelleðe almýyor. Sebebi þu: Python kendi iç mekanizmasýnýn iþleyiþi gereðince ‘ufak’ nesneleri önbelleðe alýrken ‘büyük’ nesneler için her defasýnda yeni bir depolama iþlemi yapýyor. Peki ufak ve büyük kavramlarýnýn ölçütü nedir? Ýsterseniz Python açýsýndan ufak kavramýnýn sýnýrýnýn ne olabileceðini þöyle bir kod yardýmýyla sorgulayabiliriz:
+
+>>> for k in range(-1000, 1000):
+... for v in range(-1000, 1000):
+... if k is v:
+... print(k)
+
+Not
+
+Burada henüz öðrenmediðimiz þeyler var. Bunlarý birkaç bölüm sonra ayrýntýlý bir þekilde inceleyeceðiz.
+
+Bu kod -1000 ve 1000 aralýðýndaki iki sayý grubunu karþýlaþtýrýp, kimlikleri ayný olan sayýlarý ekrana döküyor. Yani bir bakýma Python’un hangi sayýya kadar önbellekleme yaptýðýný gösteriyor. Buna göre -5 ile 257 arasýnda kalan sayýlar Python tarafýndan ufak olarak deðerlendiriliyor ve önbelleðe alýnýyor. Bu aralýðýn dýþýnda kalan sayýlar için ise bellekte her defasýnda ayrý bir nesne oluþturuluyor.
+
+Burada aldýðýmýz sonuca göre þöyle bir denetleme iþlemi yapalým:
+
+>>> a = 256
+>>> a is 256
+
+True
+
+>>> a = 257
+>>> a is 257
+
+False
+
+>>> a = -5
+>>> a is -5
+
+True
+
+>>> a = -6
+>>> a is -6
+
+False
+
+Böylece Python’daki kimlik iþleçlerini de incelemiþ olduk. Belki programcýlýk maceranýz boyunca id() fonksiyonunu hiç kullanmayacaksýnýz, ancak bu fonksiyonun arkasýndaki mantýðý anlamak, Python’ýn kimi yerlerde alttan alta neler çevirdiðini çok daha kolay kavramanýzý saðlayacaktýr.
+
+Not
+
+http://forum.ceviz.net/showthread.php?t=87565 adresindeki tartýþmaya bakýnýz.
+
+Böylece Python’daki bütün iþleçleri ayrýntýlý bir þekilde incelemiþ olduk. Dilerseniz þimdi bu konuyla ilgili birkaç uygulama örneði yapalým.

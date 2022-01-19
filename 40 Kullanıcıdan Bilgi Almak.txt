@@ -1,0 +1,24 @@
+
+Kullanýcýdan Bilgi Almak
+
+Þimdiye kadar Python programlama dili ile ilgili epey bilgi edindik. Ama muhtemelen buraya kadar öðrendiklerimiz sizi heyecanlandýrmaktan bir hayli uzaktý. Zira þu ana kadar hep tek yönlü bir programlama faaliyeti yürüttük.
+
+Mesela þimdiye kadar öðrendiklerimizi kullanarak ancak þöyle bir program yazabildik:
+
+isim = "Mübeccel"
+
+print("Merhaba", isim, end="!\n")
+
+Bu programý çalýþtýrdýðýmýzda þöyle bir çýktý alacaðýmýzý biliyorsunuz:
+
+Merhaba Mübeccel!
+
+Bu programýn ne kadar sýkýcý olduðunu herhalde söylemeye gerek yok. Bu programda isim deðiþkenini doðrudan kendimiz yazdýðýmýz için programýmýz hiçbir koþulda Merhaba Mübeccel dýþýnda bir çýktý veremez. Çünkü bu program, tek yönlü bir programlama faaliyetinin ürünüdür.
+
+Halbuki bu deðiþkenin deðerini kendimiz yazmasak, bu deðeri kullanýcýdan alsak ne hoþ olurdu, deðil mi?
+
+Python’da kullanýcýdan herhangi bir veri alýp, yazdýðýmýz programlarý tek taraflý olmaktan kurtarmak için input() adlý bir fonksiyondan faydalanýyoruz.
+
+Ýþte biz bu bölümde, programcýlýk maceramýzý bir üst seviyeye taþýyacak çok önemli bir araç olan bu input() fonksiyonunu derinlemesine inceleyeceðiz. Ama bu bölümde sadece bu fonksiyonu ele almayacaðýz elbette. Burada kullanýcýdan veri almanýn yanýsýra, aldýðýmýz bu veriyi nasýl dönüþtüreceðimizi ve bu veriyi, yazdýðýmýz programlarda nasýl kullanacaðýmýzý da derin derin inceleyeceðiz.
+
+Ýlkin input() fonksiyonunu anlatarak yola koyulalým.

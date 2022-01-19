@@ -1,0 +1,40 @@
+
+Windows
+
+Daha önce de söylediðimiz gibi, Python kodlarýmýzý yazmak için istediðimiz bir metin düzenleyiciyi kullanabiliriz. Hatta Notepad’i bile kullansak olur. Ancak Notepad’den biraz daha geliþmiþ bir metin düzenleyici ile baþlamak iþinizi kolaylaþtýracaktýr.
+
+Python programlama dilini öðrenmeye yeni baþlayan Windows kullanýcýlarý için en uygun metin düzenleyici IDLE’dýr. Baþlat > Tüm Programlar > Python3.5 > IDLE (Python GUI) yolunu takip ederek IDLE’a ulaþabilirsiniz.
+
+IDLE’ý açtýðýnýzda þöyle bir ekranla karþýlaþacaksýnýz:
+
+
+Aslýnda bu ekran size bir yerlerden tanýdýk geliyor olmalý. Dikkat ederseniz beyaz ekranýn en sonunda bordo renkli bir >>> iþareti var. Evet, tahmin ettiðiniz gibi, burasý aslýnda Python’ýn etkileþimli kabuðudur. Yani o siyah etkileþimli kabuk ekranýnda ne yapabilirseniz burada da ayný þeyi yapabilirsiniz. Dilerseniz kendi kendinize bazý denemeler yapýn. Ama þu anda biz IDLE’ýn bu özelliðini deðil, metin düzenleyici olma özelliðini kullanacaðýz. O yüzden yolumuza devam ediyoruz.
+
+Not
+
+Dediðimiz gibi, yukarýda görünen ekran aslýnda Python’ýn etkileþimli kabuðudur. Dolayýsýyla biraz sonra göstereceðimiz kodlarý buraya yazmayacaðýz. Python programlama diline yeni baþlayanlarýn en sýk yaptýðý hatalardan biri de, kaydetmek istedikleri kodlarý yukarýda görünen ekrana yazmaya çalýþmalarýdýr. Unutmayýn, Python’ýn etkileþimli kabuðunda ne yapabiliyorsanýz, IDLE’ý açtýðýnýzda ilk karþýnýza çýkan ekranda da onu yapabilirsiniz. Python’ýn etkileþimli kabuðunda yazdýðýnýz kodlar etkileþimli kabuðu kapattýðýnýzda nasýl kayboluyorsa, yukarýdaki ekrana yazdýðýnýz kodlar da IDLE’ý kapattýðýnýzda kaybolur...
+
+Bir önceki ekranda sol üst köþede File [Dosya] menüsü görüyorsunuz. Oraya týklayýn ve menü içindeki New Window [Yeni Pencere] düðmesine basýn. Þöyle bir ekranla karþýlaþacaksýnýz:
+
+
+Ýþte Python kodlarýmýzý bu beyaz ekrana yazacaðýz. Þimdi bu ekrana þu satýrlarý yazalým:
+
+tarih = "02.01.2012"
+gün = "Pazartesi"
+vakit = "öðleden sonra"
+
+print(tarih, gün, vakit, "buluþalým", end=".\n")
+
+Bu noktadan sonra yapmamýz gereken þey dosyamýzý kaydetmek olacak. Bunun için File > Save as yolunu takip ederek programýmýzý masaüstüne randevu.py adýyla kaydediyoruz.
+
+Þu anda programýmýzý yazdýk ve kaydettik. Artýk programýmýzý çalýþtýrabiliriz. Bunun için IDLE’da Run > Run Module yolunu takip etmeniz veya kýsaca F5 tuþuna basmanýz yeterli olacaktýr. Bu iki yöntemden birini kullanarak programýnýzý çalýþtýrdýðýnýzda þöyle bir çýktý elde edeceksiniz:
+
+02.01.2012 Pazartesi öðleden sonra buluþalým.
+
+Tebrikler! Ýlk Python programýnýzý yazýp çalýþtýrdýnýz... Eðer çalýþtýramadýysanýz veya yukarýdaki çýktý yerine bir hata mesajý aldýysanýz muhtemelen kodlarý yazarken yazým hatasý yapmýþsýnýzdýr. Kendi yazdýðýnýz kodlarý buradaki kodlarla dikkatlice karþýlaþtýrýp tekrar deneyin.
+
+Þimdi gelin isterseniz yukarýda yazdýðýmýz kodlarý þöyle bir kýsaca inceleyelim.
+
+Programýmýzda üç farklý deðiþken tanýmladýðýmýza dikkat edin. Bu deðiþkenler tarih, gün ve vakit adlý deðiþkenlerdir. Daha sonra bu deðiþkenleri birbiriyle birleþtiriyoruz. Bunun için print() fonksiyonundan nasýl yararlandýðýmýzý görüyorsunuz. Ayrýca print() fonksiyonunu kullanýþ biçimimize de dikkat edin. Buradaki end parametresinin anlamýný ve bunun ne iþe yaradýðýný artýk gayet iyi biliyorsunuz. end parametresi yardýmýyla cümlenin en sonuna bir adet nokta yerleþtirip, \n adlý kaçýþ dizisi yardýmýyla da bir alt satýra geçiyoruz.
+
+Böylece basit bir Python programýnýn temel olarak nasýl yazýlýp bir dosyaya kaydedileceðini ve bu programýn nasýl çalýþtýrýlacaðýný öðrenmiþ olduk.

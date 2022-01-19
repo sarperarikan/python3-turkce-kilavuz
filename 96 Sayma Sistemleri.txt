@@ -1,0 +1,17 @@
+
+Sayma Sistemleri
+
+Sayýlar olmadan bilgisayar ve programlama düþünülemez. O yüzden, önceki derslerimizde karakter dizilerini anlatýrken þöyle bir deðinip geçtiðimiz sayýlar konusunu, sayma sistemleri konusunu da ilave ederek, birer programcý adayý olan bizleri yakýndan ilgilendirdiði için mümkün olduðunca ayrýntýlý bir þekilde ele almaya çalýþacaðýz.
+
+Sayýlar ve Sayma Sistemleri konusunu iki farklý bölümde inceleyeceðiz.
+
+Sayýlar konusunun temelini oluþturduðu için, öncelikle sayma sistemlerinden söz edelim.
+
+Öncelikle ‘sayma sistemi’ kavramýný tanýmlayarak iþe baþlayalým. Nedir bu ‘sayma sistemi’ denen þey?
+
+Sayma iþleminin hangi ölçütlere göre yapýlacaðýný belirleyen kurallar bütününe sayma sistemi adý verilir.
+
+Dünyada yaygýn olarak kullanýlan dört farklý sayma sistemi vardýr. Bunlar, onlu, sekizli, on altýlý ve ikili sayma sistemleridir. Bu dördü arasýnda en yaygýn kullanýlan sayma sistemi ise, tabii ki, onlu sistemdir. Ýnsanlarýn elleri ve ayaklarýnda on parmak olduðunu düþünürsek, bu sistemin neden daha yaygýn kullanýldýðýný anlamak aslýnda hiç de zor deðil!
+
+Onlu sistemin yaygýnlýðýný düþünerek, sayma sistemleri konusunu anlatmaya onlu sayma sisteminden baþlayalým.
+

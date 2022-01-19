@@ -1,0 +1,40 @@
+
+Windows Kullanýcýlarý
+
+Windows sürümlerinin hiçbirinde Python kurulu olarak gelmez. O yüzden Windows kullanýcýlarý, Python’ý sitesinden indirip kuracak.
+
+Bunun için öncelikle http://www.python.org/downloads adresine gidiyoruz.
+
+Bu adrese gittiðinizde, üzerinde ‘Download Python 3.5.1‘ ve ‘Download 2.7.11’ yazan, yan yana iki düðme göreceksiniz. Daha önce de söylediðimiz gibi, eðer bir Python sürüm numarasý ‘2’ ile baþlýyorsa o sürüm 2.x serisine, yok eðer ‘3’ ile baþlýyorsa 3.x serisine aittir. Dolayýsýyla ilk düðme Python3 sürümünü, ikinci düðme ise Python2 sürümünü içerir.
+
+Biz bu kitapta Python’ýn 3.x serisini anlatacaðýmýz için (yeni Python sürümleri çýktýðýnda o düðmeler üzerinde yazan sürüm numaralarý deðiþecek de olsa), ‘3’ ile baþlayan sürüm numarasýný içeren düðmeye týklamaya özen gösteriyoruz. Bu düðmeye týkladýðýnýzda bilgisayarýnýza .exe uzantýlý kurulum dosyasý inecek. Bu dosyaya çift týklayarak kurulum programýný baþlatabilirsiniz.
+
+Not
+
+Eðer indireceðiniz Python sürümünün mimarisini ve sürümünü kendiniz seçmek isterseniz https://www.python.org/ftp/python/3.5.1 adresinden kendinize uygun olan sürümü bulup indirebilirsiniz.
+
+Kurulum dosyasýna çift týkladýðýnýzda karþýnýza ilk gelen ekranda, pencerenin alt tarafýnda þu kutucuklarý göreceksiniz:
+
+
+Install launcher for all users (recommended) 
+Add Python 3.5 to PATH 
+
+Burada ilk kutucuk zaten seçilidir. Bunu bu þekilde býrakabilirsiniz. Ýkinci kutucuk ise Python’ý yola eklememizi, böylece yalnýzca python komutu vererek Python’ý baþlatabilmemizi saðlayacak. O yüzden oradaki ikinci kutucuðu da iþaretliyoruz.
+
+Ayný pencerenin üst tarafýnda ise þu seçenekleri göreceksiniz:
+
+
+-> Install Now 
+-> Customize Installation 
+
+Burada ‘Install Now’ yazan kýsma týklayarak kurulumu baþlatýyoruz.
+
+Eðer Python’ýn bilgisayarda nereye kurulacaðýný ve baþka birtakým kurulum özelliklerini deðiþtirmek istiyorsanýz ‘Customize Installation’ yazýlý kýsma týklayabilirsiniz. Ben bu kitapta sizin ‘Install Now’ yazan kýsma týklayarak kurulum yaptýðýnýzý varsayacaðým.
+
+Not
+
+Python’ýn resmi sitesinde dolaþýrken kurulum dosyalarý arasýnda, ‘web-based installer’ (web tabanlý kurulum betiði) adlý bir kurulum dosyasý görebilirsiniz. Bu kurulum dosyasý, Python’ýn çalýþmasý için gereken dosyalarý kurulum esnasýnda internetten indirip kuran, 1MB’dan küçük bir kurulum programý içerir. Dolayýsýyla eðer kurulumu bu dosyadan yapacaksanýz, kesintisiz bir internet baðlantýsýna ihtiyacýnýz olacak.
+
+Uyarý
+
+Eðer Windows’ta Python’ý kurmaya çalýþýrken hata alýyorsanýz, muhtemelen iþletim sisteminiz güncel deðildir. Örneðin Windows 7’de Python kurabilmeniz için, SP1 (Service Pack 1) kurulu olmalýdýr. Windows güncellemelerini kurduktan sonra Python’ý kurmayý tekrar deneyin.

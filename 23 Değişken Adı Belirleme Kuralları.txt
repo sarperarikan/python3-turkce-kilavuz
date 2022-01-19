@@ -1,0 +1,140 @@
+
+Deðiþken Adý Belirleme Kurallarý
+
+Python programlama dilinde, deðiþken adý olarak belirleyebileceðimiz kelime sayýsý neredeyse sýnýrsýzdýr. Yani hemen hemen her kelimeyi deðiþken adý olarak kullanabiliriz. Ama yine de deðiþken adý belirlerken dikkat etmemiz gereken bazý kurallar var. Bu kurallarýn bazýlarý zorunluluk, bazýlarý ise yalnýzca tavsiye niteliðindedir.
+
+Þimdi bu kurallarý tek tek inceleyelim:
+
+1. Deðiþken adlarý bir sayý ile baþlayamaz. Yani þu kullaným yanlýþtýr:
+
+>>> 3_kilo_elma = "5 TL"
+
+2. Deðiþken adlarý aritmetik iþleçlerle baþlayamaz. Yani þu kullaným yanlýþtýr:
+
+>>> +deðer = 4568
+
+3. Deðiþken adlarý ya bir alfabe harfiyle ya da _ iþaretiyle baþlamalýdýr:
+
+>>> _deðer = 4568
+>>> deðer = 4568
+
+4. Deðiþken adlarý içinde Türkçe karakterler kullanabilirsiniz. Ancak ileride beklenmedik uyum sorunlarý çýkmasý ihtimaline karþý deðiþken adlarýnda Türkçe karakter kullanmaktan kaçýnmak isteyebilirsiniz.
+
+5. Aþaðýdaki kelimeleri deðiþken adý olarak kullanamazsýnýz:
+
+['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class',
+'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for',
+'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not',
+'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+
+Bunlar Python’da özel anlam ifade eden kelimelerdir. Etkileþimli kabuk zaten bu kelimeleri deðiþken adý olarak kullanmanýza izin vermez. Örneðin:
+
+>>> elif = "hoþ kýz"
+
+  File "<stdin>", line 1
+elif = "hoþ kýz"
+^
+SyntaxError: invalid syntax
+
+>>> as = "kare"
+
+  File "<stdin>", line 1
+as = "kare"
+^
+SyntaxError: invalid syntax
+
+>>> False = 45
+
+  File "<stdin>", line 1
+SyntaxError: assignment to keyword
+
+Ama ilerde göreceðimiz gibi, programlarýnýzý bir dosyaya yazarken bu kelimeleri deðiþken adý olarak kullanmaya çalýþýrsanýz programýnýz tespit etmesi çok güç hatalar üretecektir.
+
+Bu arada elbette yukarýdaki listeyi bir çýrpýda ezberlemeniz beklenmiyor sizden. Python programlama dilini öðrendikçe özel kelimeleri bir bakýþta tanýyabilecek duruma geleceksiniz. Ayrýca eðer isterseniz þu komutlarý vererek, istediðiniz her an yukarýdaki listeye ulaþabilirsiniz:
+
+>>> import keyword
+>>> keyword.kwlist
+
+['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class',
+'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for',
+'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not',
+'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+
+Size bir soru: Acaba bu listede kaç tane kelime var?
+
+Bu soru karþýsýnda listedeki kelimeleri tek tek elle saymaya kalkýþan arkadaþlarýma teessüflerimi iletiyorum... Bu tür iþler için hangi aracý kullanabileceðimizi artýk çok iyi biliyor olmalýsýnýz:
+
+>>> len(keyword.kwlist)
+
+33
+
+Bu kodlarý þöyle yazabileceðimizi de biliyorsunuz:
+
+>>> yasaklý_kelimeler = keyword.kwlist
+>>> len(yasaklý_kelimeler)
+
+33
+
+Bu arada, yukarýdaki kodlarýn bir kýsmýný henüz anlayamamýþ olabilirsiniz. Hiç endiþe etmeyin. Yukarýdaki kodlarý vermemizin sebebi deðiþken adý olarak kullanýlamayacak kelimelere kýsa yoldan nasýl ulaþabileceðinizi gösterebilmek içindir. Bir-iki bölüm sonra burada yazdýðýmýz kodlarý rahatlýkla anlayabilecek düzeye geleceksiniz.
+
+Yukarýda verdiðimiz kodlarýn çýktýsýndan anladýðýmýza göre, toplam 33 tane kelime varmýþ deðiþken adý belirlerken kullanmaktan kaçýnmamýz gereken...
+
+6. Yukarýdaki kelimeler dýþýnda, Python programlama diline ait fonksiyon ve benzeri araçlarýn adlarýný da deðiþken adý olarak kullanmamalýsýnýz. Örneðin yazdýðýnýz programlarda deðiþkenlerinize type veya len adý vermeyin. Çünkü ‘type’ ve ‘len’ Python’a ait iki önemli fonksiyonun adýdýr. Eðer mesela bir deðiþkene type adýný verirseniz, o programda artýk type() fonksiyonunu kullanamazsýnýz:
+
+>>> type = 3456
+
+Bu örnekte type adýnda bir deðiþken tanýmladýk. Þimdi mesela “elma” kelimesinin tipini denetlemek için type() fonksiyonunu kullanmaya çalýþalým:
+
+>>> type("elma")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not callable
+
+Gördüðünüz gibi, artýk type() fonksiyonu çalýþmýyor. Çünkü siz ‘type’ kelimesini bir deðiþken adý olarak kullanarak, type() fonksiyonunu kullanýlamaz hale getirdiniz.
+
+Bu durumdan kurtulmak için etkileþimli kabuðu kapatýp tekrar açabilirsiniz. Ya da eðer etkileþimli kabuðu kapatmak istemiyorsanýz þu komut yardýmýyla type deðiþkenini ortadan kaldýrmayý da tercih edebilirsiniz:
+
+>>> del type
+
+Böylece, (tahmin edebileceðiniz gibi delete (silmek) kelimesinin kýsaltmasý olan) del komutuyla type deðiþkenini silmiþ oldunuz. Artýk ‘type’ kelimesi yine type() fonksiyonunu çaðýracak:
+
+>>> type("elma")
+
+<class 'str'>
+
+7. Deðiþken adlarýný belirlerken, deðiþkeni oluþturan kelimeler arasýnda boþluk býrakýlamaz. Yani þu kullaným yanlýþtýr:
+
+>>> kullanýcý adý = "istihza"
+
+Yukarýdaki deðiþkeni þu þekilde tanýmlayabiliriz:
+
+>>> kullanýcý_adý = "istihza"
+
+Ya da þöyle:
+
+>>> kullanýcýAdý = "istihza"
+
+8. Deðiþken adlarý belirlerken, deðiþken adýnýn, deðiþkenin deðerini olabildiðince betimlemesine dikkat etmemiz kodlarýmýzýn okunaklýlýðýný artýracaktýr. Örneðin:
+
+>>> personel_sayýsý = 45
+
+Yukarýdaki, tanýmladýðý deðere uygun bir deðiþken adýdýr. Þu ise kurallara uygun bir deðiþken adý olsa da yeterince betimleyici deðildir:
+
+>>> sayý = 45
+
+9. Deðiþken adlarý ne çok kýsa, ne de çok uzun olmalýdýr. Mesela þu deðiþken adý, kodlarý okuyan kiþiye, deðiþken deðerinin anlamý konusunda pek fikir vermez:
+
+>>> a = 345542353
+
+Þu deðiþken adý ise gereksiz yere uzundur:
+
+>>> türkiye_büyük_millet_meclisi_milletvekili_sayýsý = 550
+
+Deðiþken adlarýnýn uzunluðunu makul seviyede tutmak esastýr:
+
+>>> tbmm_mv_sayýsý = 550
+
+Yukarýda verdiðimiz bütün bu örnekler bize, Python’da deðiþkenlerin, deðerlere atanmýþ adlardan ibaret olduðunu gösteriyor. Deðiþkenler, yazdýðýmýz programlarda bize çok büyük kolaylýk saðlar. Mesela 123432456322 gibi bir sayýyý ya da “Türkiye Cumhuriyeti Çalýþma ve Sosyal Güvenlik Bakanlýðý” gibi bir karakter dizisini gerektiði her yerde tek tek elle yazmak yerine, bunlarý birer deðiþkene atayarak, gerektiðinde sadece bu deðiþken adýný kullanmak çok daha mantýklý bir iþtir.
+
+Ayrýca zaten ileride kullanýcýdan veri almaya baþladýðýnýzda, aldýðýnýz bu verileri, yazdýðýnýz programda kullanabilmek için mutlaka bir deðiþkene atamanýz gerekecek. O yüzden Python’daki deðiþken kavramýný þimdiden iyi tanýyýp anlamakta büyük fayda var.

@@ -1,0 +1,107 @@
+
+append()
+
+append kelimesi Ýngilizcede ‘eklemek, ilave etmek, iliþtirmek’ gibi anlamlara gelir. append() metodunun görevi de kelime anlamýyla uyumludur. Bu metodu, bir listeye öðe eklemek için kullanýyoruz. Mesela:
+
+>>> liste = ["elma", "armut", "çilek"]
+>>> liste.append("erik")
+
+Bu metot, yeni öðeyi listenin en sonuna ekler. Mesela yukarýdaki örnekte “erik” adlý karakter dizisi listede “çilek” adlý karakter dizisinin saðýna eklendi.
+
+Hatýrlarsanýz bir önceki bölümde listeye öðe ekleme iþini + iþleci ile de yapabileceðimizi söylemiþtik. Dolayýsýyla, aslýnda yukarýdaki kodu þöyle de yazabiliriz:
+
+>>> liste = ["elma", "armut", "çilek"]
+>>> liste = liste + ["erik"]
+>>> print(liste)
+
+['elma', 'armut', 'çilek', 'erik']
+
+Bu iki yöntem birbiriyle ayný sonucu verse de hem pratiklik hem de iþleyiþ bakýmýndan bu iki yöntemin birbirinden farklý olduðunu görüyoruz.
+
+Pratiklik açýsýndan bakarsak, append() metodununu kullanmanýn + iþlecini kullanmaya kýyasla daha kolay olduðunu herhalde kimse reddetmeyecektir. Bu iki yöntem iþleyiþ bakýmýndan da birbirinden ayrýlýyor. Zira + iþlecini kullandýðýmýzda listeye yeni bir öðe eklerken aslýnda liste adlý baþka bir liste daha oluþturmuþ oluyoruz. Hatýrlarsanýz önceki bölümlerde listelerin deðiþtirilebilir (mutable) veri tipleri olduðunu söylemiþtik. Ýþte append() metodu sayesinde listelerin bu özelliðinden sonuna kadar yararlanabiliyoruz. + iþlecini kullandýðýmýzda ise, orijinal listeyi deðiþtirmek yerine yeni bir liste oluþturduðumuz için, sanki listelere karakter dizisi muamelesi yapmýþ gibi oluyoruz. Gördüðünüz gibi, listeye append() metodunu uyguladýktan sonra bunu bir deðiþkene atamamýza gerek kalmýyor. append() metodu orijinal liste üzerinde doðrudan deðiþiklik yapmamýza izin verdiði için daha az kod yazmamýzý ve programýmýzýn daha performanslý çalýþmasýný saðlýyor.
+
++ iþleci ile append() metodu iþlev olarak birbirine benzese de bu iki yöntem arasýnda önemli farklýlýklar da vardýr. Mesela þu örneðe bir göz atalým:
+
+iþletim_sistemleri = ["Windows", "GNU/Linux", "Mac OS X"]
+platformlar = ["IPhone", "Android", "S60"]
+hepsi = iþletim_sistemleri + platformlar
+print(hepsi)
+
+['Windows', 'GNU/Linux', 'Mac OS X', 'IPhone', 'Android', 'S60']
+
+Burada iki farklý listeyi, + iþleci kullanarak birleþtirdik. Ayný iþi append() metoduyla þu þekilde yapabiliriz:
+
+iþletim_sistemleri = ["Windows", "GNU/Linux", "Mac OS X"]
+platformlar = ["IPhone", "Android", "S60"]
+for i in platformlar:
+iþletim_sistemleri.append(i)
+
+print(iþletim_sistemleri)
+
+Burada platformlar adlý liste üzerinde bir for döngüsü kurmamýzýn nedeni, append() metodunun yalnýzca tek bir parametre alabilmesidir. Yani bu metodu kullanarak bir listeye birden fazla öðe ekleyemezsiniz:
+
+>>> liste = [1, 2, 3]
+>>> liste.append(4, 5, 6)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: append() takes exactly one argument (3 given)
+
+Bu sebeple, ekleyeceðiniz listenin öðeleri üzerinde bir for döngüsü kurmanýz gerekir:
+
+>>> liste = [1, 2, 3]
+>>> for i in [4, 5, 6]:
+... liste.append(i)
+...
+>>> print(liste)
+
+[1, 2, 3, 4, 5, 6]
+
+Bir listeye birden fazla öðe eklemek için aklýnýza þöyle bir yöntem de gelmiþ olabilir:
+
+>>> liste = [1, 2, 3]
+>>> liste.append([4, 5, 6])
+
+Ancak bu komutun çýktýsý pek beklediðiniz gibi olmayabilir:
+
+>>> print(liste)
+
+[1, 2, 3, [4, 5, 6]]
+
+Gördüðünüz gibi, [4, 5, 6] öðesi listeye tek parça olarak eklendi. Eðer istediðiniz þey buysa ne âlâ! Ama deðilse, for döngüsü ya da + iþleci ile istediðiniz çýktýyý elde edebilirsiniz.
+
+Þöyle bir örnek daha düþünün: Diyelim ki kullanýcýnýn girdiði bütün sayýlarý birbiriyle çarpan bir uygulama yazmak istiyoruz. Bunun için þöyle bir kod yazabiliriz:
+
+sonuç = 1
+
+while True:
+sayý = input("sayý (hesaplamak için q): ")
+if sayý == "q":
+break
+
+sonuç *= int(sayý)
+
+print(sonuç)
+
+Burada kullanýcý her döngüde bir sayý girecek ve programýmýz girilen bu sayýyý sonuç deðiþkeninin o anki deðeriyle çarparak yine sonuç deðiþkenine gönderecek. Böylece kullanýcý tarafýndan girilen bütün sayýlarýn çarpýmýný elde etmiþ olacaðýz. Kullanýcýnýn ‘q’ harfine basmasýyla birlikte de sonuç deðiþkeninin deðeri ekranda görünecek. Yalnýz burada birkaç sorun var. Diyelim ki kullanýcý hiçbir sayý girmeden ‘q’ harfine basarsa, sonuç deðiþkeninin 1 olan deðeri ekranda görünecek ve bu þekilde kullanýcý yanlýþ bir sonuç elde etmiþ olacak. Ayrýca çarpma iþlemi için en az 2 adet sayý gerekiyor. Dolayýsýyla kullanýcý 2‘den az sayý girerse de programýmýz yanlýþ sonuç verecektir. Kullanýcýnýn yeterli miktarda sayý girip girmediðini tespit edebilmek için yine listelerden ve listelerin append() metodundan yararlanabiliriz:
+
+kontrol = []
+sonuç = 1
+
+while True:
+sayý = input("sayý (hesaplamak için q): ")
+if sayý == "q":
+break
+kontrol.append(sayý)
+sonuç *= int(sayý)
+
+if len(kontrol) < 2:
+print("Yeterli sayý girilmedi!")
+else:
+print(sonuç)
+
+Burada önceki koda ilave olarak, kontrol adlý boþ bir liste tanýmladýk. Bu liste kullanýcýnýn girdiði sayýlarý depolayacak. Bir önceki örnekte kullanýcýnýn girdiði sayýlarý hiçbir yerde depolamadýk. Orada yaptýðýmýz þey her döngüde kullanýcý tarafýndan girilen sayýyý sonuç deðiþkeninin deðeriyle çarpýp yine sonuç deðiþkenine göndermekti. Dolayýsýyla kullanýcý tarafýndan girilen sayýlar bir yerde tutulmadýðý için kaybolup gidiyordu. Burada ise kontrol adlý liste, kullanýcý tarafýndan girilen sayýlarý tuttuðu için, bu sayýlarý daha sonra istediðimiz gibi kullanabilme imkanýna kavuþuyoruz.
+
+Ayrýca bu ikinci kodlarda kontrol deðiþkeninin boyutuna bakarak kullanýcýnýn 2‘den az sayý girip girmediðini denetliyoruz. Eðer kontrol listesinin uzunluðu 2‘den azsa kullanýcý çarpma iþlemi için yeterli sayý girmemiþ demektir. Böyle bir durumda çarpma iþlemini yapmak yerine, kullanýcýya ‘Yeterli sayý girilmedi!’ þeklinde bir uyarý mesajý gösteriyoruz.
+
+append() metodu listelerin en önemli metotlarýndan biridir. Hem kendi yazdýðýnýz, hem de baþkalarýnýn yazdýðý programlarda append() metodunu sýkça göreceksiniz. Dolayýsýyla listelerin hiçbir metodunu bilmeseniz bile append() metodunu öðrenmelisiniz.

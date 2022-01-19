@@ -1,0 +1,721 @@
+
+Kaçýþ Dizileri
+
+Python’da karakter dizilerini tanýmlayabilmek için tek, çift veya üç týrnak iþaretlerinden faydalandýðýmýzý geçen bölümde öðrenmiþtik. Python bir verinin karakter dizisi olup olmadýðýna bu týrnak iþaretlerine bakarak karar verdiði için, tek, çift ve üç týrnak iþaretleri Python açýsýndan özel bir önem taþýyor. Zira Python’ýn gözünde bir baþlangýç týrnaðý ile bitiþ týrnaðý arasýnda yer alan her þey bir karakter dizisidir.
+
+Örneðin ilk olarak bir “ iþareti koyup ardýndan “elma þeklinde devam ettiðinizde, Python ilk týrnaðý gördükten sonra karakter dizisini tanýmlayabilmek için ikinci bir týrnak iþareti aramaya baþlar. Siz “elma” þeklinde kodunuzu tamamladýðýnýzda ise Python bellekte “elma” adlý bir karakter dizisi oluþturur.
+
+Bu noktada size þöyle bir soru sormama izin verin: Acaba týrnak iþaretleri herhangi bir metin içinde kaç farklý amaçla kullanýlabilir?
+
+Ýsterseniz bu sorunun cevabýný örnekler üzerinde vermeye çalýþalým:
+
+Ahmet, “Bugün sinemaya gidiyorum,” dedi.
+
+Burada týrnak iþaretlerini, bir baþkasýnýn sözlerini aktarmak için kullandýk.
+
+‘book’ kelimesi Türkçede ‘kitap’ anlamýna gelir.
+
+Burada ise týrnak iþaretlerini bazý kelimeleri vurgulamak için kullandýk.
+
+Bir de þuna bakalým:
+
+Yarýn Adana’ya gidiyorum.
+
+Burada da týrnak iþaretini, çekim eki olan ‘-(y)a’ ile özel isim olan ‘Adana’ kelimesini birbirinden ayýrmak için kesme iþareti görevinde kullandýk.
+
+Þimdi yukarýda verdiðimiz ilk cümleyi bir karakter dizisi olarak tanýmlamaya çalýþalým:
+
+>>> 'Ahmet, "Bugün sinemaya gidiyorum," dedi.'
+
+Burada karakter dizisini tanýmlamaya tek týrnak iþareti ile baþladýk. Böylece Python bu karakter dizisini tanýmlama iþlemini bitirebilmek için ikinci bir tek týrnak iþareti daha aramaya koyuldu ve aradýðý tek týrnak iþaretini cümlenin sonunda bularak, karakter dizisini düzgün bir þekilde oluþturabildi.
+
+Dediðimiz gibi, Python’ýn gözünde týrnak iþaretleri bir karakter dizisini baþka veri tiplerinden ayýrt etmeye yarayan bir ölçüttür. Ama biz insanlar, yukarýda verdiðimiz örnek cümlelerden de göreceðiniz gibi, programlama dillerinden farklý olarak, týrnak iþaretlerini bir metin içinde daha farklý amaçlar için de kullanabiliyoruz.
+
+Þimdi yukarýdaki karakter dizisini þöyle tanýmlamaya çalýþtýðýmýzý düþünün:
+
+>>> "Ahmet, "Bugün sinemaya gidiyorum," dedi."
+
+Ýþte burada Python’ýn çýkarlarý ile bizim çýkarlarýmýz birbiriyle çatýþtý. Python karakter dizisini baþlatan ilk çift týrnak iþaretini gördükten sonra, karakter dizisini tanýmlama iþlemini bitirebilmek için ikinci bir týrnak iþareti daha aramaya koyuldu. Bu arayýþ sýrasýnda da ‘Bugün’ kelimesinin baþýndaki çift týrnak iþaretini gördü ve karakter dizisinin þu olduðunu zannetti:
+
+>>> "Ahmet, "
+
+Buraya kadar bir sorun yok. Bu karakter dizisi Python’ýn sözdizimi kurallarýna uygun.
+
+Karakter dizisi bu þekilde tanýmlandýktan sonra Python cümlenin geri kalanýný okumaya devam ediyor ve herhangi bir týrnak iþareti ile baþlamayan ve kendisinden önce gelen öðeden herhangi bir virgül iþareti ile ayrýlmamýþ ‘Bugün’ kelimesini görüyor. Eðer bir kelime týrnak iþareti ile baþlamýyorsa bu kelime ya bir deðiþkendir ya da sayýdýr. Ama ‘Bugün’ kelimesi ne bir deðiþken, ne de bir sayý olduðu, üstelik önceki öðeden de virgülle ayrýlmadýðý için Python’ýn hata vermekten baþka çaresi kalmýyor. Çünkü biz burada ‘Bugün’ kelimesinin baþ tarafýndaki çift týrnak iþaretini karakter dizisi tanýmlamak için deðil, baþkasýnýn sözlerini aktarmak amacýyla kullandýk. Ancak elbette bir programlama dili bizim amacýmýzýn ne olduðunu kestiremez ve hata mesajýný suratýmýza yapýþtýrýr:
+
+File "<stdin>", line 1
+"Ahmet, "Bugün sinemaya gidiyorum," dedi."
+^
+SyntaxError: invalid syntax
+
+Peki biz böyle bir durumda ne yapmalýyýz?
+
+Bu hatayý engellemek için karakter dizisini tanýmlamaya çift týrnak yerine tek týrnakla ya da üç týrnakla baþlayabiliriz:
+
+>>> 'Ahmet, "Bugün sinemaya gidiyorum," dedi.'
+
+... veya:
+
+>>> """Ahmet, "Bugün sinemaya gidiyorum," dedi."""
+
+Böylece karakter dizisini baþlatan iþaret ‘Bugün sinemaya gidiyorum,’ cümlesinin baþýndaki ve sonundaki iþaretlerden farklý olduðu için, Python okuma esnasýnda bu cümleye takýlmaz ve doðru bir þekilde, karakter dizisini kapatan týrnak iþaretini bulabilir.
+
+Bu yöntem tamamen geçerli ve mantýklýdýr. Ama eðer istersek, ayný karakter dizisini çift týrnakla tanýmlayýp, yine de hata almayý engelleyebiliriz. Peki ama nasýl?
+
+Ýþte burada ‘kaçýþ dizileri’ adý verilen birtakým araçlardan faydalanacaðýz.
+
+Peki nedir bu ‘kaçýþ dizisi’ denen þey?
+
+Kaçýþ dizileri, Python’da özel anlam taþýyan iþaret veya karakterleri, sahip olduklarý bu özel anlam dýþýnda bir amaçla kullanmamýzý saðlayan birtakým araçlardýr. Mesela yukarýda da örneklerini verdiðimiz gibi, týrnak iþaretleri Python açýsýndan özel anlam taþýyan iþaretlerdir. Normalde Python bu iþaretleri karakter dizilerini tanýmlamak için kullanýr. Ama eðer siz mesela bir metin içinde bu týrnak iþaretlerini farklý bir amaçla kullanacaksanýz Python’ý bu durumdan haberdar etmeniz gerekiyor. Ýþte kaçýþ dizileri, Python’ý böyle bir durumdan haberdar etmemize yarayan araçlardýr.
+
+Python’da pek çok kaçýþ dizisi bulunur. Biz burada bu kaçýþ dizilerini tek tek inceleyeceðiz. O halde hemen iþe koyulalým.
+
+
+Ters Taksim (\)
+
+Yukarýda verdiðimiz örneklerde, çift týrnakla gösterdiðimiz karakter dizilerinin içinde de çift týrnak iþareti kullanabilmek için birkaç farklý yöntemden yararlanabildiðimizi öðrenmiþtik. Buna göre, eðer bir karakter dizisi içinde çift týrnak iþareti geçiyorsa, o karakter dizisini tek týrnakla; eðer tek týrnak geçiyorsa da o karakter dizisini çift týrnakla tanýmlayarak bu sorunun üstesinden gelebiliyorduk. Ama daha önce de söylediðimiz gibi, ‘kaçýþ dizileri’ adý verilen birtakým araçlarý kullanarak, mesela içinde çift týrnak geçen karakter dizilerini yine çift týrnakla tanýmlayabiliriz.
+
+Dilerseniz, kaçýþ dizisi kavramýný açýklamaya geçmeden önce bununla ilgili birkaç örnek verelim. Bu sayede ne ile karþý karþýya olduðumuz, zihnimizde biraz daha belirginleþebilir:
+
+>>> print('Yarýn Adana\'ya gidiyorum.')
+
+Yarýn Adana'ya gidiyorum.
+
+Bir örnek daha verelim:
+
+>>> print("\"book\" kelimesi Türkçede \"kitap\" anlamýna gelir.")
+
+"book" kelimesi Türkçede "kitap" anlamýna gelir.
+
+Burada da cümle içinde çift týrnak iþaretlerini kullandýðýmýz halde, \ iþaretleri sayesinde karakter dizilerini yine çift týrnakla tanýmlayabildik.
+
+Bir de þu örneðe bakalým:
+
+>>> print("Python programlama dilinin adý \"piton\" yýlanýndan gelmez")
+
+Bütün bu örneklerde, karakter dizisini hem çift týrnakla tanýmlayýp hem de karakter dizisi içinde çift týrnak iþaretlerini kullandýðýmýz halde, herhangi bir hata almadýðýmýzý görüyorsunuz. Yukarýdaki kodlarda hata almamýzý önleyen þeyin \ iþareti olduðu belli. Ama dilerseniz bu iþaretin, hata almamýzý nasýl önlediðini anlatmadan önce son bir örnek daha verelim.
+
+Hatýrlarsanýz önceki sayfalarda þöyle bir karakter dizisi ile karþýlaþmýþtýk:
+
+>>> print('Ýstanbul'un 5 günlük hava durumu tahmini')
+
+  File "<stdin>", line 1
+print('Ýstanbul'un 5 günlük hava durumu tahmini')
+^
+SyntaxError: invalid syntax
+
+Burada da ‘Ýstanbul’un’ kelimesi içinde geçen týrnak iþareti nedeniyle karakter dizisini tek týrnak kullanarak tanýmlayamýyorduk. Bu karakter dizisini hatasýz bir þekilde tanýmlayabilmek için ya çift týrnak ya da üç týrnak kullanmamýz gerekiyordu:
+
+>>> print("Ýstanbul'un 5 günlük hava durumu tahmini")
+
+Ýstanbul'un 5 günlük hava durumu tahmini
+
+... veya:
+
+>>> print("""Ýstanbul'un 5 günlük hava durumu tahmini""")
+
+Ýstanbul'un 5 günlük hava durumu tahmini
+
+Týpký önceki örneklerde olduðu gibi, yukarýdaki karakter dizisini de aslýnda tek týrnakla tanýmlayýp hata oluþmasýný önleyebiliriz. Hemen görelim:
+
+>>> print('Ýstanbul\'un 5 günlük hava durumu tahmini')
+
+Ýstanbul'un 5 günlük hava durumu tahmini
+
+Bütün örneklerde \ iþaretini kullandýðýmýzý görüyorsunuz. Ýþte bu tür iþaretlere Python’da kaçýþ dizisi (escape sequence) adý verilir. Bu iþaretler karakter dizilerini tanýmlarken oluþabilecek hatalardan kaçmamýzý saðlar. Peki bu \ iþareti nasýl oluyor da karakter dizisini tanýmlarken hata almamýzý önlüyor? Gelin bu süreci adým adým tarif edelim:
+
+Python bir karakter dizisi tanýmladýðýmýzda, karakter dizisini soldan saða doðru okumaya baþlar. Mesela yukarýdaki örnekte ilk olarak karakter dizisini tanýmlamaya tek týrnakla baþladýðýmýzý görür.
+
+Python karakter dizisini baþlatan bu tek týrnak iþaretini gördüðü zaman, soldan saða doðru ilerleyerek karakter dizisini bitirecek olan tek týrnak iþaretini aramaya baþlar.
+
+Soldan saða doðru ilerlerken ‘Ýstanbul’un’ kelimesi içinde geçen kesme iþaretini görür ve karakter dizisinin burada sona erdiðini düþünür. Ancak karakter dizisini sona erdiren iþaret bu olmadýðý için Python’ýn hata vermekten baþka çaresi kalmaz.
+
+Ýþte biz ‘Ýstanbul’un’ kelimesi içinde geçen bu kesme iþaretinin sol tarafýna bir adet \ iþareti yerleþtirerek Python’a, ‘Aradýðýn iþaret bu deðil. Sen karakter dizisini okumaya devam et. Biraz sonra aradýðýn týrnaðý bulacaksýn!’ mesajý vermiþ, yani orada týrnak iþaretini farklý bir amaçla kullandýðýmýz konusunda Python’ý bilgilendirmiþ oluruz.
+
+Þurada da ayný durum sözkonusu:
+
+>>> print("Python programlama dilinin adý \"piton\" yýlanýndan gelmez")
+
+Týpký bir önceki örnekte olduðu gibi, burada da Python karakter dizisini soldan saða doðru okumaya baþlýyor, karakter dizisini baþlatan çift týrnak iþaretini görüyor ve bunun üzerine Python karakter dizisini bitirecek olan çift týrnak iþaretini aramaya koyuluyor.
+
+Karakter dizisini soldan saða doðru okuduðu sýrada, karakter dizisi içinde geçen ‘piton’ kelimesini görüyor. Eðer burada bir önlem almazsak Python bu kelimenin baþýndaki çift týrnak iþaretini, karakter dizisini sona erdiren týrnak olarak algýlar ve durum aslýnda böyle olmadýðý için de hata verir.
+
+Bu hatayý önlemek için ‘piton’ kelimesinin baþýndaki çift týrnaðýn soluna bir adet \ iþareti yerleþtirerek Python’a, ‘Aradýðýn týrnak bu deðil!’ mesajý veriyoruz. Yani bir bakýma, \ adlý kaçýþ dizisi kendisini týrnak iþaretine siper edip Python’ýn bu týrnaðý görmesine mani oluyor...
+
+Bunun üzerine Python bu çift týrnak iþaretini görmezden gelerek, soldan saða doðru okumaya devam eder ve yol üzerinde ‘piton’ kelimesinin sonundaki çift týrnak iþaretini görür. Eðer burada da bir önlem almazsak Python yine bir hata verecektir.
+
+Týpký biraz önce yaptýðýmýz gibi, bu týrnak iþaretinin de soluna bir adet \ iþareti yerleþtirerek Python’a, ‘Aradýðýn týrnak bu da deðil. Sen yine okumaya devam et!’ mesajý veriyoruz.
+
+Bu mesajý alan Python karakter dizisini soldan saða doðru okumaya devam ediyor ve sonunda karakter dizisini bitiren çift týrnak iþaretini bularak bize hatasýz bir çýktý veriyor.
+
+Böylece \ iþareti üzerinden hem kaçýþ dizilerinin ne olduðunu öðrenmiþ, hem de bu kaçýþ dizisinin nasýl kullanýlacaðýna dair örnekler vermiþ olduk. Ancak \ kaçýþ dizisinin yetenekleri yukarýdakilerle sýnýrlý deðildir. Bu kaçýþ dizisini, uzun karakter dizilerini bölmek için de kullanabiliriz. Þimdi þu örneði dikkatlice inceleyin:
+
+>>> print("Python 1990 yýlýnda Guido Van Rossum \
+... tarafýndan geliþtirilmeye baþlanmýþ, oldukça \
+... güçlü ve yetenekli bir programlama dilidir.")
+
+Python 1990 yýlýnda Guido Van Rossum tarafýndan geliþtirilmeye
+baþlanmýþ, oldukça güçlü ve yetenekli bir programlama dilidir.
+
+Normal þartlar altýnda, bir karakter dizisini tanýmlamaya tek veya çift týrnakla baþlamýþsak, karakter dizisinin kapanýþ týrnaðýný koymadan Enter tuþuna bastýðýmýzda Python bize bir hata mesajý gösterir:
+
+>>> print("Python 1990 yýlýnda Guido Van Rossum
+
+  File "<stdin>", line 1
+print("Python 1990 yýlýnda Guido Van Rossum
+^
+SyntaxError: EOL while scanning string literal
+
+Ýþte \ kaçýþ dizisi bizim burada olasý bir hatadan kaçmamýzý saðlar. Eðer Enter tuþuna basmadan önce bu iþareti kullanýrsak Python týpký üç týrnak iþaretlerinde þahit olduðumuz gibi, hata vermeden bir alt satýra geçecektir. Bu sýrada, yani \ kaçýþ dizisini koyup Enter tuþuna bastýðýmýzda >>> iþaretinin ... iþaretine dönüþtüðünü görüyorsunuz. Bu iþaretin, Python’ýn bize verdiði bir ‘Yazmaya devam et!’ mesajý olduðunu biliyorsunuz.
+
+
+Satýr Baþý (\n)
+
+Python’daki en temel kaçýþ dizisi biraz önce örneklerini verdiðimiz \ iþaretidir. Bu kaçýþ dizisi baþka karakterlerle birleþerek, farklý iþlevlere sahip yeni kaçýþ dizileri de oluþturabilir. Aslýnda bu olguya yabancý deðiliz. Önceki sayfalarda bu duruma bir örnek vermiþtik. Hatýrlarsanýz print() fonksiyonunu anlatýrken end parametresinin ön tanýmlý deðerinin \n, yani satýr baþý karakteri olduðunu söylemiþtik.
+
+Not
+
+Satýr baþý karakterine ‘yeni satýr karakteri’ dendiði de olur.
+
+Satýr baþý karakterini ilk öðrendiðimizde bu karakteri anlatýrken bazý örnekler de vermiþtik:
+
+>>> print("birinci satýr\nikinci satýr\nüçüncü satýr")
+
+birinci satýr
+ikinci satýr
+üçüncü satýr
+
+Gördüðünüz gibi, \n adlý kaçýþ dizisi, bir alt satýra geçilmesini saðlýyor. Ýþte aslýnda \n kaçýþ dizisi de, \ ile ‘n’ harfinin birleþmesinden oluþmuþ bir kaçýþ dizisidir. Burada \ iþaretinin görevi, ‘n’ harfinin özel bir anlam kazanmasýný saðlamaktýr. \ iþareti ile ‘n’ harfi birleþtiðinde ‘satýr baþý karakteri’ denen özel bir karakter dizisi ortaya çýkarýyor.
+
+Gelin bu kaçýþ dizisi ile ilgili bir örnek verelim. Þimdi þu kodlarý dikkatlice inceleyin:
+
+>>> baþlýk = "Türkiye'de Özgür Yazýlýmýn Geçmiþi"
+>>> print(baþlýk, "\n", "-"*len(baþlýk), sep="")
+
+Türkiye'de Özgür Yazýlýmýn Geçmiþi
+----------------------------------
+
+Burada, baþlýk adlý deðiþkenin tuttuðu “Türkiye’de Özgür Yazýlýmýn Geçmiþi” adlý karakter dizisinin altýný çizdik. Dikkat ederseniz, baþlýðýn altýna koyduðumuz çizgiler baþlýðýn uzunluðunu aþmýyor. Yazdýðýmýz program, baþlýðýn uzunluðu kadar çizgiyi baþlýðýn altýna ekliyor. Bu programda baþlýk ne olursa olsun, programýmýz çizgi uzunluðunu kendisi ayarlayacaktýr. Örneðin:
+
+>>> baþlýk = "Python Programlama Dili"
+>>> print(baþlýk, "\n", "-"*len(baþlýk), sep="")
+
+Python Programlama Dili
+-----------------------
+
+>>> baþlýk = "Alýþveriþ Listesi"
+>>> print(baþlýk, "\n", "-"*len(baþlýk), sep="")
+
+Alýþveriþ Listesi
+-----------------
+
+Gelin isterseniz bu kodlardaki print() satýrýný þöyle bir inceleyelim. Kodumuz þu:
+
+>>> print(baþlýk, "\n", "-"*len(baþlýk), sep="")
+
+Burada öncelikle baþlýk adlý deðiþkeni print() fonksiyonunun parantezleri içine yazdýk. Böylece baþlýk deðiþkeninin deðeri ekrana yazdýrýlacak.
+
+print() fonksiyonunun ikinci parametresinin \n adlý kaçýþ dizisi olduðunu görüyoruz. Bu kaçýþ dizisini eklememiz sayesinde Python ilk parametreyi çýktý olarak verdikten sonra bir alt satýra geçiyor. Bu parametrenin tam olarak ne iþe yaradýðýný anlamak için, yukarýdaki satýrý bir de o parametre olmadan çalýþtýrmayý deneyebilirsiniz:
+
+>>> print(baþlýk, "-"*len(baþlýk), sep="")
+
+Alýþveriþ Listesi-----------------
+
+print() fonksiyonunun üçüncü parametresinin ise þu olduðunu görüyoruz: "-"*len(baþlýk).
+
+Ýþte baþlýk deðiþkeninin altýna gerekli sayýda çizgiyi çizen kodlar bunlardýr. Burada len() fonksiyonunu nasýl kullandýðýmýza çok dikkat edin. Bu kod sayesinde baþlýk deðiþkeninin uzunluðu (len(baþlýk)) sayýsýnca - iþaretini ekrana çýktý olarak verebiliyoruz.
+
+Yukarýdaki kodlarda print() fonksiyonunun son parametresi ise sep=’‘. Peki bu ne iþe yarýyor? Her zaman olduðu gibi, bu kod parçasýnýn ne iþe yaradýðýný anlamak için programý bir de o kodlar olmadan çalýþtýrmayý deneyebilirsiniz:
+
+>>> print(baþlýk, "\n", "-"*len(baþlýk))
+
+Alýþveriþ Listesi
+  -----------------
+
+Gördüðünüz gibi, baþlýk deðiþkeninin tam altýna gelmesi gereken çizgi iþaretleri saða kaymýþ. Bunun nedeni sep parametresinin öntanýmlý deðerinin bir adet boþluk karakteri olmasýdýr. sep parametresinin öntanýmlý deðeri nedeniyle çizgilerin baþ tarafýna bir adet boþluk karakteri ekleniyor çýktýda. O yüzden bu çizgiler saða kaymýþ görünüyor. Ýþte biz yukarýdaki kodlarda sep parametresinin öntanýmlý deðerini deðiþtirip, boþluk karakteri yerine boþ bir karakter dizisi yerleþtiriyoruz. Böylece çizgiler çýktýda saða kaymýyor.
+
+Satýr baþý karakteri, programlama maceramýz sýrasýnda en çok kullanacaðýmýz kaçýþ dizilerinden biri ve hatta belki de birincisidir. O yüzden bu kaçýþ dizisini çok iyi öðrenmenizi tavsiye ederim.
+
+Ayrýca bu kaçýþ dizisini (ve tabii öteki kaçýþ dizilerini) tanýyýp öðrenmeniz, yazacaðýnýz programlarýn selameti açýsýndan da büyük önem taþýr. Eðer bir karakter dizisi içinde geçen kaçýþ dizilerini ayýrt edemezseniz Python size hiç beklemediðiniz çýktýlar verebilir. Hatta yazdýðýnýz programlar kaçýþ dizilerini tanýmýyor olmanýzdan ötürü bir anda hata verip çökebilir. Peki ama nasýl?
+
+Þimdi þu örneðe dikkatlice bakýn:
+
+Diyelim ki bilgisayarýnýzýn ‘C:\’ dizinindeki ‘nisan’ adlý bir klasörün içinde yer alan masraflar.txt adlý bir dosyayý yazdýðýnýz bir program içinde kullanmanýz gerekiyor. Mesela bu dosyayý, tam adresiyle birlikte kullanýcýlarýnýza göstermek istiyorsunuz.
+
+Ýlk denememizi yapalým:
+
+>>> print("C:\nisan\masraflar.txt")
+
+Buradan þöyle bir çýktý aldýk:
+
+C:
+isan\masraflar.txt
+
+Gördüðünüz gibi, bu çýktýyý normal yollardan vermeye çalýþtýðýmýzda Python bize hiç de beklemediðimiz bir çýktý veriyor. Peki ama neden?
+
+Python’da karakter dizileri ile çalýþýrken asla aklýmýzdan çýkarmamamýz gereken bir þey var: Eðer yazdýðýmýz herhangi bir karakter dizisinin herhangi bir yerinde \ iþaretini kullanmýþsak, bu iþaretten hemen sonra gelen karakterin ne olduðuna çok dikkat etmemiz gerekir. Çünkü eðer dikkat etmezsek, farkýnda olmadan Python için özel anlam taþýyan bir karakter dizisi oluþturmuþ olabiliriz. Bu da kodlarýmýzýn beklediðimiz gibi çalýþmasýný engeller.
+
+Yukarýdaki sorunun kaynaðýný anlamak için "C:\nisan\masraflar.txt" adlý karakter dizisine çok dikkatlice bakýn. Python bu karakter dizisinde bizim ‘\nisan’ olarak belirttiðimiz kýsmýn baþýndaki \n karakterlerini bir kaçýþ dizisi olarak algýladý. Çünkü \n adlý karakter dizisi, ‘satýr baþý kaçýþ dizisi’ adýný verdiðimiz, Python açýsýndan özel anlam taþýyan bir karakter dizisine iþaret ediyor. Zaten yukarýdaki tuhaf görünen çýktýya baktýðýnýzda da, bu kaçýþ dizisinin olduðu noktadan itibaren karakter dizisinin bölünüp yeni bir satýra geçildiðini göreceksiniz. Ýþte biz yukarýdaki örnekte alelade bir dizin adý belirttiðimizi zannederken aslýnda hiç farkýnda olmadan bir kaçýþ dizisi üretmiþ oluyoruz. Bu nedenle, daha önce de söylediðimiz gibi, karakter dizileri içinde farkýnda olarak veya olmayarak kullandýðýmýz kaçýþ dizilerine karþý her zaman uyanýk olmalýyýz. Aksi takdirde, yukarýda olduðu gibi hiç beklemediðimiz çýktýlarla karþýlaþabiliriz.
+
+Esasen yukarýdaki problem bir dereceye kadar (ve yerine göre) ‘masum bir kusur’ olarak görülebilir. Çünkü bu hata programýmýzýn çökmesine yol açmýyor. Ama bir karakter dizisi içindeki gizli kaçýþ dizilerini gözden kaçýrmak, bazý durumlarda çok daha yýkýcý sonuçlara yol açabilir. Mesela yukarýdaki sorunlu dizin adýný ekrana yazdýrmak yerine open() fonksiyonunu kullanarak, bu karakter dizisi içinde belirttiðimiz masraflar.txt adlý dosyayý açmaya çalýþtýðýmýzý düþünün:
+
+>>> open("C:\nisan\masraflar.txt")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+OSError: [Errno 22] Invalid argument: 'C:\nisan\\masraflar.txt'
+
+Eðer sorunun gözden kaçan bir kaçýþ dizisinden kaynaklandýðýný farkedemezseniz, bu sorunu çözebilmek için saatlerinizi ve hatta günlerinizi harcamak zorunda kalabilirsiniz. Çünkü yukarýdaki hata mesajý sorunun nedenine dair hiçbir þey söylemiyor. Ancak ve ancak yukarýdaki karakter dizisi içinde sinsice gizlenen bir \n kaçýþ dizisi olduðu gözünüze çarparsa bu sorunu çözme yolunda bir adým atabilirsiniz.
+
+Diyelim ki sorunun ‘\nisan’ ifadesinin baþýndaki \n karakterlerinin Python tarafýndan bir kaçýþ dizisi olarak algýlanmasýndan kaynaklandýðýný farkettiniz. Peki bu sorunu nasýl çözeceksiniz?
+
+Bu sorunun birkaç farklý çözüm yolu var. Biz þimdilik sadece ikisini göreceðiz. Bu bölümün sonuna vardýðýnýzda öteki çözüm yolunu da öðrenmiþ olacaksýnýz.
+
+Yukarýdaki problemi, ilgili kaçýþ dizisi içindeki ters taksim iþaretini çiftleyerek çözebilirsiniz:
+
+>>> open("C:\\nisan\masraflar")
+
+Tabii tutarlýlýk açýsýndan karakter dizisi içindeki bütün ters taksim iþaretlerini çiftlemek mantýklý olacaktýr:
+
+>>> open("C:\\nisan\\masraflar")
+
+Bunun dýþýnda, bu örnek için, dizin adlarýný ters taksim yerine düz taksim iþaretiyle ayýrmayý tercih edebilirsiniz:
+
+>>> open("C:/nisan/masraflar")
+
+Dediðimiz gibi, üçüncü (ve aslýnda daha kullanýþlý olan) yöntemi biraz sonra inceleyeceðiz. Biz þimdilik kaçýþ dizilerini anlatmaya devam edelim.
+
+
+Sekme (\t)
+
+Python’da \ iþareti sadece ‘n’ harfiyle deðil, baþka harflerle de birleþebilir. Örneðin \ iþaretini ‘t’ harfiyle birleþtirerek yine özel bir anlam ifade eden bir kaçýþ dizisi elde edebiliriz:
+
+>>> print("abc\tdef")
+
+abc def
+
+Burada \t adlý kaçýþ dizisi, “abc” ifadesinden sonra sanki Tab (sekme) tuþuna basýlmýþ gibi bir etki oluþturarak “def” ifadesini saða doðru itiyor. Bir de þu örneðe bakalým:
+
+>>> print("bir", "iki", "üç", sep="\t")
+
+bir     iki     üç
+
+Bir örnek daha:
+
+>>> print(*"123456789", sep="\t")
+
+1   2   3   4   5   6   7   8   9
+
+Gördüðünüz gibi, parametreler arasýnda belli aralýkta bir boþluk býrakmak istediðimizde \t adlý kaçýþ dizisinden yararlanabiliyoruz.
+
+Týpký \n kaçýþ dizisinde olduðu gibi, karakter dizilerinde \t kaçýþ dizisinin varlýðýna karþý da uyanýk olmalýyýz:
+
+>>> open("C:\nisan\masraflar\toplam_masraf.txt")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+OSError: [Errno 22] Invalid argument: 'C:\nisan\\masraflar\toplam_masraf.txt'
+
+Burada da \n ile yaþadýðýmýz soruna benzer bir durum var. Biz toplam_masraf.txt adlý bir dosyaya atýfta bulunmaya çalýþýyoruz, ama Python bu ifadenin baþýndaki ‘t’ harfinin, kendisinden önce gelen \ iþareti ile birleþmesinden ötürü, bunu \t kaçýþ dizisi olarak algýlýyor ve ona göre davranýyor.
+
+Belki yukarýdaki kodlarý þöyle yazarsak durumu anlamak daha kolay olabilir:
+
+>>> print("C:\nisan\masraflar\toplam_masraf.txt")
+
+C:
+isan\masraflar      oplam_masraf.txt
+
+Gördüðünüz gibi, Python \n kaçýþ dizisini gördüðü noktada alt satýrýn baþýna geçiyor ve \t kaçýþ dizisini gördüðü noktada da önceki ve sonraki öðeler arasýnda bir sekme boþluðu býrakýyor. Bu durumu engellemek için ne yapmanýz gerektiðini biliyorsunuz: Ya ters taksim iþaretlerini çiftleyeceksiniz:
+
+>>> print("C:\\nisan\\masraflar\\toplam_masraf.txt")
+
+Ya da dizin adý ayracý olarak düz taksim iþaretini kullanacaksýnýz:
+
+>>> print("C:/nisan/masraflar/toplam_masraf.txt")
+
+Daha önce de söylediðimiz gibi, üçüncü ve daha pratik olan yolu biraz sonra göreceðiz. Þimdilik sadece biraz sabýr...
+
+
+Zil Sesi (\a)
+
+\ iþaretinin birleþtiðinde farklý bir anlam türettiði bir baþka harf de ‘a’ harfidir. \ iþareti ‘a’ harfiyle birleþerek !bip! benzeri bir zil sesi üretilmesini saðlayabilir:
+
+>>> print("\a")
+
+!bip!
+
+Ýsterseniz yukarýdaki komutu þu þekilde yazarak, kafa þiþirme katsayýsýný artýrabilirsiniz:
+
+>>> print("\a" * 10)
+
+Bu þekilde !bip! sesi 10 kez tekrar edilecektir. Ancak bu kaçýþ dizisi çoðunlukla sadece Windows üzerinde çalýþacaktýr. Bu kaçýþ dizisinin GNU/Linux üzerinde çalýþma garantisi yoktur. Hatta bu kaçýþ dizisi bütün Windows sistemlerinde dahi çalýþmayabilir. Dolayýsýyla bu kaçýþ dizisinin iþlevine bel baðlamak pek mantýklý bir iþ deðildir.
+
+Týpký \n ve \t kaçýþ dizilerinde olduðu gibi bu kaçýþ dizisinin varlýðýna karþý da uyanýk olmalýyýz. Burada da mesela ‘C:\aylar’ gibi bir dizin adý tanýmlamaya çalýþýrken aslýnda \a kaçýþ dizisini oluþturuyor olabilirsiniz farkýnda olmadan.
+
+
+Ayný Satýr Baþý (\r)
+
+Bu kaçýþ dizisi, bir karakter dizisinde ayný satýrýn en baþýna dönülmesini saðlar. Bu kaçýþ dizisinin iþlevini tanýmýna bakarak anlamak biraz zor olabilir. O yüzden dilerseniz bu kaçýþ dizisinin ne iþe yaradýðýný bir örnek üzerinde göstermeye çalýþalým:
+
+>>> print("Merhaba\rZalim Dünya!")
+
+Zalim Dünya!
+
+Burada olan þey þu: Normal þartlar altýnda, print() fonksiyonu içine yazdýðýmýz bir karakter dizisindeki bütün karakterler soldan saða doðru tek tek ekrana yazdýrýlýr:
+
+>>> print("Merhaba Zalim Dünya!")
+
+Merhaba Zalim Dünya!
+
+Ancak eðer karakter dizisinin herhangi bir yerine \r adlý kaçýþ dizisini yerleþtirirsek, bu kaçýþ dizisinin bulunduðu konumdan itibaren ayný satýrýn baþýna dönülecek ve \r kaçýþ dizisinden sonra gelen bütün karakterler satýr baþýndaki karakterlerin üzerine yazacaktýr. Þu örnek daha açýklayýcý olabilir:
+
+>>> print("Merhaba\rDünya")
+
+Dünyaba
+
+Burada, “Merhaba” karakter dizisi ekrana yazdýrýldýktan sonra \r kaçýþ dizisinin etkisiyle satýr baþýna dönülüyor ve bu kaçýþ dizisinden sonra gelen “Dünya” karakter dizisi “Merhaba” karakter dizisinin üzerine yazýyor. Tabii “Dünya” karakter dizisi içinde 5 karakter, “Merhaba” karakter dizisi içinde ise 7 karakter olduðu için, “Merhaba” karakter dizisinin son iki karakteri (“ba”) dýþarda kalýyor. Böylece ortaya “Dünyaba” gibi bir þey çýkýyor.
+
+Önceki kaçýþ dizilerinde olduðu gibi, bu kaçýþ dizisini de farkýnda olmadan karakter dizisi içinde kullanýrsanýz beklemediðiniz çýktýlar alýrsýnýz:
+
+>>> print("C:\ülke\türkiye\iller\rize\nüfus.txt")
+
+izeülke     ürkiye\iller
+üfus.txt
+
+Burada farkýnda olmadan sadece bir deðil, üç kaçýþ dizisi birden oluþturduk!
+
+
+Düþey Sekme (\v)
+
+Eðer \ iþaretini ‘v’ harfiyle birlikte kullanýrsak düþey sekme denen þeyi elde ederiz. Hemen bir örnek verelim:
+
+>>> print("düþey\vsekme")
+
+düþey
+     sekme
+
+Yalnýz bu \v adlý kaçýþ dizisi her iþletim sisteminde çalýþmayabilir. Dolayýsýyla, birden fazla platform üzerinde çalýþmak üzere tasarladýðýnýz programlarýnýzda bu kaçýþ dizisini kullanmanýzý önermem.
+
+
+Ýmleç Kaydýrma (\b)
+
+\ kaçýþ dizisinin, biraraya geldiðinde özel bir anlam kazandýðý bir baþka harf de b’dir. \b kaçýþ dizisinin görevi, imleci o anki konumundan sola kaydýrmaktýr. Bu taným pek anlaþýlýr deðil. O yüzden bir örnek verelim:
+
+>>> print("yahoo.com\b")
+
+Bu kodu çalýþtýrdýðýnýzda herhangi bir deðiþiklik görmeyeceksiniz. Ama aslýnda en sonda gördüðümüz \b kaçýþ dizisi, imleci bir karakter sola kaydýrdý. Dikkatlice bakýn:
+
+>>> print("yahoo.com\b.uk")
+
+Gördüðünüz gibi, \b kaçýþ dizisinin etkisiyle imleç bir karakter sola kaydýðý için, ‘com’ kelimesinin son harfi silindi ve bunun yerine \b kaçýþ dizisinden sonra gelen .uk karakterleri yerleþtirildi. Dolayýsýyla biz de þu çýktýyý aldýk:
+
+yahoo.co.uk
+
+Bir örnek daha verelim...
+
+Bildiðiniz gibi, print() fonksiyonu, kendisine verilen parametreler arasýna birer boþluk yerleþtirir:
+
+>>> print('istihza', '.', 'com')
+
+istihza . com
+
+Biz bu öðeleri birbirine bitiþtirmek için þöyle bir yol izleyebileceðimizi biliyoruz:
+
+>>> print('istihza', '.', 'com', sep='')
+
+istihza.com
+
+Ýþte ayný etkiyi \b kaçýþ dizisini kullanarak da elde edebiliriz:
+
+>>> print('istihza', '\b.', '\bcom')
+
+istihza.com
+
+Gördüðünüz gibi, \b kaçýþ dizisi, ‘.’ ve ‘com’ parametrelerinden önce imleci birer karakter sola kaydýrdýðý için, parametreler arasýndaki boþluk karakterleri ortadan kalktý.
+
+Bu kaçýþ dizisini kullanarak þöyle gereksiz iþler peþinde de koþabilirsiniz:
+
+>>> print('istihza\b\b\bsn')
+
+istisna
+
+Burada \b kaçýþ dizisini üst üste birkaç kez kullanarak imleci birkaç karakter sola kaydýrdýk ve ‘sn’ harflerini ‘hz’ harflerinin üzerine bindirdik. Böylece ‘istihza’ kelimesi ‘istisna’ kelimesine dönüþmüþ oldu...
+
+Daha fazla uzatmadan, bu kaçýþ dizisinin Python’da çok nadir kullanýldýðý bilgisini vererek yolumuza devam edelim...
+
+
+Küçük Unicode (\u)
+
+Týpký bundan önceki kaçýþ dizileri gibi, karakter dizileri içindeki varlýðý konusunda dikkatli olmamýz gereken bir baþka kaçýþ dizisi de \u adlý kaçýþ dizisidir. Eðer bu kaçýþ dizisini tanýmaz ve dikkatli kullanmazsak, yazdýðýmýz programlar tespit etmesi çok güç hatalar üretebilir.
+
+Örneðin þöyle bir çýktý vermek istediðinizi düþünün:
+
+Dosya konumu: C:\users\zeynep\gizli\dosya.txt
+
+Bu çýktýyý normal yollardan vermeye çalýþýrsak Python bize bir hata mesajý gösterecektir:
+
+>>> print("Dosya konumu: C:\users\zeynep\gizli\dosya.txt")
+
+  File "<stdin>", line 1
+SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in
+position 16-18: truncated \uXXXX escape
+
+Belki saðda solda ‘UNICODE’ diye bir þey duymuþsunuzdur. Eðer þimdiye kadar böyle bir þey duymadýysanýz veya duyduysanýz bile ne olduðunu bilmiyorsanýz hiç ziyaný yok. Birkaç bölüm sonra bunun ne anlama geldiðini bütün ayrýntýlarýyla anlatacaðýz. Biz þimdilik sadece þunu bilelim: UNICODE, karakterlerin, harflerin, sayýlarýn ve bilgisayar ekranýnda gördüðümüz öteki bütün iþaretlerin her biri için tek ve benzersiz bir numaranýn tanýmlandýðý bir sistemdir. Bu sistemde, ‘kod konumu’ (code point) adý verilen bu numaralar özel bir þekilde gösterilir. Örneðin ‘ý’ harfi UNICODE sisteminde þu þekilde temsil edilir:
+
+u+0131
+
+Ayný þekilde ‘a’ harfi bu sistemde þu kod konumu ile gösterilir:
+
+u+0061
+
+Python programlama dilinde ise, yukarýdaki kod konumu düzeni þöyle gösterilir:
+
+\\u0131
+
+Gördüðünüz gibi, Python UNICODE sistemindeki her bir kod konumunu gösterebilmek için, önce \u þeklinde bir kaçýþ dizisi tanýmlýyor, ardýndan UNICODE sisteminde + iþaretinden sonra gelen sayýyý bu kaçýþ dizisinin hemen saðýna ekliyor. Gelin kendi kendimize birkaç deneme çalýþmasý yapalým:
+
+>>> '\u0130'
+
+'Ý'
+
+>>> '\u0070'
+
+'p'
+
+>>> "\ufdsf"
+
+  File "<stdin>", line 1
+SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in
+position 0-4: truncated \uXXXX escape
+
+Gördüðünüz gibi, eðer \u kaçýþ dizisinden sonra doðru bir kod konumu belirtmezsek Python bize bir hata mesajý gösteriyor...
+
+Bu hata mesajýnýn, biraz önce print("Dosya konumu: C:\users\zeynep\gizli\dosya.txt") kodunu yazdýktan sonra aldýðýmýz hata ile ayný olduðuna dikkat edin. Týpký \ufdsf örneðinde olduðu gibi, \users ifadesi de varolan bir UNICODE kod konumuna karþýlýk gelmediði için, Python’ýn hata vermekten baþka çaresi kalmýyor.
+
+Biz bu örnekte ‘users’ kelimesini kullanmaya çalýþýyoruz, ama ‘u’ harfinden hemen önce gelen \ kaçýþ dizisi nedeniyle, hiç farkýnda olmadan Python açýsýndan önemli bir karakter dizisi (\u) meydana getirmiþ oluyoruz. O yüzden, böyle can sýkýcý hatalarla karþýlaþmamak için olasý kaçýþ dizilerine karþý her zaman uyanýk olmamýz gerekiyor.
+
+Peký biz bu kaçýþ dizisi yüzünden, yazdýðýmýz programlarda Dosya konumu: C:\users\zeynep\gizli\dosya.txt”) gibi bir çýktý veremeyecek miyiz?
+
+Verebileceðimizi, ama bunun bir yolu yordamý olduðunu biliyorsunuz. Biz yine de tekrar edelim:
+
+>>> print("Dosya konumu: C:\\users\\zeynep\\gizli\\dosya.txt")
+
+Dosya konumu: C:\users\zeynep\gizli\dosya.txt
+
+Gördüðünüz gibi, karakter dizisi içinde geçen bütün \ iþaretlerini çiftleyerek sorunumuzu çözdük. Buradaki gibi bir sorunla karþýlaþmamak için, dizin adlarýný ayýrýrken ters taksim iþareti yerine düz taksim iþaretini kullanmayý da tercih edebilirsiniz:
+
+>>> print("Dosya konumu: C:/users/zeynep/gizli/dosya.txt")
+
+Biraz sonra bu sorunu halletmenin üçüncü ve daha kolay bir yönteminden daha söz edeceðiz. Ama biz þimdilik bu kaçýþ dizisini bir kenara býrakýp baþka bir kaçýþ dizisini incelemeye geçelim.
+
+
+Büyük Unicode (\U)
+
+Bu kaçýþ dizisi biraz önce gördüðümüz \u adlý kaçýþ dizisiyle hemen hemen ayný anlama gelir. Bu kaçýþ dizisi de, týpký \u gibi, UNICODE kod konumlarýný temsil etmek için kullanýlýr. Ancak U ile gösterilen kod konumlarý u ile gösterilenlere göre biraz daha uzundur. Örneðin, hatýrlarsanýz u kaçýþ dizisini kullanarak ‘ý’ harfinin UNICODE kod konumunu þöyle temsil ediyorduk:
+
+>>> '\u0131'
+
+'ý'
+
+Eðer ayný kod konumunu U adlý kaçýþ dizisi ile göstermek istersek þöyle bir þey yazmamýz gerekir:
+
+>>> '\U00000131'
+
+Gördüðünüz gibi, burada \U kaçýþ dizisinden sonra gelen kýsým toplam 8 haneli bir sayýdan oluþuyor. u kaçýþ dizisinde ise bu kýsmý toplam 4 haneli bir sayý olarak yazýyorduk. Ýþte \u kaçýþ dizisi ile U kaçýþ dizisi arasýndaki fark budur. u kaçýþ dizisi hakkýnda söylediðimiz öteki her þey U kaçýþ dizisi için de geçerlidir.
+
+
+Uzun Ad (\N)
+
+UNICODE sistemi ile ilgili bir baþka kaçýþ dizisi de \N adlý kaçýþ dizisidir.
+
+Dediðimiz gibi, UNICODE sistemine iliþkin ayrýntýlardan ilerleyen derslerde söz edeceðiz, ama bu sistemle ilgili ufak bir bilgi daha verelim.
+
+UNICODE sisteminde her karakterin tek ve benzersiz bir kod konumu olduðu gibi, tek ve benzersiz bir de uzun adý vardýr. Örneðin ‘a’ harfinin UNICODE sistemindeki uzun adý þudur:
+
+LATIN SMALL LETTER A
+
+Bir karakterin UNICODE sistemindeki uzun adýný öðrenmek için unicodedata adlý bir modülden yararlanabilirsiniz:
+
+>>> import unicodedata
+>>> unicodedata.name('a')
+
+LATIN SMALL LETTER A
+
+>>> unicodedata.name('Þ')
+
+LATIN CAPITAL LETTER S WITH CEDILLA
+
+Bu arada, daha önce de söylediðimiz gibi, bu ‘modül’ kavramýna þimdilik takýlmayýn. Ýlerde modülleri ayrýntýlý olarak inceleyeceðiz. Þimdilik unicodedata denen þeyin, (týpký daha önce örneklerini gördüðümüz os, sys ve keyword gibi) bir modül olduðunu ve bu modül içindeki name adlý bir fonksiyonu kullanarak, parantez içinde belirttiðimiz herhangi bir karakterin UNICODE sistemindeki uzun adýný elde edebileceðimizi bilelim yeter.
+
+Ýþte \N kaçýþ dizisi bu uzun isimleri, Python programlarýmýzda kullanma imkaný verir bize. Bu kaçýþ dizisini, karakterlerin UNICODE sistemindeki uzun adlarý ile birlikte kullanarak asýl karakterleri elde edebiliriz. Dikkatlice bakýn:
+
+>>> print("\N{LATIN SMALL LETTER A}")
+
+a
+
+>>> print("\N{LATIN CAPITAL LETTER S WITH CEDILLA}")
+
+þ
+
+>>> print("\Nisan")
+
+  File "<stdin>", line 1
+SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in
+position 0-1: malformed \N character escape
+
+Gördüðünüz gibi, herhangi bir karþýlýðý olmayan bir uzun ad belirttiðimizde Python bize bir hata mesajý gösteriyor. Çünkü Python \N kaçýþ dizisinin hemen ardýndan { iþaretinin getirilmesini ve sonra da UNICODE sistemi dahilinde geçerli bir uzun ad belirtilmesini bekliyor. Yukarýdaki örnekte \N kaçýþ dizisinden sonra { iþareti yok. Zaten \N kaçýþ dizisinin hemen ardýndan gelen ‘isan’ ifadesi de doðru bir uzun ada iþaret etmiyor. Dolayýsýyla da Python’ýn bize hata mesajý göstermekten baþka çaresi kalmýyor...
+
+\u, \U ve \N kaçýþ dizileri, UNICODE sistemi ile ilgili çalýþmalar yapmak isteyen programcýlar için Python programlama dilinin sunduðu faydalý araçlardan yalnýzca birkaçýdýr. Ancak bu araçlarýn sizin iþinize yaramayacaðýný asla düþünmeyin. Zira \u, \U ve \N kaçýþ dizileri ile ilgili yukarýdaki durum hiç beklemediðiniz bir anda sizi de vurabilir. Çünkü bu kaçýþ dizilerinin oluþturduðu risk hiç de öyle nadir karþýlaþýlacak bir sorun deðildir.
+
+Bildiðiniz gibi Windows 7’de kullanýcýnýn dosyalarýný içeren dizin adý C:\Users\kullanýcý_adý þeklinde gösteriliyor. Dolayýsýyla Windows kullananlar UNICODE kaçýþ dizilerinden kaynaklanan bu tuzaða her an düþebilir. Ya da eðer adýnýz ‘u’ veya ‘n’ harfi ile baþlýyorsa yine bu tuzaða düþme ihtimaliniz epey yüksek olacak, C:\Users\umut veya C:\Users\Nihat gibi bir dizin adý belirtirken çok dikkatli olmanýz gerekecektir. Zira özellikle dosyalar üzerinde iþlem yaparken, bu tür dizin adlarýný sýk sýk kullanmak durumunda kalacaksýnýz. Bu yüzden, alelade bir kelime yazdýðýnýzý zannederken hiç farkýnda olmadan bir kaçýþ dizisi tanýmlýyor olma ihtimalini her zaman göz önünde bulundurmalý ve buna uygun önlemleri almýþ olmalýsýnýz.
+
+
+Onaltýlý Karakter (\x)
+
+‘x’ harfi de \ iþareti ile birleþtiðinde özel anlam kazanarak bir kaçýþ dizisi meydana getirir.
+
+\x kaçýþ dizisini kullanarak, onaltýlý (hexadecimal) sayma sistemindeki bir sayýnýn karakter karþýlýðýný gösterebilirsiniz. Dikkatlice bakýn:
+
+>>> "\x41"
+
+'A'
+
+Onaltýlý sayma sistemindeki 41 sayýsý ‘A’ harfine karþýlýk gelir. Eðer hangi karakterlerin hangi sayýlara karþýlýk geldiðini merak ediyorsanýz http://www.ascii.cl/ adresindeki tabloyu inceleyebilirsiniz. Bu tabloda ‘hex’ sütunu altýnda gösterilen sayýlar onaltýlý sayýlar olup, ‘symbol’ sütununda gösterilen karakterlere karþýlýk gelirler. Örneðin ‘hex’ sütunundaki 4E sayýsý ‘symbol’ sütunundaki ‘N’ harfine karþýlýk gelir. Bu durumu Python’la da teyit edebilirsiniz:
+
+>>>"\x4E"
+
+N
+
+Eðer sayýlarla karakterler arasýndaki baðlantýnýn tam olarak ne olduðunu bilmiyorsanýz hiç endiþe etmeyin. Birkaç bölüm sonra sayýlarla karakterler arasýnda nasýl bir bað olduðunu gayet ayrýntýlý bir þekilde anlatacaðýz. Biz þimdilik yalnýzca \x karakter dizisinin özel bir kaçýþ dizisine karþýlýk geldiðini ve bu kaçýþ dizisini karakter dizileri içinde kullanýrken dikkatli olmamýz gerektiðini bilelim yeter:
+
+>>> print("C:\Users\Ayþe\xp_dosyalarý")
+
+  File "<stdin>", line 1
+SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in
+position 2-4: truncated \UXXXXXXXX escape
+
+Gördüðünüz gibi, Python \x ifadesinden sonra onaltýlý bir sayý belirtmenizi bekliyor. Halbuki biz burada \x ifadesini ‘xp_dosyalarý’ adlý dizini gösterebilmek için kullanmýþtýk. Ama görünüþe göre yanlýþlýkla Python için özel bir anlam ifade eden bir karakter dizisi oluþturmuþuz...
+
+
+Etkisizleþtirme (r)
+
+Dediðimiz gibi, Python’daki en temel kaçýþ dizisi \ iþaretidir. Bu iþaret bazý baþka harflerle birleþerek yeni kaçýþ dizileri de oluþturabilir.
+
+Python’da \ iþaretinin dýþýnda temel bir kaçýþ dizisi daha bulunur. Bu kaçýþ dizisi ‘r’ harfidir. Þimdi bu kaçýþ dizisinin nasýl kullanýlacaðýný ve ne iþe yaradýðýný inceleyelim:
+
+Þöyle bir çýktý vermek istediðimizi düþünün:
+
+Kurulum dizini: C:\aylar\nisan\toplam masraf
+
+Bildiðimiz yoldan bu çýktýyý vermeye çalýþýrsak neler olacaðýný adýnýz gibi biliyorsunuz:
+
+>>> print("Kurulum dizini: C:\aylar\nisan\toplam masraf")
+
+Kurulum dizini: C:ylar
+isan        oplam masraf
+
+Not
+
+Eðer Windows üzerinde çalýþýyorsanýz bu komutu verdikten sonra bir !bip! sesi de duymuþ olabilirsiniz...
+
+Python tabii ki, karakter dizisi içinde geçen ‘\aylar’, ‘\nisan’, ve ‘\toplam masraf’ ifadelerinin ilk karakterlerini yanlýþ anladý! \a, \n ve \t gibi ifadeler Python’ýn gözünde birer kaçýþ dizisi. Dolayýsýyla Python \a karakterlerini görünce bir !bip! sesi çýkarýyor, \n karakterlerini görünce satýr baþýna geçiyor ve \t karakterlerini görünce de Tab tuþuna basýlmýþ gibi bir tepki veriyor. Sonuç olarak da yukarýdaki gibi bir çýktý üretiyor.
+
+Daha önce bu durumu þöyle bir kod yazarak engellemiþtik:
+
+>>> print("Kurulum dizini: C:\\aylar\\nisan\\toplam masraf")
+
+Kurulum dizini: C:\aylar\nisan\toplam masraf
+
+Burada, \ iþaretlerinin her birini çiftleyerek sorunun üstesinden geldik. Yukarýdaki yöntem doðru ve kabul görmüþ bir çözümdür. Ama bu sorunun üstesinden gelmenin çok daha basit ve pratik bir yolu var. Bakalým:
+
+>>> print(r"Kurulum dizini: C:\aylar\nisan\toplam masraf")
+
+Kurulum dizini: C:\aylar\nisan\toplam masraf
+
+Gördüðünüz gibi, karakter dizisinin baþ kýsmýnýn dýþ tarafýna bir adet r harfi yerleþtirerek sorunun üstesinden geliyoruz. Bu kaçýþ dizisinin, kullaným açýsýndan öteki kaçýþ dizilerinden farklý olduðuna dikkat edin. Öteki kaçýþ dizileri karakter dizisinin içinde yer alýrken, bu kaçýþ dizisi karakter dizisinin dýþýna yerleþtiriliyor.
+
+Bu kaçýþ dizisinin tam olarak nasýl iþlediðini görmek için dilerseniz bir örnek daha verelim:
+
+>>> print("Kaçýþ dizileri: \, \n, \t, \a, \\, r")
+
+Kaçýþ dizileri: \,
+,   , , \, r
+
+Burada da Python bizim yapmak istediðimiz þeyi anlayamadý ve karakter dizisi içinde geçen kaçýþ dizilerini doðrudan ekrana yazdýrmak yerine bu kaçýþ dizilerinin iþlevlerini yerine getirmesine izin verdi. Týpký biraz önceki örnekte olduðu gibi, istersek kaçýþ dizilerini çiftleyerek bu sorunu aþabiliriz:
+
+>>> print("Kaçýþ dizileri: \\, \\n, \\t, \\a, \\\, r")
+
+Kaçýþ dizileri: \, \n, \t, \a, \\, r
+
+Ama tabii ki bunun çok daha kolay bir yöntemi olduðunu biliyorsunuz:
+
+>>> print(r"Kaçýþ dizileri: \, \n, \t, \a, \\, r")
+
+Kaçýþ dizileri: \, \n, \t, \a, \\, r
+
+Gördüðünüz gibi, karakter dizisinin baþýna getirdiðimiz r kaçýþ dizisi, karakter dizisi içinde geçen kaçýþ dizilerinin iþlevlerini yerine getirmesine engel olarak, istediðimiz çýktýyý elde etmemizi saðlýyor.
+
+Bu arada bu kaçýþ dizisini, daha önce öðrendiðimiz \r adlý kaçýþ dizisi ile karýþtýrmamaya dikkat ediyoruz.
+
+Python’daki bütün kaçýþ dizilerinden söz ettiðimize göre, konuyu kapatmadan önce önemli bir ayrýntýdan söz edelim.
+
+Python’da karakter dizilerinin sonunda sadece çift sayýda \ iþareti bulunabilir. Tek sayýda \ iþareti kullanýldýðýnda karakter dizisini bitiren týrnak iþareti etkisizleþeceði için çakýþma sorunu ortaya çýkar. Bu etkisizleþmeyi, karakter dizisinin baþýna koyduðunuz ‘r’ kaçýþ dizisi de engelleyemez. Yani:
+
+>>> print("Kaçýþ dizisi: \")
+
+Bu þekilde bir tanýmlama yaptýðýmýzda Python bize bir hata mesajý gösterir. Çünkü kapanýþ týrnaðýnýn hemen öncesine yerleþtirdiðimiz \ kaçýþ dizisi, Python’ýn karakter dizisini kapatan týrnak iþaretini görmezden gelmesine yol açarak bu týrnaðý etkisizleþtiriyor. Böylece sanki karakter dizisini tanýmlarken kapanýþ týrnaðýný hiç yazmamýþýz gibi bir sonuç ortaya çýkýyor:
+
+>>> print("Kaçýþ dizisi: \")
+  File "<stdin>", line 1
+print("Kaçýþ dizisi: \")
+^
+SyntaxError: EOL while scanning string literal
+
+Üstelik bu durumu, r adlý kaçýþ dizisi de engelleyemiyor:
+
+>>> print(r"Kaçýþ dizisi: \")
+  File "<stdin>", line 1
+print(r"Kaçýþ dizisi: \")
+^
+SyntaxError: EOL while scanning string literal
+
+Çözüm olarak birkaç farklý yöntemden yararlanabilirsiniz. Mesela karakter dizisini kapatmadan önce karakter dizisinin sonundaki \ iþaretinin saðýna bir adet boþluk karakteri yerleþtirmeyi deneyebilirsiniz:
+
+>>> print("Kaçýþ dizisi: \ ")
+
+Veya kaçýþ dizisini çiftleyebilirsiniz:
+
+>>> print("Kaçýþ dizisi: \\")
+
+Ya da karakter dizisi birleþtirme yöntemlerinden herhangi birini kullanabilirsiniz:
+
+>>> print("Kaçýþ dizisi: " + "\\")
+>>> print("Kaçýþ dizisi:", "\\")
+>>> print("Kaçýþ dizisi: " "\\")
+
+Böyle bir durumla ilk kez karþýlaþtýðýnýzda bunun Python programlama dilinden kaynaklanan bir hata olduðunu düþünebilirsiniz, ancak bu durum Python’ýn resmi internet sitesinde ‘Sýkça Sorulan Sorular’ bölümüne alýnacak kadar önemli bir tasarým tercihidir: http://goo.gl/i3tkk
+
+
+Sayfa Baþý (\f)
+
+\f artýk günümüzde pek kullanýlmayan bir kaçýþ dizisidir. Bu kaçýþ dizisinin görevi, özellikle eski yazýcýlarda, bir sayfanýn sona erip yeni bir sayfanýn baþladýðýný göstermektir. Dolayýsýyla eski model yazýcýlar, bu karakteri gördükleri noktada mevcut sayfayý sona erdirip yeni bir sayfaya geçer.
+
+Bu kaçýþ dizisinin tam olarak ne iþe yaradýðýný test etmek için þu kodlarý çalýþtýrýn:
+
+>>> f = open("deneme.txt", "w")
+>>> print("deneme\fdeneme", file=f)
+>>> f.close()
+
+Þimdi bu kodlarla oluþturduðunuz deneme.txt adlý dosyayý LibreOffice veya Microsoft Word gibi bir programla açýn. ‘deneme’ satýrlarýnýn iki farklý sayfaya yazdýrýldýðýný göreceksiniz. Bu arada, eðer Microsoft Word dosyayý açarken bir hata mesajý gösterirse, o hata mesajýna birkaç kez ‘tamam’ diyerek hata penceresini kapatýn. Dosya normal bir þekilde açýlacaktýr.
+
+Dediðimiz gibi, bu kaçýþ dizisi artýk pek kullanýlmýyor. Ama yine de bu kaçýþ dizisine karþý da uyanýk olmalýsýnýz. Çünkü bu kaçýþ dizisi de beklemediðiniz çýktýlar almanýza yol açabilir. Mesela þu örneðe bir bakalým:
+
+>>> "\fýrat"
+
+'\x0cýrat'
+
+Gördüðünüz gibi, siz aslýnda ‘\fýrat’ yazmak isterken, Python bu kelimenin baþ tarafýndaki \f karakter dizisini bir kaçýþ dizisi olarak deðerlendirip ona göre bir çýktý verdi.
+
+Bütün bu anlattýklarýmýzýn ardýndan, kaçýþ dizilerinin, birleþtirildikleri karakterlerin farklý bir anlam yüklenmesini saðlayan birtakým iþaretler olduðunu anlýyoruz. Örneðin \ iþareti ‘ (tek týrnak) iþareti ile bir araya gelerek, tek týrnak iþaretinin karakter dizisi tanýmlama dýþýnda baþka bir anlam yüklenmesini saðlýyor. Ayný þekilde yine \ iþareti “ (çift týrnak) iþareti ile birleþerek çift týrnak iþaretinin de karakter dizisi tanýmlama dýþýnda bir anlama kavuþmasýný saðlýyor. Böylece týrnak iþaretlerini karakter dizileri içinde rahatlýkla kullanabiliyoruz.
+
+Ya da yine \ iþareti ‘n’ harfi ile bir araya gelip, bu harfin satýr baþýna geçilmesini saðlayan bir kaçýþ dizisi oluþturmasýný mümkün kýlýyor. Veya ayný iþaret ‘t’ harfiyle birleþip, öðeler arasýnda sekme oluþturulmasýný saðlayabiliyor. Bu araçlar sayesinde ekrana yazdýrdýðýmýz bir metnin akýþýný kontrol etme imkanýna kavuþuyoruz.

@@ -1,0 +1,11 @@
+
+Listeden Öğe Çıkarmak
+
+Bir listeden öğe silmek için del adlı ifadeden yararlanabilirsiniz. Örneğin:
+
+>>> liste = [1, 5, 3, 2, 9]
+>>> del liste[-1]
+>>> liste
+
+[1, 5, 3, 2]
+

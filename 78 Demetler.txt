@@ -1,0 +1,38 @@
+
+Demetler
+
+Demetler, özellikle görünüþ olarak listelere çok benzeyen bir veri tipidir. Bu veri tipi de, týpký listeler gibi, farklý veri tiplerini içinde barýndýran kapsayýcý bir veri tipidir.
+
+
+Demet Tanýmlamak
+
+Demet tanýmlamanýn birkaç farklý yolu vardýr. Nasýl karakter dizilerinin ayýrt edici özelliði týrnak iþaretleri, listelerin ayýrt edici özelliði ise köþeli parantez iþaretleri ise, demetlerin ayýrt edici özelliði de normal parantez iþaretleridir. Dolayýsýyla bir demet tanýmlamak için normal parantez iþaretlerinden yararlanacaðýz:
+
+>>> demet = ("ahmet", "mehmet", 23, 45)
+
+>>> type(demet)
+
+<class 'tuple'>
+
+Gördüðünüz gibi, karakter dizilerinin type() sorgusuna str, listelerin ise list cevabý vermesi gibi, demetler de type() sorgusuna tuple cevabý veriyor.
+
+Yalnýz, dediðimiz gibi Python’da demet tanýmlamanýn birden fazla yolu vardýr. Mesela yukarýdaki demeti þöyle de tanýmlayabiliriz:
+
+>>> demet = "ahmet", "mehmet", 23, 45
+
+Gördüðünüz gibi, parantez iþaretlerini kullanmadan, öðeleri yalnýzca virgül iþareti ile ayýrdýðýmýzda da elde ettiðimiz þey bir demet oluyor.
+
+Demet oluþturmak için tuple() adlý bir fonksiyondan da yararlanabilirsiniz. Bu fonksiyon, liste oluþturan list() fonksiyonuna çok benzer:
+
+>>> tuple('abcdefg')
+
+('a', 'b', 'c', 'd', 'e', 'f', 'g')
+
+Bu fonksiyonu kullanarak baþka veri tiplerini demete dönüþtürebilirsiniz:
+
+>>> tuple(["ahmet", "mehmet", 34, 45])
+
+('ahmet', 'mehmet', 34, 45)
+
+Burada, [“ahmet”, “mehmet”, 34, 45] adlý bir listeyi tuple() fonksiyonu yardýmýyla demete dönüþtürdük.
+

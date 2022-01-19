@@ -1,0 +1,22 @@
+
+Etkileþimli Kabukta Ýlk Adýmlar
+
+Python’da etkileþimli kabuðu nasýl çalýþtýracaðýmýzý ve bu ortamý nasýl terk edeceðimizi öðrendiðimize göre artýk etkileþimli kabuk aracýlýðýyla Python programlama dilinde ilk adýmlarýmýzý atmaya baþlayabiliriz.
+
+Þimdi kendi sistemimize uygun bir þekilde etkileþimli kabuðu tekrar çalýþtýralým. Etkileþimli kabuðu çalýþtýrdýðýmýzda ekranda görünen >>> iþareti Python’ýn bizden komut almaya hazýr olduðunu gösteriyor. Python kodlarýmýzý bu >>> iþaretinden hemen sonra, hiç boþluk býrakmadan yazacaðýz.
+
+Buradaki ‘hiç boþluk býrakmadan’ kýsmý önemli. Python’a yeni baþlayanlarýn en sýk yaptýðý hatalardan biri >>> iþareti ile komut arasýnda boþluk býrakmalarýdýr. Eðer bu þekilde boþluk býrakýrsanýz yazdýðýnýz kod hata verecektir.
+
+Ýsterseniz basit bir deneme yapalým. >>> iþaretinden hemen sonra, hiç boþluk býrakmadan þu komutu yazalým:
+
+>>> "Merhaba Zalim Dünya!"
+
+Bu arada yukarýdaki kodlar içinde görünen >>> iþaretini siz yazmayacaksýnýz. Bu iþareti etkileþimli kabuðun görünümünü temsil etmek için yerleþtirdik oraya. Siz “Merhaba Zalim Dünya!” satýrýný yazdýktan sonra doðruca Enter düðmesine basacaksýnýz.
+
+Bu komutu yazýp Enter tuþuna bastýðýmýzda þöyle bir çýktý almýþ olmalýyýz:
+
+'Merhaba Zalim Dünya!'
+
+Böylece yarým yamalak da olsa ilk Python programýmýzý yazmýþ olduk...
+
+Muhtemelen bu kod, içinizde en ufak bir heyecan dahi uyandýrmamýþtýr. Hatta böyle bir kod yazmak size anlamsýz bile gelmiþ olabilir. Ama aslýnda þu küçücük kod parçasý bile bize Python programlama dili hakkýnda çok önemli ipuçlarý veriyor. Gelin isterseniz bu tek satýrlýk kodu biraz inceleyelim...

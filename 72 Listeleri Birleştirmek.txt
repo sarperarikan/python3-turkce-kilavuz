@@ -1,0 +1,159 @@
+
+Listeleri Birleþtirmek
+
+Bazý durumlarda elinize farklý kaynaklardan farklý listeler gelebilir. Böyle bir durumda bu farklý listeleri tek bir liste halinde birleþtirmeniz gerekebilir. Týpký karakter dizilerinde olduðu gibi, listelerde de birleþtirme iþlemleri için + iþlecinden yararlanabilirsiniz.
+
+Diyelim ki elimizde þöyle iki adet liste var:
+
+>>> derlenen_diller = ["C", "C++", "C#", "Java"]
+>>> yorumlanan_diller = ["Python", "Perl", "Ruby"]
+
+Bu iki farklý listeyi tek bir liste haline getirmek için þöyle bir kod yazabiliriz:
+
+>>> programlama_dilleri = derlenen_diller + yorumlanan_diller
+
+['C', 'C++', 'C#', 'Java', 'Python', 'Perl', 'Ruby']
+
+Bu iþlemin sonucunu görelim:
+
+>>> print(programlama_dilleri)
+
+Gördüðünüz gibi, derlenen_diller ve yorumlanan_diller adlý listelerin öðelerini programlama_dilleri adlý tek bir liste içinde topladýk.
+
+Programcýlýk maceranýz boyunca listeleri birleþtirmenizi gerektiren pek çok farklý durumla karþýlaþabilirsiniz. Örneðin þöyle bir durum düþünün: Diyelim ki kullanýcý tarafýndan girilen sayýlarýn ortalamasýný hesaplayan bir program yazmak istiyorsunuz. Bunun için þöyle bir kod yazabilirsiniz:
+
+sayýlar = 0
+
+for i in range(10):
+sayýlar += int(input("not: "))
+
+print(sayýlar/10)
+
+Bu program kullanýcýnýn 10 adet sayý girmesine izin verip, program çýkýþýnda, girilen sayýlarýn ortalamasýný verecektir.
+
+Peki girilen sayýlarýn ortalamasý ile birlikte, hangi sayýlarýn girildiðini de göstermek isterseniz nasýl bir kod yazarsýnýz?
+
+Eðer böyle bir þeyi karakter dizileri ile yazmaya kalkýþýrsanýz epey eziyet çekersiniz. Ama þöyle bir kod yardýmýyla istediðiniz þeyi basit bir þekilde elde edebilirsiniz:
+
+sayýlar = 0
+notlar = []
+
+for i in range(10):
+veri = int(input("{}. not: ".format(i+1)))
+sayýlar += veri
+notlar += [veri]
+
+print("Girdiðiniz notlar: ", *notlar)
+print("Not ortalamanýz: ", sayýlar/10)
+
+Burada kullanýcýdan gelen verileri her döngüde tek tek notlar adlý listeye gönderiyoruz. Böylece programýn sonunda, kullanýcýdan gelen veriler bir liste halinde elimizde bulunmuþ oluyor.
+
+Bu arada, yukarýdaki kodlarda dikkatinizi bir þey çekmiþ olmalý. Kullanýcýdan gelen verileri notlar adlý listeye gönderirken þöyle bir kod yazdýk:
+
+notlar += [veri]
+
+Buradaki [veri] ifadesine dikkat edin. Bu kod yardýmýyla kullanýcýdan gelen veri adlý deðiþkeni liste haline getiriyoruz. Bu yöntem bizim için yeni bir þey. Peki neden burada list() fonksiyonundan yararlanmadýk?
+
+Bunu anlamak için list() fonksiyonunun çalýþma mantýðýný anlamamýz gerekiyor.
+
+Elinizde þöyle bir karakter dizisi olduðunu düþünün:
+
+>>> alfabe = "abcçdefgðhýijklmnoöprsþtuüvyz"
+
+Diyelim ki siz bu karakter dizisindeki bütün öðeleri tek tek bir listeye atmak istiyorsunuz. Bu iþ için list() fonksiyonunu kullanabileceðimizi daha önce söylemiþtik:
+
+>>> liste = list(alfabe)
+
+Peki list() fonksiyonu bu karakter dizisinin öðelerini listeye atarken nasýl bir yöntem izliyor?
+
+Aslýnda list() fonksiyonunun yaptýðý iþ þuna eþdeðerdir:
+
+liste = []
+alfabe = "abcçdefgðhýijklmnoöprsþtuüvyz"
+
+for harf in alfabe:
+liste += harf
+
+print(liste)
+
+list() fonksiyonu da tam olarak böyle çalýþýr. Yani bir karakter dizisi üzerinde döngü kurarak, o karakter dizisinin her bir öðesini tek tek bir listeye atar.
+
+for döngülerini iþlerken, bu döngünün sayýlar üzerinde çalýþmayacaðýný söylemiþtik. Çünkü sayýlar, karakter dizilerinin aksine, üzerinde döngü kurulabilen bir veri tipi deðildir. Bunu bir örnek üzerinde tekrar görelim:
+
+>>> for i in 12345:
+... print(i)
+...
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not iterable
+
+Gördüðünüz gibi, 12345 sayýsý üzerinde döngü kuramýyoruz. Ayný hata mesajýný list() fonksiyonunda da görürsünüz:
+
+>>> list(12345)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not iterable
+
+Dediðimiz gibi, týpký for döngüsünde olduðu gibi, list() fonksiyonu da ancak, üzerinde döngü kurulabilen nesneler üzerinde çalýþabilir. Mesela:
+
+>>> list("12345")
+
+['1', '2', '3', '4', '5']
+
+Bu bilgilerin ýþýðýnda, yukarýda yazdýðýmýz kodlarýn þu þekilde yazýlmasý halinde Python’ýn bize hata mesajý göstereceðini söyleyebiliriz:
+
+notlar = []
+
+for i in range(10):
+veri = int(input("{}. not: ".format(i+1)))
+notlar += list(veri)
+
+print("Girdiðiniz notlar: ", *notlar)
+
+Kullanýcýdan gelen veri deðerini int() fonksiyonuyla sayýya dönüþtürdüðümüz için ve sayýlar da üzerinde döngü kurulabilen bir veri tipi olmadýðý için list() fonksiyonuna parametre olarak atanamaz.
+
+Peki kullanýcýdan gelen veri deðerini sayýya dönüþtürmeden, karakter dizisi biçiminde list() fonksiyonuna parametre olarak verirsek ne olur? Bu durumda list() fonksiyonu çalýþýr, ama istediðimiz gibi bir sonuç vermez. Þu kodlarý dikkatlice inceleyin:
+
+notlar = []
+
+for i in range(10):
+veri = input("{}. not: ".format(i+1))
+notlar += list(veri)
+
+print("Girdiðiniz notlar: ", *notlar)
+
+Bu kodlarý çalýþtýrdýðýnýzda, tek haneli sayýlar düzgün bir þekilde listeye eklenir, ancak çift ve daha fazla haneli sayýlar ise listeye parça parça eklenir. Örneðin 234 sayýsýný girdiðinizde listeye 2, 3 ve 4 sayýlarý tek tek eklenir. Çünkü, yukarýda da dediðim gibi, list() fonksiyonu, aslýnda karakter dizileri üzerine bir for döngüsü kurar. Yani:
+
+>>> for i in "234":
+... print(i)
+
+2
+3
+4
+
+Dolayýsýyla listeye 234 sayýsý bir bütün olarak deðil de, parça parça eklendiði için istediðiniz sonucu alamamýþ olursunuz.
+
+Peki bu sorunun üstesinden nasýl geleceðiz? Aslýnda bu sorunun çözümü çok basittir. Eðer bir verinin listeye parça parça deðil de, bir bütün olarak eklenmesini istiyorsanýz [] iþaretlerinden yararlanabilirsiniz. Týpký þu örnekte olduðu gibi:
+
+liste = []
+
+while True:
+sayý = input("Bir sayý girin: (çýkmak için q) ")
+
+if sayý == "q":
+break
+
+sayý = int(sayý)
+
+if sayý not in liste:
+liste += [sayý]
+print(liste)
+else:
+print("Bu sayýyý daha önce girdiniz!")
+
+Gördüðünüz gibi, kullanýcý tarafýndan ayný verinin birden fazla girilmesini önlemek için de listelerden yararlanabiliyoruz.
+
+Yalnýz burada þunu söyleyelim: Gerçek programlarda listelere öðe eklemek veya listeleri birleþtirmek gibi iþlemler için yukarýdaki gibi + iþlecinden yararlanmayacaðýz. Yukarýda gösterdiðimiz yöntem de doðru olmakla birlikte, bu iþ için genellikle liste metotlarýndan yararlanýlýr. Bu metotlarý birazdan göreceðiz.
+

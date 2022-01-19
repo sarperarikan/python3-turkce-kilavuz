@@ -1,0 +1,69 @@
+
+root Haklarý Ýle Kurulum
+
+Python’ý kurmadan önce sistemimizde bulunmasý gereken bazý programlar var. Aslýnda bu programlar olmadan da Python kurulabilir, ancak eðer bu programlarý kurmazsanýz Python’ýn bazý özelliklerinden yararlanamazsýnýz. Bu programlar þunlardýr:
+
+
+tcl-dev 
+tk-dev 
+zlib1g-dev 
+ncurses-dev 
+libreadline-dev 
+libdb-dev 
+libgdbm-dev 
+libzip-dev 
+libssl-dev 
+libsqlite3-dev 
+libbz2-dev 
+liblzma-dev 
+
+Bu programlarý, kullandýðýnýz GNU/Linux daðýtýmýnýn paket yöneticisi aracýlýðýyla kurabilirsiniz. Yalnýz paket adlarýnýn ve gerekli paket sayýsýnýn daðýtýmlar arasýnda farklýlýk gösterebileceðini unutmayýn. Yukarýdaki liste Ubuntu için geçerlidir. Mesela yukarýda tcl-dev olarak verdiðimiz paket adý baþka bir daðýtýmda sadece tcl olarak geçiyor ya da yukarýdaki paketlerin bazýlarý kullandýðýnýz daðýtýmda halihazýrda kurulu olduðu için sizin daha az baðýmlýlýk kurmanýz gerekiyor olabilir.
+
+Ubuntu’da yukarýdaki paketlerin hepsini þu komutla kurabilirsiniz:
+
+sudo apt-get install tcl-dev tk-dev
+zlib1g-dev ncurses-dev libreadline-dev
+libdb-dev libgdbm-dev libzip-dev libssl-dev
+libsqlite3-dev libbz2-dev liblzma-dev
+
+Not
+
+Farklý GNU/Linux daðýtýmlarýnda, Python3’ü kaynaktan derleme iþleminden önce halihazýrda kurulu olmasý gereken paketlerin listesi için http://goo.gl/zfLpX adresindeki tabloyu inceleyebilirsiniz.
+
+Yukarýdaki programlarý kurduktan sonra https://www.python.org/ftp/python/3.5.1 adresine gidiyoruz. Bu adreste, üzerinde ‘Python-3.5.1.tar.xz’ yazan baðlantýya týklayarak sýkýþtýrýlmýþ kurulum dosyasýný bilgisayarýmýza indiriyoruz.
+
+Daha sonra bu sýkýþtýrýlmýþ dosyayý açýyoruz. Açýlan klasörün içine girip, orada ilk olarak þu komutu veriyoruz:
+
+./configure
+
+Bu komut, Python programlama dilinin sisteminize kurulabilmesi için gereken hazýrlýk aþamalarýný gerçekleþtirir. Bu betiðin temel olarak yaptýðý iþ, sisteminizin Python programlama dilinin kurulmasýna uygun olup olmadýðýný, derleme iþlemi için gereken yazýlýmlarýn sisteminizde kurulu olup olmadýðýný denetlemektir. Bu betik ayrýca, bir sonraki adýmda gerçekleþtireceðimiz inþa iþleminin nasýl yürüyeceðini tarif eden Makefile adlý bir dosya da oluþturur.
+
+Bu arada bu komutun baþýndaki ./ iþareti, o anda içinde bulunduðunuz dizinde yer alan configure adlý bir betiði çalýþtýrmanýzý saðlýyor. Eðer yalnýzca configure komutu verirseniz, iþletim sistemi bu betiði PATH dizinleri içinde arayacak ve bulamayacaðý için de hata verecektir.
+
+./configure komutu hatasýz olarak tamamlandýktan sonra ikinci olarak þu komutu veriyoruz:
+
+make
+
+Burada aslýnda ./configure komutu ile oluþan Makefile adlý dosyayý make adlý bir program aracýlýðýyla çalýþtýrmýþ oluyoruz. make bir sistem komutudur. Bu komutu yukarýdaki gibi parametresiz olarak çalýþtýrdýðýmýzda make komutu, o anda içinde bulunduðumuz dizinde bir Makefile dosyasý arar ve eðer böyle bir dosya varsa onu çalýþtýrýr. Eðer bir önceki adýmda çalýþtýrdýðýmýz ./configure komutu baþarýsýz olduysa, dizinde bir Makefile dosyasý oluþmayacaðý için yukarýdaki make komutu da çalýþmayacaktýr. O yüzden derleme iþlemi sýrasýnda verdiðimiz komutlarýn çýktýlarýný takip edip, bir sonraki aþamaya geçmeden önce komutun düzgün sonlanýp sonlanmadýðýndan emin olmamýz gerekiyor.
+
+make komutunun yaptýðý iþ, Python programlama dilinin sisteminize kurulmasý esnasýnda sistemin çeþitli yerlerine kopyalanacak olan dosyalarý inþa edip oluþturmaktýr. Bu komutun tamamlanmasý, kullandýðýnýz bilgisayarýn kapasitesine baðlý olarak biraz uzun sürebilir.
+
+make komutu tamamlandýktan sonra, komut çýktýsýnýn son satýrlarýna doðru þöyle bir uyarý mesajý görebilirsiniz:
+
+Python build finished, but the necessary bits
+to build these modules were not found: [burada
+eksik olan modül veya modüllerin adlarý sýralanýr]
+
+Burada Python, sistemimizde bazý paketlerin eksik olduðu konusunda bizi uyarýyor. Uyarý mesajýnda bir veya daha fazla paketin eksik olduðunu görebilirsiniz. Eðer öyleyse, eksik olduðu bildirilen bütün paketleri kurmamýz gerekiyor.
+
+Gerekli paketi ya da paketleri kurduktan sonra make komutunu tekrar çalýþtýrýyoruz. Endiþe etmeyin, make komutunu ikinci kez verdiðimizde komutun tamamlanmasý birincisi kadar uzun sürmez. Eðer bu komutu ikinci kez çalýþtýrdýðýnýzda yukarýdaki uyarý mesajý kaybolduysa þu komutla yolunuza devam edebilirsiniz:
+
+sudo make altinstall
+
+Daha önce kaynaktan program derlemiþ olan GNU/Linux kullanýcýlarýnýn eli, make komutundan sonra make install komutunu vermeye gitmiþ olabilir. Ama burada bizim make install yerine make altinstall komutunu kullandýðýmýza dikkat edin. make altinstall komutu, Python kurulurken klasör ve dosyalara sürüm numarasýnýn da eklenmesini saðlar. Böylece yeni kurduðunuz Python, sistemdeki eski Python3 sürümünü silip üzerine yazmamýþ olur ve iki farklý sürüm yan yana varolabilir. Eðer make altinstall yerine make install komutunu verirseniz sisteminizde zaten varolan eski bir Python3 sürümüne ait dosya ve dizinlerin üzerine yazýp silerek o sürümü kullanýlamaz hale getirebilirsiniz. Bu da sistemde beklenmedik problemlerin ortaya çýkmasýna yol açabilir. Bu önemli ayrýntýyý kesinlikle gözden kaçýrmamalýsýnýz.
+
+Ayrýca bkz.
+
+Python3’ün kaynaktan kurulumu ile ilgili bir tartýþma için bkz. http://www.istihza.com/forum/viewtopic.php?f=50&t=544
+
+Derleme aþamalarýnýn hiçbirinde herhangi bir hata mesajý almadýysanýz kurulum baþarýyla gerçekleþmiþ ve sisteminize Python programlama dilinin 3.x sürümü kurulmuþ demektir.

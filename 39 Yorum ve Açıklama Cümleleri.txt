@@ -1,0 +1,146 @@
+
+Yorum ve Açýklama Cümleleri
+
+Python’la ilgili þimdiye kadar öðrendiðimiz bilgileri kullanarak yazabileceðimiz en karmaþýk programlardan biri herhalde þöyle olacaktýr:
+
+isim = "Fýrat"
+soyisim = "Özgül"
+iþsis = "Ubuntu"
+þehir = "Ýstanbul"
+
+print("isim           : ", isim, "\n",
+"soyisim        : ", soyisim, "\n",
+"iþletim sistemi: ", iþsis, "\n",
+"þehir          : ", þehir, "\n",
+sep="")
+
+Yukarýdaki kodlarý rahatlýkla anlayabildiðinizi zannediyorum. Ama isterseniz yine de bu kodlarý satýr satýr inceleyelim:
+
+Ýlk olarak isim, soyisim, iþsis ve þehir adýnda dört farklý deðiþken tanýmladýk. Bu deðiþkenlerin deðeri sýrasýyla Fýrat, Özgül, Ubuntu ve Ýstanbul.
+
+Daha sonra da tanýmladýðýmýz bu deðiþkenleri belli bir düzen içinde kullanýcýlarýmýza gösterdik, yani ekrana yazdýrdýk. Elbette bu iþ için print() fonksiyonunu kullandýk. Bildiðiniz gibi, print() birden fazla parametre alabilen bir fonksiyondur. Yani print() fonksiyonunun parantezleri içine istediðimiz sayýda öðe yazabiliriz.
+
+Eðer print() fonksiyonunun yukarýdaki kullanýmý ilk bakýþta gözünüze anlaþýlmaz göründüyse, fonksiyonda geçen ve ne iþe yaradýðýný anlayamadýðýnýz öðeleri, bir de çýkartarak yazmayý deneyebilirsiniz bu fonksiyonu.
+
+Python’la yazýlmýþ herhangi bir programýn tam olarak nasýl iþlediðini anlamanýn en iyi yolu program içindeki kodlarda bazý deðiþiklikler yaparak ortaya çýkan sonucu incelemektir. Örneðin print() fonksiyonunda sep parametresinin deðerini boþ bir karakter dizisi yapmamýzýn nedenini anlamak için, fonksiyondaki bu sep parametresini kaldýrýp, programý bir de bu þekilde çalýþtýrmayý deneyebilirsiniz.
+
+Yukarýdaki örnekte bütün öðeleri tek bir print() fonksiyonu içine yazdýk. Ama tabii eðer isterseniz birden fazla print() fonksiyonu da kullanabilirsiniz. Þöyle:
+
+isim = "Fýrat"
+soyisim = "Özgül"
+iþsis = "Ubuntu"
+þehir = "Ýstanbul"
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+Yukarýdaki kodlarla ilgili birkaç noktaya daha dikkatinizi çekmek istiyorum:
+
+Birincisi, gördüðünüz gibi kodlarý yazarken biraz þekil vererek yazdýk. Bunun sebebi kodlarýn görünüþ olarak anlaþýlýr olmasýný saðlamak. Daha önce de dediðimiz gibi, Python’da doðru kod yazmak kadar, yazdýðýnýz kodlarýn anlaþýlýr olmasý da önemlidir. Bu sebepten, Python’la kod yazarken, mesela kodlarýmýzdaki her bir satýrýn uzunluðunun 79 karakteri geçmemesine özen gösteriyoruz. Bunu saðlamak için, kodlarýmýzý yukarýda görüldüðü þekilde belli noktalardan bölmemiz gerekebilir.
+
+Esasýnda yukarýdaki kodlarý þöyle de yazabilirdik:
+
+isim = "Fýrat"
+soyisim = "Özgül"
+iþsis = "Ubuntu"
+þehir = "Ýstanbul"
+
+print("isim: ", isim, "\n", "soyisim: ", soyisim, "\n",
+"iþletim sistemi: ", iþsis, "\n", "þehir: ", þehir, "\n", sep="")
+
+Ancak bu þekilde kod yapýsý biraz karmaþýk görünüyor. Ayrýca parantez içindeki öðeleri yan yana yazdýðýmýz için, isim:, soyisim:, iþletim sistemi: ve þehir: ifadelerini alt alta düzgün bir þekilde hizalamak da kolay olmayacaktýr.
+
+Belki bu basit kodlarda çok fazla dikkati çekmiyordur, ama özellikle büyük boyutlu programlarda kodlarýmýzý hem yapý hem de görüntü olarak olabildiðince anlaþýlýr bir hale getirmek hem kodu okuyan baþkalarý için, hem de kendimiz için büyük önem taþýr. Unutmayýn, bir programý yazdýktan 5-6 ay sonra geri dönüp baktýðýnýzda kendi yazdýðýnýz kodlardan siz dahi hiçbir þey anlamadýðýnýzý farkedebilirsiniz!
+
+Bir program yazarken kodlarýn olabildiðince okunaklý olmasýný saðlamanýn bir kaç yolu vardýr. Biz bunlardan bazýlarýný yukarýda gördük. Ancak bir programý okunaklý hale getirmenin en iyi yolu kodlar içine bazý yorum cümleleri ekleyerek kodlarý açýklamaktýr.
+
+Ýþte bu bölümde, Python programlama dili ile yazdýðýmýz kodlara nasýl yorum ve açýklama cümleleri ekleyeceðimizi inceleyeceðiz.
+
+
+Yorum Ýþareti
+
+Programcýlýkta en zor þey baþkasýnýn yazdýðý kodlarý okuyup anlamaktýr. Hatta yazýlmýþ bir programý düzeltmeye çalýþmak, bazen o programý sýfýrdan yazmaktan daha zor olabilir. Bunun nedeni, program içindeki kodlarýn ne iþe yaradýðýný anlamanýn zorluðudur. Programý yazan kiþi kendi düþünüþüne göre bir yol izlemiþ ve programý geliþtirirken karþýlaþtýðý sorunlarý çözmek için kimi yerlerde enteresan çözümler üretmiþ olabilir. Ancak kodlara dýþarýdan bakan birisi için o programýn mantýk düzenini ve içindeki kodlarýn tam olarak ne yaptýðýný anlamak bir hayli zor olacaktýr. Böyle durumlarda, kodlarý okuyan programcýnýn en büyük yardýmcýsý, programý geliþtiren kiþinin kodlar arasýna eklediði notlar olacaktýr. Tabii programý geliþtiren kiþi kodlara yorum ekleme zahmetinde bulunmuþsa...
+
+Python’da yazdýðýmýz kodlarý baþkalarýnýn da anlayabilmesini saðlamak için, programýmýzýn yorumlarla desteklenmesi tavsiye edilir. Elbette programýnýzý yorumlarla desteklemeseniz de programýnýz sorunsuz bir þekilde çalýþacaktýr. Ama programý yorumlarla desteklemek en azýndan nezaket gereðidir.
+
+Ayrýca iþin baþka bir boyutu daha var. Sizin yazdýðýnýz kodlarý nasýl baþkalarý okurken zorlanýyorsa, kendi yazdýðýnýz kodlarý okurken siz bile zorlanabilirsiniz. Özellikle uzun süredir ilgilenmediðiniz eski programlarýnýzý gözden geçirirken böyle bir sorunla karþýlaþabilirsiniz. Programýn içindeki bir kod parçasý, programýn ilk yazýlýþýnýn üzerinden 5-6 ay geçtikten sonra size artýk hiçbir þey ifade etmiyor olabilir. Kodlara bakýp, ‘Acaba burada ne yapmaya çalýþmýþým?’ diye düþündüðünüz zamanlar da olacaktýr. Ýþte bu tür sýkýntýlarý ortadan kaldýrmak veya en aza indirmek için kodlarýmýzýn arasýna açýklayýcý notlar ekleyeceðiz.
+
+Python’da yorumlar # iþareti ile gösterilir. Mesela bu bölümün ilk baþýnda verdiðimiz kodlarý yorumlarla destekleyelim:
+
+isim = "Fýrat"
+soyisim = "Özgül"
+iþsis = "Ubuntu" #iþletim sistemi
+þehir = "Ýstanbul"
+
+#isim, soyisim, iþsis ve þehir adlý deðiþkenleri
+#alt alta, düzgün bir þekilde ekrana basýyoruz.
+#Uygun yerlerde alt satýra geçebilmek için "\n"
+#adlý kaçýþ dizisini kullanýyoruz.
+print("isim           : ", isim, "\n",
+"soyisim        : ", soyisim, "\n",
+"iþletim sistemi: ", iþsis, "\n",
+"þehir          : ", þehir, "\n",
+sep="") #parametreler arasýnda boþluk býrakmýyoruz.
+
+Burada dikkat edeceðimiz nokta her yorum satýrýnýn baþýna # iþaretini koymayý unutmamaktýr.
+
+Yazdýðýmýz yorumlar Python’a hiç bir þey ifade etmez. Python bu yorumlarý tamamen görmezden gelecektir. Bu yorumlar bilgisayardan ziyade kodlarý okuyan kiþi için bir anlam taþýr.
+
+Elbette yazdýðýnýz yorumlarýn ne kadar faydalý olacaðý, yazdýðýnýz yorumlarýn kalitesine baðlýdýr. Dediðimiz gibi, yerli yerinde kullanýlmýþ yorumlar bir programýn okunaklýlýðýný artýrýr, ama her tarafý yorumlarla kaplý bir programý okumak da bazen hiç yorum girilmemiþ bir programý okumaktan daha zor olabilir! Dolayýsýyla Python’da kodlarýmýza yorum eklerken önemli olan þey, kaþ yapmaya çalýþýrken göz çýkarmamaktýr. Yani yorumlarýmýzý, bir kodun okunaklýlýðýný artýrmaya çalýþýrken daha da bozmayacak þekilde yerleþtirmeye dikkat etmeliyiz.
+
+
+Yorum Ýþaretinin Farklý Kullanýmlarý
+
+Yukarýda yorum (#) iþaretini kullanarak, yazdýðýmýz Python kodlarýný nasýl açýklayacaðýmýzý öðrendik. Python’da yorum iþaretleri çoðunlukla bu amaç için kullanýlýr. Yani kodlarý açýklamak, bu kodlarý hem kendimiz hem de kodlarý okuyan baþkalarý için daha anlaþýlýr hale getirmek için... Ama Python’da # iþareti asýl amacýnýn dýþýnda bazý baþka amaçlara da hizmet edebilir.
+
+
+Etkisizleþtirme Amaçlý
+
+Dediðimiz gibi, yorum iþaretinin birincil görevi, tabii ki, kodlara açýklayýcý notlar eklememizi saðlamaktýr. Ama bu iþaret baþka amaçlar için de kullanýlabilir. Örneðin, diyelim ki yazdýðýmýz programa bir özellik eklemeyi düþünüyoruz, ama henüz bu özelliði yeni sürüme eklemek istemiyoruz. O zaman þöyle bir þey yapabiliriz:
+
+isim = "Fýrat"
+soyisim = "Özgül"
+iþsis = "Ubuntu"
+þehir = "Ýstanbul"
+#uyruðu = "T.C"
+
+print("isim           : ", isim, "\n",
+"soyisim        : ", soyisim, "\n",
+"iþletim sistemi: ", iþsis, "\n",
+"þehir          : ", þehir, "\n",
+#"uyruðu        : ", uyruðu,  "\n",
+sep="")
+
+Burada, programa henüz eklemek istemediðimiz bir özelliði, yorum içine alarak þimdilik iptal ediyoruz yani etkisizleþtiriyoruz (Ýngilizcede bu yorum içine alma iþlemine comment out deniyor). Python yorum içinde bir kod bile yer alsa o kodlarý çalýþtýrmayacaktýr. Çünkü Python # iþareti ile baþlayan satýrlarýn içeriðini görmez (#!/usr/bin/env python3 ve # -*- coding: utf-8 -*- satýrlarý hariç).
+
+Peki eklemek istemediðimiz özelliði yorum içine almaktansa doðrudan silsek olmaz mý? Elbette olur. Ama programýn daha sonraki bir sürümüne ilave edeceðimiz bir özelliði yorum içine almak yerine silecek olursak, vakti geldiðinde o özelliði nasýl yaptýðýmýzý hatýrlamakta zorlanabiliriz! Hatta bir süre sonra programýmýza hangi özelliði ekleyeceðimizi dahi unutmuþ olabiliriz. ‘Hayýr, ben hafýzama güveniyorum!’ diyorsanýz karar sizin.
+
+Yorum içine alarak iptal ettiðiniz bu kodlarý programa ekleme vakti geldiðinde yapacaðýnýz tek þey, kodlarýn baþýndaki # iþaretlerini kaldýrmak olacaktýr. Hatta bazý metin düzenleyiciler bu iþlemi tek bir tuþa basarak da gerçekleþtirme yeteneðine sahiptir. Örneðin IDLE ile çalýþýyorsanýz, yorum içine almak istediðiniz kodlarý fare ile seçtikten sonra Alt+3 tuþlarýna basarak ilgili kodlarý yorum içine alabilirsiniz. Bu kodlarý yorumdan kurtarmak için ise ilgili alaný seçtikten sonra Alt+4 tuþlarýna basmanýz yeterli olacaktýr (yorumdan kurtarma iþlemine Ýngilizcede uncomment diyorlar).
+
+
+Süsleme Amaçlý
+
+Bütün bunlarýn dýþýnda, isterseniz yorum iþaretini kodlarýnýzý süslemek için dahi kullanabilirsiniz:
+
+#######################################################
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#                    FALANCA v.1                      #
+#                Yazan: Keramet Su                    #
+#                  Lisans: GPL v2                     #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#######################################################
+
+isim = "Fýrat"
+soyisim = "Özgül"
+iþsis = "Ubuntu"
+þehir = "Ýstanbul"
+
+print("isim           : ", isim, "\n",
+"soyisim        : ", soyisim, "\n",
+"iþletim sistemi: ", iþsis, "\n",
+"þehir          : ", þehir, "\n",
+sep="")
+
+Yani kýsaca, Python’un görmesini, çalýþtýrmasýný istemediðimiz her þeyi yorum içine alabiliriz. Unutmamamýz gereken tek þey, yorumlarýn yazdýðýmýz programlarýn önemli bir parçasý olduðu ve bunlarý mantýklý, makul bir þekilde kullanmamýz gerektiðidir.

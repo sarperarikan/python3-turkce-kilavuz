@@ -1,0 +1,501 @@
+
+Hata Yakalama
+
+Þimdiye kadar yazdýðýmýz bütün programlar, dikkat ettiyseniz tek bir ortak varsayým üzerine kurulu. Buna göre biz, yazdýðýmýz programýn kullanýcý tarafýndan nasýl kullanýlmasýný istiyorsak, her zaman o þekilde kullanýlacaðýný varsayýyoruz. Örneðin sayýlarý toplayan bir program yazdýðýmýzda, kullanýcýnýn her zaman sayý deðerli bir veri gireceðini düþünüyoruz. Ancak bütün iyi niyetimize raðmen, yazdýðýmýz programlarda iþler her zaman beklediðimiz gibi gitmeyebilir. Örneðin, dediðimiz gibi, yazdýðýmýz programý, kullanýcýnýn bir sayý girmesi temeli üzerine kurgulamýþsak, kullanýcýnýn her zaman sayý deðerli bir veri gireceðinden emin olamayýz
+
+Mesela þöyle bir program yazdýðýmýzý düþünün:
+
+veri1 = input("Karekökünü hesaplamak istediðiniz sayý: ")
+karekök = int(veri1) ** 0.5
+
+print(veri1, "sayýsýnýn karekökü: ", karekök)
+
+veri2 = input("Karesini hesaplamak istediðiniz sayý: ")
+kare = int(veri2) ** 2
+
+print(veri2, "sayýsýnýn karesi: ", kare)
+
+Bu kodlardaki sorunu anlamaya çalýþmadan önce dilerseniz kodlarý þöyle bir inceleyelim.
+
+Gördüðünüz gibi, burada kullanýcýnýn gireceði sayýlara göre karekök ve kare alma iþlemleri yapýyoruz. Bu kodlarda gördüðümüz ** iþleci yardýmýyla bir sayýnýn herhangi bir kuvvetini hesaplayabileceðimizi biliyorsunuz. Mesela 217‘nin kaç ettiðini hesaplamak için ** iþlecini kullanabiliyoruz:
+
+>>> 21 ** 7
+
+1801088541
+
+Yine bildiðiniz gibi, bu iþleçten, bir sayýnýn karesini hesaplamak için de yararlanabiliyoruz. Çünkü neticede bir sayýnýn karesi, o sayýnýn 2. kuvvetidir:
+
+>>> 12 ** 2
+
+144
+
+Ayný þekilde, eðer bir sayýnýn, 0.5’inci kuvvetini hesaplarsak o sayýnýn karekökünü bulmuþ oluyoruz. (Bu bilgileri önceki konulardan hatýrlýyor olmalýsýnýz):
+
+>>> 144 ** 0.5
+
+12
+
+Kodlarýmýzý incelediðimize göre, bu programdaki aksaklýklarý irdelemeye baþlayabiliriz.
+
+Bu program, kullanýcý sayý deðerli bir veri girdiði müddetçe sorunsuz bir þekilde çalýþacaktýr. Peki ya kullanýcý sayý deðerli bir veri yerine baþka bir þey girerse ne olur?
+
+Örneðin kullanýcý yukarýdaki programa bir sayý yerine, (bilerek veya bilmeyerek) içinde harf barýndýran bir veri girerse þuna benzer bir hata alýr:
+
+Traceback (most recent call last):
+File "deneme.py", line 2, in <module>
+karekök = int(veri1) ** 0.5
+ValueError: invalid literal for int() with base 10: 'fds'
+
+Yazdýðýnýz programlarýn bu tür hatalar vermesi normaldir. Ancak son kullanýcý açýsýndan düþündüðümüzde, kullanýcýnýn yukarýdaki gibi bir hata mesajý görmesi yerine, hatanýn neden kaynaklandýðýný ya da neyi yanlýþ yaptýðýný daha açýk bir þekilde ifade eden bir mesaj almasý çok daha mantýklý olacaktýr. Zira yukarýdaki hata mesajý programcýlar açýsýndan anlamlý olabilir, ancak son kullanýcý açýsýndan büsbütün anlaþýlmazdýr!
+
+Dediðimiz gibi, programýnýzýn çalýþma esnasýnda bu tür hatalar vermesi normal. Çünkü yapmaya çalýþtýðýnýz iþlem, kullanýcýnýn belli tipte bir veri girmesine baðlý. Burada sizin bir programcý olarak göreviniz, yazdýðýnýz programýn çalýþma esnasýnda vermesi muhtemel hatalarý önceden kestirip, programýnýzda buna göre bazý önlemler almanýzdýr. Ýþte biz de bu bölümde bu önlemleri nasýl alacaðýmýzý anlamaya çalýþacaðýz.
+
+
+Hata Türleri
+
+Biz bu bölümde hatalardan bahsedeceðimizi söylemiþtik. Ancak her þeyden önce ‘hata’ kavramýnýn çok boyutlu olduðunu hatýrlatmakta fayda var. Özellikle programcýlýk açýsýndan hata kavramýnýn ne anlama geldiðini biraz incelememiz gerekiyor.
+
+Biz bu bölümde hatalarý üç farklý baþlýk altýnda ele alacaðýz:
+
+Programcý Hatalarý (Error) 
+Program Kusurlarý (Bug) 
+Ýstisnalar (Exception) 
+Öncelikle programcý hatalarýndan bahsedelim.
+
+Programcýdan kaynaklanan hatalar doðrudan doðruya programý yazan kiþinin dikkatsizliðinden ötürü ortaya çýkan bariz hatalardýr. Örneðin þu kod bir programcý hatasý içerir:
+
+>>> print "Merhaba Python!"
+
+Bu kodu çalýþtýrdýðýnýzda þöyle bir hata mesajý görürsünüz:
+
+>>> print "Merhaba Python!"
+
+File "<stdin>", line 1
+   print "Merhaba Python!"
+                         ^
+SyntaxError: invalid syntax
+
+Bu hata mesajýnda bizi ilgilendiren kýsým son cümlede yer alýyor: SyntaxError, yani Söz dizimi hatasý.
+
+Bu hatalar, programlama diline iliþkin bir özelliðin yanlýþ kullanýmýndan veya en basit þekilde programcýnýn yaptýðý yazým hatalarýndan kaynaklanýr. Programcýnýn hatalarý genellikle SyntaxError þeklinde ortaya çýkar. Bu hatalar çoðunlukla programcý tarafýndan farkedilir ve program kullanýcýya ulaþmadan önce programcý tarafýndan düzeltilir. Bu tür hatalarýn tespiti diðer hatalara kýyasla kolaydýr. Çünkü bu tür hatalar programýnýzýn çalýþmasýný engellediði için bunlarý farketmemek pek mümkün deðildir...
+
+Program kusurlarý, baþka bir deyiþle bug‘lar ise çok daha karmaþýktýr. Kusurlu programlar çoðu zaman herhangi bir hata vermeden çalýþýr. Ancak programýn ürettiði çýktýlar beklediðiniz gibi deðildir. Örneðin yazdýðýnýz programda bir formül hatasý yapmýþ olabilirsiniz. Bu durumda programýnýz hiçbir þey yokmuþ gibi çalýþýr, ancak formül hatalý olduðu için hesaplamalarýn sonuçlarý yanlýþtýr. Örneðin daha önceki derslerimizde yazdýðýmýz þu program yukarýdaki gibi bir kusur içerir:
+
+sayý1 = input("Toplama iþlemi için ilk sayýyý girin: ")
+sayý2 = input("Toplama iþlemi için ikinci sayýyý girin: ")
+
+print(sayý1, "+", sayý2, "=", sayý1 + sayý2)
+
+Bu programda kullanýcý veri girdiði zaman, programýmýz toplama iþlemi deðil karakter dizisi birleþtirme iþlemi yapacaktýr. Böyle bir program çalýþma sýrasýnda hata vermeyeceði için buradaki sorunu tespit etmek, özellikle büyük programlarda çok güçtür. Yani sizin düzgün çalýþtýðýný zannettiðiniz program aslýnda gizliden gizliye bir bug barýndýrýyor olabilir.
+
+Ayný þekilde, mesela eval() fonksiyonunun dikkatsizce kullanýldýðý programlar da güvenlik açýsýndan kusurludur. Yani bu tür programlar bir güvenlik kusuru (security bug veya security flaw) barýndýrýr.
+
+Dediðimiz gibi, program kusurlarý çok boyutlu olup, burada anlattýðýmýzdan çok daha karmaþýktýr.
+
+Gelelim üçüncü kategori olan istisnalara (exceptions)...
+
+Ýstisnalar, adýndan da az çok anlaþýlacaðý gibi, bir programýn çalýþmasý sýrasýnda ortaya çýkan, normalden farklý, istisnai durumlardýr. Örneðin þu programa bakalým:
+
+ilk_sayý = input("ilk sayý: ")
+ikinci_sayý = input("ikinci sayý: ")
+
+ilk_sayý = int(ilk_sayý)
+ikinci_sayý = int(ikinci_sayý)
+
+print(ilk_sayý, "/", ikinci_sayý, "=", ilk_sayý / ikinci_sayý)
+
+Burada ilk sayýyý ikinci sayýya bölen bir program yazdýk. Bu program her türlü bölme iþlemini yapabilir. Ama burada hesaba katmamýz gereken iki þey var:
+
+Kullanýcý sayý yerine, sayý deðerli olmayan bir veri tipi girebilir. Mesela ilk sayýya karþýlýk 23, ikinci sayýya karþýlýk ‘fdsfd’ gibi bir þey yazabilir. 
+Kullanýcý bir sayýyý 0‘a bölmeye çalýþabilir. Mesela ilk sayýya karþýlýk 23, ikinci sayýya karþýlýk 0 yazabilir. 
+Ýlk durumda programýmýz þöyle bir hata verir:
+
+ilk sayý: 23
+ikinci sayý: fdsfd
+Traceback (most recent call last):
+File "deneme.py", line 5, in <module>
+ikinci_sayý = int(ikinci_sayý)
+ValueError: invalid literal for int() with base 10: 'fdsfd'
+
+Buradaki sorun, sayý deðerli olmayan bir verinin, int() fonksiyonu aracýlýðýyla sayýya çevrilmeye çalýþýlýyor olmasý.
+
+Ýkinci durumda ise programýmýz þöyle bir hata verir:
+
+ilk sayý: 23
+ikinci sayý: 0
+Traceback (most recent call last):
+File "deneme.py", line 7, in <module>
+print(ilk_sayý, "/", ikinci_sayý, "=", ilk_sayý / ikinci_sayý)
+ZeroDivisionError: division by zero
+
+Buradaki sorun ise, bir sayýnýn 0‘a bölünmeye çalýþýlýyor olmasý. Matematikte sayýlar 0‘a bölünemez...
+
+Ýþte bu iki örnekte gördüðümüz ValueError ve ZeroDivisionError birer istisnadýr. Yani kullanýcýlarýn, kendilerinden sayý beklenirken sayý deðerli olmayan veri girmesi veya bir sayýyý 0’a bölmeye çalýþmasý istisnai birer durumdur ve yazdýðýmýz programlarýn exception (istisna) üretmesine yol açar.
+
+Böylece hata (error), kusur (bug) ve istisna (exception) arasýndaki farklarý þöyle bir gözden geçirmiþ olduk. Yalnýz burada þunu söylemekte yarar var: Bu üç kavram arasýndaki fark belli belirsizdir. Yani bu kavramlarýn çoðu yerde birbirlerinin yerine kullanýldýðýný da görebilirsiniz. Örneðin exception kavramý için Türkçe’de çoðu zaman ‘hata’ kelimesini kullanýyoruz. Zaten dikkat ederseniz bu bölümün baþlýðý da ‘Ýstisna Yakalama’ deðil, ‘Hata Yakalama’dýr. Ayný þekilde, Ýngilizcede de bu kavramlarýn çoðu yerde birbirleri yerine kullanýldýðýný görebilirsiniz. Dolayýsýyla, konuya karþý özel bir ilginiz yoksa, hata, kusur ve istisna kavramlarýný birbirinden ayýrmak için kendinizi zorlamanýza gerek yok. Bu üç kavram çoðu zaman birbirinin yerine kullanýlýyor da olsa, aslýnda aralarýnda bazý farklar olduðunu öðrenmiþseniz bu bölüm amacýna ulaþmýþ demektir.
+
+Konuyla ilgili temel bilgileri edindiðimize göre asýl meseleye geçebiliriz...
+
+try... except...
+
+Bir önceki bölümde hatalardan ve hatalarý yakalamaktan söz ettik. Peki bu hatalarý nasýl yakalayacaðýz?
+
+Python’da hata yakalama iþlemleri için try... except... bloklarýndan yararlanýlýr. Hemen bir örnek verelim:
+
+ilk_sayý = input("ilk sayý: ")
+ikinci_sayý = input("ikinci sayý: ")
+
+try:
+sayý1 = int(ilk_sayý)
+sayý2 = int(ikinci_sayý)
+print(sayý1, "/", sayý2, "=", sayý1 / sayý2)
+except ValueError:
+print("Lütfen sadece sayý girin!")
+
+Biliyoruz ki, bir veriyi sayýya dönüþtürmek istediðimizde eðer kullanýcý sayý deðerli bir veri yerine harf deðerli bir veri girerse programýmýz çöker. Dolayýsýyla int(ilk_sayý) ve int(ikinci_sayý) kodlarý, kullanýcýnýn gireceði veri türüne göre hata üretme potansiyeline sahiptir. O yüzden, burada hata vereceðini bildiðimiz o kodlarý try bloðu içine aldýk.
+
+Yine bildiðimiz gibi, veri dönüþtürme iþlemi sýrasýnda kullanýcýnýn uygun olmayan bir veri girmesi halinde üretilecek hata bir ValueError‘dýr. Dolayýsýyla except bloðu içine yazacaðýmýz hata türünün adý da ValueError olacaktýr. O yüzden ValueError adlý hatayý yakalayabilmek için þu satýrlarý yazdýk:
+
+except ValueError:
+print("Lütfen sadece sayý girin!")
+
+Burada bu kodlarla Python’a þu emri vermiþ olduk:
+
+Eðer try bloðu içinde belirtilen iþlemler sýrasýnda bir ValueError ile karþýlaþýrsan bunu görmezden gel ve normal þartlar altýnda kullanýcýya göstereceðin hata mesajýný gösterme. Onun yerine kullanýcýya Lütfen sadece sayý girin! uyarýsýný göster.
+
+Yukarýda Türkçeye çevirdiðimiz emri Pythoncada nasýl ifade ettiðimize dikkat edin. Temel olarak þöyle bir yapýyla karþý karþýyayýz:
+
+try:
+hata verebileceðini bildiðimiz kodlar
+except HataAdý:
+hata durumunda yapýlacak iþlem
+
+Gelin isterseniz bir örnek daha verelim.
+
+Hatýrlarsanýz bir sayýnýn 0‘a bölünmesinin mümkün olmadýðýný, böyle bir durumda programýmýzýn hata vereceðini söylemiþtik. Bu durumu teyit etmek için etkileþimli kabukta þu kodu deneyebilirsiniz:
+
+>>> 2 / 0
+
+Bu kod þöyle bir hata mesajý verecektir:
+
+>>> 2 / 0
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ZeroDivisionError: division by zero
+
+Daha önce de söylediðimiz gibi, bu hata mesajýnda bizi ilgilendiren kýsým ZeroDivisionError. Demek ki bir sayý 0‘a bölündüðünde Python ZeroDivisionError veriyormuþ. O halde þöyle bir kod yazabiliriz:
+
+ilk_sayý = input("ilk sayý: ")
+ikinci_sayý = input("ikinci sayý: ")
+
+try:
+sayý1 = int(ilk_sayý)
+sayý2 = int(ikinci_sayý)
+print(sayý1, "/", sayý2, "=", sayý1 / sayý2)
+except ZeroDivisionError:
+print("Bir sayýyý 0'a bölemezsiniz!")
+
+Gördüðünüz gibi, Python’ýn ZeroDivisionError vereceðini bildiðimiz durumlara karþý bu hata türünü yakalama yoluna gidiyoruz. Böylece kullanýcýya anlamsýz ve karmaþýk hata mesajlarý göstermek ve daha da kötüsü, programýmýzýn çökmesine sebep olmak yerine daha anlaþýlýr mesajlar üretiyoruz.
+
+Yukarýdaki kodlarda özellikle bir nokta dikkatinizi çekmiþ olmalý: Dikkat ederseniz yukarýdaki kodlar aslýnda bir deðil iki farklý hata üretme potansiyeline sahip. Eðer kullanýcý sayý deðerli veri yerine harf deðerli bir veri girerse ValueError, eðer bir sayýyý 0‘a bölmeye çalýþýrsa da ZeroDivisionError hatasý alýyoruz. Peki ayný kodlarda iki farklý hata türünü nasýl yakalayacaðýz?
+
+Çok basit:
+
+ilk_sayý = input("ilk sayý: ")
+ikinci_sayý = input("ikinci sayý: ")
+
+try:
+sayý1 = int(ilk_sayý)
+sayý2 = int(ikinci_sayý)
+print(sayý1, "/", sayý2, "=", sayý1 / sayý2)
+except ZeroDivisionError:
+print("Bir sayýyý 0'a bölemezsiniz!")
+except ValueError:
+print("Lütfen sadece sayý girin!")
+
+Gördüðünüz gibi çözüm gayet mantýklý. Birden fazla hata türü üreteceðini bildiðimiz kodlarý yine tek bir try bloðu içine alýyoruz. Hata türlerini ise ayrý except bloklarý içinde ele alýyoruz.
+
+Bir program yazarken, en iyi yaklaþým, yukarýda yaptýðýmýz gibi, her hata türü için kullanýcýya ayrý bir uyarý mesajý göstermektir. Böylece kullanýcýlarýmýz bir hatayla karþýlaþtýklarýnda sorunu nasýl çözebilecekleri konusunda en azýndan bir fikir sahibi olabilirler.
+
+Dediðimiz gibi, her hata için ayrý bir mesaj göstermek en iyisidir. Ama tabii dilerseniz hata türlerini gruplayýp hepsi için tek bir hata mesajý göstermeyi de tercih edebilirsiniz. Bunu nasýl yapacaðýmýzý görelim:
+
+ilk_sayý = input("ilk sayý: ")
+ikinci_sayý = input("ikinci sayý: ")
+
+try:
+sayý1 = int(ilk_sayý)
+sayý2 = int(ikinci_sayý)
+print(sayý1, "/", sayý2, "=", sayý1 / sayý2)
+except (ValueError, ZeroDivisionError):
+print("Bir hata oluþtu!")
+
+Gördüðünüz gibi, burada ValueError ve ZeroDivisionError adlý hata türlerini tek bir parantez içinde topladýk. Burada dikkat edeceðimiz nokta, bu hata türlerini gruplarken bunlarý parantez içine almak ve birbirlerinden virgülle ayýrmaktýr.
+
+Bu arada, gördüðünüz gibi yukarýdaki programlar sadece bir kez çalýþýp kapanýyor. Ama biz bu programlarý tekrar tekrar nasýl çalýþtýrabileceðimizi gayet iyi biliyoruz:
+
+while True:
+ilk_sayý = input("ilk sayý (Programdan çýkmak için q tuþuna basýn): ")
+
+if ilk_sayý == "q":
+break
+
+ikinci_sayý = input("ikinci sayý: ")
+
+try:
+sayý1 = int(ilk_sayý)
+sayý2 = int(ikinci_sayý)
+print(sayý1, "/", sayý2, "=", sayý1 / sayý2)
+except (ValueError, ZeroDivisionError):
+print("Bir hata oluþtu!")
+print("Lütfen tekrar deneyin!")
+
+Python’da hata yakalamanýn en yaygýn yolu yukarýda gösterdiðimiz gibi kodlarý try... except bloklarý içine almaktýr. Programcýlýk maceranýzýn büyük bölümünde bu yapýyý kullanacaksýnýz. Ama bazen, karþý karþýya olduðunuz duruma veya ihtiyacýnýza göre try... except bloklarýnýn farklý varyasyonlarýný kullanmanýz gerekebilir. Ýþte þimdi biz de bu farklý varyasyonlarýn neler olduðunu incelemeye çalýþacaðýz.
+
+
+try... except... as...
+
+Bildiðiniz gibi, Python bir programýn çalýþmasý esnasýnda hata üretirken çýktýda hata türünün adýyla birlikte kýsa bir hata açýklamasý veriyor. Yani mesela þöyle bir çýktý üretiyor:
+
+ValueError: invalid literal for int() with base 10: 'f'
+
+Burada ‘ValueError’ hata türünün adý, ‘invalid literal for int() with base 10: ‘f’’ ise hatanýn açýklamasýdýr. Eðer istersek, yazdýðýmýz programda bu hata açýklamasýna eriþebiliriz. Dikkatlice bakýn:
+
+ilk_sayý = input("ilk sayý: ")
+ikinci_sayý = input("ikinci sayý: ")
+
+try:
+sayý1 = int(ilk_sayý)
+sayý2 = int(ikinci_sayý)
+print(sayý1, "/", sayý2, "=", sayý1 / sayý2)
+except ValueError as hata:
+print(hata)
+
+Bu programý çalýþtýrýp sayý deðerli olmayan bir veri girersek hata çýktýsý þöyle olacaktýr:
+
+invalid literal for int() with base 10: 'f'
+
+Gördüðünüz gibi, bu defa çýktýda hata türünün adý (ValueError) görünmüyor. Onun yerine sadece hata açýklamasý var.
+
+Diyelim ki kullanýcýya olasý bir hata durumunda hem kendi yazdýðýnýz hata mesajýný, hem de özgün hata mesajýný göstermek istiyorsunuz. Ýþte yukarýdaki yapý böyle durumlarda iþe yarayabilir:
+
+ilk_sayý = input("ilk sayý: ")
+ikinci_sayý = input("ikinci sayý: ")
+
+try:
+sayý1 = int(ilk_sayý)
+sayý2 = int(ikinci_sayý)
+print(sayý1, "/", sayý2, "=", sayý1 / sayý2)
+except ValueError as hata:
+print("Sadece sayý girin!")
+print("orijinal hata mesajý: ", hata)
+
+Bu arada, biraz önce yaptýðýmýz gibi, hata türlerini grupladýðýnýzda da bu yöntemi kullanabilirsiniz:
+
+ilk_sayý = input("ilk sayý: ")
+ikinci_sayý = input("ikinci sayý: ")
+
+try:
+sayý1 = int(ilk_sayý)
+sayý2 = int(ikinci_sayý)
+print(sayý1, "/", sayý2, "=", sayý1 / sayý2)
+except (ValueError, ZeroDivisionError) as hata:
+print("Bir hata oluþtu!")
+print("orijinal hata mesajý: ", hata)
+
+Burada except falancaHata as filanca yapýsýný kullanarak falancaHata‘yý filanca olarak isimlendiriyor ve daha sonra bu ismi istediðimiz gibi kullanabiliyoruz. Böylece bütün hata türleri için hem kendi yazdýðýnýz mesajý görüntüleyebiliyor, hem de özgün hata mesajýný da çýktýya eklediðimiz için, kullanýcýya hata hakkýnda en azýndan bir fikir sahibi olma imkaný vermiþ oluyoruz.
+
+
+try... except... else...
+
+Daha önce de dediðimiz gibi, Python’da hata yakalama iþlemleri için çoðunlukla try... except... bloklarýný bilmek yeterli olacaktýr. Ýþlerimizin büyük kýsmýný sadece bu bloklarý kullanarak halledebiliriz. Ancak Python bize bu konuda, zaman zaman iþimize yarayabilecek baþka araçlar da sunmaktadýr. Ýþte try... except... else... bloklarý da bu araçlardan biridir. Bu bölümde kýsaca bu bloklarýn ne iþe yaradýðýndan söz edeceðiz.
+
+Öncelikle try... except... else... bloðunun ne iþe yaradýðýna bakalým. Esasýnda biz bu else deyimini daha önce de ‘koþullu ifadeler’ konusunu iþlerken görmüþtük. Buradaki kullanýmý da zaten hemen hemen aynýdýr. Diyelim ki elimizde þöyle bir þey var:
+
+try:
+bölünen = int(input("bölünecek sayý: "))
+bölen = int(input("bölen sayý: "))
+print(bölünen/bölen)
+except ValueError:
+print("hata!")
+
+Burada eðer kullanýcý sayý yerine harf girerse ValueError hatasý alýrýz. Bu hatayý except ValueError: ifadesiyle yakalýyoruz ve hata verildiðinde kullanýcýya bir mesaj göstererek programýmýzýn çökmesini engelliyoruz. Ama biliyoruz ki, bu kodlarý çalýþtýrdýðýmýzda Python’ýn verebileceði tek hata ValueError deðildir. Eðer kullanýcý bir sayýyý 0’a bölmeye çalýþýrsa Python ZeroDivisionError adlý hatayý verecektir. Dolayýsýyla bu hatayý da yakalamak için þöyle bir þey yazabiliriz:
+
+try:
+bölünen = int(input("bölünecek sayý: "))
+bölen = int(input("bölen sayý: "))
+print(bölünen/bölen)
+except ValueError:
+print("Lütfen sadece sayý girin!")
+except ZeroDivisionError:
+print("Bir sayýyý 0'a bölemezsiniz!")
+
+Bu þekilde hem ValueError hatasýný hem de ZeroDivisionError hatasýný yakalamýþ oluruz. Bu kodlarýn özelliði, except... bloklarýnýn tek bir try... bloðunu temel almasýdýr. Yani biz burada bütün kodlarýmýzý tek bir try... bloðu içine týkýþtýrýyoruz. Bu blok içinde gerçekleþen hatalarý da daha sonra tek tek except... bloklarý yardýmýyla yakalýyoruz. Ama eðer biz istersek bu kodlarda verilebilecek hatalarý gruplamayý da tercih edebiliriz:
+
+try:
+bölünen = int(input("bölünecek sayý: "))
+bölen = int(input("bölen sayý: "))
+except ValueError:
+print("Lütfen sadece sayý girin!")
+else:
+try:
+print(bölünen/bölen)
+except ZeroDivisionError:
+print("Bir sayýyý 0'a bölemezsiniz!")
+
+Burada yaptýðýmýz þey þu: Ýlk try... except... bloðu yardýmýyla öncelikle int(input()) fonksiyonu ile kullanýcýdan gelecek verinin sayý olup olmadýðýný denetliyoruz. Ardýndan bir else... bloðu açarak, bunun içinde ikinci try... except... bloðumuzu devreye sokuyoruz. Burada da bölme iþlemini gerçekleþtiriyoruz. Kullanýcýnýn bölme iþlemi sýrasýnda 0 sayýsýný girmesi ihtimaline karþý da except ZeroDivisionError ifadesi yardýmýyla olasý hatayý göðüslüyoruz. Bu þekilde bir kodlamanýn bize getireceði avantaj, hatalar üzerinde belli bir kontrol saðlamamýza yardýmcý olmasýdýr. Yukarýdaki kodlar sayesinde hatalara bir nevi ‘teker teker gelin!’ mesajý vermiþ oluyoruz. Böylelikle her blok içinde sadece almayý beklediðimiz hatayý karþýlýyoruz. Mesela yukarýda ilk try... bloðu içindeki dönüþtürme iþlemi yalnýzca ValueError hatasý verebilir. else: bloðundan sonraki try... bloðunda yer alan iþlem ise ancak ZeroDivisionError verecektir. Biz yukarýda kullandýðýmýz yapý sayesinde her bir hatayý tek tek ve yeri geldiðinde karþýlýyoruz. Bu durumun aksine, bölümün ilk baþýnda verdiðimiz try... except bloðunda hem ValueError hem de ZeroDivisionError hatalarýnýn gerçekleþme ihtimali bulunuyor. Dolayýsýyla biz orada bütün hatalarý tek bir try... bloðu içine sýkýþtýrmýþ oluyoruz. Ýþte else: bloðu bu sýkýþýklýðý gidermiþ oluyor. Ancak sizi bir konuda uyarmak isterim: Bu yapý, her akla geldiðinde kullanýlacak bir yapý deðildir. Büyük programlarda bu tarz bir kullaným kodlarýnýzýn darmadaðýn olmasýna, kodlarýnýz üzerindeki denetimi tamamen kaybetmenize de yol açabilir. Sonunda da elinizde bölük pörçük bir kod yýðýný kalabilir. Zaten açýkça söylemek gerekirse try... except... else... yapýsýnýn çok geniþ bir kullaným alaný yoktur. Bu yapý ancak çok nadir durumlarda kullanýlmayý gerektirebilir. Dolayýsýyla bu üçlü yapýyý hiç kullanmadan bir ömrü rahatlýkla geçirebilirsiniz.
+
+
+try... except... finally...
+
+try... except... else... yapýlarýnýn dýþýnda, Python’ýn bize sunduðu bir baþka yapý da try... except... finally... yapýlarýdýr. Bunu þöyle kullanýyoruz:
+
+try:
+...bir takým iþler...
+except birHata:
+...hata alýnýnca yapýlacak iþlemler...
+finally:
+...hata olsa da olmasa da yapýlmasý gerekenler...
+
+finally.. bloðunun en önemli özelliði, programýn çalýþmasý sýrasýnda herhangi bir hata gerçekleþse de gerçekleþmese de iþletilecek olmasýdýr. Eðer yazdýðýnýz programda mutlaka ama mutlaka iþletilmesi gereken bir kýsým varsa, o kýsmý finally... bloðu içine yazabilirsiniz.
+
+finally... bloðu özellikle dosya iþlemlerinde iþimize yarayabilir. Henüz Python’da dosyalarla nasýl çalýþacaðýmýzý öðrenmedik, ama ben þimdilik size en azýndan dosyalarla çalýþma prensibi hakkýnda bir þeyler söyleyeyim.
+
+Genel olarak Python’da dosyalarla çalýþabilmek için öncelikle bilgisayarda bulunan bir dosyayý okuma veya yazma kipinde açarýz. Dosyayý açtýktan sonra bu dosyayla ihtiyacýmýz olan birtakým iþlemler gerçekleþtiririz. Dosyayla iþimiz bittikten sonra ise dosyamýzý mutlaka kapatmamýz gerekir. Ancak eðer dosya üzerinde iþlem yapýlýrken bir hata ile karþýlaþýlýrsa dosyamýzý kapatma iþlemini gerçekleþtirdiðimiz bölüme hiç ulaþýlamayabilir. Ýþte finally... bloðu böyle bir durumda iþimize yarayacaktýr:
+
+try:
+dosya = open("dosyaadý", "r")
+...burada dosyayla bazý iþlemler yapýyoruz...
+...ve ansýzýn bir hata oluþuyor...
+except IOError:
+print("bir hata oluþtu!")
+finally:
+dosya.close()
+
+Burada finally... bloðu içine yazdýðýmýz dosya.close() ifadesi dosyamýzý güvenli bir þekilde kapatmaya yarýyor. Bu blok, yazdýðýmýz program hata verse de vermese de iþletilecektir.
+
+
+raise
+
+Bazen, yazdýðýmýz bir programda, kullanýcýnýn yaptýðý bir iþlem normal þartlar altýnda hata vermeyecek olsa bile biz ona ‘Python tarzý’ bir hata mesajý göstermek isteyebiliriz. Böyle bir durumda ihtiyacýmýz olan þey Python’ýn bize sunduðu raise adlý deyimdir. Bu deyim yardýmýyla duruma özgü hata mesajlarý üretebiliriz. Bir örnek verelim:
+
+bölünen = int(input("bölünecek sayý: "))
+
+if bölünen == 23:
+raise Exception("Bu programda 23 sayýsýný görmek istemiyorum!")
+
+bölen = int(input("bölen sayý: "))
+print(bölünen/bölen)
+
+Burada eðer kullanýcý 23 sayýsýný girerse, kullanýcýya bir hata mesajý gösterilip programdan çýkýlacaktýr. Biz bu kodlarda Exception adlý genel hata mesajýný kullandýk. Burada Exception yerine her istediðimizi yazamayýz. Yazabileceklerimiz ancak Python’da tanýmlý hata mesajlarý olabilir. Örneðin NameError, TypeError, ZeroDivisionError, IOError, vb...
+
+Bir örnek verelim:
+
+tr_karakter = "þçðüöýÝ"
+
+parola = input("Parolanýz: ")
+
+for i in parola:
+if i in tr_karakter:
+raise TypeError("Parolada Türkçe karakter kullanýlamaz!")
+else:
+pass
+
+print("Parola kabul edildi!")
+
+Bu kodlar çalýþtýrýldýðýnda, eðer kullanýcý, içinde Türkçe karakter geçen bir parola yazarsa kendisine TypeError tipinde bir hata mesajý gösteriyoruz. Eðer kullanýcýnýn parolasý Türkçe karakter içermiyorsa hiçbir þey yapmadan geçiyoruz ve bir sonraki satýrda kendisine ‘Parola kabul edildi!’ mesajýný gösteriyoruz.
+
+raise deyimini, bir hata mesajýna ek olarak bir iþlem yapmak istediðimizde de kullanabiliriz. Örneðin:
+
+try:
+bölünen = int(input("bölünecek sayý: "))
+bölen = int(input("bölen sayý: "))
+print(bölünen/bölen)
+except ZeroDivisionError:
+print("bir sayýyý 0'a bölemezsiniz")
+raise
+
+Burada, eðer kullanýcý bir sayýyý 0‘a bölmeye çalýþýrsa, normal bir þekilde ZeroDivisionError hatasý verilecek ve programdan çýkýlacaktýr. Ama bu hata mesajýyla birlikte kullanýcýya ‘bir sayýyý 0’a bölemezsiniz,’ uyarýsýný da gösterme imkanýný elde edeceðiz. Yani burada except ZeroDivisionError bloðunu herhangi bir hatayý engellemek için deðil, hataya ilave bilgi eklemek için kullanýyoruz. Bunu yapmamýzý saðlayan þey tabii ki bu kodlar içinde görünen raise adlý deyimdir...
+
+
+Bütün Hatalarý Yakalamak
+
+Þimdiye kadar yaptýðýmýz bütün örneklerde except... bloðunu bir hata mesajý adýyla birlikte kullandýk. Yani örneklerimiz þuna benziyordu:
+
+try:
+....birtakým iþler...
+except ZeroDivisionError:
+...hata mesajý...
+
+Yukarýdaki kod yardýmýyla sadece ZeroDivisionError adlý hatayý yakalayabiliriz. Eðer yazdýðýmýz program baþka bir hata daha veriyorsa, o hata mesajý yukarýdaki bloklarýn kapsamý dýþýnda kalacaktýr. Ama eðer istersek yukarýdaki kodu þu þekilde yazarak olasý bütün hatalarý yakalayabiliriz:
+
+try:
+....birtakým iþler...
+except:
+...hata mesajý...
+
+Gördüðünüz gibi, burada herhangi bir hata adý belirtmedik. Böylece Python, yazdýðýmýz programda hangi hata oluþursa oluþsun hepsini yakalayabilecektir.
+
+Bu yöntem gözünüze çok pratik görünmüþ olabilir, ama aslýnda hiç de öyle sayýlmaz. Hatta oldukça kötü bir yöntem olduðunu söyleyebiliriz bunun. Çünkü bu tarz bir kod yazýmýnýn bazý dezavantajlarý vardýr. Örneðin bu þekilde bütün hata mesajlarýný ayný kefeye koyarsak, programýmýzda ne tür bir hata oluþursa oluþsun, kullanýcýya hep ayný mesajý göstermek zorunda kalacaðýz. Bu da, herhangi bir hata durumunda kullanýcýyý ne yapmasý gerektiði konusunda doðru düzgün bilgilendiremeyeceðimiz anlamýna geliyor. Yani kullanýcý bir hataya sebep olduðunda tersliðin nereden kaynaklandýðýný tam olarak kestiremeyecektir.
+
+Ayrýca, eðer kendimiz bir program geliþtirirken sürekli olarak bu tarz bir yazýmý benimsersek, kendi kodlarýmýzdaki hatalarý da maskelemiþ oluruz. Dolayýsýyla, Python yukarýdaki geniþ kapsamlý except... bloðu nedeniyle programýmýzdaki bütün hatalarý gizleyeceði için, programýmýzdaki potansiyel aksaklýklarý görme imkanýmýz olmaz. Dolayýsýyla bu tür bir yapýdan olabildiðince kaçýnmakta fayda var. Ancak elbette böyle bir kod yazmanýzý gerektiren bir durumla da karþýlaþabilirsiniz. Örneðin:
+
+try:
+birtakým kodlar
+except ValueError:
+print("Yanlýþ deðer")
+except ZeroDivisionError:
+print("Sýfýra bölme hatasý")
+except:
+print("Beklenmeyen bir hata oluþtu!")
+
+Burada olasý bütün hata türlerini yakaladýktan sonra, bunlarýn dýþýnda bizim o anda öngöremediðimiz bir hatanýn oluþmasý ihtimaline karþý except: kodunu kullanarak kullanýcýya genel bir hata mesajý göstermeyi tercih edebiliriz. Böylece beklenmeyen bir hata meydana gelmesi durumunda da programýmýz çökmek yerine çalýþmaya devam edebilecektir.
+
+Örnek Uygulama
+
+Hata yakalama konusunu bütün ayrýntýlarýyla inceledik. Gelin þimdi isterseniz ufak bir örnek yapalým.
+
+Hatýrlarsanýz bir kaç bölüm önce þöyle bir uygulama yazmýþtýk:
+
+import sys
+
+_2x_metni = """
+Python'ýn 2.x sürümlerinden birini kullanýyorsunuz.
+Programý çalýþtýrabilmek için sisteminizde Python'ýn
+3.x sürümlerinden biri kurulu olmalý."""
+
+_3x_metni = "Programa hoþgeldiniz."
+
+if sys.version_info.major < 3:
+print(_2x_metni)
+else:
+print(_3x_metni)
+
+Bu programýn ne iþ yaptýðýný biliyorsunuz. Bu program yardýmýyla, kullanýcýlarýmýzýn bilgisayarlarýndaki Python sürümünü kontrol edip, programýmýzýn kullanýlan sürüme göre tepki vermesini saðlýyoruz.
+
+Ancak burada çok ciddi bir problem var. Python’ýn 2.7 öncesi sürümlerinde sys modülünün version_info() metodu farklý çýktýlar verir. Mesela Python’ýn 2.7 öncesi sürümlerinde version_info() metodunun major, minor veya micro gibi nitelikleri bulunmaz. Bu nitelikler Python programlama diline 2.7 sürümüyle birlikte geldi. Dolayýsýyla yukarýdaki programý Python’ýn 2.7 öncesi sürümlerinden biriyle çalýþtýran kullanýcýlarýnýz istediðiniz çýktýyý alamayacak, Python bu kullanýcalara þuna benzer bir hata mesajý göstererek programýn çökmesine sebep olacaktýr:
+
+AttributeError: 'tuple' object has no attribute 'major'
+
+Python’ýn 2.7 öncesi sürümlerinin kurulu olduðu bilgisayarlarda da programýnýzýn en azýndan çökmemesi ve makul bir çýktý verebilmesi için yukarýdaki kodlar þöyle yazabilirsiniz:
+
+import sys
+
+_2x_metni = """
+Python'ýn 2.x sürümlerinden birini kullanýyorsunuz.
+Programý çalýþtýrabilmek için sisteminizde Python'ýn
+3.x sürümlerinden biri kurulu olmalý."""
+
+_3x_metni = "Programa hoþgeldiniz."
+
+try:
+if sys.version_info.major < 3:
+print(_2x_metni)
+else:
+print(_3x_metni)
+except AttributeError:
+print(_2x_metni)
+
+Gördüðünüz gibi, AttributeError adlý hatayý vereceðini bildiðimiz kýsmý bir try... except bloðu içine aldýk. Eðer programýmýz AttributeError hatasýný veriyorsa, programýmýzýn çalýþtýrýldýðý sistem Python’ýn 2.7 sürümünden daha düþük bir sürümü kullanýyor demektir. O yüzden kullanýcýya _2x_metni‘ni gösteriyoruz.
+
+Elbette yukarýdaki programý yazmanýn çok daha düzgün yollarý vardýr. Ama biz hata yakalama yöntemlerinin buna benzer durumlarda da bir alternatif olarak kullanýlabileceðini bilelim. Ayrýca, dediðimiz gibi, try... except bloklarý yukarýdaki sorunun çözümü için en uygun araçlar olmasa da, bazý durumlarda hatayý önlemenin makul tek yoludur.

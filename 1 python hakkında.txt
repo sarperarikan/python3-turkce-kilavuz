@@ -1,0 +1,30 @@
+
+Python Hakkýnda
+
+Eðer yaþamýnýzýn bir döneminde herhangi bir programlama dili ile az veya çok ilgilendiyseniz, Python adýný duymuþ olabilirsiniz. Önceden bir programlama dili deneyiminiz hiç olmamýþsa dahi, Python adýnýn bir yerlerden kulaðýnýza çalýnmýþ olma ihtimali bir hayli yüksek. Bu satýrlarý okuyor olduðunuza göre, Python adýný en az bir kez duymuþ olduðunuzu ve bu þeye karþý içinizde hiç deðilse bir merak uyandýðýný varsayabiliriz.
+
+Peki, en kötü ihtimalle kulak dolgunluðunuz olduðunu varsaydýðýmýz bu þey hakkýnda acaba neler biliyorsunuz?
+
+Ýþte biz bu ilk bölümde, fazla teknik ayrýntýya kaçmadan, Python hakkýnda kýsa kýsa bilgiler vererek Python’ýn ne olduðunu ve bununla neler yapabileceðinizi anlatmaya çalýþacaðýz.
+
+
+Python Nedir?
+
+Tahmin edebileceðiniz gibi Python (C, C++, Perl, Ruby ve benzerleri gibi) bir programlama dilidir ve týpký öteki programlama dilleri gibi, önünüzde duran kara kutuya, yani bilgisayara hükmetmenizi saðlar.
+
+Bu programlama dili Guido Van Rossum adlý Hollandalý bir programcý tarafýndan 90’lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan, isminin Python olmasýna aldanarak, bu programlama dilinin, adýný piton yýlanýndan aldýðýný düþünür. Ancak zannedildiðinin aksine bu programlama dilinin adý piton yýlanýndan gelmez. Guido Van Rossum bu programlama dilini, The Monty Python adlý bir Ýngiliz komedi grubunun, Monty Python’s Flying Circus adlý gösterisinden esinlenerek adlandýrmýþtýr. Ancak her ne kadar gerçek böyle olsa da, Python programlama dilinin pek çok yerde bir yýlan figürü ile temsil edilmesi neredeyse bir gelenek halini almýþtýr.
+
+Dediðimiz gibi, Python bir programlama dilidir. Üstelik pek çok dile kýyasla öðrenmesi kolay bir programlama dilidir. Bu yüzden, eðer daha önce hiç programlama deneyiminiz olmamýþsa, programlama maceranýza Python’la baþlamayý tercih edebilirsiniz.
+
+
+Neden Programlama Öðrenmek Ýsteyeyim?
+
+Günlük yaþamýnýza þöyle bir bakýn. Gerek iþ yerinizde olsun, gerek evde bilgisayar baþýnda olsun, belli iþleri tekdüze bir þekilde tekrar ettiðinizi göreceksiniz. Mesela sürekli olarak yazýlý belgelerle uðraþmanýzý gerektiren bir iþte çalýþýyor olabilirsiniz. Belki de her gün onlarca belgeyi açýp bu belgelerde birtakým bilgiler arýyor, bu bilgileri düzeltiyor, yeniliyor veya siliyorsunuzdur. Bu iþlemlerin ne kadar vakit alýcý ve sýkýcý olduðunu düþünün. Eðer bir programlama dili biliyor olsaydýnýz, bütün bu iþlemleri sizin yerinize bu programlama dili hallediyor olabilirdi.
+
+Ýþte Python programlama dili böyle bir durumda devreye girer. Her gün saatler boyunca uðraþtýðýnýz iþlerinizi, yalnýzca birkaç satýr Python kodu yardýmýyla birkaç saniye içinde tamamlayabilirsiniz.
+
+Ya da þöyle bir durum düþünün: Çalýþtýðýnýz iþ yerinde PDF belgeleriyle bolca haþýr neþir oluyor olabilirsiniz. Belki de yüzlerce sayfalýk kaþeli ve imzalý belgeyi PDF haline getirmeniz gerekiyordur. Üstelik sizden bu belgeleri mümkün olduðunca tek parça halinde PDF’lemeniz isteniyor olabilir. Ama o yüzlerce sayfayý tarayýcýdan geçirirken iþin tam ortasýnda bir aksilik oluyor, makine arýzalanýyor ve belki de ister istemez belgeniz bölünüyordur.
+
+Ýþte Python programlama dili böyle bir durumda da devreye girer. Eðer Python programlama dilini öðrenirseniz, Ýnternet’te saatlerce ücretsiz PDF birleþtirme programý aramak veya profesyonel yazýlýmlara onlarca dolar para vermek yerine, belgelerinizi birleþtirip iþinizi görecek programý kendiniz yazabilirsiniz.
+
+Elbette Python’la yapabilecekleriniz yukarýda verdiðimiz basit örneklerle sýnýrlý deðildir. Python’ý kullanarak masaüstü programlama, oyun programlama, taþýnabilir cihaz programlama, web programlama ve að programlama gibi pek çok alanda çalýþmalar yürütebilirsiniz.

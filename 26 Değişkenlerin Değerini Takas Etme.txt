@@ -1,0 +1,99 @@
+
+Deðiþkenlerin Deðerini Takas Etme
+
+Diyelim ki, iþyerinizdeki personelin unvanlarýný tuttuðunuz bir veritabaný var elinizde. Bu veritabanýnda þuna benzer iliþkiler tanýmlý:
+
+>>> osman = "Araþtýrma Geliþtirme Müdürü"
+>>> mehmet = "Proje Sorumlusu"
+
+Ýlerleyen zamanda iþvereniniz sizden Osman ve Mehmet’in unvanlarýný deðiþtirmenizi talep edebilir. Yani Osman’ý Proje Sorumlusu, Mehmet’i de Araþtýrma Geliþtirme Müdürü yapmanýzý isteyebilir sizden.
+
+Patronunuzun bu isteðini Python’da çok rahat bir biçimde yerine getirebilirsiniz. Dikkatlice bakýn:
+
+>>> osman, mehmet = mehmet, osman
+
+Böylece tek hamlede bu iki kiþinin unvanlarýný takas etmiþ oldunuz. Gelin isterseniz deðiþkenlerin son durumuna bakalým:
+
+>>> osman
+
+'Proje Sorumlusu
+
+>>> mehmet
+
+'Araþtýrma Geliþtirme Müdürü'
+
+Gördüðünüz gibi, osman deðiþkeninin deðerini mehmet‘e; mehmet deðiþkeninin deðerini ise osman‘a baþarýyla verebilmiþiz.
+
+Yukarýdaki yöntem Python’ýn öteki diller üzerinde önemli bir üstünlüðüdür. Baþka programlama dillerinde bu iþlemi yapmak için geçici bir deðiþken tanýmlamanýz gerekir. Yani mesela:
+
+>>> osman = "Araþtýrma Geliþtirme Müdürü"
+>>> mehmet = "Proje Sorumlusu"
+
+Elimizdeki deðerler bunlar. Biz þimdi Osman’ýn deðerini Mehmet’e; Mehmet’in deðerini ise Osman’a aktaracaðýz. Bunun için öncelikle bir geçici deðiþken tanýmlamalýyýz:
+
+>>> geçici = "Proje Sorumlusu"
+
+Bu sayede “Proje Sorumlusu” deðerini yedeklemiþ olduk. Bu iþlem sayesinde, takas sýrasýnda bu deðeri kaybetmeyeceðiz.
+
+Þimdi Osman’ýn deðerini Mehmet’e aktaralým:
+
+>>> mehmet = osman
+
+Þimdi elimizde iki tane Araþtýrma Geliþtirme Müdürü olmuþ oldu:
+
+>>> mehmet
+
+'Araþtýrma Geliþtirme Müdürü'
+
+>>> osman
+
+'Araþtýrma Geliþtirme Müdürü'
+
+Gördüðünüz gibi, mehmet = osman kodunu kullanarak mehmet deðiþkeninin deðerini osman deðiþkeninin deðeriyle deðiþtirdiðimiz için “Proje Sorumlusu” deðeri ortadan kayboldu. Ama biz önceden bu deðeri geçici adlý deðiþkene atadýðýmýz için bu deðeri kaybetmemiþ olduk. Þimdi Osman’a geçici deðiþkeni içinde tuttuðumuz “Proje Sorumlusu” deðerini verebiliriz:
+
+>>> osman = geçici
+
+Böylece istediðimiz takas iþlemini gerçekleþtirmiþ olduk. Son durumu kontrol edelim:
+
+>>> osman
+
+'Proje Sorumlusu
+
+>>> mehmet
+
+'Araþtýrma Geliþtirme Müdürü'
+
+Basit bir iþlem için ne kadar büyük bir zaman kaybý, deðil mi? Ama dediðimiz gibi, Python’da bu þekilde geçici bir deðiþken atamakla uðraþmamýza hiç gerek yok. Sadece þu formülü kullanarak deðiþkenlerin deðerini takas edebiliriz:
+
+a, b = b, a
+
+Bu þekilde a deðiþkeninin deðerini b deðiþkenine; b deðiþkeninin deðerini ise a deðerine vermiþ oluyoruz. Eðer bu iþlemi geri alýp her þeyi eski haline döndürmek istersek, tahmin edebileceðiniz gibi yine ayný yöntemden yararlanabiliriz:
+
+b, a = a, b
+
+Böylece deðiþkenler konusunu da oldukça ayrýntýlý bir þekilde incelemiþ olduk. Ayrýca bu esnada len() ve pow() adlý iki yeni fonksiyon ile ** adlý bir iþleç de öðrendik.
+
+Hazýr lafý geçmiþken, len() fonksiyonunun bazý kýsýtlamalarýndan söz edelim. Dediðimiz gibi, bu fonksiyonu kullanarak karakter dizileri içinde toplam kaç adet karakter bulunduðunu hesaplayabiliyoruz. Örneðin:
+
+>>> kelime = "muvaffakiyet"
+>>> len(kelime)
+
+12
+
+Yalnýz bu len() fonksiyonunu sayýlarýn uzunluðunu ölçmek için kullanamýyoruz:
+
+>>> len(123456)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: object of type 'int' has no len()
+
+Gördüðünüz gibi, len() fonksiyonu, þu ana kadar öðrendiðimiz veri tipleri arasýnda yalnýzca karakter dizileri ile birlikte kullanýlabiliyor. Bu fonksiyonu sayýlarla birlikte kullanamýyoruz.
+
+Bu bölümün baþýnda, o anda elimizde bulunan bir verinin tipini bilmemizin çok önemli olduðunu ve Python’da bir verinin tipinin, o veri ile neler yapýp neler yapamayacaðýnýzý belirlediðini söylediðimizi hatýrlýyorsunuz, deðil mi? Ýþte len() fonksiyonu bu duruma çok güzel bir örnektir.
+
+len() fonksiyonu sayýlarla birlikte kullanýlamaz. Dolayýsýyla eðer elinizdeki verinin bir sayý olduðunu bilmezseniz, bu sayýyý len() fonksiyonu ile birlikte kullanmaya çalýþabilir ve bu þekilde programýnýzýn hata vererek çökmesine yol açabilirsiniz.
+
+Ayrýca daha önce de söylediðimiz gibi, len() fonksiyonunu doðru kullanabilmek için, bu fonksiyonun bize sayý deðerli bir çýktý verdiðini de bilmemiz gerekir.
+
+len() fonksiyonu ile ilgili bu durumu da bir kenara not ettikten sonra yolumuza kaldýðýmýz yerden devam edelim.

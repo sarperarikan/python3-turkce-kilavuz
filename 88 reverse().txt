@@ -1,0 +1,51 @@
+
+reverse()
+
+Daha önce verdiğimiz örneklerde, liste öğelerini ters çevirmek için dilimleme yöntemini kullanabileceğimizi öğrenmiştik:
+
+>>> meyveler = ["elma", "armut", "çilek", "kiraz"]
+>>> meyveler[::-1]
+
+['kiraz', 'çilek', 'armut', 'elma']
+
+Eğer istersek, bu iş için, karakter dizilerini incelerken öğrendiğimiz reversed() fonksiyonunu da kullanabiliriz:
+
+>>> reversed(meyveler)
+
+Bu komut bize şu çıktıyı verir:
+
+<list_reverseiterator object at 0x00DC9810>
+
+Demek ki reversed() fonksiyonunu bir liste üzerine uyguladığımızda ‘list_reverseiterator’ adı verilen bir nesne elde ediyoruz. Bu nesnenin içeriğini görmek için birkaç farklı yöntemden yararlanabiliriz. Örneğin:
+
+>>> print(*reversed(meyveler))
+
+kiraz çilek armut elma
+
+... veya:
+
+>>> print(list(reversed(meyveler)))
+
+['kiraz', 'çilek', 'armut', 'elma']
+
+... ya da:
+
+>>> for i in reversed(meyveler):
+... print(i)
+...
+kiraz
+çilek
+armut
+elma
+
+Gördüğünüz gibi, Python’da bir listeyi ters çevirmenin pek çok yöntemi var. Dilerseniz şimdi bu yöntemlere bir tane daha ekleyelim.
+
+Python’da listelerin öğelerini ters çevirmek için yukarıdaki yöntemlere ek olarak listelerin reverse() metodunu da kullanabilirsiniz:
+
+>>> liste = ["elma", "armut", "çilek"]
+>>> liste.reverse()
+>>> liste
+
+['çilek', 'armut', 'elma']
+
+İhtiyacınız olan çıktının türüne ve şekline göre yukarıdaki yöntemlerden herhangi birini tercih edebilirsiniz.

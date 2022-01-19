@@ -1,0 +1,13 @@
+
+Listeleri Silmek
+
+Python’da listeleri tamamen silmek de mümkündür. Örneðin:
+
+>>> liste = [1, 5, 3, 2, 9]
+>>> del liste
+>>> liste
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'liste' is not defined
+

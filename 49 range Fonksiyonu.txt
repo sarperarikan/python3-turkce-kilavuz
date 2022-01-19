@@ -1,0 +1,173 @@
+
+range Fonksiyonu
+
+range kelimesi Ýngilizcede ‘aralýk’ anlamýna gelir. Biz Python’da range() fonksiyonunu belli bir aralýkta bulunan sayýlarý göstermek için kullanýyoruz. Örneðin:
+
+>>> for i in range(0, 10):
+... print(i)
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+Gördüðünüz gibi, range(0, 10) kodu sayesinde ve for döngüsünü de kullanarak, 0 ile 10 (10 hariç) aralýðýndaki sayýlarý ekrana yazdýrdýk.
+
+Yukarýdaki kodda range() fonksiyonuna 0 ve 10 olmak üzere iki adet parametre verdiðimizi görüyorsunuz. Burada 0 sayýsý, aralýktaki ilk sayýyý, 10 sayýsý ise aralýktaki son sayýyý gösteriyor. Yani range() fonksiyonunun formülü þöyledir:
+
+range(ilk_sayý, son_sayý)
+
+Bu arada, range(ilk_sayý, son_sayý) kodunun verdiði çýktýya ilk_sayýnýn dahil olduðuna, ama son_sayýnýn dahil olmadýðýna dikkat edin.
+
+Eðer range() fonksiyonunun ilk parametresi 0 olacaksa, bu parametreyi belirtmesek de olur. Yani mesela 0‘dan 10‘a kadar olan sayýlarý listeleyeceksek range() fonksiyonunu þöyle yazmamýz yeterli olacaktýr:
+
+>>> for i in range(10):
+... print(i)
+
+range() fonksiyonunun ilk_sayý parametresi verilmediðinde Python ilk parametreyi 0 olarak alýr. Yani range(10) gibi bir kodu Python range(0, 10) olarak algýlar. Elbette, eðer aralýktaki ilk sayý 0‘dan farklý olacaksa bu sayýyý açýk açýk belirtmek gerekir:
+
+>>> for i in range(3, 20):
+... print(i)
+
+Burada 3‘ten itibaren 20‘ye kadar olan sayýlar ekrana dökülecektir.
+
+Hatýrlarsanýz, biraz önce, kullanýcýnýn 3 karakterden kýsa, 8 karakterden uzun parola belirlemesini engelleyen bir uygulama yazmýþtýk. O uygulamayý range() fonksiyonunu kullanarak da yazabiliriz:
+
+while True:
+parola = input("parola belirleyin: ")
+
+if not parola:
+print("parola bölümü boþ geçilemez!")
+
+elif len(parola) in range(3, 8): #eðer parolanýn uzunluðu 3 ile 8 karakter
+#aralýðýnda ise...
+print("Yeni parolanýz", parola)
+break
+
+else:
+print("parola 8 karakterden uzun 3 karakterden kýsa olmamalý")
+
+Bu fonksiyonu kullanarak bir döngünün kaç kez çalýþacaðýný da belirleyebilirsiniz. Aþaðýdaki kodlarý dikkatlice inceleyin:
+
+for i in range(3):
+parola = input("parola belirleyin: ")
+if i == 2:
+print("parolayý 3 kez yanlýþ girdiniz.",
+"Lütfen 30 dakika sonra tekrar deneyin!")
+
+elif not parola:
+print("parola bölümü boþ geçilemez!")
+
+elif len(parola) in range(3, 8):
+print("Yeni parolanýz", parola)
+break
+
+else:
+print("parola 8 karakterden uzun 3 karakterden kýsa olmamalý")
+
+Burada if i == 2 kodu sayesinde for döngüsü içinde belirttiðimiz i adlý deðiþkenin deðeri 2 olduðu anda ‘parolayý 3 kez yanlýþ girdiniz...’ uyarýsý gösterilecektir. Daha önce de birkaç yerde ifade ettiðimiz gibi, eðer yukarýdaki kodlarýn çalýþma mantýðýný anlamakta zorlanýyorsanýz, programýn uygun yerlerine print() fonksiyonu yerleþtirerek arka planda Python’ýn neler çevirdiðini daha net görebilirsiniz. Örneðin:
+
+for i in range(3):
+print(i)
+parola = input("parola belirleyin: ")
+if i == 2:
+print("parolayý 3 kez yanlýþ girdiniz.",
+"Lütfen 30 dakika sonra tekrar deneyin!")
+
+elif not parola:
+print("parola bölümü boþ geçilemez!")
+
+elif len(parola) in range(3, 8):
+print("Yeni parolanýz", parola)
+break
+
+else:
+print("parola 8 karakterden uzun 3 karakterden kýsa olmamalý")
+
+Gördüðünüz gibi, i deðiþkeninin baþlangýçtaki deðeri 0. Bu deðer her döngüde 1 artýyor ve bu deðiþkenin deðeri 2 olduðu anda if i == 2 bloðu devreye giriyor.
+
+range() fonksiyonunun yetenekleri yukarýda anlattýklarýmýzla sýnýrlý deðildir. Bu fonksiyonun bazý baþka maharetleri de bulunur. Hatýrlarsanýz yukarýda bu fonksiyonun formülünü þöyle vermiþtik:
+
+range(ilk_sayý, son_sayý)
+
+Buna göre range() fonksiyonu iki parametre alýyor. Ama aslýnda bu fonksiyonun üçüncü bir parametresi daha vardýr. Buna göre formülümüzü güncelleyelim:
+
+range(ilk_sayý, son_sayý, atlama_deðeri)
+
+Formüldeki son parametre olan atlama_deðeri, aralýktaki sayýlarýn kaçar kaçar ilerleyeceðini gösterir. Yani:
+
+>>> for i in range(0, 10, 2):
+... print(i)
+...
+
+0
+2
+4
+6
+8
+
+Gördüðünüz gibi, son parametre olarak verdiðimiz 2 sayýsý sayesinde 0‘dan 10‘a kadar olan sayýlar ikiþer ikiþer atlayarak ekrana dökülüyor.
+
+Bu arada, bir þey dikkatinizi çekmiþ olmalý:
+
+range() fonksiyonu üç farklý parametre alan bir fonksiyon. Eðer ilk parametre 0 olacaksa bu parametreyi belirtmek zorunda olmadýðýmýzý biliyoruz. Yani:
+
+>>> range(10)
+
+Python bu kodu range(0, 10) olarak algýlayýp buna göre deðerlendiriyor. Ancak eðer range() fonksiyonunda üçüncü parametreyi de kullanacaksak, yani range(0, 10, 2) gibi bir komut vereceksek, üç parametrenin tamamýný da belirtmemiz gerekiyor. Eðer burada bütün parametreleri belirtmezsek Python hangi sayýnýn hangi parametreye karþýlýk geldiðini anlayamaz. Yani mesela 0‘dan 10‘a kadar olan sayýlarý ikiþer ikiþer atlayarak ekrana dökmek için þöyle bir þey yazmaya çalýþtýðýmýzý düþünün:
+
+>>> for i in range(10, 2):
+... print(i)
+
+Burada Python ne yapmaya çalýþtýðýnýzý anlayamaz. Parantez içinde ilk deðer olarak 10, ikinci deðer olarak ise 2 yazdýðýnýz için, Python bu 10 sayýsýný baþlangýç deðeri; 2 sayýsýný ise bitiþ deðeri olarak algýlayacaktýr. Dolayýsýyla da Python bu durumda sizin 10‘dan 2‘ye kadar olan sayýlarý listelemek istediðinizi zannedecek, range() fonksiyonuyla bu þekilde geriye doðru sayamayacaðýmýz için de boþ bir çýktý verecektir. Bu yüzden, Python’un þaþýrmamasý için yukarýdaki örneði þu þekilde yazmalýyýz:
+
+>>> for i in range(0, 10, 2):
+... print(i)
+
+Kýsacasý, eðer range() fonksiyonunun kaçar kaçar sayacaðýný da belirtmek istiyorsak, parantez içinde, gerekli bütün parametreleri belirtmeliyiz.
+
+Gördüðünüz gibi, range() fonksiyonunu kullanarak belirli bir aralýktaki sayýlarý alabiliyoruz. Peki bu sayýlarý tersten alabilir miyiz? Elbette:
+
+>>> for i in range(10, 0, -1):
+... print(i)
+...
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+
+Burada range() fonksiyonunu nasýl yazdýðýmýza çok dikkat edin. Sayýlarý tersten alacaðýmýz için, ilk parametre 10, ikinci parametre ise 0. Üçüncü parametre olarak ise eksi deðerli bir sayý veriyoruz. Eðer sayýlarý hem tersten, hem de mesela 3’er 3’er atlayarak yazmak isterseniz þöyle bir komut verebilirsiniz:
+
+>>> for i in range(10, 0, -3):
+... print(i)
+...
+10
+7
+4
+1
+
+Bu arada, etkileþimli kabukta range(10) gibi bir komut verdiðinizde range(0, 10) çýktýsý aldýðýnýzý görüyorsunuz. Bu çýktý, verdiðimiz komutun 0 ile 10 arasý sayýlarý elde etmemizi saðlayacaðýný belirtiyor, ama bu sayýlarý o anda bize göstermiyor. Daha önce verdiðimiz örneklerden de anlaþýlacaðý gibi, 0-10 aralýðýndaki sayýlarý görebilmek için range(10) ifadesi üzerinde bir for döngüsü kurmamýz gerekiyor. range(10) ifadesinin taþýdýðý sayýlarý görebilmek için for döngüsü kurmak tek seçenek deðildir. Bu iþlem için yýldýzlý parametrelerden de yararlanabiliriz. print() fonksiyonunu incelediðimiz derste yýldýzlý parametrelerin nasýl kullanýldýðýný göstermiþtik. Dilerseniz þimdi bu parametre tipini range() fonksiyonuna nasýl uygulayabileceðimizi görelim:
+
+>>> print(*range(10))
+
+0 1 2 3 4 5 6 7 8 9
+
+print() fonksiyonunun sep parametresi yardýmýyla bu çýktýyý istediðiniz gibi düzenleyebileceðinizi biliyorsunuz. Mesela çýktýdaki sayýlarý birbirlerinden virgülle ayýrmak için þöyle bir komut verebiliyoruz:
+
+>>> print(*range(10), sep=", ")
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+Böylece range() fonksiyonunu enine boyuna incelemiþ ve bu fonksiyonun ne iþe yaradýðýný, nasýl kullanýlacaðýný anlamamýzý saðlayan örnekler vermiþ olduk. Artýk baþka bir konuyu geçebiliriz.

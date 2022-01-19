@@ -1,0 +1,12 @@
+
+Neden Python?
+
+Python programlarýnýn en büyük özelliklerinden birisi, C ve C++ gibi dillerin aksine, derlenmeye gerek olmadan çalýþtýrýlabilmeleridir. Python’da derleme iþlemi ortadan kaldýrýldýðý için, bu dille oldukça hýzlý bir þekilde program geliþtirilebilir.
+
+Ayrýca Python programlama dilinin basit ve temiz söz dizimi, onu pek çok programcý tarafýndan tercih edilen bir dil haline getirmiþtir. Python’ýn söz diziminin temiz ve basit olmasý sayesinde hem program yazmak, hem de baþkasý tarafýndan yazýlmýþ bir programý okumak, baþka dillere kýyasla çok kolaydýr.
+
+Python’ýn yukarýda sayýlan özellikleri sayesinde dünya çapýnda ün sahibi büyük kuruluþlar (Google, YouTube ve Yahoo! gibi) bünyelerinde her zaman Python programcýlarýna ihtiyaç duyuyor. Mesela pek çok büyük þirketin Python bilen programcýlara iþ imkaný saðladýðýný, Python’ýn baþ geliþtiricisi Guido Van Rossum’un 2005 ile 2012 yýllarý arasýnda Google’da çalýþtýðýný, 2012 yýlýnýn sonlarýna doðru ise Dropbox þirketine geçtiðini söylersek, bu programlama dilinin önemi ve geçerliliði herhalde daha belirgin bir þekilde ortaya çýkacaktýr.
+
+Python programlama dili ve bu dili hakkýyla bilenler sadece uluslararasý þirketlerin ilgisini çekmekle kalmýyor. Python son zamanlarda Türkiye’deki kurum ve kuruluþlarýn da dikkatini çekmeye baþladý. Bu dil artýk yavaþ yavaþ Türkiye’deki üniversitelerin müfredatýnda da kendine yer buluyor.
+
+Sözün özü, pek çok farklý sebepten, baþka bir programlama dilini deðil de, Python programlama dilini öðrenmek istiyor olabilirsiniz.

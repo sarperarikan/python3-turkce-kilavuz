@@ -1,0 +1,88 @@
+
+Windows Kullanýcýlarý
+
+Windows kullanýcýlarý Python3’ü iki þekilde baþlatabilir:
+
+
+Baþlat > Tüm Programlar > Python3.5> Python (Command Line) yolunu takip ederek. 
+Komut satýrýnda python komutunu vererek. 
+
+Eðer birinci yolu tercih ederseniz, Python’ýn size sunduðu komut satýrýna doðrudan ulaþmýþ olursunuz. Ancak Python komut satýrýna bu þekilde ulaþtýðýnýzda bazý kýsýtlamalarla karþý karþýya kalýrsýnýz. Doðrudan Python’ýn komut satýrýna ulaþmak yerine önce MS-DOS komut satýrýna ulaþýp, oradan Python komut satýrýna ulaþmak özellikle ileride yapacaðýnýz çalýþmalar açýsýndan çok daha mantýklý olacaktýr. O yüzden komut satýrýna bu þekilde ulaþmak yerine ikinci seçeneði tercih etmenizi tavsiye ederim. Bunun için önceki bölümlerde gösterdiðimiz þekilde komut satýrýna ulaþýn ve orada þu komutu çalýþtýrýn:
+
+python
+
+Bu komutu verdiðinizde þuna benzer bir ekranla karþýlaþacaksýnýz:
+
+C:\Users\istihza> python3 Python 3.5.1 (v3.5.1:c0e311e010fc, 20.04.2016, 12:24:55) [MSC v.1600 32 bit (Intel)] on win32 Type “help”, “copyright”, “credits” or “license” for more information. >>>
+
+Eðer bu komut yukarýdakine benzer bir ekran yerine bir hata mesajý verdiyse kurulum sýrasýnda bazý adýmlarý eksik veya yanlýþ yapmýþ olabilirsiniz. Yukarýdaki komut çalýþmýyorsa, muhtemelen kurulum sýrasýnda Add python3.5 to path kutucuðunu iþaretlemeyi unutmuþsunuzdur. Eðer öyleyse, kurulum dosyasýný tekrar çalýþtýrýp, ilgili adýmý gerçekleþtirmeniz veya Python’ý kendiniz YOL’a eklemeniz gerekiyor.
+
+python komutunu baþarýyla çalýþtýrabildiðinizi varsayarak yolumuza devam edelim.
+
+
+Windows’ta Farklý Sürümleri Birlikte Kullanmak
+
+Daha önce de dediðimiz gibi, þu anda piyasada iki farklý Python serisi bulunuyor: Python2 ve Python3. Çok uzun zamandan beri kullanýmda olduðu için, Python2 Python3’e kýyasla daha yaygýn. Eðer hem Python2 ile yazýlmýþ programlarý çalýþtýrmak, hem de Python3 ile geliþtirme yapmak istiyorsanýz, sisteminizde hem Python2’yi hem de Python3’ü ayný anda bulundurmayý tercih edebilirsiniz. Peki bunu nasýl yapacaksýnýz?
+
+Windows’ta bu iþlemi yapmak çok kolaydýr. python.org/download adresine giderek farklý Python sürümlerini bilgisayarýnýza indirebilir ve bunlarý bilgisayarýnýza normal bir þekilde kurabilirsiniz. Bu þekilde sisteminize istediðiniz sayýda farklý Python sürümü kurabilirsiniz. Peki bu farklý sürümlere nasýl ulaþacaksýnýz?
+
+Python, bilgisayarýmýzdaki farklý Python sürümlerini çalýþtýrabilmemiz için bize ‘py’ adlý özel bir program sunar.
+
+Not
+
+Py programý yalnýzca Windows’a özgüdür. GNU/Linux’ta böyle bir program bulunmaz.
+
+Py programýný çalýþtýrmak için, daha önce gösterdiðimiz þekilde sistem komut satýrýna ulaþýyoruz ve orada þu komutu veriyoruz:
+
+py
+
+Bu komutu verdiðinizde (teorik olarak) sisteminize en son kurduðunuz Python sürümü çalýþmaya baþlayacaktýr. Ancak bu her zaman böyle olmayabilir. Ya da aldýðýnýz çýktý beklediðiniz gibi olmayabilir. O yüzden bu komutu verdiðinizde hangi sürümün baþladýðýna dikkat edin.
+
+Eðer sisteminizde birden fazla Python sürümü kurulu ise, bu betik yardýmýyla istediðiniz sürümü baþlatabilirsiniz. Mesela sisteminizde hem Python’ýn 2.x sürümlerinden biri, hem de Python’ýn 3.x sürümlerinden biri kurulu ise, þu komut yardýmýyla Python 2.x’i baþlatabilirsiniz:
+
+py -2
+
+Python 3.x’i baþlatmak için ise þu komutu veriyoruz:
+
+py -3
+
+Eðer sisteminizde birden fazla Python2 veya birden fazla Python3 sürümü kurulu ise, ana ve alt sürüm numaralarýný belirterek istediðiniz sürüme ulaþabilirsiniz:
+
+py -2.6
+
+py -2.7
+
+py -3.4
+
+py -3.5
+
+Bu arada dikkat ettiyseniz, Python programlarýný baþlatabilmek için hem python hem de py komutunu kullanma imkanýna sahibiz. Eðer sisteminizde tek bir Python sürümü kurulu ise, Python’ý baþlatmak için python komutunu kullanmak isteyebilir, farklý sürümlerin bir arada bulunduðu durumlarda ise py ile bu farklý sürümlere tek tek eriþmek isteyebilirsiniz.
+
+Böylece Python’la ilgili en temel bilgileri edinmiþ olduk. Bu bölümde öðrendiklerimiz sayesinde Python programlama dilini bilgisayarýmýza kurabiliyor ve bu programlama dilini baþarýyla çalýþtýrabiliyoruz.
+
+Hangi Komut Hangi Sürümü Çalýþtýrýyor?
+
+Artýk Python programlama dilinin bilgisayarýmýza nasýl kurulacaðýný ve bu programlama dilinin nasýl çalýþtýrýlacaðýný biliyoruz. Ancak konunun öneminden ötürü, tekrar vurgulayýp, cevabýný bilip bilmediðinizden emin olmak istediðimiz bir soru var: Kullandýðýnýz iþletim sisteminde acaba hangi komut, hangi Python sürümünü çalýþtýrýyor?
+
+Bu kitapta anlattýðýmýz farklý yöntemleri takip ederek, Python programlama dilini bilgisayarýnýza farklý þekillerde kurmuþ olabilirsiniz. Örneðin Python programlama dilini, kullandýðýnýz GNU/Linux daðýtýmýnýn paket yöneticisi aracýlýðýyla kurduysanýz, Python’ý baþlatmak için python3 komutunu kullanmanýz gerekebilir. Ayný þekilde, eðer Python’ý Windows’a kurduysanýz, bu programlama dilini çalýþtýrmak için python komutunu kullanýyor olabilirsiniz. Bütün bunlardan farklý olarak, eðer Python’ýn kaynak kodlarýný sitesinden indirip derlediyseniz, Python’ý çalýþtýrmak için kendi belirlediðiniz bambaþka bir adý da kullanýyor olabilirsiniz. Örneðin belki de Python’ý çalýþtýrmak için py3 gibi bir komut kullanýyorsunuzdur...
+
+Python programlama dilini çalýþtýrmak için hangi komutu kullanýyor olursanýz olun, lütfen bir sonraki konuya geçmeden önce kendi kendinize þu sorularý sorun:
+
+Kullandýðým iþletim sisteminde Python programý halihazýrda kurulu mu? 
+Kullandýðým iþletim sisteminde toplam kaç farklý Python sürümü var? 
+python komutu bu Python sürümlerinden hangisini çalýþtýrýyor? 
+python3 komutu çalýþýyor mu? 
+Eðer çalýþýyorsa, bu komut Python sürümlerinden hangisini çalýþtýrýyor? 
+Kaynaktan derlediðim Python sürümünü çalýþtýrmak için hangi komutu kullanýyorum? 
+Biz bu kitapta þunlarý varsayacaðýz:
+
+Kullandýðýnýz iþletim sisteminde Python’ýn 2.x sürümlerini python komutuyla çalýþtýrýyorsunuz. 
+Kullandýðýnýz iþletim sisteminde Python’ýn 3.x sürümlerini python3 komutuyla çalýþtýrýyorsunuz. 
+Bu kitaptan yararlanýrken, bu varsayýmlarý göz önünde bulundurmalý, eðer bunlardan farklý komutlar kullanýyorsanýz, kodlarýnýzý ona göre ayarlamalýsýnýz.
+
+
+Sistem Komut Satýrý ve Python Komut Satýrý
+
+Buraya kadar Python programlama dilini nasýl çalýþtýracaðýmýz konusundaki bütün bilgileri edindik. Ancak programlamaya yeni baþlayanlarýn çok sýk yaptýðý bir hata var: Sistem komut satýrý ile Python komut satýrýný birbirine karýþtýrmak.
+
+Asla unutmayýn, kullandýðýnýz iþletim sisteminin komut satýrý ile Python’ýn komut satýrý birbirinden farklý iki ortamdýr. Yani Windows’ta cmd, Ubuntu’da ise Ctrl+Alt+T ile ulaþtýðýnýz ortam sistem komut satýrý iken, bu ortamý açýp python3 (veya python ya da py3) komutu vererek ulaþtýðýnýz ortam Python’ýn komut satýrýdýr. Sistem komut satýrýnda sistem komutlarý (mesela cd, ls, dir, pwd) verilirken, Python komut satýrýnda, biraz sonra öðrenmeye baþlayacaðýmýz Python komutlarý verilir. Dolayýsýyla python3 (veya python ya da py3) komutunu verdikten sonra ulaþtýðýnýz ortamda cd Desktop ve ls gibi sistem komutlarýný kullanmaya çalýþmanýz sizi hüsrana uðratacaktýr.

@@ -1,0 +1,14 @@
+
+Hangi Seriyi Öðrenmeliyim?
+
+Dediðimiz gibi, þu anda piyasada iki farklý Python serisi var: Python3 ve Python2. Peki acaba hangi seriye ait bir sürümü öðrenmelisiniz?
+
+[Kýsa cevap]
+
+Python3’ü öðrenmelisiniz.
+
+[Uzun cevap]
+
+Eðer Python programlama diline yeni baþlýyorsanýz Python3’ü öðrenmeniz daha doðru olacaktýr. Ama eðer Python programlama dilini belirli bir proje üzerinde çalýþmak üzere öðreniyorsanýz, hangi sürümü öðrenmeniz gerektiði, projede kullanacaðýnýz yardýmcý modüllerin durumuna baðlýdýr. Zira þu anda piyasada bulunan bütün Python modülleri/programlarý henüz Python3’e aktarýlmýþ deðil.
+
+Eðer projenizde kullanmayý planladýðýnýz yardýmcý modüller halihazýrda Python3’e aktarýlmýþsa Python3’ü öðrenebilirsiniz. Ancak eðer bu modüllerin henüz Python3 sürümü çýkmamýþsa sizin de Python2 ile devam etmeniz daha uygun olabilir. Ama her halükarda Python3’ün bu dilin geleceði olduðunu ve günün birinde Python2’nin tamamen tedavülden kalkacaðýný da aklýnýzýn bir köþesinde bulundurun.

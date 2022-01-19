@@ -1,0 +1,191 @@
+
+Listeleri Kopyalamak
+
+Diyelim ki, yazdýðýnýz bir programda, varolan bir listeyi kopyalamak, yani ayný listeden bir tane daha üretmek istiyorsunuz. Mesela elimizde þöyle bir liste olsun:
+
+>>> li1 = ["elma", "armut", "erik"]
+
+Amacýmýz bu listeden bir tane daha oluþturmak. Ýlk olarak aklýnýza þöyle bir yöntem gelmiþ olabilir:
+
+>>> li2 = li1
+
+Gerçekten de bu yöntem bize ayný öðelere sahip iki liste verdi:
+
+>>> print(li1)
+
+["elma", "armut", "erik"]
+
+>>> print(li2)
+
+["elma", "armut", "erik"]
+
+Gelin þimdi ilk listemiz olan li1 üzerinde bir deðiþiklik yapalým. Mesela bu listenin “elma” olan ilk öðesini “karpuz” olarak deðiþtirelim:
+
+>>> li1[0] = "karpuz"
+>>> print(li1)
+
+["karpuz", "armut", "erik"]
+
+Gördüðünüz gibi, li1 adlý listenin ilk öðesini baþarýyla deðiþtirdik. Þimdi þu noktada, li2 adlý öbür listemizin durumunu kontrol edelim:
+
+>>> print(li2)
+
+["karpuz", "armut", "erik"]
+
+O da ne! Biz biraz önce li1 üzerinde deðiþiklik yapmýþtýk, ama görünüþe göre bu deðiþiklikten li2 de etkilenmiþ. Muhtemelen beklediðiniz þey bu deðildi. Yani siz li2 listesinin içeriðinin ayný kalýp, deðiþiklikten yalnýzca li1 listesinin etkilenmesini istiyordunuz. Biraz sonra bu isteðinizi nasýl yerine getirebileceðinizi göstereceðiz. Ama önce dilerseniz, bir liste üzerindeki deðiþiklikten öteki listenin de neden etkilendiðini anlamaya çalýþalým.
+
+Hatýrlarsanýz, listelerin deðiþtirilebilir (mutable) bir veri tipi olduðunu söylemiþtik. Listeler bu özellikleriyle karakter dizilerinden ayrýlýyor. Zira biraz önce li1 ve li2 üzerinde yaptýðýmýz iþlemin bir benzerini karakter dizileri ile yaparsak farklý bir sonuç alýrýz. Dikkatlice bakýn:
+
+>>> a = "elma"
+
+Burada, deðeri “elma” olan a adlý bir karakter dizisi tanýmladýk. Þimdi bu karakter dizisini kopyalayalým:
+
+>>> b = a
+
+>>> a
+
+'elma'
+
+>>> b
+
+'elma'
+
+Böylece ayný deðere sahip iki farklý karakter dizimiz olmuþ oldu.
+
+Þimdi a adlý karakter dizisi üzerinde deðiþiklik yapalým. Ama biz biliyoruz ki, bir karakter dizisini deðiþtirmenin tek yolu, o karakter dizisini yeniden tanýmlamaktýr:
+
+>>> a = "E" + a[1:]
+
+>>> a
+
+'Elma'
+
+Burada yaptýðýmýz þeyin bir ‘deðiþiklik’ olmadýðýna dikkatinizi çekmek isterim. Çünkü aslýnda biz burada varolan a adlý deðiþken üzerinde bir deðiþiklik yapmak yerine, yine a adý taþýyan baþka bir deðiþken oluþturuyoruz.
+
+Peki bu ‘deðiþiklikten’ öbür karakter dizisi etkilendi mi?
+
+>>> b
+
+'elma'
+
+Gördüðünüz gibi, bu deðiþiklik öteki karakter dizisini etkilememiþ. Bunun sebebinin, karakter dizilerinin deðiþtirilemeyen (immutable) bir veri tipi olmasý olduðunu söylemiþtik.
+
+Gelin isterseniz bu olgunun derinlerine inelim biraz...
+
+Yukarýda a ve b adlý iki deðiþken var. Bunlarýn kimliklerini kontrol edelim:
+
+>>> id(a)
+
+15182784
+
+>>> id(b)
+
+15181184
+
+Gördüðünüz gibi, bu iki deðiþken farklý kimlik numaralarýna sahip. Bu durumu þu þekilde de teyit edebileceðimizi biliyorsunuz:
+
+>>> id(a) == id(b)
+
+False
+
+Demek ki gerçekten de id(a) ile id(b) birbirinden farklýymýþ. Yani aslýnda biz ayný nesne üzerinde bir deðiþiklik yapmak yerine, farklý bir nesne oluþturmuþuz.
+
+Bu sonuç bize, bu iki karakter dizisinin bellekte farklý konumlarda saklandýðýný gösteriyor. Dolayýsýyla Python, bir karakter dizisini kopyaladýðýmýzda bellekte ikinci bir nesne daha oluþturuyor. Bu nedenle birbirinden kopyalanan karakter dizilerinin biri üzerinde yapýlan herhangi bir iþlem öbürünü etkilemiyor. Ama listelerde (ve deðiþtirilebilir bütün veri tiplerinde) durum farklý. Þimdi þu örneklere dikkatlice bakýn:
+
+>>> liste1 = ["ahmet", "mehmet", "özlem"]
+
+Bu listeyi kopyalayalým:
+
+>>> liste2 = liste1
+
+Elimizde ayný öðelere sahip iki liste var:
+
+>>> liste1
+
+['ahmet', 'mehmet', 'özlem']
+
+>>> liste2
+
+['ahmet', 'mehmet', 'özlem']
+
+Bu listelerin kimlik numaralarýný kontrol edelim:
+
+>>> id(liste1)
+
+14901376
+
+>>> id(liste2)
+
+14901376
+
+>>> id(liste1) == id(liste2)
+
+True
+
+Gördüðünüz gibi, liste1 ve liste2 adlý listeler ayný kimlik numarasýna sahip. Yani bu iki nesne birbiriyle ayný. Dolayýsýyla birinde yaptýðýnýz deðiþiklik öbürünü de etkiler. Eðer birbirinden kopyalanan listelerin birbirini etkilemesini istemiyorsanýz, önünüzde birkaç seçenek var.
+
+Ýlk seçeneðe göre þöyle bir kod yazabilirsiniz:
+
+Önce özgün listemizi oluþturalým:
+
+>>> liste1 = ["ahmet", "mehmet", "özlem"]
+
+Þimdi bu listeyi kopyalayalým:
+
+>>> liste2 = liste1[:]
+
+Burada liste1‘i kopyalarken, listeyi baþtan sona dilimlediðimize dikkat edin.
+
+Bakalým liste1‘deki deðiþiklik öbürünü de etkiliyor mu:
+
+>>> liste1[0] = "veli"
+>>> liste1
+
+['veli', 'mehmet', 'özlem']
+
+>>> liste2
+
+['ahmet', 'mehmet', 'özlem']
+
+Gördüðünüz gibi, liste1‘de yaptýðýmýz deðiþiklik liste2‘ye yansýmadý. Demek ki yöntemimiz iþe yaramýþ.
+
+Ayný iþi yapmak için kullanabileceðimiz ikinci yöntem ise list() fonksiyonunu kullanmaktýr:
+
+Önce özgün listemizi görelim:
+
+>>> liste1 = ["ahmet", "mehmet", "özlem"]
+
+Þimdi bu listeyi kopyalayalým:
+
+>>> liste2 = list(liste1)
+
+Artýk elimizde birbirinin kopyasý durumunda iki farklý liste var:
+
+>>> liste2
+
+['ahmet', 'mehmet', 'özlem']
+
+>>> liste1
+
+['ahmet', 'mehmet', 'özlem']
+
+Þimdi liste2 üzerinde bir deðiþiklik yapalým:
+
+>>> liste2[0] = 'veli'
+
+liste2‘yi kontrol edelim:
+
+>>> liste2
+
+['veli', 'mehmet', 'özlem']
+
+Bakalým liste1 bu deðiþiklikten etkilenmiþ mi:
+
+>>> liste1
+
+['ahmet', 'mehmet', 'özlem']
+
+Gördüðünüz gibi, her þey yolunda. Dilerseniz bu nesnelerin birbirinden farklý olduðunu id() fonksiyonu aracýlýðýyla teyit edebileceðinizi biliyorsunuz.
+
+Listeleri kopyalamanýn üçüncü bir yöntemi daha var. Bu yöntemi de bir sonraki bölümde liste metotlarýný incelerken ele alacaðýz.
+

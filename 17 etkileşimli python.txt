@@ -1,0 +1,35 @@
+
+Etkileþimli Python
+
+Þu ana kadar öðrendiklerimiz sayesinde Python programlama dilinin farklý sistemlere nasýl kurulacaðýný ve nasýl çalýþtýrýlacaðýný biliyoruz. Dolayýsýyla Python’ý bir önceki bölümde anlattýðýmýz þekilde çalýþtýrdýðýmýz zaman þuna benzer bir ekranla karþýlaþacaðýmýzýn farkýndayýz:
+
+istihza@ubuntu:~$ # python3 Python 3.5.1 (default, 20.04.2016, 12:24:55) [GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux Type “help”, “copyright”, “credits” or “license” for more information. >>>
+
+Biz þimdiye kadar bu ekrana Python komut satýrý demeyi tercih ettik. Dilerseniz bundan sonra da bu adý kullanmaya devam edebilirsiniz. Ancak teknik olarak bu ekrana etkileþimli kabuk (interactive shell) adý verildiðini bilmemizde fayda var. Etkileþimli kabuk, bizim Python programlama dili ile iliþki kurabileceðimiz, yani onunla etkileþebileceðimiz bir üst katmandýr. Etkileþimli kabuk, asýl programýmýz içinde kullanacaðýmýz kodlarý deneme imkaný sunar bize. Burasý bir nevi test alaný gibidir. Örneðin bir Python kodunun çalýþýp çalýþmadýðýný denemek veya nasýl çalýþtýðýný, ne sonuç verdiðini görmek istediðimizde bu ekran son derece faydalý bir araç olarak karþýmýza çýkar. Bu ortam, özellikle Python’a yeni baþlayanlarýn bu programlama diline aþinalýk kazanmasýný saðlamasý açýsýndan da bulunmaz bir araçtýr. Biz de bu bölümde etkileþimli kabuk üzerinde bazý çalýþmalar yaparak, Python’a alýþma turlarý atacaðýz.
+
+Bu arada, geçen bölümde söylediðimiz gibi, bu ortamýn sistem komut satýrý adýný verdiðimiz ortamdan farklý olduðunu aklýmýzdan çýkarmýyoruz. O zaman da dediðimiz gibi, sistem komut satýrýnda sistem komutlarý, Python komut satýrýnda (yani etkileþimli kabukta) ise Python komutlarý verilir. Mesela echo %PATH%, cd Desktop, dir ve ls birer sistem komutudur. Eðer bu komutlarý etkileþimli kabukta vermeye kalkýþýrsanýz, bunlar birer Python komutu olmadýðý için, Python size bir hata mesajý gösterecektir. Mesela Python’ýn etkileþimli kabuðunda cd Desktop komutunu verirseniz þöyle bir hata alýrsýnýz:
+
+>>> cd Desktop
+
+  File "<stdin>", line 1
+cd Desktop
+^
+SyntaxError: invalid syntax
+
+Çünkü cd Desktop bir Python komutu deðildir. O yüzden bu komutu Python’ýn etkileþimli kabuðunda veremeyiz. Bu komutu ancak ve ancak kullandýðýmýz iþletim sisteminin komut satýrýnda verebiliriz.
+
+Ne diyorduk? Etkileþimli kabuk bir veya birkaç satýrlýk kodlarý denemek/test etmek için gayet uygun bir araçtýr. Ýsterseniz konuyu daha fazla lafa boðmayalým. Zira etkileþimli kabuðu kullandýkça bunun ne büyük bir nimet olduðunu siz de anlayacaksýnýz. Özellikle derlenerek çalýþtýrýlan programlama dilleri ile uðraþmýþ olan arkadaþlarým, etkileþimli kabuðun gücünü gördüklerinde göz yaþlarýna hakim olamayacaklar.
+
+Farklý iþletim sistemlerinde py3, py -3, python3 veya python komutunu vererek Python’ýn komut satýrýna nasýl eriþebileceðimizi önceki derslerde ayrýntýlý olarak anlatmýþtýk. Etkileþimli kabuða ulaþmakta sýkýntý yaþýyorsanýz eski konularý tekrar gözden geçirmenizi tavsiye ederim.
+
+Etkileþimli kabuk üzerinde çalýþmaya baþlamadan önce dilerseniz önemli bir konuyu açýklýða kavuþturalým: Etkileþimli kabuðu baþarýyla çalýþtýrdýk. Peki bu kabuktan çýkmak istersek ne yapacaðýz? Elbette doðrudan pencere üzerindeki çarpý tuþuna basarak bu ortamý terk edebilirsiniz. Ancak bu iþlemi kaba kuvvete baþvurmadan yapmanýn bir yolu olmalý, deðil mi?
+
+Etkileþimli kabuktan çýkmanýn birkaç farklý yolu vardýr:
+
+Pencere üzerindeki çarpý düðmesine basmak (kaba kuvvet) 
+Önce Ctrl+Z tuþlarýna, ardýndan da Enter tuþuna basmak (Windows) 
+Ctrl+Z tuþlarýna basmak (GNU/Linux) 
+Önce F6 tuþuna, ardýndan da Enter tuþuna basmak (Windows) 
+quit() yazýp Enter tuþuna basmak (Bütün iþletim sistemleri) 
+import sys; sys.exit() komutunu vermek (Bütün iþletim sistemleri) 
+Siz bu farklý yöntemler arasýndan, kolayýnýza hangisi geliyorsa onu seçebilirsiniz. Bu satýrlarýn yazarý, Windows’ta 2 numaralý; GNU/Linux’ta ise 3 numaralý seçeneði tercih ediyor.

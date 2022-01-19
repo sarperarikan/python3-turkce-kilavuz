@@ -1,0 +1,146 @@
+
+Deðiþkenler
+
+Þimdi þöyle bir durum düþünün: Diyelim ki sisteme kayýt için kullanýcý adý ve parola belirlenmesini isteyen bir program yazýyorsunuz. Yazacaðýnýz bu programda, belirlenebilecek kullanýcý adý ve parolanýn toplam uzunluðu 40 karakteri geçmeyecek.
+
+Bu programý yazarken ilk aþamada yapmanýz gereken þey, kullanýcýnýn belirlediði kullanýcý adý ve parolanýn uzunluðunu tek tek denetlemek olmalý.
+
+Mesela kullanýcý þöyle bir kullanýcý adý belirlemiþ olsun:
+
+firat_ozgul_1980
+
+Kullanýcýnýn belirlediði parola ise þu olsun:
+
+rT%65#$hGfUY56123
+
+Ýþte bizim öncelikle kullanýcýdan gelen bu verilerin teker teker uzunluðunu biliyor olmamýz lazým, ki bu verilerin toplam 40 karakter sýnýrýný aþýp aþmadýðýný denetleyebilelim.
+
+Peki bu verilerin uzunluðunu nasýl ölçeceðiz? Elbette bunun için verilerdeki harfleri elle tek tek saymayacaðýz. Bunun yerine, Python programlama dilinin bize sunduðu bir aracý kullanacaðýz. Peki nedir bu araç?
+
+Hatýrlarsanýz birkaç sayfa önce type() adlý bir fonksiyondan söz etmiþtik. Bu fonksiyonun görevi bir verinin hangi tipte olduðunu bize bildirmekti. Ýþte týpký type() gibi, Python’da len() adlý baþka bir fonksiyon daha bulunur. Bu fonksiyonun görevi ise karakter dizilerinin (ve ileride göreceðimiz gibi, baþka veri tiplerinin) uzunluðunu ölçmektir. Yani bu fonksiyonu kullanarak bir karakter dizisinin toplam kaç karakterden oluþtuðunu öðrenebiliriz.
+
+Biz henüz kullanýcýdan nasýl veri alacaðýmýzý bilmiyoruz. Ama þimdilik þunu söyleyebiliriz: Python’da kullanýcýdan herhangi bir veri aldýðýmýzda, bu veri bize bir karakter dizisi olarak gelecektir. Yani kullanýcýdan yukarýdaki kullanýcý adý ve parolayý aldýðýmýzý varsayarsak, bu veriler bize þu þekilde gelir:
+
+"firat_ozgul_1980"
+
+ve:
+
+"rT%65#$hGfUY56123"
+
+Gördüðünüz gibi, elde ettiðimiz veriler týrnak içinde yer alýyor. Yani bunlar birer karakter dizisi. Þimdi gelin yukarýda bahsettiðimiz len() fonksiyonunu kullanarak bu karakter dizilerinin uzunluðunu ölçelim.
+
+Dediðimiz gibi, len() de týpký type() gibi bir fonksiyondur. Dolayýsýyla len() fonksiyonunun kullanýmý type() fonksiyonunun kullanýmýna çok benzer. Nasýl type() fonksiyonu bize, kendisine verdiðimiz parametrelerin tipini söylüyorsa, len() fonksiyonu da kendisine verdiðimiz parametrelerin uzunluðunu söyler.
+
+Dikkatlice bakýn:
+
+>>> len("firat_ozgul_1980")
+
+16
+
+>>> len("rT%65#$hGfUY56123")
+
+17
+
+Demek ki “firat_ozgul_1980” adlý karakter dizisinde 16; “rT%65#$hGfUY56123” adlý karakter dizisinde ise 17 karakter varmýþ. Bizim istediðimiz þey bu iki deðerin toplam uzunluðunun 40 karakteri aþmamasý. Bunu denetlemek için yapmamýz gereken þey bu iki deðerin uzunluðunu birbiriyle toplamak olmalý. Yani:
+
+>>> len("firat_ozgul_1980") + len("rT%65#$hGfUY56123")
+
+Buradan alacaðýmýz sonuç 33 olacaktýr. Demek ki kullanýcý 40 karakter limitini aþmamýþ. O halde programýmýz bu kullanýcý adý ve parolayý kabul edebilir...
+
+Bu arada, belki farkettiniz, belki de farketmediniz, ama burada da çok önemli bir durumla karþý karþýyayýz. Gördüðünüz gibi len() fonksiyonu bize sayý deðerli bir veri gönderiyor. Gelin isterseniz bunu teyit edelim:
+
+>>> type(len("firat_ozgul_1980"))
+
+<class 'int'>
+
+len() fonksiyonunun bize sayý deðerli bir veri göndermesi sayesinde bu fonksiyondan elde ettiðimiz deðerleri birbiriyle toplayabiliyoruz:
+
+>>> len("firat_ozgul_1980") + len("rT%65#$hGfUY56123")
+
+33
+
+Eðer len() fonksiyonu bize sayý deðil de mesela karakter dizisi verseydi, bu fonksiyondan elde ettiðimiz deðerleri yukarýdaki gibi doðrudan birbiriyle aritmetik olarak toplayamazdýk. Öyle bir durumda, bu iki veriyi birbiriyle toplamaya çalýþtýðýmýzda, + iþleci 16 ve 17 deðerlerini birbiriyle toplamak yerine bu deðerleri birbiriyle birleþtirerek bize ‘1617’ gibi bir sonuç verecekti.
+
+Her zaman söylediðimiz gibi, Python’da veri tipi kavramýný çok iyi anlamak ve o anda elimizde bulunan bir verinin hangi tipte olduðunu bilmek çok önemlidir. Aksi halde programlarýmýzda hata yapmamýz kaçýnýlmazdýr.
+
+Eðer yukarýda anlattýðýmýz þeyleri kafa karýþtýrýcý bulduysanýz hiç endiþe etmeyin. Birkaç bölüm sonra input() adlý bir fonksiyondan bahsettiðimizde þimdi söylediðimiz þeyleri çok daha net anlayacaksýnýz.
+
+Biraz sonra len() fonksiyonundan bahsetmeye devam edeceðiz, ama isterseniz ondan önce çok önemli bir konuya deðinelim.
+
+Biraz önce þöyle bir örnek vermiþtik:
+
+>>> len("firat_ozgul_1980")
+
+16
+
+>>> len("rT%65#$hGfUY56123")
+
+17
+
+>>> len("firat_ozgul_1980") + len("rT%65#$hGfUY56123")
+
+Bu kodlar, istediðimiz þeyi gayet güzel yerine getiriyor. Ama sizce de yukarýdaki kodlarda çok rahatsýz edici bir durum yok mu?
+
+Dikkat ederseniz, yukarýdaki örneklerde kullandýðýmýz verileri, program içinde her ihtiyaç duyduðumuzda tekrar tekrar yazdýk. Böylece ayný program içinde iki kez “firat_ozgul_1980”; iki kez de “rT%65#$hGfUY56123” yazmak zorunda kaldýk. Halbuki bu verileri programlarýmýzýn içinde her ihtiyaç duyduðumuzda tekrar tekrar yazmak yerine bir deðiþkene atasak ve gerektiðinde o deðiþkeni kullansak çok daha iyi olmaz mý? Herhalde olur...
+
+Peki nedir bu deðiþken dediðimiz þey?
+
+Python’da bir program içinde deðerlere verilen isimlere deðiþken denir. Hemen bir örnek verelim:
+
+>>> n = 5
+
+Burada 5 sayýsýný bir deðiþkene atadýk. Deðiþkenimiz ise n. Ayrýca 5 sayýsýný bir deðiþkene atamak için = iþaretinden yararlandýðýmýza da çok dikkat edin. Buradan, = iþaretinin Python programlama dilinde deðer atama iþlemleri için kullanýldýðý sonucunu çýkarýyoruz.
+
+n = 5 gibi bir komut yardýmýyla 5 deðerini n adlý deðiþkene atamamýz sayesinde artýk ne zaman 5 sayýsýna ihtiyaç duysak bu n deðiþkenini çaðýrmamýz yeterli olacaktýr:
+
+>>> n
+
+5
+
+>>> n * 10
+
+50
+
+>>> n / 2
+
+2.5
+
+Gördüðünüz gibi, 5 deðerini bir deðiþkene atadýktan sonra, bu 5 deðerini kullanmamýz gereken yerlerde sadece deðiþkenin adýný kullandýðýmýzda deðiþkenin deðerini Python otomatik olarak yerine koyabiliyor. Yani n = 5 komutuyla n adlý bir deðiþken tanýmladýktan sonra, artýk ne zaman 5 sayýsýna ihtiyaç duysak n deðiþkenini çaðýrmamýz yeterli olacaktýr. Python o 5 deðerini otomatik olarak yerine koyar.
+
+Þimdi de pi adlý baþka bir deðiþken tanýmlayalým:
+
+>>> pi = 3.14
+
+Bu pi deðiþkeninin deðeri ile n deðiþkeninin deðerini toplayalým:
+
+>>> pi + n
+
+8.14
+
+Gördüðünüz gibi, deðerleri her defasýnda tekrar yazmak yerine bunlarý bir deðiþkene atayýp, gereken yerde bu deðiþkeni kullanmak çok daha pratik bir yöntem.
+
+Ayný þeyi programýmýz için de yapabiliriz:
+
+>>> kullanýcý_adý = "firat_ozgul_1980"
+>>> parola = "rT%65#$hGfUY56123"
+
+= iþaretini kullanarak ilgili deðerlere artýk birer ad verdiðimiz, yani bu deðerleri birer deðiþkene atadýðýmýz için, bu deðerleri kullanmamýz gereken yerlerde deðerlerin kendisini uzun uzun yazmak yerine, belirlediðimiz deðiþken adlarýný kullanabiliriz. Mesela:
+
+>>> len(kullanýcý_adý)
+
+16
+
+>>> len(parola)
+
+17
+
+>>> len(kullanýcý_adý) + len(parola)
+
+33
+
+>>> k_adý_uzunluðu = len(kullanýcý_adý)
+>>> type(k_adý_uzunluðu)
+
+<class 'int'>
+
+Gördüðünüz gibi, deðiþken kullanýmý iþlerimizi bir hayli kolaylaþtýrýyor.

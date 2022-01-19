@@ -1,0 +1,58 @@
+
+Notlar
+
+Hatýrlarsanýz döngüleri anlatýrken þöyle bir örnek vermiþtik:
+
+tr_harfler = "þçöðüÝý"
+a = 0
+
+while a < len(tr_harfler):
+print(tr_harfler[a], sep="\n")
+a += 1
+
+Bu kodlarýn for döngüsü ile yazýlabilecek olan þu kodlara alternatif olduðundan söz etmiþtik:
+
+tr_harfler = "þçöðüÝý"
+
+for tr_harf in tr_harfler:
+print(tr_harf)
+
+Yukarýdaki while örneðini verirken, henüz karakter dizilerinin öðelerine tek tek nasýl eriþebileceðimizi öðrenmemiþtik. Ama artýk bu konuyu da öðrendiðimiz için yukarýdaki while döngüsünü rahatlýkla anlayabiliyoruz:
+
+while a < len(tr_harfler):
+print(tr_harfler[a], sep="\n")
+a += 1
+
+Burada yaptýðýmýz þey þu: a deðiþkeninin deðeri tr_harfler deðiþkeninin uzunluðundan (len(tr_harfler)) küçük olduðu müddetçe a deðiþkeninin deðerini 1 sayý artýrýp yine a deðiþkenine gönderiyoruz (a += 1).
+
+while döngüsünün her dönüþünde de, a deðiþkeninin yeni deðeri yardýmýyla tr_harfler adlý karakter dizisinin öðelerine tek tek ve sýrayla eriþiyoruz (print(tr_hafler[a])).
+
+Yine hatýrlarsanýz, önceki derslerimizde sys adlý bir modül içindeki version adlý bir deðiþkenden söz etmiþtik. Bu deðiþken bize kullandýðýmýz Python’ýn sürümünü bir karakter dizisi olarak veriyordu:
+
+>>> import sys
+>>> sys.version
+
+Buradan þu çýktýyý alýyoruz:
+'3.5.1 (default, 20.04.2016, 12:24:55) [GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux' 
+Bu çýktýda, kullandýðýmýz Python sürümünün dýþýnda baþka birtakým bilgiler de var. Ýþte biz eðer istersek, bu bölümde öðrendiðimiz bilgileri kullanarak bu karakter dizisinin istediðimiz kýsmýný, mesela sadece sürüm bilgisini karakter dizisinin içinden dilimleyip alabiliriz:
+
+>>> sys.version[:5]
+'3.5.1' 
+Elbette, yukarýdaki karakter dizisini elde etmek için, kullanmasý ve yönetmesi daha kolay bir araç olan version_info deðiþkeninden de yararlanabilirdiniz:
+
+>>> '{}.{}.{}'.format(sys.version_info.major, sys.version_info.minor, sys.version_info.micro)
+'3.5.1' 
+Ancak burada þöyle bir sorun olduðunu biliyorsunuz: Python’ýn 2.7 öncesi sürümlerinde version_info‘nun major, minor ve micro gibi nitelikleri yok. Dolayýsýyla 2.7 öncesi sürümlerde version_info‘yu kullanýrken hata almamak için try... except bloklarýndan yararlanabileceðimizi görmüþtük. Ancak version_info‘yu bütün Python sürümlerinde güvenli bir þekilde kullanmanýn baþka bir yöntemi daha var. Dikkatlice bakýn:
+
+>>> major = sys.version_info[0]
+>>> minor = sys.version_info[1]
+>>> micro = sys.version_info[2]
+
+>>> print(major, minor, micro, sep=".")
+3.5.1 
+Bu yöntem bütün Python sürümlerinde çalýþýr. Dolayýsýyla, farklý Python sürümlerinde çalýþmasýný tasarladýðýnýz programlarýnýzda sürüm kontrolünü sys.version_info‘nun major, minor veya micro nitelikleri ile yapmak yerine yukarýdaki yöntemle yapabilirsiniz:
+
+if sys.version_info[1] < 3:
+print("Kullandýðýnýz Python sürümü eski!")
+
+Gördüðünüz gibi, karakter dizisi dilimleme iþlemleri pek çok farklý kullaným alanýna sahip. Programlama maceranýz boyunca karakter dizilerinin bu özelliðinden bol bol yararlanacaðýnýzdan hiç kuþkunuz olmasýn.

@@ -1,0 +1,29 @@
+
+Listeye Öðe Eklemek
+
+Listeler büyüyüp küçülebilen bir veri tipidir. Yani Python’da bir listeye istediðiniz kadar öðe ekleyebilirsiniz. Diyelim ki elimizde þöyle bir liste var:
+
+>>> liste = [2, 4, 5, 7]
+
+Bu listeye yeni bir öðe ekleyebilmek için þöyle bir kod yazabiliriz:
+
+>>> liste + [8]
+
+[2, 4, 5, 7, 8]
+
+Bu örnek, bize listeler hakkýnda önemli bir bilgi veriyor. Python’da + iþareti kullanarak bir listeye öðe ekleyecekseniz, eklediðiniz öðenin de liste olmasý gerekiyor. Mesela bir listeye doðrudan karakter dizilerini veya sayýlarý ekleyemezsiniz:
+
+>>> liste + 8
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate list (not "int") to list
+
+>>> liste + "8"
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate list (not "str") to list
+
+Listelere + iþareti ile ekleyeceðiniz öðelerin de bir liste olmasý gerekiyor. Aksi halde Python bize bir hata mesajý gösteriyor.
+

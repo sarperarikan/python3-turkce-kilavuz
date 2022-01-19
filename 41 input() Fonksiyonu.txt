@@ -1,0 +1,547 @@
+
+input() Fonksiyonu
+
+input() da daha önce öðrendiðimiz type(), len() ve print() gibi bir fonksiyondur. Esasýnda biz bu fonksiyonu ilk kez burada görmüyoruz. Windows ve GNU/Linux kullanýcýlarý, yazdýklarý bir programý çift týklayarak çalýþtýrabilmek için bu fonksiyonu kullandýklarýný hatýrlýyor olmalýlar. Mesela þu programý ele alalým:
+
+#!/usr/bin/env python3
+
+kartvizit = """
+Ýstihza Anonim Þirketi
+Fýrat Özgül
+Tel: 0212 123 23 23
+Faks: 0212 123 23 24
+e.posta: kistihza@yahoo.com
+"""
+
+print(kartvizit)
+
+Bu programý yazýp kaydettikten sonra bu programýn simgesi üzerine çift týkladýðýmýzda siyah bir komut ekranýnýn çok hýzlý bir þekilde açýlýp kapandýðýný görürüz. Aslýnda programýmýz çalýþýyor, ama programýmýz yapmasý gereken iþi yaptýktan hemen sonra kapandýðý için biz program penceresini görmüyoruz.
+
+Programýmýzýn çalýþtýktan sonra hemen kapanmamasýný saðlamak için son satýra bir input() fonksiyonu yerleþtirmemiz gerektiðini biliyoruz:
+
+#!/usr/bin/env python3
+
+kartvizit = """
+Ýstihza Anonim Þirketi
+Fýrat Özgül
+Tel: 0212 123 23 23
+Faks: 0212 123 23 24
+e.posta: kistihza@yahoo.com
+"""
+
+print(kartvizit)
+
+input()
+
+Bu sayede programýmýz kullanýcýdan bir giriþ bekleyecek ve o giriþi alana kadar da kapanmayacaktýr. Programý kapatmak için Enter düðmesine basabiliriz.
+
+input() bir fonksiyondur dedik. Henüz fonksiyon kavramýnýn ayrýntýlarýný öðrenmemiþ olsak da, þimdiye kadar pek çok fonksiyon gördüðümüz için artýk bir fonksiyonla karþýlaþtýðýmýzda bunun nasýl kullanýlacaðýný az çok tahmin edebiliyoruz. Týpký düþündüðünüz ve yukarýdaki örnekten de gördüðünüz gibi, birer fonksiyon olan type(), print(), len() ve open() fonksiyonlarýný nasýl kullanýyorsak input() fonksiyonunu da öyle kullanacaðýz.
+
+Dilerseniz lafý daha fazla uzatmadan örnek bir program yazalým:
+
+isim = input("Ýsminiz nedir? ")
+
+print("Merhaba", isim, end="!\n")
+
+Bu programý kaydedip çalýþtýrdýðýnýzda, sorulan soruya verdiðiniz cevaba göre çýktý farklý olacaktýr. Örneðin eðer bu soruya ‘Niyazi’ cevabýný vermiþseniz çýktýnýz Merhaba Niyazi! þeklinde olacaktýr.
+
+Görüyorsunuz ya, týpký daha önce gördüðümüz fonksiyonlarda olduðu gibi, input() fonksiyonunda da parantez içine bir parametre yazýyoruz. Bu fonksiyona verilen parametre, kullanýcýdan veri alýnýrken kullanýcýya sorulacak soruyu gösteriyor. Gelin isterseniz bir örnek daha yapalým elimizin alýþmasý için:
+
+yaþ = input("Yaþýnýz: ")
+
+print("Demek", yaþ, "yaþýndasýn.")
+print("Genç mi yoksa yaþlý mý olduðuna karar veremedim.")
+
+input() fonksiyonunun ne kadar kullanýþlý bir araç olduðu ortada. Bu fonksiyon sayesinde, þimdiye kadar tek sesli bir þekilde yürüttüðümüz programcýlýk faaliyetlerimizi çok sesli bir hale getirebileceðiz. Mesela önceki bölümlerden birinde yazdýðýmýz, daire alaný hesaplayan programý hatýrlarsýnýz. O zaman henüz dosyalarýmýzý kaydetmeyi ve input() fonksiyonunu öðrenmediðimiz için o programý etkileþimli kabukta þu þekilde yazmýþtýk:
+
+>>> çap = 16
+>>> yarýçap = çap / 2
+>>> pi = 3.14159
+>>> alan = pi * (yarýçap * yarýçap)
+>>> alan
+
+201.06176
+
+Ama artýk hem dosyalarýmýzý kaydetmeyi biliyoruz, hem de input() fonksiyonunu öðrendik. Dolayýsýyla yukarýdaki programý þu þekilde yazabiliriz:
+
+#Kullanýcýdan dairenin çapýný girmesini istiyoruz.
+çap = input("Dairenin çapý: ")
+
+#Kullanýcýnýn verdiði çap bilgisini kullanarak
+#yarýçapý hesaplayalým. Buradaki int() fonksiyonunu
+#ilk kez görüyoruz. Biraz sonra bunu açýklayacaðýz
+yarýçap = int(çap) / 2
+
+#pi sayýmýz sabit
+pi = 3.14159
+
+#Yukarýdaki bilgileri kullanarak artýk
+#dairenin alanýný hesaplayabiliriz
+alan = pi * (yarýçap * yarýçap)
+
+#Son olarak, hesapladýðýmýz alaný yazdýrýyoruz
+print("Çapý", çap, "cm olan dairenin alaný: ", alan, "cm2'dir")
+
+Gördüðünüz gibi, input() fonksiyonunu öðrenmemiz sayesinde artýk yavaþ yavaþ iþe yarar programlar yazabiliyoruz.
+
+Ancak burada, daha önce öðrenmediðimiz bir fonksiyon dikkatinizi çekmiþ olmalý. Bu fonksiyonun adý int(). Bu yeni fonksiyon dýþýnda, yukarýdaki bütün kodlarý anlayabilecek kadar Python bilgisine sahibiz.
+
+int() fonksiyonunun ne iþe yaradýðýný anlamak için isterseniz ilgili satýrý yarýçap = çap / 2 þeklinde yazarak çalýþtýrmayý deneyin bu programý.
+
+Dediðim gibi, eðer o satýrdaki int() fonksiyonunu kaldýrarak programý çalýþtýrdýysanýz þuna benzer bir hata mesajý almýþ olmalýsýnýz:
+
+Traceback (most recent call last):
+File "deneme.py", line 8, in <module>
+yarýçap = çap / 2
+TypeError: unsupported operand type(s) for /: 'str' and 'int'
+
+Gördüðünüz gibi programýmýz bölme iþlemini yapamadý. Buradan anlýyoruz ki, bu int() fonksiyonu programýmýzdaki aritmetik iþlemin düzgün bir þekilde yapýlabilmesini saðlýyor. Gelelim bu fonksiyonun bu iþlevi nasýl yerine getirdiðini incelemeye.
+
+
+Tip Dönüþümleri
+
+Bir önceki bölümün sonunda verdiðimiz örnek programda int() adlý bir fonksiyon görmüþ, bu fonksiyonu anlatmayý o zaman ertelemiþtik. Çok gecikmeden, bu önemli fonksiyonun ne iþe yaradýðýný öðrenmemiz gerekiyor. Ýsterseniz bir örnek üzerinden gidelim.
+
+Diyelim ki kullanýcýdan aldýðý sayýnýn karesini hesaplayan bir program yazmak istiyoruz. Öncelikle þöyle bir þey deneyelim:
+
+sayý = input("Lütfen bir sayý girin: ")
+
+#Girilen sayýnýn karesini bulmak için sayý deðiþkeninin 2.
+#kuvvetini alýyoruz. Ayný þeyi pow() fonksiyonu ile de
+#yapabileceðimizi biliyorsunuz. Örn.: pow(sayý, 2)
+print("Girdiðiniz sayýnýn karesi: ", sayý ** 2)
+
+Bu kodlarý çalýþtýrdýðýmýz zaman, programýmýz kullanýcýdan bir sayý girmesini isteyecek, ancak kullanýcý bir sayý girip Enter tuþuna bastýðýnda þöyle bir hata mesajýyla karþýlaþacaktýr:
+
+Traceback (most recent call last):
+File "test.py", line 5, in <module>
+print("Girdiðiniz sayýnýn karesi: ", sayý ** 2)
+TypeError: unsupported operand type(s) for ** or pow(): 'str' and 'int'
+
+Hata mesajýna baktýðýnýzda, ‘TypeError’ ifadesinden, bunun veri tipine iliþkin bir hata olduðunu tahmin edebilirsiniz. Eðer Ýngilizce biliyorsanýz yukarýdaki hata mesajýnýn anlamýný rahatlýkla çýkarabilirsiniz. Ýngilizce bilmeseniz de en sondaki ‘str’ ve ‘int’ kelimeleri size karakter dizisi ve sayý adlý veri tiplerini hatýrlatacaktýr. Demek ki ortada veri tiplerini ilgilendiren bir sorun var...
+
+Peki burada tam olarak neler dönüyor?
+
+Hatýrlayacaksýnýz, geçen derslerden birinde len() fonksiyonunu anlatýrken þöyle bir þey söylemiþtik:
+
+Biz henüz kullanýcýdan nasýl veri alacaðýmýzý bilmiyoruz. Ama þimdilik þunu söyleyebiliriz: Python’da kullanýcýdan herhangi bir veri aldýðýmýzda, bu veri bize bir karakter dizisi olarak gelecektir.
+
+Gelin isterseniz yukarýda anlattýðýmýz durumu teyit eden bir program yazalým:
+
+#Kullanýcýdan herhangi bir veri girmesini istiyoruz
+sayý = input("Herhangi bir veri girin: ")
+
+#Kullanýcýnýn girdiði verinin tipini bir
+#deðiþkene atýyoruz
+tip = type(sayý)
+
+#Son olarak kullanýcýnýn girdiði verinin tipini
+#ekrana basýyoruz.
+print("Girdiðiniz verinin tipi: ", tip)
+
+Bu programý çalýþtýrdýðýmýzda ne tür bir veri girersek girelim, girdiðimiz verinin tipi str, yani karakter dizisi olacaktýr. Demek ki gerçekten de, kullanýcýdan veri almak için kullandýðýmýz input() fonksiyonu bize her koþulda bir karakter dizisi veriyormuþ.
+
+Geçen derslerde þöyle bir þey daha söylemiþtik:
+
+Python’da, o anda elinizde bulunan bir verinin hangi tipte olduðunu bilmek son derece önemlidir. Çünkü bir verinin ait olduðu tip, o veriyle neler yapýp neler yapamayacaðýnýzý belirler.
+
+Þu anda karþý karþýya olduðumuz durum da buna çok güzel bir örnektir. Eðer o anda elimizde bulunan verinin tipini bilmezsek týpký yukarýda olduðu gibi, o veriyi programýmýzda kullanmaya çalýþýrken programýmýz hata verir ve çöker.
+
+Her zaman üstüne basa basa söylediðimiz gibi, aritmetik iþlemler yalnýzca sayýlarla yapýlýr. Karakter dizileri ile herhangi bir aritmetik iþlem yapýlamaz. Dolayýsýyla, input() fonksiyonundan gelen veri bir karakter dizisi olduðu için ve biz de programýmýzda girilen sayýnýn karesini hesaplamak amacýyla bu fonksiyondan gelen verinin 2. kuvvetini, yani karesini hesaplamaya çalýþtýðýmýz için programýmýz hata verecektir.
+
+Yukarýdaki programda neler olup bittiðini daha iyi anlayabilmek için Python’ýn etkileþimli kabuðunda þu iþlemleri yapabiliriz:
+
+>>> "23" ** 2
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for ** or pow(): 'str' and 'int'
+
+Gördüðünüz gibi, programýmýzdan aldýðýmýz hata ile yukarýdaki hata tamamen ayný (hata mesajlarýnda bizi ilgilendiren kýsým en son satýrdýr). Týpký burada olduðu gibi, hata veren programda da ‘Lütfen bir sayý girin: ‘ sorusuna örneðin 23 cevabýný verdiðimizde programýmýz aslýnda "23" ** 2 gibi bir iþlem yapmaya çalýþýyor. Bir karakter dizisinin kuvvetini hesaplamak mümkün olmadýðý, kuvvet alma iþlemi yalnýzca sayýlarla yapýlabileceði için de hata vermekten baþka çaresi kalmýyor.
+
+Ancak bazen öyle durumlarla karþýlaþýrsýnýz ki, programýnýz hiçbir hata vermez, ama elde edilen sonuç aslýnda tamamen beklentinizin dýþýndadýr. Mesela þu basit örneði inceleyelim:
+
+sayý1 = input("Toplama iþlemi için ilk sayýyý girin: ")
+sayý2 = input("Toplama iþlemi için ikinci sayýyý girin: ")
+
+print(sayý1, "+", sayý2, "=", sayý1 + sayý2)
+
+Bu kodlarý çalýþtýrdýðýmýzda þöyle bir manzarayla karþýlaþýrýz:
+
+input() fonksiyonunun alttan alta neler çevirdiðini bu örnek yardýmýyla çok daha iyi anladýðýnýzý zannediyorum. Gördüðünüz gibi yukarýdaki program herhangi bir hata vermedi. Ama beklediðimiz çýktýyý da vermedi. Zira biz programýmýzýn iki sayýyý toplamasýný istiyorduk. O ise kullanýcýnýn girdiði sayýlarý yan yana yazmakla yetindi. Yani bir aritmetik iþlem yapmak yerine, verileri birbiriyle bitiþtirdi. Çünkü, dediðim gibi, input() fonksiyonunun kullanýcýdan aldýðý þey bir karakter dizisidir. Dolayýsýyla bu fonksiyon yukarýdaki gibi bir durumla karþýlaþtýðý zaman karakter dizileri arasýnda bir birleþtirme iþlemi gerçekleþtirir. Týpký ilk derslerimizde etkileþimli kabukta verdiðimiz þu örnekte olduðu gibi:
+
+>>> "23" + "23"
+
+2323
+
+Bu son örnekten ayrýca þunu çýkarýyoruz: Yazdýðýnýz bir programýn herhangi bir hata vermemesi o programýn doðru çalýþtýðý anlamýna gelmeyebilir. Dolayýsýyla bu tür durumlara karþý her zaman uyanýk olmanýzda fayda var.
+
+Peki yukarýdaki gibi durumlarla karþýlaþmamak için ne yapacaðýz?
+
+Ýþte bu noktada devreye tip dönüþtürücü adýný verdiðimiz birtakým fonksiyonlar girecek.
+
+
+int()
+
+Dediðimiz gibi, input() fonksiyonundan gelen veri her zaman bir karakter dizisidir. Dolayýsýyla bu fonksiyondan gelen veriyle herhangi bir aritmetik iþlem yapabilmek için öncelikle bu veriyi bir sayýya dönüþtürmemiz gerekir. Bu dönüþtürme iþlemi için int() adlý özel bir dönüþtürücü fonksiyondan yararlanacaðýz. Gelin isterseniz Python’ýn etkileþimli kabuðunda bu fonksiyonla bir kaç deneme yaparak bu fonksiyonun ne iþe yaradýðýný ve nasýl kullanýldýðýný anlamaya çalýþalým. Zira etkileþimli kabuk bu tür deneme iþlemleri için biçilmiþ kaftandýr:
+
+>>> karakter_dizisi = "23"
+>>> sayý = int(karakter_dizisi)
+>>> print(sayý)
+
+23
+
+Burada öncelikle “23” adlý bir karakter dizisi tanýmladýk. Ardýndan da int() fonksiyonunu kullanarak bu karakter dizisini bir tamsayýya (integer) dönüþtürdük. Ýsminden de anlayacaðýnýz gibi int() fonksiyonu Ýngilizce integer (tamsayý) kelimesinin kýsaltmasýdýr ve bu fonksiyonun görevi bir veriyi tamsayýya dönüþtürmektir.
+
+Ancak burada dikkat etmemiz gereken bir þey var. Herhangi bir verinin sayýya dönüþtürülebilmesi için o verinin sayý deðerli bir veri olmasý gerekir. Örneðin “23”, sayý deðerli bir karakter dizisidir. Ama mesela “elma” sayý deðerli bir karakter dizisi deðildir. Bu yüzden “elma” karakter dizisi sayýya dönüþtürülemez:
+
+>>> karakter_dizisi = "elma"
+>>> sayý = int(karakter_dizisi)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: invalid literal for int() with base 10: 'elma'
+
+Gördüðünüz gibi, sayý deðerli olmayan bir veriyi sayýya dönüþtürmeye çalýþtýrdýðýmýzda Python bize bir hata mesajý gösteriyor. Yazdýðýmýz programlarda bu duruma özellikle dikkat etmemiz gerekiyor.
+
+Þimdi bu bölümün baþýnda yazdýðýmýz ve hata veren programýmýza dönelim yine:
+
+sayý = input("Lütfen bir sayý girin: ")
+
+print("Girdiðiniz sayýnýn karesi: ", sayý ** 2)
+
+Bu kodlarýn hata vereceðini biliyoruz. Ama artýk, öðrendiðimiz int() dönüþtürücüsünü kullanarak programýmýzý hata vermeyecek þekilde yeniden yazabiliriz:
+
+veri = input("Lütfen bir sayý girin: ")
+
+#input() fonksiyonundan gelen karakter dizisini
+#sayýya dönüþtürüyoruz.
+sayý = int(veri)
+
+print("Girdiðiniz sayýnýn karesi: ", sayý ** 2)
+
+Artýk programýmýz hatasýz bir þekilde çalýþýyor.
+
+Bir de öteki örneðimizi ele alalým:
+
+sayý1 = input("Toplama iþlemi için ilk sayýyý girin: ")
+sayý2 = input("Toplama iþlemi için ikinci sayýyý girin: ")
+
+print(sayý1, "+", sayý2, "=", sayý1 + sayý2)
+
+Bu kodlarýn beklediðimiz çýktýyý vermeyeceðini biliyoruz. Ama eðer bu kodlarý þöyle yazarsak iþler deðiþir:
+
+v1 = input("Toplama iþlemi için ilk sayýyý girin: ")
+v2 = input("Toplama iþlemi için ikinci sayýyý girin: ")
+
+sayý1 = int(v1) #v1 adlý karakter dizisini sayýya dönüþtürüyoruz.
+sayý2 = int(v2) #v2 adlý karakter dizisini sayýya dönüþtürüyoruz.
+
+print(sayý1, "+", sayý2, "=", sayý1 + sayý2)
+
+Gördüðünüz gibi, input() fonksiyonundan gelen karakter dizilerini sayýya dönüþtürerek istediðimiz çýktýyý alabiliyoruz.
+
+
+str()
+
+Python’daki tip dönüþtürücüleri elbette sadece int() fonksiyonuyla sýnýrlý deðildir. Gördüðünüz gibi, int() fonksiyonu sayý deðerli verileri (mesela karakter dizilerini) tam sayýya dönüþtürüyor. Bunun bir de tersi mümkündür. Yani karakter dizisi olmayan verileri karakter dizisine dönüþtürmemiz de mümkündür. Bu iþlem için str() adlý baþka bir tip dönüþtürücüden yararlanýyoruz:
+
+>>> sayý = 23
+>>> kardiz = str(sayý)
+>>> print(kardiz)
+
+23
+
+>>> print(type(kardiz))
+
+<class 'str'>
+
+Gördüðünüz gibi, bir tam sayý olan 23‘ü str() adlý bir fonksiyondan yararlanarak karakter dizisi olan “23” ifadesine dönüþtürdük. Son satýrda da, elde ettiðimiz þeyin bir karakter dizisi olduðundan emin olmak için type() fonksiyonunu kullanarak verinin tipini denetledik.
+
+Yukarýdaki örneklerden gördüðümüz gibi, aritmetik iþlemler yapmak istediðimizde karakter dizilerini sayýya çevirmemiz gerekiyor. Peki acaba hangi durumlarda bunun tersini yapmamýz, yani sayýlarý karakter dizilerine çevirmemiz gerekir? Python bilginiz ve tecrübeniz arttýkça bunlarýn hangi durumlar olduðunu kendiniz de göreceksiniz. Mesela biz daha þimdiden, sayýlarý karakter dizisine çevirmemiz gereken bir durumla karþýlaþtýk. Hatýrlarsanýz, len() fonksiyonunu anlatýrken, bu fonksiyonun sayýlarla birlikte kullanýlamayacaðýný söylemiþtik:
+
+>>> len(12343423432)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: object of type 'int' has no len()
+
+Peki ya yazdýðýnýz programda bir sayýnýn kaç haneden oluþtuðunu hesaplamanýz gerekirse ne yapacaksýnýz? Yani mesela yukarýdaki sayýnýn 11 haneli olduðunu bilmeniz gerekiyorsa ne olacak?
+
+Ýþte böyle bir durumda str() fonksiyonundan yararlanabilirsiniz:
+
+>>> sayý = 12343423432
+>>> kardiz = str(sayý)
+>>> len(kardiz)
+
+11
+
+Bildiðiniz gibi, len() fonksiyonu, þu ana kadar öðrendiðimiz veri tipleri içinde sadece karakter dizileri üzerinde iþlem yapabiliyor. Biz de bu yüzden, sayýmýzýn kaç haneli olduðunu öðrenebilmek için, öncelikle bu sayýyý bir karakter dizisine çeviriyoruz. Daha sonra da elde ettiðimiz bu karakter dizisini len() fonksiyonuna parametre olarak veriyoruz. Böylece sayýnýn kaç haneli olduðu bilgisini elde etmiþ oluyoruz.
+
+Bu arada elbette yukarýdaki iþlemi tek satýrda da halledebilirsiniz:
+
+>>> len(str(12343423432))
+
+11
+
+Bu þekilde iç içe geçmiþ fonksiyonlar yazdýðýmýzda, Python fonksiyonlarý içten dýþa doðru tek tek deðerlendirecektir. Mesela yukarýdaki örnekte Python önce str(12343423432) ifadesini deðerlendirecek ve çýkan sonucu len() fonksiyonuna gönderecektir. Ýç içe geçmiþ fonksiyonlarý yazarken dikkat etmemiz gereken önemli bir nokta da, açtýðýmýz her bir parantezi tek tek kapatmayý unutmamaktýr.
+
+
+float()
+
+Hatýrlarsanýz ilk bölümlerde sayýlardan söz ederken tamsayýlarýn (integer) dýþýnda kayan noktalý sayýlarýn (float) da olduðundan söz etmiþtik. Ýþte eðer bir tamsayýyý veya sayý deðerli bir karakter dizisini kayan noktalý sayýya dönüþtürmek istersek float() adlý baþka bir dönüþtürücüden yararlanacaðýz:
+
+>>> a = 23
+>>> type(a)
+
+<class 'int'>
+
+>>> float(a)
+
+23.0
+
+Gördüðünüz gibi, 23 tamsayýsý, float() fonksiyonu sayesinde 23.0‘a yani bir kayan noktalý sayýya dönüþtü.
+
+Ayný þeyi, sayý deðerli karakter dizileri üzerine uygulamak da mümkündür:
+
+>>> b = "23"
+>>> type(b)
+
+<class 'str'>
+
+>>> float(b)
+
+23.0
+
+
+complex()
+
+Sayýlardan söz ederken, eðer matematikle çok fazla içli dýþlý deðilseniz pek karþýlaþmayacaðýnýz, ‘karmaþýk sayý’ adlý bir sayý türünden de bahsetmiþtik. Karmaþýk sayýlar Python’da ‘complex’ ifadesiyle gösteriliyor. Mesela þunun bir karmaþýk sayý olduðunu biliyoruz:
+
+>>> 12+0j
+
+Kontrol edelim:
+
+>>> type(12+0j)
+
+<class 'complex'>
+
+Ýþte eðer herhangi bir sayýyý karmaþýk sayýya dönüþtürmeniz gerekirse complex() adlý bir fonksiyondan yararlanabilirsiniz. Örneðin:
+
+>>> complex(15)
+
+(15+0j)
+
+Böylece Python’daki bütün sayý dönüþtürücüleri öðrenmiþ olduk.
+
+Gelin isterseniz, bu bölümde anlattýðýmýz konularý þöyle bir tekrar ederek bilgilerimizi saðlamlaþtýrmaya çalýþalým.
+
+>>> a = 56
+
+Bu sayý bir tamsayýdýr. Ýngilizce olarak ifade etmek gerekirse, integer. Bunun bir tamsayý olduðunu þu þekilde teyit edebileceðimizi gayet iyi biliyorsunuz:
+
+>>> type(a)
+
+<class 'int'>
+
+Burada aldýðýmýz <class int> çýktýsý, bize a deðiþkeninin tuttuðu sayýnýn bir tamsayý olduðunu söylüyor. ‘int’ ifadesi, integer (tamsayý) kelimesinin kýsaltmasýdýr.
+
+Bir de þu sayýya bakalým:
+
+>>> b = 34.5
+>>> type(b)
+
+<class 'float'>
+
+Bu çýktý ise bize 34.5 sayýsýnýn bir kayan noktalý sayý olduðunu söylüyor. float kelimesi Floats veya Floating Point Number ifadesinin kýsaltmasýdýr. Yani ‘kayan noktalý sayý’ demektir.
+
+Bu arada, bu type() adlý fonksiyonu sadece sayýlara deðil, baþka þeylere de uygulayabileceðimizi biliyorsunuz. Mesela bir örnek vermek gerekirse:
+
+>>> meyve = "karpuz"
+>>> type(meyve)
+
+<class 'str'>
+
+Gördüðünüz gibi, type() fonksiyonu bize meyve adlý deðiþkenin deðerinin bir ‘str’ yani string yani karakter dizisi olduðunu bildirdi.
+
+Bu veri tipleri arasýnda, bazý özel fonksiyonlarý kullanarak dönüþtürme iþlemi yapabileceðimizi öðrendik. Mesela:
+
+>>> sayý = 45
+
+sayý adlý deðiþkenin tuttuðu verinin deðeri bir tamsayýdýr. Biz bu tamsayýyý kayan noktalý sayýya dönüþtürmek istiyoruz. Yapacaðýmýz iþlem çok basit:
+
+>>> float(sayý)
+
+45.0
+
+Gördüðünüz gibi, 45 adlý tamsayýyý, 45.0 adlý bir kayan noktalý sayýya dönüþtürdük. Þimdi type(45.0) komutu bize <class ‘float’> çýktýsýný verecektir.
+
+Eðer kayan noktalý bir sayýyý tamsayýya çevirmek istersek þu komutu veriyoruz. Mesela kayan noktalý sayýmýz, 56.5 olsun:
+
+>>> int(56.5)
+
+56
+
+Yukarýdaki örneði tabii ki þöyle de yazabiliriz:
+
+>>> a = 56.5
+>>> int(a)
+
+56
+
+Dönüþtürme iþlemini sayýlar arasýnda yapabileceðimiz gibi, sayýlar ve karakter dizileri arasýnda da yapabiliriz. Örneðin þu bir karakter dizisidir:
+
+>>> nesne = "45"
+
+Yukarýdaki deðeri týrnak içinde belirttiðimiz için bu deðer bir karakter dizisidir. Þimdi bunu bir tamsayýya çevireceðiz:
+
+>>> int(nesne)
+
+45
+
+Dilersek, ayný karakter dizisini kayan noktalý sayýya da çevirebiliriz:
+
+>>> float(nesne)
+
+45.0
+
+Hatta bir sayýyý karakter dizisine de çevirebiliriz. Bunun için string (karakter dizisi) kelimesinin kýsaltmasý olan str ifadesini kullanacaðýz:
+
+>>> s = 6547
+>>> str(s)
+
+'6547'
+
+Bir örnek de kayan noktalý sayýlarla yapalým:
+
+>>> s = 65.7
+>>> str(s)
+
+'65.7'
+
+Yalnýz þunu unutmayýn: Bir karakter dizisinin sayýya dönüþtürülebilmesi için o karakter dizisinin sayý deðerli olmasý lazým. Yani “45” deðerini sayýya dönüþtürebiliriz. Çünkü “45” deðeri, týrnaklardan ötürü bir karakter dizisi de olsa, neticede sayý deðerli bir karakter dizisidir. Ama mesela “elma” karakter dizisi böyle deðildir. Dolayýsýyla, þöyle bir maceraya giriþmek bizi hüsrana uðratacaktýr:
+
+>>> nesne = "elma"
+>>> int(nesne)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: invalid literal for int() with base 10: 'elma'
+
+Gördüðünüz gibi, Python böyle bir iþlem denemesi karþýsýnda hata veriyor...
+
+Bu bölümde pek çok yeni þey öðrendik. Bu bölümün en önemli getirisi input() fonksiyonunu öðrenmemiz oldu. Bu fonksiyon sayesinde kullanýcýyla iletiþim kurmayý baþardýk. Artýk kullanýcýdan veri alýp, bu verileri programlarýmýz içinde iþleyebiliyoruz.
+
+Yine bu bölümde dikkatinizi çektiðimiz baþka bir konu da sayýlar ve karakter dizileri arasýndaki iliþkiydi. input() fonksiyonuyla elde edilen çýktýnýn bir karakter dizisi olduðunu öðrendik. Bildiðimiz gibi, aritmetik iþlemler ancak sayýlar arasýnda yapýlabilir. Dolayýsýyla input() fonksiyonuyla gelen karakter dizisini bir sayýyla çarpmaya kalkarsak hata alýyoruz. Burada yapmamýz gereken þey, elimizdeki verileri dönüþtürmek. Yani input() fonksiyonundan gelen karakter dizisini bir sayýyla çarpmak istiyorsak, öncelikle aldýðýmýz karakter dizisini sayýya dönüþtürmemiz gerekiyor. Dönüþtürme iþlemleri için kullandýðýmýz fonksiyonlar þunlardý:
+
+int() 
+Sayý deðerli bir karakter dizisini veya kayan noktalý sayýyý tamsayýya (integer) çevirir. float() 
+Sayý deðerli bir karakter dizisini veya tamsayýyý kayan noktalý sayýya (float) çevirir. str() 
+Bir tamsayý veya kayan noktalý sayýyý karakter dizisine (string) çevirir. complex() 
+Herhangi bir sayýyý veya sayý deðerli karakter dizisini karmaþýk sayýya (complex) çevirir. 
+
+Ayrýca bu bölümde öðrendiklerimiz, þöyle önemli bir tespitte bulunmamýza da olanak tanýdý:
+
+Her tamsayý ve/veya kayan noktalý sayý bir karakter dizisine dönüþtürülebilir. Ama her karakter dizisi tamsayýya ve/veya kayan noktalý sayýya dönüþtürülemez.
+
+Örneðin, 5654 gibi bir tamsayýyý veya 543.34 gibi bir kayan noktalý sayýyý str() fonksiyonu yardýmýyla karakter dizisine dönüþtürebiliriz:
+
+>>> str(5654)
+>>> str(543.34)
+
+“5654” veya “543.34” gibi bir karakter dizisini int() veya float() fonksiyonu yardýmýyla tamsayýya ya da kayan noktalý sayýya da dönüþtürebiliriz:
+
+>>> int("5654")
+>>> int("543.34")
+
+>>> float("5654")
+>>> float("543.34")
+
+Ama “elma” gibi bir karakter dizisini ne int() ne de float() fonksiyonuyla tamsayýya veya kayan noktalý sayýya dönüþtürebiliriz! Çünkü “elma” verisi sayý deðerli deðildir.
+
+Bu bölümü kapatmadan önce, dilerseniz þimdiye kadar öðrendiklerimizi de içeren örnek bir program yazalým. Bu program, Python maceramýz açýsýndan bize yeni kapýlar da açacak.
+
+Önceki derslerimizin birinde verdiðimiz doðalgaz faturasý hesaplayan programý hatýrlarsýnýz. Ýþte artýk input() fonksiyonu sayesinde bu doðalgaz faturasý hesaplama programýný da daha ilginç bir hale getirebiliriz:
+
+#Her bir ayýn kaç gün çektiðini tanýmlýyoruz
+ocak = mart = mayýs = temmuz = aðustos = ekim = aralýk = 31
+nisan = haziran = eylül = kasým = 30
+þubat = 28
+
+#Doðalgazýn vergiler dahil metreküp fiyatý
+birimFiyat = 0.79
+
+#Kullanýcý ayda ne kadar doðalgaz tüketmiþ?
+aylýkSarfiyat = input("Aylýk doðalgaz sarfiyatýnýzý metreküp olarak giriniz: ")
+
+#Kullanýcý hangi aya ait faturasýný öðrenmek istiyor?
+dönem = input("""Hangi aya ait faturayý hesaplamak istersiniz?
+(Lütfen ay adýný tamamý küçük harf olacak þekilde giriniz)\n""")
+
+#Yukarýdaki input() fonksiyonundan gelen veriyi
+#Python'ýn anlayabileceði bir biçime dönüþtürüyoruz
+ay = eval(dönem)
+
+#Kullanýcýnýn günlük doðalgaz sarfiyatý
+günlükSarfiyat = int(aylýkSarfiyat) / ay
+
+#Fatura tutarý
+fatura = birimFiyat * günlükSarfiyat * ay
+
+print("günlük sarfiyatýnýz: \t", günlükSarfiyat, " metreküp\n",
+"tahmini fatura tutarý: \t", fatura, " TL", sep="")
+
+Burada yine bilmediðimiz bir fonksiyonla daha karþýlaþtýk. Bu fonksiyonun adý eval(). Biraz sonra eval() fonksiyonunu derinlemesine inceleyeceðiz. Ama bu fonksiyonu anlatmaya geçmeden önce dilerseniz yukarýdaki kodlarý biraz didikleyelim.
+
+Ýlk satýrlarýn ne iþe yaradýðýný zaten biliyorsunuz. Bir yýl içindeki bütün aylarýn kaç gün çektiðini gösteren deðiþkenlerimizi tanýmladýk. Burada her bir deðiþkeni tek tek tanýmlamak yerine deðiþkenleri topluca tanýmladýðýmýza dikkat edin. Ýsteseydik tabii ki yukarýdaki kodlarý þöyle de yazabilirdik:
+
+#Her bir ayýn kaç gün çektiðini tanýmlýyoruz
+ocak = 31
+þubat = 28
+mart = 31
+nisan = 30
+mayýs = 31
+haziran = 30
+temmuz = 31
+aðustos = 31
+eylül = 30
+ekim = 31
+kasým = 30
+aralýk = 31
+
+#Doðalgazýn vergiler dahil m3 fiyatý
+birimFiyat = 0.79
+
+#Kullanýcý ayda ne kadar doðalgaz tüketmiþ?
+aylýkSarfiyat = input("Aylýk doðalgaz sarfiyatýnýzý m3 olarak giriniz: ")
+
+#Kullanýcý hangi aya ait faturasýný öðrenmek istiyor?
+dönem = input("""Hangi aya ait faturayý hesaplamak istersiniz?
+(Lütfen ay adýný tamamý küçük harf olacak þekilde giriniz)\n""")
+
+#Yukarýdaki input() fonksiyonundan gelen veriyi
+#Python'ýn anlayabileceði bir biçime dönüþtürüyoruz
+ay = eval(dönem)
+
+#Kullanýcýnýn günlük doðalgaz sarfiyatý
+günlükSarfiyat = int(aylýkSarfiyat) / ay
+
+#Fatura tutarý
+fatura = birimFiyat * günlükSarfiyat * ay
+
+print("günlük sarfiyatýnýz: \t", günlükSarfiyat, " metreküp\n",
+"tahmini fatura tutarý: \t", fatura, " TL", sep="")
+
+Ama tabii ki, deðiþkenleri tek tek tanýmlamak yerine topluca tanýmlamak, daha az kod yazmanýzý saðlamasýnýn yanýsýra, programýnýzýn çalýþma performansý açýsýndan da daha iyidir. Yani deðiþkenleri bu þekilde tanýmladýðýnýzda programýnýz daha hýzlý çalýþýr.
+
+Programýmýzý incelemeye devam edelim...
+
+Deðiþkenleri tanýmladýktan sonra doðalgazýn vergiler dahil yaklaþýk birim fiyatýný da bir deðiþken olarak tanýmladýk. 0.79 deðerini zaten birkaç bölüm önce hesaplayýp bulduðumuz için, ayný iþlemleri tekrar programýmýza eklememize gerek yok. Doðrudan nihai deðeri programýmýza yazsak yeter...
+
+Birim fiyatý belirledikten sonra kullanýcýya aylýk doðalgaz sarfiyatýný soruyoruz. Kullanýcýnýn bu deðeri m3 olarak girmesini bekliyoruz. Elbette bu veriyi kullanýcýdan alabilmek için input() fonksiyonunu kullanýyoruz.
+
+Daha sonra kullanýcýya hangi aya ait doðalgaz faturasýný ödemek istediðini soruyoruz. Bu bilgi, bir sonraki satýrda günlük doðalgaz sarfiyatýný hesaplarken iþimize yarayacak. Çünkü kullanýcýnýn girdiði ayýn çektiði gün sayýsýna baðlý olarak günlük sarfiyat deðiþecektir. Günlük sarfiyatý hesaplamak için aylýk sarfiyatý, ilgili ayýn çektiði gün sayýsýna bölüyoruz. Bu arada bir önceki satýrda dönem deðiþkenini eval() adlý bir fonksiyonla birlikte kullandýðýmýzý görüyorsunuz. Bunu biraz sonra inceleyeceðiz. O yüzden bu satýrlarý atlayýp son satýra gelelim.
+
+Son satýrda print() fonksiyonunu kullanarak, kullanýcýdan aldýðýmýz verileri düzgün bir þekilde kendisine gösteriyoruz. Programýmýz kullanýcýya günlük doðalgaz sarfiyatýný ve ay sonunda karþýlaþacaðý tahmini fatura tutarýný bildiriyor. print() fonksiyonu içinde kullandýðýmýz kaçýþ dizilerine özellikle dikkatinizi çekmek istiyorum. Burada düzgün bir çýktý elde etmek için \t ve \n adlý kaçýþ dizilerinden nasýl yararlandýðýmýzý görüyorsunuz. Bu kaçýþ dizilerinin buradaki iþlevini tam olarak anlayabilmek için, bu kodlarý bir de bu kaçýþ dizileri olmadan yazmayý deneyebilirsiniz.
+
+Bu bilgileri, önemlerinden ötürü aklýmýzda tutmaya çalýþalým. Buraya kadar anlatýlan konular hakkýnda zihnimizde belirsizlikler varsa veya bazý noktalarý tam olarak kavrayamadýysak, þimdiye kadar öðrendiðimiz konularý tekrar gözden geçirmemiz bizim için epey faydalý olacaktýr. Zira bundan sonraki bölümlerde, yeni bilgilerin yanýsýra, buraya kadar öðrendiðimiz þeyleri de yoðun bir þekilde pratiðe dökeceðiz. Bundan sonraki konularý takip edebilmemiz açýsýndan, buraya kadar verdiðimiz temel bilgileri iyice sindirmiþ olmak iþimizi bir hayli kolaylaþtýracaktýr.

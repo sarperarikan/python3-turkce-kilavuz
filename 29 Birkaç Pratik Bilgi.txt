@@ -1,0 +1,97 @@
+
+Birkaç Pratik Bilgi
+
+Buraya gelene kadar print() fonksiyonu ve bu fonksiyonun parametreleri hakkýnda epey söz söyledik. Dilerseniz þimdi de, programcýlýk maceranýzda iþinize yarayacak, iþlerinizi kolaylaþtýracak bazý ipuçlarý verelim.
+
+
+Yýldýzlý Parametreler
+
+Þimdi size þöyle bir soru sormama izin verin: Acaba aþaðýdaki gibi bir çýktýyý nasýl elde ederiz?
+
+L.i.n.u.x
+
+Aklýnýza hemen þöyle bir cevap gelmiþ olabilir:
+
+>>> print("L", "i", "n", "u", "x", sep=".")
+
+L.i.n.u.x
+
+Yukarýdaki, gerçekten de doðru bir çözümdür. Ancak bu soruyu çözmenin çok daha basit bir yolu var. Þimdi dikkatle bakýn:
+
+>>> print(*"Linux", sep=".")
+
+L.i.n.u.x
+
+Konuyu açýklamaya geçmeden önce bir örnek daha verelim:
+
+>>> print(*"Galatasaray")
+
+G a l a t a s a r a y
+
+Burada neler döndüðünü az çok tahmin ettiðinizi zannediyorum. Son örnekte de gördüðünüz gibi, “Galatasaray” karakter dizisinin baþýna eklediðimiz yýldýz iþareti; “Galatasaray” karakter dizisinin her bir öðesini parçalarýna ayýrarak, bunlarý tek tek print() fonksiyonuna yolluyor. Yani sanki print() fonksiyonunu þöyle yazmýþýz gibi oluyor:
+
+>>> print("G", "a", "l", "a", "t", "a", "s", "a", "r", "a", "y")
+
+G a l a t a s a r a y
+
+Dediðimiz gibi, bir fonksiyona parametre olarak verdiðimiz bir karakter dizisinin baþýna eklediðimiz yýldýz iþareti, bu karakter dizisini tek tek öðelerine ayýrýp, bu öðeleri yine tek tek ve sanki her bir öðe ayrý bir parametreymiþ gibi o fonksiyona gönderdiði için doðal olarak yýldýz iþaretini ancak, birden fazla parametre alabilen fonksiyonlara uygulayabiliriz.
+
+Örneðin len() fonksiyonu sadece tek bir parametre alabilir:
+
+>>> len("Galatasaray")
+
+11
+
+Bu fonksiyonu birden fazla parametre ile kullanamayýz:
+
+>>> len("Galatasaray", "Fenerbahçe", "Beþiktaþ")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: len() takes exactly one argument (3 given)
+
+Hata mesajýnda da söylendiði gibi, len() fonksiyonu yalnýzca tek bir parametre alabilirken, biz 3 parametre vermeye çalýþmýþýz...
+
+Dolayýsýyla yýldýzlý parametreleri len() fonksiyonuna uygulayamayýz:
+
+>>> len(*"Galatasaray")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: len() takes exactly one argument (11 given)
+
+Bir parametrenin baþýna yýldýz eklediðimizde, o parametreyi oluþturan bütün öðeler tek tek fonksiyona gönderildiði için, sanki len() fonksiyonuna 1 deðil de, 11 ayrý parametre vermiþiz gibi bir sonuç ortaya çýkýyor.
+
+Yýldýzlý parametreleri bir fonksiyona uygulayabilmemiz için o fonksiyonun birden fazla parametre alabilmesinin yanýsýra, yapýsýnýn da yýldýzlý parametre almaya uygun olmasý gerekir. Mesela open(), type() ve biraz önce bahsettiðimiz len() fonksiyonlarýnýn yapýsý yýldýzlý parametre almaya uygun deðildir. Dolayýsýyla yýldýzlý parametreleri her fonksiyonla birlikte kullanamayýz, ama print() fonksiyonu yýldýzlý parametreler için son derece uygun bir fonksiyondur:
+
+>>> print(*"Galatasaray")
+
+G a l a t a s a r a y
+
+>>> print(*"TBMM", sep=".")
+
+T.B.M.M
+
+>>> print(*"abcçdefgðh", sep="/")
+
+a/b/c/ç/d/e/f/g/ð/h
+
+Bu örneklerden de gördüðünüz gibi, print() fonksiyonuna verdiðimiz bir parametrenin baþýna yýldýz eklediðimizde, o parametre tek tek parçalarýna ayrýlýp print() fonksiyonuna gönderildiði için, sonuç olarak sep parametresinin karakter dizisi öðelerine tek tek uygulanmasýný saðlamýþ oluyoruz.
+
+Hatýrlarsanýz sep parametresinin öntanýmlý deðerinin bir adet boþluk karakteri olduðunu söylemiþtik. Yani aslýnda Python yukarýdaki ilk komutu þöyle görüyor:
+
+>>> print(*"Galatasaray", sep=" ")
+
+Dolayýsýyla, yýldýz iþareti sayesinde “Galatasaray” adlý karakter dizisinin her bir öðesinin arasýna bir adet boþluk karakteri yerleþtiriliyor. Bir sonraki “TBMM” karakter dizisinde ise, sep parametresinin deðerini nokta iþareti olarak deðiþtirdiðimiz için “TBMM” karakter dizisinin her bir öðesinin arasýna bir adet nokta iþareti yerleþtiriliyor. Ayný þekilde “abcçdefgðh” karakter dizisinin her bir öðesini tek tek print() fonksiyonuna yollayarak, sep parametresine verdiðimiz / iþareti yardýmýyla her öðenin arasýna bu / iþaretini yerleþtirebiliyoruz.
+
+Yýldýzlý parametrelerle ilgili tek kýsýtlama, bunlarýn sayýlarla birlikte kullanýlamayacak olmasýdýr:
+
+>>> print(*2345)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: print() argument after * must be a sequence, not int
+
+Çünkü yýldýzlý parametreler ancak ve ancak dizi özelliði taþýyan veri tipleriyle birlikte kullanýlabilir. Mesela karakter dizileri bu türden bir veri tipidir. Ýlerde dizi özelliði taþýyan ve bu sayede yýldýzlý parametrelerle birlikte kullanýlabilecek baþka veri tiplerini de öðreneceðiz.
+
+Yukarýda verdiðimiz örnekler bize yýldýzlý parametrelerin son derece kullanýþlý araçlar olduðunu gösteriyor. Ýleride de bu parametrelerden bol bol yararlanacaðýz. Biz þimdi bu konuyu burada kapatýp baþka bir þeyden söz edelim.

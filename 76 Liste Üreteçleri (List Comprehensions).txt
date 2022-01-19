@@ -1,0 +1,226 @@
+
+Liste Üreteçleri (List Comprehensions)
+
+Þimdi Python’daki listelere iliþkin çok önemli bir konuya deðineceðiz. Bu konunun adý ‘liste üreteçleri’. Ýngilizce’de buna “List Comprehension” adý veriliyor.
+
+Adýndan da anlaþýlacaðý gibi, liste üreteçlerinin görevi liste üretmektir. Basit bir örnek ile liste üreteçleri konusuna giriþ yapalým:
+
+liste = [i for i in range(1000)]
+
+Burada 0’dan 1000’e kadar olan sayýlarý tek satýrda bir liste haline getirdik. Bu kodlarýn söz dizimine çok dikkat edin. Aslýnda yukarýdaki kod þu þekilde de yazýlabilir:
+
+liste = []
+
+for i in range(1000):
+liste += [i]
+
+Burada önce liste adlý boþ bir liste tanýmladýk. Daha sonra 0 ile 1000 aralýðýnda bütün sayýlarý bu boþ listeye teker teker gönderdik. Böylece elimizde 0’dan 1000’e kadar olan sayýlarý tutan bir liste olmuþ oldu. Ayný iþ için liste üreteçlerini kullandýðýmýzda ise bu etkiyi çok daha kýsa bir yoldan halletmiþ oluyoruz. Liste üreteçlerini kullandýðýmýz kodu tekrar önümüze alalým:
+
+liste = [i for i in range(1000)]
+
+Gördüðünüz gibi, burada önceden boþ bir liste tanýmlamamýza gerek kalmadý. Ayrýca bu kodlarda for döngüsünün parantezler içine alýnarak nasýl sadeleþtirildiðine de dikkatinizi çekmek isterim. Þu kod:
+
+for i in range(1000):
+liste += [i]
+
+Liste üreteçlerini kullandýðýmýzda þu koda dönüþüyor:
+
+[i for i in range(1000)]
+
+Pek çok durumda liste üreteçleri öbür seçeneklere kýyasla bir alternatif olma iþlevi görür. Yani liste üreteçleri ile elde edeceðiniz sonucu baþka araçlarla da elde edebilirsiniz. Mesela yukarýdaki kodlarýn yaptýðý iþlevi yerine getirmek için baþka bir seçenek olarak list() fonksiyonundan da yararlanabileceðimizi biliyorsunuz:
+
+liste = list(range(1000))
+
+Bu basit örneklerde liste üreteçlerini kullanmanýn erdemi pek göze çarpmýyor. Ama bazý durumlarda liste üreteçleri öteki alternatiflere kýyasla çok daha pratik bir çözüm sunar. Böyle durumlarda baþka seçeneklere baþvurup yolunuzu uzatmak yerine liste üreteçlerini kullanarak iþinizi kýsa yoldan halledebilirsiniz.
+
+Örneðin 0 ile 1000 arasýndaki çift sayýlarý listelemek için liste üreteçlerini kullanmak, alternatiflerine göre daha makul bir tercih olabilir:
+
+liste = [i for i in range(1000) if i % 2 == 0]
+
+Ayný iþi for döngüsü ile yapmak için þöyle bir kod yazmamýz gerekir:
+
+liste = []
+for i in range(1000):
+if i % 2 == 0:
+liste += [i]
+
+Gördüðünüz gibi, liste üreteçleri bize ayný iþi daha kýsa bir yoldan halletme imkaný tanýyor. Bu arada for döngüsünün ve bu döngü içinde yer alan if deyiminin liste üreteçleri içinde nasýl göründüðüne dikkat ediyoruz.
+
+Liste üreteçleri ile ilgili bir örnek daha verelim. Mesela elinizde þöyle bir liste olduðunu düþünün:
+
+liste = [[1, 2, 3],
+[4, 5, 6],
+[7, 8, 9],
+[10, 11, 12]]
+
+Burada iç içe geçmiþ 4 adet liste var. Bu listenin bütün öðelerini tek bir listeye nasýl alabiliriz? Yani þöyle bir çýktýyý nasýl elde ederiz?
+
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+for döngülerini kullanarak þöyle bir kod yazabiliriz:
+
+liste = [[1, 2, 3],
+[4, 5, 6],
+[7, 8, 9],
+[10, 11, 12]]
+
+tümü = []
+
+for i in liste:
+for z in i:
+tümü += [z]
+
+print(tümü)
+
+Liste üreteçleri ise daha kýsa bir çözüm sunar:
+
+liste = [[1, 2, 3],
+[4, 5, 6],
+[7, 8, 9],
+[10, 11, 12]]
+
+tümü = [z for i in liste for z in i]
+print(tümü)
+
+Bu liste üreteci gerçekten de bize kýsa bir çözüm sunuyor, ama bu tip iç içe geçmiþ for döngülerinden oluþan liste üreteçlerinde bazen okunaklýlýk sorunu ortaya çýkabilir. Yani bu tür iç içe geçmiþ for döngülerinden oluþan liste üreteçlerini anlamak, alternatif yöntemlere göre daha zor olabilir.
+
+Bazý durumlarda ise liste üreteçleri bir sorunun çözümü için tek makul yol olabilir. Diyelim ki bir X.O.X Oyunu (Tic Tac Toe) yazýyorsunuz. Bu oyunda oyuncular oyun tahtasý üzerine X veya O iþaretlerinden birini yerleþtirecek. Oyuncunun bu oyunu kazanabilmesi için, X veya O iþaretlerinden birisinin oyun tahtasý üzerinde belli konumlarda bulunmasý gerekiyor. Yani mesela X iþaretinin oyunu kazanabilmesi için bu iþaretin oyun tahtasý üzerinde þu þekilde bir dizilime sahip olmasý gerekir:
+
+O X O
+
+___ X O
+
+___ X ___
+
+Bu dizilime göre oyunu X iþareti kazanýr. Peki X iþaretinin, oyunu kazanmasýný saðlayacak bu dizilime ulaþtýðýný nasýl tespit edeceksiniz?
+
+Bunun için öncelikle oyun tahtasý üzerinde hangi dizilim þekillerinin galibiyeti getireceðini gösteren bir liste hazýrlayabilirsiniz. Mesela yukarýdaki gibi 3x3 boyutundaki bir oyun tahtasýnda X iþaretinin oyunu kazanabilmesi için þu dizilimlerden herhangi birine sahip olmasý gerekir:
+
+[0, 0], [1, 0], [2, 0]
+
+X ___ ___
+
+X ___ ___
+
+X ___ ___
+
+
+[0, 1], [1, 1], [2, 1]
+
+___ X ___
+
+___ X ___
+
+___ X ___
+
+
+[0, 2], [1, 2], [2, 2]
+
+___ ___ X
+
+___ ___ X
+
+___ ___ X
+
+[0, 0], [0, 1], [0, 2]
+
+X X X
+___ ___ ___
+
+___ ___ ___
+
+
+[1, 0], [1, 1], [1, 2]
+
+___ ___ ___
+
+X X X
+___ ___ ___
+
+
+[2, 0], [2, 1], [2, 2]
+
+___ ___ ___
+
+___ ___ ___
+
+X X X
+
+
+[0, 0], [1, 1], [2, 2]
+
+X ___ ___
+
+___ X ___
+
+___ ___ X
+
+
+[0, 2], [1, 1], [2, 0]
+
+___ ___ X
+
+___ X ___
+
+X ___ ___
+
+Ayný dizilimler O iþareti için de geçerlidir. Dolayýsýyla bu kazanma ölçütlerini þöyle bir liste içinde toplayabilirsiniz:
+
+kazanma_ölçütleri = [[[0, 0], [1, 0], [2, 0]],
+[[0, 1], [1, 1], [2, 1]],
+[[0, 2], [1, 2], [2, 2]],
+[[0, 0], [0, 1], [0, 2]],
+[[1, 0], [1, 1], [1, 2]],
+[[2, 0], [2, 1], [2, 2]],
+[[0, 0], [1, 1], [2, 2]],
+[[0, 2], [1, 1], [2, 0]]]
+
+Oyun sýrasýnda X veya O iþaretlerinin aldýðý konumu bu kazanma ölçütleri ile karþýlaþtýrarak oyunu kimin kazandýðýný tespit edebilirsiniz. Yani kazanma_ölçütleri adlý liste içindeki, iç içe geçmiþ listelerden herhangi biri ile oyunun herhangi bir aþamasýnda tamamen eþleþen iþaret, oyunu kazanmýþ demektir.
+
+Bir sonraki bölümde bu bahsettiðimiz X.O.X Oyununu yazacaðýz. O zaman bu sürecin nasýl iþlediðini daha ayrýntýlý bir þekilde inceleyeceðiz. Þimdilik yukarýdaki durumu temsil eden basit bir örnek vererek liste üreteçlerinin kullanýmýný incelemeye devam edelim.
+
+Örneðin elinizde, yukarýda bahsettiðimiz kazanma ölçütlerini temsil eden þöyle bir liste olduðunu düþünün:
+
+liste1 = [[1, 2, 3],
+[4, 5, 6],
+[7, 8, 9],
+[10, 11, 12],
+[13, 14, 15],
+[16, 17, 18],
+[19, 20, 21],
+[22, 23, 24],
+[25, 26, 27],
+[28, 29, 30],
+[31, 32, 33]]
+
+Bir de þöyle bir liste:
+
+liste2 = [1, 27, 88, 98, 50, 9, 28, 45, 54, 66, 61, 23, 10, 33,
+22, 12, 6, 99, 63, 26, 87, 25, 77, 5, 16, 93, 99, 44,
+59, 69, 34, 10, 60, 92, 61, 44, 5, 3, 23, 99, 79, 51,
+89, 63, 53, 31, 76, 41, 49, 10, 88, 63, 55, 43, 40, 71,
+16, 49, 78, 41, 35, 97, 33, 76, 25, 81, 15, 99, 64, 20,
+33, 6, 89, 81, 44, 53, 59, 75, 27, 15, 64, 36, 72, 78,
+34, 36, 20, 41, 41, 75, 56, 30, 86, 46, 9, 42, 21, 64,
+26, 52, 77, 65, 64, 12, 38, 1, 35, 20, 73, 71, 37, 35,
+72, 38, 100, 52, 16, 49, 79]
+
+Burada amacýnýz liste1 içinde yer alan iç içe geçmiþ listelerden hangisinin liste2 içindeki sayýlarýn alt kümesi olduðunu, yani liste2 içindeki sayýlarýn, liste1 içindeki üçlü listelerden hangisiyle birebir eþleþtiðini bulmak. Bunun için þöyle bir kod yazabiliriz:
+
+for i in liste1:
+ortak = [z for z in i if z in liste2]
+if len(ortak) == len(i):
+print(i)
+
+Bu kodlar ilk bakýþta gözünüze çok karmaþýk gelmiþ olabilir. Ama aslýnda hiç de karmaþýk deðildir bu kodlar. Þimdi bu kodlarý Türkçe’ye çevirelim:
+
+1. satýr: liste1 adlý listedeki her bir öðeye i adýný verelim
+
+2. satýr: i içindeki, liste2‘de de yer alan her bir öðeye de z adýný verelim ve bunlarý ortak adlý bir listede toplayalým.
+
+3. satýr: eðer ortak adlý listenin uzunluðu i deðiþkeninin uzunluðu ile aynýysa
+
+4. satýr: i‘yi ekrana basalým ve böylece alt kümeyi bulmuþ olalým.
+
+Eðer bu satýrlarý anlamakta zorluk çekiyorsanýz okumaya devam edin. Biraz sonra vereceðimiz örnek programda da bu kodlarý görecek ve bu kodlarýn ne iþe yaradýðýný orada daha iyi anlayacaksýnýz.
+

@@ -1,0 +1,30 @@
+
+Çalýþma Ortamý Tavsiyesi
+
+Bu bölümde, Python programlarý geliþtirirken rahat bir çalýþma ortamý elde edebilmek için yapmanýz gerekenleri sýralayacaðýz. Öncelikle Windows kullanýcýlarýndan baþlayalým.
+
+
+Windows Kullanýcýlarý
+
+Windows’ta bir Python programý yazýp kaydettikten sonra bu programý komut satýrýndan çalýþtýrabilmek için, MS-DOS’u açýp, öncelikle cd komutuyla programýn bulunduðu dizine ulaþmamýz gerekir. Ýlgili dizine ulaþtýktan sonra programýmýzý python program_adý komutuyla çalýþtýrabiliriz. Ancak bir süre sonra, programý çalýþtýrmak için her defasýnda programýn bulunduðu dizine ulaþmaya çalýþmak sýkýcý bir hal alacaktýr. Ama bu konuda çaresiz deðiliz.
+
+Windows 7, istediðimiz dizin altýnda bir MS-DOS ekraný açabilmemiz için bize çok güzel bir kolaylýk sunuyor. Normal þartlar altýnda mesela masaüstünde bir MS-DOS ekraný açabilmek için þu yolu izlemeniz gerekiyor:
+
+Windows logolu tuþa ve R tuþuna birlikte bas, 
+Açýlan pencereye cmd yazýp Enter düðmesine bas, 
+Bu þekilde ulaþtýðýn MS-DOS ekranýnda cd Desktop komutunu ver. 
+Bu üç adýmla, MS-DOS ekraný üzerinden masaüstüne ulaþmýþ oluyoruz. Ama aslýnda bunun çok daha kolay bir yolu var: Masaüstüne sað týklarken Shift tuþunu da basýlý tutarsanýz, sað-týk menüsünde ‘Komut penceresini burada aç’ adlý bir satýr görürsünüz. Ýþte bu satýra týklayarak, MS-DOS komut satýrýný tek harekette masaüstü konumunda çalýþtýrabilirsiniz. Elbette bu özellik sadece masaüstü için deðil, bütün konumlar için geçerlidir. Yani bilgisayarýnýzda herhangi bir yere sað týklarken Shift tuþunu da basýlý tutarak o konumda bir MS-DOS penceresi açabilirsiniz.
+
+Ayrýca, herhangi bir klasör açýkken dosya tarayýcýsýnýn adres çubuðuna cmd yazýp Enter düðmesine basarak da, o klasörün bulunduðu konumda bir komut ekraný açabilirsiniz. Örneðin eðer o anda önünüzde ‘Ýndirilenler’ (veya ‘Karþýdan Yüklenenler’) dizini açýksa, adres çubuðuna (aþaðýdaki resimde kýrmýzý ile gösterilen bölge) cmd yazarak C:\Users\Kullanýcý\Downloads> konumunda bir komut ekraný açabilirsiniz.
+
+Ýkinci olarak, çalýþma kolaylýðý açýsýndan Windows’ta dosya uzantýlarýnýn her zaman görünmesini saðlamanýzý da tavsiye ederim. Windows ilk kurulduðunda hiçbir dosyanýn uzantýsý görünmez. Yani mesela deneme.txt adlý bir dosya Windows ilk kurulduðunda deneme þeklinde görünecektir. Bu durumda, bir dosyanýn uzantýsýný deðiþtirmek istediðinizde bazý sýkýntýlar yaþarsýnýz. Örneðin, masaüstünde bir metin dosyasý oluþturduðunuzu varsayalým. Diyelim ki amacýnýz bu dosyanýn içine bir þeyler yazýp daha sonra mesela bu dosyanýn uzantýsýný .bat veya .py yapmak olsun. Böyle bir durumda, dosya uzantýlarýný göremediðiniz için, metin dosyasýnýn uzantýsýný deðiþtirmeye çalýþtýðýnýzda deneme.bat.txt gibi bir dosya adý elde edebilirsiniz. Tabii ki bu dosya bir .bat dosyasý deðil, bir .txt, yani metin dosyasýdýr. Dolayýsýyla aslýnda dosya uzantýsýný deðiþtirememiþ oluyorsunuz.
+
+Yukarýdaki nedenlerden ötürü, ben size þu yolu takip ederek dosya uzantýlarýný her zaman görünür hale getirmenizi öneririm:
+
+Baþlat > Denetim Masasý yolunu takip ederek denetim masasýna ulaþýn, 
+Denetim masasýnda ‘Görünüm ve Kiþiselleþtirme’ seçeneðine týklayýn, 
+Açýlan menünün sað tarafýnda ‘Klasör Seçenekleri’ satýrýna týklayýn, 
+Açýlan pencerede ‘Görünüm’ sekmesine týklayýn, 
+‘Geliþmiþ Ayarlar’ listesinde ‘Bilinen dosya türleri için uzantýlarý gizle’ seçeneðinin yanýndaki onay iþaretini kaldýrýn, 
+Uygula ve Tamam düðmelerine basarak bütün pencereleri kapatýn, 
+Artýk bütün dosyalarýnýzýn uzantýsý da görüneceði için, uzantý deðiþtirme iþlemlerini çok daha kolay bir þekilde halledebilirsiniz. 

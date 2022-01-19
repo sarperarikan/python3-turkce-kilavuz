@@ -1,0 +1,13 @@
+
+pop()
+
+Tıpkı remove() metodu gibi, bu metot da bir listeden öğe silmemizi sağlar:
+
+>>> liste = ["elma", "armut", "çilek"]
+>>> liste.pop()
+
+Ancak bu metot, remove() metodundan biraz farklı davranır. pop() metodunu kullanarak bir liste öğesini sildiğimizde, silinen öğe ekrana basılacaktır. Bu metot parametresiz olarak kullanıldığında listenin son öğesini listeden atar. Alternatif olarak, bu metodu bir parametre ile birlikte de kullanabilirsiniz. Örneğin:
+
+>>> liste.pop(0)
+
+Bu komut listenin 0. öğesini listeden atar ve atılan öğeyi ekrana basar.

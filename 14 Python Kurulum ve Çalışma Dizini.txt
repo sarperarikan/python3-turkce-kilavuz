@@ -1,0 +1,12 @@
+
+Python Kurulum ve Çalýþma Dizini
+
+Python programlama dilini, kullandýðýmýz iþletim sistemine nasýl kurabileceðimizi bilmek kadar önemli bir konu da Python’ý hangi dizine kurduðumuzu bilmektir. Zira programcýlýk maceramýz boyunca karþýlaþacaðýmýz bazý sorunlar, Python’ýn kurulu olduðu dizine gitmemizi gerektirecek, üstelik kendi yazdýðýmýz bazý programlarda da Python’ýn kurulu olduðu dizinde çeþitli iþlemler yapmak ihtiyacý duyacaðýz. Ayrýca bazý durumlarda, o anda çalýþan Python sürümünün hangi konumdan çalýþtýðýný tespit etmemiz de gerekebilir.
+
+Ýþte bu sebeplerden, Python’ýn hangi dizine kurulduðunu mutlaka biliyor olmamýz lazým.
+
+Python’ýn, iþletim sisteminizde hangi dizine kurulduðu, Python’ý nasýl kurduðunuza baðlý olarak farklýlýk gösterir.
+
+GNU/Linux daðýtýmlarýnda Python genellikle /usr/lib/python3.5 dizininde kurulur. Ama elbette, eðer siz Python’ý kaynaktan derlediyseniz, derleme sýrasýnda configure betiðine verdiðiniz –prefix parametresi yardýmýyla Python’ýn kurulum dizinini kendiniz de belirlemiþ olabilirsiniz.
+
+Windows’ta Python programlama dilini aynen bu kitapta gösterdiðimiz þekilde kurduysanýz, Python %LOCALAPPDATA%\Programs\Python dizini içine kurulacaktýr. Ancak eðer kurulum penceresinde ‘Customize Installation’ düðmesine basarak kurulumu özelleþtirdiyseniz ve ‘Install for all users’ seçeneðini iþaretlediyseniz Python %PROGRAMFILES% veya %PROGRAMFILES(x86) adlý çevre deðiþkenlerinin iþaret ettiði dizin içine kurulacaktýr.

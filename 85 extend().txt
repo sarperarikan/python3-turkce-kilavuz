@@ -1,0 +1,57 @@
+
+extend()
+
+extend kelimesi Ýngilizcede ‘geniþletmek, yaymak’ gibi anlamlara gelir. Ýþte extend() adlý metot da kelime anlamýna uygun olarak listeleri ‘geniþletir’.
+
+Þöyle bir düþündüðünüzde extend() metodunun append() metoduyla ayný iþi yaptýðýný zannedebilirsiniz. Ama aslýnda bu iki metot iþleyiþ olarak birbirinden çok farklýdýr.
+
+append() metodunu kullanarak yazdýðýmýz þu koda dikkatlice bakýn:
+
+li1 = [1, 3, 4]
+li2 = [10, 11, 12]
+li1. append(li2)
+
+print(li1)
+
+append() metodunu anlatýrken söylediðimiz gibi, bu metot bir listeye her defasýnda sadece tek bir öðe eklenmesine izin verir. Yukarýda olduðu gibi, eðer bu metodu kullanarak bir listeye yine bir liste eklemeye çalýþýrsanýz, eklediðiniz liste tek bir öðe olarak eklenecektir. Yani yukarýdaki kodlar size þöyle bir çýktý verecektir:
+
+[1, 3, 4, [10, 11, 12]]
+
+Gördüðünüz gibi, [10, 11, 12] listesi öteki listeye tek bir liste halinde eklendi. Ýþte extend() metodu bu tür durumlarda iþinize yarayabilir. Mesela yukarýdaki örneði bir de extend() metodunu kullanarak yazalým:
+
+li1 = [1, 3, 4]
+li2 = [10, 11, 12]
+li1. extend(li2)
+
+print(li1)
+
+Bu defa þöyle bir çýktý alýyoruz:
+
+[1, 3, 4, 10, 11, 12]
+
+Gördüðünüz gibi, extend() metodu tam da kelime anlamýna uygun olarak listeyi yeni öðelerle geniþletti.
+
+Hatýrlarsanýz append() metodunu anlatýrken þöyle bir örnek vermiþtik:
+
+iþletim_sistemleri = ["Windows", "GNU/Linux", "Mac OS X"]
+platformlar = ["IPhone", "Android", "S60"]
+hepsi = iþletim_sistemleri + platformlar
+print(hepsi)
+
+Burada + iþlecini kullanarak iþletim_sistemleri ve platformlar adlý listeleri birleþtirerek hepsi adlý tek bir liste elde ettik. Ayný etkiyi append() metodunu kullanarak þu þekilde elde edebileceðimizi de söylemiþtik orada:
+
+iþletim_sistemleri = ["Windows", "GNU/Linux", "Mac OS X"]
+platformlar = ["IPhone", "Android", "S60"]
+for i in platformlar:
+iþletim_sistemleri.append(i)
+
+print(iþletim_sistemleri)
+
+Esasýnda, append() metodunu kullanmaya kýyasla, burada + iþlecini kullanmak sanki daha pratikmiþ gibi görünüyor. Bir de þuna bakýn:
+
+iþletim_sistemleri = ["Windows", "GNU/Linux", "Mac OS X"]
+platformlar = ["IPhone", "Android", "S60"]
+iþletim_sistemleri.extend(platformlar)
+print(iþletim_sistemleri)
+
+Gördüðünüz gibi, bu örnekte extend() metodunu kullanmak append() metodunu kullanmaya göre daha pratik ve makul. Çünkü bir listeye tek tek öðe eklemek açýsýndan append() metodu daha uygundur, ama eðer yukarýda olduðu gibi bir listeye baþka bir liste ekleyeceksek extend() metodunu kullanmayý tercih edebiliriz.

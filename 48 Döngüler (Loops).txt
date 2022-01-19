@@ -1,0 +1,639 @@
+
+Döngüler (Loops)
+
+Þimdiye kadar öðrendiklerimiz sayesinde Python’la ufak tefek programlar yazabilecek düzeye geldik. Mesela öðrendiðimiz bilgiler yardýmýyla bir önceki bölümde çok basit bir hesap makinesi yazabilmiþtik. Yalnýz o hesap makinesinde farkettiyseniz çok önemli bir eksiklik vardý. Hesap makinemizle hesap yaptýktan sonra programýmýz kapanýyor, yeni hesap yapabilmek için programý yeniden baþlatmamýz gerekiyordu.
+
+Hesap makinesi programýndaki sorun, örneðin, aþaðýdaki program için de geçerlidir:
+
+tuttuðum_sayý = 23
+
+bilbakalým = int(input("Aklýmdan bir sayý tuttum. Bil bakalým kaç tuttum? "))
+
+if bilbakalým == tuttuðum_sayý:
+print("Tebrikler! Bildiniz...")
+
+else:
+print("Ne yazýk ki tuttuðum sayý bu deðildi...")
+
+Burada tuttuðum_sayý adlý bir deðiþken belirledik. Bu deðiþkenin deðeri 23. Kullanýcýdan tuttuðumuz sayýyý tahmin etmesini istiyoruz. Eðer kullanýcýnýn verdiði cevap tuttuðum_sayý deðiþkeninin deðeriyle aynýysa (yani 23 ise), ekrana ‘Tebrikler!...’ yazýsý dökülecektir. Aksi halde ‘Ne yazýk ki...’ cümlesi ekrana dökülecektir.
+
+Bu program iyi, hoþ, ama çok önemli bir eksiði var. Bu programý yalnýzca bir kez kullanabiliyoruz. Yani kullanýcý yalnýzca bir kez tahminde bulunabiliyor. Eðer kullanýcý bir kez daha tahminde bulunmak isterse programý yeniden çalýþtýrmasý gerekecek. Bunun hiç iyi bir yöntem olmadýðý ortada. Halbuki yazdýðýmýz bir program, ilk çalýþmanýn ardýndan kapanmasa, biz bu programý tekrar tekrar çalýþtýrabilsek, programýmýz sürekli olarak baþa dönse ve program ancak biz istediðimizde kapansa ne iyi olurdu deðil mi? Yani mesela yukarýdaki örnekte kullanýcý bir sayý tahmin ettikten sonra, eðer bu sayý bizim tuttuðumuz sayýyla ayný deðilse, kullanýcýya tekrar tahmin etme fýrsatý verebilsek çok hoþ olurdu...
+
+Yukarýda açýklamaya çalýþtýðýmýz süreç, yani bir sürecin tekrar tekrar devam etmesi Python’da ‘döngü’ (loop) olarak adlandýrýlýr.
+
+Ýþte bu bölümde, programlarýmýzýn sürekli olarak çalýþmasýný nasýl saðlayabileceðimizi, yani programlarýmýzý bir döngü içine nasýl sokabileceðimizi öðreneceðiz.
+
+Python’da programlarýmýzý tekrar tekrar çalýþtýrabilmek için döngü adý verilen bazý ifadelerden yararlanacaðýz.
+
+Python’da iki tane döngü bulunur: while ve for
+
+Dilerseniz iþe while döngüsü ile baþlayalým.
+
+
+while Döngüsü
+
+Ýngilizce bir kelime olan while, Türkçede ‘... iken, ... olduðu sürece’ gibi anlamlara gelir. Python’da while bir döngüdür. Bir önceki bölümde söylediðimiz gibi, döngüler sayesinde programlarýmýzýn sürekli olarak çalýþmasýný saðlayabiliriz.
+
+Bu bölümde Python’da while döngüsünün ne olduðunu ve ne iþe yaradýðýný anlamaya çalýþacaðýz. Öncelikle while döngüsünün temellerini kavrayarak iþe baþlayalým.
+
+Basit bir while döngüsü kabaca þuna benzer:
+
+a = 1
+
+while a == 1:
+
+Burada a adlý bir deðiþken oluþturduk. Bu deðiþkenin deðeri 1. Bir sonraki satýrda ise while a == 1: gibi bir ifade yazdýk. En baþta da söylediðimiz gibi while kelimesi, ‘... iken, olduðu sürece’ gibi anlamlar taþýyor. Python programlama dilindeki anlamý da buna oldukça yakýndýr. Burada while a == 1 ifadesi programýmýza þöyle bir anlam katýyor:
+
+a deðiþkeninin deðeri 1 olduðu sürece...
+
+Gördüðünüz gibi cümlemiz henüz eksik. Yani belli ki bunun bir de devamý olacak. Ayrýca while ifadesinin sonundaki : iþaretinden anladýðýmýz gibi, bundan sonra gelecek satýr girintili yazýlacak. Devam edelim:
+
+a = 1
+
+while a == 1:
+print("bilgisayar çýldýrdý!")
+
+Burada Python’a þu emri vermiþ olduk:
+
+a deðiþkeninin deðeri 1 olduðu sürece, ekrana ‘bilgisayar çýldýrdý!’ yazýsýný dök!
+
+Bu programý çalýþtýrdýðýmýzda Python verdiðimiz emre sadakatle uyacak ve a deðiþkeninin deðeri 1 olduðu müddetçe de bilgisayarýmýzýn ekranýna ‘bilgisayar çýldýrdý!’ yazýsýný dökecektir. Programýmýzýn içinde a deðiþkeninin deðeri 1 olduðu ve bu deðiþkenin deðerini deðiþtirecek herhangi bir þey bulunmadýðý için Python hiç sýkýlmadan ekrana ‘bilgisayar çýldýrdý!’ yazýsýný basmaya devam edecektir. Eðer siz durdurmazsanýz bu durum sonsuza kadar devam edebilir. Bu çýlgýnlýða bir son vermek için klavyenizde Ctrl+C veya Ctrl+Z tuþlarýna basarak programý durmaya zorlayabilirsiniz.
+
+Burada programýmýzý sonsuz bir döngüye sokmuþ olduk (infinite loop). Esasýnda sonsuz döngüler genellikle bir program hatasýna iþaret eder. Yani çoðu durumda programcýnýn arzu ettiði þey bu deðildir. O yüzden doðru yaklaþým, döngüye soktuðumuz programlarýmýzý durduracak bir ölçüt belirlemektir. Yani öyle bir kod yazmalýyýz ki, a deðiþkeninin 1 olan deðeri bir noktadan sonra artýk 1 olmasýn ve böylece o noktaya ulaþýldýðýnda programýmýz dursun. Kullanýcýnýn Ctrl+C tuþlarýna basarak programý durdurmak zorunda kalmasý pek hoþ olmuyor. Gelin isterseniz bu soyut ifadeleri biraz somutlaþtýralým.
+
+Öncelikle þu satýrý yazarak iþe baþlýyoruz:
+
+a = 1
+
+Burada normal bir þekilde a deðiþkenine 1 deðerini atadýk. Þimdi devam ediyoruz:
+
+a = 1
+
+while a < 10:
+
+while ile verdiðimiz ilk örnekte while a == 1 gibi bir ifade kullanmýþtýk. Bu ifade;
+
+a‘nýn deðeri 1 olduðu müddetçe...
+
+gibi bir anlama geliyordu.
+
+while a < 10 ifadesi ise;
+
+a‘nýn deðeri 10‘dan küçük olduðu müddetçe...
+
+anlamýna gelir. Ýþte burada programýmýzýn sonsuz döngüye girmesini engelleyecek bir ölçüt koymuþ olduk. Buna göre, a deðiþkeninin þimdiki deðeri 1‘dir. Biz, a‘nýn deðeri 10‘dan küçük olduðu müddetçe bir iþlem yapacaðýz. Devam edelim:
+
+a = 1
+
+while a < 10:
+print("bilgisayar yine çýldýrdý!")
+
+Ne oldu? Ýstediðimizi elde edemedik, deðil mi? Programýmýz yine sonsuz döngüye girdi. Bu sonsuz döngüyü kýrmak için Ctrl+C (veya Ctrl+Z)’ye basmamýz gerekecek yine...
+
+Sizce buradaki hata nereden kaynaklandý? Yani neyi eksik yaptýk da programýmýz sonsuz döngüye girmekten kurtulamadý? Aslýnda bunun cevabý çok basit. Biz yukarýdaki kodlarý yazarak Python’a þu emri vermiþ olduk:
+
+a‘nýn deðeri 10‘dan küçük olduðu müddetçe ekrana ‘bilgisayar yine çýldýrdý!’ yazýsýný bas!
+
+a deðiþkeninin deðeri 1. Yani 10‘dan küçük. Dolayýsýyla Python’ýn ekrana o çýktýyý basmasýný engelleyecek herhangi bir þey yok...
+
+Þimdi bu problemi nasýl aþacaðýmýzý görelim:
+
+a = 1
+
+while a < 10:
+a += 1
+print("bilgisayar yine çýldýrdý!")
+
+Burada a += 1 satýrýný ekledik kodlarýmýzýn arasýna. += iþlecini anlatýrken söylediðimiz gibi, bu satýr, a deðiþkeninin deðerine her defasýnda 1 ekliyor ve elde edilen sonucu tekrar a deðiþkenine atýyor. En sonunda a‘nýn deðeri 10‘a ulaþýnca da, Python ekrana ‘bilgisayar yine çýldýrdý!’ cümlesini yazmayý býrakýyor. Çünkü while döngüsü içinde belirttiðimiz ölçüte göre, programýmýzýn devam edebilmesi için a deðiþkeninin deðerinin 10‘dan küçük olmasý gerekiyor. a‘nýn deðeri 10‘a ulaþtýðý anda bu ölçüt bozulacaktýr. Gelin isterseniz bu kodlarý Python’ýn nasýl algýladýðýna bir bakalým:
+
+Python öncelikle a = 1 satýrýný görüyor ve a‘nýn deðerini 1 yapýyor. 
+Daha sonra a‘nýn deðeri 10‘dan küçük olduðu müddetçe... (while a < 10) satýrýný görüyor. 
+Ardýndan a‘nýn deðerini, 1 artýrýyor (a += 1) ve a‘nýn deðeri 2 oluyor. 
+a‘nýn deðeri (yani 2) 10‘dan küçük olduðu için Python ekrana ilgili çýktýyý veriyor. 
+Ýlk döngüyü bitiren Python baþa dönüyor ve a‘nýn deðerinin 2 olduðunu görüyor. 
+a‘nýn deðerini yine 1 artýrýyor ve a‘yý 3 yapýyor. 
+a‘nýn deðeri hâlâ 10‘dan küçük olduðu için ekrana yine ilgili çýktýyý veriyor. 
+Ýkinci döngüyü de bitiren Python yine baþa dönüyor ve a‘nýn deðerinin 3 olduðunu görüyor. 
+Yukarýdaki adýmlarý tekrar eden Python, a‘nýn deðeri 9 olana kadar ilerlemeye devam ediyor. 
+a‘nýn deðeri 9‘a ulaþtýðýnda Python a‘nýn deðerini bir kez daha artýrýnca bu deðer 10‘a ulaþýyor. 
+Python a‘nýn deðerinin artýk 10‘dan küçük olmadýðýný görüyor ve programdan çýkýyor. 
+Yukarýdaki kodlarý þöyle yazarsak belki durum daha anlaþýlýr olabilir:
+
+a = 1
+
+while a < 10:
+a += 1
+print(a)
+
+Burada Python’un arkada ne iþler çevirdiðini daha net görebiliyoruz. Kodlarýmýz içine eklediðimiz while döngüsü sayesinde Python her defasýnda a deðiþkeninin deðerini kontrol ediyor ve bu deðer 10‘dan küçük olduðu müddetçe a deðiþkeninin deðerini 1 artýrýp, yeni deðeri ekrana basýyor. Bu deðiþkenin deðeri 10‘a ulaþtýðýnda ise, bu deðerin artýk 10‘dan küçük olmadýðýný anlayýp bütün iþlemleri durduruyor.
+
+Gelin isterseniz bu while döngüsünü daha önce yazdýðýmýz hesap makinemize uygulayalým:
+
+giriþ = """
+(1) topla
+(2) çýkar
+(3) çarp
+(4) böl
+(5) karesini hesapla
+(6) karekök hesapla
+"""
+
+print(giriþ)
+
+anahtar = 1
+
+while anahtar == 1:
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin (Çýkmak için q): ")
+
+if soru == "q":
+print("çýkýlýyor...")
+anahtar = 0
+
+elif soru == "1":
+sayý1 = int(input("Toplama iþlemi için ilk sayýyý girin: "))
+sayý2 = int(input("Toplama iþlemi için ikinci sayýyý girin: "))
+print(sayý1, "+", sayý2, "=", sayý1 + sayý2)
+
+elif soru == "2":
+sayý3 = int(input("Çýkarma iþlemi için ilk sayýyý girin: "))
+sayý4 = int(input("Çýkarma iþlemi için ikinci sayýyý girin: "))
+print(sayý3, "-", sayý4, "=", sayý3 - sayý4)
+
+elif soru == "3":
+sayý5 = int(input("Çarpma iþlemi için ilk sayýyý girin: "))
+sayý6 = int(input("Çarpma iþlemi için ikinci sayýyý girin: "))
+print(sayý5, "x", sayý6, "=", sayý5 * sayý6)
+
+elif soru == "4":
+sayý7 = int(input("Bölme iþlemi için ilk sayýyý girin: "))
+sayý8 = int(input("Bölme iþlemi için ikinci sayýyý girin: "))
+print(sayý7, "/", sayý8, "=", sayý7 / sayý8)
+
+elif soru == "5":
+sayý9 = int(input("Karesini hesaplamak istediðiniz sayýyý girin: "))
+print(sayý9, "sayýsýnýn karesi =", sayý9 ** 2)
+
+elif soru == "6":
+sayý10 = int(input("Karekökünü hesaplamak istediðiniz sayýyý girin: "))
+print(sayý10, "sayýsýnýn karekökü = ", sayý10 ** 0.5)
+
+else:
+print("Yanlýþ giriþ.")
+print("Aþaðýdaki seçeneklerden birini giriniz:", giriþ)
+
+Burada ilave olarak þu satýrlarý görüyorsunuz:
+
+anahtar = 1
+
+while anahtar == 1:
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin (Çýkmak için q): ")
+
+if soru == "q":
+print("çýkýlýyor...")
+anahtar = 0
+
+Bu kodlarda yaptýðýmýz þey aslýnda çok basit. Öncelikle deðeri 1 olan anahtar adlý bir deðiþken tanýmladýk. Bir alt satýrda ise, programýmýzýn sürekli olarak çalýþmasýný saðlayacak olan while döngümüzü yazýyoruz. Programýmýz, anahtar deðiþkeninin deðeri 1 olduðu müddetçe çalýþmaya devam edecek. Daha önce de dediðimiz gibi, eðer bu anahtar deðiþkeninin deðerini programýn bir noktasýnda deðiþtirmezsek programýmýz sonsuza kadar çalýþmaya devam edecektir. Çünkü biz programýmýzý anahtar deðiþkeninin deðeri 1 olduðu sürece çalýþmaya ayarladýk. Ýþte programýmýzýn bu tür bir sonsuz döngüye girmesini önlemek için bir if bloðu oluþturuyoruz. Buna göre, eðer kullanýcý klavyede q tuþuna basarsa programýmýz önce çýkýlýyor... çýktýsý verecek, ardýndan da anahtar deðiþkeninin 1 olan deðerini 0 yapacaktýr. Böylece artýk anahtar‘ýn deðeri 1 olmayacaðý için programýmýz çalýþmaya son verecektir.
+
+Buradaki mantýðýn ne kadar basit olduðunu görmenizi isterim. Önce bir deðiþken tanýmlýyoruz, ardýndan bu deðiþkenin deðeri ayný kaldýðý müddetçe programýmýzý çalýþmaya ayarlýyoruz. Bu döngüyü kýrmak için de baþta tanýmladýðýmýz o deðiþkene baþka bir deðer atýyoruz. Burada anahtar deðiþkenine atadýðýmýz 1 ve 0 deðerleri tamamen tesadüfidir. Yani siz bu deðerleri istediðiniz gibi deðiþtirebilirsiniz. Mesela yukarýdaki kodlarý þöyle de yazabilirsiniz:
+
+anahtar = "hoyda bre!"
+
+#anahtar'ýn deðeri 'hoyda bre!' olduðu müddetçe aþaðýdaki bloðu
+#çalýþtýrmaya devam et.
+while anahtar == "hoyda bre!":
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin (Çýkmak için q): ")
+
+if soru == "q":
+print("çýkýlýyor...")
+anahtar = "dur yolcu!"
+#anahtar'ýn deðeri artýk 'hoyda bre!' deðil, 'dur yolcu'
+#olduðu için döngüden çýk ve böylece programý sona erdirmiþ ol.
+
+Gördüðünüz gibi, amaç herhangi bir deðiþkene herhangi bir deðer atamak ve o deðer ayný kaldýðý müddetçe programýn çalýþmaya devam etmesini saðlamak. Kurduðumuz bu döngüyü kýrmak için de o deðiþkene herhangi baþka bir deðer atamak...
+
+Yukarýda verdiðimiz son örnekte önce anahtar adlý bir deðiþken atayýp, while döngüsünün iþleyiþini bu deðiþkenin deðerine göre yapýlandýrdýk. Ama aslýnda yukarýdaki kodlarý çok daha basit bir þekilde de yazabiliriz. Dikkatlice bakýn:
+
+while True:
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin (Çýkmak için q): ")
+
+if soru == "q":
+print("çýkýlýyor...")
+break
+
+Bu yapýyý hesap makinemize uygulayalým:
+
+giriþ = """
+(1) topla
+(2) çýkar
+(3) çarp
+(4) böl
+(5) karesini hesapla
+(6) karekök hesapla
+"""
+
+print(giriþ)
+
+while True:
+soru = input("Yapmak istediðiniz iþlemin numarasýný girin (Çýkmak için q): ")
+
+if soru == "q":
+print("çýkýlýyor...")
+break
+
+elif soru == "1":
+sayý1 = int(input("Toplama iþlemi için ilk sayýyý girin: "))
+sayý2 = int(input("Toplama iþlemi için ikinci sayýyý girin: "))
+print(sayý1, "+", sayý2, "=", sayý1 + sayý2)
+
+elif soru == "2":
+sayý3 = int(input("Çýkarma iþlemi için ilk sayýyý girin: "))
+sayý4 = int(input("Çýkarma iþlemi için ikinci sayýyý girin: "))
+print(sayý3, "-", sayý4, "=", sayý3 - sayý4)
+
+elif soru == "3":
+sayý5 = int(input("Çarpma iþlemi için ilk sayýyý girin: "))
+sayý6 = int(input("Çarpma iþlemi için ikinci sayýyý girin: "))
+print(sayý5, "x", sayý6, "=", sayý5 * sayý6)
+
+elif soru == "4":
+sayý7 = int(input("Bölme iþlemi için ilk sayýyý girin: "))
+sayý8 = int(input("Bölme iþlemi için ikinci sayýyý girin: "))
+print(sayý7, "/", sayý8, "=", sayý7 / sayý8)
+
+elif soru == "5":
+sayý9 = int(input("Karesini hesaplamak istediðiniz sayýyý girin: "))
+print(sayý9, "sayýsýnýn karesi =", sayý9 ** 2)
+
+elif soru == "6":
+sayý10 = int(input("Karekökünü hesaplamak istediðiniz sayýyý girin: "))
+print(sayý10, "sayýsýnýn karekökü = ", sayý10 ** 0.5)
+
+else:
+print("Yanlýþ giriþ.")
+print("Aþaðýdaki seçeneklerden birini giriniz:", giriþ)
+
+Bu yapý sayesinde anahtar gibi bir deðiþken atama zorunluluðundan kurtulmuþ olduk. Yukarýdaki kodlarýn nasýl çalýþtýðýný açýklayalým:
+
+while True ifadesi þöyle bir anlama gelir:
+
+True olduðu müddetçe...
+
+Peki ne True olduðu müddetçe? Burada neyin True olmasý gerektiðini belirtmediðimiz için, aslýnda bu kod parçasý þu anlama geliyor:
+
+Aksi belirtilmediði sürece çalýþmaya devam et!
+
+Eðer yukarýdaki açýklamayý biraz bulanýk bulduysanýz þu örneði inceleyebilirsiniz:
+
+while True:
+print("Bilgisayar çýldýrdý!")
+
+Bu kodlarý çalýþtýrdýðýnýzda ekrana sürekli olarak Bilgisayar çýldýrdý! çýktýsý verilecektir. Bu döngüden çýkabilmek için Ctrl+C tuþlarýna basmanýz gerekiyor. Yukarýdaki kodlarýn sonsuz döngüye girmesinin sorumlusu while True satýrýdýr. Çünkü burada biz Python’a;
+
+Aksi belirtilmediði sürece çalýþmaya devam et!
+
+emri veriyoruz. Python da bu emrimizi sadakatle yerine getiriyor. Böyle bir durumda sonsuz döngüyü engellemek için programýmýzýn bir yerinde Python’a bu döngüden çýkmasýný saðlayacak bir emir vermemiz gerekiyor. Biz hesap makinesi programýmýzda bu döngüyü þu þekilde kýrdýk:
+
+if soru == "q":
+print("çýkýlýyor...")
+break
+
+Dikkat ederseniz burada break adlý yeni bir araç görüyoruz. Bu aracýn tam olarak ne iþe yaradýðýný ilerleyen sayfalarda inceleyeceðiz. Þimdilik yalnýzca þunu bilelim: break kelimesi Ýngilizce’de ‘kýrmak, koparmak, bozmak’ gibi anlamlara gelir. Bu aracýn yukarýdaki görevi döngüyü ‘kýrmak’týr. Dolayýsýyla kullanýcý klavyede q tuþuna bastýðýnda, while True ifadesi ile çalýþmaya baþlayan döngü kýrýlacak ve programýmýz sona erecektir.
+
+Bu yapýyý daha iyi anlayabilmek için þöyle basit bir örnek daha verelim:
+
+#Aksi belirtilmediði sürece kullanýcýya
+#aþaðýdaki soruyu sormaya devam et!
+while True:
+soru = input("Nasýlsýnýz, iyi misiniz?")
+
+#Eðer kullanýcý 'q' tuþuna basarsa...
+if soru == "q":
+break #döngüyü kýr ve programdan çýk.
+
+Görüyorsunuz, aslýnda mantýk gayet basit:
+
+Bir döngü oluþtur ve bu döngüden çýkmak istediðinde, programýn bir yerinde bu döngüyü sona erdirecek bir koþul meydan getir.
+
+Bu mantýðý yukarýdaki örneðe þu þekilde uyguladýk:
+
+while True: ifadesi yardýmýyla bir döngü oluþtur ve kullanýcý bu döngüden çýkmak istediðinde (yani q tuþuna bastýðýnda), döngüyü kýr ve programý sona erdir.
+
+Gelin isterseniz bu konuyu daha net kavramak için bir örnek daha verelim:
+
+tekrar = 1
+
+while tekrar <= 3:
+tekrar += 1
+input("Nasýlsýnýz, iyi misiniz?")
+
+Burada programýmýz kullanýcýya üç kez ‘Nasýlsýnýz, iyi misiniz?’ sorusunu soracak ve ardýndan kapanacaktýr. Bu kodlarda while döngüsünü nasýl kullandýðýmýza dikkat edin. Aslýnda programýn mantýðý çok basit:
+
+Öncelikle deðeri 1 olan tekrar adlý bir deðiþken tanýmlýyoruz. 
+Bu deðiþkenin deðeri 3‘e eþit veya 3‘ten küçük olduðu müddetçe (while tekrar <= 3) deðiþkenin deðerine 1 ekliyoruz (tekrar += 1). 
+Baþka bir deyiþle bool(tekrar <= 3) ifadesi True olduðu müddetçe deðiþkenin deðerine 1 ekliyoruz. 
+tekrar deðiþkenine her 1 ekleyiþimizde kullanýcýya ‘Nasýlsýnýz, iyi misiniz?’ sorusunu soruyoruz (input("Nasýlsýnýz, iyi misiniz?")). 
+tekrar deðiþkeninin deðeri 3‘ü aþtýðýnda bool(tekrar <= 3) ifadesi artýk False deðeri verdiði için programýmýz sona eriyor. 
+Yukarýdaki uygulamada Python’ýn alttan alta neler çevirdiðini daha iyi görmek için bu uygulamayý þöyle yazmayý deneyin:
+
+tekrar = 1
+
+while tekrar <= 3:
+print("tekrar: ", tekrar)
+tekrar += 1
+input("Nasýlsýnýz, iyi misiniz?")
+print("bool deðeri: ", bool(tekrar <= 3))
+
+Daha önce de dediðimiz gibi, bir Python programýnýn nasýl çalýþtýðýný anlamanýn en iyi yolu, program içinde uygun yerlere print() fonksiyonlarý yerleþtirerek arka planda hangi kodlarýn hangi çýktýlarý verdiðini izlemektir. Ýþte yukarýda da bu yöntemi kullandýk. Yani tekrar deðiþkenininin deðerini ve bool(tekrar <= 3) ifadesinin çýktýsýný ekrana yazdýrarak arka tarafta neler olup bittiðini canlý canlý görme imkanýna kavuþtuk.
+
+Yukarýdaki programý çalýþtýrdýðýmýzda þuna benzer çýktýlar görüyoruz:
+
+tekrar:  1
+Nasýlsýnýz, iyi misiniz? evet
+bool deðeri:  True
+tekrar:  2
+Nasýlsýnýz, iyi misiniz? evet
+bool deðeri:  True
+tekrar:  3
+Nasýlsýnýz, iyi misiniz? evet
+bool deðeri:  False
+
+Gördüðünüz gibi, tekrar deðiþkeninin deðeri her döngüde 1 artýyor. tekrar <= 3 ifadesinin bool deðeri, tekrar adlý deðiþkenin deðeri 3‘ü aþana kadar hep True olacaktýr. Bu deðiþkenin deðeri 3‘ü aþtýðý anda tekrar <= 3 ifadesinin bool deðeri False‘a dönüyor ve böylece while döngüsü sona eriyor.
+
+Peki size þöyle bir soru sorsam: Acaba while döngüsünü kullanarak 1‘den 100‘e kadar olan aralýktaki çift sayýlarý nasýl bulursunuz?
+
+Çok basit:
+
+a = 0
+
+while a < 100:
+a += 1
+if a % 2 == 0:
+print(a)
+
+Gördüðünüz gibi, while döngüsünün içine bir adet if bloðu yerleþtirdik.
+
+Yukarýdaki kodlarý þu þekilde Türkçeye çevirebiliriz:
+
+a deðiþkeninin deðeri 100‘den küçük olduðu müddetçe a deðiþkeninin deðerini 1 artýr. Bu deðiþkenin deðerini her artýrýþýnda yeni deðerin 2‘ye tam bölünüp bölünmediðini kontrol et. Eðer a modülüs 2 deðeri 0 ise (if a % 2 == 0), yani a‘nýn deðeri bir çift sayý ise, bu deðeri ekrana yazdýr.
+
+Gördüðünüz gibi, while döngüsü son derece kullanýþlý bir araçtýr. Üstelik kullanýmý da son derece kolaydýr. Bu döngüyle bol bol pratik yaparak bu döngüyü rahatça kullanabilecek duruma gelebilirsiniz.
+
+En baþta da söylediðimiz gibi, Python’da while dýþýnda bir de for döngüsü vardýr. En az while kadar önemli bir döngü olan for döngüsünün nasýl kullanýldýðýný anlamaya çalýþalým þimdi de.
+
+
+for Döngüsü
+
+Etrafta yazýlmýþ Python programlarýnýn kaynak kodlarýný incelediðinizde, içinde for döngüsü geçmeyen bir program kolay kolay bulamazsýnýz. Belki while döngüsünün kullanýlmadýðý programlar vardýr. Ancak for döngüsü Python’da o kadar yaygýndýr ve o kadar geniþ bir kullaným alanýna sahiptir ki, hemen hemen bütün Python programlarý bu for döngüsünden en az bir kez yararlanýr.
+
+Peki nedir bu for döngüsü denen þey?
+
+for da týpký while gibi bir döngüdür. Yani týpký while döngüsünde olduðu gibi, programlarýmýzýn birden fazla sayýda çalýþmasýný saðlar. Ancak for döngüsü while döngüsüne göre biraz daha yeteneklidir. while döngüsü ile yapamayacaðýnýz veya yaparken çok zorlanacaðýnýz þeyleri for döngüsü yardýmýyla çok kolay bir þekilde halledebilirsiniz.
+
+Yalnýz, söylediðimiz bu cümleden, for döngüsünün while döngüsüne bir alternatif olduðu sonucunu çýkarmayýn. Evet, while ile yapabildiðiniz bir iþlemi for ile de yapabilirsiniz çoðu zaman, ama bu döngülerin, belli vakalar için tek seçenek olduðu durumlar da vardýr. Zira bu iki döngünün çalýþma mantýðý birbirinden farklýdýr.
+
+Þimdi gelelim for döngüsünün nasýl kullanýlacaðýna...
+
+Dikkatlice bakýn:
+
+tr_harfler = "þçöðüÝý"
+
+for harf in tr_harfler:
+print(harf)
+
+Burada öncelikle tr_harfler adlý bir deðiþken tanýmladýk. Bu deðiþken Türkçeye özgü harfleri tutuyor. Daha sonra bir for döngüsü kurarak, tr_harfler adlý deðiþkenin her bir öðesini tek tek ekrana yazdýrdýk.
+
+Peki bu for döngüsünü nasýl kurduk?
+
+for döngülerinin söz dizimi þöyledir:
+
+for deðiþken_adý in deðiþken:
+yapýlacak_iþlem
+
+Bu söz dizimini Türkçe olarak þöyle ifade edebiliriz:
+
+deðiþken içindeki herbir öðeyi deðiþken_adý olarak adlandýr:
+ve bu öðelerle bir iþlem yap.
+
+Bu soyut yapýlarý kendi örneðimize uygulayarak durumu daha net anlamaya çalýþalým:
+
+tr_harfler adlý deðiþken içindeki herbir öðeyi harf olarak adlandýr:
+ve harf olarak adlandýrýlan bu öðeleri ekrana yazdýr.
+
+Yukarýdaki örnekte bir for döngüsü yardýmýyla tr_harfler adlý deðiþken içindeki herbir öðeyi ekrana yazdýrdýk. Esasýnda for döngüsünün yeteneklerini düþündüðümüzde bu örnek pek heyecan verici deðil. Zira ayný iþi aslýnda print() fonksiyonu ile de yapabilirdik:
+
+tr_harfler = "þçöðüÝý"
+print(*tr_harfler, sep="\n")
+
+Aslýnda bu iþlemi while ile de yapmak mümkün (Bu kodlardaki, henüz öðrenmediðimiz kýsmý þimdilik görmezden gelin):
+
+tr_harfler = "þçöðüÝý"
+a = 0
+
+while a < len(tr_harfler):
+print(tr_harfler[a], sep="\n")
+a += 1
+
+while döngüsü kullanýldýðýnda iþi uzattýðýmýzý görüyorsunuz. Dediðimiz gibi, for döngüsü while döngüsüne göre biraz daha yeteneklidir ve while ile yapmasý daha zor (veya uzun) olan iþlemleri for döngüsü ile çok daha kolay bir þekilde yapabiliriz. Ayrýca for döngüsü ile while döngüsünün çalýþma mantýklarý birbirinden farklýdýr. for döngüsü, üzerinde döngü kurulabilecek veri tiplerinin herbir öðesinin üzerinden tek tek geçer ve bu öðelerin herbiri üzerinde bir iþlem yapar. while döngüsü ise herhangi bir ifadenin bool deðerini kontrol eder ve bu deðerin bool deðeri False olana kadar, belirlenen iþlemi yapmayý sürdürür.
+
+Bu arada, biraz önce ‘üzerinde döngü kurulabilecek veri tipleri’ diye bir kavramdan söz ettik. Örneðin karakter dizileri, üzerinde döngü kurulabilecek bir veri tipidir. Ama sayýlar öyle deðildir. Yani sayýlar üzerinde döngü kuramayýz. Mesela:
+
+>>> sayýlar = 123456789
+>>> for sayý in sayýlar:
+... print(sayý)
+...
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'int' object is not iterable
+
+Buradaki hata mesajýndan da göreceðiniz gibi int (tam sayý) türündeki nesneler üzerinde döngü kuramýyoruz. Hata mesajýnda görünen not iterable (üzerinde döngü kurulamaz) ifadesiyle kastedilen de budur.
+
+Gelin isterseniz for döngüsü ile bir örnek daha vererek durumu iyice anlamaya çalýþalým:
+
+sayýlar = "123456789"
+
+for sayý in sayýlar:
+print(int(sayý) * 2)
+
+Burada sayýlar adlý deðiþkenin herbir öðesini sayý olarak adlandýrdýktan sonra, int() fonksiyonu yardýmýyla bu öðeleri tek tek sayýya çevirdik ve herbir öðeyi 2 ile çarptýk.
+
+for döngüsünün mantýðýný az çok anlamýþ olmalýsýnýz. Bu döngü bir deðiþken içindeki herbir öðeyi tek tek ele alýp, iki nokta üst üste iþaretinden sonra yazdýðýmýz kod bloðunu bu öðelere tek tek uyguluyor.
+
+for kelimesi Ýngilizcede ‘için’ anlamýna gelir. Döngünün yapýsý içinde geçen in ifadesini de tanýyorsunuz. Biz bu ifadeyi ‘Aitlik Ýþleçleri’ konusunu iþlerken de görmüþtük. Hatýrlarsanýz in iþleci bir öðenin bir veri tipi içinde bulunup bulunmadýðýný sorguluyordu. Mesela:
+
+>>> a = "istihza.com"
+>>> "h" in a
+
+True
+
+“h” öðesi “istihza.com” adlý karakter dizisi içinde geçtiði için "h" in a kodu True çýktýsý veriyor. Bir de þuna bakýn:
+
+>>> "b" in a
+
+False
+
+“b” öðesi “istihza.com” karakter dizisi içinde bulunmuyor. Dolayýsýyla "b" in a sorgulamasý False çýktýsý veriyor.
+
+in kelimesi Ýngilizcede ‘içinde’ anlamýna geliyor. Dolayýsýyla for falanca in filanca: yazdýðýmýzda aslýnda þöyle bir þey demiþ oluyoruz:
+
+filanca içinde falanca adýný verdiðimiz herbir öðe için...
+
+Yani þu kod:
+
+for s in "istihza":
+print(s)
+
+Þu anlama geliyor:
+
+“istihza” karakter dizisi içinde s adýný verdiðimiz herbir öðe için: 
+s öðesini ekrana basma iþlemi gerçekleþtir! 
+
+Ya da þu kod:
+
+sayýlar = "123456789"
+
+for i in sayýlar:
+if int(i) > 3:
+print(i)
+
+Þu anlama geliyor:
+
+sayýlar deðiþkeni içinde i adýný verdiðimiz herbir öðe için: 
+eðer sayýya dönüþtürülmüþ i deðeri 3‘ten büyükse: 
+i öðesini ekrana basma iþlemi gerçekleþtir! 
+
+Yukarýdaki temsili kodlarýn Türkçesi bozuk olsa da for döngüsünün çalýþma mantýðýný anlamaya yardýmcý olacaðýný zannediyorum. Ama yine de, eðer bu döngünün mantýðýný henüz kavrayamadýysanýz hiç endiþe etmeyin. Zira bu döngüyü oldukça sýk bir biçimde kullanacaðýmýz için, siz istemeseniz de bu döngü kafanýzda yer etmiþ olacak.
+
+Bu for döngüsünü biraz daha iyi anlayabilmek için son bir örnek yapalým:
+
+tr_harfler = "þçöðüÝý"
+
+parola = input("Parolanýz: ")
+
+for karakter in parola:
+if karakter in tr_harfler:
+print("parolada Türkçe karakter kullanýlamaz")
+
+Bu program, kullanýcýya bir parola soruyor. Eðer kullanýcýnýn girdiði parola içinde Türkçe karakterlerden herhangi biri varsa kullanýcýyý Türkçe karakter kullanmamasý konusunda uyarýyor. Buradaki for döngüsünü nasýl kurduðumuzu görüyorsunuz. Aslýnda burada þu Türkçe cümleyi Pythonca’ya çevirmiþ olduk:
+
+parola deðiþkeni içinde karakter adýný verdiðimiz herbir öðe için: 
+eðer karakter deðiþkeni tr_harfler adlý deðiþken içinde geçiyorsa: 
+‘parolada Türkçe karakter kullanýlamaz’ uyarýsýný göster! 
+
+Burada kullandýðýmýz for döngüsü sayesinde kullanýcýnýn girdiði parola adlý deðiþken içindeki bütün karakterlere tek tek bakýp, eðer bakýlan karakter tr_harfler adlý deðiþken içinde geçiyorsa kullanýcýyý uyarýyoruz.
+
+Aslýnda for döngüsüyle ilgili söyleyeceklerimiz bu kadar deðil. Ama henüz bu döngüyle kullanýlan önemli araçlarý tanýmýyoruz. Gerçi zaten bu döngüyü bundan sonra sýk sýk kullandýðýmýzý göreceksiniz.
+
+Gelin isterseniz yeni bir konuya geçmeden önce döngülerle ilgili ufak bir örnek verelim:
+
+Örneðin kullanýcýya bir parola belirletirken, belirlenecek parolanýn 8 karakterden uzun, 3 karakterden kýsa olmamasýný saðlayalým:
+
+while True:
+parola = input("Bir parola belirleyin: ")
+
+if not parola:
+print("parola bölümü boþ geçilemez!")
+
+elif len(parola) > 8 or len(parola) < 3:
+print("parola 8 karakterden uzun 3 karakterden kýsa olmamalý")
+
+else:
+print("Yeni parolanýz", parola)
+break
+
+Burada öncelikle, programýnýzýn sürekli olarak çalýþmasýný saðlamak için bir while döngüsü oluþturduk. Buna göre, aksi belirtilmedikçe (while True) programýmýz çalýþmaya devam edecek.
+
+while döngüsünü kurduktan sonra kullanýcýya bir parola soruyoruz (parola = input("Bir parola belirleyin: "))
+
+Eðer kullanýcý herhangi bir parola belirlemeden doðrudan Enter tuþuna basarsa, yani parola deðiþkeninin bool deðeri False olursa (if not parola), kullanýcýya ‘parola bölümü boþ geçilemez!’ uyarýsý veriyoruz.
+
+Eðer kullanýcý tarafýndan belirlenen parolanýn uzunluðu 8 karakterden fazlaysa ya da 3 karakterden kýsaysa, ‘parola 8 karakterden uzun 3 karakterden kýsa olmamalý’ uyarýsý veriyoruz.
+
+Yukarýdaki koþullar harici durumlar için ise (else), belirlenen yeni parolayý kullanýcýya gösterip döngüden çýkýyoruz (break).
+
+Bu arada, hatýrlarsanýz eval() fonksiyonunu anlatýrken þöyle bir örnek vermiþtik:
+
+print("""
+Basit bir hesap makinesi uygulamasý.
+
+Ýþleçler:
+
+    +   toplama
+    -   çýkarma
+    *   çarpma
+    /   bölme
+
+Yapmak istediðiniz iþlemi yazýp ENTER
+tuþuna basýn. (Örneðin 23 ve 46 sayýlarýný
+çarpmak için 23 * 46 yazdýktan sonra
+ENTER tuþuna basýn.)
+""")
+
+veri = input("Ýþleminiz: ")
+hesap = eval(veri)
+
+print(hesap)
+
+Bu programdaki eksiklikleri ve riskleri biliyorsunuz. Böyle bir program yazdýðýnýzda, eval() fonksiyonunu kontrolsüz bir þekilde kullandýðýnýz için önemli bir güvenlik açýðýna sebep olmuþ oluyorsunuz. Gelin isterseniz bu derste öðrendiðimiz bilgileri de kullanarak yukarýdaki eval() fonksiyonu için basit bir kontrol mekanizmasý kuralým:
+
+izinli_karakterler = "0123456789+-/*= "
+
+print("""
+Basit bir hesap makinesi uygulamasý.
+
+Ýþleçler:
+
+    +   toplama
+    -   çýkarma
+    *   çarpma
+    /   bölme
+
+Yapmak istediðiniz iþlemi yazýp ENTER
+tuþuna basýn. (Örneðin 23 ve 46 sayýlarýný
+çarpmak için 23 * 46 yazdýktan sonra
+ENTER tuþuna basýn.)
+""")
+
+while True:
+veri = input("Ýþleminiz: ")
+if veri == "q":
+print("çýkýlýyor...")
+break
+
+for s in veri:
+if s not in izinli_karakterler:
+print("Neyin peþindesin?!")
+quit()
+
+hesap = eval(veri)
+
+print(hesap)
+
+Burada öncelikle programýmýzý bir while döngüsü içine aldýk. Böylece programýmýzýn ne zaman sona ereceðini kendimiz belirleyebileceðiz. Buna göre eðer kullanýcý klavyede ‘q’ tuþuna basarsa while döngüsü sona erecek.
+
+Bu programda bizi özellikle ilgilendiren kýsým þu:
+
+izinli_karakterler = "0123456789+-/*= "
+
+for s in veri:
+if s not in izinli_karakterler:
+print("Neyin peþindesin?!")
+quit()
+
+hesap = eval(veri)
+
+Gördüðünüz gibi, ilk olarak izinli_karakterler adlý bir deðiþken tanýmladýk. Program içinde kullanýlmasýna izin verdiðimiz karakterleri bu deðiþken içine yazýyoruz. Buna göre kullanýcý yalnýzca 0, 1, 2, 3, 4, 5, 6, 7, 8 ve 9 sayýlarýný, +, -, /, * ve = iþleçlerini, ayrýca boþluk karakterini (‘ ‘) kullanabilecek.
+
+Kullanýcýnýn girdiði veri üzerinde bir for döngüsü kurarak, veri içindeki her bir karakterin izinli_karakterler deðiþkeni içinde yer alýp almadýðýný denetliyoruz. Ýzin verilen karakterler dýþýnda herhangi bir karakterin girilmesi Neyin peþindesin?! çýktýsýnýn verilip programdan tamamen çýkýlmasýna (quit()) yol açacaktýr.
+
+Eðer kullanýcý izinli karakterleri kullanarak bir iþlem gerçekleþtirmiþse hesap = eval(veri) kodu aracýlýðýyla, kullanýcýnýn yaptýðý iþlemi eval() fonksiyonuna gönderiyoruz.
+
+Böylece eval() fonksiyonunu daha güvenli bir hale getirebilmek için basit bir kontrol mekanizmasýnýn nasýl kurulabileceðini görmüþ olduk. Kurduðumuz kontrol mekanizmasýnýn esasý, kullanýcýnýn girebileceði veri türlerini sýnýrlamaya dayanýyor. Böylece kullanýcý mesela þöyle tehlikeli bir komut giremiyor:
+
+__import__("os").system("dir")
+
+Çünkü bu komutu yazabilmesi için gereken karakterler izinli_karakterler deðiþkeni içinde tanýmlý deðil. Kullanýcý yalnýzca basit bir hesap makinesinde kullanýlabilecek olan sayýlarý ve iþleçleri girebiliyor.
+
+
+Ýlgili Araçlar
+
+Elbette döngüler tek baþlarýna bir þey ifade etmezler. Döngülerle iþe yarar kodlar yazabilmemiz için bazý araçlara ihtiyacýmýz var. Ýþte bu bölümde döngüleri daha verimli kullanmamýzý saðlayacak bazý fonksiyon ve deyimlerden söz edeceðiz. Ýlk olarak range() adlý bir fonksiyondan bahsedelim.

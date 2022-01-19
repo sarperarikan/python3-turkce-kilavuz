@@ -1,0 +1,222 @@
+
+format() Metodu ile Biçimlendirme (Yeni Yöntem)
+
+En baþta da söylediðimiz gibi, % iþaretini kullanarak karakter dizisi biçimlendirme eskide kalmýþ bir yöntemdir. Bu yöntem aðýrlýklý olarak Python’ýn 2.x sürümlerinde kullanýlýyordu. Her ne kadar bu yöntemi Python’ýn 3.x sürümlerinde de kullanmak mümkün olsa da yeni yazýlan kodlarda bu yöntem yerine biraz sonra göreceðimiz format() metodunu kullanmak çok daha akýllýca olacaktýr. Çünkü muhtemelen % ile biçimlendirme yöntemi, ileriki bir Python sürümünde dilden tamamen kaldýrýlacak. Bu yüzden bu eski metoda fazla bel baðlamamak gerekiyor.
+
+Daha önceki derslerimizde verdiðimiz örnekler sayesinde format() metodunun temel olarak nasýl kullanýlacaðýný biliyoruz. Ama isterseniz biz yine de bütünlük açýsýndan format() metodunun temel kullanýmýný burada tekrar ele alalým.
+
+format() metodunu en basit þekilde þöyle kullanýyoruz:
+
+>>> print("{} ve {} iyi bir ikilidir!".format("Django", "Python"))
+
+Django ve Python iyi bir ikilidir!
+
+Gördüðünüz gibi, eski yöntemdeki % iþaretine karþýlýk, yeni yöntemde {} iþaretini kullanýyoruz.
+
+Çok basit bir örnek daha verelim:
+
+isim = input("Ýsminiz: ")
+print("Merhaba {}. Nasýlsýn?".format(isim))
+
+Elbette bu örneði þu þekilde de yazabilirdik:
+
+isim = input("Ýsminiz: ")
+print("Merhaba", isim + ".", "Nasýlsýn?")
+
+Burada format() metodunu ve biçim düzenleyicileri hiç kullanmadan, sadece karakter dizilerini birleþtirerek istediðimiz çýktýyý elde ettik. Ama siz de görüyorsunuz; karakter dizilerini birleþtirmekle uðraþacaðýmýza format() metodunu kullanmak hem daha pratiktir, hem de bu þekilde yazdýðýmýz kodlar daha okunaklý olur.
+
+Yukarýdaki örnekte format() metodunu tek bir parametre ile birlikte kullandýk (isim). Bu parametre (týpký eski % iþaretinde olduðu gibi), karakter dizisi içindeki {} iþaretine karþýlýk geliyor.
+
+Bu konuyu daha iyi anlayabilmek için bir örnek daha verelim:
+
+kalkýþ = input("Kalkýþ yeri: ")
+varýþ = input("Varýþ yeri: ")
+isim_soyisim = input("Ýsim ve soyisim: ")
+bilet_sayýsý = input("Bilet sayýsý: ")
+
+print("""{} noktasýndan {} noktasýna, 14:30 hareket saatli
+sefer için {} adýna {} adet bilet ayrýlmýþtýr!""".format(kalkýþ,
+varýþ,
+isim_soyisim,
+bilet_sayýsý))
+
+Gördüðünüz gibi, {} iþaretleri karakter dizisi içinde bir ‘yer tutma’ görevi görüyor. Tutulan bu yerlere nelerin geleceðini format() metodunun parametreleri vasýtasýyla belirliyoruz.
+
+Elbette eðer isterseniz yukarýdaki örneði þu þekilde de yazabilirsiniz:
+
+kalkýþ = input("Kalkýþ yeri: ")
+varýþ = input("Varýþ yeri: ")
+isim_soyisim = input("Ýsim ve soyisim: ")
+bilet_sayýsý = input("Bilet sayýsý: ")
+
+metin = "{} noktasýndan {} noktasýna, 14:30 hareket saatli \
+sefer için {} adýna {} adet bilet ayrýlmýþtýr!"
+
+print(metin.format(kalkýþ, varýþ, isim_soyisim, bilet_sayýsý))
+
+Ancak yaygýn olarak kullanýlan yöntem, karakter dizisini herhangi bir deðiþkene atamadan, doðrudan format() metoduna baðlamaktýr. Elbette hangi yöntem kolayýnýza geliyorsa onu tercih etmekte özgürsünüz. Ama özellikle biçimlendirilecek karakter dizisinin çok uzun olduðu durumlarda, yukarýdaki gibi, karakter dizisini önce bir deðiþkene atayýp, sonra da bu deðiþken üzerine format() metodunu uygulamak daha mantýklý olabilir.
+
+Verdiðimiz bu örneði, her zaman olduðu gibi, format() metoduna baþvurmadan yazmak da mümkündür:
+
+kalkýþ = input("Kalkýþ yeri: ")
+varýþ = input("Varýþ yeri: ")
+isim_soyisim = input("Ýsim ve soyisim: ")
+bilet_sayýsý = input("Bilet sayýsý: ")
+
+print(kalkýþ, "noktasýndan", varýþ, "noktasýna, 14:30 hareket saatli \
+sefer için", isim_soyisim, "adýna", bilet_sayýsý, "adet bilet ayrýlmýþtýr!")
+
+Týpký daha önce verdiðimiz örnekte olduðu gibi, burada da format() metodunu kullanmak karakter dizilerini birleþtirme yöntemine göre daha mantýklý ve kolay görünüyor. Ayrýca bir karakter dizisi karmaþýklaþtýkça bu karakter dizisini sadece karakter dizisi birleþtirme yöntemleriyle biçimlendirmeye çalýþmak bir süre sonra tam bir eziyet halini alabilir. O yüzden, ‘Ben format() metodunu öðrenmesem de olur,’ diye düþünmeyin sakýn. Mesela þöyle bir programý format() metodu kullanmadan yazmaya çalýþmak hiç akýl kârý deðildir:
+
+kodlama = "utf-8"
+site_adý = "Python Programlama Dili"
+dosya = open("deneme.html", "w", encoding=kodlama)
+içerik = """
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={}" />
+    <title>{}</title>
+</head>
+
+<body>
+    <h1>istihza.com web sitesine hoþ geldiniz!</h1>
+    <p><b>{}</b> için bir Türkçe belgelendirme projesi...</p>
+</body>
+
+</html>
+"""
+
+print(içerik.format(kodlama, site_adý, site_adý), file=dosya)
+
+dosya.close()
+
+Burada þu satýrýn bir kýsmý hariç bütün kodlarý anlayabilecek düzeydesiniz:
+
+dosya = open("deneme.html", "w", encoding=kodlama)
+
+Bu kodlarla, deneme.html adlý bir dosya oluþturduðumuzu biliyorsunuz. Daha önceki derslerimizde birkaç kez gördüðümüz open() fonksiyonu Python’da dosya oluþturmamýza imkan veriyor. Bu fonksiyon içinde kullandýðýmýz üç parametrenin ilk ikisi size tanýdýk gelecektir. Ýlk parametre dosyanýn adýný, ikinci parametre ise bu dosyanýn hangi kipte açýlacaðýný gösteriyor. Burada kullandýðýmýz “w” parametresi deneme.html adlý dosyanýn yazma kipinde açýlacaðýný gösteriyor. Bu fonksiyona atadýðýmýz encoding parametresi ise oluþturulacak dosyanýn kodlama biçimini gösteriyor. Bu da Türkçe karakterlerin dosyada düzgün görüntülenebilmesi açýsýndan önem taþýyor.
+
+Küme parantezlerini, yukarýdaki örneklerde görüldüðü þekilde içi boþ olarak kullanabilirsiniz. Böyle bir durumda Python, karakter dizisi içindeki küme parantezleriyle, karakter dizisi dýþýndaki deðerleri teker teker ve sýrasýyla eþleþtirecektir. Ama isterseniz küme parantezleri içine birer sayý yazarak, karakter dizisi dýþýndaki deðerlerin hangi sýrayla kullanýlacaðýný belirleyebilirsiniz. Örneðin:
+
+>>> "{0} {1}".format("Fýrat", "Özgül")
+
+'Fýrat Özgül'
+
+Küme parantezleri içinde sayý kullanabilme imkaný sayesinde deðerlerin sýrasýný istediðiniz gibi düzenleyebilirsiniz:
+
+>>> "{1} {0}".format("Fýrat", "Özgül")
+
+'Özgül Fýrat'
+
+Hatta bu özellik sayesinde deðerleri bir kez yazýp, birden fazla sayýda tekrar edebilirsiniz:
+
+>>> "{0} {1} ({1} {0})".format("Fýrat", "Özgül")
+
+'Fýrat Özgül (Özgül Fýrat)'
+
+Dolayýsýyla, {} iþaretleri içinde öðelerin sýrasýný da belirterek, biraz önce verdiðimiz HTML sayfasý örneðini þu þekilde yazabilirsiniz:
+
+kodlama = "utf-8"
+site_adý = "Python Programlama Dili"
+dosya = open("deneme.html", "w", encoding=kodlama)
+içerik = """
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={0}" />
+    <title>{1}</title>
+</head>
+
+<body>
+    <h1>istihza.com web sitesine hoþ geldiniz!</h1>
+    <p><b>{1}</b> için bir Türkçe belgelendirme projesi...</p>
+</body>
+
+</html>
+"""
+
+print(içerik.format(kodlama, site_adý), file=dosya)
+
+dosya.close()
+
+Gördüðünüz gibi, öðelerin sýra numarasýný belirtmemiz sayesinde, karakter dizisi içinde iki kez ihtiyaç duyduðumuz site_adý adlý deðiþkeni format() metodu içinde iki kez yazmak zorunda kalmadýk.
+
+Yukarýdaki örnekler bize, format() metodunun parametrelerine sýra numarasýna göre eriþebileceðimizi gösteriyor. Biz ayný zamanda bu metodun parametrelerine isme göre de eriþebiliriz. Çok basit bir örnek:
+
+print("{dil} dersleri".format(dil="python"))
+
+Bu yöntemi kullanarak, ayný deðiþkeni birkaç farklý yerde kullanabilirsiniz:
+
+sayfa = """
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{konu}</title>
+</head>
+
+<body>
+    <h1>istihza.com web sitesine hoþ geldiniz!</h1>
+    <p><b>{konu}</b> için bir Türkçe belgelendirme projesi...</p>
+</body>
+
+</html>
+"""
+
+print(sayfa.format(konu="Python Programlama Dili"))
+
+format() metodunun yetenekleri yukarýda gösterdiðimiz þeylerle sýnýrlý deðildir. Týpký eski biçimlendirme yönteminde olduðu gibi, {} iþaretleri arasýnda bazý sayýlar kullanarak, karakter dizileri üzerinde hizalama iþlemleri de yapabiliriz.
+
+Dikkatlice bakýn:
+
+>>> print("{:>15}".format("istihza"))
+
+        istihza
+
+Bu gösterim gözünüze oldukça yabancý ve karýþýk gelmiþ olabilir. Ama aslýnda hiç de öyle anlaþýlmaz bir yaný yoktur bu kodlarýn. Gördüðünüz gibi, burada öncelikle : adlý bir iþaretten yararlanýyoruz. Bu iþaretin ardýndan > adlý baþka bir iþaret görüyoruz. Son olarak da 15 sayýsýný kullanýyoruz.
+
+: iþareti, bir biçimlendirme iþlemi yapacaðýmýzý gösteriyor. > iþareti ise bu biçimlendirmenin bir hizalama iþlemi olacaðýný haber veriyor. En sondaki 15 sayýsý ise bu hizalama iþleminin 15 karakterlik bir alan ile ilgili olduðunu söylüyor. Bu þekilde karakter dizisini 15 karakterlik bir alan içine yerleþtirip karakter dizisini saða yasladýk. Yukarýdaki çýktýyý daha iyi anlayabilmek için kodlarý þöyle de yazabilirsiniz:
+
+>>> print("|{:>15}|".format("istihza"))
+
+|       istihza|
+
+Gördüðünüz gibi, karakter dizimiz, kendisine ayrýlan 15 karakterlik alan içinde saða yaslanmýþ vaziyette duruyor.
+
+Eðer ayný karakter dizisini sola yaslamak isterseniz þöyle bir þey yazabilirsiniz:
+
+>>> print("|{:<15}|".format("istihza"))
+
+|istihza        |
+
+Bu defa < adlý iþaretten yararlandýðýmýza dikkat edin.
+
+Yukarýdaki yöntemi kullanarak, karakter dizilerini sola veya saða yaslamanýn yanýsýra, kendilerine ayrýlan alan içinde ortalayabilirsiniz de:
+
+>>> print("|{:^15}|".format("istihza"))
+
+|    istihza    |
+
+Gördüðünüz gibi, python3 ile gelen format() metodunu hizalama iþlemleri için kullanýrken üç farklý iþaretten yararlanýyoruz:
+
+
+> saða yaslama 
+< sola yaslama 
+^ ortalama 
+
+Yukarýdaki iþaretler, yaptýklarý iþi çaðrýþtýrdýklarý için, bunlarý akýlda tutmak çok zor olmasa gerek. Mesela örnek olmasý açýsýndan, eski biçimlendirme yönteminin son kýsmýnda verdiðimiz þu örneði:
+
+for sýra, karakter in enumerate(dir(str)):
+if sýra % 3 == 0:
+print("\n", end="")
+print("%-20s" %karakter, end="")
+
+... bir de yeni format() metoduyla yazalým:
+
+for sýra, karakter in enumerate(dir(str)):
+if sýra % 3 == 0:
+print("\n", end="")
+print("{:<20}".format(karakter), end="")
+
+Bu örneði inceleyerek, eski ile yeni yöntem arasýnda nelerin deðiþtiðini, neyin neye karþýlýk geldiðini görebilirsiniz.

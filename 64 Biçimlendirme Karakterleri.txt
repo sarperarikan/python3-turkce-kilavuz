@@ -1,0 +1,313 @@
+
+Biçimlendirme Karakterleri
+
+Biraz önce, Python’da eski usul karakter dizisi biçimlendirme yöntemi olan % iþareti üzerine en temel bilgileri edindik. Buraya kadar öðrendiklerimiz, yazdýðýmýz programlarda genellikle yolumuzu yordamýmýzý bulmamýza yetecektir. Ama isterseniz þimdi karakter dizisi biçimlendirme konusunu biraz daha derinlemesine ele alalým. Mesela Python’daki biçimlendirme karakterlerinin neler olduðunu inceleyelim.
+
+
+s
+
+Önceki örneklerden de gördüðünüz gibi, Python’da biçim düzenleme iþlemleri için %s adlý bir yapýdan faydalanýyoruz. Bu yapýyý þöyle bir masaya yatýrdýðýmýzda aslýnda bu yapýnýn iki parçadan oluþtuðunu görebiliriz. Bu parçalar % ve s karakterleridir. Burada gördüðümüz parçalardan % sabit, s ise deðiþkendir. Yani % sabit deðerini bazý harflerle birlikte kullanarak, farklý karakter dizisi biçimlendirme iþlemleri gerçekleþtirebiliriz.
+
+Biz önceki sayfalarda verdiðimiz örneklerde bu simgeyi s harfiyle birlikte kullandýk. Örneðin:
+
+>>> print("Benim adým %s" %"istihza")
+
+Bu kodlardaki s karakteri Ýngilizce string, yani ‘karakter dizisi’ ifadesinin kýsaltmasýdýr. Esasýnda en yaygýn çift de budur. Yani etraftaki Python programlarýnda yaygýn olarak %s yapýsýný görürüz. Ancak Python’da % biçim düzenleyicisiyle birlikte kullanýlabilecek tek karakter s deðildir. Daha önce de dediðimiz gibi, s karakteri string, yani ‘karakter dizisi’ ifadesinin kýsaltmasýdýr. Yani aslýnda %s yapýsý Python’da özel olarak karakter dizilerini temsil eder.
+
+Peki bu ne demek oluyor?
+
+Bir karakter dizisi içinde %s yapýsýný kullandýðýmýzda, dýþarýda buna karþýlýk gelen deðerin de bir karakter dizisi veya karakter dizisine çevrilebilecek bir deðer olmasý gerekir. Python’da her þey bir karakter dizisi olarak temsil edilebilir. Dolayýsýyla bütün iþlemlerinizde % iþaretini s karakteri ile birlikte kullanabilirsiniz. Ama bazý özel durumlarda % iþaretini s dýþýnda baþka harflerle birlikte kullanmanýz da gerekebilir.
+
+Biz % yapýsý ile ilgili verdiðimiz ilk örneklerde bu yapýnýn s karakteri ile birlikte kullanýlýþýný gösteren pek çok örnek verdiðimiz için % ile s birlikteliði üzerinde daha fazla durmayacaðýz. Bunun yerine, % ile birlikte kullanýlan öteki karakterleri inceleyeceðiz. O halde yola koyulalým.
+
+
+d
+
+Bir önceki baþlýkta gördüðümüz s harfi nasýl karakter dizilerini temsil ediyorsa, d harfi de sayýlarý temsil eder. Ýsterseniz küçük bir örnekle açýklamaya çalýþalým durumu:
+
+>>> print("Þubat ayý bu yýl %d gün çekiyor" %28)
+
+Þubat ayý bu yýl 28 gün çekiyor.
+
+Gördüðünüz gibi, % iþaretiyle birlikte bu defa s yerine d harfini kullandýk. Buna uygun olarak da dýþ tarafta 28 sayýsýný kullandýk. Peki yukarýdaki ifadeyi þöyle de yazamaz mýydýk?
+
+>>> print("Þubat ayý bu yýl %s gün çekiyor" %28)
+
+Elbette yazabilirdik. Bu kod da bize doðru çýktý verecektir. Çünkü daha önce de dediðimiz gibi, s harfi karakter dizilerini ve karakter dizisine çevrilebilen deðerleri temsil eder. Python’da sayýlar karakter dizisine çevrilebildiði için %s gibi bir yapýyý hata almadan kullanabiliyoruz. Ama mesela þöyle bir þey yazamayýz:
+
+>>> print("Þubat ayý bu yýl %d gün çekiyor" %"yirmi sekiz")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: %d format: a number is required, not str
+
+Gördüðünüz gibi bu defa hata aldýk. Çünkü d harfi yalnýzca sayý deðerleri temsil edebilir. Bu harfle birlikte karakter dizilerini kullanamayýz.
+
+Doðrusunu söylemek gerekirse, d harfi aslýnda tam sayý (integer) deðerleri temsil eder. Eðer bu harfin kullanýldýðý bir karakter dizisinde deðer olarak mesela bir kayan noktalý sayý (float) verirsek, bu deðer tamsayýya çevrilecektir. Bunun ne demek olduðunu hemen bir örnekle görelim:
+
+>>> print("%d" %13.5)
+
+13
+
+Gördüðünüz gibi, %d ifadesi, 13.5 sayýsýnýn ondalýk kýsmýný çýktýda göstermiyor. Çünkü d harfi sadece tamsayýlarý temsil etme iþlevi görüyor.
+
+Burada þöyle bir soru aklýnýza gelmiþ olabilir: ‘Acaba %d ifadesi ile hiç uðraþmasak, bunun yerine her yerde %s ifadesini kullansak olmaz mý?’.
+
+Çoðu zaman olur, ama mesela þöyle bir durum düþünün: Yazdýðýnýz programda kullanýcýdan sadece tam sayý girmesini istiyor olabilirsiniz. Yani mesela kullanýcýnýn ondalýk sayý girmesi halinde, siz bu sayýnýn sadece tam sayý kýsmýný almak istiyor olabilirsiniz. Örneðin kullanýcý 23.8 gibi bir sayý girmiþse, siz bu sayýda ihtiyacýnýz olan 23 kýsmýný almak isteyebilirsiniz. Ýþte bu %d iþaretinden yararlanarak, kullanýcýnýn girdiði ondalýk sayýnýn sadece tam sayý kýsmýný çekebilirsiniz:
+
+sayý = input("sayý: ")
+
+print("%d" %float(sayý))
+
+Elbette Python’da bir ondalýk sayýnýn sadece taban kýsmýný almanýn baþka yöntemleri de vardýr. Ama yukarýda verdiðimiz örnek bir ondalýk sayýnýn sadece tabanýný almanýn gayet basit ve etkili bir yoludur.
+
+%s yapýsýný anlatýrken gösterdiðimiz ileri düzey biçimlendirme tekniklerini %d ile de kullanabilirsiniz. Örneðin:
+
+>>> print("|%7d|" %23)
+
+|     23|
+
+>>> print("|%-7d|" %23)
+
+|23     |
+
+veya:
+
+>>> print("%(sayý)d" % {"sayý": 23})
+
+23
+
+%s yapýsýna ek olarak, sayýnýn kaplayacaðý alandaki boþluklara birer 0 da yerleþtirebilirsiniz:
+
+>>> print("%05d" %23)
+
+00023
+
+...veya:
+
+>>> print("%.5d" %23)
+
+00023
+
+Hatta hem sayýnýn kaplayacaðý boþluk miktarýný hem de bu boþluklarýn ne kadarýnýn 0 ile doldurulacaðýný da belirleyebilirsiniz:
+
+>>> print("%10.5d" %23)
+
+     00023
+
+Burada 23 sayýsýnýn toplam 10 boþlukluk bir yer kaplamasýný ve bu 10 adet boþluðun 5 tanesinin içine 0 sayýlarýnýn ve 23 sayýsýnýn sýðdýrýlmasýný istedik.
+
+Bir de þuna bakalým:
+
+>>> print("%010.d" %23)
+
+0000000023
+
+Burada ise 23 sayýsýnýn toplam 10 boþlukluk bir yer kaplamasýný ve bu 10 adet boþluða 23 sayýsý yerleþtirildikten sonra arta kalan kýsmýn 0 sayýlarý ile doldurulmasýný istedik.
+
+Bu arada, son örnekte yaptýðýmýz þeyi, daha önce öðrendiðimiz zfill() metoduyla da yapabileceðimizi biliyorsunuz:
+
+>>> "23".zfill(10)
+
+'0000000023'
+
+Yukarýdaki kullanýmlar ilk bakýþta gözünüze karýþýk görünmüþ olabilir. Ama eðer yeterince pratik yaparsanýz, aslýnda bu biçimlerin hiç de o kadar karmaþýk olmadýðýný anlarsýnýz. Ýsterseniz bu biçimlerle neler yapabileceðimizi þöyle bir kýsaca tarif edelim:
+
+d harfi, % iþaretiyle birlikte kullanýldýðýnda sayýlarý temsil eder. Bu iki karakterin en temel kullanýmý þöyledir:
+
+>>> "%d" %10
+
+'10'
+
+d harfi ile % iþareti arasýna bir pozitif veya negatif sayý getirerek, temsil edilecek sayýnýn toplam kaç boþluktan oluþan bir alan içine yerleþtirileceðini belirleyebiliyoruz:
+
+>>> "%5d" %10
+
+'   10'
+
+Burada 10 sayýsýný toplam 5 boþlukluk bir alan içine yerleþtirdik. Gördüðünüz gibi, bir pozitif sayý kullandýðýmýzda, sayýmýz kendisine ayrýlan alan içinde saða yaslanýyor. Eðer bu sayýyý sola yaslamak istersek negatif sayýlardan yararlanabiliriz:
+
+>>> "%-5d" %10
+
+'10   '
+
+Eðer saða yasladýðýmýz bir sayýnýn sol tarafýný sýfýrla doldurmak istersek, hizalama miktarýný belirtmek için kullandýðýmýz sayýnýn soluna bir sýfýr ekleyebiliriz:
+
+>>> "%05d" %10
+
+'00010'
+
+Ayný etkiyi þu þekilde de elde edebilirsiniz:
+
+>>> "%.5d" %10
+
+'00010'
+
+Eðer nokta iþaretinden önce bir sayý belirtirseniz, karakter dizisi o belirttiðiniz sayý kadar saða yaslanacaktýr. Yani:
+
+>>> "%10.5d" %10
+
+'     00010'
+
+... veya sola:
+
+>>> "%-10.5d" %10
+
+'00010     '
+
+Her iki þekilde de, karakter dizisini toplam 10 boþluktan oluþan bir alan içine yerleþtirmiþ olduk. Bu toplam alanýn 5 boþlukluk kýsmý sayýnýn kendisi ve sayýnýn soluna gelecek 0‘lar arasýnda paylaþtýrýldý.
+
+Gördüðünüz gibi, biçimlendirme mantýðýnýn aslýnda o kadar da korkulacak bir yaný yok. Kendi kendinize yukarýdakilere benzer örnekler yaparak bu yapýyý daha iyi bir þekilde anlamaya çalýþabilirsiniz.
+
+
+i
+
+Bu harf de integer, yani ‘tam sayý’ kelimesinin kýsaltmasýdýr. Kullaným ve iþlev olarak, d harfinden hiç bir farký yoktur.
+
+
+o
+
+Bu harf octal (sekizli) kelimesinin kýsaltmasýdýr. Adýndan da anlaþýlacaðý gibi, sekizli düzendeki sayýlarý temsil eder. Dolayýsýyla bu harfi kullanarak onlu düzendeki bir sayýyý sekizli düzendeki karþýlýðýna dönüþtürebilirsiniz. Örneðin:
+
+>>> print("%i sayýsýnýn sekizli düzendeki karþýlýðý %o sayýsýdýr." %(10, 10))
+
+10 sayýsýnýn sekizli düzendeki karþýlýðý 12 sayýsýdýr.
+
+Not
+
+%d yapýsýný anlatýrken gösterdiðimiz ileri düzey biçimlendirme tekniklerinin tamamýný %o ile de kullanabilirsiniz.
+
+
+
+x
+
+Bu harf hexadecimal, yani onaltýlý düzendeki sayýlarý temsil eder. Dolayýsýyla bu harfi kullanarak onlu düzendeki bir sayýyý onaltýlý düzendeki karþýlýðýna çevirebilirsiniz:
+
+>>> print("%i sayýsýnýn onaltýlý düzendeki karþýlýðý %x sayýsýdýr." %(20, 20))
+
+20 sayýsýnýn onaltýlý düzendeki karþýlýðý 14 sayýsýdýr.
+
+Buradaki ‘x’ küçük harf olarak kullanýldýðýnda, onaltýlý düzende harfle gösterilen sayýlar da küçük harfle temsil edilecektir:
+
+>>> print("%i sayýsýnýn onaltýlý düzendeki karþýlýðý %x sayýsýdýr." %(10, 10))
+
+10 sayýsýnýn onaltýlý düzendeki karþýlýðý a sayýsýdýr.
+
+Not
+
+%d yapýsýný anlatýrken gösterdiðimiz ileri düzey biçimlendirme tekniklerinin tamamýný %x ile de kullanabilirsiniz.
+
+
+
+X
+
+Bu da týpký x harfinde olduðu gibi, onaltýlý düzendeki sayýlarý temsil eder. Ancak bunun farký, harfle gösterilen onaltýlý sayýlarý büyük harfle temsil etmesidir:
+
+>>> print("%i sayýsýnýn onaltýlý düzendeki karþýlýðý %X sayýsýdýr." %(10, 10))
+
+10 sayýsýnýn onaltýlý düzendeki karþýlýðý A sayýsýdýr.
+
+Not
+
+%d yapýsýný anlatýrken gösterdiðimiz ileri düzey biçimlendirme tekniklerinin tamamýný %X ile de kullanabilirsiniz.
+
+
+
+f
+
+Python’da karakter dizilerini biçimlendirirken s harfinden sonra en çok kullanýlan harf f harfidir. Bu harf Ýngilizce’deki float, yani ‘kayan noktalý sayý’ kelimesinin kýsaltmasýdýr. Adýndan da anlaþýlacaðý gibi, karakter dizileri içindeki kayan noktalý sayýlarý temsil etmek için kullanýlýr.
+
+>>> print("Dolar %f TL olmuþ..." %1.4710)
+
+Dolar 1.471000 TL olmuþ...
+
+Bu çýktý sizi biraz þaþýrtmýþ olabilir. Çünkü gördüðünüz gibi, çýktýda bizim eklemediðimiz haneler var.
+
+Python’da bir karakter dizisi içindeki sayýyý %f yapýsý ile kayan noktalý sayýya çevirdiðimizde noktadan sonra öntanýmlý olarak 6 hane yer alacaktýr. Yani mesela:
+
+>>> print("%f" %10)
+
+10.000000
+
+Gördüðünüz gibi, gerçekten de 10 tam sayýsý %f yapýsý ile kayan noktalý sayýya dönüþtürüldüðünde noktadan sonra 6 adet sýfýra sahip oluyor.
+
+Baþka bir örnek daha verelim:
+
+>>> print("%f"%23.6)
+
+23.600000
+
+Bu örnek, %f yapýsýnýn, kayan noktalý sayýlarýn noktadan sonraki hane sayýsýný da 6‘ya tamamladýðýný gösteriyor. Ama elbette biz istersek, daha önce öðrendiðimiz teknikleri kullanarak, noktadan sonra kaç hane olacaðýný belirleyebiliriz:
+
+>>> print("%.2f" % 10)
+
+10.00
+
+%f yapýsýnda, % ile f arasýna .2 gibi bir ifade yerleþtirerek noktadan sonra 2 hane olmasýný saðladýk.
+
+Not
+
+Daha önce gösterdiðimiz ileri düzey biçimlendirme tekniklerini %f ile de kullanabilirsiniz.
+
+
+
+c
+
+Bu harf de Python’daki önemli karakter dizisi biçimlendiricilerinden biridir. Bu harf tek bir karakteri temsil eder:
+
+>>> print("%c" %"a")
+
+a
+
+Ama:
+
+>>> print("%c" %"istihza")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: %c requires int or char
+
+Gördüðünüz gibi, c harfi sadece tek bir karakteri kabul ediyor. Karakter sayýsý birden fazla olduðunda bu komut hata veriyor.
+
+c harfinin bir baþka özelliði de ASCII tablosunda sayýlara karþýlýk gelen karakterleri de gösterebilmesidir:
+
+>>> print("%c" %65)
+
+A
+
+ASCII tablosunda 65 sayýsý ‘A’ harfine karþýlýk geldiði için yukarýdaki komutun çýktýsý ‘A’ harfini gösteriyor. Eðer isterseniz c harfini kullanarak bütün ASCII tablosunu ekrana dökebilirsiniz:
+
+>>> for i in range(128):
+... print("%s ==> %c" %(i, i))
+
+Not
+
+%s yapýsýný anlatýrken gösterdiðimiz ileri düzey biçimlendirme tekniklerinin tamamýný %c ile de kullanabilirsiniz.
+
+Böylece Python’da % iþareti kullanarak nasýl biçimlendirme yapabileceðimizi öðrenmiþ olduk. Dilerseniz pratik olmasý açýsýndan, karakter dizisi biçimlendiricilerinin kullanýmýný gösteren bir örnek vererek bu bölümü noktalayalým.
+
+Dikkatlice inceleyin:
+
+for sýra, karakter in enumerate(dir(str)):
+if sýra % 3 == 0:
+print("\n", end="")
+print("%-20s" %karakter, end="")
+
+Burada, gördüðünüz gibi, karakter dizisi metotlarýný bir tablo görünümü içinde ekrana yazdýrdýk. Þu satýrlar yardýmýyla tablodaki sütun sayýsýný 3 olarak belirledik:
+
+if sýra % 3 == 0:
+print("\n", end="")
+
+Burada modülüs iþlecini nasýl kullandýðýmýza çok dikkat edin. sýra deðiþkeninin deðerini 3‘e böldüðümüzde kalan deðerin 0 olduðu her sayýda satýr baþýna geçiyoruz. Böylece her 3. sütunda bir satýr aþaðý geçilmiþ oluyor.
+
+Bununla ilgili bir örnek daha verelim:
+
+for i in range(20):
+print("%5d%5o%5x" %(i, i, i))
+
+Burada 0‘dan 20‘ye kadar olan sayýlarýn onlu, sekizli ve onaltýlý düzendeki karþýlýklarýný bir tablo görünümü içinde ekrana çýktý verdik. Bu arada, eðer isterseniz yukarýdaki kodlarý þöyle de yazabileceðinizi biliyorsunuz:
+
+for i in range(20):
+print("%(deger)5d%(deger)5o%(deger)5x" %({"deger": i}))
+
+Burada da, tablomuzu biçimlendirmek için ‘sözlük’ adýný verdiðimiz yapýdan yararlandýk.

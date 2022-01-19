@@ -1,0 +1,58 @@
+
+GNU/Linux
+
+Eðer kullandýðýnýz sistem GNU/Linux’ta Unity veya GNOME masaüstü ortamý ise baþlangýç düzeyi için Gedit adlý metin düzenleyici yeterli olacaktýr.
+
+Eðer kullandýðýnýz sistem GNU/Linux’ta KDE masaüstü ortamý ise Kwrite veya Kate adlý metin düzenleyicilerden herhangi birini kullanabilirsiniz. Þu aþamada kullaným kolaylýðý ve sadeliði nedeniyle Kwrite önerilebilir.
+
+Ýþe yeni bir Gedit belgesi açarak baþlayalým. Yeni bir Gedit belgesi açmanýn en kolay yolu Alt+F2 tuþlarýna bastýktan sonra çýkan ekranda:
+
+gedit
+
+yazýp Enter düðmesine basmaktýr.
+
+Eðer Gedit yerine mesela Kwrite kullanýyorsanýz, yeni bir Kwrite belgesi oluþturmak için Alt+F2 tuþlarýna bastýktan sonra:
+
+kwrite
+
+komutunu vermelisiniz. Elbette kullanacaðýnýz metin düzenleyiciye, komut vermek yerine, daðýtýmýnýzýn menüleri aracýlýðýyla da ulaþabilirsiniz.
+
+Python kodlarýmýzý, karþýmýza çýkan bu boþ metin dosyasýna yazýp kaydedeceðiz.
+
+Aslýnda kodlarý metin dosyasýna yazmakla etkileþimli kabuða yazmak arasýnda çok fazla fark yoktur. Dilerseniz hemen bir örnek vererek ne demek istediðimizi anlatmaya çalýþalým:
+
+1. Boþ bir Gedit ya da Kwrite belgesi açýyoruz ve bu belgeye þu kodlarý eksiksiz bir þekilde yazýyoruz:
+
+tarih = "02.01.2012"
+gün = "Pazartesi"
+vakit = "öðleden sonra"
+
+print(tarih, gün, vakit, "buluþalým", end=".\n")
+
+2. Bu kodlarý yazýp bitirdikten sonra dosyayý masaüstüne randevu.py adýyla kaydedelim.
+
+3. Sonra iþletim sistemimize uygun bir þekilde komut satýrýna ulaþalým.
+
+4. Ardýndan komut satýrý üzerinden masaüstüne gelelim. (Bunun nasýl yapýlacaðýný hatýrlýyorsunuz, deðil mi?)
+
+5. Son olarak þu komutla programýmýzý çalýþtýralým:
+
+python3 randevu.py
+
+Þöyle bir çýktý almýþ olmalýyýz:
+
+02.01.2012 Pazartesi öðleden sonra buluþalým.
+
+Eðer bu çýktý yerine bir hata mesajý alýyorsanýz bunun birkaç farklý sebebi olabilir:
+
+Kodlarda yazým hatasý yapmýþ olabilirsiniz. Bu ihtimali bertaraf etmek için yukarýdaki kodlarla kendi yazdýðýnýz kodlarý dikkatlice karþýlaþtýrýn. 
+Kodlarýnýzý kaydettiðiniz randevu.py adlý dosyanýn adýný yanlýþ yazmýþ olabilirsiniz. Dolayýsýyla python3 randevu.py komutu, var olmayan bir dosyaya atýfta bulunuyor olabilir. 
+python3 randevu.py komutunu verdiðiniz dizin konumu ile randevu.py dosyasýnýn bulunduðu dizin konumu birbirinden farklý olabilir. Yani siz randevu.py dosyasýný masaüstüne kaydetmiþsinizdir, ama python3 randevu.py komutunu yanlýþlýkla baþka bir dizin altýnda veriyor olabilirsiniz. Bu ihtimali ortadan kaldýrmak için, önceki derslerde öðrendiðimiz yöntemleri kullanarak hangi dizin altýnda bulunduðunuzu kontrol edin. O anda içinde bulunduðunuz dizinin içeriðini listeleyerek, randevu.py dosyasýnýn orada görünüp görünmediðini kontrol edebilirsiniz. Eðer program dosyanýz bu listede görünmüyorsa, elbette python3 randevu.py komutu çalýþmayacaktýr. 
+Geçen derslerde anlattýðýmýz þekilde Python3’ü kaynaktan root haklarýyla derlemenize raðmen, derleme sonrasýnda /usr/bin/ dizini altýna python3 adlý bir sembolik bað oluþturmadýðýnýz için python3 komutu çalýþmýyor olabilir. 
+Eðer Python3’ü yetkisiz kullanýcý olarak derlediyseniz, $HOME/python/bin/ dizini altýnda hem python3 adlý bir sembolik bað oluþturmuþ, hem de $HOME/python/bin/ dizinini YOL’a (PATH) eklemiþ olmanýz gerekirken bunlarý yapmamýþ olabilirsiniz. 
+Asla unutmayýn, Python’ýn etkileþimli kabuðunu baþlatmak için hangi komutu kullanýyorsanýz, randevu.py dosyasýný çalýþtýrmak için de ayný komutu kullanacaksýnýz. Yani eðer Python’ýn etkileþimli kabuðunu python3.5 gibi bir komutla çalýþtýrýyorsanýz, programýnýzý da python3.5 randevu.py þeklinde çalýþtýrmanýz gerekir. Ayný þekilde, eðer etkileþimli kabuðu mesela python (veya py3) gibi bir komutla çalýþtýrýyorsanýz, programýnýzý da python randevu.py (veya py3 randevu.py) þeklinde çalýþtýrmalýsýnýz. Neticede etkileþimli kabuðu çalýþtýrýrken de, bir program dosyasý çalýþtýrýrken de aslýnda temel olarak Python programlama dilini çalýþtýrmýþ oluyorsunuz. Python programýný çalýþtýrýrken bir dosya adý belirtmezseniz, yani Python’ý baþlatan komutu tek baþýna kullanýrsanýz etkileþimli kabuk çalýþmaya baþlar. Ama eðer Python’ý baþlatan komutla birlikte bir program dosyasý ismi de belirtirseniz, o belirttiðiniz program dosyasý çalýþmaya baþlar. 
+Kodlarýnýzý düzgün bir þekilde çalýþtýrabildiðinizi varsayarak yolumuza devam edelim...
+
+Gördüðünüz gibi, kod dosyamýzý çalýþtýrmak için python3 komutundan yararlanýyoruz. Bu arada tekrar etmekte fayda var: Python’ýn etkileþimli kabuðunu çalýþtýrmak için hangi komutu kullanýyorsanýz, dosyaya kaydettiðiniz programlarýnýzý çalýþtýrmak için de ayný komutu kullanacaksýnýz.
+
+Gelelim Windows kullanýcýlarýna...

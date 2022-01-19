@@ -1,0 +1,10 @@
+
+Python Nasýl Telaffuz Edilir?
+
+Python programlama dili üzerine bu kadar söz söyledik. Peki yabancý bir kelime olan python‘ý nasýl telaffuz edeceðimizi biliyor muyuz?
+
+Geliþtiricisi Hollandalý olsa da python Ýngilizce bir kelimedir. Dolayýsýyla bu kelimenin telaffuzunda Ýngilizcenin kurallarý geçerli. Ancak bu kelimeyi hakkýyla telaffuz etmek, ana dili Türkçe olanlar için pek kolay deðil. Çünkü bu kelime içinde, Türkçede yer almayan ve telaffuzu peltek s’yi andýran [th] sesi var. Ýngilizce bilenler bu sesi think (düþünmek) kelimesinden hatýrlayacaklardýr. Ana dili Türkçe olanlar think kelimesini genellikle [tink] þeklinde telaffuz eder. Dolayýsýyla python kelimesini de [paytýn] þeklinde telaffuz edebilirsiniz.
+
+Python kelimesini tamamen Türkçeleþtirerek [piton] þeklinde telaffuz etmeyi yeðleyenler de var. Elbette siz de dilinizin döndüðü bir telaffuzu tercih etmekte özgürsünüz.
+
+Bu arada, eðer python kelimesinin Ýngilizce telaffuzunu dinlemek istiyorsanýz howjsay.com adresini ziyaret edebilir, Guido Van Rossum’un bu kelimeyi nasýl telaffuz ettiðini merak ediyorsanýz da http://goo.gl/bx9iJu adresindeki tanýtým videosunu izleyebilirsiniz.

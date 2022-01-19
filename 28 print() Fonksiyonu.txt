@@ -1,0 +1,656 @@
+
+print() Fonksiyonu
+
+Geçen bölümde bir yandan Python’ýn etkileþimli kabuðunu yakýndan tanýyýp bu vesileyle bazý önemli fonksiyon ve araçlarý öðrenirken, öbür yandan bu öðrendiklerimizi kullanarak örnek programlar yazdýk. Gördüðünüz gibi, azýcýk bir bilgiyle dahi az çok iþe yarar programlar yazmak mümkün olabiliyor. Daha yararlý programlar yazabilmek için henüz öðrenmemiz gereken pek çok þey var. Ýþte bu bölümde, ‘daha yararlý programlar yazmamýzý’ saðlayacak çok önemli bir araçtan söz edeceðiz. Öneminden dolayý ayrýntýlý bir þekilde anlatacaðýmýz bu aracýn adý print() fonksiyonu.
+
+Elbette bu bölümde sadece print() fonksiyonundan bahsetmeyeceðiz. Bu bölümde print() fonksiyonunun yanýsýra Python’daki bazý önemli temel konularý da ele alacaðýz. Mesela bu bölümde Python’daki karakter dizilerine ve sayýlara iliþkin çok önemli bilgiler vereceðiz. Ayrýca print() fonksiyonu vesilesiyle Python’daki ‘fonksiyon’ konusuna da saðlam bir giriþ yapmýþ, bu kavram ile ilgili ilk bilgilerimizi almýþ olacaðýz. Sözün özü, bu bölüm bizim için, deyim yerindeyse, tam anlamýyla bir dönüm noktasý olacak.
+
+O halde isterseniz lafý daha fazla uzatmadan iþe print() fonksiyonunun ne olduðu ve ne iþe yaradýðýný anlatarak baþlayalým.
+
+
+Nedir, Ne Ýþe Yarar?
+
+Þimdiye kadar etkileþimli kabukta gerek karakter dizilerini gerekse sayýlarý doðrudan ekrana yazdýk. Yani þöyle bir þey yaptýk:
+
+>>> "Python programlama dili"
+
+'Python programlama dili'
+
+>>> 6567
+
+6567
+
+Etkileþimli kabuk da, ekrana yazdýðýmýz bu karakter dizisi ve sayýyý doðrudan bize çýktý olarak verdi. Ancak ilerde Python kodlarýmýzý bir dosyaya kaydedip çalýþtýrdýðýmýzda da göreceðiniz gibi, Python’ýn ekrana çýktý verebilmesi için yukarýdaki kullaným yeterli deðildir. Yani yukarýdaki kullaným yalnýzca etkileþimli kabukta çalýþýr. Bu kodlarý bir dosyaya kaydedip çalýþtýrmak istediðimizde hiçbir çýktý alamayýz. Python’da yazdýðýmýz þeylerin ekrana çýktý olarak verilebilmesi için print() adlý özel bir fonksiyondan yararlanmamýz gerekir.
+
+O halde gelin bu print() fonksiyonunun ne iþe yaradýðýný ve nasýl kullanýldýðýný anlamaya çalýþalým:
+
+print() de týpký daha önce gördüðümüz type(), len() ve pow() gibi bir fonksiyondur. Fonksiyonlarý ilerde daha ayrýntýlý bir þekilde inceleyeceðimizi söylemiþtik hatýrlarsanýz. O yüzden fonksiyon kelimesine takýlarak, burada anlattýðýmýz þeylerin kafanýzý karýþtýrmasýna, moralinizi bozmasýna izin vermeyin.
+
+print() fonksiyonunun görevi ekrana çýktý vermemizi saðlamaktýr. Hemen bununla ilgili bir örnek verelim:
+
+>>> print("Python programlama dili")
+
+Python programlama dili
+
+Bildiðiniz gibi burada gördüðümüz “Python programlama dili” bir karakter dizisidir. Ýþte print() fonksiyonunun görevi bu karakter dizisini ekrana çýktý olarak vermektir. Peki bu karakter dizisini print() fonksiyonu olmadan yazdýðýmýzda da ekrana çýktý vermiþ olmuyor muyuz? Aslýnda olmuyoruz. Dediðimiz gibi, ilerde programlarýmýzý dosyalara kaydedip çalýþtýrdýðýmýzda, baþýnda print() olmayan ifadelerin çýktýda görünmediðine þahit olacaksýnýz.
+
+Daha önce de dediðimiz gibi, etkileþimli kabuk bir test ortamý olmasý açýsýndan rahat bir ortamdýr. Bu sebeple bu ortamda ekrana çýktý verebilmek için print() fonksiyonunu kullanmak zorunda deðilsiniz. Yani baþýnda print() olsa da olmasa da etkileþimli kabuk ekrana yazdýrmak istediðiniz þeyi yazdýrýr. Ama iyi bir alýþkanlýk olmasý açýsýndan, ekrana herhangi bir þey yazdýracaðýnýzda ben size print() fonksiyonunu kullanmanýzý tavsiye ederim.
+
+print() son derece güçlü bir fonksiyondur. Gelin isterseniz bu güçlü ve faydalý fonksiyonu derin derin incelemeye koyulalým.
+
+
+Nasýl Kullanýlýr?
+
+Yukarýda verdiðimiz örnekte ilk gözümüze çarpan þey, karakter dizisini print() fonksiyonunun parantezleri içine yazmýþ olmamýzdýr. Biz bir fonksiyonun parantezleri içinde belirtilen öðelere ‘parametre’ dendiðini geçen bölümde öðrenmiþtik. Týpký öðrendiðimiz öteki fonksiyonlar gibi, print() fonksiyonu da birtakým parametreler alýr.
+
+Bu arada print() fonksiyonunun parantezini açýp parametreyi yazdýktan sonra, parantezi kapatmayý unutmuyoruz. Python programlama diline yeni baþlayanlarýn, hatta bazen deneyimli programcýlarýn bile en sýk yaptýðý hatalardan biri açtýklarý parantezi kapatmayý unutmalarýdýr.
+
+Elbette, eðer istersek burada doðrudan “Python programlama dili” adlý karakter dizisini kullanmak yerine, önce bu karakter dizisini bir deðiþkene atayýp, sonra da print() fonksiyonunun parantezleri içinde bu deðiþkeni kullanabiliriz. Yani:
+
+>>> dil = "Python programlama dili"
+>>> print(dil)
+
+Python programlama dili
+
+Bu arada, hem þimdi verdiðimiz, hem de daha önce yazdýðýmýz örneklerde bir þey dikkatinizi çekmiþ olmalý. Þimdiye kadar verdiðimiz örneklerde karakter dizilerini hep çift týrnakla gösterdik. Ama aslýnda tek seçeneðimiz çift týrnak deðildir. Python bize üç farklý týrnak seçeneði sunar:
+
+Tek týrnak (‘ ‘) 
+Çift týrnak (” ”) 
+Üç týrnak (“”” “””) 
+Dolayýsýyla yukarýdaki örneði üç farklý þekilde yazabiliriz:
+
+>>> print('Python programlama dili')
+
+Python programlama dili
+
+>>> print("Python programlama dili")
+
+Python programlama dili
+
+>>> print("""Python programlama dili""")
+
+Python programlama dili
+
+Gördüðünüz gibi çýktýlar arasýnda hiçbir fark yok.
+
+Peki çýktýlarda hiçbir fark yoksa neden üç farklý týrnak çeþidi var?
+
+Ýsterseniz bu soruyu bir örnek üzerinden açýklamaya çalýþalým. Diyelim ki ekrana þöyle bir çýktý vermek istiyoruz:
+
+Python programlama dilinin adý "piton" yýlanýndan gelmez
+
+Eðer bu cümleyi çift týrnaklar içinde gösterirsek programýmýz hata verecektir:
+
+>>> print("Python programlama dilinin adý "piton" yýlanýndan gelmez")
+
+File "<stdin>", line 1
+  print("Python programlama dilinin adý "piton" yýlanýndan gelmez")
+                                              ^
+SyntaxError: invalid syntax
+
+Bunun sebebi, cümle içinde geçen ‘piton’ kelimesinin de çift týrnaklar içinde gösterilmiþ olmasýdýr. Cümlenin, yani karakter dizisinin kendisi de çift týrnak içinde gösterildiði için Python, karakter dizisini baþlatan ve bitiren týrnaklarýn hangisi olduðunu ayýrt edemiyor. Yukarýdaki cümleyi en kolay þu þekilde ekrana yazdýrabiliriz:
+
+>>> print('Python programlama dilinin adý "piton" yýlanýndan gelmez')
+
+Python programlama dilinin adý "piton" yýlanýndan gelmez
+
+Burada karakter dizisini tek týrnak içine aldýk. Karakter dizisi içinde geçen ‘piton’ kelimesi çift týrnak içinde olduðu için, karakter dizisini baþlatýp bitiren týrnaklarla ‘piton’ kelimesindeki týrnaklarýn birbirine karýþmasý gibi bir durum söz konusu deðildir.
+
+Bir de þöyle bir örnek verelim: Diyelim ki aþaðýdaki gibi bir çýktý elde etmek istiyoruz:
+
+Ýstanbul'un 5 günlük hava durumu tahmini
+
+Eðer bu karakter dizisini tek týrnak iþaretleri içinde belirtirseniz Python size bir hata mesajý gösterecektir:
+
+>>> print('Ýstanbul'un 5 günlük hava durumu tahmini')
+
+File "<stdin>", line 1
+  print('Ýstanbul'un 5 günlük hava durumu tahmini')
+                    ^
+SyntaxError: invalid syntax
+
+Bu hatanýn sebebi ‘Ýstanbul’un’ kelimesi içinde geçen kesme iþaretidir. Týpký bir önceki örnekte olduðu gibi, Python karakter dizisini baþlatan ve bitiren týrnaklarýn hangisi olduðunu kestiremiyor. Python, karakter dizisinin en baþýndaki tek týrnak iþaretinin ardýndan ‘Ýstanbul’un’ kelimesi içindeki kesme iþaretini görünce karakter dizisinin burada sona erdiðini zannediyor. Ancak karakter dizisini soldan saða doðru okumaya devam edince bir yerlerde bir terslik olduðunu düþünüyor ve bize bir hata mesajý göstermekten baþka çaresi kalmýyor. Yukarýdaki karakter dizisini en kolay þöyle tanýmlayabiliriz:
+
+>>> print("Ýstanbul'un 5 günlük hava durumu tahmini")
+
+Ýstanbul'un 5 günlük hava durumu tahmini
+
+Burada da, karakter dizisi içinde geçen kesme iþaretine takýlmamak için karakter dizimizi çift týrnak iþaretleri içine alýyoruz.
+
+Yukarýdaki karakter dizilerini düzgün bir þekilde çýktý verebilmek için üç týrnak iþaretlerinden de yararlanabiliriz:
+
+>>> print("""Python programlama dilinin adý "piton" yýlanýndan gelmez""")
+
+Python programlama dilinin adý "piton" yýlanýndan gelmez
+
+>>> print("""Ýstanbul'un 5 günlük hava durumu tahmini""")
+
+Ýstanbul'un 5 günlük hava durumu tahmini
+
+Bütün bu örneklerden sonra kafanýzda þöyle bir düþünce uyanmýþ olabilir:
+
+Görünüþe göre üç týrnak iþaretiyle her türlü karakter dizisini hatasýz bir þekilde ekrana çýktý olarak verebiliyoruz. O zaman ben en iyisi bütün karakter dizileri için üç týrnak iþaretini kullanayým!
+
+Elbette, eðer isterseniz pek çok karakter dizisi için üç týrnak iþaretini kullanabilirsiniz. Ancak Python’da karakter dizileri tanýmlanýrken genellikle tek týrnak veya çift týrnak iþaretleri kullanýlýr. Üç týrnak iþaretlerinin asýl kullaným yeri ise farklýdýr. Peki nedir bu üç týrnak iþaretlerinin asýl kullaným yeri?
+
+Üç týrnak iþaretlerini her türlü karakter dizisiyle birlikte kullanabiliyor olsak da, bu týrnak tipi çoðunlukla sadece birden fazla satýra yayýlmýþ karakter dizilerini tanýmlamada kullanýlýr. Örneðin þöyle bir ekran çýktýsý vermek istediðinizi düþünün:
+
+[H]=========HARMAN========[-][o][x]
+|                                 |
+|     Programa Hoþgeldiniz!       |
+|           Sürüm 0.8             |
+|    Devam etmek için herhangi    |
+|       bir düðmeye basýn.        |
+|                                 |
+|=================================|
+
+Böyle bir çýktý verebilmek için eðer tek veya çift týrnak kullanmaya kalkýþýrsanýz epey eziyet çekersiniz. Bu tür bir çýktý vermenin en kolay yolu üç týrnaklarý kullanmaktýr:
+
+>>> print("""
+... [H]=========HARMAN========[-][o][x]
+... |                                 |
+... |     Programa Hoþgeldiniz!       |
+... |           Sürüm 0.8             |
+... |    Devam etmek için herhangi    |
+... |       bir düðmeye basýn.        |
+... |                                 |
+... |=================================|
+... """)
+
+Burada bazý þeyler dikkatinizi çekmiþ olmalý. Gördüðünüz gibi, üç týrnaklý yapý öteki týrnak tiplerine göre biraz farklý davranýyor. Þimdi þu örneðe bakýn:
+
+>>> print("""Game Over!
+...
+
+Buraya çok dikkatli bakýn. Karakter dizisine üç týrnakla baþladýktan sonra, kapanýþ týrnaðýný koymadan Enter tuþuna bastýðýmýzda >>> iþareti ... iþaretine dönüþtü. Python bu þekilde bize, ‘yazmaya devam et!’ demiþ oluyor. Biz de buna uyarak yazmaya devam edelim:
+
+>>> print("""Game Over!
+... Insert Coin!""")
+
+Game Over!
+Insert Coin!
+
+Kapanýþ týrnaðý koyulmadan Enter tuþuna basýldýðýnda >>> iþaretinin ... iþaretine dönüþmesi üç týrnaða özgü bir durumdur. Eðer ayný þeyi tek veya çift týrnaklarla yapmaya çalýþýrsanýz programýnýz hata verir:
+
+>>> print("Game Over!
+
+File "<stdin>", line 1
+  print("Game Over!
+                  ^
+SyntaxError: EOL while scanning string literal
+
+...veya:
+
+>>> print('Game Over!
+
+File "<stdin>", line 1
+  print("Game Over!
+                  ^
+SyntaxError: EOL while scanning string literal
+
+Üç týrnak iþaretlerinin týrnak kapanmadan Enter tuþuna basýldýðýnda hata vermeme özelliði sayesinde, bu týrnak tipi özellikle birden fazla satýra yayýlmýþ karakter dizilerinin gösterilmesi için birebirdir.
+
+Gelin isterseniz üç týrnak kullanýmýna iliþkin bir örnek daha verelim:
+
+>>> print("""Python programlama dili Guido Van Rossum
+... adlý Hollandalý bir programcý tarafýndan 90’lý
+... yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu
+... insan, isminin "Python" olmasýna bakarak, bu programlama
+... dilinin, adýný piton yýlanýndan aldýðýný düþünür.
+... Ancak zannedildiðinin aksine bu programlama dilinin
+... adý piton yýlanýndan gelmez.""")
+
+Python programlama dili Guido Van Rossum
+adlý Hollandalý bir programcý tarafýndan 90'lý
+yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu
+insan, isminin "Python" olmasýna bakarak, bu programlama
+dilinin, adýný piton yýlanýndan aldýðýný düþünür.
+Ancak zannedildiðinin aksine bu programlama dilinin
+dý piton yýlanýndan gelmez.
+
+Elbette eðer istersek bu metni önce bir deðiþkene atamayý da tercih edebiliriz:
+
+>>> python_hakkinda = """Python programlama dili Guido Van Rossum
+... adlý Hollandalý bir programcý tarafýndan 90’lý
+... yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu
+... insan, isminin "Python" olmasýna bakarak, bu programlama
+... dilinin, adýný piton yýlanýndan aldýðýný düþünür.
+... Ancak zannedildiðinin aksine bu programlama dilinin
+... adý piton yýlanýndan gelmez."""
+>>> print(python_hakkinda)
+
+Python programlama dili Guido Van Rossum
+adlý Hollandalý bir programcý tarafýndan 90'lý
+yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu
+insan, isminin "Python" olmasýna bakarak, bu programlama
+dilinin, adýný piton yýlanýndan aldýðýný düþünür.
+Ancak zannedildiðinin aksine bu programlama dilinin
+dý piton yýlanýndan gelmez.
+
+Siz yukarýdaki çýktýyý tek veya çift týrnak kullanarak nasýl ekrana yazdýrabileceðinizi düþünedurun, biz önemli bir konuya geçiþ yapalým!
+
+
+Bir Fonksiyon Olarak print()
+
+print() ifadesinin bir fonksiyon olduðunu söylemiþtik hatýrlarsanýz. Dediðimiz gibi, fonksiyonlarla ilgili ayrýntýlý açýklamalarý ilerleyen derslerde vereceðiz. Ancak þimdi dilerseniz bundan sonra anlatacaklarýmýzý daha iyi kavrayabilmemiz için, fonksiyonlar hakkýnda bilmemiz gereken bazý temel þeyleri öðrenmeye çalýþalým.
+
+Gördüðünüz gibi, print() fonksiyonunu þöyle kullanýyoruz:
+
+>>> print("Aramak istediðiniz kelimeyi yazýn: ")
+
+Burada print() bir fonksiyon, “Aramak istediðiniz kelimeyi yazýn:” adlý karakter dizisi ise bu fonksiyonun parametresidir. Daha önce len() adlý baþka bir fonksiyon daha öðrenmiþtik hatýrlarsanýz. Onu da þöyle kullanýyorduk:
+
+>>> len("elma")
+
+Burada da len() bir fonksiyon, “elma” adlý karakter dizisi ise bu fonksiyonun parametresidir. Aslýnda biçim olarak print() ve len() fonksiyonlarýnýn birbirinden hiçbir farký olmadýðýný görüyorsunuz.
+
+Daha önce söylediðimiz ve bu örneklerden de anladýðýmýz gibi, bir fonksiyonun parantezleri içinde belirtilen öðelere parametre adý veriliyor. Mesela aþaðýdaki örnekte print() fonksiyonunu tek bir parametre ile kullanýyoruz:
+
+>>> print('En az 8 haneli bir parola belirleyin.')
+
+print() fonksiyonu, týpký pow() fonksiyonu gibi, birden fazla parametre alabilir:
+
+>>> print('Fýrat', 'Özgül')
+
+Fýrat Özgül
+
+Bu örnekte bizim için çýkarýlacak çok dersler var. Bir defa burada print() fonksiyonunu iki farklý parametre ile birlikte kullandýk. Bunlardan ilki Fýrat adlý bir karakter dizisi, ikincisi ise Özgül adlý baþka bir karakter dizisi. Python’ýn bu iki karakter dizisini nasýl birleþtirdiðine dikkat edin. print() fonksiyonu bu iki karakter dizisini çýktý olarak verirken aralarýna da birer boþluk yerleþtirdi. Ayrýca, geçen derste de vurguladýðýmýz gibi, parametrelerin birbirinden virgül ile ayrýldýðýný da gözden kaçýrmýyoruz.
+
+Gelin bununla ilgili bir iki örnek daha verelim elimizin alýþmasý için:
+
+>>> print("Python", "Programlama", "Dili")
+
+Python Programlama Dili
+
+>>> print('Fýrat', 'Özgül', 'Adana', 1980)
+
+Fýrat Özgül Adana 1980
+
+Bu arada dikkatinizi önemli bir noktaya çekmek istiyorum. Yukarýdaki örneklerde bazen tek týrnak, bazen de çift týrnak kullandýk. Daha önce de söylediðimiz gibi, hangi týrnak tipini kullandýðýmýz önemli deðildir. Python hangi týrnak tipini kullandýðýmýzdan ziyade, týrnak kullanýmýnda tutarlý olup olmadýðýmýzla ilgilenir. Yani Python için önemli olan, karakter dizisini hangi týrnakla baþlatmýþsak, o týrnakla bitirmemizdir. Yani þu tip kullanýmlar geçerli deðildir:
+
+>>> print("karakter dizisi')
+
+>>> print('karakter dizisi")
+
+Karakter dizisini tanýmlamaya baþlarken kullandýðýmýz týrnak tipi ile karakter dizisini tanýmlamayý bitirirken kullandýðýmýz týrnak tipi birbirinden farklý olduðu için bu iki kullaným da hata verecektir.
+
+
+print() Fonksiyonunun Parametreleri
+
+Þimdiye kadar verdiðimiz örneklerde belki çok da belli olmuyordur, ama aslýnda print() fonksiyonu son derece güçlü bir araçtýr. Ýþte þimdi biz bu fonksiyonun gücünü gözler önüne seren özelliklerini incelemeye baþlayacaðýz. Bu bölümü dikkatle takip etmeniz, ilerde yapacaðýmýz çalýþmalarý daha rahat anlayabilmeniz açýsýndan büyük önem taþýr.
+
+
+sep
+
+print() fonksiyonu ile ilgili olarak yukarýda verdiðimiz örnekleri incelediðimizde, bu fonksiyonun kendine özgü bir davranýþ þekli olduðunu görüyoruz. Mesela bir önceki bölümde verdiðimiz þu örneðe bakalým:
+
+>>> print('Fýrat', 'Özgül')
+
+Fýrat Özgül
+
+Burada print() fonksiyonunu iki farklý parametre ile birlikte kullandýk. Bu fonksiyon, kendisine verdiðimiz bu parametreleri belli bir düzene göre birbiriyle birleþtirdi. Bu düzen gereðince print(), kendisine verilen parametreleri birleþtirirken, parametreler arasýna bir boþluk yerleþtiriyor. Bunu daha net görmek için þöyle bir örnek daha verelim:
+
+>>> print("Python", "PHP", "C++", "C", "Erlang")
+
+Python PHP C++ C Erlang
+
+Gördüðünüz gibi, print() fonksiyonu gerçekten de, kendisine verilen parametreleri birleþtirirken, parametrelerin her biri arasýna bir boþluk yerleþtiriyor. Halbuki bu boþluðu biz talep etmedik! Python bize bu boþluðu eþantiyon olarak verdi. Çoðu durumda istediðimiz þey bu olacaktýr, ama bazý durumlarda bu boþluðu istemeyebiliriz. Örneðin:
+
+>>> print("http://", "www.", "istihza.", "com")
+
+http:// www. istihza. com
+
+Ya da boþluk karakteri yerine daha farklý bir karakter kullanmak istiyor da olabiliriz. Peki böyle bir durumda ne yapmamýz gerekir?
+
+Ýþte bu noktada bazý özel araçlardan yararlanarak print() fonksiyonunun öntanýmlý davranýþ kalýplarý üzerinde deðiþiklikler yapabiliriz.
+
+Peki nedir print() fonksiyonunu özelleþtirmemizi saðlayacak bu araçlar?
+
+Hatýrlarsanýz, Python’da fonksiyonlarýn parantezleri içindeki deðerlere parametre adý verildiðini söylemiþtik. Mesela print() fonksiyonunu bir ya da daha fazla parametre ile birlikte kullanabileceðimizi biliyoruz:
+
+>>> print("Mehmet", "Öz", "Ýstanbul", "Çamlýca", 156, "/", 45)
+
+Mehmet Öz Ýstanbul Çamlýca 156 / 45
+
+print() fonksiyonu içinde istediðimiz sayýda karakter dizisi ve/veya sayý deðerli parametre kullanabiliriz.
+
+Fonksiyonlarýn bir de daha özel görünümlü parametreleri vardýr. Mesela print() fonksiyonunun sep adlý özel bir parametresi bulunur. Bu parametre print() fonksiyonunda görünmese bile her zaman oradadýr. Yani diyelim ki þöyle bir kod yazdýk:
+
+>>> print("http://", "www.", "google.", "com")
+
+Burada herhangi bir sep parametresi görmüyoruz. Ancak Python yukarýdaki kodu aslýnda þöyle algýlar:
+
+>>> print("http://", "www.", "google.", "com", sep=" ")
+
+sep ifadesi, Ýngilizcede separator (ayýrýcý, ayraç) kelimesinin kýsaltmasýdýr. Dolayýsýyla print() fonksiyonundaki bu sep parametresi, ekrana basýlacak öðeler arasýna hangi karakterin yerleþtirileceðini gösterir. Bu parametrenin öntanýmlý deðeri bir adet boþluk karakteridir (” “). Yani siz bu özel parametrenin deðerini baþka bir þeyle deðiþtirmezseniz, Python bu parametrenin deðerini bir adet boþluk karakteri olarak alacak ve ekrana basýlacak öðeleri birbirinden birer boþlukla ayýracaktýr. Ancak eðer biz istersek bu sep parametresinin deðerini deðiþtirebiliriz. Böylece Python, karakter dizilerini birleþtirirken araya boþluk deðil, bizim istediðimiz baþka bir karakteri yerleþtirebilir. Gelin þimdi bu parametrenin deðerini nasýl deðiþtireceðimizi görelim:
+
+>>> print("http://", "www.", "istihza.", "com", sep="")
+
+http://www.istihza.com
+
+Gördüðünüz gibi, karakter dizilerini baþarýyla birleþtirip, geçerli bir internet adresi elde ettik.
+
+Burada yaptýðýmýz þey aslýnda çok basit. Sadece sep parametresinin ‘bir adet boþluk karakteri’ olan öntanýmlý deðerini silip, yerine ‘boþ bir karakter dizisi’ deðerini yazdýk. Bu iki kavramýn birbirinden farklý olduðunu söylediðimizi hatýrlýyorsunuz, deðil mi?
+
+Gelin bir örnek daha yapalým:
+
+>>> print("T", "C", sep=".")
+
+T.C
+
+Burada Python’a þöyle bir emir vermiþ olduk:
+
+“T” ve “C” karakter dizilerini birbiriyle birleþtir! Bunu yaparken de bu karakter dizilerinin arasýna nokta iþareti yerleþtir!
+
+sep parametresinin öteki parametrelerden farký her zaman ismiyle birlikte kullanýlmasýdýr. Zaten teknik olarak da bu tür parametrelere ‘isimli parametreler’ adý verilir. Örneðin:
+
+>>> print("Adana", "Mersin", sep="-")
+
+Adana-Mersin
+
+Eðer burada sep parametresinin ismini belirtmeden, doðrudan parametrenin deðerini yazarsak, bu deðerin öteki parametrelerden hiçbir farký kalmayacaktýr:
+
+>>> print("Adana", "Mersin", "-")
+
+Adana Mersin -
+
+Gelin isterseniz bu parametreyle ilgili bir örnek daha yapalým:
+
+‘Bir mumdur iki mumdur...’ diye baþlayan türküyü biliyorsunuzdur. Þimdi bu türküyü Python’la nasýl yazabileceðimizi görelim!
+
+>>> print("bir", "iki", "üç", "dört", "on dört", sep="mumdur")
+
+birmumdurikimumdurüçmumdurdörtmumduron dört
+
+Burada bir terslik olduðu açýk! Karakter dizileri birbirlerine sýkýþýk düzende birleþtirildi. Bunlarýn arasýnda birer boþluk olsa tabii daha iyi olurdu. Ancak biliyorsunuz sep parametresinin öntanýmlý deðerini silip, yerine “mumdur” deðerini yerleþtirdiðimiz için, Python’ýn otomatik olarak yerleþtirdiði boþluk karakteri kayboldu. Ama eðer istersek o boþluk karakterlerini kendimiz de ayarlayabiliriz:
+
+>>> print("bir", "iki", "üç", "dört", "on dört", sep=" mumdur ")
+
+bir mumdur iki mumdur üç mumdur dört mumdur on dört
+
+Gördüðünüz gibi, sep parametresine verdiðimiz “mumdur” deðerinin saðýnda ve solunda birer boþluk býrakarak sorunumuzu çözebildik. Bu sorunu çözmenin baþka bir yolu daha var. Hatýrlarsanýz etkileþimli kabukta ilk örneklerimizi verirken karakter dizilerini birleþtirmek için + iþaretinden de yararlanabileceðimizi söylemiþtik. Dolayýsýyla sep parametresini þöyle de yazabiliriz:
+
+>>> print("bir", "iki", "üç", "dört", "on dört", sep=" " + "mumdur" + " ")
+
+Burada da, “mumdur” adlý karakter dizisinin baþýnda ve sonunda birer boþluk býrakmak yerine, gerekli boþluklarý + iþareti yardýmýyla bu karakter dizisine birleþtirdik. Hatta istersek + iþlecini kullanmak zorunda olmadýðýmýzý dahi biliyorsunuz:
+
+>>> print("bir", "iki", "üç", "dört", "on dört", sep=" " "mumdur" " ")
+
+Ama gördüðünüz gibi bir problemimiz daha var. Türkünün sözleri þu þekilde olmalýydý:
+
+bir mumdur iki mumdur üç mumdur dört mumdur on dört mumdur
+
+Ama sondaki ‘mumdur’ kelimesi yukarýdaki çýktýda yok. Normal olan da bu aslýnda. sep parametresi, karakter dizilerinin arasýna bir deðer yerleþtirir. Karakter dizilerinin son tarafýyla ilgilenmez. Bu iþ için print() fonksiyonu baþka bir parametreye sahiptir.
+
+Bu arada, yukarýdaki örneklerde hep karakter dizilerini kullanmýþ olmamýz sizi yanýltmasýn. sep parametresi yalnýzca karakter dizilerinin deðil sayýlarýn arasýna da istediðiniz bir deðerin yerleþtirilmesini saðlayabilir. Mesela:
+
+>>> print(1, 2, 3, 4, 5, sep="-")
+
+1-2-3-4-5
+
+Ancak sep parametresine deðer olarak yalnýzca karakter dizilerini ve None adlý özel bir sözcüðü verebiliriz. (None sözcüðünden ileride söz edeceðiz):
+
+>>> print(1, 2, 3, 4, 5, sep=0)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: sep must be None or a string, not int
+
+Gördüðünüz gibi, sep parametresine bir sayý olan 0 deðerini veremiyoruz.
+
+Peki bu parametreye None deðeri verirsek ne olur? Bu parametreye None deðeri verildiðinde, print() fonksiyonu bu parametre için öntanýmlý deðeri (yani bir adet boþluk) kullanýr:
+
+>>> print('a', 'b', sep=None)
+
+a b
+
+Eðer amacýnýz parametreleri birbirine bitiþtirmekse, yani sep parametresinin öntanýmlý deðeri olan boþluk karakterini ortadan kaldýrmaksa, sep parametresine boþ bir karakter dizisi vermeniz gerektiðini biliyorsunuz:
+
+>>> print('a', 'b', sep='')
+
+ab
+
+print() fonksiyonunun sep parametresini bütün ayrýntýlarýyla incelediðimize göre, bu fonksiyonun bir baþka özel parametresinden söz edebiliriz.
+
+
+end
+
+Bir önceki bölümde þöyle bir laf etmiþtik:
+
+print() fonksiyonun sep adlý özel bir parametresi bulunur. Bu parametre print() fonksiyonunda görünmese bile her zaman oradadýr.
+
+Ayný bu þekilde, print() fonksiyonunun end adlý özel bir parametresi daha bulunur. Týpký sep parametresi gibi, end parametresi de print() fonksiyonunda görünmese bile her zaman oradadýr.
+
+Bildiðiniz gibi, sep parametresi print() fonksiyonuna verilen parametreler birleþtirilirken araya hangi karakterin gireceðini belirliyordu. end parametresi ise bu parametrelerin sonuna neyin geleceðini belirler.
+
+print() fonksiyonu öntanýmlý olarak, parametrelerin sonuna ‘satýr baþý karakteri’ ekler. Peki bu satýr baþý karakteri (veya ‘yeni satýr karakteri’) denen þey de ne oluyor?
+
+Dilerseniz bunu bir örnek üzerinde görelim.
+
+Þöyle bir kodumuz olsun:
+
+>>> print("Pardus ve Ubuntu birer GNU/Linux daðýtýmýdýr.")
+
+Bu kodu yazýp Enter tuþuna bastýðýmýz anda print() fonksiyonu iki farklý iþlem gerçekleþtirir:
+
+Öncelikle karakter dizisini ekrana yazdýrýr. 
+Ardýndan bir alt satýra geçip bize >>> iþaretini gösterir. 
+Ýþte bu ikinci iþlem, karakter dizisinin sonunda bir adet satýr baþý karakteri olmasýndan, daha doðrusu print() fonksiyonunun, satýr baþý karakterini karakter dizisinin sonuna eklemesinden kaynaklanýr. Bu açýklama biraz kafa karýþtýrýcý gelmiþ olabilir. O halde biraz daha açýklayalým. Þu örneðe bakýn:
+
+>>> print("Pardus\nUbuntu")
+
+Pardus
+Ubuntu
+
+Burada “Pardus” ve “Ubuntu” karakter dizilerinin tam ortasýnda çok özel bir karakter dizisi daha görüyorsunuz. Bu karakter dizisi þudur: \n. Ýþte bu özel karakter dizisine satýr baþý karakteri (newline) adý verilir. Bu karakterin görevi, karakter dizisini, bulunduðu noktadan bölüp, karakter dizisinin geri kalanýný bir alt satýra geçirmektir. Zaten çýktýda da bu iþlevi yerine getirdiðini görüyorsunuz. Karakter dizisi “Pardus” kýsmýndan sonra ikiye bölünüyor ve bu karakter dizisinin geri kalan kýsmý olan “Ubuntu” karakter dizisi bir alt satýra yazdýrýlýyor. Bunu daha iyi anlamak için bir örnek daha verelim:
+
+>>> print("birinci satýr\nikinci satýr\nüçüncü satýr")
+
+birinci satýr
+ikinci satýr
+üçüncü satýr
+
+Peki size bir soru sorayým: Acaba yukarýdaki kodlarý daha verimli bir þekilde nasýl yazabiliriz?
+
+Evet, doðru tahmin ettiniz... Tabii ki sep parametresini kullanarak:
+
+>>> print("birinci satýr", "ikinci satýr", "üçüncü satýr", sep="\n")
+
+birinci satýr
+ikinci satýr
+üçüncü satýr
+
+Burada yaptýðýmýz þey çok basit. sep parametresinin deðerini \n, yani yeni satýr karakteri (veya satýr baþý karakteri) olarak deðiþtirdik. Böylece karakter dizileri arasýna birer \n karakteri yerleþtirerek her bir karakter dizisinin farklý satýra yazdýrýlmasýný saðladýk.
+
+Ýþte end parametresinin öntanýmlý deðeri de bu \n karakteridir ve bu parametre print() fonksiyonunda görünmese bile her zaman oradadýr.
+
+Yani diyelim ki þöyle bir kod yazdýk:
+
+>>> print("Bugün günlerden Salý")
+
+Burada herhangi bir end parametresi görmüyoruz. Ancak Python yukarýdaki kodu aslýnda þöyle algýlar:
+
+>>> print("Bugün günlerden Salý", end="\n")
+
+Biraz önce de dediðimiz gibi, bu kodu yazýp Enter tuþuna bastýðýmýz anda print() fonksiyonu iki farklý iþlem gerçekleþtirir:
+
+Öncelikle karakter dizisini ekrana yazdýrýr. 
+Ardýndan bir alt satýra geçip bize >>> iþaretini gösterir. 
+Bunun ne demek olduðunu anlamak için end parametresinin deðerini deðiþtirmemiz yeterli olacaktýr:
+
+>>> print("Bugün günlerden Salý", end=".")
+
+Bugün günlerden Salý.>>>
+
+Gördüðünüz gibi, end parametresinin öntanýmlý deðeri olan \n karakterini silip yerine . (nokta) iþareti koyduðumuz için, komutu yazýp Enter tuþuna bastýðýmýzda print() fonksiyonu satýr baþýna geçmedi. Yeni satýra geçebilmek için Enter tuþuna kendimiz basmalýyýz. Elbette, eðer yukarýdaki kodlarý þöyle yazarsanýz, print() fonksiyonu hem karakter dizisinin sonuna nokta ekleyecek, hem de satýr baþýna geçecektir:
+
+>>> print("Bugün günlerden Salý", end=".\n")
+
+Bugün günlerden Salý.
+
+Þimdi bu öðrendiklerimizi türkümüze uygulayalým:
+
+>>> print("bir", "iki", "üç", "dört", "on dört",
+... sep=" mumdur ", end=" mumdur\n")
+
+Not
+
+Burada kodlarýmýzýn saða doðru çirkin bir þekilde uzamasýný engellemek için “on dört” karakter dizisini yazýp virgülü koyduktan sonra Enter tuþuna basarak bir alt satýra geçtik. Bir alt satýra geçtiðimizde >>> iþaretinin ... iþaretine dönüþtüðüne dikkat edin. Python’da doðru kod yazmak kadar, yazdýðýmýz kodlarýn düzgün görünmesi de önemlidir. O yüzden yazdýðýmýz her bir kod satýrýnýn mümkün olduðunca 79 karakteri geçmemesini saðlamalýyýz. Eðer yazdýðýnýz bir satýr 79 karakteri aþýyorsa, aþan kýsmý yukarýda gösterdiðimiz þekilde alt satýra alabilirsiniz.
+
+end parametresi de, týpký sep parametresi gibi, her zaman ismiyle birlikte kullanýlmasý gereken bir parametredir. Yani eðer end parametresinin ismini belirtmeden sadece deðerini kullanmaya çalýþýrsak Python ne yapmaya çalýþtýðýmýzý anlayamaz.
+
+Yine týpký sep parametresi gibi, end parametresinin deðeri de sadece bir karakter dizisi veya None olabilir:
+
+>>> print(1, 2, 3, 4, 5, end=0)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: end must be None or a string, not int
+
+Gördüðünüz gibi, end parametresine bir sayý olan 0 deðerini veremiyoruz.
+
+Eðer bu parametreye None deðeri verirsek, týpký sep parametresinde olduðu gibi, print() fonksiyonu bu parametre için öntanýmlý deðeri (yani satýr baþý karakteri) kullanýr:
+
+>>> print('a', 'b', end=None)
+
+a b
+
+Eðer amacýnýz yeni satýra geçilmesini engellemekse, yani end parametresinin öntanýmlý deðeri olan \n kaçýþ dizisini ortadan kaldýrmaksa, end parametresine boþ bir karakter dizisi vermelisiniz:
+
+>>> print('a', 'b', end='')
+
+a b>>>
+
+
+file
+
+Not
+
+Burada henüz öðrenmediðimiz bazý þeyler göreceksiniz. Hiç endiþe etmeyin. Bunlarý ilerde bütün ayrýntýlarýyla öðreneceðiz. Þimdilik konu hakkýnda biraz olsun fikir sahibi olmanýzý saðlayabilirsek kendimizi baþarýlý sayacaðýz.
+
+print() fonksiyonunun sep ve end dýþýnda üçüncü bir özel parametresi daha bulunur. Bu parametrenin adý file‘dýr. Görevi ise, print() fonksiyonuna verilen karakter dizisi ve/veya sayýlarýn, yani parametrelerin nereye yazýlacaðýný belirtmektir.
+
+Bu parametrenin öntanýmlý deðeri sys.stdout‘tur. Peki bu ne anlama geliyor? sys.stdout, ‘standart çýktý konumu’ anlamýna gelir. Peki ‘standart çýktý konumu’ ne demek?
+
+Standart çýktý konumu; bir programýn, ürettiði çýktýlarý verdiði yerdir. Aslýnda bu kavramýn ne demek olduðu adýndan da anlaþýlýyor:
+
+standart çýktý konumu = çýktýlarýn standart olarak verildiði konum.
+
+Mesela Python öntanýmlý olarak, ürettiði çýktýlarý ekrana verir. Eðer o anda etkileþimli kabukta çalýþýyorsanýz, Python ürettiði çýktýlarý etkileþimli kabuk üzerinde gösterir. Eðer yazdýðýnýz bir programý komut satýrýnda çalýþtýrýyorsanýz, üretilen çýktýlar komut satýrýnda görünür. Dolayýsýyla Python’ýn standart çýktý konumu etkileþimli kabuk veya komut satýrýdýr. Yani print() fonksiyonu yardýmýyla bastýðýnýz çýktýlar etkileþimli kabukta ya da komut satýrýnda görünecektir.
+
+Þimdi bu konuyu daha iyi anlayabilmek için birkaç örnek yapalým.
+
+Normal þartlar altýnda print() fonksiyonunun çýktýsýný etkileþimli kabukta görürüz:
+
+>>> print("Ben Python, Monty Python!")
+
+Ben Python, Monty Python!
+
+Ama eðer istersek print() fonksiyonunun, çýktýlarýný ekrana deðil, bir dosyaya yazdýrmasýný da saðlayabiliriz. Mesela biz þimdi print() fonksiyonunun deneme.txt adlý bir dosyaya çýktý vermesini saðlayalým.
+
+Bunun için sýrasýyla þu kodlarý yazalým:
+
+>>> dosya = open("deneme.txt", "w")
+>>> print("Ben Python, Monty Python!", file=dosya)
+>>> dosya.close()
+
+Herhangi bir çýktý almadýnýz, deðil mi? Evet. Çünkü yazdýðýmýz bu kodlar sayesinde print() fonksiyonu, çýktýlarýný deneme.txt adlý bir dosyaya yazdýrdý.
+
+Gelin isterseniz yukarýdaki kodlarý satýr satýr inceleyelim:
+
+1. Öncelikle deneme.txt adlý bir dosya oluþturduk ve bu dosyayý dosya adlý bir deðiþkene atadýk. Burada kullandýðýmýz open() fonksiyonuna çok takýlmayýn. Bunu birkaç bölüm sonra inceleyeceðiz. Biz þimdilik bu þekilde dosya oluþturulduðunu bilelim yeter. Bu arada open fonksiyonunun da biçim olarak type(), len(), pow() ve print() fonksiyonlarýna ne kadar benzediðine dikkat edin. Gördüðünüz gibi open() fonksiyonu da týpký type(), len(), pow() ve print() fonksiyonlarý gibi birtakým parametreler alýyor. Bu fonksiyonun ilk parametresi “deneme.txt” adlý bir karakter dizisi. Ýþte bu karakter dizisi bizim oluþturmak istediðimiz dosyanýn adýný gösteriyor. Ýkinci parametre ise “w” adlý baþka bir karakter dizisi. Bu da deneme.txt dosyasýnýn yazma kipinde (modunda) açýlacaðýný gösteriyor. Ama dediðim gibi, siz þimdilik bu ayrýntýlara fazla takýlmayýn. Ýlerleyen derslerde, bu konularý adýnýzý bilir gibi bileceðinizden emin olabilirsiniz.
+
+2. Oluþturduðumuz bu deneme.txt adlý dosya, o anda bulunduðunuz dizin içinde oluþacaktýr. Bu dizinin hangisi olduðunu öðrenmek için þu komutlarý verebilirsiniz:
+
+>>> import os
+>>> os.getcwd()
+
+Bu komutun çýktýsýnda hangi dizinin adý görünüyorsa, deneme.txt dosyasý da o dizinin içindedir. Mesela bendeki çýktý /home/istihza/Desktop. Demek ki oluþturduðum deneme.txt adlý dosya masaüstündeymiþ. Ben bu komutlarý Ubuntu üzerinde verdim. Eðer Windows üzerinde verseydim þuna benzer bir çýktý alacaktým: C:\Users\istihza\Desktop
+
+3. Ardýndan da normal bir þekilde print() fonksiyonumuzu çalýþtýrdýk. Ama gördüðünüz gibi print() fonksiyonu bize herhangi bir çýktý vermedi. Çünkü, daha önce de söylediðimiz gibi, print() fonksiyonunu biz ekrana deðil, dosyaya çýktý verecek þekilde ayarladýk. Bu iþlemi, file adlý bir parametreye, biraz önce tanýmladýðýmýz dosya deðiþkenini yazarak yaptýk.
+
+4. Son komut yardýmýyla da, yaptýðýmýz deðiþikliklerin dosyada görünebilmesi için ilk baþta açtýðýmýz dosyayý kapatýyoruz.
+
+Þimdi deneme.txt adlý dosyayý açýn. Biraz önce print() fonksiyonuyla yazdýrdýðýmýz “Ben Python, Monty Python!” karakter dizisinin dosyaya iþlenmiþ olduðunu göreceksiniz.
+
+Böylece print() fonksiyonunun standart çýktý konumunu deðiþtirmiþ olduk. Yani print() fonksiyonunun file adlý parametresine farklý bir deðer vererek, print() fonksiyonunun etkileþimli kabuða deðil dosyaya yazmasýný saðladýk.
+
+Týpký sep ve end parametreleri gibi, file parametresi de, siz görmeseniz bile her zaman print() fonksiyonunun içinde vardýr. Yani diyelim ki þöyle bir komut verdik:
+
+>>> print("Tahir olmak da ayýp deðil", "Zühre olmak da")
+
+Python bu komutu þöyle algýlar:
+
+>>> print("Tahir olmak da ayýp deðil", "Zühre olmak da",
+... sep=" ", end="\n", file=sys.stdout)
+
+Yani kendisine parametre olarak verilen deðerleri ekrana yazdýrýrken sýrasýyla þu iþlemleri gerçekleþtirir:
+
+
+Parametrelerin arasýna birer boþluk koyar (sep=" "), 
+Ekrana yazdýrma iþlemi bittikten sonra parametrelerin sonuna satýr baþý karakteri ekler (end="\n") 
+Bu çýktýyý standart çýktý konumuna gönderir (file=sys.stdout). 
+
+Ýþte biz burada file parametresinin deðeri olan standart çýktý konumuna baþka bir deðer vererek bu konumu deðiþtiriyoruz.
+
+Gelin isterseniz bununla ilgili bir örnek daha yapalým. Mesela kiþisel bilgilerimizi bir dosyaya kaydedelim. Öncelikle bilgileri kaydedeceðimiz dosyayý oluþturalým:
+
+>>> f = open("kiþisel_bilgiler.txt", "w")
+
+Bu kodlarla, kiþisel_bilgiler.txt adýný taþýyan bir dosyayý yazma kipinde (w) açmýþ ve bu dosyayý f adlý bir deðiþkene atamýþ olduk. Þimdi bilgileri yazmaya baþlayabiliriz:
+
+>>> print("Fýrat Özgül", file=f)
+>>> print("Adana", file=f)
+>>> print("Ubuntu", file=f)
+
+Ýþimiz bittiðinde dosyayý kapatmayý unutmuyoruz. Böylece bütün bilgiler dosyaya yazýlmýþ oluyor:
+
+>>> f.close()
+
+Oluþturduðumuz kiþisel_bilgiler.txt adlý dosyayý açtýðýmýzda, print() fonksiyonuna verdiðimiz parametrelerin dosyaya yazdýrýldýðýný görüyoruz.
+
+En baþta da söylediðim gibi, bu bölümde henüz öðrenmediðimiz bazý þeylerle karþýlaþtýk. Eðer yukarýda verilen örnekleri anlamakta zorlandýysanýz hiç endiþe etmenize gerek yok. Birkaç bölüm sonra burada anlattýðýmýz þeyler size çocuk oyuncaðý gibi gelecek...
+
+
+flush
+
+Þimdiye kadar print() fonksiyonunun sep, end ve file adlý özel birtakým parametreleri olduðunu öðrendik. print() fonksiyonunun bunlarýn dýþýnda baþka bir özel parametresi daha bulunur. Bu parametrenin adý flush. Ýþte þimdi biz print() fonksiyonunun bu flush adlý parametresinden söz edeceðiz.
+
+Bildiðiniz gibi, print() gibi bir komut verdiðimizde Python, yazdýrmak istediðimiz bilgiyi standart çýktý konumuna gönderir. Ancak Python’da bazý iþlemler standart çýktý konumuna gönderilmeden önce bir süre tamponda bekletilir ve daha sonra bekleyen bu iþlemler topluca standart çýktý konumuna gönderilir. Peki ilk baþta çok karmaþýkmýþ gibi görünen bu ifade ne anlama geliyor?
+
+Aslýnda siz bu olguya hiç yabancý deðilsiniz. file parametresini anlatýrken verdiðimiz þu örneði tekrar ele alalým:
+
+>>> f = open("kiþisel_bilgiler.txt", "w")
+
+Bu komutla kiþisel_bilgiler.txt adlý bir dosyayý yazma kipinde açtýk. Þimdi bu dosyaya bazý bilgiler ekleyelim:
+
+>>> print("Fýrat Özgül", file=f)
+
+Bu komutla kiþisel_bilgiler.txt adlý dosyaya ‘Fýrat Özgül’ diye bir satýr eklemiþ olduk.
+
+Þimdi bilgisayarýnýzda oluþan bu kiþisel_bilgiler.txt dosyasýný açýn. Gördüðünüz gibi dosyada hiçbir bilgi yok. Dosya þu anda boþ görünüyor. Halbuki biz biraz önce bu dosyaya ‘Fýrat Özgül’ diye bir satýr eklemiþtik, deðil mi?
+
+Python bizim bu dosyaya eklemek istediðimiz satýrý tampona kaydetti. Dosyaya yazma iþlemleri sona erdiðinde ise Python, tamponda bekleyen bütün bilgileri standart çýktý konumuna (yani bizim durumumuzda f adlý deðiþkenin tuttuðu kiþisel_bilgiler.txt adlý dosyaya) boþaltacak.
+
+Dosyaya baþka bilgiler de yazalým:
+
+>>> print("Adana", file=f)
+>>> print("Ubuntu", file=f)
+
+Dosyaya yazacaðýmýz þeyler bu kadar. Artýk yazma iþleminin sona erdiðini Python’a bildirmek için þu komutu veriyoruz:
+
+>>> f.close()
+
+Böylece dosyamýzý kapatmýþ olduk. Þimdi kiþisel_bilgiler.txt adlý dosyaya çift týklayarak dosyayý tekrar açýn. Orada ‘Fýrat Özgül’, ‘Adana’ ve ‘Ubuntu’ satýrlarýný göreceksiniz.
+
+Gördüðünüz gibi, gerçekten de Python dosyaya yazdýrmak istediðimiz bütün verileri önce tamponda bekletti, daha sonra dosya kapatýlýnca tamponda bekleyen bütün verileri dosyaya boþalttý. Ýþte flush parametresi ile, bahsettiðimiz bu boþaltma iþlemini kontrol edebilirsiniz. Þimdi dikkatlice inceleyin:
+
+>>> f = open("kiþisel_bilgiler.txt", "w")
+
+Dosyamýzý oluþturduk. Þimdi bu dosyaya bazý bilgiler ekleyelim:
+
+>>> print("Merhaba Dünya!", file=f, flush=True)
+
+Gördüðünüz gibi, burada flush adlý yeni bir parametre kullandýk. Bu parametreye verdiðimiz deðer True. Þimdi dosyaya çift týklayarak dosyayý açýn. Gördüðünüz gibi, henüz dosyayý kapatmadýðýmýz halde bilgiler dosyaya yazýldý. Bu durum, tahmin edebileceðiniz gibi, flush parametresine True deðeri vermemiz sayesindedir. Bu parametre iki deðer alabilir: True ve False. Bu parametrenin öntanýmlý deðeri False‘tur. Yani eðer biz bu parametreye herhangi bir deðer belirtmezsek Python bu parametrenin deðerini False olarak kabul edecek ve bilgilerin dosyaya yazýlmasý için dosyanýn kapatýlmasýný bekleyecektir. Ancak bu parametreye True deðerini verdiðimizde ise veriler tamponda bekletilmeksizin standart çýktý konumuna gönderilecektir.
+
+Yazdýðýnýz bir programda, yapmak istediðiniz iþin niteliðine göre, bir dosyaya yazmak istediðiniz bilgilerin bir süre tamponda bekletilmesini veya hiç bekletilmeden doðrudan dosyaya yazýlmasýný isteyebilirsiniz. Ýhtiyacýnýza baðlý olarak da flush parametresinin deðerini True veya False olarak belirleyebilirsiniz.

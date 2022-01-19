@@ -1,0 +1,91 @@
+
+On Altýlý Sayma Sistemi
+
+Þu ana kadar onlu ve sekizli sayma sistemlerinden bahsettik. Önemli bir baþka sayma sistemi de on altýlý sayma sistemidir.
+
+Onlu sayma sisteminde on farklý rakam, sekizli sayma sisteminde sekiz farklý rakam olduðunu öðrenmiþtik. On altýlý sayma sisteminde ise, tahmin edebileceðiniz gibi, on altý farklý rakam bulunur:
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, e, f
+
+Þimdiye kadar öðrenmiþ olduðumuz sayma sistemleri arasýndaki farký daha net görmek için biraz önce yazdýðýmýz kodlara on altýlý sayma sistemini de ekleyelim:
+
+sayý_sistemleri = ["onlu", "sekizli", "on altýlý"]
+
+print(("{:^8} "*len(sayý_sistemleri)).format(*sayý_sistemleri))
+
+for i in range(17):
+print("{0:^8} {0:^8o} {0:^8x}".format(i))
+
+Buradan þöyle bir çýktý alacaðýz:
+
+onlu sekizli on altýlý
+0 0 0
+1 1 1
+2 2 2
+3 3 3
+4 4 4
+5 5 5
+6 6 6
+7 7 7
+8 10 8
+9 11 9
+10 12 a
+11 13 b
+12 14 c
+13 15 d
+14 16 e
+15 17 f
+16 20 10
+
+Gördüðünüz gibi, onlu sistemde birbirinden farklý toplam 10 adet rakam/simge varken, sekizli sistemde toplam 8 farklý simge, on altýlý sistemde ise toplam 16 farklý simge var. Yani onlu sistemde olasý bütün sayýlar eldeki 10 farklý simge ve bunlarýn kombinasyonunun kullanýlmasý yoluyla; sekizli sistemde 8 farklý simge ve bunlarýn kombinasyonunun kullanýlmasý yoluyla; on altýlý sistemde ise 16 farklý simge ve bunlarýn kombinasyonunun kullanýlmasý yoluyla gösteriliyor. Bu sebeple onlu sistemde 9 sayýsýndan itibaren bir basamak artýrýlýp simge listesinin baþýna dönülürken, sekizli sistemde 7 sayýsýndan itibaren; on altýlý sistemde ise f sayýsýndan itibaren baþa dönülüyor.
+
+On altýlý sistemde 9 sayýsýndan sonra gelen harfleri yadýrgamýþ olabilirsiniz. Bu durumu þöyle düþünün: Sayý dediðimiz þeyler insan icadý birtakým simgelerden ibarettir. Daha önce de söylediðimiz gibi, doðada ‘2’ veya ‘7’ diye bir þey göremezsiniz...
+
+Ýþte on altýlýk sistemdeki sayýlarý gösterebilmek için de birtakým simgelere ihtiyaç var. Ýlk on simge, onluk sayma sistemindekilerle ayný. Ancak 10‘dan sonraki sayýlarý gösterebilmek için elimizde baþka simge yok. On altýlýk sistemi tasarlayanlar, bir tercih sonucu olarak, eksik sembolleri alfabe harfleriyle tamamlamayý tercih etmiþler. Alfabe harfleri yerine pekala Roma rakamlarýný da tercih edebilirlerdi. Eðer bu sistemi tasarlayanlar böyle tercih etmiþ olsaydý bugün on altýlýk sistemi þöyle gösteriyor olabilirdik:
+
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+I
+II
+III
+IV
+V
+VI
+
+Bugün bu sayýlarý bu þekilde kullanmýyor olmamýzýn tek sebebi, sistemi tasarlayanlarýn bunu böyle tercih etmemiþ olmasýdýr...
+
+On altýlý sayma sisteminde bir sayýyý oluþturan rakamlar 16‘nýn kuvvetleri olarak hesaplanýr. Peki ama bu sayma sistemindeki a, b, c, d, e ve f harfleriyle nasýl aritmetik iþlem yapacaðýz? Örneðin on altýlý sayma sistemindeki 7bc sayýsýný ele alalým. Bu sayýnýn onlu sistemdeki karþýlýðýný 16‘nýn kuvvetlerini kullanarak hesaplayabiliriz hesaplamasýna, ama peki yukarýda bahsettiðimiz harfler ne olacak? Yani þöyle bir iþlem tabii ki mümkün deðil:
+
+>>> ((c * 16 ** 0)) + ((b * 16 ** 1)) + ((7 * 16 ** 2))
+
+Elbette c ve b sayýlarýný herhangi bir aritmetik iþlemde kullanamayýz. Bunun yerine, bu harflerin onlu sistemdeki karþýlýklarýný kullanacaðýz:
+
+a –> 10
+
+b –> 11
+
+c –> 12
+
+d –> 13
+
+e –> 14
+
+f –> 15
+
+
+Buna göre:
+
+>>> ((12 * (16 ** 0)) + ((11 * (16 ** 1)) + ((7 * (16 ** 2))
+
+1980
+
+Demek ki on altýlý sistemdeki ‘7bc’ sayýsýnýn onlu sistemdeki karþýlýðý 1980‘miþ.
+

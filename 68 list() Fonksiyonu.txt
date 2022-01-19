@@ -1,0 +1,128 @@
+
+list() Fonksiyonu
+
+Yukarýdaki örneklerden de gördüðünüz gibi liste oluþturmak için öðeleri belirleyip bunlarý köþeli parantezler içine almamýz yeterli oluyor. Bu yöntemin dýþýnda, liste oluþturmanýn bir yöntemi daha bulunur. Mesela elimizde þöyle bir karakter dizisi olduðunu düþünelim:
+
+>>> alfabe = "abcçdefgðhýijklmnoöprsþtuüvyz"
+
+Sorumuz þu olsun: ‘Acaba bu karakter dizisini listeye nasýl çeviririz?’
+
+Karakter dizilerini anlatýrken split() adlý bir metottan söz etmiþtik. Bu metot karakter dizilerini belli bir ölçüte göre bölmemizi saðlýyordu. split() metoduyla elde edilen verinin bir liste olduðunu biliyorsunuz. Örneðin:
+
+>>> isimler = "ahmet mehmet cem"
+
+>>> isimler.split()
+
+['ahmet', 'mehmet', 'cem']
+
+Ancak split() metodunun bir karakter dizisini bölüp bize bir liste verebilmesi için karakter dizisinin belli bir ölçüte göre bölünebilir durumda olmasý gerekiyor. Mesela yukarýdaki isimler adlý karakter dizisi belli bir ölçüte göre bölünebilir durumdadýr. Neden? Çünkü karakter dizisi içindeki her parça arasýnda bir boþluk karakteri var. Dolayýsýyla split() metodu bu karakter dizisini boþluklardan bölebiliyor. Ayný þey þu karakter dizisi için de geçerlidir:
+
+>>> isimler = "elma, armut, çilek"
+
+Bu karakter dizisini oluþturan her bir parça arasýnda bir adet virgül ve bir adet boþluk karakteri var. Dolayýsýyla biz bu karakter dizisini split() metodunu kullanarak “virgül + boþluk karakteri” ölçütüne göre bölebiliriz:
+
+>>> isimler.split(", ")
+
+['elma', 'armut', 'çilek']
+
+Ancak bölümün baþýnda tanýmladýðýmýz alfabe adlý karakter dizisi biraz farklýdýr:
+
+>>> alfabe = "abcçdefgðhýijklmnoöprsþtuüvyz"
+
+Gördüðünüz gibi, bu karakter dizisi tek bir parçadan oluþuyor. Dolayýsýyla bu karakter dizisini öðelerine bölmemizi saðlayacak bir ölçüt yok. Yani bu karakter dizisini þu þekilde bölemeyiz:
+
+>>> alfabe.split()
+
+['abcçdefgðhýijklmnoöprsþtuüvyz']
+
+Elbette bu karakter dizisini isterseniz farklý þekillerde bölebilirsiniz. Mesela:
+
+>>> alfabe.split("i")
+
+['abcçdefgðhý', 'jklmnoöprsþtuüvyz']
+
+Gördüðünüz gibi, biz burada alfabe karakter dizisini “i” harfinden bölebildik. Ama istediðimiz þey bu deðil. Biz aslýnda þöyle bir çýktý elde etmek istiyoruz:
+
+['a', 'b', 'c', 'ç', 'd', 'e', 'f', 'g', 'ð', 'h', 'ý', 'i', 'j',
+'k', 'l', 'm', 'n', 'o', 'ö', 'p', 'r', 's', 'þ', 't', 'u', 'ü',
+'v', 'y', 'z']
+
+Yani bizim amacýmýz, alfabe karakter dizisi içindeki her bir öðeyi birbirinden ayýrmak. Ýþte Türk alfabesindeki harflerden oluþan bu karakter dizisini, list() adlý bir fonksiyondan yararlanarak istediðimiz þekilde bölebiliriz:
+
+>>> harf_listesi = list(alfabe)
+>>> print(harf_listesi)
+
+['a', 'b', 'c', 'ç', 'd', 'e', 'f', 'g', 'ð', 'h', 'ý', 'i', 'j',
+ 'k', 'l', 'm', 'n', 'o', 'ö', 'p', 'r', 's', 'þ', 't', 'u', 'ü',
+ 'v', 'y', 'z']
+
+Böylece list() fonksiyonu yardýmýyla bu karakter dizisini tek hamlede listeye çevirmiþ olduk.
+
+Peki bir karakter dizisini neden listeye çevirme ihtiyacý duyarýz? Þu anda listelerle ilgili pek çok þeyi henüz bilmediðimiz için ilk bakýþta bu çevirme iþlemi gözünüze gereksizmiþ gibi görünebilir, ama ilerleyen zamanda sizin de göreceðiniz gibi, bazý durumlarda listeleri manipüle etmek karakter dizilerini manipüle etmeye kýyasla çok daha kolaydýr. O yüzden kimi zaman karakter dizilerini listeye çevirmek durumunda kalabilirsiniz.
+
+list() fonksiyonunun yaptýðý iþi, daha önce öðrendiðimiz str(), int() ve float() fonksiyonlarýnýn yaptýðý iþle kýyaslayabilirsiniz. list() fonksiyonu da týpký str(), int() ve float() fonksiyonlarý gibi bir dönüþtürme fonksiyonudur. Örneðin int() fonksiyonunu kullanarak sayý deðerli karakter dizilerini sayýya dönüþtürebiliyoruz:
+
+>>> k = "123"
+>>> int(k)
+
+123
+
+Bu dönüþtürme iþlemi sayesinde sayýlar üzerinde aritmetik iþlem yapma imkanýmýz olabiliyor. Ýþte list() fonksiyonu da buna benzer bir amaca hizmet eder. Mesela input() fonksiyonundan gelen bir karakter dizisi ile toplama çýkarma yapabilmek için nasýl bu karakter dizisini önce sayýya dönüþtürmemiz gerekiyorsa, bazý durumlarda bu karakter dizisini (veya baþka veri tiplerini) listeye çevirmemiz de gerekebilir. Böyle bir durumda list() fonksiyonunu kullanarak farklý veri tiplerini rahatlýkla listeye çevirebiliriz.
+
+Yukarýdaki iþlevlerinin dýþýnda, list() fonksiyonu boþ bir liste oluþturmak için de kullanýlabilir:
+
+>>> li = list()
+>>> print(li)
+
+[]
+
+Yukarýdaki kodlardan gördüðünüz gibi, boþ bir liste oluþturmak için liste = [] koduna alternatif olarak list() fonksiyonundan da yararlanabilirsiniz.
+
+list() fonksiyonunun önemli bir görevi de range() fonksiyonunun, sayý aralýðýný ekrana basmasýný saðlamaktýr. Bildiðiniz gibi, range() fonksiyonu tek baþýna bir sayý aralýðýný ekrana dökmez. Bu fonksiyon bize yalnýzca þöyle bir çýktý verir:
+
+>>> range(10)
+
+range(0, 10)
+
+Bu sayý aralýðýný ekrana dökmek için range() fonksiyonu üzerinde bir for döngüsü kurmamýz gerekir:
+
+>>> for i in range(10):
+... print(i)
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+Bu bölümde verdiðimiz örneklerde ayný iþi þöyle de yapabileceðimizi öðrenmiþtik:
+
+>>> print(*range(10))
+
+0 1 2 3 4 5 6 7 8 9
+
+Bu görevi yerine getirmenin üçüncü bir yolu da list() fonksiyonunu kullanmaktýr:
+
+>>> list(range(10))
+
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Aslýnda burada yaptýðýmýz þey range(10) ifadesini bir listeye dönüþtürmekten ibarettir. Burada range türünde bir veriyi list türünde bir veriye dönüþtürüyoruz:
+
+>>> type(range(10))
+
+<class 'range'>
+
+>>> li = list(range(10))
+>>> type(li)
+
+<class 'list'>
+
+Gördüðünüz gibi, yukarýdaki üç yöntem de aralýktaki sayýlarý ekrana döküyor. Yalnýz dikkat ederseniz bu üç yöntemin çýktýlarý aslýnda görünüþ olarak birbirlerinden ince farklarla ayrýlýyor. Yazdýðýnýz programda nasýl bir çýktýya ihtiyacýnýz olduðuna baðlý olarak yukarýdaki yöntemlerden herhangi birini tercih edebilirsiniz.
+
+Böylece Python’da listelerin ne olduðunu ve bu veri tipinin nasýl oluþturulacaðýný öðrenmiþ olduk. O halde bir adým daha atarak listelerin baþka özelliklerine deðinelim.

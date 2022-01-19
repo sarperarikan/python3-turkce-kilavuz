@@ -1,0 +1,104 @@
+
+enumerate()
+
+Eðer yazdýðýnýz bir programda numaralandýrmaya iliþkin iþlemler yapmanýz gerekiyorsa Python’ýn size sunduðu çok özel bir fonksiyondan yararlanabilirsiniz. Bu fonksiyonun adý enumerate().
+
+Gelelim bu fonksiyonun nasýl kullanýlacaðýna... Önce þöyle bir deneme yapalým:
+
+>>> enumerate("istihza")
+
+<enumerate object at 0x00E3BC88>
+
+Týpký reversed() fonksiyonunun bir ‘reversed’ nesnesi vermesi gibi, bu fonksiyonun da bize yalnýzca bir ‘enumerate’ nesnesi verdiðini görüyorsunuz.
+
+reversed() fonksiyonunu kullanabilmek için þöyle bir kod yazmýþtýk:
+
+>>> print(*reversed("istihza"))
+
+enumerate() için de benzer bir þeyi deneyebiliriz:
+
+>>> print(*enumerate("istihza"))
+
+Burada þu çýktýyý aldýk:
+
+(0, 'i') (1, 's') (2, 't') (3, 'i') (4, 'h') (5, 'z') (6, 'a')
+
+Enumerate kelimesi Ýngilizcede ‘numaralamak, numaralandýrmak’ gibi anlamlara gelir. Dolayýsýyla enumerate() fonksiyonu, kendisine parametre olarak verilen deðer hakkýnda bize iki farklý bilgi verir: Bir öðe ve bu öðeye ait bir sýra numarasý. Yukarýdaki çýktýda gördüðünüz þey de iþte her bir öðenin kendisi ve o öðeye ait bir sýra numarasýdýr.
+
+Yukarýdaki çýktýyý daha iyi anlayabilmek için bir for döngüsü kullanmak daha açýklayýcý olabilir:
+
+>>> for i in enumerate("istihza"):
+... print(i)
+...
+(0, 'i')
+(1, 's')
+(2, 't')
+(3, 'i')
+(4, 'h')
+(5, 'z')
+(6, 'a')
+
+Gördüðünüz gibi, gerçekten de bu fonksiyon bize bir öðe (mesela ‘i’ harfi) ve bu öðeye ait bir sýra numarasý (mesela 0) veriyor.
+
+Hatýrlarsanýz, enumerate() fonksiyonunu öðrenmeden önce, dir("") komutundan elde ettiðimiz çýktýlarý þu þekilde numaralandýrabileceðimizi söylemiþtik:
+
+sayaç = 0
+
+for i in dir(""):
+if "_" not in i[0]:
+sayaç += 1
+print(sayaç, i)
+
+Ama artýk enumerate() fonksiyonunu öðrendiðimize göre, ayný iþi çok daha verimli bir þekilde gerçekleþtirebiliriz:
+
+for sýra, metot in enumerate(dir("")):
+print(sýra, metot)
+
+enumerate() metodunun verdiði her bir çýktýnýn iki öðeli olduðunu biliyoruz (öðenin kendisi ve o öðenin sýra numarasý). Yukarýdaki kodlar yardýmýyla, bu öðelerin her birini ayrý bir deðiþkene (sýra ve metot) atamýþ oluyoruz. Böylece bu çýktýyý manipüle etmek bizim için daha kolay oluyor. Mesela bu özelliði kullanarak metot ve sýra numarasýnýn yerlerini deðiþtirebiliriz:
+
+>>> for sýra, metot in enumerate(dir("")):
+... print(metot, sýra)
+...
+__add__ 0
+__class__ 1
+__contains__ 2
+__delattr__ 3
+__doc__ 4
+__eq__ 5
+__format__ 6
+__ge__ 7
+
+(...)
+
+Pratik olmasý açýsýndan þöyle bir örnek daha verelim:
+
+>>> for sýra, metot in enumerate(dir("")):
+... print(sýra, metot, len(metot))
+...
+0 __add__ 7
+1 __class__ 9
+2 __contains__ 12
+3 __delattr__ 11
+4 __doc__ 7
+5 __eq__ 6
+
+(...)
+
+Burada, dir("") ile elde ettiðimiz metotlarýn sýrasýný (sýra), bu metotlarýn adlarýný (metot) ve her bir metodun kaç karakterden oluþtuðunu (len(metot)) gösteren bir çýktý elde ettik.
+
+Bu arada, gördüðünüz gibi, enumerate() fonksiyonu numaralandýrmaya 0‘dan baþlýyor. Elbette eðer isterseniz bu fonksiyonun numaralandýrmaya kaçtan baþlayacaðýný kendiniz de belirleyebilirsiniz. Dikkatlice bakýn:
+
+>>> for sýra, harf in enumerate("istihza", 1):
+... print(sýra, harf)
+...
+1 i
+2 s
+3 t
+4 i
+5 h
+6 z
+7 a
+
+Burada ‘istihza’ kelimesi içindeki harfleri numaralandýrdýk. Bunu yaparken de numaralandýrmaya 1‘den baþladýk. Bunun için enumerate() fonksiyonuna ikinci bir parametre verdiðimize dikkat edin.
+
+enumerate() fonksiyonunu da incelediðimize göre önemli bir baþka fonksiyondan daha söz edebiliriz.

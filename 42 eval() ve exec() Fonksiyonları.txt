@@ -1,0 +1,157 @@
+
+eval() ve exec() Fonksiyonlarý
+
+Bir önceki bölümün son örnek programýnda eval() adlý bir fonksiyonla karþýlaþmýþtýk. Ýþte þimdi bu önemli fonksiyonun ne iþe yaradýðýný anlamaya çalýþacaðýz. Ancak eval() fonksiyonunu anlatmaya baþlamadan önce þu uyarýyý yapalým:
+
+eval() ÞEYTANÝ GÜÇLERÝ OLAN BÝR FONKSÝYONDUR!
+
+Bunun neden böyle olduðunu hem biz anlatacaðýz, hem de zaten bu fonksiyonu tanýdýkça neden eval()‘e karþý dikkatli olmanýz gerektiðini kendiniz de anlayacaksýnýz.
+
+Dilerseniz iþe basit bir eval() örneði vererek baþlayalým:
+
+print("""
+Basit bir hesap makinesi uygulamasý.
+
+Ýþleçler:
+
+    +   toplama
+    -   çýkarma
+    *   çarpma
+    /   bölme
+
+Yapmak istediðiniz iþlemi yazýp ENTER
+tuþuna basýn. (Örneðin 23 ve 46 sayýlarýný
+çarpmak için 23 * 46 yazdýktan sonra
+ENTER tuþuna basýn.)
+""")
+
+veri = input("Ýþleminiz: ")
+hesap = eval(veri)
+
+print(hesap)
+
+Ýngilizcede evaluate diye bir kelime bulunur. Bu kelime, ‘deðerlendirmeye tabi tutmak, iþleme sokmak, iþlemek’ gibi anlamlar taþýr. Ýþte eval() fonksiyonundaki eval kelimesi bu evaluate kelimesinin kýsaltmasýdýr. Yani bu fonksiyonun görevi, kendisine verilen karakter dizilerini deðerlendirmeye tabi tutmak ya da iþlemektir. Peki bu tam olarak ne anlama geliyor?
+
+Aslýnda yukarýdaki örnek programý çalýþtýrdýðýmýzda bu sorunun yanýtýný kendi kendimize verebiliyoruz. Bu programý çalýþtýrarak, “Ýþleminiz: “ ifadesinden sonra, örneðin, 45 * 76 yazýp Enter tuþuna basarsak programýmýz bize 3420 çýktýsý verecektir. Yani programýmýz hesap makinesi iþlevini yerine getirip 45 sayýsý ile 76 sayýsýný çarpacaktýr. Dolayýsýyla, yukarýdaki programý kullanarak her türlü aritmetik iþlemi yapabilirsiniz. Hatta bu program, son derece karmaþýk aritmetik iþlemlerin yapýlmasýna dahi müsaade eder.
+
+Peki programýmýz bu iþlevi nasýl yerine getiriyor? Ýsterseniz kodlarýn üzerinden tek tek geçelim.
+
+Öncelikle programýmýzýn en baþýna kullaným kýlavuzuna benzer bir metin yerleþtirdik ve bu metni print() fonksiyonu yardýmýyla ekrana bastýk.
+
+Daha sonra kullanýcýdan alacaðýmýz komutlarý veri adlý bir deðiþkene atadýk. Tabii ki kullanýcýyla iletiþimi her zaman olduðu gibi input() fonksiyonu yardýmýyla saðlýyoruz.
+
+Ardýndan, kullanýcýdan gelen veriyi eval() fonksiyonu yardýmýyla deðerlendirmeye tabi tutuyoruz. Yani kullanýcýnýn girdiði komutlarý iþleme sokuyoruz. Örneðin, kullanýcý 46 / 2 gibi bir veri girdiyse, biz eval() fonksiyonu yardýmýyla bu 46 / 2 komutunu iþletiyoruz. Bu iþlemin sonucunu da hesap adlý baþka bir deðiþken içinde depoluyoruz.
+
+Eðer burada eval() fonksiyonunu kullanmazsak, programýmýz, kullanýcýnýn girdiði 45 * 76 komutunu hiçbir iþleme sokmadan dümdüz ekrana basacaktýr. Yani:
+
+print("""
+Basit bir hesap makinesi uygulamasý.
+
+Ýþleçler:
+
+    +   toplama
+    -   çýkarma
+    *   çarpma
+    /   bölme
+
+Yapmak istediðiniz iþlemi yazýp ENTER
+tuþuna basýn. (Örneðin 23 ve 46 sayýlarýný
+çarpmak için 23 * 46 yazdýktan sonra
+ENTER tuþuna basýn.)
+""")
+
+veri = input("Ýþleminiz: ")
+
+print(veri)
+
+Eðer programýmýzý yukarýdaki gibi, eval() fonksiyonu olmadan yazarsak, kullanýcýmýz 45 * 76 gibi bir komut girdiðinde alacaðý cevap dümdüz bir 45 * 76 çýktýsý olacaktýr. Ýþte eval() fonksiyonu, kullanýcýnýn girdiði her veriyi bir Python komutu olarak algýlar ve bu veriyi iþleme sokar. Yani 45 * 76 gibi bir þey gördüðünde, bu þeyi doðrudan ekrana yazdýrmak yerine, iþlemin sonucu olan 3420 sayýsýný verir.
+
+eval() fonksiyonunun, yukarýda anlattýðýmýz özelliklerini okuduktan sonra, ‘Ne güzel bir fonksiyon! Her iþimi görür bu!’ dediðinizi duyar gibiyim. Ama aslýnda durum hiç de öyle deðil. Neden mi?
+
+Þimdi yukarýdaki programý tekrar çalýþtýrýn ve “Ýþleminiz: “ ifadesinden sonra þu cevabý verin:
+
+print("Merhaba Python!")
+
+Bu komut þöyle bir çýktý vermiþ olmalý:
+
+Merhaba Python!
+None
+
+Not
+
+Buradaki None deðerini görmezden gelin. Bunu fonksiyonlar konusunu anlatýrken inceleyeceðiz.
+
+Gördüðünüz gibi, yazdýðýmýz program, kullanýcýnýn girdiði Python komutunun iþletilmesine sebep oldu. Bu noktada, ‘Eee, ne olmuþ!’ demiþ olabilirsiniz. Gelin bir de þuna bakalým. Þimdi programý tekrar çalýþtýrýp þu cevabý verin:
+
+open("deneme.txt", "w")
+
+Bu cevap, bilgisayarýnýzda deneme.txt adlý bir dosya oluþturulmasýna sebep oldu. Belki farkýndasýnýz, belki farkýnda deðilsiniz, ama aslýnda þu anda kendi yazdýðýnýz program sizin kontrolünüzden tamamen çýktý. Siz aslýnda bir hesap makinesi programý yazmýþtýnýz. Ama eval() fonksiyonu nedeniyle kullanýcýya rastgele Python komutlarýný çalýþtýrma imkaný verdiðiniz için programýnýz sadece aritmetik iþlemleri hesaplamak için kullanýlmayabilir. Böyle bir durumda kötü niyetli (ve bilgili) bir kullanýcý size çok büyük zarar verebilir. Mesela kullanýcýnýn, yukarýdaki programa þöyle bir cevap verdiðini düþünün:
+
+__import__("os").system("dir")
+
+Burada anlamadýðýnýz þeyleri þimdilik bir kenara býrakýp, bu komutun sonuçlarýna odaklanýn. Gördüðünüz gibi, yukarýdaki programa bu cevabý vererek mevcut dizin altýndaki bütün dosyalarý listeleyebildik. Yani programýmýz bir anda amacýný aþtý. Artýk bu aþamadan sonra bu programý þeytani bir amaca yönelik olarak kullanmak tamamen programý kullanan kiþiye kalmýþ... Bu programýn, bir web sunucusu üzerinde çalýþan bir uygulama olduðunu ve bu programý kullananlarýn yukarýdaki gibi masumane bir þekilde dizin içindeki dosyalarý listeleyen bir komut yerine, dizin içindeki dosyalarý ve hatta sabit disk üzerindeki her þeyi silen bir komut yazdýðýný düþünün... Yanlýþ yazýlmýþ bir program yüzünden bütün verilerinizi kaybetmeniz iþten bile deðildir. (Bahsettiðim o, ‘bütün sabit diski silen komutu’ kendi sisteminizde vermemeniz gerektiðini söylememe gerek yok, deðil mi?)
+
+Eðer SQL Injection kavramýný biliyorsanýz, yukarýdaki kodlarýn yol açtýðý güvenlik açýðýný gayet iyi anlamýþ olmalýsýnýz. Zaten internet üzerinde yaygýn bir þekilde kullanýlan ve web sitelerini hedef alan SQL Injection tarzý saldýrýlar da ayný mantýk üzerinden gerçekleþtiriliyor. SQL Injection metoduyla bir web sitesine saldýran cracker‘lar, o web sitesini programlayan kiþinin (çoðunlukla farkýnda olmadan) kullanýcýya verdiði rastgele SQL komutu iþletme yetkisini kötüye kullanarak gizli ve özel bilgileri ele geçirebiliyorlar. Örneðin SQL Injection metodu kullanýlarak, bir web sitesine ait veritabanýnýn içeriði tamamen silinebilir. Ayný þekilde, yukarýdaki eval() fonksiyonu da kullanýcýlarýnýza rastgele Python komutlarýný çalýþtýrma yetkisi verdiði için kötü niyetli bir kullanýcýnýn programýnýza sýzmasýna yol açabilecek potansiyele sahiptir.
+
+Peki eval() fonksiyonunu asla kullanmayacak mýyýz? Elbette kullanacaðýz. Bu fonksiyonun kullanýmýný gerektiren durumlarla da karþýlaþabilirsiniz. Ama þunu asla aklýnýzdan çýkarmayýn: eval() fonksiyonu her ne kadar son derece yetenekli ve güçlü bir araç da olsa yanlýþ ellerde yýkýcý sonuçlar doðurabilir. Program yazarken, eðer eval() kullanmanýzý gerektiren bir durumla karþý karþýya olduðunuzu düþünüyorsanýz, bir kez daha düþünün. eval() ile elde edeceðiniz etkiyi muhtemelen baþka ve çok daha iyi yöntemlerle de elde edebilirsiniz. Üstelik performans açýsýndan eval() pek iyi bir tercih deðildir, çünkü bu fonksiyon (çoðu durumda farketmeseniz de) aslýnda yavaþ çalýþýr. O yüzden, eval() fonksiyonunu kullanacaðýnýz zaman, bunun artý ve eksilerini çok iyi tartýn: Bu fonksiyonu kullanmak size ne kazandýrýyor, ne kaybettiriyor?
+
+Ayrýca eval() fonksiyonu kullanýlacaðý zaman, kullanýcýdan gelen veri bu fonksiyona parametre olarak verilmeden önce sýký bir kontrolden geçirilir. Yani kullanýcýnýn girdiði veri eval() aracýlýðýyla doðrudan deðerlendirmeye tabi tutulmaz. Araya bir kontrol mekanizmasý yerleþtirilir. Örneðin, yukarýdaki hesap makinesi programýnda kullanýcýnýn gireceði verileri sadece sayýlar ve iþleçlerle sýnýrlandýrabilirsiniz. Yani kullanýcýnýzýn, izin verilen deðerler harici bir deðer girmesini engelleyebilirsiniz. Bu durumu somutlaþtýrmak için þöyle bir diyagram çizebiliriz:
+
+Yukarýdaki diyagram eval() fonksiyonunun yanlýþ uygulanýþ biçimini gösteriyor. Gördüðünüz gibi, veri doðrudan eval() fonksiyonuna gidiyor ve çýktý olarak veriliyor. Böyle bir durumda, eval() fonksiyonu kullanýcýdan gelen verinin ne olduðuna bakmadan, veriyi doðrudan komut olarak deðerlendirip iþleteceði için programýnýzý kullanýcýnýn insafýna terketmiþ oluyorsunuz.
+
+Aþaðýdaki diyagram ise eval() fonksiyonunun doðru uygulanýþ biçimini gösteriyor:
+
+Burada ise, veri eval() fonksiyonuna ulaþmadan önce kontrolden geçiriliyor. Eðer veri ancak kontrol aþamasýndan geçerse eval() fonksiyona ulaþabilecek ve oradan da çýktý olarak verilebilecektir. Böylece kullanýcýdan gelen komutlarý süzme imkanýna sahip oluyoruz.
+
+Gördüðünüz gibi, Python eval() gibi bir fonksiyon yardýmýyla karakter dizileri içinde geçen Python kodlarýný ayýklayýp bunlarý çalýþtýrabiliyor. Bu sayede, mesela bize input() fonksiyonu aracýlýðýyla gelen bir karakter dizisi içindeki Python kodlarýný iþletme imkanýna sahip olabiliyoruz. Bu özellik, dikkatli kullanýldýðýnda, iþlerinizi epey kolaylaþtýrabilir.
+
+Python’da eval() fonksiyonuna çok benzeyen exec() adlý baþka bir fonksiyon daha bulunur. eval() ile yapamadýðýmýz bazý þeyleri exec() ile yapabiliriz. Bu fonksiyon yardýmýyla, karakter dizileri içindeki çok kapsamlý Python kodlarýný iþletebilirsiniz.
+
+Örneðin eval() fonksiyonu bir karakter dizisi içindeki deðiþken tanýmlama iþlemini yerine getiremez. Yani eval() ile þöyle bir þey yapamazsýnýz:
+
+>>> eval("a = 45")
+
+Ama exec() ile böyle bir iþlem yapabilirsiniz:
+
+>>> exec("a = 45")
+
+Böylece a adlý bir deðiþken tanýmlamýþ olduk. Kontrol edelim:
+
+>>> print(a)
+
+45
+
+eval() ve exec() fonksiyonlarý özellikle kullanýcýdan alýnan verilerle doðrudan iþlem yapmak gereken durumlarda iþinize yarar. Örneðin bir hesap makinesi yaparken eval() fonksiyonundan yararlanabilirsiniz.
+
+Ayný þekilde mesela insanlara Python programlama dilini öðreten bir program yazýyorsanýz exec() fonksiyonunu þöyle kullanabilirsiniz:
+
+d1 = """
+
+Python'da ekrana çýktý verebilmek için print() adlý bir
+fonksiyondan yararlanýyoruz. Bu fonksiyonu þöyle kullanabilirsiniz:
+
+>>> print("Merhaba Dünya")
+
+Þimdi de ayný kodu siz yazýn!
+
+>>> """
+
+girdi = input(d1)
+
+exec(girdi)
+
+d2 = """
+
+Gördüðünüz gibi print() fonksiyonu, kendisine
+parametre olarak verilen deðerleri ekrana basýyor.
+
+Böylece ilk dersimizi tamamlamýþ olduk. Þimdi bir
+sonraki dersimize geçebiliriz."""
+
+print(d2)
+
+Burada exec() ile yaptýðýmýz iþi eval() ile de yapabiliriz. Ama mesela eðer bir sonraki derste ‘Python’da deðiþkenler’ konusunu öðretecekseniz, eval() yerine exec() fonksiyonunu kullanmak durumunda kalabilirsiniz.
+
+eval() fonksiyonunu anlatýrken güvenlik ile ilgili olarak söylediðimiz her þey exec() fonksiyonu için de geçerlidir. Dolayýsýyla bu iki fonksiyonu çok dikkatli bir þekilde kullanmanýz ve bu fonksiyonlarýn doðurduðu güvenlik açýðýnýn bilincinde olmanýz gerekiyor.
+
+Henüz Python bilgilerimiz çok kýsýtlý olduðu için eval() ve exec() fonksiyonlarýný bütün ayrýntýlarýyla inceleyemiyoruz. Ama bilgimiz arttýkça bu fonksiyonlarýn ne kadar güçlü (ve tehlikeli) araçlar olduðunu siz de göreceksiniz.

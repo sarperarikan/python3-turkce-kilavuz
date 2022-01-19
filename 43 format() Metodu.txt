@@ -1,0 +1,252 @@
+
+format() Metodu
+
+Python programlama dili içindeki çok temel bazý araçlarý incelediðimize göre, bu noktada Python’daki küçük ama önemli bir konuya deðinelim bu bölümü kapatmadan önce.
+
+Ýnternette dolaþýrken mutlaka þuna benzer bir sayfayla karþýlaþmýþ olmalýsýnýz:
+
+Burada belli ki adres çubuðuna fdkgd.com diye bir URL yazmýþýz, ama böyle bir internet adresi olmadýðý için, kullandýðýmýz internet tarayýcýsý bize þöyle bir mesaj vermiþ:
+
+Hata! Google Chrome fdkgd.com sitesini bulamadý
+
+Þimdi de dadasdaf.com adresini arayalým...
+
+Yine böyle bir adres olmadýðý için, bu defa tarayýcýmýz bize þöyle bir uyarý gösterecek:
+
+Hata! Google Chrome dadasdaf.com sitesini bulamadý
+
+Gördüðünüz gibi, hata mesajlarýnda deðiþen tek yer, aradýðýmýz sitenin adresi. Yani internet tarayýcýmýz bu hata için þöyle bir taslaða sahip:
+
+Hata! Google Chrome ... sitesini bulamadý
+
+Burada ... ile gösterdiðimiz yere, bulunamayan URL yerleþtiriliyor. Peki böyle bir þeyi Python programlama dili ile nasýl yapabiliriz?
+
+Çok basit:
+
+#Öncelikle kullanýcýdan bir internet adresi girmesini istiyoruz
+url = input("Lütfen ulaþmak istediðiniz sitenin adresini yazýn: ")
+
+#Þimdi de bu adresin bulunamadýðý konusunda kullanýcýyý bilgilendiriyoruz
+print("Hata! Google Chrome", url, "sitesini bulamadý")
+
+Gördüðünüz gibi, þimdiye kadar öðrendiðimiz bilgileri kullanarak böyle bir programý rahatlýkla yazabiliyoruz.
+
+Peki ya biz kullanýcýnýn girdiði internet adresini mesela týrnak içinde göstermek istersek ne olacak? Yani örneðin þöyle bir çýktý vermek istersek:
+
+Hata! Google Chrome 'fdsfd.com' sitesini bulamadý
+
+Bunun için yine karakter dizisi birleþtirme yönteminden yararlanabilirsiniz:
+
+#Öncelikle kullanýcýdan bir internet adresi girmesini istiyoruz
+url = input("Lütfen ulaþmak istediðiniz sitenin adresini yazýn: ")
+
+#Þimdi de bu adresin bulunamadýðý konusunda kullanýcýyý bilgilendiriyoruz
+print("Hata! Google Chrome", "'" + url + "'", "sitesini bulamadý")
+
+Burada, + iþaretlerini kullanarak, kullanýcýnýn girdiði adresin saðýna ve soluna birer týrnak iþaretini nasýl yerleþtirdiðimize dikkat edin.
+
+Gördüðünüz gibi bu yöntem iþe yarýyor, ama ortaya çýkan karakter dizisi de oldukça karmaþýk görünüyor. Ýþte bu tür ‘karakter dizisi biçimlendirme’ iþlemleri için Python bize çok faydalý bir araç sunuyor. Bu aracýn adý format().
+
+Bu aracý þöyle kullanýyoruz:
+
+#Öncelikle kullanýcýdan bir internet adresi girmesini istiyoruz
+url = input("Lütfen ulaþmak istediðiniz sitenin adresini yazýn: ")
+
+#Þimdi de bu adresin bulunamadýðý konusunda kullanýcýyý bilgilendiriyoruz
+print("Hata! Google Chrome {} sitesini bulamadý".format(url))
+
+Bir de bulunamayan internet adresini týrnak içine alalým:
+
+print("Hata! Google Chrome '{}' sitesini bulamadý".format(url))
+
+Görüyorsunuz ya, biraz önce karakter dizisi birleþtirme yöntemini kullanarak gerçekleþtirdiðimiz iþlemi, çok daha basit bir yolla gerçekleþtirme imkaný sunuyor bize bu format() denen araç...
+
+Peki format() nasýl çalýþýyor?
+
+Bunu anlamak için þu basit örneklere bir bakalým:
+
+>>> print("{} ve {} iyi bir ikilidir".format("Python", "Django"))
+
+'Python ve Django iyi bir ikilidir'
+
+>>> print("{} {}'yi seviyor!".format("Ali", "Ayþe"))
+
+'Ali Ayþe'yi seviyor!'
+
+>>> print("{} {} yaþýnda bir {}dur".format("Ahmet", "18", "futbolcu"))
+
+'Ahmet 18 yaþýnda bir futbolcudur'
+
+Elbette bu örnekleri þöyle de yazabilirdik:
+
+>>> metin = "{} ve {} iyi bir ikilidir"
+>>> metin.format("Python", "Django")
+
+'Python ve Django iyi bir ikilidir'
+
+>>> metin = "{} {}'yi seviyor!"
+>>> metin.format("Ali", "Ayþe")
+
+'Ali Ayþe'yi seviyor!'
+
+>>> metin = "{} {} yaþýnda bir {}dur"
+>>> metin.format("Ahmet", "18", "futbolcu")
+
+'Ahmet 18 yaþýnda bir futbolcudur'
+
+Burada taslak metni doðrudan format() metoduna parametre olarak vermeden önce bir deðiþkene atadýk. Böylece bu metni daha kolay bir þekilde kullanabildik.
+
+Bu örneklerin, format() denen aracý anlamak konusunda size epey fikir verdiðini zannediyorum. Ama isterseniz bu aracýn ne olduðunu ve nasýl çalýþtýðýný daha ayrýntýlý olarak incelemeye geçmeden önce baþka bir örnek daha verelim.
+
+Varsayalým ki kullanýcýdan aldýðý bilgiler doðrultusunda, özel bir konu üzerine dilekçe oluþturan bir program yazmak istiyorsunuz.
+
+Dilekçe taslaðýmýz þu þekilde olsun:
+
+tarih:
+
+T.C.
+... ÜNÝVERSÝTESÝ
+... Fakültesi Dekanlýðýna
+
+
+Fakülteniz ..........Bölümü ......... numaralý öðrencisiyim. Ekte sunduðum
+belgede belirtilen mazeretim gereðince ....... Eðitim-Öðretim Yýlý .........
+yarýyýlýnda öðrenime ara izni (kayýt dondurma) istiyorum.
+
+Bilgilerinizi ve gereðini arz ederim.
+
+Ýmza
+
+Ad-Soyadý :
+T.C. Kimlik No. :
+Adres :
+Tel. :
+Ekler :
+
+Amacýnýz bu dilekçedeki boþluklara gelmesi gereken bilgileri kullanýcýdan alýp, eksiksiz bir dilekçe ortaya çýkarmak.
+
+Kullanýcýdan bilgi alma kýsmý kolay. input() fonksiyonunu kullanarak gerekli bilgileri kullanýcýdan alabileceðimizi biliyorsunuz:
+
+tarih = input("tarih: ")
+üniversite = input("üniversite adý: ")
+fakülte = input("fakülte adý: ")
+bölüm = input("bölüm adý: ")
+öðrenci_no = input("öðrenci no. :")
+öðretim_yýlý = input("öðretim yýlý: ")
+yarýyýl = input("yarýyýl: ")
+ad = input("öðrencinin adý: ")
+soyad = input("öðrencinin soyadý: ")
+tc_kimlik_no = input("TC Kimlik no. :")
+adres = input("adres: ")
+tel = input("telefon: ")
+ekler = input("ekler: ")
+
+Bilgileri kullanýcýdan aldýk. Peki ama bu bilgileri dilekçe taslaðý içindeki boþluklara nasýl yerleþtireceðiz?
+
+Þu ana kadar öðrendiðimiz print() fonksiyonunu ve \t ve \n gibi kaçýþ dizilerini kullanarak istediðiniz çýktýyý elde etmeyi deneyebilirsiniz. Ama denediðinizde siz de göreceksiniz ki, bu tür yöntemleri kullanarak yukarýdaki dilekçe taslaðýný doldurmak inanýlmaz zor ve vakit alýcý olacaktýr. Halbuki bunlarýn hiçbirine gerek yok. Çünkü Python bize bu tür durumlarda kullanýlmak üzere çok pratik bir araç sunuyor. Þimdi çok dikkatlice inceleyin þu kodlarý:
+
+dilekçe = """
+                                                    tarih: {}
+
+
+T.C.
+{} ÜNÝVERSÝTESÝ
+{} Fakültesi Dekanlýðýna
+
+
+Fakülteniz {} Bölümü {} numaralý öðrencisiyim. Ekte sunduðum belgede
+belirtilen mazeretim gereðince {} Eðitim-Öðretim Yýlý  {}.
+yarýyýlýnda öðrenime ara izni (kayýt dondurma) istiyorum.
+
+    Bilgilerinizi ve gereðini arz ederim.
+
+        Ýmza
+
+Ad              : {}
+Soyad           : {}
+T.C. Kimlik No. : {}
+Adres           : {}
+Tel.            : {}
+Ekler           : {}
+"""
+
+
+tarih = input("tarih: ")
+üniversite = input("üniversite adý: ")
+fakülte = input("fakülte adý: ")
+bölüm = input("bölüm adý: ")
+öðrenci_no = input("öðrenci no. :")
+öðretim_yýlý = input("öðretim yýlý: ")
+yarýyýl = input("yarýyýl: ")
+ad = input("öðrencinin adý: ")
+soyad = input("öðrencinin soyadý: ")
+tc_kimlik_no = input("TC Kimlik no. :")
+adres = input("adres: ")
+tel = input("telefon: ")
+ekler = input("ekler: ")
+
+print(dilekçe.format(tarih, üniversite, fakülte, bölüm,
+öðrenci_no, öðretim_yýlý, yarýyýl,
+ad, soyad, tc_kimlik_no,
+adres, tel, ekler))
+
+Bu kodlara (ve bundan önceki örneklere) bakarak birkaç tespitte bulunalým:
+
+
+Taslak metinde kullanýcýdan alýnacak bilgilerin olduðu yerlere birer {} iþareti yerleþtirdik. 
+Taslaktaki eksiklikleri tamamlayacak verileri input() fonksiyonu yardýmýyla kullanýcýdan tek tek aldýk. 
+Son olarak, print() fonksiyonu yardýmýyla metni tam bir þekilde ekrana çýktý olarak verdik. 
+
+Þimdi son tespitimizi biraz açýklayalým. Gördüðünüz gibi, print() fonksiyonu içinde dilekçe.format() gibi bir yapý var. Burada dilekçe deðiþkenine nokta iþareti ile baðlanmýþ format() adlý, fonksiyon benzeri bir araç görüyoruz. Bu araca teknik dilde ‘metot’ adý verilir. format() metodunun parantezleri içinde ise, kullanýcýdan alýp birer deðiþkene atadýðýmýz veriler yer alýyor.
+
+Dilerseniz yukarýda olan biteni daha net anlayabilmek için bu konunun baþýna verdiðimiz örneklere geri dönelim.
+
+Ýlk olarak þöyle bir örnek vermiþtik:
+
+#Öncelikle kullanýcýdan bir internet adresi girmesini istiyoruz
+url = input("Lütfen ulaþmak istediðiniz sitenin adresini yazýn: ")
+
+#Þimdi de bu adresin bulunamadýðý konusunda kullanýcýyý bilgilendiriyoruz
+print("Hata! Google Chrome {} sitesini bulamadý".format(url))
+
+Burada kullanýcýnýn gireceði internet adresinin yerini tutmasý için {} iþaretlerinden yararlanarak þöyle bir karakter dizisi oluþturduk:
+
+"Hata! Google Chrome {} sitesini bulamadý"
+
+Gördüðünüz gibi, {} iþareti karakter dizisi içinde URL’nin geleceði yeri tutuyor. Bu {} iþaretinin yerine neyin geleceðini format() metodunun parantezleri içinde belirtiyoruz. Dikkatlice bakýn:
+
+print("Hata! Google Chrome {} sitesini bulamadý".format(url))
+
+Elbette eðer istersek yukarýdaki örneði þöyle de yazabilirdik:
+
+url = input("Lütfen ulaþmak istediðiniz sitenin adresini yazýn: ")
+
+#Kullanýcýya gösterilecek hata için bir taslak metin oluþturuyoruz
+hata_taslaðý = "Hata! Google Chrome {} sitesini bulamadý"
+
+print(hata_taslaðý.format(url))
+
+Burada hata metnini içeren karakter dizisini doðrudan format() metoduna baðlamak yerine, bunu bir deðiþkene atayýp, format() metodunu bu deðiþkene baðladýk.
+
+Bunun dýþýnda þu örnekleri de vermiþtik:
+
+>>> metin = "{} ve {} iyi bir ikilidir"
+>>> metin.format("Python", "Django")
+
+'Python ve Django iyi bir ikilidir
+
+>>> metin = "{} {}'yi seviyor!"
+>>> metin.format("Ali", "Ayþe")
+
+'Ali Ayþe'yi seviyor!'
+
+>>> metin = "{} {} yaþýnda bir {}dur"
+>>> metin.format("Ahmet", "18", "futbolcu")
+
+'Ahmet 18 yaþýnda bir futbolcudur'
+
+Burada da, gördüðüz gibi, öncelikle bir karakter dizisi tanýmlýyoruz. Bu karakter dizisi içindeki deðiþken deðerleri ise {} iþaretleri ile gösteriyoruz. Daha sonra format() metodunu alýp bu karakter dizisine baðlýyoruz. Karakter dizisi içindeki {} iþaretleri ile gösterdiðimiz yerlere gelecek deðerleri de format() metodunun parantezleri içinde gösteriyoruz. Yalnýz burada þuna dikkat etmemiz lazým: Karakter dizisi içinde kaç tane {} iþareti varsa, format() metodunun parantezleri içinde de o sayýda deðer olmasý gerekiyor.
+
+Bu yapýnýn, yazdýðýmýz programlarda iþimizi ne kadar kolaylaþtýracaðýný tahmin edebilirsiniz. Kýsa karakter dizilerinde pek belli olmayabilir, ama özellikle çok uzun ve boþluklu karakter dizilerini biçimlendirirken format() metodunun hayat kurtardýðýna kendiniz de þahit olacaksýnýz.
+
+Ýlerleyen derslerimizde format() metodunu ve karakter dizisi biçimlendirme konusunu çok daha ayrýntýlý bir þekilde inceleyeceðiz. Ancak yukarýda verdiðimiz bilgiler format() metodunu verimli bir þekilde kullanabilmenizi saðlamaya yetecek düzeydedir.

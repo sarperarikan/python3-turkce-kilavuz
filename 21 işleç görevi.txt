@@ -1,0 +1,100 @@
+
+Ýþleç Görevi 
++ toplama 
+- çýkarma 
+* çarpma 
+/ bölme 
+
+Yukarýdaki örneklerde bir þey dikkatinizi çekmiþ olmalý: Karakter dizilerini tanýmlarken týrnak iþaretlerini kullandýk. Ancak sayýlarda týrnak iþareti yok. Daha önce de dediðimiz gibi, týrnak iþaretleri karakter dizilerinin ayýrt edici özelliðidir. Python’da týrnak içinde gösterdiðiniz her þey bir karakter dizisidir. Mesela þu örneklere bakalým:
+
+>>> 34657
+
+34657
+
+Bu bir sayýdýr. Peki ya þu?
+
+>>> "34657"
+
+'34657'
+
+Bu ise bir karakter dizisidir. Dilerseniz biraz önce öðrendiðimiz type() fonksiyonu yardýmýyla bu verilerin tipini sorgulayalým:
+
+>>> type(34657)
+
+<class 'int'>
+
+Buradaki ‘int’ ifadesi Ýngilizce “integer”, yani tamsayý kelimesinin kýsaltmasýdýr. Demek ki 34657 sayýsý bir tamsayý imiþ. Bir de þuna bakalým:
+
+>>> type("34657")
+
+<class 'str'>
+
+Gördüðünüz gibi, 34657 sayýsýný týrnak içine aldýðýmýzda bu sayý artýk sayý olma özelliðini yitiriyor ve bir karakter dizisi oluyor. Þu anda bu çok önemsiz bir ayrýntýymýþ gibi gelebilir size, ama aslýnda son derece önemli bir konudur bu. Bu durumun etkilerini þu örneklerde görebilirsiniz:
+
+>>> 23 + 65
+
+88
+
+Burada normal bir þekilde iki sayýyý birbiriyle topladýk.
+
+Bir de þuna bakýn:
+
+>>> "23" + "65"
+
+'2365'
+
+Burada ise Python iki karakter dizisini yan yana yazmakla yetindi; yani bunlarý birleþtirdi. Python açýsýndan “23” ve 23 birbirinden farklýdýr. “23” bir karakter dizisi iken, 23 bir sayýdýr. Ayný þey “65” ve 65 için de geçerlidir. Yani Python açýsýndan “65” ile “Merhaba Zalim Dünya!” arasýnda hiç bir fark yoktur. Bunlarýn ikisi de karakter dizisi sýnýfýna girer. Ancak 65 ile “65” birbirinden farklýdýr. 65 bir sayý iken, “65” bir karakter dizisidir.
+
+Bu bilgi, özellikle aritmetik iþlemlerde büyük önem taþýr. Bunu dilerseniz þu örnekler üzerinde gösterelim:
+
+>>> 45 + "45"
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+Gördüðünüz gibi, yukarýdaki kodlar hata veriyor. Bunun sebebi bir sayý (45) ile bir karakter dizisini (“45”) birbiriyle toplamaya çalýþmamýzdýr. Asla unutmayýn, aritmetik iþlemler ancak sayýlar arasýnda yapýlýr. Karakter dizileri ile herhangi bir aritmetik iþlem yapýlamaz.
+
+Bir de þuna bakalým:
+
+>>> 45 + 45
+
+90
+
+Bu kodlar ise düzgün çalýþýr. Çünkü burada iki sayýyý aritmetik iþleme soktuk ve baþarýlý olduk.
+
+Son olarak þu örneði verelim:
+
+>>> "45" + "45"
+
+'4545'
+
+Burada + iþlecinin toplama anlamýna gelmediðine dikkat edin. Bu iþleç burada iki karakter dizisini birleþtirme görevi üstleniyor. Yani yukarýdaki örneðin þu örnekten hiçbir farký yoktur:
+
+>>> "istihza." + "com"
+
+'istihza.com'
+
+Bu iki örnekte de yaptýðýmýz þey karakter dizilerini birbiriyle birleþtirmektir.
+
+Gördüðünüz gibi, + iþlecinin saðýndaki ve solundaki deðerler birer karakter dizisi ise bu iþleç bu iki deðeri birbiriyle birleþtiriyor. Ama eðer bu deðerler birer sayý ise + iþleci bu deðerleri birbiriyle aritmetik olarak topluyor.
+
+* iþleci de + iþlecine benzer bir iþ yapar. Yani eðer * iþleci bir sayý ve bir karakter dizisi ile karþýlaþýrsa, o karakter dizisini, verilen sayý kadar tekrarlar. Örneðin:
+
+>>> "w" * 3
+
+'www'
+
+Burada * iþleci bir karakter dizisi (“w”) ve bir sayý (3) arasýnda iþlem yaptýðý için, karakter dizisini, ilgili sayý kadar tekrarlýyor. Yani “w” karakter dizisini 3 kez tekrarlýyor.
+
+Bir de þuna bakalým:
+
+>>> 25 * 3
+
+75
+
+Burada ise * iþleci iki adet sayý arasýnda iþlem yaptýðý için bu deðerleri birbiriyle aritmetik olarak çarpýyor ve 75 deðerini elde etmemizi saðlýyor.
+
+Gördüðünüz gibi, o anda elimizde bulunan verilerin tipini bilmek gerçekten de büyük önem taþýyor. Çünkü eðer elimizdeki verilerin tipini bilmezsek nasýl sonuçlar elde edeceðimizi de kestiremeyiz.
+
+Böylece karakter dizileri ile sayýlar arasýndaki farký öðrenmiþ olduk. Bu bilgiler size önemsizmiþ gibi gelebilir, ama aslýnda karakter dizileri ile sayýlar arasýndaki farký anlamak, Python programlama dilinin önemli bir bölümünü öðrenmiþ olmak demektir. Ýleride yazacaðýnýz en karmaþýk programlarda bile, bazen programýnýzýn çalýþmamasýnýn (veya daha kötüsü yanlýþ çalýþmasýnýn) nedeninin karakter dizileri ile sayýlarý birbirine karýþtýrmanýz olduðunu göreceksiniz. O yüzden burada öðrendiðiniz hiçbir bilgi kýrýntýsýný baþtan savmamanýzý (ve sabýrsýzlýk ya da acelecilik etmemenizi) tavsiye ederim.

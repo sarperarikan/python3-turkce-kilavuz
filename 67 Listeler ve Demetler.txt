@@ -1,0 +1,252 @@
+
+Listeler ve Demetler
+
+Bu bölüme gelene kadar yalnýzca iki farklý veri tipi görmüþtük. Bunlardan biri karakter dizileri, öteki ise sayýlardý. Ancak tabii ki Python’daki veri tipleri yalnýzca bu ikisiyle sýnýrlý deðildir. Python’da karakter dizileri ve sayýlarýn dýþýnda, baþka amaçlara hizmet eden, baþka veri tipleri de vardýr. Ýþte biz bu bölümde iki farklý veri tipi daha öðreneceðiz. Bu bölümde ele alacaðýmýz veri tiplerinin adý ‘liste’ (list) ve ‘demet’ (tuple).
+
+Bu bölümde birer veri tipi olarak listeler ve demetlerden söz etmenin yanýsýra liste ve demetlerin metotlarýndan da bahsedeceðiz. Listelerle demetleri öðrendikten sonra Python’daki hareket imkanýnýzýn bir hayli geniþlediðine tanýk olacaksýnýz.
+
+Python programlama diline yeni baþlayan biri, karakter dizilerini öðrendikten sonra bu dilde her þeyi karakter dizileri yardýmýyla halledebileceðini zannedebilir. O yüzden yeni bir veri tipi ile karþýlaþtýðýnda (örneðin listeler veya demetler), bu yeni veri tipi ona anlamsýz ve gereksizmiþ gibi görünebilir. Aslýnda daha önce de söylediðimiz gibi, bir programlama dilini yeni öðrenenlerin genel sorunudur bu. Öðrenci, bir programlama dilini oluþturan minik parçalarý öðrenirken, öðrencinin zihni bu parçalarýn ne iþine yarayacaðý konusunda þüpheyle dolar. Sanki gereksiz þeylerle vakit kaybediyormuþ gibi hissedebilir. En önemli ve en büyük programlarýn, bu minik parçalarýn sistematik bir þekilde birleþtirilmesiyle ortaya çýkacak olmasý öðrencinin kafasýna yatmayabilir. Halbuki en karmaþýk programlarýn bile kaynak kodlarýný incelediðinizde görecekleriniz karakter dizileri, listeler, demetler, sayýlar ve buna benzer baþka veri tiplerinden ibarettir. Nasýl en lezzetli yemekler birkaç basit malzemenin bir araya gelmesi ile ortaya çýkýyorsa, en abidevi programlar da ilk bakýþta birbiriyle ilgisiz görünen çok basit parçalarýn incelikli bir þekilde birleþtirilmesinden oluþur.
+
+O halde bu noktada, Python programlama diline yeni baþlayan hemen herkesin sorduðu o soruyu soralým kendimize: ‘Neden farklý veri tipleri var? Bu veri tiplerinin hepsine gerçekten ihtiyacým olacak mý?’
+
+Bu soruyu baþka bir soruyla cevaplamaya çalýþalým: ‘Acaba neden farklý giysi tipleri var? Neden kot pantolon, kumaþ pantolon, tiþört, gömlek ve buna benzer ayrýmlara ihtiyaç duyuyoruz?’ Bu sorunun cevabý çok basit: ‘Çünkü farklý durumlara farklý giysi türleri uygundur!’
+
+Örneðin ev taþýyacaksanýz, herhalde kumaþ pantolon ve gömlek giymezsiniz üzerinize. Buna benzer bir þekilde iþ görüþmesine giderken de kot pantolon ve tiþört doðru bir tercih olmayabilir. Ýþte buna benzer sebeplerden, programlama dillerinde de belli durumlarda belli veri tiplerini kullanmanýz gerekir. Örneðin bir durumda karakter dizilerini kullanmak uygunken, baþka bir durumda listeleri veya demetleri kullanmak daha mantýklý olabilir. Zira her veri tipinin kendine has güçlü ve zayýf yanlarý vardýr. Veri tiplerini ve bunlarýn ayrýntýlarýný öðrendikçe, hangi veri tipinin hangi sorun için daha kullanýþlý olduðunu kestirebilecek duruma geleceðinizden hiç kuþkunuz olmasýn.
+
+Biz bu bölümde listeleri ve demetleri olabildiðince ayrýntýlý bir þekilde inceleyeceðiz. O yüzden bu veri tiplerini incelerken konuyu birkaç farklý bölüme ayýracaðýz.
+
+Listeleri ve demetleri incelemeye listelerden baþlayalým...
+
+
+Listeler
+
+Giriþ bölümünde de deðindiðimiz gibi, listeler Python’daki veri tiplerinden biridir. Týpký karakter dizileri ve sayýlar gibi...
+
+
+Liste Tanýmlamak
+
+Listeleri tanýmaya, bu veri tipini nasýl tanýmlayacaðýmýzý öðrenerek baþlayalým.
+
+Hatýrlarsanýz bir karakter dizisi tanýmlayabilmek için þöyle bir yol izliyorduk:
+
+>>> kardiz = "karakter dizisi"
+
+Yani herhangi bir öðeyi karakter dizisi olarak tanýmlayabilmek için yapmamýz gereken tek þey o öðeyi týrnak içine almaktý. Herhangi bir öðeyi (tek, çift veya üç) týrnak içine aldýðýmýzda karakter dizimizi tanýmlamýþ oluyoruz. Liste tanýmlamak için de buna benzer bir þey yapýyoruz. Dikkatlice bakýn:
+
+>>> liste = ["öðe1", "öðe2", "öðe3"]
+
+Gördüðünüz gibi, liste tanýmlamak da son derece kolay. Bir liste elde etmek için, öðeleri birbirinden virgülle ayýrýp, bunlarýn hepsini köþeli parantezler içine alýyoruz.
+
+Karakter dizilerini anlatýrken, herhangi bir nesnenin karakter dizisi olup olmadýðýndan emin olmak için type() fonksiyonundan yararlanabileceðimizi söylemiþtik. Eðer bir nesne type() fonksiyonuna <class ‘str’> cevabý veriyorsa o nesne bir karakter dizisidir. Listeler için de buna benzer bir sorgulama yapabiliriz:
+
+>>> liste = ["öðe1", "öðe2", "öðe3"]
+>>> type(liste)
+
+<class 'list'>
+
+Bu çýktýdan anlýyoruz ki, liste veri tipi type() fonksiyonuna <class ‘list’> cevabý veriyor. Dolayýsýyla, eðer bir nesne type() fonksiyonuna <class ‘list’> cevabý veriyorsa o nesnenin bir liste olduðunu rahatlýkla söyleyebiliriz.
+
+Yukarýda tanýmladýðýmýz liste adlý listeye baktýðýmýzda dikkatimizi bir þey çekiyor olmalý. Bu listeye þöyle bir baktýðýmýzda, aslýnda bu listenin, içinde üç adet karakter dizisi barýndýrdýðýný görüyoruz. Gerçekten de listeler, bir veya daha fazla veri tipini içinde barýndýran kapsayýcý bir veri tipidir. Mesela þu listeye bir bakalým:
+
+>>> liste = ["Ahmet", "Mehmet", 23, 65, 3.2]
+
+Gördüðünüz gibi, liste içinde hem karakter dizileri (“Ahmet”, “Mehmet”), hem de sayýlar (23, 65, 3.2) var.
+
+Dahasý, listelerin içinde baþka listeler de bulunabilir:
+
+>>> liste = ["Ali", "Veli", ["Ayþe", "Nazan", "Zeynep"], 34, 65, 33, 5.6]
+
+Bu liste adlý deðiþkenin tipini sorgularsak þöyle bir çýktý alacaðýmýzý biliyorsunuz:
+
+>>> type(liste)
+
+<class 'list'>
+
+Bir de þunu deneyelim:
+
+for öðe in liste:
+print("{} adlý öðenin veri tipi: {}".format(öðe, type(öðe)))
+
+Bu kodlarý çalýþtýrdýðýmýzda da þöyle bir çýktý alýyoruz:
+
+Ali adlý öðenin veri tipi: <class 'str'>
+Veli adlý öðenin veri tipi: <class 'str'>
+['Ayþe', 'Nazan', 'Zeynep'] adlý öðenin veri tipi: <class 'list'>
+34 adlý öðenin veri tipi: <class 'int'>
+65 adlý öðenin veri tipi: <class 'int'>
+33 adlý öðenin veri tipi: <class 'int'>
+5.6 adlý öðenin veri tipi: <class 'float'>
+
+Bu kodlar bize þunu gösteriyor: Farklý öðeleri bir araya getirip bunlarý köþeli parantezler içine alýrsak ‘liste’ adlý veri tipini oluþturmuþ oluyoruz. Bu listenin öðeleri farklý veri tiplerine ait olabilir. Yukarýdaki kodlarýn da gösterdiði gibi, liste içinde yer alan “Ali” ve “Veli” öðeleri birer karakter dizisi; [‘Ayþe’, ‘Nazan’, ‘Zeynep’] adlý öðe bir liste; 34, 65 ve 33 öðeleri birer tam sayý; 5.6 öðesi ise bir kayan noktalý sayýdýr. Ýþte farklý veri tiplerine ait bu öðelerin hepsi bir araya gelerek liste denen veri tipini oluþturuyor. Yukarýdaki örnekten de gördüðünüz gibi, bir listenin içinde baþka bir liste de yer alabiliyor. Örneðin burada listemizin öðelerinden biri, [‘Ayþe’, ‘Nazan’, ‘Zeynep’] adlý baþka bir listedir.
+
+Hatýrlarsanýz karakter dizilerinin belirleyici özelliði týrnak iþaretleri idi. Yukarýdaki örneklerden de gördüðünüz gibi listelerin belirleyici özelliði de köþeli parantezlerdir. Mesela:
+
+>>> karakter = ""
+
+Bu boþ bir karakter dizisidir. Þu ise boþ bir liste:
+
+>>> liste = []
+
+Týpký karakter dizilerinde olduðu gibi, listelerle de iki þekilde karþýlaþabilirsiniz:
+
+
+Listeyi kendiniz tanýmlamýþ olabilirsiniz. 
+Liste size baþka bir kaynaktan gelmiþ olabilir. 
+
+Yukarýdaki örneklerde bir listeyi kendimizin nasýl tanýmlayacaðýmýzý öðrendik. Peki listeler bize baþka hangi kaynaktan gelebilir?
+
+Hatýrlarsanýz karakter dizilerinin metotlarýný sýralamak için dir() adlý bir fonksiyondan yararlanmýþtýk.
+
+Mesela karakter dizilerinin bize hangi metotlarý sunduðunu görmek için bu fonksiyonu þöyle kullanmýþtýk:
+
+>>> dir(str)
+
+Bu komut bize þu çýktýyý vermiþti:
+
+['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__',
+'__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__',
+'__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__',
+'__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__',
+'__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__',
+'__subclasshook__', 'capitalize', 'center', 'count', 'encode', 'endswith',
+'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha',
+'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable',
+'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip',
+'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition',
+'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase',
+'title', 'translate', 'upper', 'zfill']
+
+Artýk bu çýktý size çok daha anlamlý geliyor olmalý. Gördüðünüz gibi çýktýmýz köþeli parantezler arasýnda yer alýyor. Yani aslýnda yukarýdaki çýktý bir liste. Dilerseniz bunu nasýl teyit edebileceðinizi biliyorsunuz:
+
+>>> komut = dir(str)
+>>> type(komut)
+
+<class 'list'>
+
+Gördüðünüz gibi, týpký input() fonksiyonundan gelen verinin bir karakter dizisi olmasý gibi, dir() fonksiyonundan gelen veri tipi de bir listedir.
+
+dir() fonksiyonu dýþýnda, baþka bir þeyin daha bize liste verdiðini biliyoruz. Bu þey, karakter dizilerinin split() adlý metodudur:
+
+>>> kardiz = "Ýstanbul Büyükþehir Belediyesi"
+>>> kardiz.split()
+
+['Ýstanbul', 'Büyükþehir', 'Belediyesi']
+
+Görüyorsunuz, split() metodunun çýktýsý da köþeli parantezler içinde yer alýyor. Demek ki bu çýktý da bir listedir.
+
+Peki bir fonksiyonun bize karakter dizisi mi, liste mi yoksa baþka bir veri tipi mi verdiðini bilmenin ne faydasý var?
+
+Her zaman söylediðimiz gibi, Python’da o anda elinizde olan verinin tipini bilmeniz son derece önemlidir. Aksi halde o veriyi nasýl evirip çevireceðinizi, o veriyle neler yapabileceðinizi bilemezsiniz. Mesela ‘Ýstanbul Büyükþehir Belediyesi’ ifadesini ele alalým. Bu ifadeyle ilgili size þöyle bir soru sorduðumu düþünün: ‘Acaba bu ifadenin ilk harfini nasýl alýrýz?’
+
+Eðer bu ifade size input() fonksiyonundan gelmiþse, yani bir karakter dizisiyse uygulayacaðýnýz yöntem farklý, split() metoduyla gelmiþse, yani liste ise uygulayacaðýnýz yöntem farklý olacaktýr.
+
+Eðer bu ifade bir karakter dizisi ise ilk harfi þu þekilde alabilirsiniz:
+
+>>> kardiz = "Ýstanbul Büyükþehir Belediyesi"
+>>> kardiz[0]
+
+'Ý'
+
+Ama eðer bu ifade bir liste ise yukarýdaki yöntem size farklý bir sonuç verir:
+
+>>> liste = kardiz.split()
+>>> liste[0]
+
+'Ýstanbul'
+
+Çünkü “Ýstanbul Büyükþehir Belediyesi” adlý karakter dizisinin ilk öðesi “Ý” karakteridir, ama [‘Ýstanbul’, ‘Büyükþehir’, ‘Belediyesi’] adlý listenin ilk öðesi “Ý” karakteri deðil, “Ýstanbul” kelimesidir.
+
+Gördüðünüz gibi, bir nesnenin hangi veri tipine ait olduðunu bilmek o nesneyle neleri nasýl yapabileceðimizi doðrudan etkiliyor. O yüzden programlama çalýþmalarýnýz esnasýnda veri tiplerine karþý her zaman uyanýk olmalýsýnýz.
+
+Not
+
+Python’da bir nesnenin hangi veri tipine ait olduðunu bilmenin neden bu kadar önemli olduðunu gerçek bir örnek üzerinde görmek isterseniz istihza.com/forum/viewtopic.php?f=43&t=62 adresindeki tartýþmayý inceleyebilirsiniz.
+
+Her ne kadar karakter dizileri ve listeler iki farklý veri tipi olsa ve bu iki veri tipinin birbirinden çok farklý yönleri ve yetenekleri olsa da, bu iki veri tipi arasýnda önemli benzerlikler de vardýr. Örneðin karakter dizilerini iþlerken öðrendiðimiz pek çok fonksiyonu listelerle birlikte de kullanabilirsiniz. Mesela karakter dizilerini incelerken öðrendiðimiz len() fonksiyonu listelerin boyutunu hesaplamada da kullanýlabilir:
+
+>>> diller = ["Ýngilizce", "Fransýzca", "Türkçe", "Ýtalyanca", "Ýspanyolca"]
+>>> len(diller)
+
+5
+
+Karakter dizileri karakterlerden oluþan bir veri tipi olduðu için len() fonksiyonu karakter dizisi içindeki karakterlerin sayýsýný veriyor. Listeler ise baþka veri tiplerini bir araya toplayan bir veri tipi olduðu için len() fonksiyonu liste içindeki veri tiplerinin sayýsýný söylüyor.
+
+len() fonksiyonu dýþýnda, range() fonksiyonuyla listeleri de birlikte kullanabilirsiniz. Mesela herhangi bir kaynaktan size þunlar gibi iki öðeli listeler geliyor olabilir:
+
+[0, 10]
+[6, 60]
+[12, 54]
+[67, 99]
+
+Bu iki öðeli listeleri tek bir liste içinde topladýðýmýzý düþünürsek þöyle bir kod yazabiliriz:
+
+sayýlar = [[0, 10], [6, 60], [12, 54], [67, 99]]
+
+for i in sayýlar:
+print(*range(*i))
+
+Eðer ilk bakýþta bu kod gözünüze anlaþýlmaz göründüyse bu kodu parçalara ayýrarak inceleyebilirsiniz.
+
+Burada öncelikle bir for döngüsü oluþturduk. Bu sayede sayýlar adlý listedeki öðelerin üzerinden tek tek geçebileceðiz. Eðer döngü içinde sadece öðeleri ekrana yazdýrýyor olsaydýk þöyle bir kodumuz olacaktý:
+
+for i in sayýlar:
+print(i)
+
+Bu kod bize þöyle bir çýktý verecektir:
+
+[0, 10]
+[6, 60]
+[12, 54]
+[67, 99]
+
+range() fonksiyonunun nasýl kullanýldýðýný hatýrlýyorsunuz. Yukarýdaki listelerde görünen ilk sayýlar range() fonksiyonunun ilk parametresi, ikinci sayýlar ise ikinci parametresi olacak. Yani her döngüde þöyle bir þey elde etmemiz gerekiyor:
+
+range(0, 10)
+range(6, 60)
+range(12, 54)
+range(67, 99)
+
+Aslýnda kodlarýmýzý þöyle yazarak yukarýdaki çýktýyý elde edebilirdik:
+
+sayýlar = [[0, 10], [6, 60], [12, 54], [67, 99]]
+
+for i in sayýlar:
+print(range(i[0], i[1]))
+
+Yukarýdaki açýklamalarda gördüðünüz gibi, i deðiþkeninin çýktýsý ikiþer öðeli bir liste oluyor. Ýþte burada yaptýðýmýz þey, bu ikiþer öðeli listelerin ilk öðesini (i[0]) range() fonksiyonunun ilk parametresi, ikinci öðesini (i[1]) ise range() fonksiyonunun ikinci parametresi olarak atamaktan ibaret. Ancak ilk derslerimizden hatýrlayacaðýnýz gibi, bunu yapmanýn daha kýsa bir yolu var. Bildiðiniz gibi, öðelerden oluþan dizileri ayrýþtýrmak için yýldýz iþaretinden yararlanabiliyoruz. Dolayýsýyla yukarýdaki kodlarý þöyle yazmak daha pratik olabilir:
+
+sayýlar = [[0, 10], [6, 60], [12, 54], [67, 99]]
+
+for i in sayýlar:
+print(range(*i))
+
+Gördüðünüz gibi, i deðiþkeninin soluna bir yýldýz ekleyerek bu deðiþken içindeki deðerleri ayrýþtýrdýk ve þöyle bir çýktý elde ettik:
+
+range(0, 10)
+range(6, 60)
+range(12, 54)
+range(67, 99)
+
+Hatýrlarsanýz, range(0, 10) gibi bir kod yazdýðýmýzda Python bize 0 ile 10 arasýndaki sayýlarý doðrudan göstermiyordu. Aralýktaki sayýlarý görmek için range() fonksiyonunun çýktýsýný bir döngü içine almalýyýz:
+
+for i in range(0, 10):
+print(i)
+
+range(0, 10) çýktýsýný görmek için döngü kurmak yerine yine yýldýz iþaretinden yararlanabiliyoruz. Örneðin:
+
+>>> print(*range(0, 10))
+
+0 1 2 3 4 5 6 7 8 9
+
+Ayný þeyi yukarýdaki kodlara da uygularsak þöyle bir þey elde ederiz:
+
+sayýlar = [[0, 10], [6, 60], [12, 54], [67, 99]]
+
+for i in sayýlar:
+print(*range(*i))
+
+Gördüðünüz gibi, yýldýz iþaretini hem i deðiþkenine, hem de range() fonksiyonuna ayrý ayrý uygulayarak istediðimiz sonucu elde ettik.
+
+Bu arada, yukarýdaki örnek bize listeler hakkýnda önemli bir bilgi de verdi. Karakter dizilerinin öðelerine eriþmek için nasýl kardiz[öðe_sýrasý] gibi bir formülden yararlanýyorsak, listelerin öðelerine eriþmek için de ayný þekilde liste[öðe_sýrasý] gibi bir formülden yararlanabiliyoruz.
+
+Listelerin öðelerine nasýl ulaþacaðýmýzýn ayrýntýlarýný biraz sonra göreceðiz. Ama biz þimdi listelere iliþkin önemli bir fonksiyonu inceleyerek yolumuza devam edelim.

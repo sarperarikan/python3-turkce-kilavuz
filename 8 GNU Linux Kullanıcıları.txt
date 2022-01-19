@@ -1,0 +1,33 @@
+
+GNU/Linux Kullanýcýlarý
+
+GNU/Linux daðýtýmlarýna Python programlama dilini kurarken bazý noktalarý göz önünde bulundurmamýz gerekiyor. Ýþte bu bölümde bu önemli noktalarýn neler olduðunu inceleyeceðiz.
+
+
+Kurulu Python Sürümü
+
+Hemen hemen bütün GNU/Linux daðýtýmlarýnda Python programlama dili kurulu olarak gelir. Örneðin Ubuntu’da Python zaten kuruludur.
+
+Ancak burada þöyle bir durum var:
+
+Daha önce de belirttiðimiz gibi, þu anda piyasada iki farklý Python serisi bulunuyor. Bunlardan birinin Python’ýn 2.x serisi, ötekinin ise 3.x serisi olduðunu biliyorsunuz.
+
+Sisteminizde kurulu olan Python sürümünü denetlemek için komut satýrýnda öncelikle þu komutu vermeyi deneyin (büyük ‘V’ ile):
+
+python -V
+
+Eðer bu komuttan Python 2.x.y þeklinde bir çýktý alýyorsanýz, yani x ve y’den önceki kýsým 2 ile baþlýyorsa sisteminizde Python2 kuruludur.
+
+Ancak python -V komutundan Python 2.x.y þeklinde bir çýktý almanýz sisteminizde sadece Python2’nin kurulu olduðunu göstermez. Sisteminizde Python2 ile birlikte Python3 de halihazýrda kurulu olabilir. Örneðin Ubuntu GNU/Linux’un 12.10 sürümünden itibaren hem Python2, hem de Python3 sistemde kurulu vaziyettedir.
+
+Kullandýðýnýz GNU/Linux daðýtýmýnda durumun ne olduðunu denetlemek için yukarýdaki komutu bir de python3 -V þeklinde çalýþtýrmayý deneyebilirsiniz. Eðer bu komut size bir hata mesajý yerine bir sürüm numarasý veriyorsa sisteminizde Python3 de kuruludur.
+
+Sisteminizdeki Python sürümlerine iliþkin daha kesin bir rapor için ise þu komutu kullanabilirsiniz:
+
+ls -g {,/usr{,/local}}/bin | grep python
+
+Buradan aldýðýnýz çýktýyý inceleyerek de sisteminizde birden fazla Python sürümünün kurulu olup olmadýðýný görebilirsiniz. [Bununla ilgili bir tartýþma için bkz. http://goo.gl/RnRRc]
+
+Ayrýca kullandýðýnýz GNU/Linux daðýtýmýnda whereis python gibi bir komut vererek de sistemde kurulu Python sürümleri hakkýnda bilgi edinebilirsiniz.
+
+Eðer sisteminizde Python3 kuruluysa ve siz de kurulu olan Python3 sürümünden memnunsanýz herhangi bir þey yapmanýza gerek yok. Farklý bir Python sürümü kurmaya çalýþmadan yolunuza devam edebilirsiniz.

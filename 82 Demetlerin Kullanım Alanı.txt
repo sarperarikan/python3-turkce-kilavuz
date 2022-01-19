@@ -1,0 +1,12 @@
+
+Demetlerin Kullaným Alaný
+
+Demetleri ilk öðrendiðinizde bu veri tipi size son derece gereksizmiþ gibi gelebilir. Ama aslýnda oldukça yaygýn kullanýlan bir veri tipidir bu. Özellikle programlarýn ayar (conf) dosyalarýnda bu veri tipi sýklýkla kullanýlýr. Örneðin Python tabanlý bir web çatýsý (framework) olan Django’nun settings.py adlý ayar dosyasýnda pek çok deðer bir demet olarak saklanýr. Mesela bir Django projesinde web sayfalarýnýn þablonlarýný (template) hangi dizin altýnda saklayacaðýnýzý belirlediðiniz ayar þöyle görünür:
+
+TEMPLATE_DIRS = ('/home/projects/djprojects/blog/templates',)
+
+Burada, þablon dosyalarýnýn hangi dizinde yer alacaðýný bir demet içinde gösteriyoruz. Bu demet içine birden fazla dizin adý yazabilirdik. Ama biz bütün þablon dosyalarýný tek bir dizin altýnda tutmayý tercih ettiðimiz için tek öðeli bir demet tanýmlamýþýz. Bu arada, daha önce de söylediðimiz gibi, demetlerle ilgili en sýk yapacaðýnýz hata, tek öðeli demet tanýmlamaya çalýþýrken aslýnda yanlýþlýkla bir karakter dizisi tanýmlamak olacaktýr. Örneðin yukarýdaki TEMPLATE_DIRS deðiþkenini þöyle yazsaydýk:
+
+TEMPLATE_DIRS = ('/home/projects/djprojects/blog/templates')
+
+Aslýnda bir demet deðil, alelade bir karakter dizisi tanýmlamýþ olurduk...

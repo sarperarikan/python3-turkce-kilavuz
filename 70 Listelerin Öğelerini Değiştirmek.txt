@@ -1,0 +1,65 @@
+
+Listelerin Öðelerini Deðiþtirmek
+
+Hatýrlarsanýz karakter dizilerinden söz ederken bunlarýn deðiþtirilemez (immutable) bir veri tipi olduðunu söylemiþtik. Bu özellikten ötürü, bir karakter dizisi üzerinde deðiþiklik yapmak istediðimizde o karakter dizisini yeniden oluþturuyoruz. Örneðin:
+
+>>> kardiz = "istihza"
+>>> kardiz = "Ý" + kardiz[1:]
+>>> kardiz
+
+'Ýstihza'
+
+Listeler ise deðiþtirilebilen (mutable) bir veri tipidir. Dolayýsýyla listeler üzerinde doðrudan deðiþiklik yapabiliriz. Bir liste üzerinde deðiþiklik yapabilmek için o listeyi yeniden tanýmlamamýza gerek yok. Þu örneði dikkatlice inceleyin:
+
+>>> renkler = ["kýrmýzý", "sarý", "mavi", "yeþil", "beyaz"]
+>>> print(renkler)
+
+['kýrmýzý', 'sarý', 'mavi', 'yeþil', 'beyaz']
+
+>>> renkler[0] = "siyah"
+>>> print(renkler)
+
+['siyah', 'sarý', 'mavi', 'yeþil', 'beyaz']
+
+Liste öðelerini nasýl deðiþtirdiðimize çok dikkat edin. Yukarýdaki örnekte renkler adlý listenin 0. öðesini deðiþtirmek istiyoruz. Bunun için þöyle bir formül kullandýk:
+
+renkler[öðe_sýrasý] = yeni_öðe
+
+Örnek olmasý açýsýndan, ayný listenin 2. sýrasýndaki “mavi” adlý öðeyi “mor” yapalým bir de:
+
+>>> renkler[2] = "mor"
+>>> print(renkler)
+
+['siyah', 'sarý', 'mor', 'yeþil', 'beyaz']
+
+Gördüðünüz gibi, listeler üzerinde deðiþiklik yapmak son derece kolay. Sýrf bu özellik bile, neden bazý durumlarda listelerin karakter dizileri yerine tercih edilebileceðini gösterecek güçtedir.
+
+Liste öðelerini deðiþtirmeye çalýþýrken, eðer var olmayan bir sýra numarasýna atýfta bulunursanýz Python size IndexError tipinde bir hata mesajý gösterecektir:
+
+>>> renkler[10] = "pembe"
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list assignment index out of range
+
+Sýra numaralarýný kullanarak listeler üzerinde daha ilginç iþlemler de yapabilirsiniz. Mesela þu örneðe bakýn:
+
+>>> liste = [1, 2, 3]
+>>> liste[0:len(liste)] = 5, 6, 7
+>>> print(liste)
+
+[5, 6, 7]
+
+Burada liste adlý listenin bütün öðelerini bir çýrpýda deðiþtirdik. Peki bunu nasýl yaptýk?
+
+Yukarýdaki örneði þu þekilde yazarsak biraz daha açýklayýcý olabilir:
+
+>>> liste[0:3] = 5, 6, 7
+
+Bu kodlarla yaptýðýmýz þey, listenin 0. ve 3. öðesi arasýnda kalan bütün öðelerin yerine 5, 6 ve 7 öðelerini yerleþtirmekten ibarettir.
+
+Karakter dizilerinden hatýrlayacaðýnýz gibi, eðer sýra numarasý bir karakter dizisinin ilk öðesine karþýlýk geliyorsa o sýra numarasýný belirtmeyebiliriz. Ayný þekilde eðer sýra numarasý bir karakter dizisinin son öðesine karþýlýk geliyorsa o sýra numarasýný da belirtmeyebiliriz. Bu kural listeler için de geçerlidir. Dolayýsýyla yukarýdaki örneði þöyle de yazabilirdik:
+
+>>> liste[:] = 5, 6, 7
+
+Sýra numaralarýný kullanarak gerçekten son derece enteresan iþlemler yapabilirsiniz. Sýra numaralarý ile neler yapabileceðinizi görmek için kendi kendinize ve hayal gücünüzü zorlayarak bazý denemeler yapmanýzý tavsiye ederim.

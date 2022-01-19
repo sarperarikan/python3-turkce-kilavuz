@@ -1,0 +1,48 @@
+
+Etkileþimli Kabuðun Hafýzasý
+
+Bir önceki bölümde Python’ýn etkileþimli kabuðunun nasýl kullanýlacaðýna dair epey örnek verdik ve etkileþimli kabuk üzerinden Python’ýn bazý temel araçlarýna kýsa bir giriþ yaptýk. Þimdi isterseniz yeri gelmiþken Python’ýn etkileþimli kabuðunun bir baþka yeteneðinden daha söz edelim.
+
+Etkileþimli kabukta _ adlý iþaret (alt çizgi iþareti), yapýlan son iþlemin veya girilen son öðenin deðerini tutma iþlevi görür. Yani:
+
+>>> 2345 + 54355
+
+56700
+
+Eðer bu iþlemin ardýndan _ komutunu verirsek þöyle bir çýktý alýrýz:
+
+>>> _
+
+56700
+
+Gördüðünüz gibi, _ komutu son girilen öðeyi hafýzasýnda tutuyor. Bu özellikten çeþitli þekillerde yararlanabilirsiniz:
+
+>>> _ + 15
+
+56715
+
+Burada _ komutunun deðeri bir önceki iþlemin sonucu olan 56715 deðeri olduðu için, _ komutuna 15 eklediðimizde 56715 deðerini elde ediyoruz. _ komutunun deðerini tekrar kontrol edelim:
+
+>>> _
+
+56715
+
+Gördüðünüz gibi, _ komutunun deðeri artýk 56715 sayýsýdýr...
+
+_ komutu yalnýzca sayýlarý deðil, karakter dizilerini de hafýzasýnda tutabilir:
+
+>>> "www"
+
+'www'
+
+>>> _
+
+'www'
+
+>>> _ + ".istihza.com"
+
+'www.istihza.com'
+
+Bu iþaret öyle çok sýk kullanýlan bir araç deðildir, ama zaman zaman iþinizi epey kolaylaþtýrýr. Yalnýz, unutmamamýz gereken þey, bu özelliðin sadece etkileþimli kabuk ortamýnda geçerli olmasýdýr. _ komutunun etkileþimli kabuk ortamý dýþýnda herhangi bir geçerliliði yoktur.
+
+Aslýnda burada söylenecek daha çok þey var. Ama biz þimdilik bunlarý sonraki konulara býrakacaðýz. Zira bu bölümdeki amacýmýz size konularýn her ayrýntýsýný vermekten ziyade, Python’a ýsýnmanýzý saðlamaktýr.

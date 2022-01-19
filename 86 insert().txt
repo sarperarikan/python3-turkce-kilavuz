@@ -1,0 +1,92 @@
+
+insert()
+
+Bildiðiniz gibi, + iþleci, append() ve extend() metotlarý öðeleri listenin sonuna ekliyor. Peki biz bir öðeyi listenin sonuna deðil de, liste içinde baþka bir konuma eklemek istersek ne yapacaðýz? Ýþte bunun için insert() adlý baþka bir metottan yararlanacaðýz.
+
+insert kelimesi ‘yerleþtirmek, sokmak’ gibi anlamlara gelir. insert() metodu da bu anlama uygun olarak, öðeleri listenin istediðimiz bir konumuna yerleþtirir. Dikkatlice inceleyin:
+
+>>> liste = ["elma", "armut", "çilek"]
+>>> liste.insert(0, "erik")
+>>> print(liste)
+
+['erik', 'elma', 'armut', 'çilek']
+
+Gördüðünüz gibi insert() metodu iki parametre alýyor. Ýlk parametre, öðenin hangi konuma yerleþtirileceðini, ikinci parametre ise yerleþtirilecek öðenin ne olduðunu gösteriyor. Yukarýdaki örnekte “erik” öðesini listenin 0. konumuna, yani listenin en baþýna yerleþtiriyoruz.
+
+ìnsert() metodu özellikle dosya iþlemlerinde iþinize yarar. Diyelim ki elimizde içeriði þöyle olan deneme.txt adlý bir dosya var:
+
+Ahmet Özkoparan
+Mehmet Veli
+Serdar Güzel
+Zeynep Güz
+
+Bizim amacýmýz, ‘Ahmet Özkoparan’ satýrýndan sonra ‘Ferhat Yaz’ diye bir satýr daha eklemek. Yani dosyamýzý þu hale getirmek istiyoruz:
+
+Ahmet Özkoparan
+Ferhat Yaz
+Mehmet Veli
+Serdar Güzel
+Zeynep Güz
+
+Biz henüz Python’da dosya iþlemlerinin nasýl yapýlacaðýný öðrenmedik. Ama hatýrlarsanýz bundan önceki bölümlerde birkaç yerde open() adlý bir fonksiyondan bahsetmiþ ve bu fonksiyonun dosya iþlemlerinde kullanýldýðýný söylemiþtik. Mesela yukarýda bahsettiðimiz deneme.txt adlý dosyayý açmak için open() fonksiyonunu þu þekilde kullanabiliriz:
+
+f = open("deneme.txt", "r")
+
+Burada deneme.txt adlý dosyayý okuma modunda açmýþ olduk. Þimdi dosya içeriðini okuyalým:
+
+içerik = f.readlines()
+
+Bu satýr sayesinde dosya içeriðini bir liste halinde alabildik. Eðer yukarýdaki kodlara þu eklemeyi yaparsanýz, dosya içeriðini görebilirsiniz:
+
+print(içerik)
+
+['Ahmet Özkoparan\n', 'Mehmet Veli\n', 'Serdar Güzel\n', 'Zeynep Güz\n', '\n']
+
+Gördüðünüz gibi, dosya içeriði basit bir listeden ibaret. Dolayýsýyla listelerle yapabildiðimiz her þeyi içerik adlý deðiþkenle de yapabiliriz. Yani bu listeye öðe ekleyebilir, listeden öðe çýkarabilir ya da bu listeyi baþka bir liste ile birleþtirebiliriz.
+
+Dosya içeriðini bir liste olarak aldýðýmýza göre þimdi bu listeye “Ahmet Özkoparan” öðesinden sonra “Ferhat Yaz” öðesini ekleyelim. Dikkatlice bakýn:
+
+içerik.insert(1, "Ferhat Yaz\n")
+
+Dediðimiz gibi, f.readlines() satýrý bize dosya içeriðini bir liste olarak verdi. Amacýmýz “Ahmet Özkoparan” öðesinden sonra “Ferhat Yaz” öðesini eklemek. Bunun için, liste metotlarýndan biri olan insert() metodunu kullanarak listenin 1. sýrasýna “Ferhat Yaz” öðesini ekledik. Burada “Ferhat Yaz” öðesine n adlý satýr baþý karakterini de ilave ettiðimize dikkat edin. Bu eklemeyi neden yaptýðýmýzý anlamak için satýr baþý karakterini çýkarmayý deneyebilirsiniz.
+
+içerik adlý deðiþkenin deðerini istediðimiz biçime getirdiðimize göre bu listeyi tekrar deneme.txt adlý dosyaya yazabiliriz. Ama bunun için öncelikle deneme.txt adlý dosyayý yazma modunda açmamýz gerekiyor. Python’da dosyalar ya okuma ya da yazma modunda açýlabilir. Okuma modunda açýlan bir dosyaya yazýlamaz. O yüzden dosyamýzý bir de yazma modunda açmamýz gerekiyor:
+
+g = open("deneme.txt", "w")
+
+open() fonksiyonunun ilk parametresi dosya adýný gösterirken, ikinci parametresi dosyanýn hangi modda açýlacaðýný gösteriyor. Biz burada deneme.txt adlý dosyayý yazma modunda açtýk. Buradaki “w” parametresi Ýngilizcede ‘yazmak’ anlamýna gelen write kelimesinin ilk harfidir. Biraz önce ise deneme.txt dosyasýný “r”, yani okuma (read) modunda açmýþtýk.
+
+Dosyamýz artýk üzerine yazmaya hazýr. Dikkatlice bakýn:
+
+g.writelines(içerik)
+
+Burada, biraz önce istediðimiz biçime getirdiðimiz içerik adlý listeyi doðruda dosyaya yazdýk. Bu iþlem için writelines() adlý özel bir metottan yararlandýk. Bu metotlarý birkaç bölüm sonra ayrýntýlý olarak inceleyeceðiz. Biz þimdilik sadece sonuca odaklanalým.
+
+Yapmamýz gereken son iþlem, açýk dosyalarý kapatmak olmalý:
+
+f.close()
+g.close()
+
+Þimdi kodlara topluca bir bakalým:
+
+f = open("deneme.txt", "r")
+içerik = f.readlines()
+içerik.insert(1, "Ferhat Yaz\n")
+
+g = open("deneme.txt", "w")
+g.writelines(içerik)
+
+f.close()
+g.close()
+
+Gördüðünüz gibi yaptýðýmýz iþlem þu basamaklardan oluþuyor:
+
+
+Öncelikle dosyamýzý okuma modunda açýyoruz (f = open("deneme.txt", "r")) 
+Ardýndan dosya içeriðini bir liste olarak alýyoruz (içerik = f.readlines()) 
+Aldýðýmýz bu listenin 2. sýrasýna “Ferhat Yaz” öðesini ekliyoruz (içerik.insert(1, "Ferhat Yaz\n")) 
+Listeyi istediðimiz þekle getirdikten sonra bu defa dosyamýzý yazma modunda açýyoruz (g = open("deneme.txt", "w")) 
+Biraz önce düzenlediðimiz listeyi dosyaya yazýyoruz (g.writelines(içerik)) 
+Son olarak da, hem yaptýðýmýz deðiþikliklerin etkin hale gelebilmesi hem de iþletim sisteminin programýmýza tahsis ettiði kaynaklarýn serbest kalmasý için dosyalarýmýzý kapatýyoruz (f.close() ve g.close()) 
+
+Burada insert() metodunun bize nasýl kolaylýk saðladýðýna dikkat edin. insert() metodu da listelerin önemli metotlarýndan biridir ve dediðimiz gibi, özellikle dosyalarý manipüle ederken epey iþimize yarar.

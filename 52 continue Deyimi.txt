@@ -1,0 +1,35 @@
+
+continue Deyimi
+
+continue ilginç bir deyimdir. Ýsterseniz continue deyimini anlatmaya çalýþmak yerine bununla ilgili bir örnek verelim:
+
+while True:
+s = input("Bir sayý girin: ")
+if s == "iptal":
+break
+
+if len(s) <= 3:
+continue
+
+print("En fazla üç haneli bir sayý girebilirsiniz.")
+
+Burada eðer kullanýcý klavyede iptal yazarsa programdan çýkýlacaktýr. Bunu;
+
+if s == "iptal":
+break
+
+satýrýyla saðlamayý baþardýk.
+
+Eðer kullanýcý tarafýndan girilen sayý üç haneli veya daha az haneli bir sayý ise, continue ifadesinin etkisiyle:
+
+>>> print("En fazla üç haneli bir sayý girebilirsiniz.")
+
+satýrý es geçilecek ve döngünün en baþýna gidilecektir.
+
+Eðer kullanýcýnýn girdiði sayýdaki hane üçten fazlaysa ekrana:
+
+En fazla üç haneli bir sayý girebilirsiniz.
+
+cümlesi yazdýrýlacaktýr.
+
+Dolayýsýyla buradan anladýðýmýza göre, continue deyiminin görevi kendisinden sonra gelen her þeyin es geçilip döngünün baþýna dönülmesini saðlamaktýr. Bu bilgiye göre, yukarýdaki programda eðer kullanýcý, uzunluðu üç karakterden az bir sayý girerse continue deyiminin etkisiyle programýmýz döngünün en baþýna geri gidiyor. Ama eðer kullanýcý, uzunluðu üç karakterden fazla bir sayý girerse, ekrana ‘En fazla üç haneli bir sayý girebilirsiniz,’ cümlesinin yazdýrýldýðýný görüyoruz.

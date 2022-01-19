@@ -1,0 +1,512 @@
+
+Örnek Uygulamalar
+
+Python programlama dilinde döngülerin neye benzediðini öðrendik. Bu bölünde ayrýca döngülerle birlikte kullanabileceðimiz baþka araçlarý da tanýdýk. Þimdi dilerseniz bu öðrendiklerimizi pekiþtirmek için birkaç ufak çalýþma yapalým.
+
+
+Karakter Dizilerinin Ýçeriðini Karþýlaþtýrma
+
+Diyelim ki elinizde þöyle iki farklý metin var:
+
+ilk_metin = "asdasfddgdhfjfdgdþfkgjdfklgþjdfklgjdfkghdfjghjklsdhajlsdhjkjhkhjjh"
+ikinci_metin = "sdfsuýdoryeuýfsjkdfhdjklghjdfklruseldhfjlkdshfljskeeuf"
+
+Siz burada, ilk_metin adlý deðiþken içinde bulunan, ama ikinci_metin adlý deðiþken içinde bulunmayan öðeleri ayýklamak istiyorsunuz. Yani bu iki metnin içeriðini karþýlaþtýrýp, farklý öðeleri bulmayý amaçlýyorsunuz. Bu iþlem için, bu bölümde öðrendiðimiz döngülerden ve daha önce öðrendiðimiz baþka araçlardan yararlanabilirsiniz. Þimdi dikkatlice bakýn:
+
+ilk_metin = "asdasfddgdhfjfdgdþfkgjdfklgþjdfklgjdfkghdfjghjklsdhajlsdhjkjhkhjjh"
+ikinci_metin = "sdfsuýdoryeuýfsjkdfhdjklghjdfklruseldhfjlkdshfljskeeuf"
+
+for s in ilk_metin:
+if not s in ikinci_metin:
+print(s)
+
+Bu kodlarý bir dosyaya kaydedip çalýþtýrdýðýmýzda þu çýktýyý alýyoruz:
+
+a
+a
+þ
+þ
+a
+
+Demek ki ilk_metin adlý deðiþkende olup da ikinci_metin adlý deðiþkende olmayan öðeler bunlarmýþ...
+
+Bu kodlarda anlayamayacaðýnýz hiçbir þey yok. Ama dilerseniz biz yine de bu kodlarý tek tek inceleyelim.
+
+Ýlk olarak deðiþkenlerimizi tanýmladýk:
+
+ilk_metin = "asdasfddgdhfjfdgdþfkgjdfklgþjdfklgjdfkghdfjghjklsdhajlsdhjkjhkhjjh"
+ikinci_metin = "sdfsuýdoryeuýfsjkdfhdjklghjdfklruseldhfjlkdshfljskeeuf"
+
+Amacýmýz ilk_metin‘de olan, ama ikinci_metin‘de olmayan öðeleri görmek. Bunun için ilk_metin‘deki öðeleri tek tek ikinci_metin‘deki öðelerle karþýlaþtýrmamýz gerekiyor. Tahmin edebileceðiniz gibi, bir metnin bütün öðelerine tek tek bakabilmenin en iyi yolu for döngülerini kullanmaktýr. O halde döngümüzü yazalým:
+
+for s in ilk_metin: #ilk_metin'deki, 's' adýný verdiðimiz bütün öðeler için
+if not s in ikinci_metin: #eðer 's' adlý bu öðe ikinci_metin'de yoksa
+print(s) #'s' adlý öðeyi ekrana bas
+
+Gördüðünüz gibi, döngüleri (for), bool iþleçlerini (not) ve aitlik iþleçlerini (in) kullanarak, istediðimiz þeyi rahatlýkla yapabiliyoruz. Burada kullandýðýmýz if deyimi, bir önceki satýrda for döngüsü ile üzerinden geçtiðimiz öðeleri süzmemizi saðlýyor. Burada temel olarak þu üç iþlemi yapýyoruz:
+
+ilk_metin içindeki bütün öðelerin üzerinden geçiyoruz, 
+Bu öðeleri belli bir ölçüte göre süzüyoruz, 
+Ölçüte uyan öðeleri ekrana basýyoruz. 
+Elbette yukarýda yaptýðýmýz iþlemin tersini yapmak da mümkündür. Biz yukarýdaki kodlarda ilk_metin‘de olan, ama ikinci_metin‘de olmayan öðeleri süzdük. Eðer istersek ikinci_metin‘de olan, ama ilk_metin‘de olmayan öðeleri de süzebiliriz. Mantýðýmýz yine ayný:
+
+ilk_metin = "asdasfddgdhfjfdgdþfkgjdfklgþjdfklgjdfkghdfjghjklsdhajlsdhjkjhkhjjh"
+ikinci_metin = "sdfsuýdoryeuýfsjkdfhdjklghjdfklruseldhfjlkdshfljskeeuf"
+
+for s in ikinci_metin: #ikinci_metin'deki, 's' adýný verdiðimiz bütün öðeler için
+if not s in ilk_metin: #eðer 's' adlý bu öðe ilk_metin'de yoksa
+print(s) #'s' adlý öðeyi ekrana bas
+
+Bu da bize þu çýktýyý veriyor:
+
+u
+ý
+o
+r
+y
+e
+u
+ý
+r
+u
+e
+e
+e
+u
+
+Gördüðünüz gibi, yaptýðýmýz tek þey, ilk_metin ile ikinci_metin‘in yerlerini deðiþtirmek oldu. Kullandýðýmýz mantýk ise deðiþmedi.
+
+Bu arada, yukarýdaki çýktýda bizi rahatsýz eden bir durum var. Çýktýda bazý harfler birbirini tekrar ediyor. Aslýnda temel olarak sadece þu harfler var:
+
+u
+ý
+o
+r
+y
+e
+
+Ama metin içinde bazý harfler birden fazla sayýda geçtiði için, doðal olarak çýktýda da bu harfler birden fazla sayýda görünüyor. Ama tabii ki, eðer biz istersek farklý olan her harften yalnýzca bir tanesini çýktýda görmeyi de tercih edebiliriz. Bunun için þöyle bir kod yazabiliriz:
+
+ilk_metin = "asdasfddgdhfjfdgdþfkgjdfklgþjdfklgjdfkghdfjghjklsdhajlsdhjkjhkhjjh"
+ikinci_metin = "sdfsuýdoryeuýfsjkdfhdjklghjdfklruseldhfjlkdshfljskeeuf"
+
+fark = ""
+
+for s in ikinci_metin:
+if not s in ilk_metin:
+if not s in fark:
+fark += s
+print(fark)
+
+Burada da anlayamayacaðýmýz hiçbir þey yok. Bu kodlardaki bütün parçalarý tanýyoruz. Herzamanki gibi öncelikle deðiþkenlerimizi tanýmladýk:
+
+ilk_metin = "asdasfddgdhfjfdgdþfkgjdfklgþjdfklgjdfkghdfjghjklsdhajlsdhjkjhkhjjh"
+ikinci_metin = "sdfsuýdoryeuýfsjkdfhdjklghjdfklruseldhfjlkdshfljskeeuf"
+
+Daha sonra fark adlý boþ bir karakter dizisi tanýmlýyoruz. Metinler içindeki farklý karakter dizilerini fark adlý bu karakter dizisi içinde depolayacaðýz.
+
+Ardýndan da for döngümüzü yazýyoruz:
+
+for s in ikinci_metin: # ikinci_metin'de 's' dediðimiz bütün öðeler için
+if not s in ilk_metin: # eðer 's' ilk_metin'de yoksa
+if not s in fark: # eðer 's' fark'ta da yoksa
+fark += s # bu öðeyi fark deðiþkenine ekle
+print(fark) # fark deðiþkenini ekrana bas
+
+Uyguladýðýmýz mantýðýn ne kadar basit olduðunu görüyorsunuz. Bu kodlarda basitçe þu iþlemleri yapýyoruz:
+
+ikinci_metin deðiþkeni içindeki bütün öðelerin üzerinden tek tek geç, 
+Eðer bu deðiþkendeki herhangi bir öðe ilk_metin‘de ve fark‘ta yoksa o öðeyi fark‘a ekle. 
+Son olarak da fark‘ý ekrana bas. 
+Bu kodlarda dikkatimizi çeken ve üzerinde durmamýz gereken bazý noktalar var. Burada özellikle fark deðiþkenine öðe ekleme iþlemini nasýl yaptýðýmýza dikkat edin.
+
+Python programlama dilinde önceden oluþturduðumuz bir karakter dizisini baþka bir karakter dizisi ile birleþtirdiðimizde bu iþlem ilk oluþturduðumuz karakter dizisini etkilemez. Yani:
+
+>>> a = 'istihza'
+>>> a + '.com'
+
+'istihza.com'
+
+Burada sanki a adlý özgün karakter dizisini deðiþtirmiþiz ve ‘istihza.com’ deðerini elde etmiþiz gibi görünüyor. Ama aslýnda a‘nýn durumunda hiçbir deðiþiklik yok:
+
+>>> a
+
+'istihza'
+
+Gördüðünüz gibi, a deðiþkeninin deðeri hâlâ ‘istihza’. Bu durumun nedeni, birleþtirme iþlemlerinin bir deðiþtirme iþlemi olmamasýdýr. Yani mesela iki karakter dizisini birleþtirdiðinizde birleþen karakter dizileri üzerinde herhangi bir deðiþiklik olmaz. Bu durumda yapabileceðimiz tek þey, karakter dizisine eklemek istediðimiz öðeyi de içeren yeni bir karakter dizisi oluþturmaktýr. Yani:
+
+>>> a = 'istihza'
+>>> a = a + '.com'
+>>> print(a)
+
+istihza.com
+
+Burada sanki deðeri ‘istihza’ olan a adlý bir deðiþkene ‘.com’ deðerini eklemiþiz gibi görünüyor, ama aslýnda biz burada a deðiþkenini yok edip, ‘istihza.com’ deðerini içeren, a adlý baþka bir deðiþken tanýmladýk. Bu durumu nasýl teyit edeceðinizi biliyorsunuz:
+
+>>> a = 'istihza'
+>>> id(a)
+
+15063200
+
+>>> a = a + '.com'
+>>> id(a)
+
+15067960
+
+Burada id() fonksiyonunu kullanarak karakter dizilerinin kimliklerini sorguladýk. Gördüðünüz gibi, isimleri ayný da olsa, aslýnda ortada iki farklý a deðiþkeni var. Kimlik numaralarýnýn farklý olmasýndan anladýðýmýza göre, ilk baþta tanýmladýðýmýz a deðiþkeni ile a = a + '.com' satýrýyla oluþturduðumuz a deðiþkeni birbirinden farklý.
+
+Bu arada, eðer istersek yukarýdaki deðer atama iþlemini, önceki bölümlerde öðrendiðimiz deðer atama iþleçleri yardýmýyla kýsaltabileceðimizi de biliyorsunuz:
+
+>>> a += '.com'
+
+Ýþte ilk_metin ile ikinci_metin deðiþkenleri arasýndaki farklý harfleri yalnýzca birer kez yazdýrmak için kullandýðýmýz kodlarda da yukarýdaki iþlemi yaptýk:
+
+ilk_metin = "asdasfddgdhfjfdgdþfkgjdfklgþjdfklgjdfkghdfjghjklsdhajlsdhjkjhkhjjh"
+ikinci_metin = "sdfsuýdoryeuýfsjkdfhdjklghjdfklruseldhfjlkdshfljskeeuf"
+
+fark = ''
+
+for s in ikinci_metin:
+if not s in ilk_metin:
+if not s in fark:
+fark += s
+print(fark)
+
+Gördüðünüz gibi, önce boþ bir fark deðiþkeni oluþturduk. Daha sonra bu deðiþkene for döngüsü içinde yeni deðerler atayabilmek (daha doðrusu atarmýþ gibi yapmak) için fark += s gibi bir kod kullandýk. Böylece for döngüsünün her dönüþünde s adýný verdiðimiz herbir öðeyi tek tek fark deðiþkenine yolladýk. Böylece program sonunda elimizde, farklý öðeleri yalnýzca birer kez içeren fark adlý bir deðiþken olmuþ oldu. Dediðimiz gibi, ilk baþta tanýmladýðýmýz boþ fark deðiþkeni ile, program sonunda farklý deðerleri içeren fark deðiþkeni aslýnda ayný deðil. Yani biz ilk fark deðiþkenine döngünün her dönüþünde yeni bir öðe eklemek yerine, döngünün her dönüþünde yeni bir fark deðiþkeni oluþturmuþ oluyoruz. Ama programýn sonunda sanki fark deðiþkenine her defasýnda yeni bir deðer atamýþýz gibi görünüyor ve bu da bizim iþimizi görmemize yetiyor...
+
+Programýn baþýndaki ve sonundaki fark deðiþkenlerinin aslýnda birbirinden farklý olduðunu teyit etmek için þu kodlarý kullanabilirsiniz:
+
+ilk_metin = "asdasfddgdhfjfdgdþfkgjdfklgþjdfklgjdfkghdfjghjklsdhajlsdhjkjhkhjjh"
+ikinci_metin = "sdfsuýdoryeuýfsjkdfhdjklghjdfklruseldhfjlkdshfljskeeuf"
+
+fark = ""
+print("fark'ýn ilk tanýmlandýðý zamanki kimlik numarasý: ", id(fark))
+
+for s in ikinci_metin:
+if not s in ilk_metin:
+if not s in fark:
+fark += s
+
+print("fark'ýn program sonundaki kimlik numarasý: ", id(fark))
+
+Gördüðünüz gibi, gerçekten de ortada iki farklý fark deðiþkeni var. Bu durumu id() fonksiyonu yardýmýyla doðrulayabiliyoruz.
+
+Peki bu bilginin bize ne faydasý var?
+
+Þimdilik þu kadarýný söyleyelim: Eðer o anda muhatap olduðunuz bir veri tipinin mizacýný, huyunu-suyunu bilmezseniz yazdýðýnýz programlarda çok kötü sürprizlerle karþýlaþabilirsiniz. Birkaç bölüm sonra baþka veri tiplerini de öðrendikten sonra bu durumu daha ayrýntýlý bir þekilde inceleyeceðiz.
+
+Bu arada, tahmin edebileceðiniz gibi yukarýdaki for döngüsünü þöyle de yazabilirdik:
+
+for s in ikinci_metin:
+if not s in ilk_metin and not s in fark:
+fark += s
+
+Burada iki farklý if deyimini iki farklý satýrda yazmak yerine, bu deyimleri and iþleci ile birbirine baðladýk.
+
+Bu örnek ile ilgili söyleyeceklerimiz þimdilik bu kadar. Gelin biz þimdi isterseniz bilgilerimizi pekiþtirmek için baþka bir örnek daha yapalým.
+
+
+Dosyalarýn Ýçeriðini Karþýlaþtýrma
+
+Bir önceki örnekte karakter dizilerinin içeriðini nasýl karþýlaþtýrabileceðimizi gösteren bir örnek vermiþtik. Þimdi de, gerçek hayatta karþýnýza çýkmasý daha olasý bir durum olmasý bakýmýndan, dosyalarýn içeriðini nasýl karþýlaþtýracaðýmýza dair bir örnek verelim.
+
+Esasýnda karakter dizilerinin içeriðini birbirleriyle nasýl karþýlaþtýrýyorsak, dosyalarýn içeriðini de benzer þekilde karþýlaþtýrabiliriz. Mesela içeriði þu olan isimler1.txt adlý bir dosyamýz olduðunu varsayalým:
+
+Ahmet
+Mehmet
+Sevgi
+Sinan
+Deniz
+Ege
+Efe
+Ferhat
+Fýrat
+Zeynep
+Hazan
+Mahmut
+Celal
+Cemal
+Özhan
+Özkan
+
+Yine içeriði þu olan bir de isimler2.txt adlý baþka bir dosya daha olduðunu düþünelim:
+
+Gürsel
+Mehmet
+Sevgi
+Sami
+Deniz
+Ege
+Efe
+Ferhat
+Fýrat
+Tülay
+Derya
+Hazan
+Mahmut
+Tezcan
+Cemal
+Özhan
+Özkan
+Özcan
+Dilek
+
+Amacýmýz bu iki dosyanýn içeriðini karþýlaþtýrýp, farklý öðeleri ortaya sermek. Dediðimiz gibi, bir önceki örnekte izlediðimiz yolu burada da takip edebiliriz. Dikkatlice bakýn:
+
+d1 = open("isimler1.txt") # dosyayý açýyoruz
+d1_satýrlar = d1.readlines() # satýrlarý okuyoruz
+
+d2 = open("isimler2.txt")
+d2_satýrlar = d2.readlines()
+
+for i in d2_satýrlar:
+if not i in d1_satýrlar:
+print(i)
+
+d1.close()
+d2.close()
+
+Gerçekten de mantýðýn bir önceki örnekle tamamen ayný olduðunu görüyorsunuz. Biz henüz Python’da dosyalarýn nasýl iþleneceðini öðrenmedik, ama daha önce gördüðümüz open() fonksiyonu yardýmýyla en azýndan dosyalarý açabilecek kadar biliyoruz dosya iþlemlerinin nasýl yürütüleceðini...
+
+Burada farklý olarak readlines() adlý bir metot görüyoruz. Biz burada bu metodun ayrýntýlarýna inmeyeceðiz, ama þimdilik dosya içeriðinin satýrlar halinde okunmasýný saðladýðýný bilelim yeter.
+
+Bu arada, eðer çýktýda Türkçe karakterleri düzgün görüntüleyemiyorsanýz open() fonksiyonunun encoding adlý bir parametresi vasýtasýyla içeriði UTF-8 olarak kodlayabilirsiniz:
+
+d1 = open("isimler1.txt", encoding="utf-8") # dosyayý açýyoruz
+d1_satýrlar = d1.readlines() # satýrlarý okuyoruz
+
+d2 = open("isimler2.txt", encoding="utf-8")
+d2_satýrlar = d2.readlines()
+
+for i in d2_satýrlar:
+if not i in d1_satýrlar:
+print(i)
+
+d1.close()
+d2.close()
+
+Bu þekilde Türkçe karakterleri düzgün bir þekilde görüntüleyebiliyor olmanýz lazým. Eðer Windows’ta Türkçe karakterleri hala düzgün görüntüleyemiyorsanýz encoding parametresinde ‘utf-8’ yerine ‘cp1254’ adlý dil kodlamasýný kullanmayý deneyebilirsiniz:
+
+encoding = "cp1254"
+
+Yukarýdaki örneklerde bir içerik karþýlaþtýrmasý yapýp, farklý öðeleri ayýkladýk. Ayný þekilde benzer öðeleri ayýklamak da mümkündür. Bu iþlemin nasýl yapýlacaðýný az çok tahmin ettiðinizi zannediyorum:
+
+d1 = open("isimler1.txt")
+d1_satýrlar = d1.readlines()
+
+d2 = open("isimler1.txt")
+d2_satýrlar = d2.readlines()
+
+for i in d2_satýrlar:
+if i in d1_satýrlar:
+print(i)
+
+d1.close()
+d2.close()
+
+Burada bir öncekinden farklý olarak if not i in d2_satýrlar kodu yerine, doðal olarak, if i in d2_satýrlar kodunu kullandýðýmýza dikkat edin.
+
+Dosyalar üzerinde yaptýðýmýz iþlemleri tamamladýktan sonra close() metodu ile bunlarý kapatmayý unutmuyoruz:
+
+d1.close()
+d2.close()
+
+
+Karakter Dizisindeki Karakterleri Sayma
+
+Yukarýdaki örneklerde içerik karþýlaþtýrmaya iliþkin birkaç örnek verdik. Þimdi yine bilgilerimizi pekiþtirmek için baþka bir konuya iliþkin örnekler verelim.
+
+Mesela elimizde þöyle bir metin olduðunu varsayalým:
+
+Bu programlama dili Guido Van Rossum adlý Hollandalý bir programcý
+tarafýndan 90’lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan,
+isminin Python olmasýna aldanarak, bu programlama dilinin, adýný piton
+yýlanýndan aldýðýný düþünür. Ancak zannedildiðinin aksine bu programlama
+dilinin adý piton yýlanýndan gelmez. Guido Van Rossum bu programlama dilini,
+The Monty Python adlý bir Ýngiliz komedi grubunun, Monty Python’s Flying
+Circus adlý gösterisinden esinlenerek adlandýrmýþtýr. Ancak her ne kadar
+gerçek böyle olsa da, Python programlama dilinin pek çok yerde bir yýlan
+figürü ile temsil edilmesi neredeyse bir gelenek halini almýþtýr.
+
+Yapmamýz gereken bir istatistik çalýþmasý gereðince bu metinde her harfin kaç kez geçtiðini hesaplamanýz gerekiyor.
+
+Bunun için þöyle bir program yazabiliriz:
+
+metin = """Bu programlama dili Guido Van Rossum adlý Hollandalý bir programcý
+tarafýndan 90’lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan,
+isminin Python olmasýna aldanarak, bu programlama dilinin, adýný piton
+yýlanýndan aldýðýný düþünür. Ancak zannedildiðinin aksine bu programlama dilinin
+adý piton yýlanýndan gelmez. Guido Van Rossum bu programlama dilini, The Monty
+Python adlý bir Ýngiliz komedi grubunun, Monty Python’s Flying Circus adlý
+gösterisinden esinlenerek adlandýrmýþtýr. Ancak her ne kadar gerçek böyle olsa
+da, Python programlama dilinin pek çok yerde bir yýlan figürü ile temsil
+edilmesi neredeyse bir gelenek halini almýþtýr."""
+
+harf = input("Sorgulamak istediðiniz harf: ")
+
+sayý = ''
+
+for s in metin:
+if harf == s:
+sayý += harf
+
+print(len(sayý))
+
+Burada öncelikle metnimizi bir deðiþken olarak tanýmladýk. Ardýndan da kullanýcýya hangi harfi sorgulamak istediðini sorduk.
+
+Bu kodlarda tanýmladýðýmýz sayý adlý deðiþken, sorgulanan harfi, metinde geçtiði sayýda içinde barýndýracaktýr. Yani mesela metin 5 tane a harfi varsa sayý deðiþkeninin deðeri aaaaa olacaktýr.
+
+Sonraki satýrlarda for döngümüzü tanýmlýyoruz:
+
+for s in metin: # metin içinde 's' adýný verdiðimiz herbir öðe için
+if harf == s: # eðer kullanýcýdan gelen harf 's' ile aynýysa
+sayý += harf # kullanýcýdan gelen bu harfi sayý deðiþkenine yolla
+
+Dediðimiz gibi, sayý deðiþkeni, sorgulanan harfi, metinde geçtiði sayýda barýndýrýyor. Dolayýsýyla bir harfin metinde kaç kez geçtiðini bulmak için sayý deðiþkeninin uzunluðunu yazdýrmamýz yeterli olacaktýr:
+
+print(len(sayý))
+
+Dilerseniz yukarýdaki programý yazmak için daha farklý bir mantýk da kullanabilirsiniz. Dikkatlice bakýn:
+
+metin = """Bu programlama dili Guido Van Rossum adlý Hollandalý bir programcý
+tarafýndan 90’lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan,
+isminin Python olmasýna aldanarak, bu programlama dilinin, adýný piton
+yýlanýndan aldýðýný düþünür. Ancak zannedildiðinin aksine bu programlama dilinin
+adý piton yýlanýndan gelmez. Guido Van Rossum bu programlama dilini, The Monty
+Python adlý bir Ýngiliz komedi grubunun, Monty Python’s Flying Circus adlý
+gösterisinden esinlenerek adlandýrmýþtýr. Ancak her ne kadar gerçek böyle olsa
+da, Python programlama dilinin pek çok yerde bir yýlan figürü ile temsil
+edilmesi neredeyse bir gelenek halini almýþtýr."""
+
+harf = input("Sorgulamak istediðiniz harf: ")
+
+sayý = 0
+
+for s in metin:
+if harf == s:
+sayý += 1
+
+print(sayý)
+
+Burada sayý deðiþkeninin ilk deðeri 0 olarak belirledik. Döngü içinde de, sorgulanan harfin metin içinde her geçiþinde sayý deðiþkeninin deðerini 1 sayý artýrdýk. Dolayýsýyla sorgulanan harfin metinde kaç kez geçtiðini bulmak için sayý deðiþkeninin son deðerini yazdýrmamýz yeterli oldu.
+
+
+Dosya içindeki Karakterleri Sayma
+
+Dilerseniz bir önceki örnekte kullandýðýmýz metnin program içinde bir deðiþken deðil de, mesela bir dosyadan okunan bir metin olduðunu varsayalým þimdi:
+
+hakkýnda = open("hakkýnda.txt", encoding="utf-8")
+
+harf = input("Sorgulamak istediðiniz harf: ")
+
+sayý = 0
+
+for karakter_dizisi in hakkýnda:
+for karakter in karakter_dizisi:
+if harf == karakter:
+sayý += 1
+print(sayý)
+
+hakkýnda.close()
+
+Burada yaptýðýmýz ilk iþ elbette dosyamýzý açmak oldu:
+
+hakkýnda = open("hakkýnda.txt", encoding="utf-8")
+
+Bu komutla, hakkýnda.txt adlý dosyayý UTF-8 kodlamasý ile açtýk. Daha sonra kullanýcýya, sorgulamak istediði harfi soruyoruz:
+
+harf = input("Sorgulamak istediðiniz harf: ")
+
+Ardýndan da sorgulanan harfin dosyada kaç kez geçtiði bilgisini tutacak olan sayý adlý bir deðiþken tanýmlýyoruz:
+
+sayý = 0
+
+Sýra geldi for döngümüzü tanýmlamaya:
+
+for karakter_dizisi in hakkýnda:
+for karakter in karakter_dizisi:
+if harf == karakter:
+sayý += 1
+
+Bu döngüyü anlamakta bir miktar zorlanmýþ olabilirsiniz. Her zaman söylediðimiz gibi, Python’da bir kod parçasýný anlamanýn en iyi yöntemi, gerekli yerlere print() fonksiyonlarý yerleþtirerek, programýn verdiði çýktýlarý incelemektir:
+
+for karakter_dizisi in hakkýnda:
+print(karakter_dizisi)
+#for karakter in karakter_dizisi:
+#    if harf == karakter:
+#        sayý += 1
+
+Gördüðünüz gibi, ilk for döngüsünün hemen sonrasýna bir print() fonksiyonu yerleþtirerek bu döngünün verdiði çýktýlarý inceliyoruz. Bu arada, amacýmýza hizmet etmeyen satýrlarý da yorum içine alarak etkisizleþtirdiðimize dikkat edin.
+
+Çýktýya baktýðýmýz zaman, þöyle bir durumla karþýlaþýyoruz:
+
+Bu programlama dili Guido Van Rossum adlý Hollandalý bir programcý
+
+tarafýndan 90’lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan,
+
+isminin Python olmasýna aldanarak, bu programlama dilinin, adýný piton
+
+yýlanýndan aldýðýný düþünür. Ancak zannedildiðinin aksine bu programlama dilinin
+
+adý piton yýlanýndan gelmez. Guido Van Rossum bu programlama dilini, The Monty
+
+Python adlý bir Ýngiliz komedi grubunun, Monty Python’s Flying Circus adlý
+
+gösterisinden esinlenerek adlandýrmýþtýr. Ancak her ne kadar gerçek böyle olsa
+
+da, Python programlama dilinin pek çok yerde bir yýlan figürü ile temsil
+
+edilmesi neredeyse bir gelenek halini almýþtýr.
+
+Burada herbir satýr ayrý bir karakter dizisidir. Eðer herbir satýrýn ayrý bir karakter dizisi olduðunu daha net bir þekilde görmek istiyorsanýz repr() adlý özel bir fonksiyondan yararlanabilirsiniz:
+
+for karakter_dizisi in hakkýnda:
+print(repr(karakter_dizisi))
+#for karakter in karakter_dizisi:
+#    if harf == karakter:
+#        sayý += 1
+
+Bu kodlar bu kez þöyle bir çýktý verir:
+
+'Bu programlama dili Guido Van Rossum adlý Hollandalý bir programcý\n'
+'tarafýndan 90’lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan,\n'
+'isminin Python olmasýna aldanarak, bu programlama dilinin, adýný piton\n'
+'yýlanýndan aldýðýný düþünür. Ancak zannedildiðinin aksine bu programlama dilinin\n'
+'adý piton yýlanýndan gelmez. Guido Van Rossum bu programlama dilini, The Monty\n'
+'Python adlý bir Ýngiliz komedi grubunun, Monty Python’s Flying Circus adlý\n'
+'gösterisinden esinlenerek adlandýrmýþtýr. Ancak her ne kadar gerçek böyle olsa\n'
+'da, Python programlama dilinin pek çok yerde bir yýlan figürü ile temsil\n'
+'edilmesi neredeyse bir gelenek halini almýþtýr.'
+
+Bu çýktýya çok dikkatlice bakýn. repr() fonksiyonu sayesinde Python’ýn alttan alta neler çevirdiðini bariz bir biçimde görüyoruz. Karakter dizisinin baþlangýç ve bitiþini gösteren týrnak iþaretleri ve \n kaçýþ dizilerinin görünür vaziyette olmasý sayesinde herbir satýrýn ayrý bir karakter dizisi olduðunu daha net bir þekilde görebiliyoruz.
+
+Biz yazdýðýmýz kodlarda, kullanýcýdan bir harf girmesini istiyoruz. Kullandýðýmýz algoritma gereðince bu harfi metindeki karakter dizileri içinde geçen herbir karakterle tek tek karþýlaþtýrmamýz gerekiyor. input() metodu aracýlýðýyla kullanýcýdan tek bir karakter alýyoruz. Kullandýðýmýz for döngüsü ise bize bir karakter yerine her satýrda bir karakter dizisi veriyor. Dolayýsýyla mesela kullanýcý ‘a’ harfini sorgulamýþsa, ilk for döngüsü bu harfin karþýsýna ‘Bu programlama dili Guido Van Rossum adlý Hollandalý bir programcýn’ adlý karakter dizisini çýkaracaktýr. Dolayýsýyla bizim bir seviye daha alta inerek, ilk for döngüsünden elde edilen deðiþken üzerinde baþka bir for döngüsü daha kurmamýz gerekiyor. Bu yüzden þöyle bir kod yazýyoruz:
+
+for karakter_dizisi in hakkýnda:
+for karakter in karakter_dizisi:
+...
+
+Böylece iç içe iki for döngüsü oluþturmuþ oluyoruz. Ýsterseniz bu anlattýðýmýz þeyleri daha net görmek için yine print() fonksiyonundan yararlanabilirsiniz:
+
+hakkýnda = open("hakkýnda.txt", encoding="utf-8")
+
+harf = input("Sorgulamak istediðiniz harf: ")
+
+sayý = 0
+
+for karakter_dizisi in hakkýnda:
+for karakter in karakter_dizisi:
+print(karakter)
+#        if harf == karakter:
+#            sayý += 1
+#print(sayý)
+
+karakter deðiþkenin deðerini ekrana yazdýrarak Python’ýn alttan alta neler çevirdiðini daha net görebiliyoruz.
+
+Kodlarýn geri kalanýnda ise, kullanýcýnýn sorguladýðý harfin, for döngüsü ile üzerinden geçtiðimiz karakter_dizisi adlý deðiþken içindeki karakterlerle eþleþip eþleþmediðini denetliyoruz. Eðer eþleþiyorsa, her eþleþmede sayý deðiþkeninin deðerini 1 sayý artýrýyoruz. Böylece en elimizde sorgulanan harfin metin içinde kaç kez geçtiði bilgisi olmuþ oluyor.
+
+Son olarak da, ilk baþta açtýðýmýz dosyayý kapatýyoruz:
+
+hakkýnda.close()
+
+Nihayet bir konunun daha sonuna ulaþtýk. Döngüler ve döngülerle iliþkili araçlarý da epey ayrýntýlý bir þekilde incelediðimize göre gönül rahatlýðýyla bir sonraki konuya geçebiliriz.

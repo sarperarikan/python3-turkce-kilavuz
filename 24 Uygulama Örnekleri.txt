@@ -1,0 +1,202 @@
+
+Uygulama Örnekleri
+
+Gelin isterseniz yukarýda verdiðimiz bilgileri pekiþtirmek için birkaç ufak alýþtýrma yapalým, alýþtýrma yaparken de sizi yine Python programlama diline iliþkin çok önemli bazý yeni bilgilerle tanýþtýralým.
+
+Diyelim ki aylýk yol masrafýmýzý hesaplayan bir program yazmak istiyoruz. Elimizdeki verilerin þunlar olduðunu varsayalým:
+
+Cumartesi-Pazar günleri çalýþmýyoruz. 
+Dolayýsýyla ayda 22 gün çalýþýyoruz. 
+Evden iþe gitmek için kullandýðýmýz vasýtanýn ücreti 1.5 TL 
+Ýþten eve dönmek için kullandýðýmýz vasýtanýn ücreti 1.4 TL 
+Aylýk yol masrafýmýzý hesaplayabilmek için gidiþ ve dönüþ ücretlerini toplayýp, bunlarý çalýþtýðýmýz gün sayýsýyla çarpmamýz yeterli olacaktýr. Elimizdeki bu bilgilere göre aylýk yol masrafýmýzý hesaplamak için þöyle bir formül üretebiliriz:
+
+masraf = gün sayýsý x (gidiþ ücreti + dönüþ ücreti)
+
+Dilerseniz hemen bunu bir Python programý haline getirelim:
+
+>>> 22 * (1.5 + 1.4)
+
+63.8
+
+Demek ki bir ayda 63.8 TL’lik bir yol masrafýmýz varmýþ.
+
+Bu arada, yukarýdaki örnekte bir þey dikkatinizi çekmiþ olmalý. Aritmetik iþlemi yaparken bazý sayýlarý parantez içine aldýk. Python’da aritmetik iþlemler yapýlýrken alýþtýðýmýz matematik kurallarý geçerlidir. Yani mesela ayný anda bölme, çýkarma, toplama ve çarpma iþlemleri yapýlacaksa iþlem öncelik sýrasý önce bölme ve çarpma, sonra toplama ve çýkarma þeklinde olacaktýr. Elbette siz parantezler yardýmýyla bu iþlem sýrasýný deðiþtirebilirsiniz.
+
+Bu anlattýklarýmýza göre, eðer yukarýda yol masrafýný hesaplayan programda parantezleri kullanmazsak, iþlem öncelik kurallarý gereðince Python önce 22 ile 1.5‘i çarpýp, çýkan sonucu 1.4 ile toplayacaðý için elde ettiðimiz sonuç yanlýþ çýkacaktýr. Bizim burada doðru sonuç alabilmemiz için önce 1.5 ile 1.4‘ü toplamamýz, çýkan sonucu da 22 ile çarpmamýz gerekiyor. Bu sýralamayý da parantezler yardýmýyla elde ediyoruz.
+
+Yine dikkat ederseniz, yukarýdaki örnek programda aslýnda çok verimsiz bir yol izledik. Gördüðünüz gibi, bu programda bütün deðerleri tek tek elle kendimiz giriyoruz. Örneðin çalýþýlan gün sayýsýna karþýlýk gelen 22 deðerini baþka bir yerde daha kullanmak istesek ayný sayýyý tekrar elle doðrudan kendimiz girmek zorundayýz. Mesela yýlda kaç gün çalýþtýðýmýzý hesaplayalým:
+
+>>> 22 * 12
+
+264
+
+Gördüðünüz gibi, burada da 22 sayýsýna ihtiyaç duyduk. Aslýnda deðerleri bu þekilde her defasýnda tekrar tekrar elle girmek hem hata yapma riskini artýrdýðý, hem de bize fazladan iþ çýkardýðý için tercih edilmeyen bir yöntemdir. Bunun yerine, 22 sayýsýna bir isim verip, gereken yerlerde bu ismi kullanmak daha mantýklý olacaktýr. Yani týpký kullanýcý ve parola örneðinde olduðu gibi, burada da verileri öncelikle bir deðiþkene atamak çok daha akýllýca bir iþtir:
+
+>>> gün = 22
+>>> gidiþ_ücreti = 1.5
+>>> dönüþ_ücreti = 1.4
+>>> gün * (gidiþ_ücreti + dönüþ_ücreti)
+
+63.8
+
+Bütün deðerleri birer deðiþkene atadýðýmýz için, artýk bu deðiþkenleri istediðimiz yerde kullanabiliriz. Mesela yýlda toplam kaç gün çalýþtýðýmýzý bulmak istersek, ilgili deðeri elle yazmak yerine, yukarýda tanýmladýðýmýz gün deðiþkenini kullanabiliriz:
+
+>>> gün * 12
+
+264
+
+Ýlerleyen zamanda aylýk çalýþýlan gün sayýsý deðiþirse sadece gün deðiþkeninin deðerini deðiþtirmemiz yeterli olacaktýr:
+
+>>> gün = 23
+>>> gün * (gidiþ_ücreti + dönüþ_ücreti)
+
+66.7
+
+>>> gün * 12
+
+276
+
+Eðer bu þekilde deðiþken atamak yerine, deðerleri gerektiði her yerde elle yazsaydýk, bu deðerlerde herhangi bir deðiþiklik yapmamýz gerektiðinde program içinde geçen ilgili bütün deðerleri bulup tek tek deðiþtirmemiz gerekecekti:
+
+>>> 23 * (1.6 + 1.5)
+
+71.3
+
+>>> 23 * 12
+
+276
+
+Deðiþken kavramý þu anda gözünüze pek anlamlý görünmemiþ olabilir. Ama programlarýmýzý ilerde dosyaya kaydettiðimiz zaman bu deðiþkenler çok daha kullanýþlý araçlar olarak karþýmýza çýkacaktýr.
+
+Dilerseniz bir örnek daha yaparak yukarýdaki bilgilerin kafamýza iyice yerleþmesiniz saðlayalým. Mesela bir dairenin alanýný (yaklaþýk olarak) hesaplayan bir program yazalým.
+
+Öncelikle çap adlý bir deðiþken tanýmlayarak dairenin çapýný belirleyelim:
+
+>>> çap = 16
+
+Bu deðeri kullanarak dairemizin yarýçapýný hesaplayabiliriz. Bunun için çap deðiþkeninin deðerinin yarýsýný almamýz yeterli olacaktýr:
+
+>>> yarýçap = çap / 2
+
+pi sayýsýný 3.14159 olarak alalým.
+
+>>> pi = 3.14159
+
+Bir dairenin alan formülü (pi)r2‘dir:
+
+>>> alan = pi * (yarýçap * yarýçap)
+
+Son olarak alan deðiþkeninin deðerini ekrana yazdýrabiliriz:
+
+>>> alan
+
+201.06176
+
+Böylece bir dairenin alanýný yaklaþýk olarak hesaplamýþ olduk. Dilerseniz programýmýzý bir de derli toplu olarak görelim:
+
+>>> çap = 16
+>>> yarýçap = çap / 2
+>>> pi = 3.14159
+>>> alan = pi * (yarýçap * yarýçap)
+>>> alan
+
+201.06176
+
+Görüyorsunuz ya, deðiþkenler iþimizi nasýl da kolaylaþtýrýyor. Eðer yukarýdaki programda deðiþken kullanmasaydýk kodlarýmýz þöyle görünecekti:
+
+>>> 3.14159 * ((16/2) * (16/2))
+
+201.06176
+
+Bu kodlar tek kullanýmlýktýr. Eðer yukarýdaki örnekte mesela dairenin çapýný deðiþtirmeniz gerekirse, iki yerde elle deðiþiklik yapmanýz gerekir. Ama deðiþkenleri kullandýðýmýzda sadece çap deðiþkeninin deðerini deðiþtirmeniz yeterli olacaktýr. Ayrýca deðiþken kullanmadýðýnýzda, ilgili deðeri program boyunca aklýnýzda tutmanýz gerekir. Örneðin çap deðiþkenini kullanmak yerine, gereken her yerde 16 deðerini kullanacaksanýz, bu 16 deðerini sürekli aklýnýzda tutmanýz lazým. Ama bu deðeri en baþta bir deðiþkene atarsanýz, 16 deðerini kullanmanýz gereken yerlerde, akýlda tutmasý daha kolay bir ifade olan çap ismini kullanabilirsiniz.
+
+Bu arada yeri gelmiþken sizi yeni bir iþleçle daha tanýþtýralým. Þimdiye kadar Python’da toplama (+), çýkarma (-), çarpma (*), bölme (/) ve deðer atama (=) iþleçlerini gördük. Ama yukarýda verdiðimiz son örnek, baþka bir iþleç daha öðrenmemizi gerektiriyor...
+
+Yukarýdaki þu örneðe tekrar bakalým:
+
+alan = pi * (yarýçap * yarýçap)
+
+Burada yarýçap deðiþkeninin karesini alabilmek için bu deðeri kendisiyle çarptýk. Aslýnda gayet mantýklý ve makul bir yöntem. Kare bulmak için deðeri kendisiyle çarpýyoruz. Eðer bir sayýnýn küpünü bulmak isteseydik o sayýyý üç kez kendisiyle çarpacaktýk:
+
+>>> 3 * 3 * 3
+
+27
+
+Peki ya bir sayýnýn mesela beþinci kuvvetini hesaplamak istersek ne yapacaðýz? O sayýyý beþ kez kendisiyle mi çarpacaðýz? Bu ne kadar vasat bir yöntem, deðil mi?
+
+Elbette bir sayýnýn herhangi bir kuvvetini hesaplamak için o sayýyý kendisiyle kuvvetince çarpmayacaðýz. Python’da bu tür ‘kuvvet hesaplamalarý’ için ayrý bir iþleç (ve fonksiyon) bulunur.
+
+Öncelikle kuvvet hesaplarýný yapmamýzý saðlayan iþleçten söz edelim.
+
+Python’da ** adlý bir iþleç bulunur. Bu iþlecin görevi bir sayýnýn kuvvetini hesaplamamýzý saðlamaktýr. Örneðin bir sayýnýn 2. kuvvetini, ya da baþka bir deyiþle karesini hesaplamak istersek þöyle bir kod yazabiliriz:
+
+>>> 12 ** 2
+
+144
+
+Burada 12 sayýsýnýn 2. kuvvetini, yani karesini hesapladýk. Bu bilgiyi yukarýdaki formüle uygulayalým:
+
+>>> alan = pi * (yarýçap ** 2)
+
+Bu iþleci herhangi bir sayýnýn herhangi bir kuvvetini hesaplamak için kullanabiliriz elbette. Mesela 23 sayýsýnýn küpünü (yani 3. kuvvetini) hesaplayalým:
+
+>>> 23 ** 3
+
+12167
+
+Ayný iþleçten, bir sayýnýn karekökünü hesaplamak için de yararlanabilirsiniz. Neticede bir sayýnýn 0.5‘inci kuvveti, o sayýnýn kareköküdür:
+
+>>> 144 ** 0.5
+
+12.0
+
+Gördüðünüz gibi, kuvvet hesaplama iþlemleri için bu iþleç son derece kullanýþlý bir araç vazifesi görüyor. Ama eðer istersek ayný iþ için özel bir fonksiyondan da yararlanabiliriz. Bu fonksiyonun adý pow().
+
+Peki bu fonksiyonu nasýl kullanacaðýz?
+
+Daha önce öðrendiðimiz type() ve len() fonksiyonlarýný nasýl kullanýyorsak pow() fonksiyonu da ayný þekilde kullanacaðýz.
+
+type() ve len() fonksiyonlarýný birtakým parametreler ile birlikte kullanýyorduk hatýrlarsanýz. Ayný þekilde pow() fonksiyonu da birtakým parametreler alýr.
+
+Daha önce öðrendiðimiz fonksiyonlarý tek bir parametre ile birlikte kullanmýþtýk. pow() fonksiyonu ise toplam üç farklý parametre alýr. Ama genellikle bu fonksiyon yalnýzca iki parametre ile kullanýlýr.
+
+Bu fonksiyonu þöyle kullanýyoruz:
+
+>>> pow(12, 2)
+
+144
+
+>>> pow(23, 3)
+
+12167
+
+>>> pow(144, 0.5)
+
+12.0
+
+Gördüðünüz gibi, pow() fonksiyonunun ilk parametresi asýl sayýyý, ikinci parametresi ise bu sayýnýn hangi kuvvetini hesaplamak istediðimizi gösteriyor.
+
+Bu arada, fonksiyonun parantezleri içinde belirttiðimiz parametreleri birbirinden virgül ile ayýrdýðýmýzý gözden kaçýrmayýn.
+
+Dediðimiz gibi, pow() fonksiyonu, pek kullanýlmayan üçüncü bir parametre daha alýr. Bu fonksiyonun üçüncü parametresi þöyle kullanýlýr. Dikkatlice bakýn:
+
+>>> pow(16, 2, 2)
+
+0
+
+Bu komut þu anlama gelir:
+
+16 sayýsýnýn 2‘nci kuvvetini hesapla ve çýkan sayýyý 2‘ye bölüp, bölme iþleminden kalan sayýyý göster!
+
+16 sayýsýnýn 2. kuvveti 256 sayýsýdýr. 256 sayýsýný 2‘ye böldüðümüzde, bölme iþleminin kalaný 0‘dýr. Yani 256 sayýsý 2‘ye tam bölünür...
+
+Bir örnek daha verelim:
+
+>>> pow(11, 3, 4)
+
+3
+
+Demek ki, 11 sayýsýnýn 3. kuvveti olan 1331 sayýsý 4‘e bölündüðünde, bölme iþleminden kalan sayý 3 imiþ...
+
+Dediðimiz gibi, pow() fonksiyonu genellikle sadece iki parametre ile kullanýlýr. Üçüncü parametrenin kullaným alaný oldukça dardýr.

@@ -1,0 +1,153 @@
+
+Python Nasýl Çalýþtýrýlýr?
+
+Bir önceki bölümde, Python’ý farklý platformlara nasýl kuracaðýmýzý bütün ayrýntýlarýyla anlattýk. Bu bölümde ise kurduðumuz bu Python programýný hem GNU/Linux’ta hem de Windows’ta nasýl çalýþtýracaðýmýzý göreceðiz. Öncelikle GNU/Linux kullanýcýlarýnýn Python’ý nasýl çalýþtýracaðýna bakalým.
+
+
+GNU/Linux Kullanýcýlarý
+
+Geçen bölümlerde gördüðünüz gibi, Python3’ü GNU/Linux sistemleri üzerine farklý þekillerde kurabiliyoruz. Bu bölümde, her bir kurulum türü için Python3’ün nasýl çalýþtýrýlacaðýný ayrý ayrý inceleyeceðiz.
+
+
+Kurulu Python3’ü Kullananlar
+
+Eðer sisteminizde zaten Python3 kurulu ise komut satýrýnda yalnýzca þu komutu vererek Python3’ü baþlatabilirsiniz:
+
+python
+
+Ancak daha önce de dediðimiz gibi, 20.04.2016 tarihi itibariyle pek çok GNU/Linux daðýtýmýnda öntanýmlý olarak Python2 kuruludur. Dolayýsýyla python komutunu verdiðinizde çalýþan sürüm muhtemelen Python2 olacaktýr. Bu yüzden sistemimizde öntanýmlý olarak hangi sürümün kurulu olduðuna ve python komutunun hangi sürümü baþlattýðýna çok dikkat etmelisiniz.
+
+Yine daha önce de söylediðimiz gibi, sisteminizde hem Python2 hem de Python3 zaten kurulu durumda olabilir. O yüzden yukarýdaki komutu bir de python3 þeklinde vermeyi deneyebilirsiniz.
+
+Örneðin Ubuntu GNU/Linux daðýtýmýnýn 12.10 sürümünden itibaren python komutu Python2’yi; python3 komutu ise Python3’ü çalýþtýrýyor.
+
+
+Python3’ü Depodan Kuranlar
+
+Dediðimiz gibi, 20.04.2016 tarihi itibariyle GNU/Linux daðýtýmlarýnda öntanýmlý Python sürümü aðýrlýklý olarak Python2’dir. Dolayýsýyla python komutu Python’ýn 2.x sürümlerini çalýþtýrýr. Bu durumdan ötürü, herhangi bir çakýþmayý önlemek için GNU/Linux daðýtýmlarý Python3 paketini farklý bir þekilde adlandýrma yoluna gider. Þu anda piyasada bulunan daðýtýmlarýn ezici çoðunluðu Python3 paketini ‘python3’ þeklinde adlandýrýyor. O yüzden GNU/Linux kullanýcýlarý, eðer paket yöneticilerini kullanarak Python kurulumu gerçekleþtirmiþ iseler, komut satýrýnda þu komutu vererek Python3’ü baþlatabilirler:
+
+python3
+
+Bu komutun ardýndan þuna benzer bir ekranla karþýlaþmýþ olmalýsýnýz:
+
+istihza@ubuntu:~$ # python3 Python 3.5.1 (default, 20.04.2016, 12:24:55) [GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux Type “help”, “copyright”, “credits” or “license” for more information. >>>
+
+Eðer yukarýdaki ekraný gördüyseniz Python’la programlama yapmaya hazýrsýnýz demektir. Deðilse, geriye dönüp iþlerin nerede ters gittiðini bulmaya çalýþabilirsiniz.
+
+Bu aþamada iþlerin nerede ters gitmiþ olabileceðine dair birkaç ipucu verelim:
+
+
+Python3 kurulurken paket yöneticinizin herhangi bir hata vermediðinden, programýn sisteminize baþarýyla kurulduðundan emin olun. Bunun için Python3’ün kurulu paketler listesinde görünüp görünmediðini denetleyebilirsiniz. 
+python3 komutunu doðru verdiðinize emin olun. Python programlama diline özellikle yeni baþlayanlarýn en sýk yaptýðý hatalardan biri python kelimesini yanlýþ yazmaktýr. Python yerine yanlýþlýkla pyhton, pyton veya phyton yazmýþ olabilirsiniz. Ayrýca python3 komutunun tamamen küçük harflerden oluþtuðuna dikkat edin. Python ve python bilgisayar açýsýndan ayný þeyler deðildir. 
+Kullandýðýnýz daðýtýmýn Python3 paketini adlandýrma politikasý yukarýda anlattýðýmýzdan farklý olabilir. Yani sizin kullandýðýnýz daðýtým, belki de Python3 paketini farklý bir þekilde adlandýrmýþtýr. Eðer durum böyleyse, daðýtýmýnýzýn yardým kaynaklarýný (wiki, forum, irc, yardým belgeleri, kullanýcý listeleri, vb.) kullanarak ya da istihza.com/forum adresinde sorarak Python3’ün nasýl çalýþtýrýlacaðýný öðrenmeyi deneyebilirsiniz. 
+
+Gelelim Python3’ü kaynaktan derlemiþ olanlarýn durumuna...
+
+
+Python3’ü root Olarak Derleyenler
+
+Eðer Python3’ü önceki bölümlerde anlattýðýmýz þekilde kaynaktan root haklarý ile derlediyseniz python3 komutu çalýþmayacaktýr. Bunun yerine þu komutu kullanmanýz gerekecek:
+python3.5 
+
+Not
+
+Kurduðunuz Python3 sürümünün 3.5 olduðunu varsayýyorum. Eðer farklý bir Python3 sürümü kurduysanýz, elbette baþlatýcý komut olarak o sürümün adýný kullanmanýz gerekecektir. Mesela: python3.0 veya python3.1. Bu arada python3.5 komutunda 35 sayýsýnýn rakamlarý arasýnda bir adet nokta iþareti olduðunu gözden kaçýrmýyoruz...
+
+Týpký paket deposundan kurulumda olduðu gibi, eðer yukarýdaki komut Python’ý çalýþtýrmanýzý saðlamýyorsa, kurulum esnasýnda bazý þeyler ters gitmiþ olabilir. Örneðin kaynaktan kurulumun herhangi bir aþamasýnda bir hata almýþ olabilirsiniz ve bu da Python’ýn kurulumunu engellemiþ olabilir.
+
+Gördüðünüz gibi, Python’ý kaynaktan derleyenler Python programlama dilini çalýþtýrabilmek için Python’ýn tam sürüm adýný belirtiyor. Dilerseniz bu þekilde çalýþmaya devam edebilirsiniz. Bunun hiçbir sakýncasý yok. Ancak ben size kolaylýk açýsýndan, /usr/bin/ dizini altýna py3 adýnda bir sembolik bað yerleþtirmenizi tavsiye ederim. Böylece sadece py3 komutunu vererek Python3’ü baþlatabilirsiniz.
+
+Peki bunu nasýl yapacaðýz?
+
+Python kaynaktan derlendiðinde çalýþtýrýlabilir dosya /usr/local/bin/ dizini içine Python3.5 (veya kurduðunuz Python3 sürümüne baðlý olarak Python3.0 ya da Python3.1) adýyla kopyalanýr. Bu nedenle Python3’ü çalýþtýrabilmek için python3.5 komutunu kullanmamýz gerekir. Python3’ü çalýþtýrabilmek için mesela sadece py3 gibi bir komut kullanmak istiyorsak yapacaðýmýz tek þey /usr/local/bin/ dizini içindeki python3.5 adlý dosyaya /usr/bin dizini altýndan, py3 adlý bir sembolik bað oluþturmak olacaktýr. Bunun için ln komutunu kullanacaðýz:
+ln -s /usr/local/bin/python3.5 /usr/bin/py3 
+Tabii bu komutu yetkili kullanýcý olarak vermeniz gerektiðini söylememe herhalde gerek yoktur. Bu komutu verdikten sonra artýk sadece py3 komutu ile Python programlama dilini baþlatabilirsiniz.
+
+
+Çok Önemli Bir Uyarý
+
+Bir önceki adýmda anlattýðýmýz gibi Python3’ü resmi sitesinden indirip kendiniz derlediniz. Gayet güzel. Ancak bu noktada çok önemli bir konuya dikkatinizi çekmek isterim. En baþtan beri söylediðimiz gibi, Python programlama dili GNU/Linux iþletim sistemlerinde çok önemli bir yere sahiptir. Öyle ki bu programlama dili, kullandýðýnýz daðýtýmýn belkemiði durumunda olabilir.
+
+Örneðin Ubuntu GNU/Linux daðýtýmýnda pek çok sistem aracý Python ile yazýlmýþtýr. Bu yüzden, sistemdeki öntanýmlý Python sürümünün ne olduðu ve dolayýsýyla python komutunun hangi Python sürümünü çalýþtýrdýðý çok önemlidir. Çünkü sisteminizdeki hayati bazý araçlar, python komutunun çalýþtýrdýðý Python sürümüne bel baðlamýþ durumdadýr. Dolayýsýyla sizin bu python komutunun çalýþtýrdýðý Python sürümüne dokunmamanýz gerekir.
+
+Mesela eðer kullandýðýnýz iþletim sisteminde python komutu Python’ýn 2.x sürümlerinden birini çalýþtýrýyorsa sembolik baðlar veya baþka araçlar vasýtasýyla python komutunu Python’ýn baþka bir sürümüne baðlamayýn. Bu þekilde bütün sistemi kullanýlmaz hale getirirsiniz. Elbette eðer kurulum aþamasýnda tarif ettiðimiz gibi, Python3’ü make install yerine make altinstall komutu ile kurmaya özen gösterdiyseniz, sonradan oluþturduðunuz bað dosyasýný silip python komutunu yine sistemdeki öntanýmlý sürüme baðlayabilirsiniz. Bu þekilde her þey yine eski haline döner. Ama eðer Python’ý make install komutuyla kurmanýzdan ötürü sistemdeki öntanýmlý Python sürümüne ait dosyalarý kaybettiyseniz sizin için yapýlacak fazla bir þey yok... Sistemi tekrar eski kararlý haline getirmek için kan, ter ve gözyaþý dökeceksiniz...
+
+Ayný þekilde, kullandýðýnýz daðýtýmda python3 komutunun öntanýmlý olarak belirli bir Python sürümünü baþlatýp baþlatmadýðý da önemlidir. Yukarýda python komutu ile ilgili söylediklerimiz python3 ve buna benzer baþka komutlar için de aynen geçerli.
+
+Örneðin, Ubuntu GNU/Linux daðýtýmýnda python komutu sistemde kurulu olan Python 2.x sürümünü; python3 komutu ise sistemde kurulu olan Python 3.x sürümünü çalýþtýrdýðýndan, biz kendi kurduðumuz Python sürümleri için, sistemdeki sürümlerle çakýþmayacak isimler seçtik. Mesela kendi kurduðumuz Python3 sürümünü çalýþtýrmak için py3 gibi bir komut tercih ettik.
+
+Ýyi bir test olarak, Python programlama dilini kendiniz kaynaktan derlemeden önce þu komutun çýktýsýný iyice inceleyebilirsiniz:
+
+ls -g {,/usr{,/local}}/bin | grep python
+
+Bu komut iki farklý Python sürümünün kurulu olduðu sistemlerde þuna benzer bir çýktý verir (çýktý kýrpýlmýþtýr):
+dh_python2 dh_python3 pdb2.7 -> ../lib/python2.7/pdb.py pdb3.2 -> ../lib/python3.2/pdb.py py3versions -> ../share/python3/py3versions.py python -> python2.7 python2 -> python2.7 python2.7 python3 -> python3.2 python3.2 -> python3.2mu python3.2mu python3mu -> python3.2mu pyversions -> ../share/python/pyversions.py 
+Yatýk harflerle gösterdiðimiz kýsýmlara dikkat edin. Gördüðünüz gibi python ve python2 komutlarý bu sistemde Python’ýn 2.7 sürümünü çalýþtýrýyor. python3 komutu ise Python’ýn 3.2 sürümünü... Dolayýsýyla yukarýdaki çýktýyý aldýðýmýz bir sistemde kendi kurduðumuz Python sürümlerine ‘python’, ‘python2’ veya ‘python3’ gibi isimler vermekten kaçýnmalýyýz.
+
+Sözün özü, bir GNU/Linux kullanýcýsý olarak sistemdeki öntanýmlý hiçbir Python sürümünü silmemeli, öntanýmlý sürüme ulaþan komutlarý deðiþtirmemelisiniz. Eðer mesela sisteminizde python3 komutu halihazýrda bir Python sürümünü çalýþtýrýyorsa, siz yeni kurduðunuz Python sürümüne ulaþmak için öntanýmlý adla çakýþmayacak baþka bir komut adý kullanýn. Yani örneðin sisteminizde python3 komutu Python’ýn 3.2 sürümünü çalýþtýrýyorsa, siz yeni kurduðunuz sürümü çalýþtýrmak için py3 gibi bir sembolik bað oluþturun. Býrakýn öntanýmlý komut (python, python3 vb.) öntanýmlý Python sürümünü çalýþtýrmaya devam etsin.
+
+Asla unutmayýn. Siz bir programcý adayý olarak, program yazacaðýnýz iþletim sistemini enine boyuna tanýmakla yükümlüsünüz. Dolayýsýyla iþletim sisteminizi kararsýz hale getirecek davranýþlarý bilmeli, bu davranýþlardan kaçýnmalý, yanlýþ bir iþlem yaptýðýnýzda da nasýl geri döneceðinizi bilmelisiniz. Hele ki bir programý kaynaktan derlemeye karar vermiþseniz...
+
+Bu ciddi uyarýyý da yaptýðýmýza göre gönül rahatlýðýyla yolumuza devam edebiliriz.
+
+
+
+Python3’ü Ev Dizinine Kuranlar
+
+Eðer Python3’ü kýsýtlý kullanýcý haklarý ile derleyip ev dizininize kurduysanýz yukarýdaki komutlar Python’ý çalýþtýrmanýzý saðlamayacaktýr. Python3’ü ev dizinine kurmuþ olan kullanýcýlar Python3’ü çalýþtýrabilmek için, öncelikle komut satýrý aracýlýðýyla Python3’ü kurduklarý dizine, oradan da o dizin altýndaki bin/ klasörüne ulaþacak ve orada þu komutu verecek:
+./python3.5 
+Diyelim ki Python3’ü $HOME/python adlý dizine kurdunuz. Önce þu komutla $HOME/python/bin adlý dizine ulaþýyoruz:
+
+cd $HOME/python/bin
+
+Ardýndan da þu komutu veriyoruz:
+./python3.5 
+
+Not
+
+Komutun baþýndaki ./ iþaretinin ne iþe yaradýðýný artýk adýnýz gibi biliyorsunuz...
+
+Not
+
+Elbette ben burada kurduðunuz Python sürümünün 3.5 olduðunu varsaydým. Eðer farklý bir sürüm kurduysanýz yukarýdaki komutu ona göre yazmanýz gerekiyor.
+
+Eðer isterseniz bu þekilde çalýþmaya devam edebilirsiniz. Ancak her defasýnda Python’ýn kurulu olduðu dizin altýna gelip orada ./python3.5 komutunu çalýþtýrmak bir süre sonra eziyete dönüþecektir. Ýþlerinizi kolaylaþtýrmak için þu iþlemleri takip etmelisiniz:
+
+1. ev dizininizin altýnda bulunan .profile (veya kullandýðýnýz daðýtýma göre .bash_profile ya da .bashrc) adlý dosyayý açýn.
+
+2. Bu dosyanýn en sonuna þuna benzer bir satýr yerleþtirerek Python’ý çalýþtýrmamýzý saðlayan dosyanýn bulunduðu dizini yola ekleyin:
+
+export PATH=$PATH:$HOME/python/bin/
+
+3. $HOME/python/bin/ satýrý Python3’ün çalýþtýrýlabilir dosyasýnýn hangi dizin altýnda olduðunu gösteriyor. Ben burada Python3’ün çalýþtýrýlabilir dosyasýnýn $HOME/python/bin dizini içinde olduðunu varsaydým. O yüzden de $HOME/python/bin/ gibi bir satýr yazdým. Ama eðer Python3’ün çalýþtýrýlabilir dosyasý sizde farklý bir dizindeyse bu satýrý ona göre yazmalýsýnýz.
+
+4. Kendi sisteminize uygun satýrý dosyaya ekledikten sonra dosyayý kaydedip çýkýn. Dosyada yaptýðýmýz deðiþikliðin etkin hale gelebilmesi için þu komutu verin:
+
+source .profile
+
+Elbette eðer sizin sisteminizdeki dosyanýn adý .bash_profile veya .bashrc ise yukarýdaki komutu ona göre deðiþtirmelisiniz.
+
+5. Daha sonra $HOME/python/bin/python3.5 adlý dosyaya $HOME/python/bin/ dizini altýndan mesela py3 gibi bir sembolik bað verin:
+
+ln -s $HOME/python/bin/python3.5 $HOME/python/bin/py3 
+
+6. Bilgisayarýnýzý yeniden baþlatýn.
+
+7. Artýk hangi konumda bulunursanýz bulunun, þu komutu vererek Python3’ü baþlatabilirsiniz:
+
+py3
+
+Burada da eðer yukarýdaki komut Python3’ü çalýþtýrmanýzý saðlamýyorsa, bazý þeyleri eksik veya yanlýþ yapmýþ olabilirsiniz. Yardým almak için istihza.com/forum adresine uðrayabilirsiniz.
+
+Python3’ü baþarýyla kurup çalýþtýrabildiðinizi varsayarak yolumuza devam edelim.
+
+
+GNU/Linux’ta Farklý Sürümleri Birlikte Kullanmak
+
+Daha önce de dediðimiz gibi, þu anda piyasada iki farklý Python serisi bulunuyor: Python2 ve Python3. Çok uzun zamandan beri kullanýmda olduðu için, Python2 Python3’e kýyasla daha yaygýn. Eðer hem Python2 ile yazýlmýþ programlarý çalýþtýrmak, hem de Python3 ile geliþtirme yapmak istiyorsanýz, sisteminizde hem Python2’yi hem de Python3’ü ayný anda bulundurmayý tercih edebilirsiniz. Peki bunu nasýl yapacaksýnýz?
+
+En baþta da söylediðimiz gibi, hemen hemen bütün GNU/Linux daðýtýmlarýnda Python2 kurulu olarak gelir. Dolayýsýyla eðer sisteminize ek olarak Python3’ü de kurduysanýz (kaynaktan veya paket deposundan), baþka herhangi bir þey yapmanýza gerek yok. Yukarýda anlattýðýmýz yönergeleri takip ettiyseniz, konsolda python komutu verdiðinizde Python2 çalýþacak, python3 (veya py3) komutunu verdiðinizde ise Python3 çalýþacaktýr.
+
+Ama eðer sisteminizde Python2 bile kurulu deðilse, ki bu çok çok düþük bir ihtimaldir, Python2’yi paket yöneticiniz yardýmýyla sisteminize kurabilirsiniz. Þu anda piyasada olup da paket deposunda Python bulundurmayan GNU/Linux daðýtýmý pek azdýr.
+
+GNU/Linux’ta Python’ý nasýl çalýþtýracaðýmýzý ve farklý Python sürümlerini bir arada nasýl kullanacaðýmýzý öðrendiðimize göre, Windows kullanýcýlarýnýn durumuna bakabiliriz.

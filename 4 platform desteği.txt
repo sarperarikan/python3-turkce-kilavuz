@@ -1,0 +1,10 @@
+
+Platform Desteði
+
+Python programlama dili pek çok farklý iþletim sistemi ve platform üzerinde çalýþabilir. GNU/Linux, Windows, Mac OS X, AS/400, BeOS, MorphOS, MS-DOS, OS/2, OS/390, z/OS, RiscOS, S60, Solaris, VMS, Windows CE, HP-UX, iOS ve Android gibi, belki adýný dahi duymadýðýnýz pek çok ortamda Python uygulamalarý geliþtirebilirsiniz. Ayrýca herhangi bir ortamda yazdýðýnýz bir Python programý, üzerinde hiçbir deðiþiklik yapýlmadan veya ufak deðiþikliklerle baþka ortamlarda da çalýþtýrýlabilir.
+
+Biz bu belgelerde Python programlama dilini GNU/Linux ve Microsoft Windows iþletim sistemi üzerinden anlatacaðýz. Ancak sýký sýkýya bel baðlayacaðýmýz özel bir GNU/Linux daðýtýmý veya Windows sürümü yok. Bu yüzden, hangi GNU/Linux daðýtýmýný veya hangi Windows sürümünü kullanýyor olursanýz olun, buradaki bilgiler yardýmýyla Python programlama dilini öðrenebilir, öðrendiklerinizi kendi iþletim sisteminize uyarlayabilirsiniz.
+
+Not
+
+Bu satýrlarýn yazarýnýn, Ubuntu, CentOs, Windows 7 ve Windows 10 kurulu bilgisayarlara eriþimi olduðu için, bu kitaptaki ekran görüntüleri genellikle bu iþletim sistemlerinden alýnmýþ olacaktýr.

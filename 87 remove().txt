@@ -1,0 +1,10 @@
+
+remove()
+
+Bu metot listeden öğe silmemizi sağlar. Örneğin:
+
+>>> liste = ["elma", "armut", "çilek"]
+>>> liste.remove("elma")
+>>> liste
+
+['armut', 'çilek']

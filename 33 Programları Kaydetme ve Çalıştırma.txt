@@ -1,0 +1,18 @@
+
+Programlarý Kaydetme ve Çalýþtýrma
+
+Bu noktaya kadar bütün iþlerimizi Python’ýn etkileþimli kabuðu üzerinden hallettik. Her ne kadar etkileþimli kabuk son derece kullanýþlý bir ortam da olsa, bizim asýl çalýþma alanýmýz deðildir. Daha önce de dediðimiz gibi, etkileþimli kabuðu genellikle ufak tefek Python kodlarýný test etmek için kullanacaðýz. Ama asýl programlarýmýzý tabii ki etkileþimli kabuða deðil, program dosyasýna yazacaðýz.
+
+Ne dedik? Özellikle küçük kod parçalarý yazýp bunlarý denemek için etkileþimli kabuk mükemmel bir ortamdýr. Ancak kodlar çoðalýp büyümeye baþlayýnca bu ortam yetersiz gelmeye baþlayacaktýr. Üstelik tabii ki yazdýðýnýz kodlarý bir yere kaydedip saklamak isteyeceksiniz. Ýþte burada metin düzenleyiciler devreye girecek.
+
+Python kodlarýný yazmak için istediðiniz herhangi bir metin düzenleyiciyi kullanabilirsiniz. Hatta Notepad bile olur. Ancak Python kodlarýný ayýrt edip renklendirebilen bir metin düzenleyici ile yola çýkmak her bakýmdan hayatýnýzý kolaylaþtýracaktýr.
+
+Not
+
+Python kodlarýnýzý yazmak için Microsoft Word veya OpenOffice.Org OOWriter gibi, belgeleri ikili (binary) düzende kaydeden programlar uygun deðildir. Kullanacaðýnýz metin düzenleyici, belgelerinizi düz metin (plain text) biçiminde kaydedebilmeli.
+
+Biz bu bölümde farklý iþletim sistemlerinde, metin düzenleyici kullanýlarak Python programlarýnýn nasýl yazýlacaðýný ve bunlarýn nasýl çalýþtýrýlacaðýný tek tek inceleyeceðiz.
+
+Daha önce de söylediðimiz gibi, hangi iþletim sistemini kullanýyor olursanýz olun, hem Windows hem de GNU/Linux baþlýðý altýnda yazýlanlarý okumalýsýnýz.
+
+Dilerseniz önce GNU/Linux ile baþlayalým:

@@ -1,0 +1,84 @@
+
+GNU Linux Kullanýcýlarý
+
+Eðer KDE temelli bir GNU/Linux daðýtýmý kullanýyorsanýz, yazýp kaydettiðiniz Python programýný barýndýran dizin açýkken F4 tuþuna bastýðýnýzda, komut satýrý o dizin altýnda açýlacaktýr.
+
+Unity ve GNOME kullanýcýlarýnýn ise benzer bir kolaylýða ulaþmak için nautilus-open-terminal adlý betiði sistemlerine kurmalarý gerekiyor. Eðer Ubuntu kullanýyorsanýz bu betiði þu komutla kurabilirsiniz:
+
+sudo apt-get install nautilus-open-terminal
+
+Bu betiði kurduktan sonra bilgisayarýnýzý yeniden baþlatýn veya þu komutu verin:
+
+killall nautilus
+
+Artýk komut satýrýný hangi dizin altýnda baþlatmak istiyorsanýz o dizine sað týklayýn. Menüler arasýnda Open in Terminal [Uçbirimde aç] adlý bir seçenek göreceksiniz. Buna týkladýðýnýzda o dizin altýnda bir komut satýrý penceresi açýlacaktýr.
+
+
+Metin Düzenleyici Ayarlarý
+
+Daha önce de söylediðimiz gibi, Python ile program yazmak için istediðiniz metin düzenleyiciyi kullanabilirsiniz. Ama kodlarýnýzýn kusursuz görünmesi ve hatasýz çalýþmasý için kullandýðýnýz metin düzenleyicide birtakým ayarlamalar yapmanýz gerekir. Ýþte bu bölümde bu ayarlarýn neler olduðunu göstereceðiz.
+
+Eðer programlarýnýzý IDLE ile yazýyorsanýz aslýnda bir þey yapmanýza gerek yok. IDLE Python ile program yazmak üzere tasarlanmýþ bir düzenleyici olduðu için bu programýn bütün ayarlarý Python ile uyumludur. Ama eðer IDLE dýþýnda bir metin düzenleyici kullanýyorsanýz bu düzenleyicide temel olarak þu ayarlarý yapmanýz gerekir:
+
+Sekme geniþliðini [TAB width] 4 olarak ayarlayýn. 
+Girinti geniþliðini [Indent width] 4 olarak ayarlayýn. 
+Girintilemede sekme yerine boþluk kullanmayý tercih edin [Use spaces instead of tabs] 
+Tercih edilen kodlama biçimini [Preferred encoding] utf-8 olarak ayarlayýn. 
+Özellikle son söylediðimiz ‘kodlama biçimi’ ayarý çok önemlidir. Bu ayarýn yanlýþ olmasý halinde, yazdýðýnýz programý çalýþtýrmak istediðinizde þöyle bir hata alabilirsiniz:
+
+SyntaxError: Non-UTF-8 code starting with '\xfe' in file deneme.py on line 1,
+but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
+
+Eðer yazdýðýnýz bir program böyle bir hata mesajý üretiyorsa, ilk olarak metin düzenleyicinizin kodlama biçimi (encoding) ayarlarýný kontrol edin. Metin düzenleyiciler genellikle tercih edilen kodlama biçimini aþaðýdaki örnek resimde görüldüðü gibi, durum çubuðunda sürekli olarak gösterir.
+
+Ancak kodlama biçimi doðru bir þekilde utf-8 olarak ayarlanmýþ metin düzenleyicilerde, özellikle internet üzerinden kod kopyalanýp yapýþtýrýlmasý sýrasýnda bu ayar siz farkýnda olmadan deðiþebilir. Böyle bir durumda da program çalýþýrken yukarýda bahsedilen hatayý alabilirsiniz. Dolayýsýyla, programýnýzý yazdýðýnýz metin düzenleyicinin kodlama ayarlarýnýn siz farkýnda olmadan deðiþme ihtimaline karþý uyanýk olmanýz gerekir.
+
+Elbette piyasada yüzlerce metin düzenleyici olduðu için yukarýda bahsedilen ayarlarýn her metin düzenleyicide nasýl yapýlacaðýný tek tek göstermemiz mümkün deðil. Ancak iyi bir metin düzenleyicide yukarýdaki ayarlarýn hepsi bulunur. Tek yapmanýz gereken, bu ayarlarýn, kullandýðýnýz metin düzenleyicide nereden yapýldýðýný bulmak. Eðer kullandýðýnýz metin düzenleyiciyi ayarlamakta zorlanýyorsanýz, her zamanki gibi istihza.com/forum adresinde sýkýntýnýzý dile getirebilirsiniz.
+
+‘Kodlama biçimi’ kavramýndan söz etmiþken, Python’la ilgili önemli bir konuya daha deðinelim. En baþta da söylediðimiz gibi, þu anda piyasada Python iki farklý seri halinde geliþtiriliyor. Bunlardan birinin 2.x serisi, öbürünün de 3.x serisi olduðunu biliyoruz. Python’ýn 2.x serisinde Türkçe karakterlerin gösterimi ile ilgili çok ciddi problemler vardý. Örneðin Python’ýn 2.x serisinde þöyle bir kod yazamýyorduk:
+
+print("Günaydýn Þirin Baba!")
+
+Bu kodu bir dosyaya kaydedip, Python’ýn 2.x serisine ait bir sürümle çalýþtýrmak istediðimizde Python bize þöyle bir hata mesajý veriyordu:
+
+SyntaxError: Non-ASCII character '\xc3' in file
+test.py on line 1, but no encoding declared;
+see http://www.python.org/peps/pep-0263.html for details
+
+Bunun sebebi, Python’ýn 2.x sürümlerinde ASCII adlý kodlama biçiminin kullanýlýyor olmasýdýr. Zaten hata mesajýna baktýðýmýzda da, Python’ýn ASCII olmayan karakterlerin varlýðýndan þikayet ettiðini görüyoruz.
+
+Yukarýdaki kodlarýn çalýþabilmesi için programýmýza þöyle bir ekleme yapmamýz gerekiyordu:
+
+# -*- coding: utf-8 -*-
+print("Günaydýn Þirin Baba!")
+
+Buradaki ilk satýra dikkat edin. Bu kodlarla yaptýðýmýz þey, Python’ýn ASCII adlý kodlama biçimi yerine UTF-8 adlý kodlama biçimini kullanmasýný saðlamaktýr. ASCII adlý kodlama biçimi Türkçe karakterleri gösteremez, ama UTF-8 adlý kodlama biçimi Türkçe karakterleri çok rahat bir þekilde gösterebilir.
+
+Not
+
+Kodlama biçimlerinden, ileride ayrýntýlý bir þekilde söz edeceðiz. O yüzden bu anlattýklarýmýzda eðer anlamadýðýnýz yerler olursa bunlara takýlmanýza gerek yok.
+
+Python’ýn 3.x serisinin geliþi ile birlikte Python’da öntanýmlý olarak ASCII yerine UTF-8 kodlama biçimi kullanýlmaya baþlandý. Dolayýsýyla yazdýðýmýz programlara # -*- coding: utf-8 -*- satýrýný eklememize gerek kalmadý. Çünkü zaten Python UTF-8 kodlama biçimini öntanýmlý olarak kendisi kullanýyor. Ama eðer UTF-8 dýþýnda baþka bir kodlama biçimine ihtiyaç duyarsanýz yine bu satýrdan yararlanabilirsiniz.
+
+Örneðin GNU/Linux daðýtýmlarýnýn geleneksel olarak UTF-8 kodlama biçimi ile arasý iyidir. Dolayýsýyla eðer GNU/Linux üzerinde Python programlarý geliþtiriyorsanýz bu satýrý hiç yazmadan bir ömür geçirebilirsiniz. Ama Windows iþletim sistemleri UTF-8‘i desteklemekle birlikte, bu destek GNU/Linux’taki kadar iyi deðildir. Dolayýsýyla zaman zaman Windows’ta UTF-8 dýþýnda baþka bir kodlama biçimini kullanmanýz gerekebilir. Örneðin yazdýðýnýz bir programda Türkçe karakterleri göremiyorsanýz, programýnýzýn ilk satýrýný þöyle düzenleyebilirsiniz:
+
+# -*- coding: cp1254 -*-
+
+Burada UTF-8 yerine cp1254 adlý kodlama biçimini kullanmýþ oluyoruz. Windows iþletim sisteminde cp1254 adlý kodlama biçimi UTF-8‘e kýyasla daha fazla desteklenir.
+
+
+MS-DOS Komut Satýrý Ayarlarý
+
+Eðer yukarýda anlattýðýmýz bütün ayarlarý doðru bir þekilde yapmanýza raðmen, özellikle MS-DOS komut satýrýnda hala Türkçe karakterleri düzgün görüntüleyemiyorsanýz, kullandýðýnýz Windows sürümünün komut satýrý, öntanýmlý olarak Türkçe karakterleri gösteremeyen bir yazý tipine ayarlanmýþ olabilir. Dolayýsýyla Türkçe karakterleri gösterebilmek için öncelikle uygun bir yazý tipi seçmeniz gerekir. Bunun için þu basamaklarý takip ediyoruz:
+
+Komut satýrýný açýyoruz, 
+Açýlan pencerenin baþlýk çubuðuna sað týklayarak, ‘özellikler’ menüsüne giriyoruz, 
+‘Yazý tipi’ sekmesinde yazý tipi olarak ‘Lucida Console’u (veya varsa ‘Consolas’ý) seçiyoruz, 
+‘Tamam’ düðmesine basýyoruz. 
+Eðer önünüze bir onay penceresi açýlýrsa, ‘Özellikleri ayný baþlýkla ileride oluþturulacak pencereler için kaydet’ seçeneðini iþaretleyip ‘Tamam’a bastýktan sonra çýkýyoruz. 
+Bu iþlemin nasýl yapýlacaðýný gösteren bir videoyu http://media.istihza.com/videos/ms-dos.swf adresinden izleyebilirsiniz. 
+Böylece MS-DOS komut satýrý için Türkçe karakterleri gösterebilen bir yazý tipi belirlemiþ olduk. Ancak bu, Türkçe karakterleri düzgün görüntülemeye yetmeyebilir. Eðer Türkçe karakterler hala düzgün görünmüyorsa, kullandýðýnýz sistemde MS-DOS’un dil kodlamasý Türkçe karakterleri görüntülemeye uygun olmayabilir. Türkçe karakterleri gösterebilen bir dil kodlamasý belirlemek için komut satýrýnda þu komutu verin:
+
+chcp 1254
+
+CP1254, Türkçe karakterleri de içeren bir dil kodlamasýdýr. Bu komutu verdikten sonra artýk Türkçe karakterleri düzgün görüntüleyebiliyor olmanýz lazým.

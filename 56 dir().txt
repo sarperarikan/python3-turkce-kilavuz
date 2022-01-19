@@ -1,0 +1,85 @@
+
+dir()
+
+Ýlk olarak dir() adlý özel bir fonksiyondan söz edeceðiz. Bu metot bize Python’daki bir nesnenin özellikleri hakkýnda bilgi edinme imkaný verecek. Mesela karakter dizilerinin bize hangi metotlarý sunduðunu görmek için bu fonksiyonu þöyle kullanabiliriz:
+
+>>> dir(str)
+
+['__add__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__',
+'__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__',
+'__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__',
+'__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__',
+'__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__',
+'__subclasshook__', 'capitalize', 'center', 'count', 'encode', 'endswith',
+'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha',
+'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable',
+'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip',
+'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition',
+'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase',
+'title', 'translate', 'upper', 'zfill']
+
+Ýngilizcede ‘karakter dizisi’nin karþýlýðýnýn string, bu kelimenin kýsaltmasýnýn da ‘str’ olduðunu hatýrlýyor olmalýsýnýz. Ýþte dir() fonksiyonuna parametre olarak bu ‘str’ kelimesini verdiðimizde, Python bize karakter dizilerinin bütün metotlarýný listeliyor.
+
+Karakter dizileri dýþýnda, þimdiye kadar öðrendiðimiz baþka bir veri tipi de sayýlar. Biz Python’da sayýlarýn tam sayýlar (integer), kayan noktalý sayýlar (float) ve karmaþýk sayýlar (complex) olarak üçe ayrýldýðýný da biliyoruz. Örnek olmasý açýsýndan dir() fonksiyonunu bir de sýrasýyla, tam sayýlar, kayan noktalý sayýlar ve karmaþýk sayýlar üzerinde de uygulayalým:
+
+>>> dir(int)
+
+>>> dir(float)
+
+>>> dir(complex)
+
+Gördüðünüz gibi, dir() fonksiyonunu kullanmak için, metotlarýný listelemek istediðimiz nesneyi alýp dir() fonksiyonuna parametre olarak veriyoruz. Örneðin yukarýda karakter dizileri için str; tam sayýlar için int; kayan noktalý sayýlar için float; karmaþýk sayýlar için ise complex parametrelerini kullandýk.
+
+dir() fonksiyonunu kullanabilmek için tek yöntemimiz, sorgulamak istediðimiz nesnenin adýný kullanmak deðil. Mesela karakter dizilerinin metotlarýný sorgulamak için ‘str’ kelimesini kullanabileceðimiz gibi, herhangi bir karakter dizisini de kullanabiliriz. Yani:
+
+>>> dir("")
+
+Burada dir() fonksiyonuna parametre olarak boþ bir karakter dizisi verdik. Bu kodun dir(str) kodundan hiçbir farký yoktur. Bu komut da bize karakter dizilerinin metotlarýný listeler.
+
+Ayný etkiyi dilersek þöyle de elde edebiliriz:
+
+>>> a = "karakter"
+>>> dir(a)
+
+Karakter dizilerinin metotlarýný listelemek için, siz hangi yöntem kolayýnýza geliyorsa onu kullanabilirsiniz. Bu satýrlarýn yazarý genellikle þu yöntemi kullanýyor:
+
+>>> dir("")
+
+dir("") komutunun çýktýsýndan da göreceðiniz gibi, karakter dizilerinin epey metodu var. Metot listesi içinde bizi ilgilendirenler baþýnda veya sonunda _ iþareti olmayanlar. Yani þunlar:
+
+>>> for i in dir(""):
+... if "_" not in i[0]:
+... print(i)
+...
+
+Bu arada bu metotlarý listelemek için nasýl bir kod kullandýðýmýza dikkat edin:
+
+for i in dir(""):
+if "_" not in i[0]:
+print(i)
+
+Burada dir("") komutunun içerdiði her bir metoda tek tek bakýyoruz. Bu metotlar içinde, ilk harfi _ karakteri olmayan bütün metotlarý listeliyoruz. Böylece istediðimiz listeyi elde etmiþ oluyoruz. Ýsterseniz ilgilendiðimiz metotlarýn sayýsýný da çýktýya ekleyebiliriz:
+
+sayaç = 0
+
+for i in dir(""):
+if "_" not in i[0]:
+sayaç += 1
+print(i)
+
+print("Toplam {} adet metot ile ilgileniyoruz.".format(sayaç))
+
+Burada da, ilk karakteri _ olmayan her bir metot için sayaç deðiþkeninin deðerini 1 artýrýyoruz. Böylece programýn sonunda sayaç deðiþkeni ilgilendiðimiz metot sayýsýný göstermiþ oluyor.
+
+Eðer her metodun soluna, sýra numarasýný da eklemek isterseniz elbette þöyle bir kod da yazabilirsiniz:
+
+sayaç = 0
+
+for i in dir(""):
+if "_" not in i[0]:
+sayaç += 1
+print(sayaç, i)
+
+print("Toplam {} adet metot ile ilgileniyoruz.".format(sayaç))
+
+Bu noktada bir parantez açalým. Yukarýdaki yöntemi kullanarak metotlarý numaralandýrabilirsiniz. Ama aslýnda Python bize numaralandýrma iþlemleri için özel bir fonksiyon sunar. Þimdi isterseniz bu özel fonksiyonu inceleyelim.

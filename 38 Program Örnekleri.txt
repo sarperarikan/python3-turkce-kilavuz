@@ -1,0 +1,119 @@
+
+Program Örnekleri
+
+Yukarýda Python ve programlamaya iliþkin pek çok teknik bilgi verdik. Bunlarý öðrenmemiz, iþlerimizi kuru kuruya ezberleyerek deðil, anlayarak yapmamýzý saðlamasý açýsýndan büyük önem taþýyordu. Ancak yukarýda pratiðe yönelik pek bir þey sunamadýk. Ýþte bu bölümde pratik eksikliðimizi biraz olsun kapamaya dönük örnekler yapacaðýz.
+
+Hatýrlarsanýz Python’la tanýþmamýzý saðlayan ilk örneðimiz ekrana basit bir “Merhaba Zalim Dünya!” cümlesi yazdýrmaktý. Bu ilk örneði etkileþimli kabukta verdiðimizi hatýrlýyorsunuz:
+
+>>> "Merhaba Zalim Dünya!"
+
+Ama artýk programlarýmýzý dosyaya kaydetmeyi öðrendiðimize göre bu kodlarý etkileþimli kabuða yazmak yerine bir dosyaya yazmayý tercih edebiliriz. Bu sayede yazdýðýmýz kodlar kalýcýlýk kazanacaktýr.
+
+Hemen bir deneme yapalým. Boþ bir metin belgesi açýp oraya þu satýrý yazalým:
+
+"Merhaba Zalim Dünya!"
+
+Þimdi de bu dosyayý daha önce anlattýðýmýz þekilde masaüstüne deneme.py adýyla kaydedip programýmýzý çalýþtýralým.
+
+Ne oldu? Programýnýz hiçbir çýktý vermeden kapandý, deðil mi?
+
+Hemen hatýrlayacaðýnýz gibi, print() fonksiyonu içine alýnmayan ifadelerin ekrana çýktý olarak verilebilmesi sadece etkileþimli kabuða özgü bir durumdur. Programlarýmýzý dosyadan çalýþtýrýrken, print() fonksiyonu içine alýnmayan ifadeler ekranda görünmeyecektir. Yukarýdaki örnek bu durumun bir göstergesidir. Dolayýsýyla yukarýdaki ifadenin ekrana çýktý olarak verilebilmesi için o kodu þöyle yazmamýz gerekiyor:
+
+print("Merhaba Zalim Dünya!")
+
+Programýnýzý bu þekilde tekrar çalýþtýrdýðýnýzda þöyle bir çýktý alýyoruz:
+
+Merhaba Zalim Dünya!
+
+Bu oldukça basit bir örnekti. Þimdi biraz daha karmaþýk bir örnek verelim.
+
+Yine hatýrlayacaðýnýz gibi, önceki bölümlerden birinde aylýk yol masrafýmýzý hesaplayan bir program yazmýþtýk.
+
+Orada elimizdeki verilerin þunlar olduðunu varsaymýþtýk:
+
+Cumartesi-Pazar günleri çalýþmýyoruz. 
+Dolayýsýyla ayda 22 gün çalýþýyoruz. 
+Evden iþe gitmek için kullandýðýmýz vasýtanýn ücreti 1.5 TL 
+Ýþten eve dönmek için kullandýðýmýz vasýtanýn ücreti 1.4 TL 
+Elimizdeki bu bilgilere göre aylýk yol masrafýmýzý hesaplamak için de þöyle bir formül üretmiþtik:
+
+masraf = gün sayýsý x (gidiþ ücreti + dönüþ ücreti)
+
+Gelin þimdi yukarýdaki bilgileri kullanarak programýmýzý dosyaya yazalým:
+
+gün = 22
+gidiþ_ücreti = 1.5
+dönüþ_ücreti = 1.4
+
+masraf = gün * (gidiþ_ücreti + dönüþ_ücreti)
+
+print(masraf)
+
+Týpký öncekiler gibi, bu programý da masaüstüne deneme.py adýyla kaydedelim ve komut satýrýnda masaüstünün bulunduðu konuma giderek python3 deneme.py komutuyla programýmýzý çalýþtýralým. Programý çalýþtýrdýðýmýzda þöyle bir çýktý alýyoruz:
+
+63.8
+
+Programýmýz gayet düzgün çalýþýyor. Ancak gördüðünüz gibi, elde ettiðimiz çýktý çok yavan. Ama eðer isterseniz yukarýdaki programa daha profesyonel bir görünüm de kazandýrabilirsiniz. Dikkatlice inceleyin:
+
+gün = 22
+gidiþ_ücreti = 1.5
+dönüþ_ücreti = 1.4
+
+masraf = gün * (gidiþ_ücreti + dönüþ_ücreti)
+
+print("-"*30)
+print("çalýþýlan gün sayýsý\t:", gün)
+print("iþe gidiþ ücreti\t:", gidiþ_ücreti)
+print("iþten dönüþ ücreti\t:", dönüþ_ücreti)
+print("-"*30)
+
+print("AYLIK YOL MASRAFI\t:", masraf)
+
+Bu defa programýmýz þöyle bir çýktý verdi:
+
+------------------------------
+çalýþýlan gün sayýsý : 22
+iþe gidiþ ücreti : 1.5
+iþten dönüþ ücreti : 1.4
+------------------------------
+AYLIK YOL MASRAFI : 63.8
+
+Gördüðünüz gibi, bu kodlar sayesinde kullanýcýya daha ayrýntýlý bilgi vermiþ olduk. Üstelik elde ettiðimiz çýktý daha þýk görünüyor.
+
+Yukarýdaki kodlarda þimdiye kadar öðrenmediðimiz hiçbir þey yok. Yukarýdaki kodlarýn tamamýný anlayabilecek kadar Python bilgimiz var. Bu kodlarda çok basit parçalarý bir araya getirerek istediðimiz çýktýyý nasýl elde ettiðimizi dikkatlice inceleyin. Mesela elde etmek istediðimiz çýktýnýn görünüþünü güzelleþtirmek için iki yerde þu satýrý kullandýk:
+
+print("-"*30)
+
+Böylece 30 adet - iþaretini yan yana basmýþ olduk. Bu sayede elde ettiðimiz çýktý daha derli toplu bir görünüme kavuþtu. Ayrýca kodlarýmýz içinde \t adlý kaçýþ dizisinden de yararlandýk. Böylelikle ekrana basýlan çýktýlar alt alta düzgün bir þekilde hizalanmýþ oldu.
+
+Bu arada, yukarýdaki kodlar sayesinde deðiþken kullanýmýnýn iþlerimizi ne kadar kolaylaþtýrdýðýna da birebir tanýk olduk. Eðer deðiþkenler olmasaydý yukarýdaki kodlarý þöyle yazacaktýk:
+
+print("-"*30)
+print("çalýþýlan gün sayýsý\t:", 22)
+print("iþe gidiþ ücreti\t:", 1.5)
+print("iþten dönüþ ücreti\t:", 1.4)
+print("-"*30)
+
+print("AYLIK YOL MASRAFI\t:", 22 * (1.5 + 1.4))
+
+Eðer günün birinde mesela çalýþýlan gün sayýsý deðiþirse yukarýdaki kodlarýn iki farklý yerinde deðiþiklik yapmamýz gerekecekti. Bu kodlarýn çok büyük bir programýn parçasý olduðunu düþünün. Kodlarýn içinde deðer arayýp bunlarý tek tek deðiþtirmeye kalkýþmanýn ne kadar hataya açýk bir yöntem olduðunu tahmin edebilirsiniz. Ama deðiþkenler sayesinde, sadece tek bir yerde deðiþiklik yaparak kodlarýmýzý güncel tutabiliriz. Mesela çalýþýlan gün sayýsý 20‘ye düþmüþ olsun:
+
+gün = 20
+gidiþ_ücreti = 1.5
+dönüþ_ücreti = 1.4
+
+masraf = gün * (gidiþ_ücreti + dönüþ_ücreti)
+
+print("-"*30)
+print("çalýþýlan gün sayýsý\t:", gün)
+print("iþe gidiþ ücreti\t:", gidiþ_ücreti)
+print("iþten dönüþ ücreti\t:", dönüþ_ücreti)
+print("-"*30)
+
+print("AYLIK YOL MASRAFI\t:", masraf)
+
+Gördüðünüz gibi, sadece en baþtaki gün adlý deðiþkenin deðerini deðiþtirerek istediðimiz sonucu elde ettik.
+
+Kendiniz isterseniz yukarýdaki örnekleri çeþitlendirebilirsiniz.
+
+Gördüðünüz gibi, Python’da az da olsa iþe yarar bir þeyler yazabilmek için çok þey bilmemize gerek yok. Sýrf þu ana kadar öðrendiklerimizi kullanarak bile ufak tefek programlar yazabiliyoruz.

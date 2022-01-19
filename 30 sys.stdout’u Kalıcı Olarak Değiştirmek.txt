@@ -1,0 +1,172 @@
+
+sys.stdout’u Kalýcý Olarak Deðiþtirmek
+
+Önceki baþlýklar altýnda verdiðimiz örneklerden de gördüðünüz gibi, print() fonksiyonunun file parametresi yardýmýyla Python’ýn standart çýktý konumunu geçici olarak deðiþtirebiliyoruz. Ama bazý durumlarda, yazdýðýnýz programlarda, o programýn iþleyiþi boyunca standart dýþý bir çýktý konumu belirlemek isteyebilirsiniz. Yani standart çýktý konumunu geçici olarak deðil, kalýcý olarak deðiþtirmeniz gerekebilir. Mesela yazdýðýnýz programda bütün çýktýlarý bir dosyaya yazdýrmayý tercih edebilirsiniz. Elbette bu iþlemi her defasýnda file parametresini, çýktýlarý yazdýrmak istediðiniz dosyanýn adý olarak belirleyerek yapabilirsiniz. Týpký þu örnekte olduðu gibi:
+
+>>> f = open("dosya.txt", "w")
+>>> print("Fýrat Özgül", file=f)
+>>> print("Adana", file=f)
+>>> print("Ubuntu", file=f)
+>>> f.close()
+
+Gördüðünüz gibi, her defasýnda file parametresine f deðerini vererek iþimizi hallettik. Ama bunu yapmanýn daha pratik bir yöntemi var. Dilerseniz yazdýðýnýz programýn tüm iþleyiþi boyunca çýktýlarý baþka bir konuma yönlendirebilirsiniz. Bunun için hem þimdiye kadar öðrendiðimiz, hem de henüz öðrenmediðimiz bazý bilgileri kullanacaðýz.
+
+Ýlk önce þöyle bir kod yazalým:
+
+>>> import sys
+
+Bu kod yardýmýyla sys adlý özel bir ‘modülü’ programýmýza dahil etmiþ, yani içe aktarmýþ olduk. Peki ‘modül’ nedir, ‘içe aktarmak’ ne demek?
+
+Aslýnda biz bu ‘modül’ ve ‘içe aktarma’ kavramlarýna hiç de yabancý deðiliz. Önceki derslerde, pek üzerinde durmamýþ da olsak, biz Python’daki birkaç modülle zaten tanýþmýþtýk. Mesela os adlý bir modül içindeki getcwd() adlý bir fonksiyonu kullanarak, o anda hangi dizinde bulunduðumuzu öðrenebilmiþtik:
+
+>>> import os
+>>> os.getcwd()
+
+Ayný þekilde keyword adlý baþka bir modül içindeki kwlist adlý deðiþkeni kullanarak, hangi kelimelerin Python’da deðiþken adý olarak kullanýlamayacaðýný da listeleyebilmiþtik:
+
+>>> import keyword
+>>> keyword.kwlist
+
+Ýþte þimdi de, os ve keyword modüllerine ek olarak sys adlý bir modülden söz ediyoruz. Gelin isterseniz öteki modülleri þimdilik bir kenara býrakýp, bu sys denen modüle dikkatimizi verelim.
+
+Dediðimiz gibi, sys modülü içinde pek çok önemli deðiþken ve fonksiyon bulunur. Ancak bir modül içindeki deðiþken ve fonksiyonlarý kullanabilmek için o modülü öncelikle programýmýza dahil etmemiz, yani içe aktarmamýz gerekiyor. Bunu import komutuyla yapýyoruz:
+
+>>> import sys
+
+Artýk sys modülü içindeki bütün fonksiyon ve deðiþkenlere ulaþabileceðiz.
+
+sys modülü içinde bulunan pek çok deðiþken ve fonksiyondan biri de stdout adlý deðiþkendir. Bu deðiþkenin deðerine þöyle ulaþabilirsiniz:
+
+>>> sys.stdout
+
+Bu komut þuna benzer bir çýktý verir:
+
+<_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1254'>
+
+Bu çýktýdaki name=’<stdout>’ kýsmýna dikkat edin. Bu ifadeye birazdan geri döneceðiz. Biz þimdi baþka bir þeyden söz edelim.
+
+Hatýrlarsanýz etkileþimli kabuðu nasýl kapatabileceðimizi anlatýrken, etkileþimli kabuktan çýkmanýn bir yolunun da þu komutlarý vermek olduðunu söylemiþtik:
+
+>>> import sys; sys.exit()
+
+Bu komutu tek satýrda yazmýþtýk, ama istersek þöyle de yazabiliriz elbette:
+
+>>> import sys
+>>> sys.exit()
+
+Dedik ya, sys modülü içinde pek çok deðiþken ve fonksiyon bulunur. Nasýl stdout sys modülü içindeki deðiþkenlerden biri ise, exit() de sys modülü içinde bulunan fonksiyonlardan biridir.
+
+Biz ‘modüller’ konusunu ilerleyen derslerde ayrýntýlý bir þekilde inceleyeceðiz. Þimdilik modüllere iliþkin olarak yalnýzca þunlarý bilelim yeter:
+
+1. Python’da modüller import komutu ile içe aktarýlýr. Örneðin sys adlý modülü içe aktarmak için import sys komutunu veriyoruz.
+
+2. Modüller içinde pek çok faydalý deðiþken ve fonksiyon bulunur. Ýþte bir modülü içe aktardýðýmýzda, o modül içindeki bu deðiþken ve fonksiyonlarý kullanma imkaný elde ederiz.
+
+3. sys modülü içindeki deðiþkenlere bir örnek stdout; fonksiyonlara örnek ise exit() fonksiyonudur. Bir modül içindeki bu deðiþken ve fonksiyonlara ‘modül_adý.deðiþken_ya_da_fonksiyon’ formülünü kullanarak eriþebiliriz. Örneðin:
+
+>>> sys.stdout
+>>> sys.exit()
+
+4. Hatýrlarsanýz bundan önce de, open() fonksiyonu ile dosya oluþturmayý anlatýrken, oluþturulan dosyanýn hangi dizinde olduðunu bulabilmek amacýyla, o anda içinde bulunduðumuz dizini tespit edebilmek için þu kodlarý kullanmýþtýk:
+
+>>> import os
+>>> os.getcwd()
+
+Burada da os adlý baþka bir modül görüyoruz. Ýþte os da týpký sys gibi bir modüldür ve týpký sys modülünde olduðu gibi, os modülünün de içinde pek çok yararlý deðiþken ve fonksiyon bulunur. getcwd() adlý fonksiyon da os modülü içinde yer alan ve o anda hangi dizin altýnda bulunduðumuzu gösteren bir fonksiyondur. Elbette, yine týpký sys modülünde olduðu gibi, os modülü içindeki bu yararlý deðiþken ve fonksiyonlarý kullanabilmek için de öncelikle bu os modülünü içe aktarmamýz, yani programýmýza dahil etmemiz gerekiyor. os modülünü import komutu aracýlýðýyla uygun bir þekilde içe aktardýktan sonra, modül içinde yer alan getcwd() adlý fonksiyona yine ‘modül_adý.fonksiyon’ formülünü kullanarak eriþebiliyoruz.
+
+Modüllere iliþkin þimdilik bu kadar bilgi yeter. Modülleri bir kenara býrakýp yolumuza devam edelim...
+
+Eðer sys.exit() komutunu verip etkileþimli kabuktan çýktýysanýz, etkileþimli kabuða tekrar girin ve sys modülünü yeniden içe aktarýn:
+
+>>> import sys
+
+Not
+
+Bir modülü ayný etkileþimli kabuk oturumu içinde bir kez içe aktarmak yeterlidir. Bir modülü bir kez içe aktardýktan sonra, o oturum süresince bu modül içindeki deðiþken ve fonksiyonlarý kullanmaya devam edebilirsiniz. Ama tabii ki etkileþimli kabuðu kapatýp tekrar açtýktan sonra, bir modülü kullanabilmek için o modülü tekrar içe aktarmanýz gerekir.
+
+Þimdi þu kodu yazýn:
+
+>>> f = open("dosya.txt", "w")
+
+Bu kodun anlamýný biliyorsunuz. Burada dosya.txt adlý bir dosyayý yazma kipinde açmýþ olduk. Tahmin edebileceðiniz gibi, çýktýlarýmýzý ekran yerine bu dosyaya yönlendireceðiz.
+
+Þimdi de þöyle bir kod yazalým:
+
+>>> sys.stdout = f
+
+Bildiðiniz gibi, sys.stdout deðeri Python’ýn çýktýlarý hangi konuma vereceðini belirliyor. Ýþte biz burada sys.stdout‘un deðerini biraz önce oluþturduðumuz f adlý dosya ile deðiþtiriyoruz. Böylece Python bütün çýktýlarý f deðiþkeni içinde belirttiðimiz dosya.txt adlý dosyaya gönderiyor.
+
+Bu andan sonra yazacaðýnýz her þey dosya.txt adlý dosyaya gidecektir:
+
+>>> print("deneme metni", flush=True)
+
+Gördüðünüz gibi, burada file parametresini kullanmadýðýmýz halde çýktýlarýmýz ekrana deðil, dosya.txt adlý bir dosyaya yazdýrýldý. Peki ama bu nasýl oldu? Aslýnda bunun cevabý çok basit: Biraz önce sys.stdout = f komutuyla sys.stdout‘un deðerini f deðiþkeninin tuttuðu dosya ile deðiþtirdik. Bu iþlemi yapmadan önce sys.stdout‘un deðeri þuydu hatýrlarsanýz:
+
+<_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1254'>
+
+Ama sys.stdout = f komutundan sonra her þey deðiþti. Kontrol edelim:
+
+>>> print(sys.stdout, flush=True)
+
+Elbette bu komuttan herhangi bir çýktý almadýnýz. Çýktýnýn ne olduðunu görmek için dosya.txt adlý dosyayý açýn. Orada þu satýrý göreceksiniz:
+
+<_io.TextIOWrapper name='dosya.txt' mode='w' encoding='cp1254'>
+
+Gördüðünüz gibi, özgün stdout çýktýsýndaki name=’<stdout>’ deðeri name=’dosya.txt’ olmuþ. Dolayýsýyla artýk bütün çýktýlar dosya.txt adlý dosyaya gidiyor...
+
+Bu arada, yukarýdaki çýktýda görünen name, mode ve encoding deðerlerine þu þekilde ulaþabilirsiniz:
+
+>>> sys.stdout.name
+>>> sys.stdout.mode
+>>> sys.stdout.encoding
+
+Burada sys.stdout.name komutu standart çýktý konumunun o anki adýný verecektir. sys.stdout.mode komutu ise standart çýktý konumunun hangi kipe sahip olduðunu gösterir. Standart çýktý konumu genellikle yazma kipinde (w) bulunur. sys.stdout.encoding kodu ise standart çýktý konumunun sahip olduðu kodlama biçimini gösterir. Kodlama biçimi, standart çýktý konumuna yazdýracaðýnýz karakterlerin hangi kodlama biçimi ile kodlanacaðýný belirler. Kodlama biçimi Windows’ta genellikle ‘cp1254’, GNU/Linux’ta ise ‘utf-8’dir. Eðer bu kodlama biçimi yanlýþ olursa, mesela dosyaya yazdýracaðýnýz karakterler içindeki Türkçe harfler düzgün görüntülenemez. Eðer burada söylediklerimiz size þu anda anlaþýlmaz geliyorsa, söylediklerimizi dikkate almadan yolunuza devam edebilirsiniz. Birkaç bölüm sonra bu söylediklerimiz size daha fazla þey ifade etmeye baþlayacak nasýl olsa.
+
+Peki standart çýktý konumunu eski haline döndürmek isterseniz ne yapacaksýnýz? Bunun için etkileþimli kabuktan çýkýp tekrar girebilirsiniz. Etkileþimli kabuðu tekrar açtýðýnýzda her þeyin eski haline döndüðünü göreceksiniz. Ayný þekilde, eðer bu kodlarý bir program dosyasýna yazmýþ olsaydýnýz, programýnýz kapandýðýnda her þey eski haline dönecekti.
+
+Peki standart çýktý konumunu, etkileþimli kabuktan çýkmadan veya programý kapatmadan eski haline döndürmenin bir yolu var mý? Elbette var. Dikkatlice bakýn:
+
+>>> import sys
+>>> f = open("dosya.txt", "w")
+>>> sys.stdout, f = f, sys.stdout
+>>> print("deneme", flush=True)
+>>> f, sys.stdout = sys.stdout, f
+>>> print("deneme")
+
+deneme
+
+Uyarý
+
+Eðer yukarýdaki kodlarý çalýþtýramýyorsanýz, ayný etkileþimli kabuk oturumunda önceden verdiðiniz kodlar bu kodlarýn doðru çýktý vermesini engelliyor olabilir. Bu sorunu aþmak için, etkileþimli kabuðu kapatýp tekrar açýn ve yukarýdaki komutlarý tekrar verin.
+
+Aslýnda burada anlayamayacaðýnýz hiçbir þey yok. Burada yaptýðýmýz þeyi geçen bölümlerde deðiþkenlerin deðerini nasýl takas edeceðimizi anlatýrken de yapmýþtýk. Hatýrlayalým:
+
+>>> osman = "Araþtýrma Geliþtirme Müdürü"
+>>> mehmet = "Proje Sorumlusu"
+>>> osman, mehmet = mehmet, osman
+
+Bu kodlarla Osman ve Mehmet’in unvanlarýný birbiriyle takas etmiþtik. Ýþte yukarýda yaptýðýmýz þey de bununla aynýdýr. sys.stdout, f = f, sys.stdout dediðimizde f deðerini sys.stdout‘a, sys.stdout‘un deðerini ise f‘ye vermiþ oluyoruz. f, sys.stdout = sys.stdout, f dediðimizde ise, bu iþlemin tam tersini yaparak her þeyi eski haline getirmiþ oluyoruz.
+
+Python’ýn bize sunduðu bu kolaylýktan faydalanarak deðiþkenlerin deðerini birbiriyle kolayca takas edebiliyoruz. Eðer böyle bir kolaylýk olmasaydý yukarýdaki kodlarý þöyle yazabilirdik:
+
+>>> import sys
+>>> f = open("dosya.txt", "w")
+>>> özgün_stdout = sys.stdout
+>>> sys.stdout = f
+>>> print("deneme", flush=True)
+>>> sys.stdout = özgün_stdout
+>>> print("deneme")
+
+deneme
+
+Gördüðünüz gibi, sys.stdout‘un deðerini kaybetmemek için, sys.stdout deðerini f adlý dosyaya göndermeden önce þu kod yardýmýyla yedekliyoruz:
+
+>>> özgün_stdout = sys.stdout
+
+sys.stdout‘un özgün deðerini özgün_stdout deðiþkenine atadýðýmýz için, bu deðere sonradan tekrar ulaþabileceðiz. Zaten yukarýdaki kodlardan da gördüðünüz gibi, sys.stdout‘un özgün deðerine dönmek istediðimizde þu kodu yazarak isteðimizi gerçekleþtirebiliyoruz:
+
+>>> sys.stdout = özgün_stdout
+
+Böylece stdout deðeri eski haline dönmüþ oluyor ve bundan sonra yazdýrdýðýmýz her þey yeniden ekrana basýlmaya baþlýyor.
+
+...ve böylece uzun bir bölümü daha geride býraktýk. Bu bölümde hem print() fonksiyonunu bütün ayrýntýlarýyla incelemiþ olduk, hem de Python programlama diline dair baþka çok önemli kavramlardan söz ettik. Bu bakýmdan bu bölüm bize epey þey öðretti. Artýk öðrendiðimiz bu bilgileri de küfemize koyarak baþýmýz dik bir þekilde yola devam edebiliriz.

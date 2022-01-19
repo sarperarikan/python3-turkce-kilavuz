@@ -1,0 +1,6 @@
+
+Kaynaktan Kurulum
+
+Peki ya kullandýðýnýz daðýtýmýn depolarýnda Python3 yoksa veya depodaki Python3 sürümü eskiyse ve siz daha yeni bir Python3 sürümü kullanmak istiyorsanýz ne yapacaksýnýz?
+
+Eðer daðýtýmýnýzýn depolarýnda Python3 paketini bulamazsanýz veya depodaki sürüm sizi tatmin etmiyorsa, Python3’ü kaynaktan derlemeniz gerekecektir. Python3’ü kaynaktan derlerken iki seçeneðiniz var: Python3’ü root haklarý ile kurmak veya Python3’ü yetkisiz kullanýcý olarak kurmak. Normal þartlar altýnda eðer kullandýðýnýz sistemde root haklarýna sahipseniz Python3’ü yetkili kullanýcý olarak kurmanýzý tavsiye ederim.

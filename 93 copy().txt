@@ -1,0 +1,18 @@
+
+copy()
+
+Hatýrlarsanýz, geçen bölümde, listeleri, birbirlerini etkilemeyecek þekilde kopyalamak için þu iki yöntemi kullanmýþtýk:
+
+>>> liste1 = ["ahmet", "mehmet", "özlem"]
+>>> liste2 = liste1[:]
+
+ve:
+
+>>> liste2 = list(liste1)
+
+Ýþte ayný iþ için yukarýdakilere ek olarak copy() adlý bir metottan da yararlanabiliriz. Dikkatlice bakýn:
+
+>>> liste2 = liste1.copy()
+
+Hangi yöntemi seçeceðiniz size kalmýþ...
+

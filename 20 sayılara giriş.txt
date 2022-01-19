@@ -1,0 +1,50 @@
+
+Sayýlara Giriþ
+
+Dedik ki, Python’da birtakým veri tipleri bulunur ve karakter dizileri de bu veri tiplerinden yalnýzca biridir. Veri tipi olarak karakter dizilerinin dýþýnda, biraz önce aritmetik iþleçler vesilesiyle sözünü ettiðimiz, bir de ‘sayý’ (number) adlý bir veri tipi vardýr.
+
+Herhalde sayýlarýn ne anlama geldiðini tarif etmeye gerek yok. Bunlar bildiðimiz sayýlardýr. Mesela:
+
+>>> 23
+
+23
+
+>>> 4567
+
+4567
+
+>>> 2.3
+
+2.3
+
+>>> (10+2j)
+
+(10+2j)
+
+Python’da sayýlarýn farklý alt türleri bulunur. Mesela tamsayýlar, kayan noktalý sayýlar, karmaþýk sayýlar...
+
+Yukarýdaki örnekler arasýnda geçen 23 ve 4567 birer tamsayýdýr. Ýngilizcede bu tür sayýlara integer adý verilir.
+
+2.3 ise bir kayan noktalý sayýdýr (floating point number veya kýsaca float). Bu arada kayan noktalý sayýlarda basamak ayracý olarak virgül deðil, nokta iþareti kullandýðýmýza dikkat edin.
+
+En sonda gördüðümüz 10+2j sayýsý ise bir karmaþýk sayýdýr (complex). Ancak eðer matematikle yoðun bir þekilde uðraþmýyorsanýz karmaþýk sayýlar pek karþýnýza çýkmaz.
+
+Sayýlarý temel olarak öðrendiðimize göre etkileþimli kabuðu basit bir hesap makinesi niyetine kullanabiliriz:
+
+>>> 5 + 2
+
+7
+
+>>> 25 * 25
+
+625
+
+>>> 5 / 2
+
+2.5
+
+>>> 10 - 3
+
+7
+
+Yukarýdaki örneklerde kullandýðýmýz aritmetik iþleçlerden biraz önce bahsetmiþtik. O yüzden bunlara yabancýlýk çektiðinizi zannetmiyorum. Ama biz yine de bu iþleçleri ve görevlerini þöylece sýralayalým:

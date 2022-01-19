@@ -1,0 +1,55 @@
+
+Ýkili Sayma Sistemi
+
+Bildiðiniz, veya orada burada duymuþ olabileceðiniz gibi, bilgisayarlarýn temelinde iki tane sayý vardýr: 0 ve 1. Bilgisayarlar bütün iþlemleri sadece bu iki sayý ile yerine getirir.
+
+Onlu, sekizli ve on altýlý sayý sistemleri dýþýnda, özellikle bilgisayarlarýn altyapýsýnda tercih edilen bir baþka sayý sistemi daha bulunur. Ýþte bu sistemin adý ikili (binary) sayý sistemidir. Nasýl onlu sistemde 10, sekizli sistemde 8, on altýlý sistemde ise sayýlarý gösteren 16 farklý simge varsa, bu sayý sisteminde de sayýlarý gösteren toplam iki farklý sembol vardýr: 0 ve 1.
+
+Ýkili sayý sisteminde olasý bütün sayýlar iþte bu iki simge ile gösterilir.
+
+Gelin isterseniz durumu daha net bir þekilde görebilmek için yukarýda verdiðimiz sayý sistemi tablosuna ikili sayýlarý da ekleyelim:
+
+sayý_sistemleri = ["onlu", "sekizli", "on altýlý", "ikili"]
+
+print(("{:^9} "*len(sayý_sistemleri)).format(*sayý_sistemleri))
+
+for i in range(17):
+print("{0:^9} {0:^9o} {0:^9x} {0:^9b}".format(i))
+
+Bu kodlar þu çýktýyý verecektir:
+
+onlu sekizli on altýlý ikili
+0 0 0 0
+1 1 1 1
+2 2 2 10
+3 3 3 11
+4 4 4 100
+5 5 5 101
+6 6 6 110
+7 7 7 111
+8 10 8 1000
+9 11 9 1001
+10 12 a 1010
+11 13 b 1011
+12 14 c 1100
+13 15 d 1101
+14 16 e 1110
+15 17 f 1111
+16 20 10 10000
+
+Burada, onlu, sekizli ve on altýlý sayý sistemleri için geçerli olan durumun aynen ikili sayý sistemi için de geçerli olduðunu rahatlýkla görebiliyoruz. Ýkili sayý sistemindeki mevcut sayýlarý gösterebilmemiz için toplam iki farklý simge var. Bunlar: 0 ve 1. Ýkili sayý sisteminde 0 ve 1 diye saymaya baþlayýp üçüncü sayýyý söylememiz gerektiðinde, elimizde 0 ve 1‘den baþka simge olmadýðý için bir basamak artýrýp simge listesinin baþýna dönüyoruz ve böylece onluk düzendeki 2 sayýsýný ikili düzende gösterebilmek için 0 ve 1‘den sonra 10 simgesini kullanýyoruz.
+
+Bu söylediklerimizden sonra Ýnternet üzerinde sýkça karþýlaþtýðýnýz þu sözün anlamýný herhalde artýk daha iyi anlýyor olmalýsýnýz:
+
+Ýnsanlar 10’a ayrýlýr: Ýkili sistemi bilenler ve bilmeyenler!
+
+Bu arada, elbette ikili düzendeki 10 sayýsý ‘on’ þeklinde telaffuz edilmiyor. Bu sayýyý “bir-sýfýr” diye seslendiriyoruz...
+
+Ýkili sayma sisteminde bir sayýyý oluþturan rakamlar 2‘nin kuvvetleri olarak hesaplanýr. Örneðin ikili sayma sistemindeki 1100 sayýsýný ele alalým. Bu sayýyý 2‘nin kuvvetlerini kullanarak þu þekilde hesaplayabiliriz:
+
+>>> (0 * (2 ** 0)) + (0 * (2 ** 1)) + (1 * (2 ** 2)) + (1 * (2 ** 3))
+
+12
+
+Demek ki ‘1100’ sayýsý onlu sistemde 12 sayýsýna karþýlýk geliyormuþ.
+

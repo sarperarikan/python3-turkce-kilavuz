@@ -1,0 +1,19 @@
+
+clear()
+
+Listelerle ilgili olarak ele alacaðýmýz son metodun adý clear(). Bu metodun görevi bir listenin içeriðini silmektir.
+
+Diyelim ki elimizde þöyle bir liste var:
+
+>>> liste = [1, 2, 3, 5, 10, 20, 30, 45]
+
+Bu listenin içini boþaltmak için clear() metodunu kullanabiliriz:
+
+>>> liste.clear()
+>>> liste
+
+[]
+
+Bu metodun del sözcüðünden farklý olduðunu dikkat edin. clear() metodu listenin içeriðini boþaltýrken, del sözcüðü listeyi olduðu gibi ortadan kaldýrýr.
+
+

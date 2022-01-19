@@ -1,0 +1,8 @@
+
+Paket Deposundan Kurulum
+
+Sistemlerinde öntanýmlý olarak herhangi bir Python3 sürümü kurulu olmayan veya sistemlerinde kurulu öntanýmlý Python3 sürümünden memnun olmayan GNU/Linux kullanýcýlarýnýn, Python3’ü elde etmek için tercih edebileceði iki yol var: Birincisi ve benim size önereceðim yol, öncelikle kullandýðýnýz daðýtýmýn paket yöneticisini kontrol etmenizdir. Python3 sisteminizde kurulu olmasa bile, daðýtýmýnýzýn depolarýnda bu sürüm paketlenmiþ halde duruyor olabilir. O yüzden sisteminize uygun bir þekilde paket yöneticinizi açýp orada ‘python’ kelimesini kullanarak bir arama yapmanýzý öneririm. Örneðin Ubuntu GNU/Linux daðýtýmýnýn paket depolarýnda Python3 var. Dolayýsýyla Ubuntu kullanýcýlarý, eðer sistemlerinde zaten kurulu deðilse (ki muhtemelen kuruludur), bu paketi Ubuntu Yazýlým Merkezi aracýlýðýyla veya doðrudan þu komutla kurabilir:
+
+sudo apt-get install python3
+
+Bu komut, Python3’ü bütün baðýmlýlýklarý ile beraber bilgisayarýnýza kuracaktýr.

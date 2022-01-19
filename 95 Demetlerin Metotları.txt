@@ -1,0 +1,40 @@
+
+Demetlerin Metotlarý
+
+Listelerin metotlarýný incelediðimize göre, artýk demetlerin metotlarýna bakabiliriz.
+
+Geçen bölümde de söylediðimiz gibi, listeler ve demetler birbirine benzer. Aralarýndaki en önemli fark, listelerin deðiþtirilebilir bir veri tipi iken, demetlerin deðiþtirilemez bir veri tipi olmasýdýr. Elbette bu fark, iki veri tipinin metotlarýnda da kendini gösterir. Demetler üzerinde deðiþiklik yapamadýðýmýz için, bu veri tipi deðiþiklik yapmaya yarayan metotlara sahip deðildir.
+
+Demetlerin hangi metotlarý olduðunu þu komutla görebilirsiniz:
+
+>>> dir(tuple)
+
+Gördüðünüz gibi, bu veri tipinin bizi ilgilendiren iki metodu var:
+
+index() 
+count() 
+
+index()
+
+Listeler ve karakter dizileri konusunu anlatýrken bu veri tiplerinin index() adlý bir metodu olduðundan söz etmiþtik hatýrlarsanýz. Ýþte demet veri tipinin de index() adýnda ve listelerle karakter dizilerinin index() metoduyla ayný iþi yapan bir metodu bulunur. Bu metot bir demet öðesinin demet içindeki konumunu söyler bize:
+
+>>> demet = ("elma", "armut", "çilek")
+>>> demet.index("elma")
+
+0
+
+Listelerin ve karakter dizilerinin index() metoduyla ilgili söylediðimiz her þey demetlerin index() metodu için de geçerlidir.
+
+
+count()
+
+Karakter dizileri, listeler ve demetlerin ortak metotlarýndan biri de count() metodudur. Týpký karakter dizileri ve listelerde olduðu gibi, demetlerin count() metodu da bir öðenin o veri tipi içinde kaç kez geçtiðini söyler:
+
+>>> demet = ("elma", "armut", "elma", "çilek")
+>>> demet.count("elma")
+
+2
+
+Karakter dizilerinin ve listelerin count() metoduyla ilgili söylediðimiz her þeydemetlerin count() metodu için de geçerlidir.
+
+

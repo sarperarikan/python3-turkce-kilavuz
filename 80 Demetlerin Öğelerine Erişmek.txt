@@ -1,0 +1,20 @@
+
+Demetlerin Öðelerine Eriþmek
+
+Eðer bir demet içinde yer alan herhangi bir öðeye eriþmek isterseniz, karakter dizileri ve listelerden hatýrladýðýnýz yöntemi kullanabilirsiniz:
+
+>>> demet = ('elma', 'armut', 'kiraz')
+>>> demet[0]
+
+'elma'
+
+>>> demet[-1]
+
+'kiraz'
+
+>>> demet[:2]
+
+('elma', 'armut')
+
+Gördüðünüz gibi, daha önce öðrendiðimiz indeksleme ve dilimleme kurallarý aynen demetler için de geçerli.
+

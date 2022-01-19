@@ -1,0 +1,124 @@
+
+Deðiþkenlere Dair Bazý Ýpuçlarý
+
+Deðiþkenin ne demek olduðunu öðrendiðimize göre, deðiþkenlere dair bazý ufak ipuçlarý verebiliriz.
+
+
+Ayný Deðere Sahip Deðiþkenler Tanýmlama
+
+Þimdi size þöyle bir soru sormama izin verin: Acaba ayný deðere sahip iki deðiþkeni nasýl tanýmlayabiliriz? Yani mesela deðeri 4 sayýsý olan iki farklý deðiþkeni nasýl belirleyeceðiz?
+
+Aklýnýza þöyle bir çözüm gelmiþ olabilir:
+
+>>> a = 4
+>>> b = 4
+
+Böylece ikisi de 4 deðerine sahip a ve b adlý iki farklý deðiþken tanýmlamýþ olduk. Bu tamamen geçerli bir yöntemdir. Ancak Python’da bu iþlemi yapmanýn daha kolay bir yolu var. Bakalým:
+
+>>> a = b = 4
+
+Bu kodlar bir öncekiyle tamamen ayný iþlevi görür. Yani her iki kod da 4 deðerine sahip a ve b deðiþkenleri tanýmlamamýzý saðlar:
+
+>>> a
+
+4
+
+>>> b
+
+4
+
+Bu bilgiyi kullanarak mesela bir yýl içindeki her bir ayýn çektiði gün sayýsýný ay adlarýna atayabilirsiniz:
+
+>>> ocak = mart = mayýs = temmuz = aðustos = ekim = aralýk = 31
+>>> nisan = haziran = eylül = kasým = 30
+>>> þubat = 28
+
+Böylece bir çýrpýda deðeri 31 olan yedi adet deðiþken, deðeri 30 olan dört adet deðiþken, deðeri 28 olan bir adet deðiþken tanýmlamýþ olduk. Bu deðiþkenlerin deðerine nasýl ulaþacaðýnýzý biliyorsunuz:
+
+>>> ocak
+
+31
+>>> haziran
+
+30
+
+>>> þubat
+
+28
+
+>>> mayýs
+
+31
+
+>>> ekim
+
+31
+
+>>> eylül
+
+30
+
+Eðer Python’ýn ayný anda birden fazla deðiþkene tek bir deðer atama özelliði olmasaydý yukarýdaki kodlarý þöyle yazmamýz gerekirdi:
+
+>>> ocak = 31
+>>> þubat = 28
+>>> mart = 31
+>>> nisan = 30
+>>> mayýs = 31
+>>> haziran = 30
+>>> temmuz = 31
+>>> aðustos = 31
+>>> eylül = 30
+>>> ekim = 31
+>>> kasým = 30
+>>> aralýk = 31
+
+Bu deðiþkenleri nasýl bir program içinde kullanacaðýnýz tamamen sizin hayal gücünüze kalmýþ. Mesela bu deðiþkenleri kullanarak aylara göre doðalgaz faturasýný hesaplayan bir program yazabiliriz.
+
+Hemen son gelen doðalgaz faturasýný (örn. Mart ayý) elimize alýp inceliyoruz ve bu faturadan þu verileri elde ediyoruz:
+
+Mart ayý doðalgaz faturasýna göre sayaçtan ölçülen hacim 346 m3. Demek ki bir ayda toplam 346 m3 doðalgaz harcamýþýz.
+
+Fatura tutarý 273.87 TL imiþ. Yani 346 m3 doðalgaz tüketmenin bedeli 273.87 TL. Buna göre deðiþkenlerimizi tanýmlayalým:
+
+>>> aylýk_sarfiyat = 346
+>>> fatura_tutarý = 273.87
+
+Bu bilgiyi kullanarak doðalgazýn birim fiyatýný hesaplayabiliriz. Formülümüz þöyle olmalý:
+
+>>> birim_fiyat = fatura_tutarý / aylýk_sarfiyat
+
+>>> birim_fiyat
+
+0.7915317919075144
+
+Demek ki doðalgazýn m3 fiyatý (vergilerle birlikte yaklaþýk) 0.79 TL’ye karþýlýk geliyormuþ.
+
+Bu noktada günlük ortalama doðalgaz sarfiyatýmýzý da hesaplamamýz gerekiyor:
+
+>>> günlük_sarfiyat = aylýk_sarfiyat / mart
+>>> günlük_sarfiyat
+
+11.161290322580646
+
+Demek ki Mart ayýnda günlük ortalama 11 m3 doðalgaz tüketmiþiz.
+
+Bütün bu bilgileri kullanarak Nisan ayýnda gelecek faturayý tahmin edebiliriz:
+
+>>> nisan_faturasý = birim_fiyat * günlük_sarfiyat * nisan
+>>> nisan_faturasý
+
+265.03548387096777
+
+Þubat ayý faturasý ise þöyle olabilir:
+
+>>> þubat_faturasý = birim_fiyat * günlük_sarfiyat * þubat
+>>> þubat_faturasý
+
+247.36645161290326
+
+Burada farklý deðiþkenlerin deðerini deðiþtirerek daha baþka iþlemler de yapabilirsiniz. Örneðin pratik olmasý açýsýndan günlük_sarfiyat deðiþkeninin deðerini 15 yaparak hesaplamalarýnýzý buna göre güncelleyebilirsiniz.
+
+Gördüðünüz gibi, ayný anda birden fazla deðiþken tanýmlayabilmek iþlerimizi epey kolaylaþtýrýyor.
+
+Deðiþkenlerle ilgili bir ipucu daha verelim...

@@ -1,0 +1,981 @@
+
+Karakter Dizilerinin Metotlarý (Devamý)
+
+Karakter dizileri konusunun en baþýnda söylediðimiz gibi, karakter dizileri metot yönünden bir hayli zengin bir veri tipidir. Bir önceki bölümde karakter dizileri metotlarýnýn bir kýsmýný incelemiþtik. Bu bölümde yine metotlarý incelemeye devam edeceðiz.
+
+
+capitalize()
+
+Hatýrlarsanýz, bir önceki bölümde öðrendiðimiz startswith() ve endswith() metotlarý karakter dizileri üzerinde herhangi bir deðiþiklik yapmýyordu. Bu iki metodun görevi, karakter dizilerini sorgulamamýzý saðlamaktý. Þimdi göreceðimiz capitalize() metodu ise karakter dizileri üzerinde deðiþiklik yapmamýzý saðlayacak. Dolayýsýyla bu capitalize() metodu da ‘deðiþtirici metotlar’dan biridir diyebiliriz.
+
+Hatýrlarsanýz, upper() ve lower() metotlarý bir karakter dizisi içindeki bütün karakterleri etkiliyordu. Yani mesela upper() metodunu bir karakter dizisine uygularsak, o karakter dizisi içindeki bütün karakterler büyük harfe dönecektir. Ayný þekilde lower() metodu da bir karakter dizisi içindeki bütün karakterleri küçük harfe çevirir.
+
+Þimdi göreceðimiz capitalize() metodu da upper() ve lower() metotlarýna benzemekle birlikte onlardan biraz daha farklý davranýr: capitalize() metodunun görevi karakter dizilerinin yalnýzca ilk harfini büyütmektir. Örneðin:
+
+>>> a = "python"
+>>> a.capitalize()
+
+'Python'
+
+Bu metodu kullanýrken dikkat etmemiz gereken bir nokta var: Bu metot bir karakter dizisinin yalnýzca ilk harfini büyütür. Yani birden fazla kelimeden oluþan karakter dizilerine bu metodu uyguladýðýmýzda bütün kelimelerin ilk harfi büyümez. Yalnýzca ilk kelimenin ilk harfi büyür. Yani:
+
+>>> a = "python programlama dili"
+>>> a.capitalize()
+
+'Python programlama dili'
+
+“python programlama dili” üç kelimeden oluþan bir karakter dizisidir. Bu karakter dizisi üzerine capitalize() metodunu uyguladýðýmýzda bu üç kelimenin tamamýnýn ilk harfleri büyümüyor. Yalnýzca ilk ‘python’ kelimesinin ilk harfi bu metottan etkileniyor.
+
+Bu arada capitalize() metodunu kullanýrken bir þey dikkatinizi çekmiþ olmalý. Bu metodun da, týpký upper() ve lower() metotlarýnda olduðu gibi, Türkçe karakterlerden bazýlarý ile ufak bir problemi var. Mesela þu örneðe bir bakýn:
+
+>>> kardiz = "istanbul"
+>>> kardiz.capitalize()
+
+'Istanbul'
+
+‘istanbul’ kelimesinin ilk harfi büyütüldüðünde ‘Ý’ olmasý gerekirken ‘I’ oldu. Bildiðiniz gibi bu problem ‘þ’, ‘ç’, ‘ö’, ‘ð’ ve ‘ü’ gibi öteki Türkçe karakterlerde karþýmýza çýkmaz. Sadece ‘i’ ve ‘Ý’ harfleri karakter dizisi metotlarýnda bize problem çýkaracaktýr. Ama endiþe etmemize hiç gerek yok. Bu sorunu da basit bir ‘if-else’ yapýsýyla çözebilecek kadar Python bilgisine sahibiz:
+
+kardiz = "istanbul büyükþehir belediyesi"
+
+if kardiz.startswith("i"):
+kardiz = "Ý" + kardiz[1:]
+
+kardiz = kardiz.capitalize()
+
+print(kardiz)
+
+Burada yaptýðýmýz þey þu: Eðer deðiþkenin tuttuðu karakter dizisi ‘i’ harfi ile baþlýyorsa, "Ý" + kardiz[1:] kodunu kullanarak karakter dizisinin ilk harfi dýþýnda kalan kýsmýyla ‘Ý’ harfini birleþtiriyoruz. Bu yapýyý daha iyi anlayabilmek için etkileþimli kabukta þu denemeleri yapabilirsiniz:
+
+>>> kardiz = "istanbul"
+>>> kardiz[1:]
+
+'stanbul'
+
+Gördüðünüz gibi, kardiz[1:] kodu bize karakter dizisinin ilk harfi hariç geri kalan kýsmýný veriyor. Bu yapýyý dilimleme konusundan hatýrlýyor olmalýsýnýz. Ýþte biz dilimleme tekniðinin bu özelliðinden yararlanarak, karakter dizisinin ilk harfini kesip, baþ tarafa bir adet ‘Ý’ harfi ekliyoruz:
+
+>>> "Ý" + kardiz[1:]
+
+'Ýstanbul'
+
+Hatýrlarsanýz karakter dizilerinin deðiþtirilemeyen bir veri tipi olduðunu söylemiþtik. O yüzden, karakter dizisinin “stanbul” kýsmýný ‘Ý’ harfiyle birleþtirdikten sonra, bu deðiþikliðin kalýcý olabilmesi için kardiz = "Ý" + kardiz[1:] kodu yardýmýyla, yaptýðýmýz deðiþikliði tekrar kardiz adlý bir deðiþkene atýyoruz.
+
+Böylece;
+
+if kardiz.startswith("i"):
+kardiz = "Ý" + kardiz[1:]
+
+kodlarýnýn ne yaptýðýný anlamýþ olduk. Kodlarýn geri kalanýnda ise þöyle bir kod bloðu görüyoruz:
+
+kardiz = kardiz.capitalize()
+
+Buna göre, hangi harfle baþlarsa baþlasýn Python’ýn standart capitalize() metodunu bu karakter dizisi üzerine uyguluyoruz.
+
+Son olarak da print(kardiz) kodunu kullanarak yeni karakter dizisini ekrana yazdýrýyoruz ve böylece capitalize() metodundaki Türkçe karakter sorununu kývrak bir çalýmla aþmýþ oluyoruz.
+
+
+title()
+
+Bu metot biraz önce öðrendiðimiz capitalize() metoduna benzer. Bildiðiniz gibi capitalize() metodu bir karakter dizisinin yalnýzca ilk harfini büyütüyordu. title() metodu da karakter dizilerinin ilk harfini büyütür. Ama capitalize() metodundan farklý olarak bu metot, birden fazla kelimeden oluþan karakter dizilerinin her kelimesinin ilk harflerini büyütür.
+
+Bunu bir örnek üzerinde anlatsak sanýrým daha iyi olacak:
+
+>>> a = "python programlama dili"
+>>> a.capitalize()
+
+'Python programlama dili'
+
+>>> a.title()
+
+'Python Programlama Dili'
+
+capitalize() metodu ile title() metodu arasýndaki fark bariz bir biçimde görünüyor. Dediðimiz gibi, capitalize() metodu yalnýzca ilk kelimenin ilk harfini büyütmekle yetinirken, title() metodu karakter dizisi içindeki bütün kelimelerin ilk harflerini büyütüyor.
+
+Tahmin edebileceðiniz gibi, capitalize() metodundaki Türkçe karakter problemi title() metodu için de geçerlidir. Yani:
+
+>>> kardiz = "istanbul"
+>>> kardiz.title()
+
+'Istanbul'
+
+>>> kardiz = "istanbul büyükþehir belediyesi"
+>>> kardiz.title()
+
+'Istanbul Büyükþehir Belediyesi'
+
+Gördüðünüz gibi, burada da Python ‘i’ harfini düzgün büyütemedi. Ama tabii ki bu bizi durduramaz! Çözümümüz hazýr:
+
+kardiz = "istanbul"
+
+if kardiz.startswith("i"):
+kardiz = "Ý" + kardiz[1:]
+kardiz = kardiz.title()
+else:
+kardiz = kardiz.title()
+
+print(kardiz)
+
+Bu kodlarýn capitalize() metodunu anlatýrken verdiðimiz koda ne kadar benzediðini görüyorsunuz. Bu iki kod hemen hemen birbirinin aynýsý. Tek fark, en sondaki kardiz.capitalize() kodunun burada kardiz.title() olmasý ve if bloðu içine ek olarak kardiz = kardiz.title() satýrýný yazmýþ olmamýz. kardiz.capitalize() kodunun neden kardiz.title() koduna dönüþtüðünü açýklamaya gerek yok. Ama eðer kardiz = kardiz.title() kodunun ne iþe yaradýðýný tam olarak anlamadýysanýz o satýrý silin ve kardiz deðiþkeninin deðerini “istanbul büyükþehir belediyesi” yapýn. Yani:
+
+kardiz = "istanbul büyükþehir belediyesi"
+
+if kardiz.startswith("i"):
+kardiz = "Ý" + kardiz[1:]
+else:
+kardiz = kardiz.title()
+
+print(kardiz)
+
+Bu kodlarý bu þekilde çalýþtýrýrsanýz þu çýktýyý alýrsýnýz:
+
+Ýstanbul büyükþehir belediyesi
+
+Burada yalnýzca ilk kelimenin ilk harfi büyüdü. Halbuki title() metodunun iþleyiþi gereðince karakter dizisi içindeki bütün kelimelerin ilk harflerinin büyümesi gerekiyordu. Ýþte o satýr bütün kelimelerin ilk harflerinin büyümesini saðlýyor. Eðer bir kelimenin ilk harfi zaten büyükse title() metodu bu harfe dokunmaz, ama karakter dizisi içindeki öbür kelimelerin ilk harflerini yine de büyütür.
+
+Ýþte yukarýda title() metodunun bu özelliðinden faydalanýyoruz. kardiz = "Ý" + kardiz[1:] komutu karakter dizisinin ilk kelimesinin ilk harfini düzgün bir þekilde büyütüyor, ama geri kalan kelimelere hiçbir þey yapmýyor. kardiz = kardiz.title() komutu ise karakter dizisi içindeki geri kalan kelimelerin ilk harflerini büyütüyor. Böylece istediðimiz çýktýyý elde edebilmiþ oluyoruz. Yalnýz bu kodlarda bir þey dikkatinizi çekmiþ olmalý. kardiz = kardiz.title() komutunu program içinde iki yerde kullandýk. Programcýlýktaki en önemli ilkelerden biri de mümkün olduðunca tekrardan kaçýnmaktýr. Eðer yazdýðýnýz bir programda ayný kodlarý program boyunca tekrar tekrar yazýyorsanýz muhtemelen bir yerde hata yapýyorsunuzdur. Öyle bir durumda yapmanýz gereken þey kodlarýnýzý tekrar gözden geçirip, tekrar eden kodlarý nasýl azaltabileceðinizi düþünmektir. Ýþte burada da böyle bir tekrar söz konusu. Biz tekrara düþmekten kurtulmak için yukarýdaki kodlarý þöyle de yazabiliriz:
+
+kardiz = "istanbul büyükþehir belediyesi"
+
+if kardiz.startswith("i"):
+kardiz = "Ý" + kardiz[1:]
+
+kardiz = kardiz.title()
+
+print(kardiz)
+
+kardiz = kardiz.title() komutunu hem if bloðunda, hem de else bloðunda kullandýðýmýz için, programýmýz her koþulda bu kodu zaten çalýþtýracak. O yüzden bu satýrý if bloðuna yazdýktan sonra bir de ayný þeyi else bloðu içine yazmak gereksiz. Onun yerine else bloðunu tamamen kaldýrýp, o satýrý if bloðunun çýkýþýna yerleþtirebiliriz.
+
+Eski kodlardaki mantýk iþleyiþi þöyle idi:
+
+
+kardiz adlý bir deðiþken tanýmla 
+Eðer kardiz ‘i’ harfi ile baþlýyorsa (if), kardiz‘in ilk harfi hariç geri kalan kýsmý ile ‘Ý’ harfini birleþtir. 
+Daha sonra kardiz deðiþkenine title() metodunu uygula. 
+Eðer kardiz ‘i’ harfi ile deðil de baþka bir harfle baþlýyorsa (else), kardiz deðiþkenine title() metodunu uygula. 
+Son olarak kardiz deðiþkenini yazdýr. 
+
+Tekrar eden kodlarý çýkardýktan sonra ise kodlarýmýzýn mantýk iþleyiþi þöyle oldu:
+
+
+kardiz adlý bir deðiþken tanýmla 
+Eðer kardiz ‘i’ harfi ile baþlýyorsa (if), kardiz‘in ilk harfi hariç geri kalan kýsmý ile ‘Ý’ harfini birleþtir. 
+Daha sonra kardiz deðiþkenine title() metodunu uygula. 
+Son olarak kardiz deðiþkenini yazdýr. 
+
+Gördüðünüz gibi, ayný sonuca daha kýsa bir yoldan ulaþabiliyoruz.
+
+Ama bir dakika! Burada bir sorun var!
+
+Bu kodlar ‘i’ harfinin karakter dizisinin yalnýzca en baþýnda yer aldýðý durumlarda düzgün çalýþacaktýr. Bu kodlar mesela þu karakter dizisini düzgün büyütemez:
+
+on iki ada
+
+Ayný þekilde bu kodlar þu karakter dizisini de büyütemez:
+
+hükümet istifa!
+
+Çünkü bu karakter dizilerinde ‘i’ harfi karakter dizisini oluþturan kelimelerin ilkinde yer almýyor. Bizim yazdýðýmýz kod ise yalnýzca ilk kelime düþünülerek yazýlmýþ. Peki bu sorunun üstesinden nasýl geleceðiz?
+
+Evet, doðru tahmin ettiniz. Bizi kurtaracak þey split() metodu ve basit bir for döngüsü. Dikkatlice bakýn:
+
+kardiz = "on iki ada"
+
+for kelime in kardiz.split():
+if kelime.startswith("i"):
+kelime = "Ý" + kelime[1:]
+
+kelime = kelime.title()
+
+print(kelime, end=" ")
+
+Bu defa istediðimizi gerçekleþtiren bir kod yazabildik. Bu kodlar, ‘i’ harfi karakter dizisini oluþturan kelimelerin hangisinde bulunursa bulunsun, karakter dizisini Türkçeye uygun bir þekilde büyütebilecektir.
+
+Bir önceki kodlara göre, bu son kodlardaki tek farkýn split() metodu ve for döngüsü olduðuna dikkat edin.
+
+Bu kodlarý daha iyi anlayabilmek için etkileþimli kabukta kendi kendinize bazý deneme çalýþmalarý yapabilirsiniz:
+
+>>> kardiz = "on iki ada"
+>>> kardiz.split()
+
+['on', 'iki', 'ada']
+
+>>> for kelime in kardiz.split():
+... print(kelime[0])
+...
+o
+i
+a
+
+Gördüðünüz gibi, split() metodu "on iki ada" adlý karakter dizisini kelimelerine ayýrýyor. Ýþte biz de kelimelerine ayrýlmýþ bu yapý üzerinde bir for döngüsü kurarak herbir öðenin ilk harfinin ‘i’ olup olmadýðýný kontrol edebiliyoruz.
+
+
+swapcase()
+
+swapcase() metodu da büyük-küçük harfle ilgili bir metottur. Bu metot bir karakter dizisi içindeki büyük harfleri küçük harfe; küçük harfleri de büyük harfe dönüþtürür. Örneðin:
+
+>>> kardiz = "python"
+>>> kardiz.swapcase()
+
+'PYTHON'
+
+>>> kardiz = "PYTHON"
+>>> kardiz.swapcase()
+
+'python'
+
+>>> kardiz = "Python"
+>>> kardiz.swapcase()
+
+'pYTHON'
+
+Gördüðünüz gibi, bu metot aynen dediðimiz gibi iþliyor. Yani küçük harfleri büyük harfe; büyük harfleri de küçük harfe dönüþtürüyor.
+
+Yine tahmin edebileceðiniz gibi, bu metodun da bazý Türkçe karakterlerle problemi var:
+
+>>> kardiz = "istihza"
+>>> kardiz.swapcase()
+
+'ISTIHZA'
+
+Bu sorunu da aþmak tabii ki bizim elimizde:
+
+kardiz = "istanbul"
+
+for i in kardiz:
+if i == 'Ý':
+kardiz = kardiz.replace('Ý', 'i')
+elif i == 'i':
+kardiz = kardiz.replace('i', 'Ý')
+else:
+kardiz = kardiz.replace(i, i.swapcase())
+
+print(kardiz)
+
+Daha önceki örneklerde de olduðu gibi, bu kodlarda da ‘i’ ve ‘I’ harflerini tek tek kontrolden geçiriyoruz. Eðer bir karakter dizisi içinde bu iki harften biri varsa, bunlarýn büyük harf veya küçük harf karþýlýklarýný elle yerine koyuyoruz. Bu karakterler dýþýnda kalan karakterlere ise doðrudan swapcase() metodunu uygulayarak istediðimiz sonucu elde ediyoruz. Bu kodlarda kafanýza yatmayan yerler varsa, kodlar içinde kendinize göre bazý eklemeler çýkarmalar yaparak neyin ne iþe yaradýðýný daha kolay anlayabilirsiniz.
+
+
+casefold()
+
+Bu metot iþlev olarak lower() metoduna çok benzer. Hatta Türkçe açýsýndan, bu metodun lower() metodundan hiçbir farký yoktur. Ancak bazý baþka dillerde, bu metot bazý harfler için lower() metodunun verdiðinden farklý bir çýktý verir. Örneðin Almancadaki ‘ß’ harfi bu duruma bir örnek olabilir:
+
+>>> "ß".lower()
+'ß'
+
+>>> "ß".casefold()
+'ss'
+
+Gördüðünüz gibi, lower() ve casefold() metotlarý bu harfe farklý davranýyor.
+
+Türkçedeki Ý-i sorunu bu metot için de aynen geçerlidir.
+
+
+strip(), lstrip(), rstrip()
+
+Bu baþlýkta birbiriyle baðlantýlý üç adet karakter dizisi metodunu inceleyeceðiz. Bu metotlar strip(), lstrip() ve rstrip(). Ýlk olarak strip() metoduyla baþlayalým.
+
+Zaman zaman, içinde anlamsýz ya da gereksiz karakterler barýndýran metinleri bu anlamsýz ve gereksiz karakterlerden temizlemeniz gereken durumlarla karþýlaþabilirsiniz. Örneðin arkadaþýnýzdan gelen bir e.postada her satýrýn baþýnda ve/veya sonunda > gibi bir karakter olabilir. Arkadaþýnýzdan gelen bu e.postayý kullanabilmek için öncelikle metin içindeki o > karakterlerini silmeniz gerekebilir. Hepimizin bildiði gibi, bu tür karakterleri elle temizlemeye kalkýþmak son derece sýkýcý ve zaman alýcý bir yöntemdir. Ama artýk siz bir Python programcýsý olduðunuza göre bu tür angaryalarý Python’a devredebilirsiniz.
+
+Yukarýda bahsettiðimiz duruma yönelik bir örnek vermeden önce dilerseniz strip() metoduyla ilgili çok basit örnekler vererek baþlayalým iþe:
+
+>>> kardiz = " istihza "
+
+Burada deðeri ” istihza “ olan kardiz adlý bir karakter dizisi tanýmladýk. Dikkat ederseniz bu karakter dizisinin saðýnda ve solunda birer boþluk karakteri var. Bazý durumlarda kullanýcýdan ya da baþka kaynaktan gelen karakter dizilerinde bu tür istenmeyen boþluklar olabilir. Ama sizin kullanýcýdan veya baþka bir kaynaktan gelen o karakter dizisini düzgün kullanabilmeniz için öncelikle o karakter dizisinin saðýnda ve solunda bulunan boþluk karakterlerinden kurtulmanýz gerekebilir. Ýþte böyle anlarda strip() metodu yardýmýnýza yetiþecektir. Dikkatlice inceleyin:
+
+>>> kardiz = " istihza "
+>>> print(kardiz)
+
+' istihza '
+
+>>> kardiz.strip()
+
+'istihza'
+
+Gördüðünüz gibi, strip() metodunu kullanarak, karakter dizisinin orijinalinde bulunan saðlý sollu boþluk karakterlerini bir çýrpýda ortadan kaldýrdýk.
+
+strip() metodu yukarýdaki örnekte olduðu gibi parametresiz olarak kullanýldýðýnda, bir karakter dizisinin saðýnda veya solunda bulunan belli baþlý karakterleri kýrpar. strip() metodunun öntanýmlý olarak kýrptýðý karakterler þunlardýr:
+
+
+‘ ‘ boþluk karakteri 
+\t sekme (TAB) oluþturan kaçýþ dizisi 
+\n satýr baþýna geçiren kaçýþ dizisi 
+\r imleci ayný satýrýn baþýna döndüren kaçýþ dizisi 
+\v düþey sekme oluþturan kaçýþ dizisi 
+\f yeni bir sayfaya geçiren kaçýþ dizisi 
+
+Yani eðer strip() metoduna herhangi bir parametre vermezsek bu metot otomatik olarak karakter dizilerinin saðýnda ve solunda bulunan yukarýdaki karakterleri kýrpacaktýr. Ancak eðer biz istersek strip() metoduna bir parametre vererek bu metodun istediðimiz herhangi baþka bir karakteri kýrpmasýný da saðlayabiliriz. Örneðin:
+
+>>> kardiz = "python"
+>>> kardiz.strip("p")
+
+'ython'
+
+Burada strip() metoduna parametre olarak “p” karakter dizisini vererek, strip() metodunun, karakter dizisinin baþýnda bulunan “p” karakterini ortadan kaldýrmasýný saðladýk. Yalnýz strip() metodunu kullanýrken bir noktaya dikkat etmelisiniz. Bu metot bir karakter dizisinin hem baþýnda, hem de sonunda bulunan karakterlerle ilgilenir. Mesela þu örneðe bakalým:
+
+>>> kardiz = "kazak"
+>>> kardiz.strip("k")
+
+'aza'
+
+Gördüðünüz gibi, strip() metoduna “k” parametresini vererek, “kazak” adlý karakter dizisinin hem baþýndaki hem de sonundaki “k” harflerini kýrpmayý baþardýk. Eðer bu metoda verdiðiniz parametre karakter dizisinde geçmiyorsa, bu durumda strip() metodu herhangi bir iþlem yapmaz. Ya da aradýðýnýz karakter, karakter dizisinin yalnýzca tek bir tarafýnda (mesela sadece baþýnda veya sadece sonunda) geçiyorsa, strip() metodu, ilgili karakter hangi taraftaysa onu siler. Aranan karakterin bulunmadýðý tarafla ilgilenmez.
+
+strip() metodunu anlatmaya baþlarken, içinde gereksiz yere > iþaretlerinin geçtiði e.postalardan söz etmiþ ve bu e.postalardaki o gereksiz karakterleri elle silmenin ne kadar da sýkýcý bir iþ olduðunu söylemiþtik. Eðer e.postalarýnýzda bu tip durumlarla sýk sýk karþýlaþýyorsanýz, gereksiz karakterleri silme görevini sizin yerinize Python yerine getirebilir. Þimdi þu kodlarý dikkatlice inceleyin:
+
+metin = """
+> Python programlama dili Guido Van Rossum adlý Hollandalý bir programcý tarafýndan
+> 90'lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan, isminin Python
+> olmasýna bakarak, bu programlama dilinin, adýný piton yýlanýndan aldýðýný düþünür.
+> Ancak zannedildiðinin aksine bu programlama dilinin adý piton yýlanýndan gelmez.
+> Guido Van Rossum bu programlama dilini, The Monty Python adlý bir Ýngiliz komedi
+> grubunun, Monty Python's Flying Circus adlý gösterisinden esinlenerek adlandýrmýþtýr.
+> Ancak her ne kadar gerçek böyle olsa da, Python programlama dilinin pek çok yerde
+> bir yýlan figürü ile temsil edilmesi neredeyse bir gelenek halini almýþtýr diyebiliriz.
+"""
+
+for i in metin.split():
+print(i.strip("> "), end=" ")
+
+Bu programý çalýþtýrdýðýnýzda þöyle bir çýktý elde edeceksiniz:
+
+Python programlama dili Guido Van Rossum adlý Hollandalý bir programcý tarafýndan
+90'lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr. Çoðu insan, isminin Python
+olmasýna bakarak, bu programlama dilinin, adýný piton yýlanýndan aldýðýný düþünür.
+Ancak zannedildiðinin aksine bu programlama dilinin adý piton yýlanýndan gelmez.
+Guido Van Rossum bu programlama dilini, The Monty Python adlý bir Ýngiliz komedi
+grubunun, Monty Python's Flying Circus adlý gösterisinden esinlenerek adlandýrmýþtýr.
+Ancak her ne kadar gerçek böyle olsa da, Python programlama dilinin pek çok yerde
+bir yýlan figürü ile temsil edilmesi neredeyse bir gelenek halini almýþtýr diyebiliriz.
+
+Gördüðünüz gibi, her satýrýn baþýnda bulunan ‘> ‘ karakterlerini ufacýk birkaç kod yardýmýyla rahatlýkla temizledik. Burada strip() metoduyla birlikte split() metodunu da kullandýðýmýzý görüyorsunuz. split() metodu ile önce metin adlý karakter dizisini parçaladýk. Daha sonra da strip() metodu yardýmýyla baþ taraftaki istenmeyen karakterleri temizledik.
+
+Yukarýdaki örnekte verdiðimiz metin, istenmeyen karakterleri yalnýzca tek bir tarafta içeriyor. Ama elbette istenmeyen karakterler, karakter dizisinin ne tarafýnda olursa olsun strip() metodu bu karakterleri baþarýyla kýrpacaktýr.
+
+Bu bölümün baþlýðýnda strip() metodu ile birlikte lstrip() ve rstrip() adlý iki metodun daha adý geçiyordu. strip() metodunun ne iþe yaradýðýný öðrendik. Peki bu lstrip() ve rstrip() metotlarý ne iþe yarýyor?
+
+lstrip() metodundan baþlayalým anlatmaya...
+
+strip() metodunu anlatýrken, bu metodun bir karakter dizisinin saðýnda ve solunda bulunan istenmeyen karakterleri kýrptýðýný söylemiþtik. Ancak bazen, istediðimiz þey bu olmayabilir. Yani biz bir karakter dizisinin hem saðýnda, hem de solunda bulunan gereksiz karakterleri deðil, yalnýzca saðýnda veya yalnýzca solunda bulunan gereksiz karakterleri kýrpmak isteyebiliriz. Örneðin strip() metodunu anlatýrken verdiðimiz “kazak” örneðini ele alalým. Þöyle bir komutun ne yapacaðýný biliyorsunuz:
+
+>>> "kazak".strip("k")
+
+Bu komut hem sol, hem de sað taraftaki “k” karakterlerini kýrpacaktýr. Ama peki ya biz sadece sol taraftaki “k” karakterini atmak istersek ne olacak? Ýþte böyle bir durumda strip() metodundan deðil, lstrip() metodundan faydalanacaðýz.
+
+lstrip() metodu bir karakter dizisinin sol tarafýndaki gereksiz karakterlerden kurtulmamýzý saðlar. Mesela bu bilgiyi yukarýdaki örneðe uygulayalým:
+
+>>> "kazak".lstrip("k")
+
+'azak'
+
+Gördüðünüz gibi, lstrip() metodu yalnýzca sol baþtaki “k” harfiyle ilgilendi. Sað taraftaki “k” harfine ise dokunmadý. Eðer sol taraftaki karakteri deðil de yalnýzca sað taraftaki karakteri uçurmak istemeniz halinde ise rstrip() metodundan yararlanacaksýnýz:
+
+>>> "kazak".rstrip("k")
+
+'kaza'
+
+Bu arada, yukarýdaki metotlarý doðrudan karakter dizileri üzerine uygulayabildiðimize de dikkat edin. Yani þu iki yöntem de uygun ve doðrudur:
+
+>>> kardiz = "karakter dizisi"
+>>> kardiz.metot_adý()
+
+veya:
+
+>>> "karakter dizisi".metot_adý()
+
+
+join()
+
+Hatýrlarsanýz þimdiye kadar öðrendiðimiz metotlar arasýnda split() adlý bir metot vardý. Bu metodun ne iþe yaradýðýný ve nasýl kullanýldýðýný biliyorsunuz:
+
+>>> kardiz = "Beþiktaþ Jimnastik Kulübü"
+>>> bölünmüþ = kardiz.split()
+>>> print(bölünmüþ)
+
+['Beþiktaþ', 'Jimnastik', 'Kulübü']
+
+Gördüðünüz gibi split() metodu bir karakter dizisini belli yerlerden bölerek parçalara ayýrýyor. Bu noktada insanýn aklýna þöyle bir soru geliyor: Diyelim ki elimizde böyle bölünmüþ bir karakter dizisi grubu var. Biz bu grup içindeki karakter dizilerini tekrar birleþtirmek istersek ne yapacaðýz?
+
+Þimdi þu kodlara çok dikkatlice bakýn:
+
+>>> " ".join(bölünmüþ)
+
+'Beþiktaþ Jimnastik Kulübü'
+
+Gördüðünüz gibi, “Beþiktaþ Jimnastik Kulübü” adlý karakter dizisinin ilk halini tekrar elde ettik. Yani bu karakter dizisine ait, bölünmüþ parçalarý tekrar bir araya getirdik. Ancak bu iþi yapan kod gözünüzüne biraz tuhaf ve anlaþýlmaz görünmüþ olabilir.
+
+Ýlk baþta dikkatimizi çeken þey, bu metodun öbür metotlara göre biraz daha farklý bir yapýya sahipmiþ gibi görünmesi. Ama belki yukarýdaki örneði þöyle yazarsak bu örnek biraz daha anlaþýlýr gelebilir gözünüze:
+
+>>> birleþtirme_karakteri = " "
+>>> birleþtirme_karakteri.join(bölünmüþ)
+
+Burada da týpký öteki metotlarda olduðu gibi, join() metodunu bir karakter dizisi üzerine uyguladýk. Bu karakter dizisi bir adet boþluk karakteri. Ayrýca gördüðünüz gibi join() metodu bir adet de parametre alýyor. Bu örnekte join() metoduna verdiðimiz parametre bölünmüþ adlý deðiþken. Aslýnda þöyle bir düþününce yukarýdaki kodlarýn sanki þöyle yazýlmasý gerekiyormuþ gibi gelebilir size:
+
+>>> bölünmüþ.join(birleþtirme_karakteri)
+
+Ama bu kullaným yanlýþtýr. Üstelik kodunuzu böyle yazarsanýz Python size bir hata mesajý gösterecektir:
+
+>>> bölünmüþ.join(birleþtirme_karakteri)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'join'
+
+Buradaki hata mesajý bize þöyle diyor: ‘liste nesnesinin join adlý bir niteliði yoktur!’. Bu cümledeki ‘liste nesnesi’ ifadesine özellikle dikkatinizi çekmek istiyorum. Biz þimdiye kadar iki tür nesne (ya da baþka bir ifadeyle veri tipi) görmüþtük. Bunlar karakter dizileri ve sayýlardý. Burada karþýmýza üçüncü bir nesne çýkýyor. Gördüðümüz kadarýyla bu yeni nesnenin adý ‘liste’. (Liste adlý veri tipini birkaç bölüm sonra en ince ayrýntýsýna kadar inceleyeceðiz. Python’da böyle bir veri tipi olduðunu bilmemiz bizim için þimdilik yeterli.)
+
+Ýþte yukarýdaki hatayý almamýzýn nedeni, aslýnda karakter dizilerine ait bir metot olan join() metodunu bir liste üzerinde uygulamaya çalýþmamýz. Böyle bir durumda da Python doðal olarak bizi ‘liste nesnelerinin join adlý bir niteliði olmadýðý’ konusunda uyarýyor. Bütün bu anlattýklarýmýz bizi þu sonuca ulaþtýrýyor: Bir veri tipine ait metotlar doðal olarak yalnýzca o veri tipi üzerinde kullanýlabilir. Mesela yukarýdaki örnekte gördüðümüz gibi, bir karakter dizisi metodu olan join()‘i baþka bir veri tipine uygulamaya çalýþýrsak hata alýrýz.
+
+Sonuç olarak, join() adlý metodu bölünmüþ adlý deðiþkene uygulayamayacaðýmýzý anlamýþ bulunuyoruz. O halde bu metotla birlikte kullanýlmak üzere bir karakter dizisi bulmamýz gerekiyor.
+
+En baþta da söylediðimiz gibi, join() metodunun görevi bölünmüþ karakter dizisi gruplarýný birleþtirmektir. Bu metot görevini yerine getirirken, yani karakter dizisi gruplarýný birleþtirirken bir birleþtirme karakterine ihtiyaç duyar. Bizim örneðimizde bu birleþtirme karakteri bir adet boþluktur. Durumu daha iyi anlayabilmek için örneðimizi tekrar gözümünün önüne getirelim:
+
+>>> kardiz = "Beþiktaþ Jimnastik Kulübü"
+>>> bölünmüþ = kardiz.split()
+>>> print(bölünmüþ)
+
+['Beþiktaþ', 'Jimnastik', 'Kulübü']
+
+>>> kardiz = " ".join(bölünmüþ)
+>>> print(kardiz)
+
+Beþiktaþ Jimnastik Kulübü
+
+Gördüðünüz gibi, orijinal karakter dizisinin bölünmüþ parçalarýný, her bir parçanýn arasýnda bir adet boþluk olacak þekilde yeniden birleþtirdik. Elbette sadece boþluk karakteri kullanabileceðiz diye bir kaide yok. Mesela þu örneklere bakýn:
+
+>>> kardiz = "-".join(bölünmüþ)
+
+Beþiktaþ-Jimnastik-Kulübü
+
+>>> kardiz = "".join(bölünmüþ)
+
+BeþiktaþJimnastikKulübü
+
+Ýlk örnekte, bölünmüþ karakter dizilerini - iþareti ile birleþtirdik. Ýkinci örnekte ise bu karakter dizilerini birleþtirmek için boþ bir karakter dizisi kullandýk. Yani parçalarý birleþtirirken arada boþluk olmamasýný saðladýk.
+
+join() metodu ile bol bol pratik yaparak bu metodu hakkýyla öðrenmenizi tavsiye ederim. Zira programcýlýk maceranýz boyunca en sýk kullanacaðýnýz karakter dizisi metotlarý listesinin en baþlarýnda bu metot yer alýr.
+
+
+count()
+
+Týpký daha önce öðrendiðimiz sorgulayýcý metotlar gibi, count() metodu da bir karakter dizisi üzerinde herhangi bir deðiþiklik yapmamýzý saðlamaz. Bu metodun görevi bir karakter dizisi içinde belli bir karakterin kaç kez geçtiðini sorgulamaktýr. Bununla ilgili hemen bir örnek verelim:
+
+>>> þehir = "Kahramanmaraþ"
+>>> þehir.count("a")
+
+5
+
+Buradan anlýyoruz ki, “Kahramanmaraþ” adlý karakter dizisi içinde toplam 5 adet “a” karakteri geçiyor.
+
+count() metodu yaygýn olarak yukarýdaki örnekte görüldüðü þekilde sadece tek bir parametre ile kullanýlýr. Ama aslýnda bu metot toplam 3 parametre alýr. Þimdi þu örnekleri dikkatlice inceleyin:
+
+>>> þehir = "adana"
+>>> þehir.count("a")
+
+3
+
+>>> þehir.count("a", 1)
+
+2
+
+>>> þehir.count("a", 2)
+
+2
+
+>>> þehir.count("a", 3)
+
+1
+
+>>> þehir.count("a", 4)
+
+1
+
+Ýlk örnekte count() metodunu tek bir parametre ile birlikte kullandýðýmýz için “adana” adlý karakter dizisi içindeki bütün “a” harflerinin toplam sayýsý çýktý olarak verildi.
+
+Ýkinci örnekte ise count() metoduna ikinci bir parametre daha verdik. Bu ikinci parametre, count() metodunun bir karakteri saymaya baþlarken karakter dizisinin kaçýncý sýrasýndan baþlayacaðýný gösteriyor. Bu örnekte ikinci parametre olarak 1 sayýsýný verdiðimiz için, Python saymaya “adana” karakter dizisinin 1. sýrasýndan baþlayacak. Dolayýsýyla 0. sýradaki “a” harfi sayým iþleminin dýþýnda kalacaðý için toplam “a” sayýsý 4 deðil 3 olarak görünecek. Gördüðünüz gibi, sonraki örneklerde de ayný mantýðý takip ettiðimiz için aradýðýmýz karakterin toplam sayýsý örnekten örneðe farklýlýk gösteriyor.
+
+Peki bu metodu gerçek programlarda ne amaçla kullanabilirsiniz? Bu metodu kullanarak, örneðin, kullanýcýyý ayný karakterden yalnýzca bir adet girmeye zorlayabilirsiniz. Bunun için mesela þöyle bir yapý kullanabilirsiniz:
+
+parola = input("parolanýz: ")
+
+kontrol = True
+
+for i in parola:
+if parola.count(i) > 1:
+kontrol = False
+
+if kontrol:
+print('Parolanýz onaylandý!')
+else:
+print('Parolanýzda ayný harfi bir kez kullanabilirsiniz!')
+
+Burada kontrol deðiþkeninin deðerini True olarak belirledik. Eðer parola içindeki harflerden herhangi biri 1’den fazla geçiyorsa bu durumda kontrol deðiþkeninin deðerini False yapýyoruz:
+
+for i in parola:
+if parola.count(i) > 1:
+kontrol = False
+
+Daha sonra da kontrol deðiþkeninin durumuna göre kullanýcýya parolanýn onaylandýðý veya onaylanmadýðý bilgisini veriyoruz. Buna göre eðer kontrol deðiþkeninin deðeri True ise þu çýktýyý veriyoruz:
+
+Parolanýz onaylandý!
+
+Aksi halde þu çýktýyý veriyoruz:
+
+Parolanýzda ayný harfi bir kez kullanabilirsiniz!
+
+Yukarýdakine benzer durumlarýn dýþýnda count() metodunu þöyle durumlarda da kullanabilirsiniz:
+
+kelime = input("Herhangi bir kelime: ")
+
+for harf in kelime:
+print("{} harfi {} kelimesinde {} kez geçiyor!".format(harf,
+kelime,
+kelime.count(harf)))
+
+Burada amacýmýz kullanýcýnýn girdiði bir kelime içindeki bütün harflerin o kelime içinde kaç kez geçtiðini bulmak. count() metodunu kullanarak bu iþi çok kolay bir þekilde halledebiliyoruz. Kullanýcýnýn mesela ‘adana’ kelimesini girdiðini varsayarsak yukarýdaki program þöyle bir çýktý verecektir:
+
+a harfi adana kelimesinde 3 kez geçiyor!
+d harfi adana kelimesinde 1 kez geçiyor!
+a harfi adana kelimesinde 3 kez geçiyor!
+n harfi adana kelimesinde 1 kez geçiyor!
+a harfi adana kelimesinde 3 kez geçiyor!
+
+Ancak burada þöyle bir problem var: ‘adana’ kelimesi içinde birden fazla geçen harfler (mesela ‘a’ harfi) çýktýda birkaç kez tekrarlanýyor. Yani mesela ‘a’ harfinin geçtiði her yerde programýmýz ‘a’ harfinin kelime içinde kaç kez geçtiðini rapor ediyor. Ýstediðiniz davranýþ bu olabilir. Ama bazý durumlarda her harfin kelime içinde kaç kez geçtiði bilgisinin yalnýzca bir kez raporlanmasýný isteyebilirsiniz. Yani siz yukarýdaki gibi bir çýktý yerine þöyle bir çýktý elde etmek istiyor olabilirsiniz:
+
+a harfi adana kelimesinde 3 kez geçiyor!
+d harfi adana kelimesinde 1 kez geçiyor!
+n harfi adana kelimesinde 1 kez geçiyor!
+
+Böyle bir çýktý elde edebilmek için þöyle bir program yazabilirsiniz:
+
+kelime = input("Herhangi bir kelime: ")
+sayaç = ""
+
+for harf in kelime:
+if harf not in sayaç:
+sayaç += harf
+
+for harf in sayaç:
+print("{} harfi {} kelimesinde {} kez geçiyor!".format(harf,
+kelime,
+kelime.count(harf)))
+
+Gelin isterseniz bu kodlarý þöyle bir inceleyelim.
+
+Bu kodlarda öncelikle kullanýcýdan herhangi bir kelime girmesini istiyoruz.
+
+Daha sonra sayaç adlý bir deðiþken tanýmlýyoruz. Bu deðiþken, kullanýcýnýn girdiði kelime içindeki harfleri tutacak. Bu deðiþken, kelime deðiþkeninden farklý olarak, kullanýcýnýn girdiði sözcük içinde birden fazla geçen harflerden yalnýzca tek bir örnek içerecek.
+
+Deðiþkenimizi tanýmladýktan sonra bir for döngüsü kuruyoruz. Bu döngüye dikkatlice bakýn. Kullanýcýnýn girdiði kelime içinde geçen harflerden her birini yalnýzca bir kez alýp sayaç deðiþkenine gönderiyoruz. Böylece elimizde her harften sadece bir adet olmuþ oluyor. Burada Python’ýn arka planda neler çevirdiðini daha iyi anlayabilmek için isterseniz döngüden sonra þöyle bir satýr ekleyerek sayaç deðiþkeninin içeriðini inceleyebilir, böylece burada kullandýðýmýz for döngüsünün nasýl çalýþtýðýný daha iyi görebilirsiniz:
+
+print("sayaç içeriði: ", sayaç)
+
+Ýlk döngümüz sayesinde, kullanýcýnýn girdiði kelime içindeki her harfi teke indirerek, bu harfleri sayaç deðiþkeni içinde topladýk. Þimdi yapmamýz gereken þey, sayaç deðiþkenine gönderilen her bir harfin, kelime adlý deðiþken içinde kaç kez geçtiðini hesaplamak olmalý. Bunu da yine bir for döngüsü ile yapabiliriz:
+
+for harf in sayaç:
+print("{} harfi {} kelimesinde {} kez geçiyor!".format(harf,
+kelime,
+kelime.count(harf)))
+
+Burada yaptýðýmýz þey þu: count() metodunu kullanarak, sayaç deðiþkeninin içindeki her bir harfin, kelime deðiþkeninin içinde kaç kez geçtiðini buluyoruz. Bu döngünün nasýl çalýþtýðýný daha iyi anlayabilmek için, isterseniz bu döngüyü þu þekilde sadeleþtirebilirsiniz:
+
+for harf in sayaç:
+print(harf, kelime, kelime.count(harf))
+
+Gördüðünüz gibi, sayaç deðiþkeni içindeki herbir harfin kelime adlý karakter dizisi içinde kaç kez geçtiðini tek tek sorguladýk.
+
+Yukarýdaki örneklerde count() metodunun iki farklý parametre aldýðýný gördük. Bu metot bunlarýn dýþýnda üçüncü bir parametre daha alýr. Bu üçüncü parametre ikinci parametreyle iliþkilidir. Dilerseniz bu iliþkiyi bir örnek üzerinde görelim:
+
+>>> kardiz = "python programlama dili"
+>>> kardiz.count("a")
+
+3
+
+>>> kardiz.count("a", 15)
+
+2
+
+Bu örneklerden anladýðýmýza göre, “python programlama dili” adlý karakter dizisi içinde toplam 3 adet ‘a’ harfi var. Eðer bu karakter dizisi içindeki ‘a’ harflerini karakter dizisinin en baþýndan itibaren deðil de, 15. karakterden itibaren saymaya baþlarsak bu durumda 2 adet ‘a’ harfi buluyoruz. Þimdi de þu örneðe bakalým:
+
+>>> kardiz.count("a", 15, 17)
+
+1
+
+Burada, 15. karakter ile 17. karakter arasýnda kalan ‘a’ harflerini saymýþ olduk. 15. karakter ile 17. karakter arasýnda toplam 1 adet ‘a’ harfi olduðu için de Python bize 1 sonucunu verdi. Bütün bu örneklerden sonra count() metoduna iliþkin olarak þöyle bir tespitte bulunabiliriz:
+
+count() metodu bir karakter dizisi içinde belli bir karakterin kaç kez geçtiðini sorgulamamýzý saðlar. Örneðin bu metodu count("a") þeklinde kullanýrsak Python bize karakter dizisi içindeki bütün “a” harflerinin sayýsýný verecektir. Eðer bu metoda 2. ve 3. parametreleri de verirsek, sorgulama iþlemi karakter dizisinin belli bir kýsmýnda gerçekleþtirilecektir. Örneðin count("a", 4, 7) gibi bir kullaným, bize karakter dizisinin 4. ve 7. karakterleri arasýnda kalan “a” harflerinin sayýsýný verecektir.
+
+Böylece bir metodu daha ayrýntýlý bir þekilde incelemiþ olduk. Artýk baþka bir metot incelemeye geçebiliriz.
+
+
+index(), rindex()
+
+Bu bölümün baþýnda karakter dizilerinin dilimlenme özelliðinden söz ederken, karakter dizisi içindeki her harfin bir sýrasý olduðunu söylemiþtik. Örneðin “python” adlý karakter dizisinde ‘p’ harfinin sýrasý 0‘dýr. Ayný þekilde ‘n’ harfinin sýrasý ise 5‘tir. Karakterlerin, bir karakter dizisi içinde hangi sýrada bulunduðunu öðrenmek için index() adlý bir metottan yararlanabiliriz. Örneðin:
+
+>>> kardiz = "python"
+>>> kardiz.index("p")
+
+0
+
+>>> kardiz.index("n")
+
+5
+
+Eðer sýrasýný sorguladýðýmýz karakter, o karakter dizisi içinde bulunmuyorsa, bu durumda Python bize bir hata mesajý gösterir:
+
+>>> kardiz.index("z")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: substring not found
+
+Bu metodun özelliði, sorguladýðýmýz karakterin, karakter dizisi içinde geçtiði ilk konumu vermesidir. Yani örneðin:
+
+>>> kardiz = "adana"
+>>> kardiz.index("a")
+
+0
+
+“adana” adlý karakter dizisi içinde 3 adet ‘a’ harfi var. Ancak biz index() metodu yardýmýyla “adana” karakter dizisi içindeki ‘a’ harfinin konumunu sorgularsak, Python bize ‘a’ harfinin geçtiði ilk konumu, yani 0. konumu, bildirecektir. Halbuki “adana” karakter dizisi içinde 2. ve 4. sýralarda da birer ‘a’ harfi var. Ancak index() metodu 0. konumdaki ‘a’ harfini gördükten sonra karakter dizisinin geri kalanýna bakmaz.
+
+index() metodunu biz yukarýda tek bir parametre ile birlikte kullandýk. Bu parametre, karakter dizisi içinde konumunu öðrenmek istediðimiz karakteri gösteriyor. Ama bu metot aslýnda toplam 3 parametre alýr. Þu örnekleri dikkatlice inceleyelim:
+
+>>> kardiz = "adana"
+>>> kardiz.index("a")
+
+0
+
+Burada normal bir þekilde index() metodunu tek bir parametre ile birlikte kullandýk. Böylece Python bize ‘a’ harfinin karakter dizisi içinde ilk olarak hangi sýrada bulunduðunu gösterdi. Bir de þu örneðe bakalým:
+
+>>> kardiz.index("a", 1)
+
+2
+
+Gördüðünüz gibi, bu defa index() metoduna ikinci bir parametre daha verdik. index() metodunun ikinci parametresi, Python’ýn aramaya kaçýncý sýradan itibaren baþlayacaðýný gösteriyor. Biz yukarýdaki örnekte Python’ýn aramaya 1. sýradan itibaren baþlamasýný istedik. Bu yüzden Python 0. sýradaki “a” karakterini es geçti ve 2. sýrada bulunan “a” karakterini gördü. Bir de þuna bakalým:
+
+>>> kardiz.index("a", 3)
+
+Bu defa Python’ýn aramaya 3. sýradan baþlamasýný istedik. Dolayýsýyla Python 0. ve 2. sýralardaki ‘a’ harflerini görmezden gelip bize 4. sýradaki ‘a’ harfinin sýrasýný bildirdi.
+
+Gelelim index() metodunun 3. parametresine... Dilerseniz 3. parametrenin ne iþe yaradýðýný bir örnek üzerinde gösterelim:
+
+>>> kardiz = "adana"
+>>> kardiz.index("a", 1, 3)
+
+2
+
+Hatýrlarsanýz, bundan önce count() adlý bir metot öðrenmiþtik. O metot da toplam 3 parametre alýyordu. count() metodunda kullandýðýmýz 2. ve 3. parametrelerin görevlerini hatýrlýyor olmalýsýnýz. Ýþte index() metodunun 2. ve 3. parametreleri de aynen count() metodundaki gibi çalýþýr. Yani Python’ýn sorgulama iþlemini hangi sýra aralýklarýndan gerçekleþtireceðini gösterir. Mesela yukarýdaki örnekte biz “adana” karakter dizisinin 1. ve 3. sýralarý arasýndaki ‘a’ harflerini sorguladýk. Yani yukarýdaki örnekte Python ‘a’ harfini aramaya 1. konumdan baþladý ve aramayý 3. konumda kesti. Böylece “adana” karakter dizisinin 2. sýrasýndaki ‘a’ harfinin konumunu bize bildirdi.
+
+Gördüðünüz gibi, index() metodu bize aradýðýmýz karakterin yalnýzca ilk konumunu bildiriyor. Peki biz mesela “adana” karakter dizisi içindeki bütün ‘a’ harflerinin sýrasýný öðrenmek istersek ne yapacaðýz?
+
+Bu isteðimizi yerine getirmek için karakter dizisinin her bir sýrasýný tek tek kontrol etmemiz yeterli olacaktýr. Yani þöyle bir þey yazmamýz gerekiyor:
+
+kardiz = "adana"
+
+print(kardiz.index("a", 0))
+print(kardiz.index("a", 1))
+print(kardiz.index("a", 2))
+print(kardiz.index("a", 3))
+print(kardiz.index("a", 4))
+
+Buradaki mantýðý anladýðýnýzý sanýyorum. Bildiðiniz gibi, index() metodunun ikinci parametresi sayesinde karakter dizisi içinde aradýðýmýz bir karakteri hangi konumdan itibaren arayacaðýmýzý belirleyebiliyoruz. Örneðin yukarýdaki kodlarda gördüðünüz ilk print() satýrý ‘a’ karakterini 0. konumdan itibaren arýyor ve gördüðü ilk ‘a’ harfinin konumunu raporluyor. Ýkinci print() satýrý ‘a’ karakterini 1. konumdan itibaren arýyor ve gördüðü ilk ‘a’ harfinin konumunu raporluyor. Bu süreç karakter dizisinin sonuna ulaþýlýncaya kadar devam ediyor. Böylece karakter dizisi içinde geçen bütün ‘a’ harflerinin konumunu elde etmiþ oluyoruz.
+
+Elbette yukarýdaki kodlarý, sadece iþin mantýðýný anlamanýzý saðlamak için bu þekilde verdik. Tahmin edebileceðiniz gibi, yukarýdaki kod yazýmý son derece verimsiz bir yoldur. Ayrýca gördüðünüz gibi, yukarýdaki kodlar sadece 5 karakter uzunluðundaki karakter dizileri için geçerlidir. Halbuki programlamada esas alýnmasý gereken yöntem, kodlarýnýzý olabildiðince genel amaçlý tutup, farklý durumlarda da çalýþabilmesini saðlamaktýr. Dolayýsýyla yukarýdaki mantýðý þu þekilde kodlara dökmek çok daha akýllýca bir yol olacaktýr:
+
+kardiz = "adana"
+
+for i in range(len(kardiz)):
+print(kardiz.index("a", i))
+
+Gördüðünüz gibi, yukarýdaki kodlar yardýmýyla, bir önceki verimsiz kodlarý hem kýsalttýk, hem de daha geniþ kapsamlý bir hale getirdik. Hatta yukarýdaki kodlarý þöyle yazarsanýz karakter dizisi ve bu karakter dizisi içinde aranacak karakteri kullanýcýdan da alabilirsiniz:
+
+kardiz = input("Metin girin: ")
+aranacak = input("Aradýðýnýz harf: ")
+
+for i in range(len(kardiz)):
+print(kardiz.index(aranacak, i))
+
+Bu kodlarda bazý problemler dikkatinizi çekmiþ olmalý. Mesela, aranan karakter dizisinin bulunduðu konumlar çýktýda tekrar ediyor. Örneðin, kullanýcýnýn “adana” karakter dizisi içinde ‘a’ harfini aramak istediðini varsayarsak programýmýz þöyle bir çýktý veriyor:
+
+0
+2
+2
+4
+4
+
+Burada 2 ve 4 sayýlarýnýn birden fazla geçtiðini görüyoruz. Bunu engellemek için þöyle bir kod yazabiliriz:
+
+kardiz = input("Metin girin: ")
+aranacak = input("Aradýðýnýz harf: ")
+
+for i in range(len(kardiz)):
+if i == kardiz.index(aranacak, i):
+print(i)
+
+Bu kodlarla yaptýðýmýz þey þu: Öncelikle karakter dizisinin uzunluðunu gösteren sayý aralýðý üzerinde bir for döngüsü kuruyoruz. Kullanýcýnýn burada yine “adana” karakter dizisini girdiðini varsayarsak, “adana” karakter dizisinin uzunluðu 5 olduðu için for döngümüz þöyle görünecektir:
+
+for i in range(5):
+...
+
+Daha sonra for döngüsü içinde tanýmladýðýmýz i deðiþkeninin deðerinin, karakter dizisi içinde aradýðýmýz karakterin konumu ile eþleþip eþleþmediðini kontrol ediyoruz ve deðeri eþleþen sayýlarý print() fonksiyonunu kullanarak ekrana döküyoruz.
+
+Eðer bu kodlar ilk bakýþta gözünüze anlaþýlmaz göründüyse bu kodlarý bir de þu þekilde yazarak arka planda neler olup bittiðini daha net görebilirsiniz:
+
+kardiz = input("Metin girin: ")
+aranacak = input("Aradýðýnýz harf: ")
+
+for i in range(len(kardiz)):
+print("i'nin deðeri: ", i)
+if i == kardiz.index(aranacak, i):
+print("%s. sýrada 1 adet %s harfi bulunuyor" %(i, aranacak))
+else:
+print("%s. sýrada %s harfi bulunmuyor" %(i, aranacak))
+
+Gördüðünüz gibi index() metodu bir karakter dizisi içindeki karakterleri ararken karakter dizisini soldan saða doðru okuyor. Python’da bu iþlemin tersi de mümkündür. Yani isterseniz Python’ýn, karakter dizisini soldan saða doðru deðil de, saðdan sola doðru okumasýný da saðlayabilirsiniz. Bu iþ için rindex() adlý bir metottan yararlanacaðýz. Bu metot her yönden index() metoduyla aynýdýr. index() ve rindex() metotlarýnýn birbirinden tek farký, index() metodunun karakter dizilerini soldan saða, rindex() metodunun ise saðdan sola doðru okumasýdýr. Hemen bir örnekle durumu açýklamaya çalýþalým:
+
+>>> kardiz = "adana"
+>>> kardiz.index("a")
+
+0
+
+>>> kardiz.rindex("a")
+
+4
+
+Bu iki örnek, index() ve rindex() metotlarý arasýndaki farký gayet net bir þekilde ortaya koyuyor. index() metodu, karakter dizisini soldan saða doðru okuduðu için “adana” karakter dizisinin 0. sýrasýndaki ‘a’ harfini yakaladý. rindex() metodu ise karakter dizisini saðdan sola doðru okuduðu için “adana” karakter dizisinin 4. sýrasýndaki ‘a’ harfini yakaladý...
+
+
+find, rfind()
+
+find() ve rfind() metotlarý tamamen index() ve rindex() metotlarýna benzer. find() ve rfind() metotlarýnýn görevi de bir karakter dizisi içindeki bir karakterin konumunu sorgulamaktýr:
+
+>>> kardiz = "adana"
+>>> kardiz.find("a")
+
+0
+
+>>> kardiz.rfind("a")
+
+4
+
+Peki index()/rindex() ve find()/rfind() metotlarý arasýnda ne fark var?
+
+index() ve rindex() metotlarý karakter dizisi içindeki karakteri sorgularken, eðer o karakteri bulamazsa bir ValueError hatasý verir:
+
+>>> kardiz = "adana"
+>>> kardiz.index("z")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: substring not found
+
+Ama find() ve rfind() metotlarý böyle bir durumda -1 çýktýsý verir:
+
+>>> kardiz = "adana"
+>>> kardiz.find("z")
+
+-1
+
+Bu iki metot çifti arasýndaki tek fark budur.
+
+
+center()
+
+Center kelimesi Ýngilizce’de ‘orta, merkez, ortalamak’ gibi anlamlara gelir. Bu anlama uygun olarak, center() metodunu karakter dizilerini ortalamak için kullanabilirsiniz. Örneðin:
+
+for metot in dir(""):
+print(metot.center(15))
+
+Gördüðünüz gibi center() metodu bir adet parametre alýyor. Bu parametre, karakter dizisine uygulanacak ortalama iþleminin geniþliðini gösteriyor. Bu parametrenin nasýl bir etki ortaya çýkardýðýný daha iyi anlayabilmek için isterseniz bir iki basit örnek verelim:
+
+>>> kardiz = "python"
+
+Burada 6 karakterlik bir karakter dizisi tanýmladýk. Þimdi dikkatlice bakýn:
+
+>>> kardiz.center(1)
+
+'python'
+
+Burada ise center() metoduna parametre olarak 1 sayýsýný verdik. Ancak bu parametre karakter dizimizinin uzunluðundan az olduðu için çýktý üzerinde herhangi bir etkisi olmadý. Bir de þuna bakalým:
+
+>>> kardiz.center(10)
+
+'  python  '
+
+Çýktýdaki týrnak iþaretlerine bakarak, ‘python’ kelimesinin ortalandýðýný görebilirsiniz. Buradan þu sonucu çýkarýyoruz: center() metoduna verilen geniþlik parametresi aslýnda bir karakter dizisinin toplam kaç karakterlik bir yer kaplayacaðýný gösteriyor. Mesela yukarýdaki örnekte bu metoda verdiðimiz 10 sayýsý "python" adlý karakter dizisinin toplam 10 karakterlik bir yer kaplayacaðýný gösteriyor. Kaplanacak yere karakter dizisinin kendisi de dahildir. Yani 10 olarak belirttiðimiz boþluk adedinin 6‘sý ‘python’ kelimesinin kendisi tarafýndan iþgal ediliyor. Geriye kalan 4 boþlukluk mesafe ise karakter dizisinin sol ve sað tarafýna paylaþtýrýlýyor.
+
+center() metodunun karakter dizileri üzerindeki etkisini daha net olarak görmek için þöyle bir döngü kurabilirsiniz:
+
+>>> for i in range(1, 20):
+... kardiz.center(i)
+...
+'python'
+'python'
+'python'
+'python'
+'python'
+'python'
+' python'
+' python '
+'  python '
+'  python  '
+'   python  '
+'   python   '
+'    python   '
+'    python    '
+'     python    '
+'     python     '
+'      python     '
+'      python      '
+'       python      '
+
+Bu örnekte, karakter dizisinin her adýmda nasýl ortaya doðru kaydýðý açýkça görülüyor. Dikkat ederseniz çýktýnýn ilk altý satýrýnda karakter dizisinin konumu deðiþmiyor. Ancak center() metoduna verilen parametrenin deðeri karakter dizisinin uzunluðunu aþtýðý anda karakter dizisi ortaya doðru ilerlemeye baþlýyor.
+
+center() metodu genellikle yukarýdaki gösterdiðimiz þekilde tek bir parametre ile birlikte kullanýlýr. Ancak bu metot aslýnda bir parametre daha alýr. Þu örneði inceleyelim:
+
+>>> kardiz = "elma"
+>>> kardiz.center(10, "-")
+
+'---elma---'
+
+Gördüðünüz gibi, center() metoduna verdiðimiz “-“ deðeri sayesinde “elma” karakteri ortalanýrken, sað ve sol taraftaki boþluklara da “-“ karakteri eklenmiþ oldu.
+
+
+rjust(), ljust()
+
+Bu metotlar da týpký bir önceki center() metodu gibi karakter dizilerini hizalama vazifesi görür. rjust() metodu bir karakter dizisini saða yaslarken, ljust() metodu karakter dizisini sola yaslar. Mesela þu iki kod parçasýnýn çýktýlarýný inceleyin:
+
+>>> for i in dir(""):
+... print(i.ljust(20))
+
+>>> for i in dir(""):
+... print(i.rjust(20))
+
+ljust() metodu bize özellikle karakter dizilerinin hizalama iþlemlerinde yardýmcý oluyor. Bu metot yardýmýyla karakter dizilerimizi sola yaslayýp, sað tarafýna da istediðimiz karakterleri yerleþtirebiliyoruz. Hemen bir örnek verelim:
+
+>>> kardiz = "tel no"
+>>> kardiz.ljust(10, ".")
+
+'tel no....'
+
+Burada olan þey þu: ljust() metodu, kendisine verilen 10 parametresinin etkisiyle 10 karakterlik bir alan oluþturuyor. Bu 10 karakterlik alanýn içine önce 6 karakterlik yer kaplayan “tel no” ifadesini, geri kalan 4 karakterlik boþluða ise ”.” karakterini yerleþtiriyor. Eðer ljust() metoduna verilen sayý karakter dizisinin uzunluðundan az yer tutarsa, karakter dizisinin görünüþünde herhangi bir deðiþiklik olmayacaktýr. Örneðin yukarýdaki örnekte karakter dizimizin uzunluðu 6. Dolayýsýyla kodumuzu þu þekilde yazarsak bir sonuç elde edemeyiz:
+
+>>> kardiz.ljust(5, ".")
+
+'tel no'
+
+Gördüðünüz gibi, karakter dizisinde herhangi bir deðiþiklik olmadý. ljust() metoduna verdiðimiz ”.” karakterini görebilmemiz için, verdiðimiz sayý cinsli parametrenin en az karakter dizisinin boyunun bir fazlasý olmasý gerekir:
+
+>>> kardiz.ljust(7, ".")
+
+'tel no.'
+
+ljust() metoduyla ilgili basit bir örnek daha verelim:
+
+>>> for i in "elma", "armut", "patlýcan":
+... i.ljust(10, ".")
+...
+'elma......'
+'armut.....'
+'patlýcan..'
+
+Gördüðünüz gibi, bu metot karakter dizilerini þýk bir biçimde sola hizalamamýza yardýmcý oluyor.
+
+rjust() metodu ise, ljust() metodunun yaptýðý iþin tam tersini yapar. Yani karakter dizilerini sola deðil saða yaslar:
+
+>>> for i in "elma", "armut", "patlýcan":
+... i.rjust(10, ".")
+...
+'......elma'
+'.....armut'
+'..patlýcan'
+
+ljust() ve rjust() metotlarý, kullanýcýlarýnýza göstereceðiniz çýktýlarýn düzgün görünmesini saðlamak açýsýndan oldukça faydalýdýr.
+
+
+zfill()
+
+Bu metot kimi yerlerde iþimizi epey kolaylaþtýrabilir. zfill() metodu yardýmýyla karakter dizilerinin sol tarafýna istediðimiz sayýda sýfýr ekleyebiliriz:
+
+>>> a = "12"
+>>> a.zfill(3)
+
+'012'
+
+Bu metodu þöyle bir iþ için kullanabilirsiniz:
+
+>>> for i in range(11):
+... print(str(i).zfill(2))
+00
+01
+02
+03
+04
+05
+06
+07
+08
+09
+10
+
+Burada str() fonksiyonunu kullanarak, range() fonksiyonundan elde ettiðimiz sayýlarý birer karakter dizisine çevirdiðimize dikkat edin. Çünkü zfill() karakter dizilerinin bir metodudur. Sayýlarýn deðil...
+
+
+partition(), rpartition()
+
+Bu metot yardýmýyla bir karakter dizisini belli bir ölçüte göre üçe bölüyoruz. Örneðin:
+
+>>> a = "istanbul"
+>>> a.partition("an")
+
+('ist', 'an', 'bul')
+
+Eðer partition() metoduna parantez içinde verdiðimiz ölçüt karakter dizisi içinde bulunmuyorsa þu sonuçla karþýlaþýrýz:
+
+>>> a = "istanbul"
+>>> a.partition("h")
+
+('istanbul', '', '')
+
+Gelelim rpartition() metoduna... Bu metot da partition() metodu ile ayný iþi yapar, ama yöntemi biraz farklýdýr. partition() metodu karakter dizilerini soldan saða doðru okur. rpartition() metodu ise saðdan sola doðru. Peki bu durumun ne gibi bir sonucu vardýr? Hemen görelim:
+
+>>> b = "istihza"
+>>> b.partition("i")
+
+('', 'i', 'stihza')
+
+Gördüðünüz gibi, partition() metodu karakter dizisini ilk ‘i’ harfinden böldü. Þimdi ayný iþlemi rpartition() metodu ile yapalým:
+
+>>> b.rpartition("i")
+
+('ist', 'i', 'hza')
+
+rpartition() metodu ise, karakter dizisini saðdan sola doðru okuduðu için ilk ‘i’ harfinden deðil, son ‘i’ harfinden böldü karakter dizisini.
+
+partition() ve rpartition() metotlarý, ölçütün karakter dizisi içinde bulunmadýðý durumlarda da farklý tepkiler verir:
+
+>>> b.partition("g")
+
+('istihza', '', '')
+
+>>> b.rpartition("g")
+
+('', '', 'istihza')
+
+Gördüðünüz gibi, partition() metodu boþ karakter dizilerini saða doðru yaslarken, rpartition() metodu sola doðru yasladý.
+
+
+encode()
+
+Bu metot yardýmýyla karakter dizilerimizi istediðimiz kodlama sistemine göre kodlayabiliriz. Python 3.x’te varsayýlan karakter kodlamasý utf-8‘dir. Eðer istersek þu karakter dizisini utf-8 yerine cp1254 ile kodlayabiliriz:
+
+>>> "çilek".encode("cp1254")
+
+
+expandtabs()
+
+Bu metot yardýmýyla bir karakter dizisi içindeki sekme boþluklarýný geniþletebiliyoruz. Örneðin:
+
+>>> a = "elma\tbir\tmeyvedir"
+>>> a.expandtabs(10)
+
+'elma   bir     meyvedir'
+
+Böylece bir metot grubunu daha geride býrakmýþ olduk. Gördüðünüz gibi bazý metotlar sýklýkla kullanýlabilme potansiyeli taþýrken, bazý metotlar pek öyle sýk kullanýlacakmýþ gibi görünmüyor...
+
+Sonraki bölümde metotlarý incelemeye devam edeceðiz.

@@ -1,0 +1,31 @@
+
+Tek Öðeli bir Demet Tanýmlamak
+
+Tek öðeli bir karakter dizisi oluþturabilmek için þu yolu izliyorduk hatýrlarsanýz:
+
+>>> kardiz = 'A'
+
+Bu tek öðeli bir karakter dizisidir. Bir de tek öðeli bir liste tanýmlayalým:
+
+>>> liste = ['ahmet']
+
+Bu da tek öðeli bir listedir. Gelin bir de tek öðeli bir demet oluþturmaya çalýþalým:
+
+>>> demet = ('ahmet')
+
+Bu þekilde tek öðeli bir demet oluþturduðunuzu zannediyorsunuz, ama aslýnda oluþturduðunuz þey basit bir karakter dizisinden ibaret! Gelin kontrol edelim:
+
+>>> type(demet)
+
+<class 'str'>
+
+Python programlama dilinde tek öðeli bir demet oluþturma iþlemi biraz ‘tuhaf’týr. Eðer tek öðeye sahip bir demet oluþturacaksak þöyle bir þey yazmalýyýz:
+
+>>> demet = ('ahmet',)
+
+veya:
+
+>>> demet = 'ahmet',
+
+Gördüðünüz gibi, tek öðeli bir demet tanýmlarken, o tek öðenin yanýna bir tane virgül iþareti yerleþtiriyoruz. Böylece demet tanýmlamak isterken, yanlýþlýkla alelade bir þekilde ‘ahmet’ adlý bir karakter dizisini ‘demet’ adlý bir deðiþkene atamamýþ oluyoruz...
+
