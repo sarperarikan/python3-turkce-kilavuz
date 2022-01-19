@@ -1,0 +1,40 @@
+
+Üçüncü Þahýs Paketleri
+
+Python’da standart paketlerin dýþýnda bir de üçüncü þahýs paketleri vardýr. Bunlar Python geliþtiricileri haricindeki kiþilerce yazýlýp kullanýmýmýza sunulmuþ araçlardýr. Bu paketler, standart paketlerin aksine dilin bir parçasý olmadýðýndan, bu paketleri kullanabilmek için öncelikle bunlarý bilgisayarýmýza kurmamýz gerekir. Mesela django, kivy ve ilk derslerimizden birinde bahsettiðimiz cx_freeze birer üçüncü þahýs paketidir.
+
+Peki bu üçüncü þahýs paketlerini nereden bulabiliriz?
+
+Hatýrlarsanýz Modüller konusunu iþlerken ‘Üçüncü Þahýs Modüllerinden’ de söz etmiþtik. Üçüncü þahýs modüllerini bulabileceðimiz baþlýca kaynaðýn https://pypi.python.org/pypi adresi olduðunu ve buradan 60.000’in üzerinde üçüncü þahýs Python modülüne ulaþabileceðimizi de ifade etmiþtik. Ýþte orada bahsettiðimiz üçüncü þahýs modülleri, aslýnda birer pakettir. Zira üçüncü þahýs modülleri çoðunlukla birer paket biçiminde sunulur. Dolayýsýyla üçüncü þahýs modüllerine nereden ve nasýl ulaþýyorsak, üçüncü þahýs paketlerine de ayný yerden ve ayný þekilde ulaþabiliriz. Ayrýca bir üçüncü þahýs paketini kurmadan önce, ilgili paketin yardým dosyalarýný veya websitesini incelemekte de fayda var. Çünkü bazý üçüncü þahýs modüllerini kurabilmek için birtakým özel gereksinimleri yerine getirmeniz gerekiyor olabilir. Bu tür bilgilere de ancak ilgili paketi geliþtiren kiþi veya ekibin websitesinden ulaþabilirsiniz.
+
+Bir üçüncü þahýs paketinin https://pypi.python.org/pypi adresindeki adýný öðrendikten sonra, bu paketi þu komutla kurabilirsiniz:
+
+pip3 install paket_adý
+
+Mesela restructuredText biçimli metin dosyalarýndan þýk ve kullanýþlý belgeler üretmemizi saðlayan sphinx paketi PyPI sitesinde bulunuyor. Dolayýsýyla bu paketi kurmak için þu komutu verebiliriz:
+
+pip3 install sphinx
+
+Elbette, eðer bir GNU/Linux daðýtýmý kullanýyorsanýz, bu komutu root haklarýyla çalýþtýrmanýz gerektiðini söylememe herhalde gerek yok:
+
+sudo pip3 install sphinx
+
+pip3 adlý yazýlým, sphinx paketinin bütün dosyalarýný PyPI sitesinden çekip otomatik olarak bilgisayarýmýza kuracaktýr.
+
+Bir üçüncü þahýs paketini pip3 komutuyla kurmak yerine elle kurmayý da tercih edebilirsiniz. Örnek olarak bu defa django paketini alalým. Bu paketin en son sürümünü https://github.com/django/django/archive/master.tar.gz adresinden indirebilirsiniz. Ayrýca arzu ederseniz https://www.djangoproject.com adresine uðrayarak bu modülün resmi websitesine de gözatabilirsiniz.
+
+Ýndirdiðiniz tar.gz uzantýlý sýkýþtýrýlmýþ dosyayý açtýðýnýzda karþýsýnýza pek çok dizin ve bu dizinlerin içinde de pek çok Python dosyasý çýkacak. Django, geniþ kapsamlý üçüncü þahýs paketlerine güzel bir örnektir.
+
+Django paketini açýp django-master adlý dizinin içine girdiðinizde, orada setup.py adlý bir dosya göreceksiniz. Ýþte pip3 komutu yerine, bu dosyayý kullanarak da bu paketi bilgisayarýmýza kurabiliriz.
+
+Dikkatlice bakýn:
+
+python3 setup.py install
+
+Bu komutta iki önemli unsur var. Birincisi, komutu çalýþtýrdýðýmýz Python sürümü. Unutmayýn, bir Python paketini hangi Python sürümü ile kurarsanýz, o paketi o sürüm ile kullanabilirsiniz. Ben yukarýdaki komutta, sizin Python sürümünüzü baþlatan komutun python3 olduðunu varsaydým. Eðer siz Python’ý baþlatmak için veya baþka Python programlarýný çalýþtýrmak için farklý bir komut kullanýyorsanýz, setup.py dosyasýný da o komutla çalýþtýracaksýnýz. Neticede setup.py de sýradan bir Python programýdýr. Bu programý install parametresi ile birlikte çalýþtýrarak Django paketini sisteminize kurmuþ oluyorsunuz. Kurulum tamamlandýktan sonra, kurulumun baþarýlý olup olmadýðýný test etmek için Python komut satýrýnda þu komutu verin:
+
+>>> import django
+
+Eðer herhangi bir çýktý verilmeden alt satýra geçildiyse, bir üçüncü þahýs paketi olan django‘yu bilgisayarýnýza baþarýyla kurmuþsunuz demektir. Bu üçüncü þahýs modülünü nasýl kullanacaðýnýzý öðrenmek için internet üzerindeki sayýsýz makaleden ve kitaptan yararlanabilirsiniz.
+
+

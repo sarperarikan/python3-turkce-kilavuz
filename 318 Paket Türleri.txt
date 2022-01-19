@@ -1,0 +1,13 @@
+
+Paket Türleri
+
+Týpký fonksiyonlarda ve modüllerde olduðu gibi, paketlerin de türleri vardýr. Paketleri, kaynaklarýna göre ikiye ayýrabiliriz:
+
+
+Standart Paketler 
+Üçüncü Þahýs Paketleri 
+
+Bu türlerin ne anlama geldiðini isimlerine bakarak rahatlýkla anlayabiliyoruz. Ama gelin isterseniz bunlarý kýsaca gözden geçirelim.
+
+Öncelikle standart paketlerden baþlayalým.
+

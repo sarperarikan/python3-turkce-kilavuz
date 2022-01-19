@@ -1,0 +1,51 @@
+
+Yeni Bir Veritabaný Oluþturmak
+
+Bu bölümde sqlite adlý bir modül aracýlýðýyla yeni bir veritabanýný nasýl oluþturacaðýmýzý öðreneceðiz.
+
+Yukarýda sqlite adlý bir modülden söz ettik. Dolayýsýyla, tahmin edebileceðiniz gibi, bu modülü kullanabilmek için öncelikle modülü içe aktarmamýz gerekiyor. Bu bölümün baþýnda da söylediðimiz gibi, Sqlite, Python’ýn 2.5 sürümünden bu yana dilin bir parçasýdýr:
+
+>>> import sqlite3
+
+Python’da Sqlite veritabaný sistemine ait modül ‘sqlite3’ adýný taþýr. Bu yüzden, bu modülü içe aktarmak için import sqlite3 ifadesini kullanmamýz gerekiyor. Eðer bu isim size çok uzun geliyorsa veya modül adýnda sayýlarýn ve harflerin birlikte bulunmasý nedeniyle hem sayý hem de harf girmeyi bir angarya olarak görüyorsanýz elbette sqlite3 modülünü farklý bir adla da içe aktarabileceðinizi biliyorsunuz. Mesela:
+
+>>> import sqlite3 as sql
+
+Veya:
+
+>>> import sqlite3 as lite
+
+Böylece sqlite3 modülünü ‘sql’ veya ‘lite’ adýyla içe aktarmýþ olduk. Ancak ben konuyu anlatýrken, okur açýsýndan kafa karýþýklýðýna sebep olmamak için, modülü import sqlite3 þeklinde içe aktarmýþýz gibi davranacaðým.
+
+Gelelim bu modül yardýmýyla nasýl veritabaný oluþturulacaðýna... Bunun için sqlite3 modülünün connect() adlý metodundan yararlanacaðýz. Bu metodu þu þekilde kullanýyoruz:
+
+>>> vt = sqlite3.connect('veritabaný_adý')
+
+connect() metoduna verdiðimiz varitabaný_adý adlý argüman, kullanacaðýmýz veritabanýnýn adýdýr. Eðer belirtilen isimde bir veritabaný sistemde bulunmuyorsa o adla yeni bir veritabaný oluþturulacaktýr. Mesela:
+
+>>> vt = sqlite3.connect('deneme.sqlite')
+
+Eðer bu komutu verdiðiniz dizin içinde deneme.sqlite adlý bir veritabaný yoksa, bu ada sahip bir veritabaný oluþturulacaktýr.
+
+Bu arada, biz veritabaný dosyasýnýn uzantýsý olarak .sqlite‘ý seçtik. Ama eðer siz isterseniz kendinize uygun baþka bir uzantý da belirleyebilirsiniz. Veritabaný dosyasýnýn uzantýsýnýn ne olmasý gerektiði konusunda kesin kurallar bulunmaz. .sqlite uzantýsýnýn yerine, .sqlite3, .db veya .db3 gibi uzantýlarý tercih edenler de vardýr. Hatta eðer siz isterseniz veritabanýnýzýn uzantýsýný .osman olarak dahi belirleyebilirsiniz. Bu konuda herhangi bir kýsýtlama bulunmaz.
+
+Yukarýdaki örnekte deneme.sqlite adýný verdiðimiz bir veritabaný dosyasýna, connect() metodu yardýmýyla baðlandýk. Elbette isteseydik connect() metoduna argüman olarak tam dosya yolu da verebilirdik:
+
+>>> import sqlite3
+>>> vt = sqlite3.connect('/home/istihza/test.sqlite') #GNU/Linux
+>>> vt = sqlite3.connect('c:/users/fozgul/desktop/test.sqlite') #Windows
+
+Bu komut yardýmýyla sabit disk üzerinde bir Sqlite veritabaný dosyasý oluþturmuþ oluyoruz. Ancak isterseniz sqlite3 ile geçici bir veritabaný da oluþturabilirsiniz:
+
+>>> vt = sqlite3.connect(':memory:')
+
+Oluþturduðunuz bu geçici veritabaný sabit disk üzerinde deðil RAM (bellek) üzerinde çalýþýr. Veritabanýný kapattýðýnýz anda da bu geçici veritabaný silinir. Eðer arzu ederseniz, RAM üzerinde deðil, disk üzerinde de geçici veritabanlarý oluþturabilirsiniz. Bunun için de þöyle bir komut kullanýyoruz:
+
+>>> vt = sqlite3.connect('')
+
+Gördüðünüz gibi, disk üzerinde geçici bir veritabaný oluþturmak için boþ bir karakter dizisi kullandýk. Týpký :memory: kullanýmýnda olduðu gibi, boþ karakter dizisiyle oluþturulan geçici veritabanlarý da veritabaný baðlantýsýnýn kesilmesiyle birlikte ortadan kalkacaktýr.
+
+Geçici veritabaný oluþturmak, özellikle çeþitli testler veya denemeler yaptýðýnýz durumlarda iþinize yarar. Sonradan nasýl olsa sileceðiniz, sýrf test amaçlý tuttuðunuz bir veritabanýný disk üzerinde oluþturmak yerine RAM üzerinde oluþturmayý tercih edebilirsiniz. Ayrýca, geçici veritabanlarý sayesinde, yazdýðýnýz bir kodu test ederken bir hatayla karþýlaþýrsanýz sorunun veritabaný içinde varolan verilerden deðil, yazdýðýnýz koddan kaynaklandýðýndan da emin olabilirsiniz. Çünkü, dediðimiz gibi, programýn her yeniden çalýþýþýnda veritabaný baþtan oluþturulacaktýr.
+
+Dikkatinizi çekmek istediðim bir nokta da þudur: Gördüðünüz gibi Sqlite, veritabanýný o anda içinde bulunduðunuz dizin içinde oluþturuyor. Mesela MySQL kullanýyor olsaydýnýz, oluþturulan veritabanlarýnýn önceden tanýmlanmýþ bir dizin içine atýldýðýný görecektiniz. Örneðin GNU/Linux sistemlerinde, MySQL veritabanlarý /var/lib/mysql gibi bir dizinin içinde tutulur.
+

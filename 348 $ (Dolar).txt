@@ -1,0 +1,40 @@
+
+$ (Dolar)
+
+Bir önceki bölümde “^” iþaretinin, karakter dizilerinin en baþýna demir attýðýný söylemiþtik. Yani bu sembol arama/eþleþtirme iþleminin karakter dizisinin en baþýndan baþlamasýný saðlýyordu. Bu sembol bir bakýma karakter dizilerinin nasýl baþlayacaðýný belirliyordu. Ýþte þimdi göreceðimiz “dolar iþareti” de ($) karakter dizilerinin nasýl biteceðini belirliyor. Bu soyut açýklamalarý somut bir örnekle baðlayalým:
+
+>>> liste = ["at", "katký", "fakat", "atký", "rahat",
+... "mat", "yat", "sat", "satýlýk", "katýlým"]
+
+Gördüðünüz gibi, elimizde on öðelik bir liste var. Diyelim ki biz bu listeden, “at” hecesiyle biten kelimeleri ayýklamak istiyoruz:
+
+>>> for i in liste:
+... if re.search("at$",i):
+... print(i)
+...
+at
+fakat
+rahat
+mat
+yat
+sat
+
+Burada “$” metakarakteri sayesinde aradýðýmýz karakter dizisinin nasýl bitmesi gerektiðini belirleyebildik. Eðer biz “at” ile baþlayan bütün öðeleri ayýklamak isteseydik ne yapmamýz gerektiðini biliyorsunuz:
+
+>>> for i in liste:
+... if re.search("^at",i):
+... print(i)
+...
+at
+atký
+
+Gördüðünüz gibi, “^” iþareti bir karakter dizisinin nasýl baþlayacaðýný belirlerken, “$” iþareti ayný karakter dizisinin nasýl biteceðini belirliyor. Hatta istersek bu metakarakterleri birlikte de kullanabiliriz:
+
+>>> for i in liste:
+... if re.search("^at$",i):
+... print(i)
+...
+at
+
+Sonuç tam da beklediðimiz gibi oldu. Verdiðimiz düzenli ifade kalýbý ile “at” ile baþlayan ve ayný þekilde biten karakter dizilerini ayýkladýk. Bu da bize “at” çýktýsýný verdi.
+

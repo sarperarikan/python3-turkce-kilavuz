@@ -1,0 +1,30 @@
+
+fetchmany() Metodu
+
+Bu metot, bir veritabanýndan seçtiðiniz verilerin istediðiniz kadarýný alabilmenize imkan tanýr. Dikkatlice bakýn:
+
+>>> im.fetchmany(5)
+
+[('AS 3.0 ÝLE SUNUCU PROGRAMLAMA', 'Engin Yöðen', '24,00 TL'),
+ ('HACKING INTERFACE', 'Hamza Elbahadýr', '25,00 TL'),
+ ('JAVA VE JAVA TEKNOLOJÝLERÝ', 'Tevfik Kýzýlören', '45,00 TL'),
+ ('XML VE ÝLERÝ XML TEKNOLOJÝLERÝ', 'Musa Çiçek', '24,50 TL'),
+ ('GRAFÝK&ANÝMASYON', 'Anonim', '18,50 TL')]
+
+Gördüðünüz gibi, beþ öðeden oluþan bir liste elde ettik.
+
+Böylece bir veritabanýndan seçilen verileri almanýn farklý yöntemlerini öðrenmiþ olduk. Bu metotlarýn dýþýnda, eðer arzu ederseniz for döngüsünden yararlanarak da veri çekebilirsiniz. Bunun için herhangi bir metot kullanmanýza gerek yok:
+
+>>> for veri in im:
+... print(veri)
+
+Gördüðünüz gibi, for döngüsünü doðrudan imleç üzerinde kuruyoruz.
+
+Eðer amacýnýz alýnacak verilerin sayýsýný sýnýrlamaksa yine for döngüsünden ve fetchone() metodundan birlikte yararlanabilirsiniz:
+
+>>> for i in range(5):
+... print(im.fetchone())
+
+Biraz sonra veri süzmeyi öðrendiðimizde, bir veritabanýndan veri seçip almanýn daha verimli yollarýný göreceðiz.
+
+

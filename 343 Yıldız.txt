@@ -1,0 +1,51 @@
+
+* (Yýldýz)
+
+Bu metakarakter, kendinden önce gelen bir düzenli ifade kalýbýný sýfýr veya daha fazla sayýda eþleþtirir. Tanýmý biraz karýþýk olsa da örnek yardýmýyla bunu da anlayacaðýz:
+
+>>> yeniliste = ["st", "sat", "saat", "saaat", "falanca"]
+>>> for i in yeniliste:
+... if re.match("sa*t",i):
+... print(i)
+
+Burada “*” sembolü kendinden önce gelen “a” karakterini sýfýr veya daha fazla sayýda eþleþtiriyor. Yani mesela “st” içinde sýfýr adet “a” karakteri var. Dolayýsýyla bu karakter yazdýðýmýz düzenli ifadeyle eþleþiyor. “sat” içinde bir adet “a” karakteri var. Dolayýsýyla bu da eþleþiyor. “saat” ve “saaat” karakter dizilerinde sýrasýyla iki ve üç adet “a” karakteri var. Tabii ki bunlar da yazdýðýmýz düzenli ifadeyle eþleþiyor. Listemizin en son öðesi olan “falanca”da da ilk hecede bir adet “a” karakteri var. Ama bu öðedeki sorun, bunun “s” harfiyle baþlamamasý. Çünkü biz yazdýðýmýz düzenli ifadede, aradýðýmýz þeyin “s” harfi ile baþlamasýný, sýfýr veya daha fazla sayýda “a” karakteri ile devam etmesini ve ardýndan da “t” harfinin gelmesini istemiþtik. “falanca” öðesi bu koþullarý karþýlamadýðý için süzgecimizin dýþýnda kaldý.
+
+Burada dikkat edeceðimiz nokta, “*” metakarakterinin kendinden önce gelen yalnýzca bir karakterle ilgileniyor olmasý... Yani bizim örneðimizde “*” sembolü sadece “a” harfinin sýfýr veya daha fazla sayýda bulunup bulunmamasýyla ilgileniyor. Bu ilgi, en baþtaki “s” harfini kapsamýyor. “s” harfinin de sýfýr veya daha fazla sayýda eþleþmesini istersek düzenli ifademizi “s*a*t” veya “[sa]*t” biçiminde yazmamýz gerekir... Bu iki seçenek içinde “[sa]*t” þeklindeki yazýmý tercih etmenizi tavsiye ederim. Burada, daha önce öðrendiðimiz “[ ]” metakarakteri yardýmýyla “sa” harflerini nasýl grupladýðýmýza dikkat edin...
+
+Þimdi ”.” metakarakterini anlatýrken istediðimiz sonucu alamadýðýmýz listeye dönelim. Orada “ahmet” ve “mehmet” öðelerini listeden baþarýyla ayýklayamamýþtýk. O durumda bizim baþarýsýz olmamýza neden olan kullaným þöyleydi:
+
+>>> liste = ["ahmet", "kemal", "kamil", "mehmet"]
+>>> for i in liste:
+... if re.match(".met",i):
+... print(i)
+
+Ama artýk elimizde “*” gibi bir araç olduðuna göre þimdi istediðimiz þeyi yapabiliriz. Yapmamýz gereken tek þey ”.” sembolünden sonra “*” sembolünü getirmek:
+
+>>> for i in liste:
+... if re.match(".*met", i):
+... print(i)
+
+Gördüðünüz gibi “ahmet” ve “mehmet” öðelerini bu kez baþarýyla ayýkladýk. Bunu yapmamýzý saðlayan þey de “*” adlý metakarakter oldu... Burada Python’a þu emri verdik: “Bana kelime baþýnda herhangi bir karakteri (”.” sembolü herhangi bir karakterin yerini tutuyor) sýfýr veya daha fazla sayýda içeren ve sonu da “met” ile biten bütün öðeleri ver!”
+
+Bir önceki örneðimizde “a” harfinin sýfýr veya daha fazla sayýda bulunup bulunmamasýyla ilgilenmiþtik. Bu son örneðimizde ise herhangi bir harfin/karakterin sýfýr veya daha fazla sayýda bulunup bulunmamasýyla ilgilendik. Dolayýsýyla ”.*met” þeklinde yazdýðýmýz düzenli ifade, “ahmet”, “mehmet”, “muhammet”, “ismet”, “kýsmet” ve hatta tek baþýna “met” gibi bütün öðeleri kapsayacaktýr. Kýsaca ifade etmek gerekirse, sonu “met” ile biten her þey (“met” ifadesinin kendisi de dâhil olmak üzere) kapsama alanýmýza girecektir. Bunu günlük hayatta nerede kullanabileceðinizi hemen anlamýþ olmalýsýnýz. Mesela bir dizin içindeki bütün “mp3” dosyalarýný bu düzenli ifade yardýmýyla listeleyebiliriz:
+
+>>> import os
+>>> import re
+>>> dizin = os.listdir(os.getcwd())
+>>> for i in dizin:
+... if re.match(".*mp3",i):
+... print(i)
+
+match() metodunu anlattýðýmýz bölümde bu metodun bir karakter dizisinin yalnýzca baþlangýcýyla ilgilendiðini söylemiþtik. Mesela o bölümde verdiðimiz þu örneði hatýrlýyorsunuzdur:
+
+>>> a = "python güçlü bir dildir"
+>>> re.match("güçlü", a)
+
+Bu örnekte Python bize çýktý olarak “None” deðerini vermiþti. Yani herhangi bir eþleþme bulamamýþtý. Çünkü dediðimiz gibi, match() metodu bir karakter dizisinin yalnýzca en baþýna bakar. Ama geldiðimiz þu noktada artýk bu kýsýtlamayý nasýl kaldýracaðýnýzý biliyorsunuz:
+
+>>> re.match(".*güçlü", a)
+
+Ama match() metodunu bu þekilde zorlamak yerine performans açýsýndan en doðru yol bu tür iþler için search() metodunu kullanmak olacaktýr.
+
+Bunu da geçtiðimize göre artýk yeni bir metakarakteri incelemeye baþlayabiliriz.
+

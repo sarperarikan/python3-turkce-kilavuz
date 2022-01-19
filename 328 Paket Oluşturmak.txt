@@ -1,0 +1,52 @@
+
+Paket Oluþturmak
+
+Bir Python programý yazdýðýnýzý düþünün. Programýnýzý ilk yazmaya baþlarken doðal olarak programýnýz tek bir dosyadan oluþacaktýr. Ancak elbette programýnýz büyüdükçe, bütün kodlarý tek bir dosyaya sýkýþtýrmak yerine, farklý iþlevleri farklý dosyalar içinde tanýmlamanýn daha mantýklý olduðunu farkedeceksiniz. Mesela programýn grafik arayüz kýsmýný bir dosyada tanýmlarken, düðmelere, menülere baðlayacaðýnýz iþlevleri bir baþka dosyada tanýmlamak isteyebilirsiniz. Programýnýzýn gerçekleþtirdiði iþlemleri küçük, mantýklý birimlere bölüp bunlarý farklý modüllere taþýmanýz, programýnýzý çok daha rahat bir þekilde idare etmenizi saðlayacaktýr. Yani, yazdýðýnýz programý birkaç modüle bölüp, bunlarý bir paket yapýsý içinde sunmanýz hem kendiniz açýsýndan, hem de kodlarýnýzý okuyan baþkalarý açýsýndan iþleri epey kolaylaþtýracaktýr.
+
+Python’da bir paket oluþturmak son derece kolaydýr. Program kodlarýný içeren .py dosyasýný bir klasör içine koyduðunuz anda, o klasörün adýný taþýyan bir paket meydana getirmiþ olursunuz.
+
+Mesela bir sipariþ takip programý yazdýðýmýzý düþünelim. Ana klasörümüzün adýný siparistakip koyalým. Bu klasör içinde de komut.py, veritabani.py ve siparis.py adlý modüller olsun. Yani þöyle bir dosya-dizin yapýsý oluþturalým:
+
++ siparistakip
+|__ siparis.py
+|__ komut.py
+|__ veritabani.py
+
+Ýþte bu þekilde basit bir dosya-dizin yapýsý oluþturduðumuzda, siparistakip adlý bir Python paketi meydana getirmiþ oluyoruz1.
+
+Gelin isterseniz, siparistakip dizininin gerçekten bir paket olduðunu teyit edelim.
+
+Öncelikle paketimizi içe aktaralým. Bunun için siparistakip dizininin bulunduðu klasörde þu komutu verelim:
+
+>>> import siparistakip
+
+Þimdi paket içeriðini kontrol edelim:
+
+>>> dir(siparistakip)
+
+['__doc__', '__loader__', '__name__',
+ '__package__', '__path__', '__spec__']
+
+Gördüðünüz gibi, listede __path__ adlý bir nitelik var. Bu niteliðin yalnýzca paketlerde bulunduðunu biliyorsunuz. Demek ki siparistakip gerçekten de bir Python paketiymiþ. Bunun dýþýnda, listede gördüðünüz __package__ niteliðini kullanarak da bir modülün paket olup olmadýðýný kontrol edebilirsiniz:
+
+>>> siparistakip.__package__
+
+'siparistakip'
+
+Eðer test ettiðimiz modül bir paketse, __package__ niteliði bize bir paket adý verecektir. Yok eðer test ettiðimiz modül bir paket deðil de alelade bir modülse, __package__ niteliði boþ bir karakter dizisi döndürecektir. Mesela os modülünün bir paket olmadýðýný biliyoruz:
+
+>>> import os
+>>> os.__package__
+
+''
+
+Gördüðünüz gibi, bu modülün __package__ niteliði boþ bir karakter dizisi. Ayrýca bu modül bir paket olmadýðý için, __path__ adlý bir nitelik de barýndýrmýyor:
+
+>>> os.__path__
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute '__path__'
+
+Dolayýsýyla bütün iþaretler, gerçekten de siparistakip adlý bir paket oluþturduðumuzu gösteriyor...
+

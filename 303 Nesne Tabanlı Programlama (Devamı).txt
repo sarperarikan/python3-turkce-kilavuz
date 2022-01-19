@@ -1,0 +1,7 @@
+
+Nesne Tabanlý Programlama (Devamý)
+
+Nesne tabanlý programlamaya giriþ yaparken, bu programlama yaklaþýmýnýn oldukça geniþ kapsamlý bir konu olduðunu söylemiþtik. Bu bölümde de bu geniþ kapsamlý konunun ileri düzey yönlerini ele almaya devam edeceðiz.
+
+Ayrýca bu bölümü bitirdikten sonra, nesne tabanlý programlamanýn yoðun bir þekilde kullanýldýðý ‘grafik arayüz tasarlama’ konusundan da söz edebileceðiz. Böylece, bu zamana kadar gördüðümüz komut satýrý uygulamalarýndan sonra, bu bölümle birlikte ilk kez düðmeli-menülü modern arayüzleri tanýmaya da baþlayacaðýz. Üstelik grafik arayüzlü programlar üzerinde çalýþmak, nesne tabanlý programlamanýn özellikle karmaþýk yönlerini çok daha kolay ve net bir þekilde anlamamýzý da saðlayacak.
+

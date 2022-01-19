@@ -1,0 +1,37 @@
+
+Parametreli Sorgular
+
+Þu ana kadar verdiðimiz örneklerde, veritabanýna girilecek verileri tek tek elle yerine koyduk. Örneðin:
+
+im.execute("""INSERT INTO personel VALUES
+    ('Fýrat', 'Özgül', 'Adana')""")
+
+Ancak çoðu durumda veritabanýna girilecek veriler harici kaynaklardan gelecektir. Basit bir örnek verelim:
+
+import sqlite3
+
+with sqlite3.connect('vt.sqlite') as vt:
+im = vt.cursor()
+
+veriler = [('Fýrat', 'Özgül', 'Adana'),
+('Ahmet', 'Söz', 'Bolvadin'),
+('Veli', 'Göz', 'Ýskenderun'),
+('Mehmet', 'Öz', 'Kilis')]
+
+im.execute("""CREATE TABLE IF NOT EXISTS personel
+        (isim, soyisim, memleket)""")
+
+for veri in veriler:
+im.execute("""INSERT INTO personel VALUES
+            (?, ?, ?)""", veri)
+
+vt.commit()
+
+Burada veritabanýna iþlenecek veriler, veriler adlý bir deðiþkenden geliyor. Bu deðiþken içindeki verileri veritabanýna nasýl yerleþtirdiðimize dikkat edin:
+
+for veri in veriler:
+im.execute("""INSERT INTO personel VALUES
+        (?, ?, ?)""", veri)
+
+Ayrýca her bir sütunun (‘isim’, ‘soyisim’, ‘memleket’) altýna gelecek her bir deðer için (mesela sýrasýyla ‘Fýrat’, ‘Özgül’, ‘Adana’) bir adet ‘?’ iþareti yerleþtirdiðimizi de gözden kaçýrmayýn.
+

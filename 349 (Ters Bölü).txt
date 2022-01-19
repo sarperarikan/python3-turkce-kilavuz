@@ -1,0 +1,26 @@
+
+\ (Ters Bölü)
+
+Bu iþaret bildiðimiz “kaçýþ dizisi”dir... Peki burada ne iþi var? Þimdiye kadar öðrendiðimiz konulardan gördüðünüz gibi, Python’daki düzenli ifadeler açýsýndan özel anlam taþýyan bir takým semboller/metakarakterler var. Bunlar kendileriyle eþleþmiyorlar. Yani bir karakter dizisi içinde bu sembolleri arýyorsak eðer, bunlarýn taþýdýklarý özel anlam yüzünden bu sembolleri ayýklamak hemencecik mümkün olmayacaktýr. Yani mesela biz “$” sembolünü arýyor olsak, bunu Python’a nasýl anlatacaðýz? Çünkü bu sembolü yazdýðýmýz zaman Python bunu farklý algýlýyor. Lafý dolandýrmadan hemen bir örnek verelim...
+
+Diyelim ki elimizde þöyle bir liste var:
+
+>>> liste = ["10$", "25€", "20$", "10TL", "25£"]
+
+Amacýmýz bu listedeki dolarlý deðerleri ayýklamaksa ne yapacaðýz? Þunu deneyelim önce:
+
+>>> for i in liste:
+... if re.match("[0-9]+$",i):
+... print(i)
+
+Python “$” iþaretinin özel anlamýndan dolayý, bizim sayýyla biten bir karakter dizisi aradýðýmýzý zannedecek, dolayýsýyla da herhangi bir çýktý vermeyecektir. Çünkü listemizde sayýyla biten bir karakter dizisi yok... Peki biz ne yapacaðýz? Ýþte bu noktada “\” metakarakteri devreye girecek... Hemen bakalým:
+
+>>> for i in liste:
+... if re.match("[0-9]+\$",i):
+... print(i)
+...
+10$
+20$
+
+Gördüðünüz gibi, “\” sembolünü kullanarak “$” iþaretinin özel anlamýndan kaçtýk... Bu metakarakteri de kýsaca anlattýðýmýza göre yeni bir metakarakterle yolumuza devam edebiliriz...
+

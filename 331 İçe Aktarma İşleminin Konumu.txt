@@ -1,0 +1,67 @@
+
+Ýçe Aktarma Ýþleminin Konumu
+
+Python’da herhangi bir içe aktarma iþlemi yapacaðýmýz zaman, unutmamamýz gereken en önemli konu, Python’ýn bütün içe aktarma iþlemlerini tek bir konumdan gerçekleþtirdiði gerçeðidir. Bunun ne demek olduðunu anlamak için çok basit bir örnek verelim.
+
+Yukarýda þöyle bir paket yapýsý oluþturmuþtuk:
+
++ paket
+|__ modul1.py
+|__ modul2.py
+|__ modul3.py
++ altdizin
+|__altmodul1.py
+|__altmodul2.py
+
+Burada altmodul2.py dosyasýnýn içine þunu yazalým:
+
+import altmodul1
+
+Yani bu dosya ile ayný dizinde bulunan altmodul1.py dosyasýný, altmodul2.py dosyasý içinden bir modül olarak içe aktaralým.
+
+Þimdi, daha önce yaptýðýmýz gibi, paket adlý dizinin bulunduðu klasörde bir etkileþimli kabuk oturumu açalým ve þu komutu yazalým:
+
+>>> from paket.altdizin import altmodul2
+
+Bu komut bize þöyle bir hata mesajý verecek:
+
+ImportError: No module named 'altmodul1'
+
+Bu hatanýn sebebi, Python’ýn altmodul1 adlý modülü bulamýyor olmasýdýr. Halbuki bu modül, altmodul2 ile ayný dizinde bulunuyor. O halde acaba Python bu modülü neden bulamýyor?
+
+Bunu anlamak için þöyle bir deneme yapalým:
+
+Þimdi altmodul1.py ve altmodul2.py dosyalarýnýn bulunduðu konumda bir etkileþimli kabuk oturumu baþlatýn ve þu komutu verin:
+
+>>> import altmodul2
+
+Gördüðünüz gibi, bu defa Python herhangi bir hata mesajý vermeden, impport altmodul1 komutuyla altmodul2.py dosyasý içinden çaðýrdýðýmýz altmodul1 modülünün içeriðini alabildi. Peki ama neden?
+
+Baþta da söylediðimiz gibi, Python bütün aktarma iþlemlerini tek bir konumdan yapar. Yani eðer siz bir modülü üst dizinden içe aktardýysanýz, o üst dizinin adý paket içindeki bütün aktarmalara önek olarak eklenecektir. Dolayýsýyla paket adlý dizinin bulunduðu konumdan altdizin içindeki altmodul2.py dosyasýný çaðýrdýðýnýzda, altmodul2.py içindeki import altmodul1 komutu, altmodul1.py dosyasýný bulamayacaktýr. Ama siz altmodul2.py dosyasýný kendi dizini içinden çaðýrdýðýnýzda, import altmodul1 komutu, ayný dizin içindeki altmodul1.py dosyasýný bulabilecektir.
+
+Bu okuduklarýnýz ilk bakýþta size çok karmaþýkmýþ gibi gelebilir, ama aslýnda biraz dikkat ederseniz bu sistemin hiç de öyle karmaþýk olmadýðýný, aksine son derece mantýklý olduðunu göreceksiniz.
+
+Durumu daha da netleþtirmek için þöyle bir þey yapalým:
+
+altmodul2.py dosyasýný açýp, import altmodul1 komutunu þöyle yazalým:
+
+from paket.altdizin import altmodul1
+
+Bu deðiþikliði kaydettikten sonra tekrar paket dizininin bulunduðu konumda bir oturum açýp þu komutu verelim:
+
+>>> from paket.altdizin import altmodul2
+
+Ýþte bu kez komutumuz baþarýyla çalýþtý ve altmodul1 modülünü bulabildi...
+
+Þimdi de altmodul1.py ve altmodul2.py dosyalarýnýn bulunduðu konuma tekrar dönüp burada yine bir etkileþimli kabuk oturumu baþlatalým ve daha önce verdiðimiz þu komutu tekrar verelim:
+
+>>> import altmodul2
+
+O da ne! Geçen sefer hatasýz çalýþan kod bu defa hata verdi:
+
+ImportError: No module named 'paket'
+
+Gördüðünüz gibi, modülü içe aktardýðýmýz konumdan ötürü Python bu kez de paket adlý paketi bulamýyor.
+
+Birazdan bütün bu sorunlarýn kesin çözümünü vereceðiz. Ama ondan önce baþka bir konudan söz edelim.
+

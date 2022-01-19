@@ -1,0 +1,47 @@
+
+findall() Metodu
+
+Python komut satýrýnda, yani etkileþimli kabukta, dir(re) yazdýðýmýz zaman aldýðýmýz listeye tekrar bakarsak orada bir de findall() adlý bir metodun olduðunu görürüz. Ýþte bu bölümde findall() adlý bu önemli metodu incelemeye çalýþacaðýz.
+
+Önce þöyle bir metin alalým elimize:
+
+metin = """Guido Van Rossum Python'ý geliþtirmeye 1990 yýlýnda baþlamýþ... Yani
+aslýnda Python için nispeten yeni bir dil denebilir. Ancak Python'un çok uzun
+bir geçmiþi olmasa da, bu dil öteki dillere kýyasla kolay olmasý, hýzlý olmasý,
+ayrý bir derleyici programa ihtiyaç duymamasý ve bunun gibi pek çok nedenden
+ötürü çoðu kimsenin gözdesi haline gelmiþtir. Ayrýca Google'ýn da Python'a özel
+bir önem ve deðer verdiðini, çok iyi derecede Python bilenlere iþ olanaðý
+sunduðunu da hemen söyleyelim. Mesela bundan kýsa bir süre önce Python'ýn
+yaratýcýsý Guido Van Rossum Google'de iþe baþladý..."""
+
+Bu metin içinde geçen bütün “Python” kelimelerini bulmak istiyoruz:
+
+print(re.findall("Python", metin))
+
+['Python', 'Python', 'Python', 'Python', 'Python', 'Python']
+
+Gördüðünüz gibi, metinde geçen bütün “Python” kelimelerini bir çýrpýda liste olarak aldýk. Ayný iþlemi search() metodunu kullanarak yapmak istersek yolu biraz uzatmamýz gerekir:
+
+>>> liste = metin.split()
+>>> for i in liste:
+... nesne = re.search("Python", i)
+... if nesne:
+... print(nesne.group())
+...
+Python
+Python
+Python
+Python
+Python
+Python
+
+Gördüðünüz gibi, metinde geçen bütün “Python” kelimelerini search() metodunu kullanarak bulmak için öncelikle “metin” adlý karakter dizisini, daha önce karakter dizilerini iþlerken gördüðümüz split() metodu yardýmýyla bir liste haline getiriyoruz. Ardýndan bu liste üzerinde bir for döngüsü kurarak search() ve group() metotlarýný kullanarak bütün “Python” kelimelerini ayýklýyoruz. Eðer karakter dizisini yukarýdaki þekilde listeye dönüþtürmezsek þöyle bir netice alýrýz:
+
+>>> nesne = re.search("Python", metin)
+>>> print(nesne.group())
+
+Python
+
+Bu þekilde metinde geçen sadece ilk “Python” kelimesini alabiliyoruz.
+
+

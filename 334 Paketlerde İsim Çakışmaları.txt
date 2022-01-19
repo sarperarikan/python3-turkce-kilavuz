@@ -1,0 +1,11 @@
+
+Paketlerde Ýsim Çakýþmalarý
+
+
+__init__.py Dosyasý
+
+Dipnotlarý:
+
+[1]Daha önce Python’ýn 2.x sürümlerini kullanmýþ olanlar, bu yapýnýn bir paket oluþturmak için yeterli olmadýðýný düþünebilir. Çünkü Python’ýn 2.x sürümlerinde bir paket oluþturabilmek için, siparistakip dizininin içinde __init__.py adlý bir dosya daha oluþturmamýz gerekiyordu. Ancak Python3’te bu zorunluluk ortadan kaldýrýldý. Eðer bu söylediðimiz þeyin ne anlama geldiðini bilmiyorsanýz, bu uyarýyý görmezden gelip yolunuza devam edebilirsiniz. 
+
+

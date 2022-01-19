@@ -1,0 +1,55 @@
+
+object Sýnýfý
+
+Biz buraya gelinceye kadar Python’da sýnýflarý iki farklý þekilde tanýmlayabileceðimizi öðrendik:
+
+class Deneme():
+pass
+
+veya:
+
+class Deneme:
+pass
+
+Sýnýf tanýmlarken parantez kullansak da olur kullanmasak da. Eðer miras alacaðýnýz bir sýnýf yoksa parantezsiz yazýmý tercih edebilir, parantezli yazým tarzýný ise baþka bir sýnýftan miras aldýðýnýz durumlar için saklayabilirsiniz:
+
+class AltSýnýf(TabanSýnýf):
+pass
+
+Ancak saðda solda incelediðiniz Python kodlarýnda bazen þöyle bir sýnýf tanýmlama þekli de görürseniz þaþýrmayýn:
+
+class Sýnýf(object):
+pass
+
+Python’ýn 3.x öncesi sürümlerinde sýnýflar yeni ve eski tip olmak üzere ikiye ayrýlýyordu. Bu sürümlerde eski tip sýnýflar þöyle tanýmlanýyordu:
+
+class Sýnýf:
+pass
+
+veya:
+
+class Sýnýf():
+pass
+
+Yeni tip sýnýflar ise þöyle:
+
+class Sýnýf(object):
+pass
+
+Yani eski tip sýnýflar öntanýmlý olarak herhangi bir taban sýnýftan miras almazken, yeni tip sýnýflarýn object adlý bir sýnýftan miras almasý gerekiyordu. Dolayýsýyla, tanýmladýðýnýz bir sýnýfta object sýnýfýný miras almadýðýnýzda, yeni tip sýnýflarla birlikte gelen özelliklerden yararlanamýyordunuz. Mesela önceki derslerde öðrendiðimiz @property bezeyicisi yeni tip sýnýflarla gelen bir özelliktir. Eðer Python 3 öncesi bir sürüm için kod yazýyorsanýz ve eðer @property bezeyicisini kullanmak istiyorsanýz tanýmladýðýnýz sýnýflarda açýk açýk object sýnýfýný miras almalýsýnýz.
+
+Python 3’te ise bütün sýnýflar yeni tip sýnýftýr. Dolayýsýyla object sýnýfýný miras alsanýz da almasanýz da, tanýmladýðýnýz bütün sýnýflar öntanýmlý olarak object sýnýfýný miras alacaktýr. Yani Python 3 açýsýndan þu üç tanýmlama arasýnda bir fark bulunmaz:
+
+class Sýnýf:
+pass
+
+class Sýnýf():
+pass
+
+class Sýnýf(object):
+pass
+
+Bunlarýn hepsi de Python 3 açýsýndan birer yeni tip sýnýftýr. Daha doðrusu Python 3’te bütün sýnýflar bir yeni tip sýnýf olduðu için, yukarýdaki sýnýf tanýmlamalarý hep ayný tipte sýnýflara iþaret eder. Python 2’de ise ilk iki tanýmlama eski tip sýnýflarý gösterirken, yalnýzca üçüncü tanýmlama yeni tip sýnýflarý gösterir.
+
+Geldik bir bölümün daha sonuna... Böylece miras almaya iliþkin temel konularý incelemiþ olduk. Bu bölümde öðrendiklerimiz sayesinde, etrafta gördüðümüz, miras alma mekanizmasýnýn kullanýldýðý kodlarýn çok büyük bir bölümünü anlayabilecek duruma geldik. Bu mekanizmaya iliþkin olarak öðrenmemiz gerekenlerin geri kalanýný da bir sonraki bölümde, grafik arayüz tasarýmý konusuyla birlikte ele alacaðýz.
+

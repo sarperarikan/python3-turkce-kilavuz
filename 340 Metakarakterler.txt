@@ -1,0 +1,61 @@
+
+Metakarakterler
+
+Þimdiye kadar düzenli ifadelerle ilgili olarak verdiðimiz örnekler sizi biraz þaþýrtmýþ olabilir. “Zor dediðin bunlar mýydý?” diye düþünmüþ olabilirsiniz. Haklýsýnýz, zira “zor” dediðim, buraya kadar olan kýsýmda verdiðim örneklerden ibaret deðildir. Buraya kadar olan bölümde verdiðim örnekler iþin en temel kýsmýný gözler önüne sermek içindi. Þimdiye kadar olan bölümde, mesela, “python” karakter dizisiyle eþleþtirme yapmak için “python” kelimesini kullandýk. Esasýnda bu, düzenli ifadelerin en temel özelliðidir. Yani “python” karakter dizisini bir düzenli ifade sayacak olursak (ki zaten öyledir), bu düzenli ifade en baþta kendisiyle eþleþecektir. Bu ne demek? Þöyle ki: Eðer aradýðýnýz þey “python” karakter dizisi ise, kullanmanýz gereken düzenli ifade de “python” olacaktýr.
+
+Diyoruz ki: “Düzenli ifadeler en baþta kendileriyle eþleþirler”. Buradan þu anlam çýkýyor: Demek ki bir de kendileriyle eþleþmeyen düzenli ifadeler var. Ýþte bu durum, Python’daki düzenli ifadelere kiþiliðini kazandýran þeydir. Biraz sonra ne demek istediðimizi daha açýk anlayacaksýnýz. Artýk gerçek anlamýyla düzenli ifadelere giriþ yapýyoruz!
+
+Öncelikle, elimizde aþaðýdaki gibi bir liste olduðunu varsayalým:
+
+>>> liste = ["özcan", "mehmet", "süleyman", "selim",
+... "kemal", "özkan", "esra", "dündar", "esin",
+... "esma", "özhan", "özlem"]
+
+Diyelim ki, biz bu liste içinden “özcan”, “özkan” ve “özhan” öðelerini ayýklamak/almak istiyoruz. Bunu yapabilmek için yeni bir bilgiye ihtiyacýmýz var: Metakarakterler.
+
+Metakarakterler; kabaca, programlama dilleri için özel anlam ifade eden sembollerdir. Örneðin daha önce gördüðümüz \n bir bakýma bir metakarakterdir. Çünkü \n sembolü Python için özel bir anlam taþýr. Python bu sembolü gördüðü yerde yeni bir satýra geçer. Yukarýda “kendisiyle eþleþmeyen karakterler” ifadesiyle kastettiðimiz þey de iþte bu metakarakterlerdir. Örneðin, “a” harfi yalnýzca kendisiyle eþleþir. Týpký “istihza” kelimesinin yalnýzca kendisiyle eþleþeceði gibi... Ama mesela \t ifadesi kendisiyle eþleþmez. Python bu iþareti gördüðü yerde sekme (tab) düðmesine basýlmýþ gibi tepki verecektir. Ýþte düzenli ifadelerde de buna benzer metakarakterlerden yararlanacaðýz. Düzenli ifadeler içinde de, özel anlam ifade eden pek çok sembol, yani metakarakter vardýr. Bu metakarakterlerden biri de “[ ]” sembolüdür. Þimdi yukarýda verdiðimiz listeden “özcan”, “özhan” ve “özkan” öðelerini bu sembolden yararlanarak nasýl ayýklayacaðýmýzý görelim:
+
+>>> re.search("öz[chk]an", liste)
+
+Bu kodu böyle yazmamamýz gerektiðini artýk biliyoruz. Aksi halde hata alýrýz. Çünkü daha önce de dediðimiz gibi, düzenli ifadeler karakter dizileri üzerinde iþlem yapabilir. Listeler üzerinde deðil. Dolayýsýyla komutumuzu þu þekilde vermemiz gerekiyor:
+
+>>> for i in liste:
+... nesne = re.search("öz[chk]an", i)
+... if nesne:
+... print(nesne.group())
+
+Ayný iþlemi þu þekilde de yapabiliriz:
+
+>>> for i in liste:
+... if re.search("öz[chk]an",i):
+... print(i)
+
+Ancak, bu örnekte pek belli olmasa da, son yazdýðýmýz kod her zaman istediðimiz sonucu vermez. Mesela listemiz þöyle olsaydý:
+
+>>> liste = ["özcan demir", "mehmet", "süleyman",
+... "selim", "kemal", "özkan nuri", "esra", "dündar",
+... "esin", "esma", "özhan kamil", "özlem"]
+
+Yukarýdaki kod bu liste üzerine uygulandýðýnda, sadece almak istediðimiz kýsým deðil, ilgisiz kýsýmlar da gelecektir.
+
+Gördüðünüz gibi, uygun kodlarý kullanarak, “özcan”, “özkan” ve “özhan” öðelerini listeden kolayca ayýkladýk. Bize bu imkâný veren þey ise “[ ]” adlý metakarakter oldu. Aslýnda “[ ]” metakarakterinin ne iþe yaradýðýný az çok anlamýþ olmalýsýnýz. Ama biz yine de þöyle bir bakalým bu metakaraktere:
+
+“[ ]” adlý metakarakter, yukarýda verdiðimiz listedeki “öz” ile baþlayýp, “c”, “h” veya “k” harflerinden herhangi biri ile devam eden ve “an” ile biten bütün öðeleri ayýklýyor. Gelin bununla ilgili bir örnek daha yapalým:
+
+>>> for i in liste:
+... nesne = re.search("es[mr]a",i)
+... if nesne:
+... print(nesne.group())
+
+Gördüðünüz gibi, “es” ile baþlayýp, “m” veya “r” harflerinden herhangi biriyle devam eden ve sonunda da “a” harfi bulunan bütün öðeleri ayýkladýk. Bu da bize “esma” ve “esra” çýktýlarýný verdi...
+
+Dediðimiz gibi, metakarakterler programlama dilleri için özel anlam ifade eden sembollerdir. “Normal” karakterlerden farklý olarak, metakarakterlerle karþýlaþan bir bilgisayar normalden farklý bir tepki verecektir. Yukarýda metakarakterlere örnek olarak “\n” ve “\t” kaçýþ dizilerini vermiþtik. Örneðin Python’da print(“\n”) gibi bir komut verdiðimizde, Python ekrana “\n” yazdýrmak yerine bir alt satýra geçecektir. Çünkü “\n” Python için özel bir anlam taþýmaktadýr. Düzenli ifadelerde de birtakým metakarakterlerin kullanýldýðýný öðrendik. Bu metakarakterler, düzenli ifadeleri düzenli ifade yapan þeydir. Bunlar olmadan düzenli ifadelerle yararlý bir iþ yapmak mümkün olmaz. Bu giriþ bölümünde düzenli ifadelerde kullanýlan metakarakterlere örnek olarak “[ ]” sembolünü verdik. Herhangi bir düzenli ifade içinde “[ ]” sembolünü gören Python, doðrudan doðruya bu sembolle eþleþen bir karakter dizisi aramak yerine, özel bir iþlem gerçekleþtirecektir. Yani “[ ]” sembolü kendisiyle eþleþmeyecektir...
+
+Python’da bulunan temel metakarakterleri topluca görelim:
+
+[ ] . \* + ? { } ^ $ | ( )
+
+Doðrudur, yukarýdaki karakterler, çizgi romanlardaki küfürlere benziyor. Endiþelenmeyin, biz bu metakarakterleri olabildiðince sindirilebilir hale getirmek için elimizden gelen çabayý göstereceðiz.
+
+Bu bölümde düzenli ifadelerin zor kýsmý olan metakarakterlere, okurlarýmýzý ürkütmeden, yumuþak bir giriþ yapmayý amaçladýk. Þimdi artýk metakarakterlerin temelini attýðýmýza göre üste kat çýkmaya baþlayabiliriz.
+

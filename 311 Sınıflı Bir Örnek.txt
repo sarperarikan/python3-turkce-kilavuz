@@ -1,0 +1,85 @@
+
+Sýnýflý Bir Örnek
+
+Bir önceki baþlýkta Tkinter’i kullanýlarak prosedürel bir kod yazdýk. Peki acaba yukarýdaki kodlarý nesne tabanlý olarak nasýl yazabiliriz?
+
+Dikkatlice bakýn:
+
+import tkinter as tk
+
+class Pencere(tk.Tk):
+def __init__(self):
+super().__init__()
+self.protocol('WM_DELETE_WINDOW', self.çýkýþ)
+
+self.etiket = tk.Label(text='Merhaba Zalim Dünya')
+self.etiket.pack()
+
+self.düðme = tk.Button(text='Çýk', command=self.çýkýþ)
+self.düðme.pack()
+
+def çýkýþ(self):
+self.etiket['text'] = 'Elveda zalim dünya...'
+self.düðme['text'] = 'Bekleyin...'
+self.düðme['state'] = 'disabled'
+self.after(2000, self.destroy)
+
+pencere = Pencere()
+pencere.mainloop()
+
+Bu kodlarda gördüðünüz bütün satýrlarý anlayacak kadar nesne tabanlý programlama bilgisine sahipsiniz. Ama gelin biz yine de bu kodlarý sizin için tek tek ve tane tane açýklayalým.
+
+Öncelikle tkinter modülünü tk adýyla içe aktarýyoruz:
+
+import tkinter as tk
+
+Daha sonra Pencere() adlý sýnýfýmýzý tanýmlamaya baþlýyoruz:
+
+class Pencere(tk.Tk):
+...
+
+Burada öncelikle Tk() sýnýfýný miras aldýðýmýza dikkat edin. Bu sayede bu sýnýfýn içindeki bütün nitelik ve metotlarý kendi uygulamamýz içinden çaðýrabileceðiz.
+
+Penceremiz oluþur oluþmaz pencere üzerinde bir etiket ile bir düðme olmasýný planlýyoruz. Pencere oluþur oluþmaz iþletilecek kodlarý tanýmlamak için bir __init__() metoduna ihtiyacýmýz olduðunu biliyorsunuz:
+
+class Pencere(tk.Tk):
+def __init__(self):
+...
+
+Ancak kendi __init__() metodumuzu tanýmlarken, Tk() sýnýfýnýn kendi __init__() metodundaki iþlemleri de gölgelemememiz lazým. Dolayýsýyla orijinal __init__() metodunu kendi __init__() metodumuza aktarmak için super() fonksiyonundan yararlanacaðýz:
+
+class Pencere(tk.Tk):
+def __init__(self):
+super().__init__()
+
+Artýk taban sýnýfýn __init__() metodunu kendi tanýmladýðýmýz alt sýnýfýn __init__() metodu içinden özelleþtirmeye baþlayabiliriz. Öncelikle þu satýrý yazýyoruz:
+
+self.protocol('WM_DELETE_WINDOW', self.çýkýþ)
+
+protocol() metodunun öntanýmlý davranýþý, pencerenin ‘X’ düðmesine basýldýðýnda programý sonlandýrmaktýr. Ýþte biz bu öntanýmlý davranýþý deðiþtirmek için protocol() metodunu içeren kodu tekrar tanýmlýyoruz ve ‘X’ düðmesine basýldýðýnda çýkýþ() fonksiyonunun çalýþmasýný saðlýyoruz.
+
+Daha sonra normal bir þekilde etiketimizi ve düðmemizi tanýmlýyoruz:
+
+self.etiket = tk.Label(text='Merhaba Zalim Dünya')
+self.etiket.pack()
+
+self.düðme = tk.Button(text='Çýk', command=self.çýkýþ)
+self.düðme.pack()
+
+Ýki farklý yerde atýfta bulunduðumuz çýkýþ() fonksiyonumuz ise þöyle:
+
+def çýkýþ(self):
+self.etiket['text'] = 'Elveda zalim dünya...'
+self.düðme['text'] = 'Bekleyin...'
+self.düðme['state'] = 'disabled'
+self.after(2000, self.destroy)
+
+Son olarak da þu kodlarý yazýp programýmýzý tamamlýyoruz:
+
+pencere = Pencere()
+pencere.mainloop()
+
+Elbette zevkler ve renkler tartýþýlmaz, ancak ben yukarýdaki kodlarý, prosedürel kodlara göre çok daha düzgün, düzenli, anlaþýlýr ve okunaklý bulduðumu, bu kodlara baktýðýmda, programý oluþturan parçalarýn prosedürel kodlara kýyasla daha yerli yerinde olduðunu düþündüðümü söylemeden de geçmeyeceðim...
+
+Eðer siz aksini düþünüyorsanýz sizi prosedürel yolu tercih etmekten alýkoyan hiçbir þeyin olmadýðýný da bilin. Ancak tabii ki bu, nesne tabanlý programlamadan kaçabileceðiniz anlamýna da gelmiyor! Unutmayýn, bu yaklaþýmý siz kullanmasanýz da baþkalarý kullanýyor.
+

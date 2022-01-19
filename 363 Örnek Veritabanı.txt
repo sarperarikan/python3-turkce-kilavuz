@@ -1,0 +1,10 @@
+
+Örnek Veritabaný
+
+Sqlite’ý öðrenirken, içinde örnek veriler barýndýran bir veritabanýnýn elimizin altýnda bulunmasý alýþtýrma yapabilmek açýsýndan faydalý olacaktýr. Bunun için http://www.istihza.com/denemeler/kitaplar.sqlite adresindeki örnek veritabanýný bilgisayarýnýza indirin. Veritabaný sorgu çalýþmalarýmýzý bu örnek veritabaný üzerinde gerçekleþtireceðiz.
+
+Þimdi mesela biraz önce indirip kurduðunuz Sqlitebrowser programýný çalýþtýrýn ve File > Open Database yolunu takip ederek bu kitaplar.sqlite adlý veritabaný dosyasýný açýn. Eðer Sqlitebrowser programýný Sqlite veritabaný dosyalarý ile iliþkilendirdiyseniz, kitaplar.sqlite dosyasý üzerine çift týkladýðýnýzda da bu veritabaný dosyasý otomatik olarak Sqlitebrowser programý ile açýlacaktýr. Ayrýca elbette veritabaný dosyasý üzerine sað týklayýp, ‘Birlikte aç...’ seçeneðini kullanarak da Sqlitebrowser programýný çalýþtýrmayý deneyebilirsiniz.
+
+Sqlitebrowser programýný çalýþtýrýp, kitaplar.sqlite dosyasýný da açtýktan sonra, program penceresi üzerindeki ‘Browse Data’ sekmesine týklayarak veritabanýnýn içinde ne tür verilerin olduðunu inceleyin. Gördüðünüz gibi, Sqlitebrowser programý, veritabaný içindeki verileri görselleþtirmek açýsýndan epey kolaylýk saðlýyor. Birazdan bu verilere Python aracýlýðýyla nasýl eriþebileceðimizi de öðreneceðiz.
+
+

@@ -1,0 +1,41 @@
+
+Baðýl Ýçe Aktarma
+
+Dediðimiz gibi, bir içe aktarma iþleminin baþarýlý olabilmesi, o içe aktarma iþleminin yapýldýðý konumun neresi olduðuna ve paket içinde bulunan öteki modüllerdeki içe aktarmalarýn nasýl yazýldýðýna baðlýdýr. Yani mesela normalde ayný konumda bulunan iki modül birbirini yalnýzca import modül_adý gibi bir komutla içe aktarabilecekken, eðer bu modüller üst dizinin bulunduðu konumdan çaðrýlýyorsa, içe aktarma baþarýsýz olabilir. Bunun bir örneðini yukarýda görmüþtük. altdizin içinde bulunan altmodul1.py dosyasýný, ayný dizindeki altmodul2.py dosyasýndan içe aktarmak için altmodul2.py dosyasýna import altmodul1 yazdýðýmýzda, ana paket dizininin bulunduðu konumdan altdizin içindeki altmodul2.py dosyasýný from paket.altdizin import altmodul2 gibi bir komut ile içe aktarma giriþimimiz baþarýsýzlýða uðruyordu. Python’ýn ilgili modülü bulabilmesini saðlamak için, altmodul2.py dosyasýna import altmodul1 yazmak yerine from paket.altdizin import altmodul1 yazmýþtýk. Ýþte ayný þeyi ‘baðýl içe aktarma’ (relative import) denen bir mekanizma yardýmýyla da gerçekleþtirebiliriz.
+
+Bu mekanizmada içe aktarma iþlemi, içe aktaran modülün bulunduðu konuma göre gerçekleþir. Bir örnek verelim...
+
+altmodul2.py dosyasýna import altmodul1 veya from paket.altdizin import altmodul1 yerine þunu yazalým:
+
+from . import altmodul1
+
+Burada from kelimesinden sonra gelen nokta (.), içe aktaran modülle ayný dizine atýfta bulunuyor. Yani bu þekilde altmodul2.py‘nin bulunduðu dizine atýfta bulunmuþ, böylece bu dizinde bulunan altmodul1 adlý modülü içe aktarabilmiþ olduk. paket dizininden, hatta altdizin dizininden yapýlacak içe aktarma iþlemleri bu komut sayesinde baþarýlý olacaktýr.
+
+Dediðimiz gibi, orada . iþareti, içe aktaran modülle ayný dizini temsil ediyor. Eðer oraya yan yana iki nokta (..) koyacak olursanýz, bir üst dizine atýfta bulunabilirsiniz. Mesela bir üst dizinde bulunan modul3.py dosyasýný altmodul2.py veya altmodul1.py dosyasýndan içe aktarmak isterseniz, bu dosyalarýn herhangi birine þu kodu yazabilirsiniz:
+
+from .. import modul3
+
+Üç nokta yan yana koyduðunuzda ise (...) iki üst dizine atýfta bulunmuþ olursunuz. Ancak bu þekilde paketin dýþýna çýkamayacaðýnýzý da unutmayýn. Yani mesela paket dizininin bulunduðu konuma göre bir üst dizinde bulunan, yani paket dýþýndaki falanca.py adlý bir modülü þu þekilde içe aktaramazsýnýz:
+
+from ... import falanca
+
+Ama tabii eðer paketinizin dizin yapýsý iki üst dizine çýkýlmasýna müsaade ediyorsa yukarýdaki komut çalýþacaktýr. Yani elinizdeki, aþaðýdakine benzer yapýda bir pakette:
+
++ paket
+|__ modul1.py
+|__ modul2.py
+|__ modul3.py
++ altdizin
+|__altmodul1.py
+|__altmodul2.py
++ altaltdizin
+|__altaltmodul1.py
+|__altaltmodul2.py
+
+altaltmodul1.py dosyasýnýn bulunduðu konumdan itibaren iki üst dizine çýkarak modul2.py dosyasýný içe aktarabilirsiniz:
+
+from ... import modul2
+
+Yukarýda gösterdiðimiz baðýl içe aktarma mekanizmasý, paket adý belirtmeden içe aktarma iþlemi gerçekleþtirmenizi saðlar. Yani bu mekanizma sayesinde from paketadi.modul import altmodul yerine from . import modul gibi bir kod yazarak, ayný dizin içinde veya üst dizinlerde bulunan modüllere atýfta bulunabilirsiniz.
+
+

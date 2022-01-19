@@ -1,0 +1,77 @@
+
+( ) (Parantez)
+
+Bu metakarakter yardýmýyla düzenli ifade kalýplarýný gruplayacaðýz. Bu metakarakter bizim bir karakter dizisinin istediðimiz kýsýmlarýný ayýklamamýzda çok büyük kolaylýklar saðlayacak.
+
+Diyelim ki biz http://www.istihza.com/py2/icindekiler_python.html adresindeki bütün baþlýklarý ve bu baþlýklara ait html dosyalarýný bir liste halinde almak istiyoruz. Bunun için þöyle bir þey yazabiliriz:
+
+import re
+from urllib.request import urlopen
+
+url = "http://belgeler.istihza.com/py3/index.html"
+f = urlopen(url)
+
+regex = 'href=".+html">.+</a>'
+
+for i in f:
+nesne = re.search(regex, str(i, 'utf-8'))
+if nesne:
+print(nesne.group())
+
+Burada yaptýðýmýz þey þu:
+
+Öncelikle “http://belgeler.istihza.com/py3/index.html” sayfasýný urllib modülü yardýmýyla açtýk. Amacýmýz bu sayfadaki baþlýklarý ve bu baþlýklara ait html dosyalarýný listelemek 
+Ardýndan, bütün sayfayý taramak için basit bir for döngüsü kurduk 
+Düzenli ifade kalýbýmýzý þöyle yazdýk: '<href=".+html">.+</a>' Çünkü bahsi geçen web sayfasýndaki html uzantýlý dosyalar bu þekilde gösteriliyor. Bu durumu, web tarayýcýnýzda http://belgeler.istihza.com/py3/index.html sayfasýný açýp sayfa kaynaðýný görüntüleyerek teyit edebilirsiniz. (Firefox’ta CTRL+U’ya basarak sayfa kaynaðýný görebilirsiniz) 
+Yazdýðýmýz düzenli ifade kalýbý içinde dikkatimizi çekmesi gereken bazý noktalar var: Kalýbýn “(.+html)” kýsmýnda geçen “+” metakarakteri kendisinden önce gelen düzenli ifadenin bir veya daha fazla sayýda tekrar eden eþleþmelerini buluyor. Burada “+” metakarakterinden önce gelen düzenli ifade, kendisi de bir metakarakter olan ”.” sembolü... Bu sembol bildiðiniz gibi, “herhangi bir karakter” anlamýna geliyor. Dolayýsýyla ”.+” ifadesi þu demek oluyor: “Bana bir veya daha fazla sayýda tekrar eden bütün karakterleri bul!” Dolayýsýyla burada “(.+html)” ifadesini birlikte düþünürsek, yazdýðýmýz þey þu anlama geliyor: “Bana ‘html’ ile biten bütün karakter dizilerini bul!” 
+“http://belgeler.istihza.com/py3/index.html” adresinin kaynaðýna baktýðýmýz zaman aradýðýmýz bilgilerin hep þu þekilde olduðunu görüyoruz: href=”kitap_hakkinda.html”>Bu Kitap Hakkxc4xb1nda</a> Dolayýsýyla aslýnda düzenli ifade kalýbýmýzý yazarken yaptýðýmýz þey, düzenli ifademizi kaynakta görünen þablona uydurmak... 
+Ayrýca çýktýdaki Türkçe karakterlerin düzgün görünmesi için de bayt dizilerini karakter dizisine dönüþtürürken ‘utf-8’ kodlamasýný kullandýk. 
+Yukarýda verdiðimiz kodlarý çalýþtýrdýðýmýz zaman aldýðýmýz çýktý þu þekilde oluyor:
+
+b'href="kitap_hakkinda.html">Bu Kitap Hakk\xc4\xb1nda</a>'
+b'href="python_hakkinda.html">Python Hakk\xc4\xb1nda</a>'
+...
+
+Hemen hemen amacýmýza ulaþtýk sayýlýr. Ama gördüðünüz gibi çýktýmýz biraz karmaþýk. Bunlarý istediðimiz gibi düzenleyebilsek iyi olurdu, deðil mi? Mesela bu çýktýlarý þu þekilde düzenleyebilmek hoþ olurdu:
+
+Baþlýk: ANA SAYFA; Baðlantý: index.html
+
+Ýþte bu bölümde göreceðimiz “( )” metakarakteri istediðimiz þeyi yapmada bize yardýmcý olacak.
+
+Dilerseniz en baþta verdiðimiz kodlara tekrar dönelim:
+
+import re
+from urllib.request import urlopen
+
+url = "http://belgeler.istihza.com/py3/index.html"
+f = urlopen(url)
+
+regex = 'href=".+html">.+</a>'
+
+for i in f:
+nesne = re.search(regex, str(i, 'utf-8'))
+if nesne:
+print(nesne.group())
+
+Þimdi bu kodlarda þu deðiþikliði yapýyoruz:
+
+import re
+from urllib.request import urlopen
+
+url = "http://belgeler.istihza.com/py3/index.html"
+f = urlopen(url)
+
+çýktý = "Baþlýk: {};\nBaðlantý: {}\n"
+regex = 'href="(.+html)">(.+)</a>'
+
+for i in f:
+nesne = re.search(regex, str(i, 'utf-8'))
+if nesne:
+print(çýktý.format(nesne.group(2),
+nesne.group(1)))
+
+Kodlarda yaptýðýmýz deðiþikliklere dikkat edin ve anlamaya çalýþýn. Bazý noktalar gözünüze karanlýk göründüyse hiç endiþe etmeyin, çünkü bir sonraki bölümde bütün karanlýk noktalarý tek tek açýklayacaðýz. Burada en azýndan, “( )” metakarakterini kullanarak düzenli ifadenin bazý bölümlerini nasýl grupladýðýmýza dikkat edin.
+
+Bu arada, elbette www.istihza.com sitesinde herhangi bir deðiþiklik olursa yukarýdaki kodlarýn istediðiniz çýktýyý vermeyeceðini bilmelisiniz. Çünkü yazdýðýmýz düzenli ifade istihza.com sitesinin sayfa yapýsýyla sýký sýkýya baðlantýlýdýr.
+
+

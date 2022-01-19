@@ -1,0 +1,9 @@
+
+Kendi Oluþturduðumuz Paketler
+
+Buraya kadar hep baþkalarýnýn yazdýðý, hazýr paketlerden söz ettik. Bu sayede bir Python paketinin yapý olarak neye benzediðini ve nasýl kullanýlacaðýný kabataslak da olsa anlamýþ olduk. Elbette biz sadece baþkalarýnýn yazdýðý paketleri kullanmayacaðýz. Bir de bizim kendi yazdýðýmýz Python paketleri olacak.
+
+Kendi oluþturduðumuz paketler, adý üzerinde, kendi kendimize yazýp meydana getirdiðimiz paketlerdir. Bu paketleri iyice geliþtirdikten ve baþkalarý için de yararlý olabilecek hale getirdikten sonra, istersek https://pypi.python.org/pypi adresindeki üçüncü þahýs paket deposuna yükleyebiliriz. Böylece kendi geliþtirdiðimiz paketler de, üçüncü þahýs Python paketleri arasýna girmiþ olur...
+
+Ýþte bu bölümde, bu tür paketleri nasýl yazacaðýmýzý ele alacaðýz.
+

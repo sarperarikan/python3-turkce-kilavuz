@@ -1,0 +1,43 @@
+
+fetchone() Metodu
+
+fetchone() metodu, bir veritabanýndan seçilen verilerin tek tek alýnabilmesine izin verir.
+
+Bu metodun nasýl kullanýlacaðýný ‘kitaplar.sqlite’ adlý örnek veritabanýmýz üzerinden inceleyelim:
+
+Önce veritabanýna baðlanalým:
+
+>>> import sqlite3
+>>> vt = sqlite3.connect('kitaplar.sqlite')
+>>> im = vt.cursor()
+
+Þimdi ‘kitaplar’ adlý tablodan bütün verileri seçelim:
+
+>>> im.execute("""SELECT * FROM kitaplar""")
+
+<sqlite3.Cursor object at 0x003C2D20>
+
+Artýk seçtiðimiz verileri tek tek almaya baþlayabiliriz:
+
+>>> im.fetchone()
+
+('UZMANLAR ÝÇÝN PHP', 'Mehmet Þamlý', '33,00 TL')
+
+Bir tane daha alalým:
+
+>>> im.fetchone()
+
+('ADOBE AÝR', 'Engin Yöðen', '28,00 TL')
+
+Ýki tane daha...
+
+>>> im.fetchone()
+
+('WEB TASARIM REHBERÝ', 'Mustafa Aydemir', '38,50 TL')
+
+>>> im.fetchone()
+
+('ORACLE 11g R2', 'Teoman Dinçel', '34,00 TL')
+
+fetchone()‘ýn gayet faydalý bir metot olduðu her halinden belli...
+

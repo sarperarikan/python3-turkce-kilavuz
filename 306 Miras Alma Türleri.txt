@@ -1,0 +1,246 @@
+
+Miras Alma Türleri
+
+Tahmin edebileceðiniz gibi, miras alma yalnýzca bir sýnýfýn parantezleri arasýna baþka bir sýnýfý yazarak ilgili sýnýfýn bütün nitelik ve metotlarýný kayýtsýz þartsýz devralmaktan ibaret deðildir. Bir sýnýf, muhtemelen, miras aldýðý nitelik ve metotlar üzerinde birtakým deðiþiklikler de yapmak isteyecektir. Esasýnda miras alma mekanizmasýnýn iþleyiþi bakýmýndan kabaca üç ihtimalden söz edebiliriz:
+
+Miras alýnan sýnýfýn bütün nitelik ve metotlarý alt sýnýfa olduðu gibi devredilir. 
+Miras alýnan sýnýfýn bazý nitelik ve metotlarý alt sýnýfta yeniden tanýmlanýr. 
+Miras alýnan sýnýfýn bazý nitelik ve metotlarý alt sýnýfta deðiþikliðe uðratýlýr. 
+Bu ihtimallerden ilkini zaten görmüþtük. Bir sýnýfýn parantezleri arasýna baþka bir sýnýfýn adýný yazdýktan sonra eðer alt sýnýfta herhangi bir deðiþiklik yapmazsak, taban sýnýftaki nitelik ve metotlar olduðu gibi alt sýnýflara aktarýlacaktýr.
+
+Mesela:
+
+class Asker(Oyuncu):
+pass
+
+Burada Asker() sýnýfý, miras aldýðý Oyuncu() sýnýfýnýn sanki bir kopyasý gibidir. Dolayýsýyla Oyuncu() sýnýfýnýn bütün nitelik ve metotlarýna Asker() sýnýfý altýndan da aynen eriþebiliriz.
+
+Yani yukarýdaki kod, Oyuncu() adlý sýnýfýn bütün nitelik ve metotlarýnýn Asker() sýnýfý tarafýndan miras alýnmasýný saðlar. Bu þekilde, Oyuncu() sýnýfý içinde hangi metot veya nitelik nasýl tanýmlanmýþsa, Asker() sýnýfýna da o þekilde devredilir.
+
+Taban sýnýfýmýzýn þu þekilde tanýmlandýðýný biliyoruz:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+Dolayýsýyla bu taban sýnýfta hangi nitelik ve metotlar hangi deðerlere sahipse aþaðýdaki Asker(), Ýþçi() ve Yönetici() sýnýflarý da o deðerlere sahip olacaktýr:
+
+class Asker(Oyuncu):
+pass
+
+class Ýþçi(Oyuncu):
+pass
+
+class Yönetici(Oyuncu):
+pass
+
+Ancak, dediðimiz gibi, miras almada tek seçenek bütün metot ve nitelikleri olduðu gibi alt sýnýflara aktarmak deðildir. Zaten öyle olsaydý miras alma mekanizmasýnýn pek bir anlamý olmazdý. Biz miras aldýðýmýz sýnýflar üzerinde, içinde bulunduðumuz durumun gerektirdiði birtakým deðiþiklikleri yapabilmeliyiz ki bu mekanizmanýn ilgi çekici bir yaný olsun.
+
+Ayrýca eðer bir taban sýnýfý alt sýnýflara olduðu gibi aktaracaksanýz, taban sýnýftan gelen metot ve nitelikler üzerinde herhangi bir deðiþiklik yapmayacaksanýz ve alt sýnýflara da herhangi bir nitelik ilave etmeyecekseniz, alt sýnýflar tanýmlamak yerine doðrudan taban sýnýfýn örneklerinden yararlanmak daha akýllýca ve pratik bir tercih olabilir:
+
+>>> asker = Oyuncu('Ahmet', 'Er')
+>>> iþçi = Oyuncu('Mehmet', 'Usta')
+>>> yönetici = Oyuncu('Selim', 'Müdür')
+
+Burada asker, iþçi ve yönetici için ayrý ayrý alt sýnýflar tanýmlamak yerine, her biri için doðrudan Oyuncu() sýnýfýný farklý isim ve rütbe deðerleriyle örnekleyerek istediðimiz þeyi elde ettik.
+
+Ýlerleyen derslerde miras alma alternatiflerinden daha ayrýntýlý bir þekilde söz edeceðiz, ama dilerseniz þimdi konuyu daha fazla daðýtmadan miras alýnan metot ve niteliklerin alt sýnýflar içinde nasýl yeniden tanýmlanacaðýný, nasýl deðiþikliðe uðratýlacaðýný ve alt sýnýflara nasýl yeni nitelik ve metotlar ekleneceðini incelemeye geçelim ve ilk örneklerimizi vermeye baþlayalým.
+
+Hatýrlarsanýz bir önceki baþlýkta þöyle bir kod yazmýþtýk:
+
+class Asker(Oyuncu):
+pass
+
+Burada Oyuncu() sýnýfýný bütünüyle alt sýnýfa aktardýk. Peki ya biz bir taban sýnýfý olduðu gibi miras almak yerine, bazý nitelikleri üzerinde deðiþiklik yaparak miras almak istersek ne olacak? Mesela taban sýnýf içinde self.güç deðeri 0. Biz bu deðerin Asker(), Ýþçi() ve Yönetici() örnekleri için birbirinden farklý olmasýný isteyebiliriz. Veya taban sýnýfý olduðu gibi miras almakla birlikte, alt sýnýflardan herhangi birine ilave nitelik veya nitelikler eklemek de isteyebiliriz. Diyelim ki biz Asker() sýnýfý için, öteki sýnýflardan farklý olarak, bir de memleket niteliði tanýmlamak istiyoruz. Peki bu durumda ne yapacaðýz?
+
+Ýþte bunun için Asker() sýnýfýný þu þekilde yazabiliriz:
+
+class Asker(Oyuncu):
+memleket = 'Arpaçbahþiþ'
+
+Burada Asker() sýnýfýna memleket adlý bir sýnýf niteliði eklemiþ olduk. Dolayýsýyla Asker() sýnýfý, Oyuncu() adlý taban sýnýftan miras alýnan bütün nitelik ve metotlarla birlikte bir de memleket niteliðine sahip olmuþ oldu:
+
+>>> asker = Asker('Ahmet', 'binbaþý')
+>>> asker.isim
+
+'Ahmet'
+
+>>> asker.memleket
+
+'Arpaçbahþiþ'
+
+Elbette, bu niteliði öbür alt sýnýflarda tanýmlamadýðýmýz için bu nitelik yalnýzca Asker() sýnýfýna özgüdür.
+
+Ayný þekilde, bir taban sýnýftan türeyen bir alt sýnýfa yeni bir sýnýf metodu, örnek metodu veya statik metot da ekleyebiliriz:
+
+class Asker(Oyuncu):
+memleket = 'Arpaçbahþiþ'
+
+def örnek_metodu(self):
+pass
+
+@classmethod
+def sýnýf_metodu(cls):
+pass
+
+@staticmethod
+def statik_metot():
+pass
+
+Kural þu: Eðer alt sýnýfa eklenen herhangi bir nitelik veya metot taban sýnýfta zaten varsa, alt sýnýfa eklenen nitelik ve metotlar taban sýnýftaki metot ve niteliklerin yerine geçecektir. Yani diyelim ki taban sýnýfýmýz þu:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+Bu sýnýfýn nitelik ve metotlarýný miras yoluyla devralan Asker() sýnýfýmýz ise þu:
+
+class Asker(Oyuncu):
+pass
+
+Þimdi bu sýnýf içinde hareket_et() adlý bir örnek metodu tanýmlayalým:
+
+class Asker(Oyuncu):
+def hareket_et(self):
+print('yeni hareket_et() metodu')
+
+Eðer taban sýnýfta hareket_et() adlý bir sýnýf olmasaydý, Asker() adlý alt sýnýf, taban sýnýftan miras alýnan öteki metot ve niteliklerle birlikte bir de hareket_et() adlý yeni bir örnek metoduna sahip olmuþ olacaktý. Ancak taban sýnýfta zaten hareket_et() adlý bir örnek metodu olduðu için, alt sýnýfta tanýmladýðýmýz ayný adlý örnek metodu, taban sýnýftaki metodun yerine geçip üzerine yazýyor.
+
+Buraya kadar her þey tamam. Artýk bir taban sýnýfa ait metodu alt sýnýfa miras yoluyla aktarýrken nasýl yeniden tanýmlayacaðýmýzý öðrendik. Ayrýca alt sýnýflara nasýl yeni metot ve nitelik ekleyeceðimizi de biliyoruz. Ama mesela, self.isim ve self.rütbe deðiþkenlerini korurken, taban sýnýf içinde 0 deðeri ile gösterilen self.güç deðiþkenini Asker(), Ýþçi() ve Yönetici() sýnýflarýnýn her biri içinde nasýl farklý bir deðerle göstereceðimizi bilmiyoruz. Yani self.güç deðerini Asker() sýnýfý içinde 100, Ýþçi() sýnýfý içinde 70, Yönetici() sýnýfý içinde ise 50 ile göstermek istesek nasýl bir yol takip etmemiz gerektiði konusunda bir fikrimiz yok. Ýsterseniz þu ana kadar bildiðimiz yöntemleri kullanarak bu amacýmýzý gerçekleþtirmeyi bir deneyelim:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Asker(Oyuncu):
+def __init__(self, isim, rütbe):
+self.güç = 100
+
+class Ýþçi(Oyuncu):
+def __init__(self, isim, rütbe):
+self.güç = 70
+
+class Yönetici(Oyuncu):
+def __init__(self, isim, rütbe):
+self.güç = 50
+
+Burada taban sýnýfýn __init__() metodunu alt sýnýflarda yeniden tanýmladýk. Bu kodlarý bu þekilde yazýp çalýþtýrdýðýmýzda self.güç deðerinin herbir alt sýnýf için istediðimiz deðere sahip olduðunu görürüz. Ancak burada þöyle bir sorun var. Bu kodlarý bu þekilde yazarak self.isim ve self.rütbe deðiþkenlerinin deðerini maalesef kaybettik...
+
+__init__() metodunun parametre listesine isim ve rütbe parametrelerini yazdýðýmýz halde bunlarý kodlarýmýz içinde herhangi bir þekilde kullanmadýðýmýz için, bu parametrelerin listede görünüyor olmasý bir þey ifade etmiyor. Yani alt sýnýflarda tanýmladýðýmýz __init__() metodu bizden isim ve rütbe adlý iki parametre bekliyor olsa da, bu parametrelerin deðerini kodlar içinde kullanmadýðýmýz için bu parametrelere deðer atamamýz herhangi bir amaca hizmet etmiyor.
+
+Gelin bu söylediklerimizi kanýtlayalým:
+
+>>> import oyuncular
+>>> asker = oyuncular.Asker('Ahmet', 'Er')
+>>> asker.rütbe
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Asker' object has no attribute 'rütbe'
+
+>>> asker.isim
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Asker' object has no attribute 'isim'
+
+Bu sorunu çözmek için alt sýnýflarýmýzý þu þekilde yazabiliriz:
+
+class Asker(Oyuncu):
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 100
+
+class Ýþçi(Oyuncu):
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 70
+
+class Yönetici(Oyuncu):
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 50
+
+Burada self.isim ve self.rütbe deðiþkenlerini herbir alt sýnýf için tekrar tanýmladýk. Bu küçük örnekte pek sorun olmayabilir, ama taban sýnýfýn __init__() metodunun içinde çok daha karmaþýk iþlemlerin yapýldýðý durumlarda yukarýdaki yaklaþým hiç de pratik olmayacaktýr. Ayrýca eðer miras alma iþlemini, içeriðini bilmediðiniz veya baþka bir dosyada bulunan bir sýnýftan yapýyorsanýz yukarýdaki yöntem tamamen kullanýþsýz olacaktýr. Ayrýca ayný þeyleri tekrar tekrar yazmak miras alma mekanizmasýnýn ruhuna tamamen aykýrýdýr. Çünkü biz miras alma iþlemini zaten ayný þeyleri tekrar tekrar yazmaktan kurtulmak için yapýyoruz.
+
+Bu arada, yukarýda yapmak istediðimiz þeyi þununla karýþtýrmayýn: Biz elbette taban sýnýftaki bir niteliði, örnekleme sýrasýnda deðiþtirme imkanýna her koþulda sahibiz. Yani taban ve alt sýnýflarýn þöyle tanýmlanmýþ olduðunu varsayarsak:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Asker(Oyuncu):
+pass
+
+class Ýþçi(Oyuncu):
+pass
+
+class Yönetici(Oyuncu):
+pass
+
+Herbir alt sýnýfýn güç deðiþkenini þu þekilde deðiþtirebiliriz:
+
+>>> import oyuncular
+>>> asker = oyuncular.Asker('Ahmet', 'Er')
+>>> asker.güç
+
+0
+
+Gördüðünüz gibi þu anda askerin gücü 0. Bunu 100 yapalým:
+
+>>> asker.güç = 100
+>>> asker.güç
+
+100
+
+Ayný þeyi öteki Ýþçi() ve Yönetici() sýnýflarýnýn örnekleri üzerinde de yapabiliriz. Ama bizim istediðimiz bu deðil. Biz, Asker() sýnýfýný örneklediðimiz anda gücü 100, Ýþçi() sýnýfýný örneklediðimiz anda gücü 70, Yönetici() sýnýfýný örneklediðimiz anda ise gücü 50 olsun istiyoruz.
+
+Ýþte tam bu noktada imdadýmýza yepyeni bir fonksiyon yetiþecek. Bu yeni fonksiyonun adý super().
+

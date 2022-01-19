@@ -1,0 +1,48 @@
+
+Sqlite ile Veritabaný Programlama
+
+
+Giriþ
+
+Bu bölümde, Python’daki ileri düzey konulardan biri olan veritabaný programlamayý (database programming) inceleyeceðiz. Dilerseniz öncelikle ‘veritabaný’ denen þeyin ne olduðunu anlamaya çalýþarak iþe baþlayalým.
+
+Esasýnda veritabaný, hiçbirimizin yabancýsý olduðu bir kavram deðil. Biz bu kelimeyi, teknik anlamýnýn dýþýnda, günlük hayatta da sýkça kullanýyoruz. Veritabaný, herkesin bildiði ve kullandýðý anlamýyla, içinde veri barýndýran bir ‘þey’dir. Günlük kullanýmda, hakikaten, içinde veri barýndýran her þeye veritabaný dendiðini duyarsýnýz.
+
+Veritabaný kelimesinin günlük kullanýmdaki anlamý dýþýnda bir de teknik anlamý vardýr. Bizi esas ilgilendiren de zaten terimin teknik anlamýdýr. Mesela Vikipedi’de veritabaný þöyle tanýmlanýyor:
+
+Bilgisayar terminolojisinde, sistematik eriþim imkâný olan, yönetilebilir, güncellenebilir, taþýnabilir, birbirleri arasýnda tanýmlý iliþkiler bulunabilen bilgiler kümesidir. Bir baþka tanýmý da, bir bilgisayarda sistematik þekilde saklanmýþ, programlarca iþlenebilecek veri yýðýnýdýr.
+
+Yukarýdaki taným, veritabanýnýn ne demek olduðunu gayet iyi ifade ediyor. Ama esasýnda bizim veritabaný tanýmý üzerinde fazlaca durmamýza gerek yok. Biz her zaman olduðu gibi iþin teknik boyutuyla deðil, taktik boyutuyla ilgilenmeyi tercih edeceðiz. O halde yavaþ yavaþ iþe koyulmaya baþlayalým.
+
+Python’la veritabaný programlama iþlemleri için pek çok alternatifimiz var. Python’la hangi veritabaný sistemlerini kullanabileceðinizi görmek için http://wiki.python.org/moin/DatabaseInterfaces adresindeki listeyi inceleyebilirsiniz. Biz bunlar içinde, sadeliði, basitliði ve kullaným kolaylýðý nedeniyle Sqlite adlý veritabaný yönetim sistemini ele alacaðýz.
+
+
+Neden Sqlite?
+
+Dediðimiz gibi, Python’da veritabaný iþlemleri için kullanabileceðiniz pek çok alternatif bulunur. Ama biz bütün bu alternatifler içinde Sqlite’ý tercih edeceðiz. Peki neden Sqlite?
+
+Sqlite’ýn öteki sistemlere göre pek çok avantajý bulunur. Gelin isterseniz Sqlite’ýn bazý avantajlarýna þöyle bir göz gezdirelim:
+
+Her þeyden önce Sqlite Python’un 2.5 sürümlerinden bu yana bu dilin bir parçasýdýr. Dolayýsýyla eðer kullandýðýnýz Python sürümü 2.5 veya üstü ise Sqlite’ý Python’daki herhangi bir modül gibi içe aktarabilir ve kullanmaya baþlayabilirsiniz. 
+Sqlite herhangi bir yazýlým veya sunucu kurulumu gerektirmez. Bu sayede, bu modülü kullanabilmek için öncelikle bir sunucu yapýlandýrmanýza da gerek yoktur. Bazý veritabanlarýný kullanabilmek için arka planda bir veritabaný sunucusu çalýþtýrýyor olmanýz gerekir. Sqlite’ta ise böyle bir þey yapmazsýnýz. 
+Sqlite, öteki pek çok veritabaný alternatifine göre basittir. Bu yüzden Sqlite’ý çok kýsa bir sürede kavrayýp kullanmaya baþlayabilirsiniz. 
+Sqlite özgür bir yazýlýmdýr. Bu yazýlýmýn baþtan aþaðý bütün kodlarý kamuya açýktýr. Dolayýsýyla Sqlite kodlarýnýn her zerresini istediðiniz gibi kullanabilir, deðiþikliðe uðratabilir, satabilir ve ticari olan/olmayan bütün uygulamalarýnýzda gönül rahatlýðýyla kullanabilirsiniz. 
+Sqlite’ýn sade ve basit olmasý sizi yanýltmasýn. Bu özelliklerine bakarak, Sqlite’ýn yeteneksiz bir veritabaný sistemi olduðunu düþünmeyin. Bugün Sqlite’ý aktif olarak kullanan pek çok büyük ve tanýnmýþ þirket bulunur. Mesela, Adobe, Apple, Mozilla/Firefox, Google, Symbian ve Sun bu þirketlerden bazýlarýdýr. Hatta GNOME masaüstü ortamýnýn sevilen müzik ve video çalarlarýndan Banshee’de de veritabaný olarak Sqlite kullanýldýðýný söyleyelim. 
+Yukarýdaki sebeplerden ötürü, veritabaný konusunu Sqlite üzerinden anlatacaðýz. O halde hemen yola koyulalým.
+
+
+Sqlite’ýn Yapýsý
+
+Bu bölümün en baþýnda verdiðimiz veritabaný tanýmýndan da anlaþýlacaðý gibi, veritabanlarý, verileri sonradan kullanýlmak üzere içinde tutan bir sistemdir. Bütün iliþkisel veritabanlarýnda olduðu gibi, Sqlite da bu verileri tablo benzeri bir yapý içinde tutar. Yani aslýnda bir Sqlite veritabaný içindeki veriler þöyle bir yapýya sahiptir:
+
+
+Sütun 1 Sütun 2 Sütun 3 Sütun 4 Sütun 5 
+Deðer 1/1 Deðer 2/1 Deðer 3/1 Deðer 4/1 Deðer 5/1 
+Deðer 1/2 Deðer 2/2 Deðer 3/2 Deðer 4/2 Deðer 5/2 
+Deðer 1/3 Deðer 2/3 Deðer 3/3 Deðer 4/3 Deðer 5/3 
+Deðer 1/4 Deðer 2/4 Deðer 3/4 Deðer 4/4 Deðer 5/4 
+
+Sqlite içinde oluþturulan yukarýdakine benzer her tablonun bir de ismi vardýr. Daha doðrusu, Sqlite ile bir tablo oluþtururken, bu tabloya bir de ad vermemiz gerekir. Mesela yukarýdaki tabloya ‘deðerler’ adýný verdiðimizi varsayabilirsiniz.
+
+Sqlite ile çalýþýrken veriler üzerinde yapacaðýmýz iþlemleri, yukarýdaki tablonun adýný ve bu tablodaki sütunlarý kullanarak gerçekleþtireceðiz. Bu yüzden Sqlite’ýn yapýsýný anlamak büyük önem taþýr. Gördüðünüz gibi, bu veritabaný sisteminin yapýsýný anlamak da öyle zor bir iþ deðildir.
+

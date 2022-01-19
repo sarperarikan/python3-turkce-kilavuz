@@ -1,0 +1,26 @@
+
+{ } (Küme Parantezi)
+
+{ } adlý metakarakterimiz yardýmýyla bir eþleþmeden kaç adet istediðimizi belirtebiliyoruz. Yine ayný örnek üzerinden gidelim:
+
+>>> for i in yeniliste:
+... if re.match("sa{3}t",i):
+... print(i)
+...
+saaat
+
+Burada “a” karakterinin 3 kez tekrar etmesini istediðimizi belirttik. Python da bu emrimizi hemen yerine getirdi.
+
+Bu metakarakterin ilginç bir özelliði daha vardýr. Küme içinde iki farklý sayý yazarak, bir karakterin en az ve en çok kaç kez tekrar etmesini istediðimizi belirtebiliriz. Örneðin:
+
+>>> for i in yeniliste:
+... if re.match("sa{0,3}t",i):
+... print(i)
+...
+st
+sat
+saat
+saaat
+
+sa{0,3}t ifadesiyle, “a” harfinin en az sýfýr kez, en çok da üç kez tekrar etmesini istediðimiz söyledik. Dolayýsýyla, “a” harfinin sýfýr, bir, iki ve üç kez tekrar ettiði durumlar ayýklanmýþ oldu. Bu sayý çiftlerini deðiþtirerek daha farklý sonuçlar elde edebilirsiniz. Ayrýca hangi sayý çiftinin daha önce öðrendiðimiz ”?” metakarakteriyle ayný iþi yaptýðýný bulmaya çalýþýn...
+

@@ -1,0 +1,11 @@
+
+from paket import modül
+
+Yukarýda olduðu gibi, urllib paketi içindeki request modülünü import paket.modül gibi bir komutla içe aktardýðýmýzda ilgili modülün bütün nitelik ve metotlarý urllib.request ismi altýnda içe aktarýldýðýndan, urllib paketi içindeki request modülünün nitelik ve metotlarýna ulaþabilmek için her defasýnda urllib.request önekini kullanmamýz gerekir. Eðer her defasýnda uzun uzun urllib.request yazmak istemiyorsanýz paket içindeki modülü þu þekilde içe aktarabilirsiniz:
+
+>>> from urllib import request
+
+Böylece request modülünün nitelik ve metotlarýna yalnýzca request önekiyle eriþebilirsiniz:
+
+>>> request.urlopen('http://www.istihza.com')
+

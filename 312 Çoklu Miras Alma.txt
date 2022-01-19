@@ -1,0 +1,127 @@
+
+Çoklu Miras Alma
+
+Python’da bir sýnýf, ayný anda birden fazla sýnýfý da miras alabilir. Eðer yazdýðýnýz bir uygulamada birden fazla taban sýnýftan nitelik ve metot miras almanýz gerekirse bunu þu þekilde gerçekleþtirebilirsiniz:
+
+class Sýnýf(taban_sýnýf1, taban_sýnýf2):
+pass
+
+Bu þekilde hem taban_sýnýf1 hem de taban_sýnýf2‘de bulunan nitelik ve metotlar ayný anda Sýnýf adlý sýnýfa dahil olacaktýr.
+
+Ufak bir örnek verelim. Diyelim ki elimizde þu sýnýflar var:
+
+class c1:
+sn1 = 'sn1'
+
+def __init__(self):
+self.ön1 = 'ön1'
+print(self.ön1)
+
+def örn_metot1(self):
+self.öm1 = 'öm1'
+return self.öm1
+
+class c2:
+sn2 = 'sn2'
+
+def __init__(self):
+self.ön2 = 'ön2'
+print(self.ön2)
+
+def örn_metot2(self):
+self.öm2 = 'öm2'
+return self.öm2
+
+class c3:
+sn3 = 'sn3'
+
+def __init__(self):
+self.ön3 = 'ön3'
+print(self.ön3)
+
+def örn_metot3(self):
+self.öm3 = 'öm3'
+return self.öm3
+
+Burada üç farklý sýnýf ve herbir sýnýfýn içinde de birer sýnýf niteliði, birer __init__() metodu, birer örnek niteliði ve birer örnek metodu görüyoruz.
+
+Þimdi bu üç sýnýfý birden taban sýnýf olarak miras alan dördüncü bir sýnýf tanýmlayalým:
+
+class c4(c1, c2, c3):
+pass
+
+Burada, taban sýnýf vazifesi görecek sýnýflarýn adýný c4 sýnýfýnýn parantezleri arasýna tek tek yerleþtirdiðimize dikkat edin. Bu þekilde c1, c2 ve c3 adlý sýnýflarý ayný anda miras almýþ oluyoruz. Ýþte bu mekanizmaya Python’da çoklu miras alma (multiple inheritance) adý veriliyor.
+
+Tek bir sýnýfý miras aldýðýnýzda hangi kurallar geçerliyse, birden fazla sýnýfý miras aldýðýnýzda da temel olarak ayný kurallar geçerlidir. Ancak çoklu miras almada birden fazla sýnýf söz konusu olduðu için, miras alýnan sýnýflarýn da kendi aralarýnda veya baþka sýnýflarla nitelik ve/veya metot alýþveriþi yapmasý halinde ortaya çýkabilecek beklenmedik durumlara karþý dikkatli olmalýsýnýz. Ayrýca çoklu miras alma iþlemi sýrasýnda, ayný adý taþýyan metotlardan yalnýzca birinin miras alýnacaðýný da unutmayýn.
+
+Örneðin:
+
+class c1:
+sn1 = 'sn1'
+
+def __init__(self):
+self.ön1 = 'ön1'
+print(self.ön1)
+
+def örn_metot1(self):
+self.öm1 = 'öm1'
+return self.öm1
+
+def ortak_metot(self):
+self.om = 'ortak metot_c1'
+return self.om
+
+class c2:
+sn2 = 'sn2'
+
+def __init__(self):
+self.ön2 = 'ön2'
+print(self.ön2)
+
+def örn_metot2(self):
+self.öm2 = 'öm2'
+return self.öm2
+
+def ortak_metot(self):
+self.om = 'ortak metot_c2'
+return self.om
+
+class c3:
+sn3 = 'sn3'
+
+def __init__(self):
+self.ön3 = 'ön3'
+print(self.ön3)
+
+def örn_metot3(self):
+self.öm3 = 'öm3'
+return self.öm3
+
+def ortak_metot(self):
+self.om = 'ortak metot_c3'
+return self.om
+
+class c4(c1, c2, c3):
+def __init__(self):
+super().__init__()
+
+Burada, ayný adý taþýyan __init__() ve ortak_metot() adlý metotlardan yalnýzca biri miras alýnacaktýr. Bunlardan hangisinin miras alýnacaðýný az çok tahmin etmiþsinizdir. Evet, doðru bildiniz. Miras alma listesinde hangi sýnýf önde geliyorsa onun metotlarý miras alýnacaktýr:
+
+s = c4()
+print(s.ortak_metot())
+
+Gördüðünüz gibi, c4() sýnýfý önce c1 sýnýfýný miras aldýðý için hep c1 sýnýfýnýn metotlarý öncelik kazanýyor.
+
+Eðer sýnýflarý class c4(c2, c3, c1): þeklinde miras alsaydýk, bu kez de c2 sýnýfýnýn metotlarý öncelik kazanacaktý.
+
+Elbette, Python’ýn sizin için belirlediði öncelik sýrasý yerine kendi belirlediðiniz öncelik sýrasýný da dayatabilirsiniz:
+
+class c4(c1, c2, c3):
+def __init__(self):
+c2.__init__(self)
+
+def ortak_metot(self):
+return c3.ortak_metot(self)
+
+Burada c2 sýnýfýnýn __init__() metodu ile c3 sýnýfýnýn ortak_metot‘una miras önceliði verdik.
+

@@ -1,0 +1,998 @@
+
+Önemli Standart Kütüphane Modülleri
+
+Daha önce de söylediðimiz gibi, modüller Python programlama dilinin belkemiðini oluþturur. Hatta Python’ý öðrenmek, bir bakýma modülleri öðrenmek demektir, diyebiliriz. Biz her ne kadar bu noktaya gelene kadar Python’daki bütün temel veri tiplerini ve fonksiyonlarý öðrenmiþ olsak da modülleri öðrenmeden ve bunlarý etkili bir þekilde nasýl kullanacaðýmýzý bilmeden iþe yarar programlar yazamayýz.
+
+Mesela diyelim ki veritabanýna kayýt yapan bir program yazacaksýnýz. Ýþte bu iþ için çeþitli modüllerden yararlanmanýz gerekir.
+
+Eðer MS Excel veya MS Word gibi dosya biçimleri üzerinde çalýþmalar yapacaksanýz, bu dosyalar üzerinde iþlem yapabilmenizi saðlayan birtakým modülleri kullanmanýz gerekir.
+
+Ayný þekilde grafik bir arayüze sahip programlar geliþtirebilmek için de bazý standart modülleri veya üçüncü þahýs modüllerini kullanmalýsýnýz.
+
+Bu durum oyun programlama, taþýnabilir cihaz programlama, að programlama, web programlama ve baþka programlama alanlarý için de geçerlidir.
+
+Geçen bölümde, modüller konusundan söz ederken Python’daki standart kütüphane modüllerine ve üçüncü þahýs modüllerine þöyle bir göz gezdirmiþtik. Önümüzdeki bir kaç bölüm boyunca ise bazý önemli standart modülleri ve üçüncü þahýs modüllerini ayrýntýlý olarak inceleyeceðiz. Bu sayede programcýlýk ufkumuz epey bir geniþlemiþ olacak.
+
+
+os Modülü 
+os.name 
+os.sep 
+os.getcwd() 
+os.chdir() 
+os.listdir() 
+os.curdir 
+os.pardir 
+os.startfile() 
+os.mkdir() 
+os.makedirs() 
+os.rename() 
+os.replace() 
+os.remove() 
+os.rmdir() 
+os.removedirs() 
+os.stat() 
+os.system() 
+os.urandom() 
+os.walk() 
+os.environ 
+os.path 
+os.path.abspath() 
+os.path.dirname() 
+os.path.exists() 
+os.path.expanduser() 
+os.path.isdir() 
+os.path.isfile() 
+os.path.join() 
+os.path.split() 
+os.path.splitext() 
+sys Modülü 
+sys.exit() 
+sys.argv 
+sys.executable 
+sys.getwindowsversion() 
+sys.path 
+sys.platform 
+sys.prefix 
+sys.ps1 
+sys.ps2 
+sys.version 
+sys.version_info 
+sys.winver 
+sys.stdout 
+sys.stderr 
+sys.stdin 
+random Modülü 
+random() 
+uniform() 
+randint() 
+choice() 
+shuffle() 
+randrange() 
+sample() 
+datetime Modülü 
+now() 
+today() 
+ctime() 
+strftime() 
+strptime() 
+fromtimestamp() 
+timestamp() 
+Tarihlerle Ýlgili Aritmetik Ýþlemler 
+Belirli Bir Tarihi Kaydetmek 
+Ýki Tarih Arasýndaki Farký Bulmak 
+Ýleri Bir Tarihi Bulmak 
+Geçmiþ Bir Tarihi Bulmak 
+time Modülü 
+gmtime() 
+time() 
+localtime() 
+asctime() 
+strftime() 
+strptime() 
+sleep() 
+
+Önemli Standart Kütüphane Modülleri " 
+
+
+os Modülü
+
+Bildiðiniz gibi, iþletim sistemlerinin çalýþma mantýðý birbirinden farklýdýr. Örneðin Windows ve GNU/Linux iþletim sistemleri ayný iþi birbirlerinden farklý þekillerde yaparlar. Mesela Windows’ta bir dizin içinde hangi klasör ve dosyalarýn olduðunu öðrenmek için dir komutunu kullanýrýz. GNU/Linux’ta ise ayný iþlev için ls adlý bir komut vardýr.
+
+Ayný þekilde, iki iþletim sistemi arasýnda dizin ayraçlarý konusunda da farklýlýk bulunur. Windows’ta dizinleri birbirinden ayýrmak için ters taksim (\) iþareti kullanýlýrken, GNU/Linux’ta ayný iþ için düz taksim (/) iþareti kullanýlýr.
+
+Not
+
+Düz taksim iþaretini Windows da kabul eder, ancak Windows’un doðal dizin ayracý ters taksimdir.
+
+Ýþte biz hem Windows’ta, hem de GNU/Linux’ta çalýþacak bir program yazmak istediðimizde bu farklýlýklarý göz önünde bulundurmamýz ve farklý durumlarýn herbiri için ayrý kodlar yazmamýz gerekirken, os modülü bizi bu zahmetten kurtarýr ve bize ortak bir arayüz üzerinden farklý iþletim sistemleri ile tutarlý bir þekilde iletiþim kurabilmemizi saðlayacak pek çok fonksiyon ve nitelik sunar.
+
+Bu nitelik ve fonksiyonlarýn neler olduðunu dir(os) komutuyla görebileceðinizi biliyorsunuz.
+
+Bu bölümde, os modülünün sunduðu bu fonksiyon ve niteliklerin en önemlilerini ve en yaygýn kullanýlanlarýný olabildiðince ayrýntýlý bir þekilde ele almaya çalýþacaðýz.
+
+Not
+
+Burada os modülünü import os komutuyla içe aktarmýþ olduðunuz varsayýlmaktadýr.
+
+
+os.name
+
+os modülünün, önceki derslerde þöyle bir deðinip geçtiðimiz name niteliði, kullanýcýlarýmýzýn, yazdýðýmýz kodlarý hangi iþletim sisteminde çalýþtýrdýðý konusunda bize bilgi verir.
+
+Bu niteliði þöyle kullanýyoruz:
+
+>>> os.name
+
+Eðer kodlarýmýz Windows iþletim sistemi üzerinde çalýþtýrýlmýþsa buradan þu çýktýyý alýrýz:
+
+'nt'
+
+MacOS ve GNU/Linux iþletim sistemleri ise bu komuta þu cevabý verir:
+
+'posix'
+
+Dolayýsýyla os.name niteliðini kullanarak farklý iþletim sistemlerinde farklý çalýþan programlar yazabiliriz.
+
+
+os.sep
+
+os modülünün sep niteliði, kodlarýmýzýn çalýþtýðý iþletim sisteminin dizin ayracýnýn ne olduðunu bize gösterir.
+
+Eðer bu niteliði Windows iþletim sistemi üzerinde kullanýrsak þu çýktýyý alýrýz:
+
+>>> os.sep
+
+'\\'
+
+MacOS ve GNU/Linux iþletim sistemleri ise bu komuta þu cevabý verir:
+
+>>> os.sep
+
+'/'
+
+Peki bu nitelik ne iþe yarar?
+
+Bu niteliði kullanarak, farklý iþletim sistemlerine özgü dizin yollarý oluþturabilirsiniz. Mesela:
+
+>>> liste = ['aylar', 'mayýs', 'test']
+>>> os.sep.join(liste)
+
+Burada karakter dizilerinin join() metodunu os.sep ile birlikte kullandýðýmýza dikkat edin.
+
+Bu komutu Windows’ta verdiðinizde þu çýktýyý alýrsýnýz:
+
+'aylar\\mayýs\\test'
+
+Ayný komutu GNU/Linux’ta verdiðinizde ise þu çýktýyý:
+
+'aylar/mayýs/test'
+
+Yani yukarýdaki komutu Windows’ta verdiðinizde Python þu komutu almýþ gibi davranýr:
+
+>>> liste = ['aylar', 'mayýs', 'test']
+>>> '\\'.join(liste)
+
+GNU/Linux’ta ise þu komutu:
+
+>>> liste = ['aylar', 'mayýs', 'test']
+>>> '/'.join(liste)
+
+Böylece yazdýðýnýz programlarda hangi iþletim sisteminin hangi dizin ayracýný kullandýðýný düþünmenize gerek kalmaz; bunu sizin yerinize Python düþünür...
+
+
+os.getcwd()
+
+os modülünün getcwd() fonksiyonu bize o anda içinde bulunduðumuz dizinin adýný verir:
+
+>>> os.getcwd()
+
+'/home/istihza/Desktop' #GNU/Linux
+
+veya:
+
+>>> os.getcwd()
+
+'C:\\Documents and Settings\\fozgul' #Windows
+
+
+os.chdir()
+
+os modülünün chdir() fonksiyonu bize bir dizinden baþka bir dizine geçme imkaný verir.
+
+Mesela GNU/Linux’ta, o anda bulunduðumuz dizinden /usr/bin adlý dizine geçmek için þu komutu kullanabiliriz:
+
+>>> os.chdir('/usr/bin/')
+
+veya Windows’ta C:\Documents and Settings\fozgul\Desktop adlý dizine geçmek için þunu:
+
+>>> os.chdir('C:\\Documents and Settings\\fozgul\\Desktop')
+
+Gördüðünüz gibi, gitmek istediðimiz dizin adýný os.chdir() fonksiyonuna parametre olarak vermemiz yeterli oluyor.
+
+
+os.listdir()
+
+os modülünün listdir() fonksiyonu, bize bir dizin içindeki dosya ve klasörleri listeleme imkaný verir. listdir(), os modülünün en kullanýþlý fonksiyonlarýndan biridir.
+
+Mesela o anda içinde bulunduðumuz dizindeki dosya ve klasörleri listelemek istersek bu fonksiyonu þöyle kullanabiliriz:
+
+>>> mevcut_dizin = os.getcwd()
+>>> os.listdir(mevcut_dizin)
+
+Eðer farklý bir dizinin içeriðini listelemek istersek, parametre olarak o dizinin adýný yazmamýz yeterli olacaktýr:
+
+>>> os.listdir('/var/www')
+
+Gördüðünüz gibi, os.listdir() komutunun çýktýsý liste türünde bir veri tipidir. Dolayýsýyla listelerle yapabildiðiniz her þeyi bununla da yababilirsiniz. Mesela bu liste üzerinde bir döngü kurabilirsiniz:
+
+>>> for i in os.listdir(os.getcwd()):
+... print(i)
+
+Ya da bir dizin içindeki, belli bir uzantýya sahip dosyalarý süzebilirsiniz:
+
+>>> for i in os.listdir(os.getcwd()):
+... if i.endswith('.doc'):
+... print(i)
+
+Bu kodlar bize, adý .doc ile biten bütün dosyalarý listeleyecektir.
+
+Bu arada karakter dizilerinin endswith() adlý metodunu hatýrlýyorsunuz, deðil mi?
+
+
+os.curdir
+
+Çoðu iþletim sisteminde mevcut dizini göstermek için ‘.’ adlý karakter dizisi kullanýlýr. Örneðin:
+
+>>> os.listdir(os.getcwd())
+
+gibi bir komut yerine þu komutu da kullanabilirsiniz:
+
+>>> os.listdir('.')
+
+listdir() fonksiyonuna parametre olarak verdiðimiz ‘.’ karakter dizisi o anda içinde bulunduðumuz dizini temsil eder.
+
+Eðer bu karakter dizisini elle yazmak istemiyorsanýz os modülü içindeki curdir adlý nitelikten de yararlanabilirsiniz:
+
+>>> os.listdir(os.curdir)
+
+Bu arada os.getcwd() ile os.curdir‘i birbirine karýþtýrmamalýsýnýz. Bu ikisi ayný þey deðildir. os.getcwd() çýktý olarak o anda içinde bulunduðumuz dizinin adýný verir. os.curdir ise, bir iþletim sisteminde, o anda içinde bulunulan dizini temsil eden karakter dizisi ne ise onun deðerini barýndýrýr. Bu deðer çoðu iþletim sisteminde ‘.’ adlý karakter dizisidir.
+
+
+os.pardir
+
+Týpký ‘.’ karakter dizisi gibi, çoðu iþletim sisteminde bir üst dizini göstermek için ‘..’ adlý karakter dizisi kullanýlýr. Örneðin:
+
+>>> os.listdir('..')
+
+komutu, o anda içinde bulunduðunuz dizindeki deðil, bir üst dizindeki dosya ve dizin adlarýný listeleyecektir. Yine týpký os.curdir niteliðinde olduðu gibi, eðer bu karakter dizisini kendiniz elle yazmak istemezseniz, bu karakter dizisini içinde barýndýran os.pardir adlý bir nitelikten yararlanabilirsiniz:
+
+>>> os.listdir(os.pardir)
+
+Bu komut, os.listdir('..') ile ayný çýktýyý verir.
+
+
+os.startfile()
+
+Uyarý
+
+Bu fonksiyon yalnýzca Windows’ta çalýþýr. GNU/Linux iþletim sistemlerinde bu fonksiyon tanýmlý deðildir.
+
+os modülü içindeki startfile() adlý fonksiyonun görevi bilgisayarýmýzda bulunan herhangi bir dosyayý, iliþkilendirilmiþ olduðu programla açmaktýr.
+
+Hemen bir örnek verelim.
+
+O anda içinde bulunduðumuz dizinde deneme.txt adlý bir dosya olduðunu varsayalým. Þimdi de þu komutu verelim:
+
+>>> os.startfile('deneme.txt')
+
+Ýþletim sisteminiz .txt uzantýlý dosyalarý hangi programla iliþkilendirmiþse, startfile() fonksiyonu deneme.txt adlý dosyayý o programla açacaktýr. Windows’ta .txt dosyalarý genellikle Notepad programýyla iliþkilendirildiði için yukarýdaki komutu verdiðinizde muhtemelen deneme.txt dosyasýnýn içeriði Notepad programý aracýlýðýyla görüntülenecektir.
+
+Ayný þekilde, o anda bulunduðuz dizin içinde deneme.docx adlý bir dosyanýn olduðunu varsayalým ve þu komutu verelim:
+
+>>> os.startfile('deneme.docx')
+
+Bu komut da deneme.docx dosyasýnýn Microsoft Word adlý yazýlýmla açýlmasýný saðlayacaktýr.
+
+Eðer startfile() fonksiyonuna parametre olarak bir dosya deðil de dizin adý verecek olursanýz, o dizin Windows Explorer ile açýlýr. Mesela içinde bulunduðumuz dizini Windows Explorer ile açalým:
+
+>>> os.startfile(os.curdir)
+
+Bunun yerine þu komutu kullanabileceðinizi de biliyorsunuz:
+
+>>> os.startfile('.')
+
+veya:
+
+>>> os.startfile(os.getcwd())
+
+Bu üç komut da ayný iþlevi yerine getirir.
+
+Peki bir üst dizini açmak istersek ne yapacaðýz?
+
+Dikkatlice bakýn:
+
+>>> os.startfile(os.pardir)
+
+veya:
+
+>>> os.startfile('..')
+
+Her iki komut da Windows Explorer yardýmýyla bir üst dizinin görüntülenmesini saðlayacaktýr.
+
+Elbette startfile() fonksiyonuna parametre olarak belirli bir dizinin adýný da verebilirsiniz:
+
+>>> os.startfile(r"C:\Documents and Settings\fozgul")
+
+os.startfile() oldukça faydalý bir fonksiyondur. Hatta bu fonksiyonu sadece dosyalarý açmak için deðil, internet sayfalarýný açmak için dahi kullanabilirsiniz:
+
+>>> os.startfile('www.istihza.com')
+
+Ancak bu komutun yalnýzca Windows’ta çalýþacaðýný unutmayýn. O yüzden bunun yerine, daha önce öðrendiðimiz webbrowser modülünü kullanmak daha doðru olacaktýr.
+
+
+os.mkdir()
+
+os modülünün mkdir() fonksiyonu yeni dizinler oluþturabilmemizi saðlar.
+
+Örneðin:
+
+>>> os.mkdir('yenidizin')
+
+Bu komut, o anda içinde bulunduðumuz dizin içinde ‘yenidizin’ adlý bir dizin oluþturacaktýr.
+
+Elbette eðer dizini o anda içinde bulunduðunuz dizin içinde deðil de farklý bir konumda oluþturmak isterseniz, o konumun açýk adresini belirtebilirsiniz:
+
+>>> os.mkdir('/home/istihza/Desktop/yenidizin')
+
+veya:
+
+>>> os.mkdir(r'C:\Documents and Settings\fozgul\yenidizin')
+
+Eðer oluþturmaya çalýþtýðýnýz dizin zaten varsa os.mkdir() hata verecektir:
+
+>>> os.mkdir(r'C:\Documents and Settings\fozgul\yenidizin')
+
+FileExistsError: [WinError 183] Halen varolan bir
+dosya oluþturulamaz: 'yenidizin'
+
+
+os.makedirs()
+
+os.makedirs() fonksiyonu biraz önce öðrendiðimiz os.mkdir() fonksiyonuna çok benzese de aralarýnda önemli farklar bulunur.
+
+Biraz önce os.mkdir() fonksiyonunu anlatýrken þöyle bir örnek vermiþtik:
+
+>>> os.mkdir(r'C:\Documents and Settings\fozgul\yenidizin')
+
+Bu komutun çalýþabilmesi için, bilgisayarýmýzda halihazýrda C:Documents and Settingsfozgul` yolunun varolmasý gerekir. Eðer bu yolu oluþturan dizinlerden herhangi biri mevcut deðilse, ``mkdir()` fonksiyonu yenidizin adlý dizini oluþturamaz. Bu fonksiyonun çalýþabilmesi için, varolmayan bütün dizinleri tek tek oluþturmanýz gerekir.
+
+os.makedirs() ise os.mkdir() fonksiyonunun aksine, varolmayan üst ve alt dizinleri de oluþturma yeteneðine sahiptir. Örneðin:
+
+>>> os.makedirs('/home/istihza/Desktop/aylar/mayýs/ödeme/')
+
+Bu komut sýrasýyla aylar, mayýs ve ödeme adlý dizinleri iç içe oluþturacaktýr. Yani os.makedirs() komutunun ödeme adlý dizini oluþturmasý için aylar ve mayýs adlý dizinlerin önceden varolmasý zorunlu deðildir. Bu dizinler varolsa da olmasa da os.makedirs() komutu ödeme dizinini oluþturabilir. Ama os.mkdir() fonksiyonu böyle deðildir. Eðer os.mkdir() fonksiyonuyla ödeme dizinini oluþturmak isterseniz, öncelikle aylar ve mayýs adlý dizinleri oluþturmanýz gerekir.
+
+
+os.rename()
+
+os modülünün rename() adlý fonksiyonunu kullanarak dizinlerin adlarýný deðiþtirebiliriz. Bu fonksiyon iki parametre alýr:
+
+>>> os.rename('dizinin_þimdiki_adý', 'dizinin_yeni_adý')
+
+Mesela mevcut çalýþma dizininde ‘deneme’ adlý bir dizin varsa, bu dizinin adýný ‘test’ olarak deðiþtirmek için þu komutu verebiliriz:
+
+>>> os.rename('deneme', 'test')
+
+Eðer zaten ‘test’ adlý bir dizin varsa (ve içi boþsa), yukarýdaki komut GNU/Linux’ta ‘test’ adlý dizinin üzerine yazacak, Windows’ta ise hata verecektir.
+
+
+os.replace()
+
+os modülünün replace() fonksiyonu biraz önce öðrendiðimiz rename() fonksiyonu gibi çalýþýr:
+
+>>> os.replace('deneme', 'test')
+
+Bu komut, týpký rename() fonksiyonunda olduðu gibi, deneme adlý dizinin adýný test olarak deðiþtirecektir.
+
+Eðer test adlý bir dizin zaten varsa, replace() fonksiyonu, hem Windows’ta hem de GNU/Linux’ta, varolan bu test dizininin üzerine yazmaya çalýþýr. GNU/Linux’ta çoðu durumda bunu baþarýr, ancak Windows’ta yine de çeþitli izin hatalarý ile karþýlaþabilirsiniz.
+
+
+os.remove()
+
+os modülünün remove() adlý fonksiyonu, bilgisayarýmýzdaki dosyalarý silmemizi saðlar:
+
+>>> os.remove('dosya_adý')
+
+Yalnýz bu komutu çok dikkatli kullanmalýsýnýz. Çünkü bu komut, silme iþleminden önce herhangi bir soru sormadan, dosyayý doðrudan siler.
+
+
+os.rmdir()
+
+os modülünün rmdir() fonksiyonu, içi boþ bir dizini silmek için kullanýlýr:
+
+>>> os.rmdir('dizin_adý')
+
+Eðer silmeye çalýþtýðýnýz dizin içinde herhangi bir baþka dizin veya dosya varsa bu fonksiyon hata verecektir.
+
+Mesela þöyle bir dizin yapýsý düþünelim:
+
+|___ anadizin
+|___ dizin1
+|___ dizin2
+|___ dizin3
+|___ dizin4
+
+Bu arada, bu dizin yapýsýný kolayca oluþturmak için ne yapmanýz gerektiðini biliyorsunuz:
+
+>>> os.makedirs('anadizin/dizin1/dizin2/dizin3/dizin4')
+
+Anadizin altýndayken þu komutlar hata verecektir:
+
+>>> os.rmdir('anadizin')
+>>> os.rmdir(r'anadizin/dizin1')
+>>> os.rmdir(r'anadizin/dizin1/dizin2/dizin3')
+
+Çünkü bu dizinlerinin hiçbirinin içi boþ deðil; her birinin içinde birer dizin var. Ama þu komut baþarýlý olacaktýr:
+
+>>> os.rmdir(r'anadizin/dizin1/dizin2/dizin3/dizin4')
+
+Bu þekilde yukarý doðru ilerleyerek sýrayla bütün dizinleri silebilirsiniz:
+
+>>> os.rmdir(r'anadizin/dizin1/dizin2/dizin3/')
+>>> os.rmdir(r'anadizin/dizin1/dizin2/')
+>>> os.rmdir(r'anadizin/dizin1')
+>>> os.rmdir(r'anadizin/')
+
+
+os.removedirs()
+
+os modülünün removedirs() fonksiyonu, içi boþ dizin yollarýný silmemizi saðlar. Peki bu ne demek?
+
+Diyelim ki elimizde þöyle bir dizin yapýsý var:
+
+|___ anadizin
+|___ dizin1
+|___ dizin2
+|___ dizin3
+|___ dizin4
+
+Anadizin altýndan þu komutu verdiðimizde:
+
+>>> os.removedirs('anadizin/dizin1/dizin2/dizin3/dizin4')
+
+Eðer bütün dizinlerin içi boþsa, anadizin‘den dizin4‘e kadar olan bütün dizinler (anadizin ve dizin4 dahil) silinecektir.
+
+
+os.stat()
+
+os modülünün stat() fonksiyonu dosyalar hakkýnda bilgi almamýzý saðlar. Bu fonksiyonu kullanarak bir dosyanýn boyutunu, oluþturulma tarihini, deðiþtirilme tarihini ve eriþilme tarihini sorgulayabiliriz.
+
+stat() fonksiyonunu þöyle kullanýyoruz:
+
+>>> dosya = os.stat('dosya_adý')
+>>> dosya
+
+Buradan þuna benzer bir çýktý alýrýz:
+
+os.stat_result(st_mode=33279, st_ino=17732923532961356,
+st_dev=1745874298, st_nlink=1, st_uid=0, st_gid=0,
+st_size=495616, st_atime=1416488851, st_mtime=1415275662,
+st_ctime=1415275658)
+
+Bu, kendi içinde birtakým nitelikler barýndýran özel bir veri tipidir. Bu veri tipinin barýndýrdýðý nitelikleri görmek için, her zaman olduðu gibi dir() fonksiyonundan yararlanabilirsiniz:
+
+dir(dosya)
+
+Burada özellikle iþimize yarayacak olan nitelikler þunlardýr:
+
+
+st_atime:dosyaya en son eriþilme tarihi 
+st_ctime:dosyanýn oluþturulma tarihi (Windows’ta) 
+st_mtime:dosyanýn son deðiþtirilme tarihi 
+st_size:dosyanýn boyutu 
+
+Mesela bir dosyanýn boyutunu öðrenmek için st_size niteliðini þu þekilde kullanabiliriz:
+
+>>> dosya = os.stat('dosya_adý')
+>>> dosya.st_size
+
+Bu fonksiyon bize ‘bayt’ cinsinden bir çýktý verir. Bunu kilobayta çevirmek için, bu deðeri 1024’e bölebilirsiniz:
+
+>>> dosya.st_size / 1024
+
+os modülünün stat() fonksiyonunu kullanarak bir dosyanýn oluþturulma, eriþilme ve deðiþtirilme tarihlerini de elde edebilirsiniz:
+
+>>> dosya = os.stat('dosya_adý')
+>>> dosya.st_ctime #oluþturulma tarihi
+>>> dosya.st_atime #eriþilme tarihi
+>>> dosya.st_mtime #deðiþtirme tarihi
+
+Uyarý
+
+GNU/Linux’ta bir dosyanýn ne zaman oluþturulduðunu öðrenmek mümkün deðildir. Dolayýsýyla dosya.st_ctime komutu yalnýzca Windows’ta bir dosyanýn oluþturulma tarihi verir. Bu komutu GNU/Linux’ta verdiðimizde elde edeceðimiz þey dosyanýn son deðiþtirilme tarihidir.
+
+Bu arada, yukarýdaki komutlarýn çýktýsý size anlamsýz gelmiþ olabilir. Birazdan, datetime adlý bir modülü öðrendiðimizde bu anlamsýz görünen sayýlarý anlamlý tarih bilgilerine nasýl dönüþtüreceðimizi de anlatacaðýz.
+
+
+os.system()
+
+os modülünün system() fonksiyonu Python içinden sistem komutlarýný veya baþka programlarý çalýþtýrabilmemizi saðlar. Mesela:
+
+>>> os.system('notepad.exe')
+
+
+os.urandom()
+
+os modülünün urandom() fonksiyonu rastgele bayt dizileri elde etmek için kullanýlabilir:
+
+>>> os.urandom(12)
+
+Bu komut, 12 bayttan oluþan rastgele bir dizi oluþturur. Buradan elde ettiðiniz rastgele deðeri kriptografik çalýþmalarda veya rastgele parola üretme iþlemlerinde kullanabilirsiniz.
+
+
+os.walk()
+
+Hatýrlarsanýz önceki sayfalarda os modülü içindeki listdir() adlý bir fonksiyondan söz etmiþtik. Bu fonksiyon, bir dizinin içeriðini listeleme imkaný veriyordu bize. Mesela o anda içinde bulunduðumuz dizinde hangi dosya ve alt dizinlerin olduðunu öðrenmek için þöyle bir komut kullanabiliyorduk:
+
+>>> os.listdir('.')
+
+['build.py', 'gtk', 'kitap', 'make.bat', 'Makefile',
+ 'meta_conf.py', 'py2', 'py3', 'theme', 'tk2', '__pycache__']
+
+Gördüðünüz gibi bu fonksiyon yalnýzca kendisine parametre olarak verilen dizinin içeriðini listeliyor. Örneðin yukarýdaki çýktýda görünen gtk, kitap, py2, py3, theme, tk2 ve __pycache__ birer dizin. Ama listdir() fonksiyonu bu dizinlerin de içine girip buradaki içeriði listelemeye çalýþmýyor. Eðer biz mesela theme dizininin içeriðini de listelemek istersek bunu açýkça belirtmemiz gerekir:
+
+>>> os.listdir('theme')
+
+['layout.html', 'localtoc.html', 'pydoctheme',
+ 'sidebar.html', 'static']
+
+Veya theme dizini içindeki static adlý dizine de eriþmek istersek bunu da þu þekilde açýk açýk ifade etmemiz gerekir:
+
+>>> os.listdir('theme/static')
+
+['basic.css', 'copybutton.js', 'py.png', 'sidebar.js']
+
+Peki ya biz o anda içinde bulunduðumuz dizinden itibaren içe doðru bütün dizinleri otomatik olarak taramak istersek ne yapacaðýz?
+
+Bunun için listdir() fonksiyonunu kullanarak özyinelemeli (recursive) bir fonksiyon yazabilirsiniz:
+
+import os
+
+def tara(dizin):
+baþlangýç = os.getcwd()
+dosyalar = []
+os.chdir(dizin)
+
+for öðe in os.listdir(os.curdir):
+if not os.path.isdir(öðe):
+dosyalar.append(öðe)
+else:
+dosyalar.extend(tara(öðe))
+
+os.chdir(baþlangýç)
+return dosyalar
+
+Not
+
+Bu kodlarda henüz öðrenmediðimiz tek þey os.path.isdir() fonksiyonu. Bu fonksiyon, kendisine parametre olarak verilen bir deðerin dizin olup olmadýðýný tespit etmemizi saðlýyor.
+
+Yukarýdaki kodlarda öncelikle o anda içinde bulunduðumuz dizinin konumunu baþlangýç adlý bir deðiþkene atýyoruz. Çünkü daha sonra buraya dönmemiz gerekecek:
+
+baþlangýç = os.getcwd()
+
+Ardýndan dosyalar adlý bir liste oluþturuyoruz:
+
+dosyalar = []
+
+Bu liste, dizinler içindeki bütün dosyalarý içinde barýndýracak.
+
+Daha sonra, tara() fonksiyonuna parametre olarak verilen dizin adlý dizinin içine giriyoruz:
+
+os.chdir(dizin)
+
+Bu dizinin içine girdikten sonra, mevcut dizin içindeki bütün öðeleri listdir() fonksiyonu ile tek tek tarýyoruz:
+
+for öðe in os.listdir(os.curdir):
+...
+
+Eðer tarama sýrasýnda karþýlaþtýðýmýz öðe bir dizin deðil ise:
+
+if not os.path.isdir(öðe):
+...
+
+Bu öðeyi, doðrudan en baþta tanýmladýðýmýz dosyalar adlý listeye gönderiyoruz:
+
+dosyalar.append(öðe)
+
+Ama eðer tarama sýrasýnda karþýlaþtýðýmýz öðe bir dizin ise:
+
+else:
+...
+
+tara() fonksiyonunun en baþýna dönüp, tanýmladýðýmýz bütün iþlemleri bu dizin üzerine özyinelemeli olarak uyguluyoruz ve elde ettiðimiz öðeleri dosyalar adlý listeye extend() metodu ile iþliyoruz:
+
+dosyalar.extend(tara(öðe))
+
+Burada neden append() deðil de extend() kullandýðýmýzý anlamak için, yukarýdaki kodu bir de append() ile yazýp elde ettiðiniz çýktýyý deðerlendirebilirsiniz.
+
+for döngüsünden çýktýktan sonra da tekrar en baþtaki konuma dönebilmek için aþaðýdaki komutu çalýþtýrýyoruz:
+
+os.chdir(baþlangýç)
+
+Eðer bu þekilde baþa dönmezsek, dizin yapýsý içindeki ilk alt dizine girildikten sonra programýmýz o konumda takýlý kalacaðý için öteki üst dizinlerin içini tarayamaz. Bunun ne demek olduðunu anlamak için kodlarý bir de os.chdir(baþlangýç) kodu olmadan çalýþtýrmayý deneyebilirsiniz.
+
+Yukarýdaki yöntem doðru olsa da, Python’da bir dizini en dibe kadar taramanýn en iyi yolu deðildir. Python bize bu iþ için özel bir fonksiyon sunar. Ýþte, bu bölümde ele alacaðýmýz bu fonksiyonun adý walk().
+
+Walk kelimesi Ýngilizcede ‘yürümek’ anlamýna gelir. walk() fonksiyonu da, kelimenin bu anlamýna uygun olarak, dizinler içinde ‘yürünmesini’ saðlar. Gelin bunu biraz açýklayalým.
+
+Þöyle bir durum düþünün: Sabit diskinizde, bir dizin içinde pek çok alt dizine daðýlmýþ bir sürü dosya var. Yani þunun gibi:
+
++anadizin
+|dosya.txt
+|dosya.doc
+|dosya.xls
+|dosya.jpeg
++resimler
+|resim1.jpeg
+|resim2.jpeg
+|resim3.jpeg
+|resim4.jpeg
++baþkadosyalar
+|dosya.pdf
+|dosya.zip
+|dosya.mp3
+|dosya.ogg
+|dosya.jpeg
+
+Siz bu iç içe geçmiþ dosya yýðýný içinden, sonu .jpeg ile bitenleri tek bir yerde toplamak istiyorsunuz. Elbette, eðer isterseniz bu .jpeg dosyalarýný tek tek elle bulup istediðiniz yere taþýyabilirsiniz. Ama bu yöntem bir Python programcýsýna yakýþmaz, deðil mi?
+
+Python programcýlarý bu tür angaryalarý kendi yapmak yerine Python’a yaptýrmayý tercih eder. O yüzden biz de bu iþi yapmak için Python’dan yararlanacaðýz.
+
+os modülünün walk() fonksiyonunu kullanarak bu görevi rahatlýkla yerine getirebilirsiniz.
+
+Peki ama nasýl?
+
+Öncelikle þu kodlar yardýmýyla, yukarýdaki sözünü ettiðimiz dosya-dizin yapýsýný oluþturalým. Böylece daha somut bir yapý üzerinde çalýþma imkaný elde etmiþ oluruz:
+
+import os
+
+uzantýlar = ['txt', 'doc', 'xls',
+'jpeg', 'pdf', 'zip',
+'mp3', 'ogg', 'jpeg']
+
+þablon1 = ['{}.{}'.format('dosya', i) for i in uzantýlar[:4]]
+þablon2 = ['resim{}.{}'.format(i, uzantýlar[-1]) for i in range(1, 5)]
+þablon3 = ['{}.{}'.format('dosya', i) for i in uzantýlar[4:]]
+
+dosyalar = [('anadizin', þablon1),
+('resimler', þablon2),
+('baþkadosyalar', þablon3)]
+
+os.makedirs(os.sep.join([dosya[0] for dosya in dosyalar]))
+
+for dizin, þablon in dosyalar:
+for s in þablon:
+open(os.sep.join([dizin, s]), 'w')
+os.chdir(dizin)
+
+Bu kodlarda, þu ana kadar görmediðimiz, öðrenmediðimiz hiçbir þey yok. Bu kodlarý rahatlýkla anlayabilecek kadar Python bilgisine sahipsiniz.
+
+Dosya-dizin yapýmýzý oluþturduðumuza göre, os modülünün walk() fonksiyonunu bu yapý üzerinde nasýl kullanacaðýmýza geçebiliriz.
+
+Þimdi ‘anadizin’ adlý klasörün bulunduðu dizin içinde etkileþimli kabuðu baþlatalým ve þu komutlarý verelim:
+
+>>> for i in os.walk('anadizin'):
+... print(i)
+
+Buradan þu çýktýyý alacaðýz:
+
+('anadizin', ['resimler'], ['dosya.doc', 'dosya.jpeg',
+'dosya.txt', 'dosya.xls'])
+('anadizin\\resimler', ['baþkadosyalar'], ['resim1.jpeg',
+'resim2.jpeg', 'resim3.jpeg', 'resim4.jpeg'])
+('anadizin\\resimler\\baþkadosyalar', [], ['dosya.jpeg',
+'dosya.mp3', 'dosya.ogg', 'dosya.pdf', 'dosya.zip'])
+
+Ýnceleme kolaylýðý açýsýndan bu çýktýnýn ilk kýsmýný ele alalým:
+
+('anadizin', ['resimler'], ['dosya.doc', 'dosya.jpeg',
+'dosya.txt', 'dosya.xls'])
+
+Gördüðünüz gibi, burada üç öðeli bir demet var. Çýktýnýn diðer kýsýmlarýný da incelerseniz ayný yapýyý göreceksiniz. Dolayýsýyla os.walk() komutu bize þu üç öðeden oluþan bir demet verir:
+
+(kökdizin, altdizinler, dosyalar)
+
+Yukarýdaki çýktýyý incelediðinizde bu yapýyý rahatlýkla görebilirsiniz:
+
+kökdizin => 'anadizin'
+altdizinler => ['resimler']
+dosyalar => ['dosya.doc', 'dosya.jpeg',
+'dosya.txt', 'dosya.xls']
+
+kökdizin => 'anadizin\\resimler'
+altdizinler => ['baþkadosyalar']
+dosyalar => ['resim1.jpeg', 'resim2.jpeg',
+'resim3.jpeg', 'resim4.jpeg']
+
+kökdizin => 'anadizin\\resimler\\baþkadosyalar'
+altdizinler => []
+dosyalar => ['dosya.jpeg', 'dosya.mp3',
+'dosya.ogg', 'dosya.pdf',
+'dosya.zip']
+
+Mesela bu üç öðeli demet içinden yalnýzca dosyalarý almak isterseniz þöyle bir komut verebilirsiniz:
+
+>>> for kökdizin, altdizinler, dosyalar in os.walk('anadizin'):
+... print(dosyalar)
+
+Burada, os.walk('anadizin') komutunun bize sunduðu üç öðeli demetin herbir öðesini, þu satýr yardýmýyla tek tek kökdizin, altdizinler ve dosyalar adlý deðiþkenlere atýyoruz:
+
+>>> for kökdizin, altdizinler, dosyalar in os.walk('anadizin'):
+... ...
+
+Sonra da bu üçlü içinden, dosyalar adlý deðiþkeni ekrana yazdýrýyoruz:
+
+>>> print(dosyalar)
+
+Bu da bize þöyle bir çýktý veriyor:
+
+['dosya.doc', 'dosya.jpeg', 'dosya.txt', 'dosya.xls']
+['resim1.jpeg', 'resim2.jpeg', 'resim3.jpeg', 'resim4.jpeg']
+['dosya.jpeg', 'dosya.mp3', 'dosya.ogg', 'dosya.pdf', 'dosya.zip']
+
+Gördüðünüz gibi, bu çýktýda ‘anadizin’ ve bunun altýndaki bütün dizinlerde yer alan bütün dosyalar var. Bu konunun baþýnda walk() fonksiyonunu tanýmlarken dediðimiz gibi, walk() fonksiyonu gerçekten de dizinler içinde ‘yürünmesini’ saðlýyor.
+
+Bu fonksiyonu daha iyi anlamak için birkaç deneme daha yapalým:
+
+>>> for kökdizin, altdizinler, dosyalar in os.walk('anadizin'):
+... print(altdizinler)
+...
+['resimler']
+['baþkadosyalar']
+
+Bu da bize ‘anadizin’ içindeki alt dizinlerin isimlerini veriyor.
+
+Bir de kökdizin deðiþkeninin ne olduðuna bakalým:
+
+>>> for kökdizin, altdizinler, dosyalar in os.walk('anadizin'):
+... print(yol)
+...
+anadizin
+anadizin\resimler
+anadizin\resimler\baþkadosyalar
+
+Burada da o üçlü deðiþkenler arasýndan kökdizin‘i yazdýrdýk ve gördük ki bu deðiþken bize bütün kök dizinlere iliþkin yol bilgilerini, yani dizinlerin adresini veriyor. Dolayýsýyla kökdizin deðiþkeni ile dosyalar deðiþkenini birleþtirerek bir dosyanýn tam adresini elde edebiliriz.
+
+Dikkatlice bakýn:
+
+>>> for kökdizin, altdizinler, dosyalar in os.walk('anadizin'):
+... for dosya in dosyalar:
+... print(os.sep.join([yol, dosya]))
+...
+anadizin\dosya.doc
+anadizin\dosya.jpeg
+anadizin\dosya.txt
+anadizin\dosya.xls
+anadizin\resimler\resim1.jpeg
+anadizin\resimler\resim2.jpeg
+anadizin\resimler\resim3.jpeg
+anadizin\resimler\resim4.jpeg
+anadizin\resimler\baþkadosyalar\dosya.jpeg
+anadizin\resimler\baþkadosyalar\dosya.mp3
+anadizin\resimler\baþkadosyalar\dosya.ogg
+anadizin\resimler\baþkadosyalar\dosya.pdf
+anadizin\resimler\baþkadosyalar\dosya.zip
+
+Bildiðiniz gibi, dosya deðiþkeninin bize verdiði veri tipi bir listedir. O yüzden bu listenin öðelerini tek tek alabilmek için bu liste üzerinde de bir for döngüsü kurduðumuza dikkat edin.
+
+Eðer yukarýdaki dizinler içinde yer alan bütün .jpeg dosyalarýný listelemek istersek de þöyle bir kod yazabiliriz:
+
+>>> for kökdizin, altdizinler, dosyalar in os.walk('anadizin'):
+... for dosya in dosyalar:
+... if dosya.endswith('.jpeg'):
+... print(dosya)
+...
+dosya.jpeg
+resim1.jpeg
+resim2.jpeg
+resim3.jpeg
+resim4.jpeg
+dosya.jpeg
+
+Gördüðünüz gibi, os.walk() fonksiyonu gayet pratik ve kullanýþlý bir araç.
+
+
+os.environ
+
+os modülünün environ adlý niteliði, kullandýðýmýz iþletim sistemindeki çevre deðiþkenleri hakkýnda bilgi edinmemizi saðlar.
+
+Bu nitelik alelade bir sözlüktür. Dolayýsýyla bu sözlüðün içinde neler olduðunu þu kodlarla görebilirsiniz:
+
+>>> for k, v in os.environ.items():
+... print(k.ljust(10), v)
+
+Sözlük içindeki istediðiniz bir deðere nasýl eriþeceðinizi biliyorsunuz:
+
+>>> os.environ['HOMEPATH']
+
+'\\Documents and Settings\\fozgul'
+
+>>> os.environ['USERNAME']
+
+'FOZGUL'
+
+Yalnýz, Windows ve GNU/Linux iþletim sistemlerinde çevre deðiþkenleri ve bunlarýn adlarý birbirinden farklý olduðu için, doðal olarak environ niteliði de farklý iþletim sistemlerinde farklý çýktýlar verir. Birden fazla iþletim sistemi üzerinde çalýþacak þekilde tasarladýðýmýz programlarda bu duruma dikkat etmeliyiz. Örneðin Windows’ta kullanýcý adýný veren çevre deðiþkeni ‘USERNAME’ iken, GNU/Linux’ta bu deðiþken ‘USER’ olarak adlandýrýlýr.
+
+
+os.path
+
+os modülü üzerinde dir() fonksiyonunu uyguladýðýnýzda, orada path adlý bir niteliðin olduðunu göreceksiniz. Bu nitelik, kendi içinde pek çok önemli fonksiyon ve baþka nitelik barýndýrýr.
+
+Þimdi bu bölümde os.path adlý bu niteliðin içeriðini inceleyeceðiz.
+
+
+os.path.abspath()
+
+abspath() fonksiyonu, bir dosyanýn tam yolunun ne olduðunu söyler:
+
+>>> os.path.abspath('falanca.txt')
+
+
+os.path.dirname()
+
+dirname() fonksiyonu, bir dosya yolunun dizin kýsmýný verir:
+
+>>> os.path.dirname('/home/istihza/Desktop/falanca.txt')
+
+'/home/istihza/Desktop'
+
+Bu fonksiyonu abspath() fonksiyonu ile birlikte kullanabilirsiniz:
+
+>>> os.path.dirname(os.path.abspath('falanca.txt'))
+
+'/home/istihza/Desktop'
+
+
+os.path.exists()
+
+exists() fonksiyonu bir dosya veya dizinin varolup olmadýðýný kontrol eder:
+
+>>> os.path.exists('/home/istihza/Desktop/falanca.txt')
+
+Eðer böyle bir dosya varsa yukarýdaki kod True çýktýsý, yoksa False çýktýsý verir.
+
+
+os.path.expanduser()
+
+expanduser() fonksiyonu bilgisayardaki kullanýcýya ait dizinin adresini verir:
+
+>>> os.path.expanduser('~')
+
+'C:\\Documents and Settings\\fozgul'
+
+veya:
+
+>>> os.path.expanduser('~')
+
+'/home/istihza'
+
+Bu fonksiyonu kullanarak, Windows’ta belirli bir kullanýcý ismi ve dizini de oluþturabilirsiniz:
+
+>>> os.path.expanduser('~denizege')
+
+'C:\\Documents and Settings\\denizege'
+
+
+os.path.isdir()
+
+isdir() fonksiyonu, kendisine parametre olarak verilen öðenin bir dizin olup olmadýðýný sorgular:
+
+>>> os.path.isdir('/home/istihza')
+
+Eðer parametre bir dizin ise True, eðer bir dosya ise False çýktýsý alýnýr.
+
+
+os.path.isfile()
+
+isfile() fonksiyonu, kendisine parametre olarak verilen öðenin bir dosya olup olmadýðýný sorgular:
+
+>>> os.path.isfile('/home/istihza/falance.txt')
+
+Eðer parametre bir dosya ise True, eðer bir dizin ise False çýktýsý alýnýr.
+
+
+os.path.join()
+
+join() fonksiyonu, kendisine verilen parametrelerden, ilgili iþletim sistemine uygun yol adresleri oluþturur:
+
+>>> os.path.join('dizin1', 'dizin2', 'dizin3') #Windows
+
+'dizin1\\dizin2\\dizin3'
+
+>>> os.path.join('dizin1', 'dizin2', 'dizin3')
+
+'dizin1/dizin2/dizin3'
+
+
+os.path.split()
+
+split() fonksiyonu, bir yol adresinin son kýsmýný baþ kýsmýndan ayýrýr:
+
+>>> os.path.split('/home/istihza/Desktop')
+
+('/home/istihza', 'Desktop')
+
+Bu fonksiyonu kullanarak dosya adlarýný dizin adlarýndan ayýrabilirsiniz:
+
+>>> dizin, dosya = os.path.split('/home/istihza/Desktop/falanca.txt')
+>>> dizin
+
+'/home/istihza/Desktop'
+
+>>> dosya
+
+'falanca.txt'
+
+
+os.path.splitext()
+
+splitext() fonksiyonu dosya adý ile uzantýsýný birbirinden ayýrmak için kullanýlýr:
+
+>>> dosya, uzantý = os.path.splitext('falanca.txt')
+>>> dosya
+
+'falanca'
+
+>>> uzantý
+
+'.txt'
+
+Gördüðünüz gibi, kendi içinde pek çok nitelik ve fonksiyon barýndýran os.path, kullandýðýmýz iþletim sistemine uygun þekilde dizin iþlemleri yapabilmemizi saðlayan son derece faydalý bir araçtýr.
+
+Gelin isterseniz þimdi biraz bu os.path niteliðinin bazý önemli özelliklerinden söz edelim.
+
+Hatýrlarsanýz önceki derslerimizde, modüllerin kaynak dosyalarýný görmemizi saðlayan __file__ adlý bir araçtan söz etmiþtik. Mesela bu aracý os modülü üzerinde uyguladýðýmýzda þuna benzer bir çýktý alýyorduk:
+
+>>> os.__file__
+
+'C:\\Python\\lib\\os.py'
+
+Demek ki os modülünün kaynak kodlarý bu dizin içinde yer alýyormuþ...
+
+Normalde __file__ niteliðini yalnýzca modül adlarýna uygulayabilirsiniz. Modüllerin nitelik ve fonksiyonlarý üzerinde __file__ aracý kullanýlamaz:
+
+>>> os.name.__file__
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'str' object has no attribute '__file__'
+
+>>> os.walk.__file__
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'function' object has no attribute '__file__'
+
+Ama os modülünün path niteliði için durum biraz farklýdýr:
+
+>>> os.path.__file__
+
+Eðer bu komutu Windows’ta verdiyseniz þu çýktýyý alýrsýnýz:
+'C:\Python35\lib\ntpath.py' 
+Ama eðer bu komutu GNU/Linux’ta verdiyseniz þuna benzer bir çýktý alýrsýnýz:
+'/home/python35/lib/python3.5/posixpath.py' 
+Gördüðünüz gibi, __file__, os.path üzerinde kullanýlabiliyor. Yukarýdaki çýktýlardan anladýðýmýza göre os.path niteliði Windows’ta ntpath, GNU/Linux’ta ise posixpath adlý bir modüle atýfta bulunuyor.
+
+Dolayýsýyla aslýnda biz os.path niteliðini kullanýrken, eðer Windows’ta isek ntpath adlý bir modülü, ama eðer GNU/Linux’ta isek posixpath adlý bir modülü içe aktarmýþ oluyoruz.
+
+Eðer os.path adlý ortak bir arayüz olmasaydý, yukarýda os.path baþlýðý altýnda incelediðimiz araçlarý kullanabilmek için, kullandýðýmýz iþletim sistemine göre posixpath veya ntpath modüllerinden uygun olanýný kendimiz elle içe aktarmak zorunda kalacaktýk:
+
+if os.name == 'nt':
+import ntpath as path
+
+else:
+import posixpath as path
+
+Ama Python programlama dilinin bize os.path adlý niteliði sunmuþ olmasý sayesinde Windows iþletim sistemi için ntpath, GNU/Linux iþletim sistemi için ise posixpath modülünü ayrý ayrý içe aktarmamýza gerek kalmýyor. Bütün iþi bizim yerimize Python hallediyor. Böylece farklý iþletim sistemlerine iliþkin birbirinden farklý iþlemleri, os.path adlý tek bir arayüz üzerinden gerçekleþtirebiliyoruz.
+
+

@@ -1,0 +1,29 @@
+
+import paket
+
+Mesela urllib paketini ele alalým. Týpký os modülünde yaptýðýmýz gibi, urllib modülünü de þu þekilde içe aktarabiliriz:
+
+>>> import urllib
+
+Ancak os modülünün aksine, urllib paketini içe aktardýðýmýzda mevcut isim alanýna herhangi bir nitelik veya metot otomatik olarak aktarýlmaz. Örneðin os modülünü içe aktardýðýmýzda bu modülün içeriðinin, os öneki altýnda mevcut isim alanýna döküldüðünü biliyoruz:
+
+>>> dir(os)
+
+Gördüðünüz gibi, modül içeriði kullanýlabilir durumda. Listedeki nitelik ve metotlara os öneki ile eriþebiliriz:
+
+>>> os.name
+>>> os.listdir(os.getcwd())
+
+gibi...
+
+Ancak import os komutunun aksine, import urllib komutu, paket içeriðini otomatik olarak mevcut isim alanýna aktarmaz:
+
+>>> import urllib
+>>> dir(urllib)
+
+['__builtins__', '__cached__', '__doc__', '__file__',
+ '__loader__', '__name__', '__package__', '__path__',
+ '__spec__']
+
+Gördüðünüz gibi listede yalnýzca standart metot ve nitelikler var. Bu listede mesela paket içeriðinde olduðunu bildiðimiz error.py, parse.py, request.py, response.py ve robotparser.py gibi modülleri göremiyoruz. Eðer paket içinde bulunan belirli bir modülü içe aktarmak istiyorsak bunu açýk açýk belirtmeliyiz. Nasýl mý? Görelim...
+

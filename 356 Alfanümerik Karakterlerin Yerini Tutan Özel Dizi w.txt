@@ -1,0 +1,64 @@
+
+Alfanümerik Karakterlerin Yerini Tutan Özel Dizi: \w
+
+Bu sembol, bir karakter dizisi içinde geçen alfanümerik karakterleri ve buna ek olarak “_” karakterini bulmak için kullanýlýr. Þu örneðe bakalým:
+
+>>> a = "abc123_$%+"
+>>> print(re.search("\w*", a).group())
+
+abc123_
+
+“\w” özel dizisinin hangi karakterleri eþlediðine dikkat edin. Bu özel dizi þu ifadeyle ayný anlama gelir:
+
+[A-Za-z0-9_]
+
+Düzenli ifadeler içindeki özel diziler genel olarak bunlardan ibarettir. Ama bir de bunlarýn büyük harfli versiyonlarý vardýr ki, önemli olduklarý için onlarý da inceleyeceðiz.
+
+Gördüðünüz gibi;
+
+“\s” özel dizisi boþluk karakterlerini avlýyor 
+“\d” özel dizisi ondalýk sayýlarý avlýyor 
+“\w” özel dizisi alfanümerik karakterleri ve “_” karakterini avlýyor 
+Dedik ki, bir de bunlarýn büyük harfli versiyonlarý vardýr. Ýþte bu büyük harfli versiyonlar da yukarýdaki dizilerin yaptýðý iþin tam tersini yapar. Yani:
+
+“\S” özel dizisi boþluk olmayan karakterleri avlar 
+“\D” özel dizisi ondalýk sayý olmayan karakterleri avlar. Yani “[^0-9]” ile eþdeðerdir. 
+“\W” özel dizisi alfanümerik olmayan karakterleri ve “_” olmayan karakterleri avlar. Yani [^A-Za-z0-9_] ile eþdeðerdir. 
+“\D” ve “\W” dizilerinin yeterince anlaþýlýr olduðunu zannediyorum. Burada sanýrým sadece “S” dizisi bir örnekle somutlaþtýrýlmayý hakediyor:
+
+>>> a = ["5 Ocak", "27Mart", "4 Ekim", "Nisan 3"]
+>>> for i in a:
+... nesne = re.search("\d+\S\w+",i)
+... if nesne:
+... print(nesne.group())
+...
+27Mart
+
+Burada “\S” özel dizisinin listede belirtilen konumda boþluk içermeyen öðeyi nasýl bulduðuna dikkat edin.
+
+Þimdi bu özel diziler için genel bir örnek verip konuyu kapatalým...
+
+Bilgisayarýmýzda þu bilgileri içeren “adres.txt” adlý bir dosya olduðunu varsayýyoruz:
+
+esra : istinye 05331233445 esma : levent 05322134344 sevgi : dudullu
+05354445434 kemal : sanayi 05425455555 osman : tahtakale 02124334444
+metin : taksim 02124344332 kezban : caddebostan 02163222122
+
+Amacýmýz bu dosyada yer alan isim ve telefon numaralarýný “isim > telefon numarasý” þeklinde almak:
+
+import re
+dosya = open("adres.txt")
+for i in dosya.readlines():
+nesne = re.search("(\w+)\s+:\s(\w+)\s+(\d+)",i)
+if nesne:
+print("{} > {}".format(nesne.group(1), nesne.group(3)))
+
+Burada formülümüz þu þekilde: “Bir veya daha fazla karakter” + “bir veya daha fazla boþluk” + “’:’ iþareti” + “bir adet boþluk” + “bir veya daha fazla sayý”
+
+Ýsterseniz bu bölümü çok basit bir soruyla kapatalým. Sorumuz þu:
+
+Elimizde þu adresteki yýðýn var: http://www.istihza.com/denemeler/yigin.txt
+
+Yapmanýz gereken, bu yýðýn içindeki gizli mesajý düzenli ifadeleri kullanarak bulmak...
+
+

@@ -1,0 +1,132 @@
+
+Veri Doðrulamasý
+
+@property bezeyicisinin üç önemli iþlevi bulunur:
+
+Deðer döndürmek 
+Deðer atamak 
+Deðer silmek 
+Yukarýdaki örneklerde bu bezeyicinin deðer döndürme iþlevini görmüþtük. Þimdi ise bu bezeyicinin deðer atama iþlevini anlamaya çalýþalým.
+
+Bildiðiniz gibi, @property bezeyicisinin ‘deðer döndürme’ iþlevini kullanarak, bir niteliðe eriþimi kýsýtlayabiliyoruz. Örneðin, zamanýnda þöyle bir kod yazdýðýmýzý varsayalým:
+
+class Program():
+def __init__(self):
+self.sayý = 0
+
+Daha sonra herhangi bir sebepten ötürü buradaki self.sayý niteliðine eriþimi kýsýtlayýp bu niteliði üzerinde deðiþiklik yapýlamaz hale getirmek istersek @property bezeyicisinden yararlanabiliriz:
+
+class Program():
+def __init__(self):
+self._sayý = 0
+
+@property
+def sayý(self):
+return self._sayý
+
+Gördüðünüz gibi, öncelikle self.sayý adlý niteliði, baþýna bir alt çizgi getirerek normal eriþime kapatmak istediðimizi belirttik. Bu kodlarý görenler, sayý niteliðinin yarý-gizli bir üye olduðunu anlayýp ona göre davranacak. Ayrýca biraz sonra tanýmlayacaðýmýz sayý() fonksiyonuyla bu deðiþkenin adýnýn birbirine karýþmamasý için de bir önlem almýþ olacaðýz. Python’da bir deðiþkenin adýný deðiþtirmeden o deðiþkene eriþimi kontrol altýna almak istediðimizde tek alt çizgi kullanmak tercih edilen bir yöntemdir.
+
+Daha sonra da sayý() fonksiyonumuzu tanýmlýyoruz:
+
+@property
+def sayý(self):
+return self._sayý
+
+Bu sayý() fonksiyonunu @property ile bezediðimiz için, fonksiyon bir niteliðe dönüþtü ve sayý deðiþkenini salt okunur hale getirdi. Eðer amacýnýz deðiþkeni salt okunur hale getirmek deðilse @property ile bezediðimiz fonksiyon için bir setter parametresi tanýmlayabilirsiniz. Nasýl mý? Dikkatlice inceleyin:
+
+class Program():
+def __init__(self):
+self._sayý = 0
+
+@property
+def sayý(self):
+return self._sayý
+
+@sayý.setter
+def sayý(self, yeni_deðer):
+self._sayý = yeni_deðer
+return self._sayý
+
+@property ile bezeyerek bir nitelik haline getirdiðiniz fonksiyonu yazýlabilir hale getirmek ve bu yazma iþleminin nasýl olacaðýný belirlemek için özel bir .setter bezeyicisi ile bezenmiþ yeni bir fonksiyon tanýmlayabilirsiniz.
+
+Biz yukarýda, yine sayý adýný taþýyan, .setter ile bezenmiþ bir fonksiyon daha tanýmladýk:
+
+@sayý.setter
+def sayý(self, yeni_deðer):
+self._sayý = yeni_deðer
+return self._sayý
+
+Yukarýdaki kodlarý çalýþtýrdýðýmýzda, _sayý deðiþkenine sayý adý ile normal bir þekilde eriþip istediðimiz deðiþikliði yapabiliyoruz:
+
+>>> p = Program()
+>>> p.sayý
+
+0
+
+>>> p.sayý = 5
+>>> p.sayý
+
+5
+
+Gördüðünüz gibi, artýk sayý deðiþkeni, kendisi için bir .setter bezeyicisi tanýmlamýþ olmamýz sayesinde deðiþiklik kabul ediyor.
+
+.setter bezeyicisini, bir niteliði yazýlabilir hale getirmenin yanýsýra, doðrulama iþlemleri için de kullanabilirsiniz.
+
+Basit bir örnek verelim:
+
+class Program():
+def __init__(self):
+self._sayý = 0
+
+@property
+def sayý(self):
+return self._sayý
+
+@sayý.setter
+def sayý(self, yeni_deðer):
+if yeni_deðer % 2 == 0:
+self._sayý = yeni_deðer
+else:
+print('çift deðil!')
+
+return self.sayý
+
+Burada, self.sayý niteliðinin deðerini çift sayýlarla sýnýrlandýrdýk. Veri doðrulama/kýsýtlama iþlemini .setter bezeyicisi içinden gerçekleþtirdiðimize dikkatinizi çekmek isterim. Buna göre, eðer self.sayý deðiþkenine girilen deðer bir çift sayý ise bu deðiþikliði kabul ediyoruz. Aksi halde ‘çift deðil!’ uyarýsý gösteriyoruz:
+
+>>> p = Program()
+>>> p.sayý = 2
+>>> p.sayý = 5
+
+'çift deðil!'
+
+Bu arada, .setter dýþýnda .deleter adlý özel bir @property bezeyicisi daha bulunur. Bunu da bir deðeri silmek için kullanýyoruz:
+
+class Program():
+def __init__(self):
+self._sayý = 0
+
+@property
+def sayý(self):
+return self._sayý
+
+@sayý.setter
+def sayý(self, yeni_deðer):
+if yeni_deðer % 2 == 0:
+self._sayý = yeni_deðer
+else:
+print('çift deðil!')
+
+return self.sayý
+
+@sayý.deleter
+def sayý(self):
+del self._sayý
+
+Gördüðünüz gibi, @property bezeyicisini kullanýrken üç ayrý metot tanýmlýyoruz:
+
+Ýlgili niteliðe nasýl ulaþacaðýmýzý gösteren bir metot: Bu metodu @property ile beziyoruz. 
+Ýlgili niteliði nasýl ayarlayacaðýmýzý gösteren bir metot: Bu metodu @metot_adý.setter þeklinde beziyoruz. 
+Ýlgili niteliði nasýl sileceðimizi gösteren bir metot: Bu metodu @metot_adý.deleter þeklinde beziyoruz. 
+Bu bölümde nesne tabanlý programlamanýn orta-ileri düzey sayýlabilecek yönlerine temas ettik. Artýk nesne tabanlý programlamanýn temellerinden biraz daha fazlasýný bildiðinizi rahatlýkla iddia edebilirsiniz.
+
+

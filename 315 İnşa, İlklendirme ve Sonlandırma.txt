@@ -1,0 +1,14 @@
+
+Ýnþa, Ýlklendirme ve Sonlandýrma
+
+Python’da bir sýnýfýn ömrü üç aþamadan oluþur:
+
+
+Ýnþa (Construction) 
+Ýlklendirme (initialization) 
+Sonlandýrma (destruction) 
+
+Biz bundan önceki derslerimizde ilklendirme sürecinin nasýl yürüdüðünü görmüþtük. Bu dersimizde ise, ilklendirme sürecine de tekrar deðinmekle birlikte, özellikle inþa ve sonlandýrma süreçlerini ele alacaðýz.
+
+Önceki derslerimizden de bildiðimiz gibi, Python’da bir sýnýfý ilklendirmek için __init__() adlý bir metottan yararlanýyoruz. Ancak, adýnýn aksine, ilklendirme, sýnýflarýn oluþturulmasýna iliþkin ilk basamak deðildir. Python, bir sýnýfýn ilklendirilmesinden önce o sýnýfý inþa eder. Bu inþa iþleminden sorumlu metodun adý ise __new__()‘dur. Gelin bu metodu yakýndan tanýmaya çalýþalým.
+

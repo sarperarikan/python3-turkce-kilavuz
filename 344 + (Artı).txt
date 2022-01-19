@@ -1,0 +1,63 @@
+
++ (Artý)
+
+Bu metakarakter, bir önceki metakarakterimiz olan “*” ile benzerdir. Hatýrlarsanýz, “*” metakarakteri kendisinden önceki sýfýr veya daha fazla sayýda tekrar eden karakterleri ayýklýyordu. “+” metakarakteri ise kendisinden önceki bir veya daha fazla sayýda tekrar eden karakterleri ayýklar. Bildiðiniz gibi, önceki örneklerimizden birinde “ahmet” ve “mehmet” öðelerini þu þekilde ayýklamýþtýk:
+
+>>> for i in liste:
+... if re.match(".*met",i):
+... print(i)
+
+Burada “ahmet” ve “mehmet” dýþýnda “met” þeklinde bir öðe de bu düzenli ifadenin kapsamýna girecektir. Mesela listemiz þöyle olsa idi:
+
+>>> liste = ["ahmet", "mehmet", "met", "kezban"]
+
+Yukarýdaki düzenli ifade bu listedeki “met” öðesini de içine alacaktý. Çünkü “*” adlý metakarakter sýfýr sayýda tekrar eden karakterleri de ayýklýyor. Ama bizim istediðimiz her zaman bu olmayabilir. Bazen de, ilgili karakterin en az bir kez tekrar etmesini isteriz. Bu durumda yukarýdaki düzenli ifadeyi þu þekilde yazmamýz gerekir:
+
+>>> for i in liste:
+... if re.match(".+met",i):
+... print(i)
+
+Burada þu komutu vermiþ olduk: ” Bana sonu ‘met’ ile biten bütün öðeleri ver! Ama bana ‘met’ öðesini yalnýz baþýna verme!”
+
+Ayný iþlemi search() metodunu kullanarak da yapabileceðimizi biliyorsunuz:
+
+>>> for i in liste:
+... nesne = re.search(".+met",i)
+... if nesne:
+... nesne.group()
+...
+ahmet
+mehmet
+
+Bir de daha önce verdiðimiz þu örneðe bakalým:
+
+>>> yeniliste = ["st", "sat", "saat", "saaat", "falanca"]
+>>> for i in yeniliste:
+... if re.match("sa*t",i):
+... print(i)
+
+Burada yazdýðýmýz düzenli ifadenin özelliði nedeniyle “st” de kapsama alaný içine giriyordu. Çünkü burada “*” sembolü “a” karakterinin hiç bulunmadýðý durumlarý da içine alýyor. Ama eðer biz “a” karakteri en az bir kez geçsin istiyorsak, düzenli ifademizi þu þekilde yazmalýyýz:
+
+>>> for i in yeniliste:
+... if re.match("sa+t", i):
+... print(i)
+
+Hatýrlarsanýz önceki derslerimizden birinde köþeli parantezi anlatýrken þöyle bir örnek vermiþtik:
+
+>>> a = ["23BH56", "TY76Z", "4Y7UZ", "TYUDZ", "34534"]
+>>> for i in a:
+... if re.match("[A-Z][A-Z][0-9]",i):
+... print(i)
+
+Burada amacýmýz sadece “TY76Z” öðesini almaktý. Dikkat ederseniz, öðenin baþýndaki “T” ve “Y” harflerini bulmak için iki kez “[A-Z]” yazdýk. Ama artýk “+” metakarakterini öðrendiðimize göre ayný iþi daha basit bir þekilde yapabiliriz:
+
+>>> for i in a:
+... if re.match("[A-Z]+[0-9]",i):
+... print(i)
+...
+TY76Z
+
+Burada “[A-Z]” düzenli ifade kalýbýný iki kez yazmak yerine bir kez yazýp yanýna da “+” sembolünü koyarak, bu ifade kalýbýnýn bir veya daha fazla sayýda tekrar etmesini istediðimizi belirttik...
+
+“+” sembolünün ne iþ yaptýðýný da anladýðýmýza göre, artýk yeni bir metakarakteri incelemeye baþlayabiliriz.
+

@@ -1,0 +1,44 @@
+
+subn() metodu
+
+Bu metodu çok kýsa bir þekilde anlatýp geçeceðiz. Çünkü bu metot sub() metoduyla neredeyse tamamen aynýdýr. Tek farký, subn() metodunun bir metin içinde yapýlan deðiþiklik sayýsýný da göstermesidir. Yani bu metodu kullanarak, kullanýcýlarýnýza “toplam þu kadar sayýda deðiþiklik yapýlmýþtýr” þeklinde bir bilgi verebilirsiniz. Bu metot çýktý olarak iki öðeli bir demet verir. Birinci öðe deðiþtirilen metin, ikinci öðe ise yapýlan deðiþiklik sayýsýdýr. Yani kullanýcýya deðiþiklik sayýsýný göstermek için yapmanýz gereken þey, bu demetin ikinci öðesini almaktýr. Mesela sub() metodunu anlatýrken verdiðimiz kodlarýn son satýrýný þöyle deðiþtirebilirsiniz:
+
+ab = derle.subn(degistir, metin)
+print("Toplam {} deðiþiklik yapýlmýþtýr.".format(ab[1]))
+
+Yani:
+
+import re
+
+metin = """Karadeniz Ereðlisi denince akla ilk olarak kömür ve demir-çelik
+gelir. Kokusu ve tadýyla dünyaya nam salmýþ meþhur Osmanlý çileði ise ismini
+verdiði festival günleri dýþýnda pek hatýrlanmaz. Oysa Çin'den Arnavutköy'e
+oradan da Ereðli'ye getirilen krallarýn meyvesi çilek, burada geçirdiði deðiþim
+sonucu tadýna doyulmaz bir hal alýr. Ereðli'nin havasýndan mý suyundan mý
+bilinmez, kokusu, tadý bambaþka bir hale dönüþür ve meþhur Osmanlý çileði
+unvanýný hak eder. Bu nazik ve aromalý çilekten yapýlan reçel de likör de bir
+baþka olur. Bu yýl dokuzuncusu düzenlenen Uluslararasý Osmanlý Çileði Kültür
+Festivali'nde 36 üretici arasýnda yetiþtirdiði çileklerle birinci olan Kocaali
+Köyü'nden Güner Özdemir, yýlda bir ton ürün alýyor. 60 yaþýndaki Özdemir,
+çileklerinin sýrrýný yoðun ilgiye ve içten duyduðu sevgiye baðlýyor: "Erkekler
+bahçemize giremez. Koca ayaklarýyla ezerler çileklerimizi" Çileði toplamanýn zor
+olduðunu söyleyen Ayþe Özhan da çocukluðundan bu yana çilek bahçesinde
+çalýþýyor. Her sabah 04.00'te kalkan Özhan, çileklerini özenle suluyor. Kasým
+baþýnda ektiði çilek fideleri haziran baþýnda meyve veriyor."""
+
+derle = re.compile("çile[kð]", re.IGNORECASE)
+
+def degistir(nesne):
+a = {"çileð":"erið", "Çileð":"Erið", "Çilek":"Erik", "çilek":"erik"}
+b = nesne.group().split()
+for i in b:
+return a[i]
+
+ab = derle.subn(degistir, metin)
+print("Toplam {} deðiþiklik yapýlmýþtýr.".format(ab[1]))
+
+
+Sonuç
+
+Böylelikle düzenli ifadeler konusunu bitirmiþ olduk. Buradaki amacýmýz, size düzenli ifadeler konusunda genel bir bakýþ sunabilmekti. Bu yazýlarý okuduktan sonra kafanýzda düzenli ifadelerle ilgili kabataslak da olsa bir resim oluþtuysa bu yazýlar amacýna ulaþmýþ demektir. Elbette düzenli ifadeler burada anlattýklarýmýzdan ibaret deðildir. Bu konunun üzerine eðildiðinizde aslýnda düzenli ifadelerin dipsiz bir kuyu gibi olduðunu göreceksiniz. Esasýnda en baþta da dediðimiz gibi, düzenli ifadeler apayrý bir dil gibidir. Doðrusu þu ki, düzenli ifadeler baþlý baþýna baðýmsýz bir sistemdir. Hemen hemen bütün programlama dilleri öyle ya da böyle düzenli ifadeleri destekler. Python’da düzenli ifadeleri bünyesine adapte etmiþ dillerden biridir. Bizim düzenli ifadeler konusundaki yaklaþýmýmýz, her zaman bunlarý “gerektiðinde” kullanmak olmalýdýr. Dediðimiz gibi, eðer yapmak istediðiniz bir iþlemi karakter dizilerinin metotlarý yardýmýyla yapabiliyorsanýz düzenli ifadelere giriþmemek en iyisidir. Çünkü karakter dizisi metotlarý hem daha hýzlýdýr hem de anlamasý daha kolaydýr.
+

@@ -1,0 +1,53 @@
+
+Paketlerin Yola Eklenmesi
+
+Daha önce de birkaç kez vurguladýðýmýz gibi, içe aktarma iþlemlerinde Python aradýðýmýz modülü veya paketi bulabilmek için sys.path adlý listede görünen dizinlerin içine bakar. Eðer içe aktarmak istediðiniz paket dizini bu listede deðilse, o paketi içe aktarabilmek için, komut satýrýný o dizinin bulunduðu klasörde açmanýz gerekir. Yani standart paketler ve üçüncü þahýs paketlerin aksine, sys.path‘e eklenmemiþ bir paketi her yerden içe aktaramazsýnýz.
+
+Peki bir paketi sys.path listesine nasýl ekleyeceðiz?
+
+Aslýnda bu sorunun cevabý çok basit. Bildiðiniz gibi, sys.path aslýnda basit bir listeden ibarettir. Dolayýsýyla listeler üzerinde nasýl deðiþiklik yapýyorsanýz, sys.path üzerinde de o þekilde deðiþiklik yapacaksýnýz.
+
+Gelin isterseniz, yukarýda oluþturduðumuz paket adlý paket üzerinden bir uygulama yapalým.
+
+Python’da bir paketi sys.path listesine eklerken dikkat etmemiz gereken çok önemli bir konu var: Bir paketi sys.path listesine eklerken, paket adýna karþýlýk gelen dizini deðil, paketi içeren dizini bu listeye eklemeliyiz. Yani mesela paket adlý dizin masaüstündeyse, bizim listeye masaüstünün olduðu dizini eklememiz gerekiyor, paketin olduðu dizini deðil...
+
+Dikkatlice bakýn:
+
+>>> import os, sys
+>>> kullanýcý = os.environ['HOME'] #Windows'ta os.environ['HOMEPATH']
+>>> masaüstü = os.path.join(kullanýcý, 'Desktop')
+>>> sys.path.append(masaüstü)
+
+Böylece masaüstünün bulunduðu dizini sys.path‘e eklemiþ olduk. Burada uyguladýðýmýz adýmlara þöyle bir bakalým.
+
+Öncelikle gerekli modülleri içe aktardýk:
+
+>>> import os, sys
+
+Amacýmýz masaüstünün yolunu sys.path‘e eklemek. Dolayýsýyla öncelikle kullanýcý dizininin nerede olduðunu tespit etmemiz lazým. Bildiðiniz gibi, kullanýcý dizinleri, bilgisayarý kuran kiþinin ismine göre belirlendiði için, bütün bilgisayarlarda bu deðer farklý olur. Bu deðerin ne olduðu tespit edebilmek için os modülünün environ niteliðinden yararlanabiliriz. Bu nitelik, iþletim sistemine özgü çevre deðiþkenlerini tutar.
+
+GNU/Linux’ta kullanýcý dizinini tutan çevre deðiþkeni ‘HOME’ anahtarý ile gösterilir:
+
+>>> kullanýcý = os.environ['HOME']
+
+Windows’ta ise ‘HOMEPATH’ anahtarýný kullanýyoruz:
+
+>>> kullanýcý = os.environ['HOMEPATH']
+
+Kullanýcý dizinini elde ettikten sonra, masaüstüne giden yolu bulabilmek için þu komutu kullanýyoruz:
+
+>>> masaüstü = os.path.join(kullanýcý, 'Desktop')
+
+Sýra geldi elde ettiðimiz tam dizin yolunu sys.path‘e eklemeye:
+
+>>> sys.path.append(masaüstü)
+
+Gördüðünüz gibi, listelerin append() metodu yardýmýyla masaüstünün yolunu sys.path adlý listeye ekledik.
+
+Artýk masaüstünde bulunan paketleri rahatlýkla her yerden içe aktarabiliriz.
+
+Not
+
+os modülü hakkýnda daha geniþ bilgi için os Modülü baþlýklý konuyu inceleyebilirsiniz. sys modülü hakkýnda bilgi için ise sys Modülü baþlýðýný ziyaret edebilirsiniz.
+
+

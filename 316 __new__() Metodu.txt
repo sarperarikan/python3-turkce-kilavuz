@@ -1,0 +1,61 @@
+
+__new__() Metodu
+
+Bildiðiniz gibi, Python’da basit bir sýnýfý þu þekilde tanýmlýyoruz:
+
+class Sýnýf():
+def __init__(self):
+print('merhaba sýnýf!')
+
+Burada __init__() metodu, sýnýfýmýz örneklenir örneklenmez hangi iþlemlerin yapýlacaðýný gösteriyor. Yani mesela sýnýf = Sýnýf() gibi bir kod yardýmýyla Sýnýf() adlý sýnýfý örneklediðimiz anda ne olacaðýný bu __init__() metodu içinde tanýmlýyoruz:
+
+>>> # Yukarýdaki kodlarýn `sýnýf.py` adlý bir dosyada olduðunu varsayalým
+>>> import sýnýf
+>>> snf = sýnýf.Sýnýf()
+
+merhaba sýnýf!
+
+Gördüðünüz gibi, tam da __init__() metodunda tanýmladýðýmýz þekilde, sýnýfýmýzý örneklediðimiz anda ekrana ‘merhaba sýnýf’ çýktýsý verildi.
+
+Ancak yukarýda da belirttiðimiz gibi, bir sýnýf örneklendiðinde çalýþan ilk metot aslýnda __init__() deðildir. Python bu süreçte alttan alta __new__() adlý baþka bir metodu çalýþtýrýr. Gelin bunu kanýtlayalým:
+
+class Sýnýf():
+def __new__(cls):
+pass
+
+def __init__(self):
+print('merhaba sýnýf')
+
+Bu sýnýfý örneklediðinizde, bir önceki kodlarýn aksine, ekrana ‘merhaba sýnýf’ yazýsý çýktý olarak verilmeyecektir. Ýþte bunun sebebi, Python’ýn öntanýmlý __new__() metodunun üzerine yazýp, o metodun iþlevselliðini ortadan kaldýrmýþ olmanýzdýr. Eðer __new__() metodunun öntanýmlý davranýþýný taklit etmek isterseniz yukarýdaki kodlarý þu þekilde yazmalýsýnýz:
+
+class Sýnýf():
+def __new__(cls, *args, **kwargs):
+return object.__new__(cls, *args, **kwargs)
+
+def __init__(self):
+print('merhaba sýnýf')
+
+Burada yaptýðýmýz þeyin aslýnda temel olarak basit bir miras alma iþleminden ibaret olduðunu görüyor olmalýsýnýz. Bildiðiniz gibi, Python’daki bütün sýnýflar, eðer baþka bir sýnýfý miras olarak almýyorlarsa, otomatik olarak object sýnýfýný miras alýrlar. Yani aslýnda yukarýdaki sýnýf tanýmýný Python þöyle görür:
+
+class Sýnýf(object):
+...
+
+Burada object taban sýnýf olmuþ oluyor. Bu taban sýnýfýn __new__() metodunun sahip olduðu iþlevselliði Sýnýf adlý alt sýnýfa aktarabilmek için taban sýnýfý kendi __new__() metodumuz içinde çaðýrýyoruz:
+
+class Sýnýf():
+def __new__(cls, *args, **kwargs):
+return object.__new__(cls, *args, **kwargs)
+
+Ýþte eðer bir sýnýfýn inþa edilme sürecinin nasýl iþleyeceðini kontrol etmek isterseniz bu __new__() metodunun üzerine yazarak metodu deðiþikliðe uðratabilirsiniz:
+
+class Sýnýf():
+def __new__(cls, *args, **kwargs):
+print('Yeni sýnýf inþa edilirken lütfen bekleyiniz...')
+return object.__new__(cls, *args, **kwargs)
+
+def __init__(self):
+print('merhaba sýnýf')
+
+Ancak bu noktada þunu belirtmeden de geçmeyelim. __new__() metodu, sýk sýk muhatap olmanýz gereken bir metot deðil. __new__() metodunu kullanarak yapacaðýnýz pek çok þeyi aslýnda doðrudan __init__() metodu aracýlýðýyla da yapabilirsiniz.
+
+

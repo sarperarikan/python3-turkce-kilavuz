@@ -1,0 +1,168 @@
+
+super()
+
+Hatýrlarsanýz, taban sýnýflardan ilk kez bahsederken, bunlara üst sýnýf da dendiðini söylemiþtik. Üst sýnýf kavramýnýn Ýngilizcesi super class‘týr. Ýþte bu bölümde inceleyeceðimiz super() fonksiyonunun adý da buradaki ‘super’, yani ‘üst’ kelimesinden gelir. Miras alýnan üst sýnýfa atýfta bulunan super() fonksiyonu, miras aldýðýmýz bir üst sýnýfýn nitelik ve metotlarý üzerinde deðiþiklik yaparken, mevcut özellikleri de muhafaza edebilmemizi saðlar.
+
+Bir önceki baþlýkta verdiðimiz örnek üzerinden super() fonksiyonunu açýklamaya çalýþalým:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Asker(Oyuncu):
+def __init__(self, isim, rütbe):
+self.güç = 100
+
+Bu kodlarda, Oyuncu() adlý taban sýnýfý miras alan Asker() sýnýfý, __init__() metodu içinde self.güç deðerini yeniden tanýmlýyor. Ancak bu þekilde taban sýnýfýn __init__() metodu silindiði için, self.isim ve self.rütbe deðiþkenlerini kaybediyoruz. Ýþte bu sorunu, üst sýnýfa atýfta bulunan super() fonksiyonu ile çözebiliriz.
+
+Dikkatlice bakýn:
+
+class Asker(Oyuncu):
+def __init__(self, isim, rütbe):
+super().__init__(isim, rütbe)
+self.güç = 100
+
+Burada __init__() metodu içinde þöyle bir satýr kullandýðýmýzý görüyorsunuz:
+
+super().__init__(isim, rütbe)
+
+Ýþte bu satýrda super() fonksiyonu, tam da adýnýn anlamýna uygun olarak, miras alýnan üst sýnýfýn __init__() metodu içindeki kodlarýn, miras alan alt sýnýfýn __init__() metodu içine aktarýlmasýný saðlýyor. Böylece hem taban sýnýfýn __init__() metodu içindeki self.isim ve self.rütbe niteliklerini korumuþ, hem de self.güç adlý yeni bir nitelik ekleme imkaný elde etmiþ oluyoruz:
+
+>>> asker = oyuncular.Asker('Ahmet', 'Er')
+>>> asker.isim
+
+'Ahmet'
+
+>>> asker.rütbe
+
+'Er'
+
+>>> asker.güç
+
+100
+
+Bu bilgiyi öteki alt sýnýflara da uygulayalým:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Asker(Oyuncu):
+def __init__(self, isim, rütbe):
+super().__init__(isim, rütbe)
+self.güç = 100
+
+class Ýþçi(Oyuncu):
+def __init__(self, isim, rütbe):
+super().__init__(isim, rütbe)
+self.güç = 70
+
+class Yönetici(Oyuncu):
+def __init__(self, isim, rütbe):
+super().__init__(isim, rütbe)
+self.güç = 20
+
+Gördüðünüz gibi, super() fonksiyonu sayesinde taban sýnýfýn deðiþtirmek istediðimiz niteliklerine yeni deðerler atarken, deðiþtirmek istemediðimiz nitelikleri ise ayný þekilde muhafaza ettik.
+
+Bu arada eðer taban sýnýfýn __init__() metodundaki parametre listesini alt sýnýfta da tek tek tekrar etmek sizi rahatsýz ediyorsa yukarýdaki kodlarý þöyle de yazabilirsiniz:
+
+class Asker(Oyuncu):
+def __init__(self, *arglar):
+super().__init__(*arglar)
+self.güç = 100
+
+class Ýþçi(Oyuncu):
+def __init__(self, *arglar):
+super().__init__(*arglar)
+self.güç = 70
+
+class Yönetici(Oyuncu):
+def __init__(self, *arglar):
+super().__init__(*arglar)
+self.güç = 20
+
+Yýldýzlý parametreleri önceki derslerimizden hatýrlýyor olmalýsýnýz. Bildiðiniz gibi, tek yýldýzlý parametreler bir fonksiyonun bütün konumlu (positional) argümanlarýný, parametrelerin parantez içinde geçtiði sýrayý dikkate alarak bir demet içinde toplar. Ýþte yukarýda da bu özellikten faydalanýyoruz. Eðer taban sýnýfta isimli (keyword) argümanlar da olsaydý, o zaman da çift yýldýzlý argümanlarý kullanabilirdik.
+
+Tek ve çift yýldýzlý argümanlar genellikle þu þekilde gösterilir:
+
+class Asker(Oyuncu):
+def __init__(self, *args, **kwargs):
+super().__init__(*args, **kwargs)
+self.güç = 100
+
+Böylece konumlu argümanlarý bir demet içinde, isimli argümanlarý ise bir sözlük içinde toplamýþ oluyoruz. Bu da bizi üst (ya da taban) sýnýfýn parametre listesini alt sýnýflarda tekrar etme derdinden kurtarýyor.
+
+Bu arada, miras alýnan taban sýnýfa atýfta bulunan super() fonksiyonu, Python programlama diline sonradan eklenmiþ bir özelliktir. Bu fonksiyon gelmeden önce taban sýnýfa atýfta bulunabilmek için doðrudan o sýnýfýn adýný kullanýyorduk:
+
+class Asker(Oyuncu):
+def __init__(self, isim, rütbe):
+Oyuncu.__init__(self, isim, rütbe)
+self.güç = 100
+
+veya:
+
+class Asker(Oyuncu):
+def __init__(self, *args):
+Oyuncu.__init__(self, *args)
+self.güç = 100
+
+Gördüðünüz gibi, eski yöntemde taban sýnýfýn adýný iki kez kullanmamýz gerekiyor. Ayrýca __init__() fonksiyonunun parametre listesinde ilk sýraya yine self kelimesini de eklemek zorunda kalýyoruz.
+
+Ýsterseniz yukarýda gösterdiðimiz eski yöntemi kullanmaya devam edebilirsiniz elbette. Ancak super() fonksiyonunu kullanmak eski yönteme göre biraz daha pratiktir.
+
+Yukarýdaki örneklerde super() fonksiyonunu __init__() metodu içinde kullandýk. Ancak elbette super() fonksiyonunu yalnýzca __init__() fonksiyonu içinde kullanmak zorunda deðiliz. Bu fonksiyonu baþka fonksiyonlar içinde de kullanabiliriz:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Asker(Oyuncu):
+def __init__(self, isim, rütbe):
+super().__init__(isim, rütbe)
+self.güç = 100
+
+def hareket_et(self):
+super().hareket_et()
+print('hedefe ulaþýldý.')
+
+Bu örneðin, super() fonksiyonunun nasýl iþlediðini daha iyi anlamanýzý saðladýðýný zannediyorum. Gördüðünüz gibi, taban sýnýfýn hareket_et() adlý metodunu alt sýnýfta tanýmladýðýmýz ayný adlý fonksiyon içinde super() fonksiyonu yardýmýyla geniþlettik, yani taban sýnýfýn hareket_et() adlý fonksiyonuna yeni bir iþlev ekledik:
+
+def hareket_et(self):
+super().hareket_et()
+print('hedefe ulaþýldý.')
+
+Burada super().hareket_et() satýrýyla taban sýnýfýn hareket_et() adlý metodunu alt sýnýfta tanýmladýðýmýz yeni hareket_et() metodu içinde çalýþtýrarak, bu metodun kabiliyetlerini yeni hareket_et() metoduna aktarýyoruz.
+

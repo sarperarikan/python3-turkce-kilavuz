@@ -1,0 +1,28 @@
+
+Düzenli Ýfadelerin Metotlarý
+
+Python’daki düzenli ifadelere iliþkin her þey bir modül içinde tutulur. Bu modülün adý re. Týpký os modülünde, sys modülünde, tkinter modülünde ve öteki bütün modüllerde olduðu gibi, düzenli ifadeleri kullanabilmemiz için de öncelikle bu re modülünü içe aktarmamýz gerekecek. Bu iþlemi nasýl yapacaðýmýzý çok iyi biliyorsunuz:
+
+>>> import re
+
+Baþta da söylediðimiz gibi, düzenli ifadeler bir programcýnýn en önemli silahlarýndan biridir. Þu halde silahýmýzýn özelliklerine bakalým. Yani bu yapýnýn bize sunduðu araçlarý þöyle bir listeleyelim. Etkileþimli kabukta þu kodu yazýyoruz:
+
+>>> dir(re)
+
+Tabii yukarýdaki dir(re) komutunu yazmadan önce import re þeklinde modülümüzü içe aktarmýþ olmamýz gerekiyor.
+
+Gördüðünüz gibi, re modülü içinde epey metot/fonksiyon var. Biz bu sayfada ve ilerleyen sayfalarda, yukarýdaki metotlarýn/fonksiyonlarýn en sýk kullanýlanlarýný size olabildiðince yalýn bir þekilde anlatmaya çalýþacaðýz. Eðer isterseniz, þu komutu kullanarak yukarýdaki metotlar/fonksiyonlar hakkýnda yardým da alabilirsiniz:
+
+>>> help(metot_veya_fonksiyon_adý)
+
+Bir örnek vermek gerekirse:
+
+>>> help(re.match)
+
+Help on function match in module re:
+match(pattern, string, flags=0)
+ Try to apply the pattern at the start of the string,
+returning a match object, or None if no match was found.
+
+Ne yazýk ki, Python’ýn yardým dosyalarý hep Ýngilizce. Dolayýsýyla eðer Ýngilizce bilmiyorsanýz, bu yardým dosyalarý pek iþinize yaramayacaktýr. Bu arada yukarýdaki yardým bölümünden çýkmak için klavyedeki q düðmesine basmanýz gerekir.
+

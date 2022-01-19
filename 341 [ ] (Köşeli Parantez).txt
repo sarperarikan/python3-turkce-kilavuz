@@ -1,0 +1,55 @@
+
+[ ] (Köþeli Parantez)
+
+[ ] adlý metakaraktere önceki bölümde deðinmiþtik. Orada verdiðimiz örnek þuydu:
+
+>>> for i in liste:
+... nesne = re.search("öz[chk]an", i)
+... if nesne:
+... print(nesne.group())
+
+Yukarýdaki örnekte, bir liste içinde geçen “özcan”, “özhan” ve “özkan” öðelerini ayýklýyoruz. Burada bu üç öðedeki farklý karakterleri (“c”, “h” ve “k”) köþeli parantez içinde nasýl belirttiðimize dikkat edin. Python, köþeli parantez içinde gördüðü bütün karakterleri tek tek liste öðelerine uyguluyor. Önce “öz” ile baþlayan bütün öðeleri alýyor, ardýndan “öz” hecesinden sonra “c” harfiyle devam eden ve “an” hecesi ile biten öðeyi buluyor. Böylece “özcan” öðesini bulmuþ oldu. Ayný iþlemi, “öz” hecesinden sonra “h” harfini barýndýran ve “an” hecesiyle biten öðeye uyguluyor. Bu þekilde ise “özhan” öðesini bulmuþ oldu. En son hedef ise “öz” ile baþlayýp “k” harfi ile devam eden ve “an” ile biten öðe. Yani listedeki “özkan” öðesi... En nihayetinde de elimizde “özcan”, “özhan” ve “özkan” öðeleri kalmýþ oluyor.
+
+Bir önceki bölümde yine “[ ]” metakarakteriyle ilgili olarak þu örneði de vermiþtik:
+
+>>> for i in liste:
+... nesne = re.search("es[mr]a",i)
+... if nesne:
+... print(nesne.group())
+
+Bu örneðin de “özcan, özkan, özhan” örneðinden bir farký yok. Burada da Python köþeli parantez içinde gördüðü bütün karakterleri tek tek liste öðelerine uygulayýp, “esma” ve “esra” öðelerini bize veriyor.
+
+Þimdi bununla ilgili yeni bir örnek verelim
+
+Diyelim ki elimizde þöyle bir liste var:
+
+>>> a = ["23BH56","TY76Z","4Y7UZ","TYUDZ","34534"]
+
+Mesela biz bu listedeki öðeler içinde, sayýyla baþlayanlarý ayýklayalým. Þimdi þu kodlarý dikkatlice inceleyin:
+
+>>> for i in a:
+... if re.match("[0-9]",i):
+... print(i)
+...
+23BH56
+4Y7UZ
+34534
+
+Burada parantez içinde kullandýðýmýz ifadeye dikkat edin. “0” ile “9” arasýndaki bütün öðeleri içeren bir karakter dizisi tanýmladýk. Yani kýsaca, içinde herhangi bir sayý barýndýran öðeleri kapsama alanýmýza aldýk. Burada ayrýca search() yerine match() metodunu kullandýðýmýza da dikkat edin. match() metodunu kullanmamýzýn nedeni, bu metodun bir karakter dizisinin sadece en baþýna bakmasý... Amacýmýz sayý ile baþlayan bütün öðeleri ayýklamak olduðuna göre, yukarýda yazdýðýmýz kod, liste öðeleri içinde yer alan ve sayý ile baþlayan bütün öðeleri ayýklayacaktýr. Biz burada Python’a þu emri vermiþ oluyoruz:
+
+“Bana sayý ile baþlayan bütün öðeleri bul! Önemli olan bu öðelerin sayýyla baþlamasýdýr! Sayýyla baþlayan bu öðeler ister harfle devam etsin, ister baþka bir karakterle... Sen yeter ki bana sayý ile baþlayan öðeleri bul!”
+
+Bu emri alan Python, hemen liste öðelerini gözden geçirecek ve bize “23BH56”, “4Y7UZ” ve “34534” öðelerini verecektir. Dikkat ederseniz, Python bize listedeki “TY76Z” ve “TYUDZ” öðelerini vermedi. Çünkü “TY76Z” içinde sayýlar olsa da bunlar bizim ölçütümüze uyacak þekilde en baþta yer almýyor. “TYUDZ” öðesinde ise tek bir sayý bile yok...
+
+Þimdi de isterseniz listedeki “TY76Z” öðesini nasýl alabileceðimize bakalým:
+
+>>> for i in a:
+... if re.match("[A-Z][A-Z][0-9]",i):
+... print(i)
+
+Burada dikkat ederseniz düzenli ifademizin baþýnda “A-Z” diye bir þey yazdýk. Bu ifade “A” ile “Z” harfleri arasýndaki bütün karakterleri temsil ediyor. Biz burada yalnýzca büyük harfleri sorguladýk. Eðer küçük harfleri sorgulamak isteseydik “A-Z” yerine “a-z” diyecektik. Düzenli ifademiz içinde geçen birinci “A-Z” ifadesi aradýðýmýz karakter dizisi olan “TY76Z” içindeki “T” harfini, ikinci “A-Z” ifadesi “Y” harfini, “0-9” ifadesi ise “7” sayýsýný temsil ediyor. Karakter dizisi içindeki geri kalan harfler ve sayýlar otomatik olarak eþleþtirilecektir. O yüzden onlar için ayrý bir þey yazmaya gerek yok. Yalnýz bu söylediðimiz son þey sizi aldatmasýn. Bu “otomatik eþleþtirme” iþlemi bizim þu anda karþý karþýya olduðumuz karakter dizisi için geçerlidir. Farklý nitelikteki karakter dizilerinin söz konusu olduðu baþka durumlarda iþler böyle yürümeyebilir. Düzenli ifadeleri baþarýlý bir þekilde kullanabilmenin ilk þartý, üzerinde iþlem yapýlacak karakter dizisini tanýmaktýr. Bizim örneðimizde yukarýdaki gibi bir düzenli ifade kalýbý oluþturmak iþimizi görüyor. Ama baþka durumlarda, duruma uygun baþka kalýplar yazmak gerekebilir/gerekecektir. Dolayýsýyla, tek bir düzenli ifade kalýbýyla hayatýn geçmeyeceðini unutmamalýyýz.
+
+Þimdi yukarýdaki kodu search() ve group() metotlarýný kullanarak yazmayý deneyin. Elde ettiðiniz sonuçlarý dikkatlice inceleyin. match() ve search() metotlarýnýn ne gibi farklýlýklara sahip olduðunu kavramaya çalýþýn... Sorunuz olursa bana nasýl ulaþacaðýnýzý biliyorsunuz...
+
+Bu arada, düzenli ifadelerle ilgili daha fazla þey öðrendiðimizde yukarýdaki kodu çok daha sade bir biçimde yazabileceðiz.
+

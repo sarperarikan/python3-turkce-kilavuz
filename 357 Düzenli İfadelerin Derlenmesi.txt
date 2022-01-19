@@ -1,0 +1,25 @@
+
+Düzenli Ýfadelerin Derlenmesi
+
+
+compile() metodu
+
+En baþta da söylediðimiz gibi, düzenli ifadeler karakter dizilerine göre biraz daha yavaþ çalýþýrlar. Ancak düzenli ifadelerin iþleyiþini hýzlandýrmanýn da bazý yollarý vardýr. Bu yollardan biri de compile() metodunu kullanmaktýr. “compile” kelimesi Ýngilizcede “derlemek” anlamýna gelir. Ýþte biz de bu compile() metodu yardýmýyla düzenli ifade kalýplarýmýzý kullanmadan önce derleyerek daha hýzlý çalýþmalarýný saðlayacaðýz. Küçük boyutlu projelerde compile() metodu pek hissedilir bir fark yaratmasa da özellikle büyük çaplý programlarda bu metodu kullanmak oldukça faydalý olacaktýr.
+
+Basit bir örnekle baþlayalým:
+
+>>> liste = ["Python2.7", "Python3.2", "Python3.3",
+... "Python3.4", "Java"]
+>>> derli = re.compile("[A-Za-z]+[0-9]\.[0-9]")
+>>> for i in liste:
+... nesne = derli.search(i)
+... if nesne:
+... print(nesne.group())
+...
+Python2.7
+Python3.2
+Python3.3
+Python3.4
+
+Burada öncelikle düzenli ifade kalýbýmýzý derledik. Derleme iþlemini nasýl yaptýðýmýza dikkat edin. Derlenecek düzenli ifade kalýbýný compile() metodunda parantez içinde belirtiyoruz. Daha sonra search() metodunu kullanýrken ise, re.search() demek yerine, derli.search() þeklinde bir ifade kullanýyoruz. Ayrýca dikkat ederseniz derli.search() kullanýmýnda parantez içinde sadece eþleþecek karakter dizisini kullandýk (i). Eðer derleme iþlemi yapmamýþ olsaydýk, hem bu karakter dizisini, hem de düzenli ifade kalýbýný yan yana kullanmamýz gerekecektir. Ama düzenli ifade kalýbýmýzý yukarýda derleme iþlemi esnasýnda belirttiðimiz için, bu kalýbý ikinci kez yazmamýza gerek kalmadý. Ayrýca burada kullandýðýmýz düzenli ifade kalýbýna da dikkat edin. Nasýl bir þablon oturttuðumuzu anlamaya çalýþýn. Gördüðünüz gibi, liste öðelerinde bulunan ”.” iþaretini eþleþtirmek için düzenli ifade kalýbý içinde “\.” ifadesini kullandýk. Çünkü bildiðiniz gibi, tek baþýna ”.” iþaretinin Python açýsýndan özel bir anlamý var. Dolayýsýyla bu özel anlamdan kaçmak için “\” iþaretini de kullanmamýz gerekiyor.
+

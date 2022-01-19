@@ -1,0 +1,42 @@
+
+Dahil Etme
+
+Bir sýnýftaki nitelik ve metotlarý baþka bir sýnýf içinde kullanmanýn tek yolu ilgili sýnýf veya sýnýflarý miras almak deðildir. Hatta bazý durumlarda, miras alma iyi bir yöntem dahi olmayabilir. Özellikle birden fazla sýnýfa ait nitelik ve metotlara ihtiyaç duyduðumuzda, çoklu miras alma yöntemini kullanmak yerine, dahil etme (composition) denen yöntemi tercih edebiliriz.
+
+Peki nedir bu dahil etme denen þey? Adýndan da anlaþýlacaðý gibi, dahil etme yönteminde, taban sýnýfýn nitelik ve metotlarýný miras almak yerine, alt sýnýf içine dahil ediyoruz. Esasýnda biz bunun örneðini görmüþtük. Þu kodu hatýrlýyorsunuz:
+
+import tkinter as tk
+
+class Pencere(tk.Tk):
+def __init__(self):
+super().__init__()
+self.protocol('WM_DELETE_WINDOW', self.çýkýþ)
+
+self.etiket = tk.Label(text='Merhaba Zalim Dünya')
+self.etiket.pack()
+
+self.düðme = tk.Button(text='Çýk', command=self.çýkýþ)
+self.düðme.pack()
+
+def çýkýþ(self):
+self.etiket['text'] = 'Elveda zalim dünya...'
+self.düðme['text'] = 'Bekleyin...'
+self.düðme['state'] = 'disabled'
+self.after(2000, self.destroy)
+
+pencere = Pencere()
+pencere.mainloop()
+
+Burada ayný anda hem miras alma hem de dahil etme yönteminden yararlanýyoruz. Ýlk önce Tk() sýnýfýný miras aldýk. Böylece bu sýnýfýn nitelik ve metotlarýna doðrudan eriþim elde ettik. Etiket ve düðme oluþturmamýzý saðlayan Label() ve Button() sýnýflarýný ise Pencere() sýnýfýmýz içine dahil ettik. Böylece bu sýnýflarýn nitelik ve metotlarýna sýrasýyla self.etiket ve self.düðme adlarý altýnda eriþim kazandýk.
+
+Miras alma ve dahil etme yöntemleri arasýnda tercih yaparken genel yaklaþýmýmýz þu olacak: Eðer yazdýðýmýz uygulama, bir baþka sýnýfýn türevi ise, o sýnýfý miras alacaðýz. Ama eðer bir sýnýf, yazdýðýmýz uygulamanýn bir parçasý ise o sýnýfý uygulamamýza dahil edeceðiz.
+
+Yani mesela yukarýdaki örnekte temel olarak yaptýðýmýz þey bir uygulama penceresi tasarlamaktýr. Dolayýsýyla uygulama penceremiz, tk.Tk() sýnýfýnýn doðrudan bir türevidir. O yüzden bu sýnýfý miras almayý tercih ediyoruz.
+
+Pencere üzerine etiket ve düðme yerleþtirmemizi saðlayan Label() ve Button() sýnýflarý ise, uygulama penceresinin birer parçasýdýr. Dolayýsýyla bu sýnýflarý uygulamamýz içine dahil ediyoruz.
+
+Yukarýda anlattýðýmýz iki farklý iliþki türü ‘olma iliþkisi’ (is-a relationship) ve ‘sahiplik iliþkisi’ (has-a relationship) olarak adlandýrýlabilir. Olma iliþkisinde, bir sýnýf ötekinin türevidir. Sahip olma iliþkisinde ise bir sýnýf öteki sýnýfýn parçasýdýr. Eðer iki sýnýf arasýnda ‘olma iliþkisi’ varsa miras alma yöntemini kullanýyoruz. Ama eðer iki sýnýf arasýnda ‘sahiplik iliþkisi’ varsa dahil etme yöntemini kullanýyoruz.
+
+Dipnotlarý:
+
+[1]GNU/Linux daðýtýmlarýnda, daðýtýmý geliþtiren ekip genellikle Tkinter paketini Python paketinden ayýrdýðý için, Tkinter’i ayrýca kurmanýz gerekebilir. Eðer Python’ýn etkileþimli kabuðunda import tkinter komutunu verdiðinizde bir hata mesajý alýyorsanýz http://www.istihza.com/forum adresinden yardým isteyin. Eðer Windows kullanýyorsanýz, böyle bir probleminiz yok. Python’ý kurduðunuz anda Tkinter de emrinize amadedir. 

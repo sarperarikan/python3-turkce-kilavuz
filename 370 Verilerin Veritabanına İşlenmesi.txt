@@ -1,0 +1,47 @@
+
+Verilerin Veritabanýna Ýþlenmesi
+
+Bir önceki bölümde bir Sqlite veritabanýna nasýl veri gireceðimizi öðrendik. Ama aslýnda iþ sadece veri girmeyle bitmiyor. Verileri veritabanýna “iþleyebilmek” için bir adým daha atmamýz gerekiyor. Mesela þu örneðe bir bakalým:
+
+import sqlite3
+
+vt = sqlite3.connect("vt.sqlite")
+
+im = vt.cursor()
+im.execute("""CREATE TABLE IF NOT EXISTS
+    personel (isim, soyisim, sehir, eposta)""")
+
+im.execute("""INSERT INTO personel VALUES
+    ("Orçun", "Kunek", "Adana", "okunek@gmail.com")""")
+
+Burada öncelikle vt.sqlite adlý bir veritabaný oluþturduk ve bu veritabanýna baðlandýk. Ardýndan, vt.cursor() komutuyla imlecimizi de oluþturduktan sonra, SQL komutlarýmýzý çalýþtýrýyoruz. Önce isim, soyisim, þehir ve eposta adlý sütunlardan oluþan, “personel” adlý bir tablo oluþturduk. Daha sonra “personel” tablosunun içine “Orçun”, “Kunek”, “Adana” ve “okunek@gmail.com” deðerlerini yerleþtirdik.
+
+Ancak her ne kadar veritabanýna veri iþlemiþ gibi görünsek de aslýnda henüz iþlenmiþ bir þey yoktur. Ýsterseniz bu durumu teyit etmek için Sqlitebrowser programýný kullanabilir, tabloya verilerin iþlenmediðini kendi gözlerinizle görebilirsiniz.
+
+Biz henüz sadece verileri girdik. Ama verileri veritabanýna iþlemedik. Bu girdiðimiz verileri veritabanýna iþleyebilmek için commit() adlý bir metottan yararlanacaðýz:
+
+>>> vt.commit()
+
+Gördüðünüz gibi, commit() imlecin deðil, baðlantý nesnesinin (yani burada vt deðiþkeninin) bir metodudur. Þimdi bu satýrý da betiðimize ekleyelim:
+
+import sqlite3
+
+vt = sqlite3.connect("vt.sqlite")
+
+im = vt.cursor()
+im.execute("""CREATE TABLE IF NOT EXISTS
+    personel (isim, soyisim, sehir, eposta)""")
+
+im.execute("""INSERT INTO personel VALUES
+    ("Orçun", "Kunek", "Adana", "okunek@gmail.com")""")
+
+vt.commit()
+
+Bu son satýrý da ekledikten sonra Sqlite veritabaný içinde þöyle bir tablo oluþturmuþ olduk:
+
+
+isim soyisim þehir eposta 
+Orçun Kunek Adana okunek@gmail.com 
+
+Eðer vt.commit() satýrýný yazmazsak, veritabaný, tablo ve sütun baþlýklarý oluþturulur, ama sütunlarýn içeriði veritabanýna iþlenmez.
+

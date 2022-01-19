@@ -1,0 +1,41 @@
+
+Veritabanýnýn Kapatýlmasý
+
+Bir veritabaný üzerinde yapacaðýmýz bütün iþlemleri tamamladýktan sonra, prensip olarak, o veritabanýný kapatmamýz gerekir. Mesela þu kodlarý ele alalým:
+
+import sqlite3
+
+vt = sqlite3.connect("vt.sqlite")
+
+im = vt.cursor()
+im.execute("""CREATE TABLE IF NOT EXISTS
+    personel (isim, soyisim, sehir, eposta)""")
+
+im.execute("""INSERT INTO personel VALUES
+    ("Orçun", "Kunek", "Adana", "okunek@gmail.com")""")
+
+vt.commit()
+vt.close()
+
+Burada bütün iþlemleri bitirdikten sonra veritabanýný kapatmak için, close() adlý bir metottan yararlandýk:
+
+vt.close()
+
+Bu þekilde, veritabanýnýn ilk açýldýðý andan itibaren, iþletim sisteminin devreye soktuðu kaynaklarý serbest býrakmýþ oluyoruz. Esasýnda programýmýz kapandýðýnda, açýk olan bütün Sqlite veritabanlarý da otomatik olarak kapanýr. Ama yine de bu iþlemi elle yapmak her zaman iyi bir fikirdir.
+
+Eðer üzerinde iþlem yaptýðýnýz veritabanýnýn her þey bittikten sonra otomatik olarak kapanmasýný garantilemek isterseniz, daha önce öðrendiðimiz with sözcüðünü kullanabilirsiniz:
+
+import sqlite3
+
+with sqlite3.connect('vt.sqlite') as vt:
+im = vt.cursor()
+
+im.execute("""CREATE TABLE IF NOT EXISTS personel
+        (isim, soyisim, memleket)""")
+im.execute("""INSERT INTO personel VALUES
+        ('Fýrat', 'Özgül', 'Adana')""")
+
+vt.commit()
+
+Bu þekilde with sözcüðünü kullanarak bir veritabaný baðlantýsý açtýðýmýzda, bütün iþler bittikten sonra Python bizim için baðlantýyý otomatik olarak sonlandýracaktýr.
+

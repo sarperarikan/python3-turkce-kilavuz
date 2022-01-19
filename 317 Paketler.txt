@@ -1,0 +1,38 @@
+
+Paketler
+
+Uyarý
+
+Bu makale yoðun bir þekilde geliþtirilmekte, içeriði sýk sýk güncellenmektedir.
+
+Birkaç bölüm önce, Python’ýn belkemiði olduðunu söylediðimiz modüller konusundan söz etmiþtik. Bu bölümde de yine modüllerle baðlantýlý bir konuyu ele alacaðýz. Konumuz Python’da paketler.
+
+
+Paket Nedir?
+
+Öncelikle paketin ne demek olduðunu anlamaya çalýþarak baþlayalým. Python’da bir dizin yapýsý içinde bir araya getirilen, birbiriyle baðlantýlý modüllere paket adý verilir. Dolayýsýyla paketler modüllerden oluþur.
+
+Python programlama dilinde paketler hem geniþ bir yer tutar, hem de büyük bir önem taþýr. Hatta Python’ý bilmenin paketleri bilmek demek olduðunu söylersek çok da abartmýþ olmayýz. Mesela Python’la web programlarý yazmak için kullanýlan en gözde araçlardan biri olan django web çatýsý, aslýnda birtakým üçüncü þahýs modüllerinin bir paket yapýsý içinde bir araya getirilmiþ halinden baþka bir þey deðildir. Ayný þekilde Python’la Android ve iOS üzerinde çalýþabilecek programlar yazmak isterseniz kivy adlý bir baþka Python paketini öðrenmeniz gerekir. Python programlama dilini kullanarak grafik arayüzlü yazýlýmlar geliþtirmemizi saðlayan tkinter ise standart kütüphanede bulunan pek çok paketten yalnýzca bir tanesidir.
+
+Etrafta django, kivy ve tkinter gibi pek çok kullanýþlý paket bulabilirsiniz. Mesela standart kütüphanede bulunan sqlite3, Sqlite veritabanlarý üzerinde çalýþmamýza imkan tanýyan çeþitli modülleri içinde barýndýran bir Python paketidir. Yine standart kütüphanede bulunan urllib paketi yardýmýyla internet adresleri (URL’ler) üzerinde çeþitli iþlemler yapabilirsiniz. Python kurulum dizini içindeki Lib klasörü altýnda pek çok standart Python paketi görebilirsiniz.
+
+Peki modüllerle paketleri birbirinden ayýran þey nedir?
+
+Öncelikle, paketler modüllere kýyasla çok daha kapsamlý bir yapýdýr. Zira bir paket içinde (genellikle) birden fazla modül bulunur. Örneðin standart kütüphanede bulunan ve tek bir os.py dosyasýndan oluþan os bir modülken, içinde pek çok farklý modülü barýndýran collections bir pakettir. Tek bir dosyadan oluþtuðu ve bir dizin yapýsý içinde yer almadýðý için bir modülden içe aktarma iþlemi gerçekleþtirmek son derece kolaydýr. Paketlerden içe aktarma yaparken uymamýz gereken kurallar ise haliyle biraz daha karmaþýktýr.
+
+Ýkincisi, bütün paketler ayný zamanda birer modüldür, ancak bütün modüller birer paket deðildir. Örneðin venv paketinden bahsederken ‘venv modülü’ demek yanlýþ olmaz. Ancak os modülünden bahsederken ‘os paketi’ demek biraz abes kaçacaktýr.
+
+Üçüncüsü, paketlerin __path__ adlý özel bir niteliði bulunur. Modüllerde ise bu nitelik bulunmaz. Örneðin:
+
+>>> import os
+>>> os.__path__
+
+AttributeError: 'module' object has no attribute '__path__'
+
+os bir modül olduðu için, __path__ niteliðine sahip deðildir. Bir de json paketine bakalým:
+
+>>> import json
+>>> json.__path__
+
+json ise bir paket olduðu için, __path__ niteliðine sahiptir. Birazdan bu niteliðin ne iþe yaradýðýný anlatacaðýz. Ama ondan önce öðrenmeniz gereken baþka þeyler var.
+

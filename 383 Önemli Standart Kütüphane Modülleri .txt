@@ -1,0 +1,211 @@
+
+Önemli Standart Kütüphane Modülleri 
+
+
+random Modülü
+
+Eðer yazdýðýnýz programlarda, belirli bir aralýkta rastgele sayýlarýn üretilmesine ihtiyaç duyarsanýz Python’ýn standart kütüphanesinde bulunan random adlý bir modülü kullanabilirsiniz.
+
+Týpký öteki modüllerde olduðu gibi, random modülü de birtakým faydalý nitelik ve fonksiyonlarý barýndýrýr. Biz bu bölümde, bu nitelik ve fonksiyonlar arasýnda en sýk kullanýlanlarý inceleyeceðiz.
+
+Elbette bu modülü kullanabilmek için öncelikle modülümüzü içe aktarmamýz gerekiyor:
+
+import random
+
+Bu iþlemin ardýndan, bu modülün bize sunduðu bütün iþlevlerden yararlanabiliriz.
+
+
+random()
+
+random modülünün random() adlý fonksiyonunu kullanarak, 0.0 ile 1.0 arasýnda rastgele bir kayan noktalý sayý üretebilirsiniz:
+
+>>> random.random()
+
+0.8064301704207291
+
+random() fonksiyonu, kendisini her çalýþtýrýþýnýzda farklý bir kayan noktalý sayý üretecektir:
+
+>>> random.random()
+
+0.6825988062501599
+
+Üretilen sayýlarýn 0 ile 1 arasýnda olduðunu özellikle dikkatinizi çekmek isterim.
+
+Mesela bu fonksiyonu kullanarak, 0 ile 1 arasý 10 tane sayý üretelim. Bu sayýlarý gösterirken de noktadan sonra yalnýzca dört basamak görüntülenmesine izin verelim:
+
+>>> for i in range(10):
+... print("{:.4f}".format(random.random()))
+...
+0.3094
+0.5277
+0.1588
+0.2832
+0.8742
+0.9989
+0.6847
+0.5672
+0.5529
+0.9717
+
+
+uniform()
+
+Biraz önce gördüðümüz random() fonksiyonu, dikkat ederseniz herhangi bir parametre almýyordu. Çünkü bu fonksiyonun tek görevi 0 ile 1 arasý sayýlar üretmektir. Peki ya biz üreteceðimiz sayýlarýn farklý bir aralýkta olmasýný istersek ne yapacaðýz?
+
+Ýþte, belirli bir aralýkta kayan noktalý sayýlar üretmek istediðimizde, random() yerine uniform() adlý bir fonksiyon kullanacaðýz. Dikkatlice inceleyim:
+
+>>> random.uniform(0.5, 1.5)
+
+Bu kod, her çalýþtýrýlýþýnda 0.5 ile 1.5 arasý rastgele bir kayan noktalý sayý üretecektir:
+
+>>> random.uniform(0.5, 1.5)
+
+0.9624863371746406
+
+>>> random.uniform(0.5, 1.5)
+
+0.900446344810926
+
+
+randint()
+
+Þimdiye kadar öðrendiðimiz random() ve uniform() fonksiyonlarý bize yalnýzca kayan noktalý sayýlar üretme imkaný veriyordu. Ancak elbette biz kimi durumlarda kayan noktalý sayýlar yerine tam sayýlar üretmek de isteyebiliriz. Ýþte böyle bir durumda, random modülünün randint() adlý baþka bir fonksiyonunu kullanabiliriz.
+
+Mesela 45 ile 500 arasýnda rastgele bir sayý üretmek isterseniz, randint() fonksiyonunu þu þekilde kullanabilirsiniz:
+
+>>> random.randint(45, 500)
+
+Bu fonksiyon, her çalýþtýrýlýþýnda 45 ile 500 arasýnda rastgele bir tam sayý üretecektir.
+
+
+choice()
+
+random modülünün choice() adlý fonksiyonunu kullanarak, dizi niteliði taþýyan veri tiplerinden rastgele öðeler seçebiliriz. Bu taným biraz anlaþýlmaz gelmiþ olabilir. O yüzden bunu bir örnekle açýklayalým.
+
+Diyelim ki elimizde þöyle bir liste var:
+
+>>> liste = ['ali', 'veli', 'ahmet',
+... 'mehmet', 'celal', 'selin', 'nihat']
+
+Bildiðiniz gibi, listeler, dizi niteliði taþýyan veri tipleridir. Dolayýsýyla choice() fonksiyonunu kullanarak bu diziden rastgele bir öðe seçebiliriz:
+
+>>> liste = ['ali', 'veli', 'ahmet', 'mehmet', 'celal', 'selin', 'nihat']
+
+>>> random.choice(liste)
+
+'ali'
+
+>>> random.choice(liste)
+
+'mehmet'
+
+>>> random.choice(liste)
+
+'selin'
+
+Týpký bu örnekte olduðu gibi, karakter dizileri de dizi niteliði taþýyan bir veri tipi olduðu için, choice() fonksiyonuna cevap verir:
+
+>>> kardiz = 'istihza'
+>>> random.choice(kardiz)
+
+'i'
+
+Peki acaba bu ‘i’ harfi karakter dizisinin baþýndaki ‘i’ harfi mi, yoksa ortasýndaki ‘i’ harfi mi? Sizce bunu nasýl anlayabiliriz?
+
+
+shuffle()
+
+shuffle() fonksiyonunu kullanarak, dizi niteliði taþýyan veri tiplerindeki öðeleri karýþtýrabilirsiniz (yani öðelerin sýrasýný karýþýk bir hale getirebilirsiniz). Mesela:
+
+>>> l = list(range(10))
+
+10 öðeli bir listemiz var. Bu listedeki öðeler 0‘dan 10‘a kadar düzgün bir þekilde sýralanmýþ:
+
+>>> l
+
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Þimdi biz shuffle() fonksiyonunu kullanarak öðeleri karýþtýracaðýz:
+
+>>> random.shuffle(l)
+>>> l
+
+[8, 0, 7, 9, 1, 4, 6, 5, 3, 2]
+
+Burada dikkat etmemiz gereken önemli nokta, shuffle() fonksiyonunun, özgün listenin kendisi üzerinde deðiþiklik yapýyor oluþudur. Yani liste üzerinde shuffle() metodunu uyguladýktan sonra artýk özgün listeyi kaybediyoruz. Dolayýsýyla elimizde artýk öðeleri 0’dan 10’a kadar düzgün bir þekilde sýralanmýþ liste yok. Onun yerine, öðeleri karýþtýrýlmýþ bir liste var elimizde.
+
+Liste üzerine shuffle() fonksiyonunu her uygulayýþýnýzda özgün listenin öðeleri bir daha karýþtýrýlacaktýr.
+
+Peki size bir soru...
+
+Elinizde þöyle bir liste var:
+
+arkadaþlar = [‘ali’, ‘veli’, ‘mehmet’, ‘ahmet’, ‘serkan’, ‘selin’]
+
+Görevimiz bu listenin öðelerini karýþtýrmak. Ama biz ayný zamanda özgün arkadaþlar listesindeki öðe sýralamasýný da kaybetmek istemiyoruz. Bunu nasýl baþarabiliriz?
+
+
+randrange()
+
+randrange() fonksiyonu, yukarýda öðrendiðimiz randint() fonksiyonu ile ayný iþi yapar. Yani her iki fonksiyon da, belli bir aralýkta rastgele tamsayýlar üretir. Ancak aralarýnda iki ufak fark bulunur.
+
+Ýlk önce birincisine bakalým...
+
+Dikkatlice inceleyin:
+
+>>> random.randrage(10)
+
+5
+
+
+Gördüðünüz gibi, randrange() fonksiyonunu tek parametre ile kullanabiliyoruz. Yukarýdaki komutu eðer randint() ile yazmak istersek þunu yapmamýz gerekir:
+
+>>> random.randint(0, 10)
+
+randrange() fonksiyonundan farklý olarak, randint() fonksiyonunu iki parametre ile kullanmamýz gerekir. Eðer bu fonksiyona tek parametre verirsek hata alýrýz:
+
+>>> random.randint(10)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: randint() missing 1 required positional argument: 'b'
+
+Elbette, eðer istersek randrange() fonksiyonunu da çift parametre ile kullanarak, farklý bir sayý aralýðý belirtme imkanýna sahibiz:
+
+>>> random.randrange(10, 500)
+
+Bu komut, 10 ile 500 arasý rastgele tam sayýlar üretecektir. Ayrýca bu komut þununla da eþdeðerdir:
+
+>>> random.randint(10, 500)
+
+Bu iki fonksiyon arasýndaki ikinci fark ise, rastgele sayý üretilecek aralýðýn son deðeridir. Bu muðlak ifadeyi bir örnekle anlaþýlýr hale getirmeye çalýþalým:
+
+>>> random.randrange(10, 20)
+
+Bu komut, 10 ile 20 arasýnda rastgele bir sayý üretir. Üretilecek en düþük sayý 10 iken, en büyük sayý ise 19 olacaktýr. 20 sayýsý asla üretilmez.
+
+Bir de þuna bakalým:
+
+>>> random.randint(10, 20)
+
+Burada da yime 10 ile 20 arasýnda rastgele bir sayý üretilir. Týpký randrange() metodunda olduðu gibi, üretilecek en düþük sayý 10‘dur. Ancak en büyük sayý 20 olacaktýr.
+
+Bu iki fonksiyonu kullanýrken bu farklýlýða dikkat etmemiz gerekir. Aksi halde yazdýðýmýz programlar hatalý çalýþabilir.
+
+Peki size bir soru: Acaba randint() ile randrange() arasýndaki bu farký nasýl kanýtlarsýnýz?
+
+
+sample()
+
+‘Sample’ kelimesi ‘numune’ anlamýna gelir. Ýþte kelimenin bu anlamýna paralel olarak sample() fonksiyonu da, dizi niteliði taþýyan veri tiplerinden belli sayýda numune alýnabilmesini saðlar. Bakýnýz:
+
+>>> liste = range(100)
+
+100 öðeli bir liste oluþturduk. Þimdi bu listeden 5 tane rastgele numune alalým:
+
+>>> random.sample(liste, 5)
+
+[56, 74, 2, 3, 80]
+
+Gördüðünüz gibi, sample() fonksiyonunun ilk parametresi numune alýnacak diziyi, ikinci parametresi ise bu diziden kaç tane numune alýnacaðýný gösteriyor.
+

@@ -1,0 +1,53 @@
+
+Veri Süzme
+
+Daha önce bir Sqlite veritabanýnda belli bir tablo içindeki bütün verileri seçmek için þu SQL komutunu kullanmamýz gerektiðini öðrenmiþtik:
+
+SELECT * FROM tablo_adi
+
+Ancak amacýmýz çoðu zaman bir tablo içindeki bütün verileri seçmek olmayacaktýr. Programcýlýk maceramýz boyunca genellikle yalnýzca belli ölçütlere uyan verileri seçmek isteyeceðiz. Zira içinde milyonlarca veri barýndýrabilecek olan veritabanlarýndaki verilerin tamamýný seçmek akýl kârý deðildir.
+
+Verileri süzme iþini WHERE adlý bir SQL komutu yardýmýyla gerçekleþtireceðiz. Bu SQL komutunun sözdizimi þöyle:
+
+SELECT * FROM tablo_adý WHERE sütun_baþlýðý = aranan_veri
+
+Gördüðünüz gibi, bu sorguyu gerçekleþtirebilmek için tablodaki sütun baþlýklarýný bilmemiz gerekiyor.
+
+Önceki sayfalarda, kitaplar.sqlite adlý veritabanýmýzdaki tablolarýn adýný nasýl öðrenebileceðimizi anlatmýþtýk. Hatýrlarsanýz bu iþ için þu komutu kullanýyorduk:
+
+>>> im.execute("SELECT name FROM sqlite_master")
+
+Bu þekilde, bütün Sqlite veritabanlarýnda bulunan ‘sqlite_master’ adlý özel bir tablonun ‘name’ niteliðini sorgulayarak, elimizdeki veritabanýnda bulunan tablolarýn adýný elde edebiliyoruz. Adýný öðrendiðimiz tablodaki sütun baþlýklarýný elde etmek için yine buna benzer bir komuttan yararlanacaðýz. Dikkatlice bakýn:
+
+>>> im.execute("SELECT sql FROM sqlite_master").fetchone()
+
+('CREATE TABLE "kitaplar"
+(\n\t`KitapAdi`\tTEXT,\n\t`Yazar`\tTEXT,\n\t`Fiyati`\tTEXT\n)',)
+
+‘sqlite_master’ adlý tablonun ‘sql’ niteliðini sorguladýðýmýzda, ilgili tabloyu oluþturmak için kullanýlan SQL komutunu görüyoruz. Bu komuta dikkatli bakarsanýz, tablonun ‘KitapAdi’, ‘Yazar’ ve ‘Fiyati’ olmak üzere üç sütundan oluþtuðunu göreceksiniz. Elbette sütun adlarýný öðrenmek için Sqlitebrowser programýný da kullanabileceðinizi artýk biliyorsunuz.
+
+Sütun adlarýný öðrendiðimize göre gelin þimdi yazar adýna göre veritabanýnda bir sorgu yapalým:
+
+>>> im.execute("SELECT * FROM kitaplar WHERE Yazar = 'Fýrat Özgül'")
+
+Burada sorguyu nasýl kurduðumuza dikkat edin. Bu sorgunun ilk kýsmý olan SELECT * FROM kitaplar ifadesini zaten daha önce öðrenmiþtik. Yeni olan kýsým WHERE Yazar = 'Fýrat Özgül'. Burada da anlaþýlmayacak bir þey yok. Bu þekilde, veritabanýndaki ‘kitaplar’ tablosunun ‘Yazar’ sütununda ‘Fýrat Özgül’ bulunan bütün kayýtlarý seçiyoruz.
+
+Þimdi de seçtiðimiz bu verileri alalým:
+
+>>> im.fetchall()
+
+('HERYÖNÜYLE PYTHON', 'Fýrat Özgül', '34,00 TL')
+
+Gayet baþarýlý... Bu arada, verileri almak için fetchall() yerine for döngüsü kullanabileceðinizi de biliyorsunuz:
+
+>>> for s in im:
+... print(s)
+...
+('HERYÖNÜYLE PYTHON', 'Fýrat Özgül', '34,00 TL')
+
+Ýmleç üzerinde for döngüsü kurabildiðimize göre yýldýzlý parametrelerden de yararlanabileceðimizi tahmin etmiþsinizdir:
+
+>>> print(*im)
+
+('HERYÖNÜYLE PYTHON', 'Fýrat Özgül', '34,00 TL')
+

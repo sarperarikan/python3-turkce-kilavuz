@@ -1,0 +1,134 @@
+
+Alt Sýnýflar
+
+Bir taban sýnýftan türeyen bütün sýnýflar, o taban sýnýfýn alt sýnýflarýdýr. (subclass). Alt sýnýflar, kendilerinden türedikleri taban sýnýflarýn metot ve niteliklerini miras yoluyla devralýr.
+
+Anlattýðýmýz bu soyut þeyleri anlamanýn en kolay yolu somut bir örnek üzerinden ilerlemektir. Mesela, biraz önce tanýmladýðýmýz Oyuncu() adlý taban sýnýftan bir alt sýnýf türetelim:
+
+class Asker(Oyuncu):
+pass
+
+Kodlarýmýz tam olarak þöyle görünüyor:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Asker(Oyuncu):
+pass
+
+Burada Asker() sýnýfýný tanýmlarken, bu sýnýfýn parantezleri içine Oyuncu() sýnýfýnýn adýný yazdýðýmýza dikkat edin. Ýþte bu þekilde bir sýnýfýn parantezleri içinde baþka bir sýnýfýn adýný belirtirsek, o sýnýf, parantez içinde belirttiðimiz sýnýfýn bir alt sýnýfý olmuþ olur. Yani mesela yukarýdaki gibi Asker() sýnýfýnýn parantezleri arasýna Oyuncu() sýnýfýnýn adýný yazdýðýmýzda, Asker() adlý sýnýf;
+
+
+Oyuncu() adlý sýnýfý miras almýþ, 
+Oyuncu() adlý sýnýfýn bütün metot ve niteliklerini devralmýþ, 
+Oyuncu() adlý sýnýftan türemiþ oluyor. 
+
+Bu sayede Oyuncu() sýnýfýnda tanýmlanan bütün nitelik ve metotlara Asker() sýnýfýndan da eriþebiliyoruz:
+
+>>> import oyuncular
+>>> asker1 = oyuncular.Asker('Ahmet', 'Er')
+>>> asker1.isim
+
+'Ahmet'
+
+>>> asker1.rütbe
+
+'Er'
+
+>>> asker1.güç
+
+0
+
+>>> asker1.puan_kazan()
+
+'puan kazanýldý'
+
+Örnek olmasý açýsýndan, Oyuncu() sýnýfýndan türeyen (miras alan) birkaç alt sýnýf daha tanýmlayalým:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Asker(Oyuncu):
+pass
+
+class Ýþçi(Oyuncu):
+pass
+
+class Yönetici(Oyuncu):
+pass
+
+Tanýmladýðýmýz bu Ýþçi() ve Yönetici() sýnýflarý da týpký Asker() sýnýfý gibi Oyuncu() adlý sýnýftan miras aldýðý için, Oyuncu() sýnýfýnýn sahip olduðu tüm nitelik ve metotlara sahiptirler.
+
+Buraya kadar anlattýklarýmýzý özetleyecek olursak, þu sýnýf bir taban sýnýftýr:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+Bu taban sýnýf, kendisinden türeyecek alt sýnýflarýn ortak nitelik ve metotlarýný tanýmlar.
+
+Þu sýnýflar ise, yukarýdaki taban sýnýftan türeyen birer alt sýnýftýr:
+
+class Asker(Oyuncu):
+pass
+
+class Ýþçi(Oyuncu):
+pass
+
+class Yönetici(Oyuncu):
+pass
+
+Bu alt sýnýflar, Oyuncu() adlý taban sýnýfýn bütün nitelik ve metotlarýný miras yoluyla devralýr. Yani Oyuncu() adlý taban/ebeveyn/üst sýnýfýn nitelik ve metotlarýna, Asker(), Ýþçi() ve Yönetici() adlý alt sýnýflardan eriþebiliriz:
+
+>>> asker1 = Asker('Ahmet', 'Ýstihkamcý')
+>>> iþçi1 = Ýþçi('Mehmet', 'Usta')
+>>> yönetici1 = Yönetici('Selim', 'Müdür')
+>>> asker1.hareket_et()
+
+'hareket ediliyor...'
+
+>>> iþçi1.puan_kaybet()
+
+'puan kaybedildi'
+
+>>> yönetici1.puan_kazan()
+
+'puan kazanýldý'
+
+Ýþte bu mekanizmaya miras alma (inheritance) adý verilir. Miras alma mekanizmasý, bir kez yazýlan kodlarýn farklý yerlerde kullanýlabilmesini saðlayan, bu bakýmdan da programcýyý kod tekrarýna düþmekten kurtaran oldukça faydalý bir araçtýr. Ýlerleyen sayfalarda miras alma mekanizmasýnýn baþka faydalarýný da göreceðiz.
+

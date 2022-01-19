@@ -1,0 +1,234 @@
+
+Tkinter Hakkýnda
+
+Hatýrlarsanýz, önceki derslerimizde birkaç kez Tkinter adlý bir modülden söz etmiþtik. Tkinter, Python kurulumu ile birlikte gelen ve pencereli-menülü modern programlar yazmamýzý saðlayan grafik arayüz geliþtirme takýmlarýndan biridir.
+
+Tkinter bir standart kütüphane paketi olduðu için, Python programlama dilini kurduðunuzda Tkinter de otomatik olarak kurulur1.
+
+Elbette Python’da grafik arayüzlü programlar yazmamýzý saðlayacak tek modül Tkinter deðildir. Bunun dýþýnda PyQt, PyGI ve Kivy gibi alternatifler de bulunur. Ancak Tkinter’in öteki alternatiflere karþý en büyük üstünlüðü hem öbürlerine kýyasla çok daha kolay olmasý hem de Python’la birlikte gelmesidir. PyQt, PyGI ve Kivy’yi kullanabilmek için öncelikle bunlarý bilgisayarýnýza kurmanýz gerekir. Ayrýca Tkinter dýþýndaki alternatifleri kullanarak yazdýðýnýz programlarý daðýtýrken, bu arayüz kütüphanelerini kullanýcýlarýnýzýn bilgisayarýna ya kendiniz kurmanýz ya da kullanýcýlarýnýzdan bu kütüphaneleri kurmasýný talep etmeniz gerekir.
+
+Ben size, ilerde baþka arayüz takýmlarýna geçiþ yapacak da olsanýz, Tkinter’i mutlaka öðrenmenizi tavsiye ederim. Hem nesne tabanlý programlama hem de grafik arayüz geliþtirme kavramlarýný öðrenmek açýsýndan Tkinter son derece uygun bir ortamdýr.
+
+Biz bu bölümde Tkinter modülünü kullanarak, prosedürel programlama, nesne tabanlý programlama, sýnýflar, miras alma ve nesne programlamaya iliþkin öteki konular üzerine ufak tefek de olsa bazý çalýþmalar yapacaðýz. Bu çalýþmalar sayesinde bir yandan öðrendiðimiz eski konulara iliþkin güzel bir pratik yapma imkaný bulacaðýz, bir yandan Tkinter’in çalýþmalarýmýzýn sonucunu görsel bir þekilde izleme imkaný saðlamasý sayesinde nesne tabanlý programlamanýn çetrefilli kavramlarýný anlamamýz kolaylaþacak, bir yandan da ilk kez gördüðümüz kodlarý anlama ve bunlar hakkýnda fikir yürütme kabiliyeti kazanacaðýz. Yani bir taþla tamý tamýna üç kuþ vurmuþ olacaðýz...
+
+
+Prosedürel Bir Örnek
+
+Baþta da söylediðimiz gibi, nesne tabanlý programlama, grafik arayüzlü programlar geliþtirmek için son derece uygun bir programlama yaklaþýmýdýr. Zaten kendi araþtýrmalarýnýz sýrasýnda da, etraftaki grafik arayüzlü programlarýn büyük çoðunluðunun nesne tabanlý programlama yaklaþýmýyla yazýldýðýný göreceksiniz. Biz de bu derste vereceðimiz Tkinter örneklerinde sýnýflý yapýlarý kullanacaðýz. Ancak dilerseniz Tkinter’in nasýl bir þey olduðunu daha kolay anlayabilmek için öncelikle nesne tabanlý yaklaþým yerine prosedürel yaklaþýmý kullanarak birkaç küçük çalýþma yapalým. Zira özellikle basit kodlarda, prosedürel yapýyý anlamak nesne tabanlý programlama yaklaþýmý ile yazýlmýþ kodlarý anlamaktan daha kolaydýr. Ancak tabii ki kodlar büyüyüp karmaþýklaþtýkça sýnýflý yapýlarý kullanmak çok daha akýllýca olacaktýr.
+
+O halde gelin isterseniz Tkinter modülünü nasýl kullanacaðýmýzý anlamak için, bir metin dosyasý açýp içine þu kodlarý yazalým:
+
+import tkinter
+
+pencere = tkinter.Tk()
+pencere.mainloop()
+
+Bu kodlarý herhangi bir Python programý gibi kaydedip çalýþtýrdýðýnýzda boþ bir pencerenin açýldýðýný göreceksiniz. Ýþte böylece siyah komut satýrýndan renkli grafik arayüze geçiþ yapmýþ oldunuz. Hadi hayýrlý olsun!
+
+Gördüðünüz gibi, bu kodlarda sýnýflarý kullanmadýk. Dediðimiz gibi, ilk etapta Tkinter’i daha iyi anlayabilmek için sýnýflý yapýlar yerine prosedürel bir yaklaþýmý benimseyeceðiz.
+
+Burada öncelikle Tkinter modülünü içe aktardýðýmýza dikkat edin:
+
+import tkinter
+
+Modülü bu þekilde içe aktardýðýmýz için, modül içindeki nitelik ve metotlara eriþmek istediðimizde modülün adýný kullanmamýz gerekecek. Mesela yukarýda modülün adýný kullanarak, tkinter modülü içindeki Tk() sýnýfýný örnekledik:
+
+pencere = tkinter.Tk()
+
+Dilerseniz içe aktarma iþlemini þu þekilde yaparak iþlerimizi biraz daha kolaylaþtýrabiliriz:
+
+import tkinter as tk
+
+Böylece tkinter modülünün nitelik ve metotlarýna ‘tkinter’ yerine ‘tk’ önekiyle eriþebiliriz:
+
+pencere = tk.Tk()
+
+Yukarýdaki kodlarý yazdýðýmýzda, yani tkinter modülünün Tk() sýnýfýný örneklediðimiz anda aslýnda penceremiz oluþtu. Ancak bu pencere örnekleme ile birlikte oluþmuþ olsa da, Tkinter’in iç iþleyiþi gereði, ‘ana döngü’ adlý bir mekanizma çalýþmaya baþlamadan görünür hale gelmez. Ýþte bu özel ana döngü mekanizmasýný çalýþtýrmak ve böylece oluþturduðumuz pencereyi görünür hale getirmek için, Tk() sýnýf örneklerinin mainloop() adlý bir metodunu çalýþtýracaðýz:
+
+pencere.mainloop()
+
+Gördüðünüz gibi, Tk() sýnýfýný pencere adýyla örnekledikten sonra Tk() sýnýfýnýn mainloop() adlý metoduna pencere örneði üzerinden eriþtik.
+
+Bu ana döngü mekanizmasýnýn benzerlerini Tkinter’in dýþýndaki öbür grafik arayüz tasarým araçlarýnda da göreceksiniz.
+
+Bu arada, yukarýdaki prosedürel örnekte bile, biz istemesek de sýnýflarla muhatap olduðumuza dikkatinizi çekmek isterim. Çünkü kullandýðýmýz tkinter modülünün kendisi halihazýrda birtakým sýnýflardan oluþuyor. Dolayýsýyla bu modülü içe aktardýðýmýzda, kodlarýmýzýn içine pek çok sýnýfý ister istemez dahil etmiþ oluyoruz. Esasýnda sýrf bu durum bile, grafik arayüzlü programlarda neden nesne tabanlý programlamanýn tercih edildiðini gayet güzel gösteriyor bize. Neticede, kullandýðýmýz harici kaynaklardan ötürü her þekilde sýnýflarla ve nesne tabanlý yapýlarla içli dýþlý olacaðýmýz için, kendi yazdýðýmýz kodlarda da nesne tabanlý yapýlardan kaçmamýzýn hiçbir gerekçesi yok.
+
+Neyse... Biz konumuza dönelim...
+
+Yukarýda Tkinter modülünü kullanarak boþ bir pencere oluþturduk. Gelin isterseniz bu boþ pencere üzerinde birtakým deðiþiklikler yapalým.
+
+Öncelikle tkinter modülümüzü içe aktaralým:
+
+import tkinter as tk
+
+Þimdi bu modülün Tk() adlý sýnýfýný örnekleyelim:
+
+pencere = tk.Tk()
+
+Böylece penceremizi oluþturmuþ olduk. Tkinter’le verdiðimiz ilk örnekte de gördüðünüz gibi, Tkinter’le oluþturulan boþ bir pencere öntanýmlý olarak 200 piksel geniþliðe ve 200 piksel yüksekliðe sahip olacaktýr. Ancak isterseniz, Tk() sýnýfýnýn geometry() adlý metodunu kullanarak, pencere boyutunu ayarlayabilirsiniz (Tk() sýnýfýnýn hangi metotlara sahip olduðunu görmek için dir(pencere) komutunu verebileceðinizi biliyorsunuz):
+
+import tkinter as tk
+
+pencere = tk.Tk()
+pencere.geometry('200x70')
+
+pencere.mainloop()
+
+Kendi yazdýðýmýz sýnýflardaki nitelik ve metotlara nasýl eriþiyorsak, Tk() sýnýfýnýn nitelik ve metotlarýna da ayný þekilde eriþtiðimize dikkat edin. Neticede bizim yazdýklarýmýz da sýnýftýr, Tk() da sýnýftýr. Tk() sýnýfýnýn bizimkilerden tek farký, Tk() sýnýfýnýn Python geliþtiricilerince yazýlmýþ olmasýdýr. Yazarlarý farklý olsa da bütün sýnýflar ayný kurallara tabidir. Dolayýsýyla ilgili sýnýfý kullanabilmek için önce sýnýfýmýzý örnekliyoruz, ardýndan da bu sýnýf içinde tanýmlý olan nitelik ve metotlara noktalý gösterim tekniðini kullanarak ulaþýyoruz. Burada da Tk() sýnýf örneklerinin geometry() metodunu kullanarak 200x200 yerine 200x70 boyutlarýnda bir pencere oluþturduk:
+
+pencere.geometry('200x70')
+
+Þimdi bu boþ pencereye bir etiket bir de düðme ekleyelim:
+
+import tkinter as tk
+
+pencere = tk.Tk()
+pencere.geometry('200x70')
+
+etiket = tk.Label(text='Merhaba Zalim Dünya')
+etiket.pack()
+
+düðme = tk.Button(text='Tamam', command=pencere.destroy)
+düðme.pack()
+
+pencere.mainloop()
+
+Burada tkinter modülünün Tk() sýnýfýna ek olarak, ayný modülün Label() ve Button() adlý iki sýnýfýný daha kullandýk. Label() sýnýfý etiketler, Button() sýnýfý ise düðmeler oluþturmamýzý saðlýyor. Bu sýnýflarýn örnekleri üzerinde çalýþtýrdýðýmýz pack() metodunu ise, etiket ve düðmeleri pencere üzerine yerleþtirmek için kullanýyoruz.
+
+Label() ve Button() sýnýflarýnýn text adlý bir parametre aldýðýný görüyorsunuz. Bu parametrenin deðeri, etiket veya düðmenin üzerinde ne yazacaðýný gösteriyor.
+
+Bu kodlarý da týpký baþka Python programlarýný çalýþtýrdýðýnýz gibi çalýþtýrabilirsiniz.
+
+Bu arada, Tkinter’de bir þeyi oluþturmanýn ve görünür hale getirmenin iki farklý iþlem gerektirdiðine özellikle dikkat edin. Mesela üzerinde ‘Merhaba Zalim Dünya’ yazan bir etiket oluþturmak için þu kodu kullanýyoruz:
+
+etiket = tk.Label(text='Merhaba Zalim Dünya')
+
+Bu etiketi pencere üzerine yerleþtirmek, yani görünür hale getirmek için ise þu komutu kullanýyoruz:
+
+etiket.pack()
+
+Ayný þekilde bir düðme oluþturmak için de þu komutu kullanýyoruz:
+
+düðme = tk.Button(text='Tamam', command=pencere.destroy)
+
+Böylece üzerinde ‘Tamam’ yazan ve týklandýðýnda pencereyi kapatan bir düðme oluþturmuþ oluyoruz. Düðmenin üzerine týklandýðýnda ne olacaðýný Button() sýnýfýnýn command parametresi aracýlýðýyla belirledik. Bu parametreye, pencere örneðinin destroy() metodunu verdiðimizde pencereye kapatma sinyali gönderilecektir. Yalnýz bu metodu yazarken parantez iþaretlerini kullanmadýðýmýza dikkat edin. Eðer metodu pencere.destroy() þeklinde parantezli bir biçimde yazarsak, kapatma komutu daha düðmeye basmadan çalýþacak ve bu durumda düðmemiz düzgün iþlemeyecektir.
+
+Týpký etikette olduðu gibi, düðmemizi de pencere üzerine yerleþtirmek, yani görünür hale getirmek için pack() metodundan yararlanýyoruz:
+
+düðme.pack()
+
+Bunun, Tk() sýnýfý ile mainloop() metodu arasýndaki iliþkiye benzediðine dikkatinizi çekmek isterim: Týpký pack() metoduna benzer bir þekilde, Tk() sýnýfý yardýmýyla da bir pencere oluþturduktan sonra, bu pencerenin görünür hale gelebilmesi için mainloop() metodunu çalýþtýrmamýz gerektiðini hatýrlýyorsunuz.
+
+Bu kodlarda Tkinter’e iliþkin ayrýntýlardan ziyade, sýnýflý yapýlarý kodlarýmýza nasýl dahil ettiðimize ve bunlarý nasýl kullandýðýmýza odaklanmanýzý istiyorum. Gördüðünüz gibi, tkinter modülünden içe aktardýðýmýz Tk(), Label() ve Button() gibi sýnýflarýn metot ve niteliklerini, mesela týpký karakter dizilerinin metot ve niteliklerini kullanýr gibi kullanýyoruz.
+
+Yukarýdaki örnekte, tkinter modülünün sýnýflarýný, kodlarýmýz içine prosedürel olarak dahil ettik. Yani her sýnýfý, belli bir sýraya göre kodlarýmýz içinde belirtip, bunlarý adým adým çalýþtýrdýk. Prosedürel programlamada kodlarýn yazýlýþ sýrasý çok önemlidir. Bunu kanýtlamak için çok basit bir örnek verelim:
+
+import tkinter as tk
+
+pencere = tk.Tk()
+
+def çýkýþ():
+etiket['text'] = 'Elveda zalim dünya...'
+düðme['text'] = 'Bekleyin...'
+düðme['state'] = 'disabled'
+pencere.after(2000, pencere.destroy)
+
+etiket = tk.Label(text='Merhaba Zalim Dünya')
+etiket.pack()
+
+düðme = tk.Button(text='Çýk', command=çýkýþ)
+düðme.pack()
+
+pencere.protocol('WM_DELETE_WINDOW', çýkýþ)
+
+pencere.mainloop()
+
+Burada herzamanki gibi öncelikle gerekli modülü içe aktardýk:
+
+import tkinter as tk
+
+Daha sonra Tk() sýnýfý yardýmýyla penceremizi oluþturduk:
+
+pencere = tk.Tk()
+
+Ardýndan çýkýþ() adlý bir fonksiyon tanýmladýk:
+
+def çýkýþ():
+etiket['text'] = 'Elveda zalim dünya...'
+düðme['text'] = 'Bekleyin...'
+düðme['state'] = 'disabled'
+pencere.after(2000, pencere.destroy)
+
+Bu fonksiyon, pencere kapatýlýrken hangi iþlemlerin yapýlacaðýný belirliyor. Buna göre, programdan çýkýlýrken sýrasýyla þu iþlemleri gerçekleþtiriyoruz:
+
+Etiketin text parametresini ‘Elveda zalim dünya...’ olarak deðiþtiriyoruz. 
+Düðmenin text parametresini ‘Bekleyin...’ olarak deðiþtiriyoruz. 
+Düðmenin state parametresini ‘disabled’ olarak deðiþtirerek düðmeyi basýlamaz hale getiriyoruz. 
+2000 milisaniye (yani 2 saniye) sonra ise pencere.destroy() komutunu iþleterek pencerenin kapanmasýný saðlýyoruz. 
+çýkýþ() fonksiyonunu tanýmladýktan sonra Label() ve Button() düðmeleri aracýlýðýyla etiket ve düðmelerimizi oluþturuyoruz:
+
+etiket = tk.Label(text='Merhaba Zalim Dünya')
+etiket.pack()
+
+düðme = tk.Button(text='Çýk', command=çýkýþ)
+düðme.pack()
+
+Buna göre, düðmeye basýldýðýnda, command parametresinin deðeri olan çýkýþ() fonksiyonu çalýþmaya baþlayacak ve fonksiyon gövdesinde tanýmladýðýmýz iþlemler gerçekleþecek.
+
+Bildiðiniz gibi, bir program penceresinde, o programý kapatmayý saðlayacak düðmelerin yanýsýra, bir de en üst sað (veya sol) köþede program penceresini kapatan bir ‘X’ düðmesi bulunur. Ýþte bu ‘X’ düðmesine basýldýðýnda da pencere kapanmadan önce çýkýþ() fonksiyonunun çalýþmasý için þu kodu yazýyoruz:
+
+pencere.protocol('WM_DELETE_WINDOW', çýkýþ)
+
+protocol() de týpký geometry() gibi, Tk() sýnýfýnýn metotlarýndan biridir. Bu metodu WM_DELETE_WINDOW argümanýyla birlikte kullanarak, pencere üzerindeki ‘X’ düðmesine basýldýðýnda neler olacaðýný tanýmlayabiliyoruz.
+
+Son olarak da ana döngü mekanizmasýný çalýþtýrýyoruz ve penceremizi görünür hale getiriyoruz:
+
+pencere.mainloop()
+
+Bu prosedürel kodlarý tekrar önümüze alalým:
+
+import tkinter as tk
+
+pencere = tk.Tk()
+
+def çýkýþ():
+etiket['text'] = 'Elveda zalim dünya...'
+düðme['text'] = 'Bekleyin...'
+düðme['state'] = 'disabled'
+pencere.after(2000, pencere.destroy)
+
+etiket = tk.Label(text='Merhaba Zalim Dünya')
+etiket.pack()
+
+düðme = tk.Button(text='Çýk', command=çýkýþ)
+düðme.pack()
+
+pencere.protocol('WM_DELETE_WINDOW', çýkýþ)
+
+pencere.mainloop()
+
+En baþta da söylediðimiz gibi, bu kodlarda, satýr sýralarý çok önemlidir. Mesela burada düðmeyi oluþturan kodlarla pencere.protocol() kodlarýnýn çalýþmasý için bunlarýn mutlaka çýkýþ() fonksiyonu tanýmlandýktan sonra yazýlmasý gerekir. Eðer bu kodlarý þöyle yazarsanýz:
+
+import tkinter as tk
+
+pencere = tk.Tk()
+pencere.protocol('WM_DELETE_WINDOW', çýkýþ)
+
+def çýkýþ():
+etiket['text'] = 'Elveda zalim dünya...'
+düðme['text'] = 'Bekleyin...'
+düðme['state'] = 'disabled'
+pencere.after(2000, pencere.destroy)
+
+etiket = tk.Label(text='Merhaba Zalim Dünya')
+etiket.pack()
+
+düðme = tk.Button(text='Çýk', command=çýkýþ)
+düðme.pack()
+
+pencere.mainloop()
+
+... programýnýz çalýþmayacaktýr.
+
+Bu durum, programcýyý, istediði kod düzenini oturtmak konusunda epey kýsýtlar. Ama eðer nesne tabanlý programlama yaklaþýmýný kullanýrsak kod akýþýný belirlerken daha özgür olabiliriz. Ayrýca prosedürel yaklaþýmda kodlar büyüdükçe programýnýzýn çorbaya dönme ihtimali nesne tabanlý programlama yaklaþýmýna göre daha fazladýr. Ancak elbette nesne tabanlý programlama yaklaþýmýný kullanmak tek baþýna düzgün ve düzenli kod yazmanýn teminatý deðildir. Nesne tabanlý programlama yaklaþýmýný kullanarak da gayet sebze çorbasý kývamýnda kodlar yazabilirsiniz. En baþta da söylediðimiz gibi, nesne tabanlý programlama bir seçenektir. Eðer istemezseniz, nesne tabanlý programlama yaklaþýmýný kullanmak zorunda deðilsiniz. Ama elinizde böyle bir imkanýnýz olduðunu ve baþkalarýnýn da bu yaklaþýmdan yoðun bir þekilde faydalandýðýný bilmek çok önemlidir.
+

@@ -1,0 +1,13 @@
+
+Düzenli Ýfadeler
+
+Düzenli ifadeler Python programlama dilinin en çetrefilli konularýndan biridir. Öyle ki, düzenli ifadelerin Python içinde ayrý bir dil olarak düþünülmesi gerektiðini söyleyenler dahi vardýr. Ama bütün zorluklarýna raðmen programlama deneyimimizin bir noktasýnda mutlaka karþýmýza çýkacak olan bu yapýyý öðrenmemizde büyük fayda var. Düzenli ifadeleri öðrendikten sonra, elle yapýlmasý saatler sürecek bir iþlemi saliseler içinde yapabildiðinizi gördüðünüzde eminim düzenli ifadelerin ne büyük bir nimet olduðunu siz de anlayacaksýnýz. Tabii her güzel þey gibi, düzenli ifadelerin nimetlerinden yararlanabilecek düzeye gelmek de bir miktar kan, ter ve gözyaþý istiyor.
+
+Peki, düzenli ifadeleri kullanarak neler yapabiliriz? Çok genel bir ifadeyle, bu yapýyý kullanarak metinleri veya karakter dizilerini parmaðýmýzda oynatabiliriz. Örneðin bir web sitesinde daðýnýk halde duran verileri bir çýrpýda ayýklayabiliriz. Bu veriler, mesela, toplu halde görmek istediðimiz web adreslerinin bir listesi olabilir. Bunun dýþýnda, örneðin, çok sayýda belge üzerinde tek adýmda istediðimiz deðiþiklikleri yapabiliriz.
+
+Ancak genel bir kural olarak, düzenli ifadelerden kaçabildiðimiz müddetçe kaçmamýz gerekir. Eðer Python’daki karakter dizisi metotlarý, o anda yapmak istediðimiz þey için yeterli geliyorsa mutlaka o metotlarý kullanmalýyýz. Çünkü karakter dizisi metotlarý, düzenli ifadelere kýyasla hem daha basit, hem de çok daha hýzlýdýr. Ama bir noktadan sonra karakter dizilerini kullanarak yazdýðýnýz kodlar iyice karmaþýklaþmaya baþlamýþsa, kodlarýn her tarafý if deyimleriyle dolmuþsa, hatta basit bir iþlemi gerçekleþtirmek için yazdýðýnýz kod sayfa sýnýrlarýný zorlamaya baþlamýþsa, iþte o noktada artýk düzenli ifadelerin dünyasýna adým atmanýz gerekiyor olabilir. Ama bu durumda Jamie Zawinski’nin þu sözünü de aklýnýzdan çýkarmayýn: “Bazýlarý, bir sorunla karþý karþýya kaldýklarýnda þunu der: ‘Evet, burada düzenli ifadeleri kullanmam gerekiyor.’ Ýþte onlarýn bir sorunu daha vardýr artýk...”
+
+Baþta da söylediðim gibi, düzenli ifadeler bize zorluklarý unutturacak kadar büyük kolaylýklar sunar. Emin olun yüzlerce dosya üzerinde tek tek elle deðiþiklik yapmaktan daha zor deðildir düzenli ifadeleri öðrenip kullanmak... Hem zaten biz de bu sayfalarda bu “sevimsiz” konuyu olabildiðince sevimli hale getirmek için elimizden gelen çabayý göstereceðiz. Sizin de çaba göstermeniz, bol bol alýþtýrma yapmanýz durumunda düzenli ifadeleri kavramak o kadar da zorlayýcý olmayacaktýr. Unutmayýn, düzenli ifadeler ne kadar uðraþtýrýcý olsa da programcýnýn en önemli silahlarýndan biridir. Hatta düzenli ifadeleri öðrendikten sonra onsuz geçen yýllarýnýza acýyacaksýnýz.
+
+Þimdi lafý daha fazla uzatmadan iþimize koyulalým.
+

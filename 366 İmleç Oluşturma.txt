@@ -1,0 +1,13 @@
+
+Ýmleç Oluþturma
+
+Yukarýda connect() metodunu kullanarak hem Sqlite ile nasýl veritabaný baðlantýsý kuracaðýmýzý hem de nasýl yeni bir veritabaný oluþturacaðýmýzý öðrendik.
+
+connect() metodu, bir veritabaný üzerinde iþlem yapabilmemizin ilk adýmýdýr. Veritabanýný oluþturduktan veya varolan bir veritabaný ile baðlantý kurduktan sonra, veritabaný üzerinde iþlem yapabilmek için sonraki adýmda bir imleç oluþturmamýz gerekir.
+
+Ýmleç oluþturmak için cursor() adlý bir metottan yararlanacaðýz:
+
+>>> im = vt.cursor()
+
+Ýmleci oluþturduktan sonra artýk önümüz iyice açýlýyor. Böylece, yukarýda oluþturduðumuz im nesnesinin execute() metodunu kullanarak SQL komutlarýný çalýþtýrabileceðiz. Nasýl mý? Hemen bakalým.
+

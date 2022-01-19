@@ -1,0 +1,11 @@
+
+import paket.modül
+
+Mesela urllib paketinden request modülünü içe aktarmak istersek þu komutu yazacaðýz:
+
+>>> import urllib.request
+
+Bu modülü yukarýdaki þekilde içe aktardýðýmýzda, modül içindeki nitelik ve metotlara urllib.request önekiyle eriþebiliriz:
+
+>>> urllib.request.urlopen('http://www.istihza.com')
+

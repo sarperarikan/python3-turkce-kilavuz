@@ -1,0 +1,149 @@
+
+fetchall() Metodu
+
+Biraz önce þöyle bir program yazmýþtýk:
+
+import sqlite3
+
+vt = sqlite3.connect('vt.sqlite')
+
+im = vt.cursor()
+
+im.execute("""CREATE TABLE IF NOT EXISTS faturalar
+(fatura, miktar, ilk_odeme_tarihi, son_odeme_tarihi)""")
+
+im.execute("""INSERT INTO faturalar VALUES
+("Elektrik", 45, "23 Ocak 2010", "30 Ocak 2010")""")
+
+vt.commit()
+
+im.execute("""SELECT * FROM faturalar""")
+
+Burada vt.sqlite adlý bir veritabanýnda ‘faturalar’ adlý bir tablo oluþturduk ve bu tabloya bazý veriler girdik. Daha sonra da SELECT adlý SQL komutu yardýmýyla bu verileri seçtik. Þimdi de seçtiðimiz bu verileri veritabanýndan alacaðýz.
+
+Yukarýdaki programa þu satýrý ekliyoruz:
+
+veriler = im.fetchall()
+
+Burada da ilk defa gördüðümüz bir metot var: fetchall(). Gördüðünüz gibi, fetchall() imlecin bir metodudur. Yukarýda gördüðümüz SELECT * FROM faturalar komutu ‘faturalar’ adlý tablodaki bütün verileri seçiyordu. fetchall() metodu ise seçilen bu verileri alma iþlevi görüyor. Yukarýda biz fetchall() metoduyla aldýðýmýz bütün verileri veriler adlý bir deðiþkene atadýk.
+
+Artýk bu verileri rahatlýkla yazdýrabiliriz:
+
+print(veriler)
+
+Dilerseniz betiðimizi topluca görelim:
+
+import sqlite3
+
+vt = sqlite3.connect('vt.sqlite')
+
+im = vt.cursor()
+
+im.execute("""CREATE TABLE IF NOT EXISTS faturalar
+(fatura, miktar, ilk_odeme_tarihi, son_odeme_tarihi)""")
+
+im.execute("""INSERT INTO faturalar VALUES
+("Elektrik", 45, "23 Ocak 2010", "30 Ocak 2010")""")
+
+vt.commit()
+
+im.execute("""SELECT * FROM faturalar""")
+
+veriler = im.fetchall()
+
+print(veriler)
+
+Bu betiði ilk kez çalýþtýrdýðýmýzda þöyle bir çýktý alýrýz:
+
+[('Elektrik', 45, '23 Ocak 2010', '30 Ocak 2010')]
+
+Gördüðünüz gibi, veriler bir liste içinde demet halinde yer alýyor. Ama tabii siz bu verileri istediðiz gibi biçimlendirecek kadar Python bilgisine sahipsiniz. Ayrýca programý her çalýþtýrdýðýnýzda INSERT INTO sorgusu tekrar iþletileceði için verilerin tabloya tekrar tekrar yazýlacaðýný, bu verileri alýrken de çýktý listesinin büyüyeceðini unutmayýn. Peki eðer siz bir veritabaný dosyasýna verilerin yalnýzca bir kez yazýlmasýný istiyorsanýz ne yapacaksýnýz? Yani mesela yukarýdaki kodlarda þu sorgu yalnýzca tek bir kez iþletilsin:
+
+im.execute("""INSERT INTO faturalar VALUES
+("Elektrik", 45, "23 Ocak 2010", "30 Ocak 2010")""")
+
+Böylece veritabanýný her çalýþtýrdýðýnýzda ("Elektrik", 45, "23 Ocak 2010", "30 Ocak 2010") satýrý dosyaya tekrar tekrar yazdýrýlmasýn.
+
+Bunu þu kodlarla halledebilirsiniz:
+
+import sqlite3, os
+
+dosya = 'vt.sqlite'
+dosya_mevcut = os.path.exists(dosya)
+
+vt = sqlite3.connect(dosya)
+im = vt.cursor()
+
+im.execute("""CREATE TABLE IF NOT EXISTS faturalar
+(fatura, miktar, ilk_odeme_tarihi, son_odeme_tarihi)""")
+
+if not dosya_mevcut:
+im.execute("""INSERT INTO faturalar VALUES
+    ("Elektrik", 45, "23 Ocak 2010", "30 Ocak 2010")""")
+vt.commit()
+
+im.execute("""SELECT * FROM faturalar""")
+
+veriler = im.fetchall()
+print(veriler)
+
+Burada kodlarýmýzýn en baþýnda vt.sqlite adlý bir veritabanýnýn mevcut olup olmadýðýný kontrol ediyoruz (zira eðer ortada bir veritabaný dosyasý yoksa, veri de yok demektir):
+
+dosya_mevcut = os.path.exists(dosya)
+
+Eðer böyle bir dosya mevcut deðilse (dolayýsýyla veri mevcut deðilse) INSERT INTO sorgusu iþletilerek gerekli veriler yerine yerleþtirilecek:
+
+if not dosya_mevcut:
+im.execute("""INSERT INTO faturalar VALUES
+    ("Elektrik", 45, "23 Ocak 2010", "30 Ocak 2010")""")
+vt.commit()
+
+Eðer böyle bir dosya zaten mevcutsa bu sorgu iþletilemeyecek, onun yerine doðrudan SELECT sorgusuna geçilecek. Böylece deðerler veritabanýna bir kez iþlendikten sonra, programýmýz ayný verileri tekrar tekrar veritabanýna yerleþtirmeye çalýþmayacak.
+
+Bu arada, daha önce de belirttiðimiz gibi, tablo oluþtururken sütun adlarýnda boþluk (ve Türkçe karakter) kullanmak iyi bir fikir deðildir. Mesela ilk ödeme tarihi yerine ilk_odeme_tarihi ifadesini tercih edin. Eðer kelimeler arasýnda mutlaka boþluk býrakmak isterseniz bütün kelimeleri týrnak içine alýn. Mesela: "ilk odeme tarihi" veya "ilk ödeme tarihi" gibi.
+
+Yukarýda gördüðünüz gibi, fetchall() metodu, bir veritabanýndan SELECT ile seçtiðimiz bütün verileri önümüze getiriyor. Eðer seçilen verilerden kaç tanesini almak istediðinizi kendiniz belirlemek istiyorsanýz fetchall() yerine fetchone() veya fetchmany() metotlarýndan o anki amacýnýza uygun olanýný kullanmayý tercih edebilirsiniz. Birazdan fetchone() ve fetchmany() metotlarýndan da söz edeceðiz.
+
+Gelin isterseniz þimdi fetchall() metodunu kullanarak veritabanlarýndan veri çekme konusunda biraz alýþtýrma yapalým. Bu alýþtýrmalar için, daha önce söz ettiðimiz ve bilgisayarýmýza indirdiðimiz kitaplar.sqlite adlý örnek veritabanýný kullanacaðýz.
+
+Öncelikle veritabanýna baðlanalým ve bir imleç oluþturalým:
+
+>>> import sqlite3
+>>> vt = sqlite3.connect('kitaplar.sqlite')
+>>> im = vt.cursor()
+
+Þimdi bu veritabanýndaki tabloyu seçeceðiz. Peki ama seçeceðimiz tablonun adýný nereden bileceðiz? Hatýrlarsanýz, bir tablodaki bütün verileri seçebilmek için þu SQL sorgusunu kullanýyorduk:
+
+"SELECT * FROM tablo_adý"
+
+Ýþte bu sorguda ‘tablo_adý’ kýsmýna ne geleceðini bulabilmek için birkaç farklý yöntemden yararlanabiliriz.
+
+Bir veritabanýnda hangi tablolarýn olduðunu öðrenmek için Sqlitebrowser programýný kullanabiliriz. Bir veritabaný dosyasýný Sqlitebrowser ile açtýktan sonra, ‘Browse Data’ sekmesine gidip, ‘Table’ ifadesinin karþýsýnda ne yazdýðýna bakabiliriz.
+
+Veritabanýndaki tablolarýn adýný öðrenmenin ikinci yolu þu komutlarý kullanmaktýr:
+
+>>> import sqlite3
+>>> vt = sqlite3.connect('kitaplar.sqlite')
+>>> im = vt.cursor()
+>>> im.execute("SELECT name FROM sqlite_master")
+>>> im.fetchall()
+
+Burada þu satýra dikkat edin:
+
+>>> im.execute("SELECT name FROM sqlite_master")
+
+Bütün Sqlite veritabanlarýnda, ilgili veritabanýnýn þemasýný gösteren ‘sqlite_master’ adlý bir tablo bulunur. Ýþte bu tabloyu sorgulayarak veritabaný hakkýnda bilgi edinebiliriz. Yukarýdaki örnekte, bu ‘sqlite_master’ tablosunun ‘name’ (isim) niteliðini sorguladýk. Bu sorgu bize þu cevabý verdi:
+
+>>> im.fetchall()
+
+[('kitaplar',)]
+
+Demek ki kitaplar.sqlite adlý veritabanýnda ‘kitaplar’ adlý tek bir tablo varmýþ.
+
+Gelin þimdi bu bu tablodaki bütün verileri alalým:
+
+>>> im.execute("SELECT * FROM kitaplar")
+>>> im.fetchall()
+
+Bu þekilde tablo içinde ne kadar veri varsa hepsini ekrana yazdýrdýk. Ancak tabii ki, bir veritabanýnýn tamamýný bir anda yazdýrmak her zaman iyi bir fikir olmayabilir. Eðer veritabanýnýn içinde milyonlarca girdi varsa bütün verilerin seçilip yazdýrýlmasý mantýklý olmayacaktýr. Gelin o halde þimdi bizim seçilen verilerin ne kadarýný çekeceðimizi belirleyebilmemizi saðlayacak metotlarý inceleyelim.
+

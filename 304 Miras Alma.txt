@@ -1,0 +1,179 @@
+
+Miras Alma
+
+Bu bölümde, yine nesne tabanlý programlamaya ait bir kavram olan ‘miras alma’dan söz edeceðiz. Bütün ayrýntýlarýyla ele alacaðýmýz miras alma, nesne tabanlý programlamanýn en önemli konularýndan birisidir. Hatta nesne tabanlý programlamayý faydalý bir programlama yaklaþýmý haline getiren özelliklerin baþýnda miras alma gelir dersek çok da abartmýþ olmayýz. Ayrýca miras alma konusu, komut satýrýnda çalýþan programlarýn yanýsýra grafik arayüzlü programlar da yazabilmemizin önündeki son engel olacak. Bu bölümü tamamladýktan sonra, grafik arayüzlü programlar yazmamýzý saðlayacak özel modüllerin belgelerinden yararlanabilmeye ve grafik arayüzlü programlarýn kodlarýný okuyup anlamaya baþlayabileceðiz.
+
+Daha önce de söylediðimiz gibi, Python programlama dilinin temel felsefesi, bir kez yazýlan kodlarý en verimli þekilde tekrar tekrar kullanabilmeye dayanýr. Genel olarak baktýðýmýzda dilin hemen hemen bütün öðeleri bu amaca hizmet edecek þekilde tasarlanmýþtýr. Ýþte bu baþlýk altýnda ele alacaðýmýz ‘miras alma’ kavramý da kodlarýn tekrar tekrar kullanýlabilmesi felsefesine katký sunan bir özelliktir.
+
+Ýsterseniz miras alma konusunu anlatmaya basit bir örnekle baþlayalým.
+
+Diyelim ki bir oyun yazýyorsunuz. Bu oyun içinde askerler, iþçiler, yöneticiler, krallar, kraliçeler ve bunun gibi oyuncu türleri olacak. Bu oyuncularý ve kabiliyetlerini mesela þöyle tanýmlayabilirsiniz:
+
+class Asker():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 100
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Ýþçi():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 70
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Yönetici():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 20
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+Burada asker, iþçi ve yöneticinin her biri için ayrý bir sýnýf tanýmladýk. Her sýnýfýn bir ismi, rütbesi ve gücü var. Ayrýca her sýnýf; hareket etme, puan kazanma ve puan kaybetme gibi kabiliyetlere sahip.
+
+Bu kodlarýn oyuncular.py adlý bir dosyada bulunduðunu varsayarsak, mesela bir asker oluþturmak için yukarýdaki kodlarý þöyle kullanabiliriz:
+
+>>> import oyuncular
+>>> asker1 = oyuncular.Asker('Mehmet', 'er')
+
+Asker() sýnýfýnýn isim ve rütbe parametrelerini belirtmek suretiyle bir asker nesnesi oluþturduk. Týpký Python’da gördüðümüz baþka nesneler gibi, bu nesne de çeþitli nitelik ve metotlardan oluþuyor:
+
+>>> dir(asker1)
+
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__',
+ '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__',
+ '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__',
+ '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__',
+ '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'güç',
+ 'hareket_et', 'isim', 'puan_kaybet', 'puan_kazan', 'rütbe']
+
+Bu nitelik ve metotlarý asker nesnesi üzerine nasýl uygulayacaðýmýzý biliyorsunuz:
+
+>>> asker1.isim
+
+'Mehmet'
+
+>>> asker1.rütbe
+
+'er'
+
+>>> asker1.güç
+
+100
+
+>>> asker1.hareket_et()
+
+'hareket ediliyor...'
+
+>>> asker1.puan_kazan()
+
+'puan kazanýldý'
+
+>>> asker1.puan_kaybet()
+
+'puan kaybedildi'
+
+Ayný þekilde öteki Ýþçi() ve Yönetici() sýnýflarýný da örnekleyip kullanabiliriz. Bu konuda bir problem yok. Ancak yukarýdaki kodlarý incelediðinizde, ayný kodlarýn sürekli tekrarlandýðýný göreceksiniz. Gördüðünüz gibi, ayný nitelik ve metotlarý her sýnýf için yeniden tanýmlýyoruz. Bu durumun Python’ýn mantalitesine aykýrý olduðunu tahmin etmek hiç zor deðil. Peki acaba yukarýdaki kodlarý nasýl daha ‘Pythonvari’ hale getirebiliriz?
+
+Bu noktada ilk olarak taban sýnýflardan söz etmemiz gerekiyor.
+
+
+Taban Sýnýflar
+
+Taban sýnýflar (base classes) miras alma konusunun önemli kavramlarýndan biridir. Dilerseniz taban sýnýfýn ne olduðu anlayabilmek için, yukarýda verdiðimiz örneði temel alarak çok basit bir uygulama yapalým.
+
+Öncelikle yukarýda verdiðimiz örneði tekrar önümüze alalým:
+
+class Asker():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 100
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Ýþçi():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 70
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+class Yönetici():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 20
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+Bu örnekte, Asker(), Ýþçi() ve Yönetici() adlý sýnýflarýn içeriðine baktýðýmýzda pek çok metot ve niteliðin aslýnda birbiriyle ayný olduðunu görüyoruz. Gelin isterseniz bütün sýnýflarda ortak olan bu nitelik ve metotlarý tek bir sýnýf altýnda toplayalým.
+
+Asker(), Ýþçi() ve Yönetici() sýnýflarýnýn, yazdýðýmýz programdaki oyuncularý temsil ettiðini düþünürsek, ortak nitelik ve metotlarý barýndýran sýnýfýmýzý da Oyuncu() olarak adlandýrmamýz mantýksýz olmayacaktýr:
+
+class Oyuncu():
+def __init__(self, isim, rütbe):
+self.isim = isim
+self.rütbe = rütbe
+self.güç = 0
+
+def hareket_et(self):
+print('hareket ediliyor...')
+
+def puan_kazan(self):
+print('puan kazanýldý')
+
+def puan_kaybet(self):
+print('puan kaybedildi')
+
+Ýþte burada Oyuncu() adlý sýnýf, bir ‘taban sýnýf’ olarak adlandýrýlýr. Taban sýnýf denen þey, birkaç farklý sýnýfta ortak olan nitelik ve metotlarý barýndýran bir sýnýf türüdür. Ýngilizcede base class olarak adlandýrýlan taban sýnýflar, ayrýca üst sýnýf (super class) veya ebeveyn sýnýf (parent class) olarak da adlandýrýlýr. Biz bu makalede taban sýnýf ismini tercih edeceðiz.
+
+Yukarýdaki Oyuncu() adlý taban sýnýf da, Ýþçi(), Asker(), Yönetici() gibi sýnýflarýn hepsinde ortak olarak bulunacak nitelik ve metotlarý barýndýracak. Öteki bütün sýnýflar, ortak nitelik ve metotlarýný her defasýnda tek tek yeniden tanýmlamak yerine, Oyuncu() adlý bu taban sýnýftan devralacak. Peki ama nasýl? Ýþte bunu anlamak için de ‘alt sýnýf’ adlý bir kavrama deðinmemiz gerekiyor.
+

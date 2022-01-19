@@ -1,0 +1,582 @@
+
+Önemli Standart Kütüphane Modülleri " 
+
+
+sys Modülü
+
+Týpký os modülü gibi, sys de Python programlama dilindeki önemli standart kütüphane modüllerinden biridir. Bu modül, kullandýðýnýz Python sürümü ile ilgili bilgi edinmenizi ve kullandýðýnýz Python sürümü ile çeþitli iþlemler yapabilmenizi saðlar.
+
+Bütün modüllerde olduðu gibi, bu modülü de þu komutla içe aktarýyoruz:
+
+>>> import sys
+
+Bu modülün içinde hangi nitelik ve fonksiyonlarýn olduðunu görmek için þu komutu kullanabileceðinizi biliyorsunuz:
+
+>>> dir(sys)
+
+Gördüðünüz gibi bu modül içinde de epeyce fonksiyon ve nitelik var. Biz bu bölümde, sys modülünün en yaygýn kullanýlan, en önemli fonksiyon ve niteliklerini ele alacaðýz.
+
+Ýlk olarak exit() fonksiyonu ile baþlayalým...
+
+
+sys.exit()
+
+sys modülünün exit() fonksiyonunu kullanarak, programýnýzýn iþleyiþini durdurabilir, programýnýzý kapanmaya zorlayabilirsiniz. Basit bir örnek verelim:
+
+import sys
+
+sayý = input('Bir sayý girin: ')
+
+if int(sayý) < 0:
+print('çýkýlýyor...')
+sys.exit()
+
+else:
+print(sayý)
+
+Eðer kullanýcý 0’dan küçük bir sayý girerse programýmýz sys.exit() komutunun etkisiyle çalýþmayý durdurup kapanacaktýr.
+
+
+sys.argv
+
+sys modülünün argv niteliði, yazdýðýmýz program çalýþtýrýlýrken kullanýlan parametreleri bir liste halinde tutar.
+
+Gelin isterseniz bunun ne demek olduðunu bir örnek üzerinde gösterelim.
+
+Þimdi mesela masaüstünde deneme.py adlý bir dosya oluþturun ve içine þunlarý yazýn:
+
+import sys
+print(sys.argv)
+
+Bu programý þu komutla çalýþtýrýn:
+
+python deneme.py
+
+Programý çalýþtýrdýðýnýzda þuna benzer bir çýktý alacaksýnýz:
+
+['deneme.py']
+
+Gördüðünüz gibi, sys.argv komutu bize bir liste veriyor. Bu listenin ilk öðesi, yazdýðýmýz programýn adý. Yani deneme.py.
+
+Þimdi ayný programý bir de þu þekilde çalýþtýralým:
+
+python deneme.py parametre
+
+Bu defa programýmýz bize þu çýktýyý verecek:
+
+['deneme.py', 'parametre']
+
+Gördüðünüz gibi, sys.argv komutu, programýn ismi ile birlikte, bu programa parametre olarak verilen deðerleri de bir liste halinde saklýyor. Bu oldukça önemli ve kullanýþlý bir özelliktir. Bu özellikten pek çok farklý þekillerde yararlanabilirsiniz.
+
+Mesela:
+
+import sys
+
+def çýk():
+print('Çýkýlýyor...')
+sys.exit()
+
+if len(sys.argv) < 2:
+print('Gerekli parametreleri girmediniz!')
+çýk()
+
+elif len(sys.argv) > 2:
+print('Çok fazla parametre girdiniz!')
+çýk()
+
+elif sys.argv[1] in ['-v', '-V']:
+print('Program sürümü: 0.8')
+
+else:
+mesaj = 'Girdiðiniz parametre ({}) anlaþýlamadý!'
+print(mesaj.format(sys.argv[1]))
+çýk()
+
+Burada öncelikle modülümüzü içe aktardýk:
+
+import sys
+
+Bunu yapmadan, o modülü kullanamayacaðýmýzý biliyorsunuz.
+
+Ardýndan çýk() adlý bir fonksiyon tanýmladýk:
+
+def çýk():
+print('Çýkýlýyor...')
+sys.exit()
+
+Programý sonlandýrmak istediðimizde bu fonksiyonu kullanacaðýz.
+
+Daha sonra þöyle bir if bloðu oluþturduk:
+
+if len(sys.argv) < 2:
+print('Gerekli parametreleri girmediniz!')
+çýk()
+
+Eðer sys.argv listesinin uzunluðu 2’den düþükse, programýmýz herhangi bir parametre olmadan, yalnýzca ismiyle çalýþtýrýlmýþ demektir. Bu durumda kullanýcýya ‘Gerekli parametreleri girmediniz!’ mesajýný gösterip programý sonlandýrýyoruz.
+
+Sonraki kod bloðumuz þöyle:
+
+elif len(sys.argv) > 2:
+print('Çok fazla parametre girdiniz!')
+çýk()
+
+Eðer sys.argv listesi 2’den büyükse, programýmýz birden fazla parametre ile çalýþtýrýlmýþ demektir. Bu durumda kullanýcýya ‘Çok fazla parametre girdiniz!’ mesajýný gösterip yine programý sonlandýrýyoruz.
+
+Bir sonraki kodlarýmýz þöyle:
+
+elif sys.argv[1] in ['-v', '-V']:
+print('Program sürümü: 0.8')
+
+Eðer sys.argv listesinin ikinci öðesi -v veya -V ise programýmýzýn sürüm bilgisini veriyoruz.
+
+Son olarak da þu bloðu yazýyoruz:
+
+else:
+mesaj = 'Girdiðiniz parametre ({}) anlaþýlamadý!'
+print(mesaj.format(sys.argv[1]))
+çýk()
+
+Kullanýcýnýn -v veya -V dýþýnda bir parametre girmesi durumunda ise, girilen parametrenin anlaþýlamadýðý konusunda kullanýcýyý bilgilendirip programdan çýkýyoruz.
+
+Aþaðýda, programýmýzýn hangi komutlara hangi karþýlýklarý verdiðini görüyorsunuz:
+
+C:\Users\fozgul\Belgelerim> python deneme.py
+Gerekli parametreleri girmediniz!
+Çýkýlýyor...
+
+C:\Users\fozgul\Belgelerim> python deneme.py -a
+Girdiðiniz parametre (-a) anlaþýlamadý!
+Çýkýlýyor...
+
+C:\Users\fozgul\Belgelerim> python deneme.py -a -b
+Çok fazla parametre girdiniz!
+Çýkýlýyor...
+
+C:\Users\fozgul\Belgelerim> python deneme.py -v
+Program sürümü: 0.8
+
+C:\Users\fozgul\Belgelerim> python deneme.py -V
+Program sürümü: 0.8
+
+
+sys.executable
+
+Eðer, yazdýðýnýz bir programda, programýnýzýn çalýþtýðý sistemdeki Python’ýn çalýþtýrýlabilir dosyasýnýn adýný ve yolunu öðrenmeniz gerekirse bu niteliði kullanabilirsiniz:
+>>> sys.executable C:\Python35python.exe 
+
+
+sys.getwindowsversion()
+
+Bu fonksiyon, kullanýlan Windows sürümüne iliþkin bilgi verir:
+
+>>> sys.getwindowsversion()
+
+sys.getwindowsversion(major=5, minor=1, build=2600,
+platform=2, service_pack='Service Pack 3')
+
+Uyarý
+
+Bu fonksiyon yalnýzca Windows’ta çalýþýr. GNU/Linux’ta bu fonksiyon tanýmlý deðildir.
+
+Bu fonksiyon kendi içinde de bazý nitelikler barýndýrýr. Bunlarý görmek için þu komutu kullanabilirsiniz:
+
+>>> ver = sys.getwindowsversion()
+>>> dir(ver)
+
+['__add__', '__class__', '__contains__', '__delattr__',
+ '__dir__', '__doc__', '__eq__', '__format__', '__ge__',
+ '__getattribute__', '__getitem__', '__getnewargs__',
+ '__gt__', '__hash__', '__init__', '__iter__', '__le__',
+ '__len__', '__lt__', '__mul__', '__ne__', '__new__',
+ '__reduce__', '__reduce_ex__', '__repr__', '__rmul__',
+ '__setattr__', '__sizeof__', '__str__', '__subclasshook__',
+ 'build', 'count', 'index', 'major', 'minor', 'n_fields',
+ 'n_sequence_fields', 'n_unnamed_fields', 'platform',
+ 'product_type', 'service_pack', 'service_pack_major',
+ 'service_pack_minor', 'suite_mask']
+
+Bu niteliklere eriþmek için þu söz dizimini kullanabilirsiniz:
+
+>>> ver.service_pack()
+
+
+sys.path
+
+Modüller konusunu iþlerken sys modülünün path niteliðinden söz etmiþtik. O yüzden orada söylediklerimizi tekrarlamayacaðýz.
+
+
+sys.platform
+
+os modülünü incelerken öðrendiðimiz name niteliði gibi, sys modülünün platform adlý niteliði de, kodlarýmýzýn çalýþtýðý iþletim sistemi hakkýnda bize bilgi verir:
+
+>>> sys.platform
+
+Eðer bu komutu GNU/Linux’ta verirsek linux çýktýsý, Windows’ta verirsek win32 çýktýsý, Mac OS X’te verirsek darvin çýktýsý alýrýz.
+
+
+sys.prefix
+
+sys modülünün prefix niteliði Python’ýn hangi dizine kurulduðunu gösterir:
+
+>>> sys.prefix
+
+'/home/local/python'
+
+Veya:
+
+>>> sys.prefix
+
+'C:\\Python'
+
+
+sys.ps1
+
+sys modülünün ps1 niteliði, etkileþimli kabuktaki ‘>>>’ iþaretini tutar:
+
+>>> sys.ps1
+
+'>>> '
+
+Eðer isterseniz bu iþareti deðiþtirebilirsiniz:
+
+>>> sys.ps1 = '+++ '
+
+Bu komutu verdikten sonra ‘>>>’ iþaretinin ‘+++’ olarak deðiþtiðini göreceksiniz.
+
+
+sys.ps2
+
+Etkileþimli kabukta Python bizden girdiðimiz kodlarýn devamýný beklediðini göstermek için ‘...’ iþaretini kullanýr:
+
+>>> a = 5
+>>> if a == 5:
+...
+
+sys modülünün ps2 niteliði, iþte etkileþimli kabuktaki devam satýrlarýnda gördüðümüz bu ‘...’ iþaretini tutar:
+
+>>> sys.ps2
+
+'... '
+
+Eðer isterseniz bu iþareti deðiþtirebilirsiniz:
+
+>>> sys.ps1 = '--- '
+
+Bu komutu verdikten sonra ‘...’ iþaretinin ‘—’ olarak deðiþtiðini göreceksiniz.
+
+
+sys.version
+
+sys modülünün version niteliði kullandýðýnýz Python sürümüne iliþkin ayrýntýlý bilgi verir:
+>>> sys.version '3.5.1 (default, 20.04.2016, 12:24:55) [GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux' 
+
+
+sys.version_info
+
+sys modülünün version_info niteliði de kullandýðýnýz Python sürümüne iliþkin bilgi verir:
+>>> sys.version_info sys.version_info(major=|major3|, minor=|minor3|, micro=|micro3|, releaselevel='final', serial=0) 
+Bu nitelik kendi içinde birtakým baþka nitelikler de barýndýrýr:
+
+>>> dir(sys.version_info)
+
+['count', 'index', 'major', 'micro', 'minor',
+ 'n_fields', 'n_sequence_fields', 'n_unnamed_fields',
+ 'releaselevel', 'serial']
+
+Bu niteliklere nasýl ulaþacaðýnýzý biliyorsunuz:
+
+>>> sys.version_info.major #büyük sürüm numarasý
+>>> sys.version_info.minor #küçük sürüm numarasý
+>>> sys.version_info.micro #minik sürüm numarasý
+
+
+sys.winver
+
+sys modülünün winver niteliði Python’ýn büyük sürüm numarasýyla küçük sürüm numarasýný verir:
+>>> sys.winver 3.5 
+
+Uyarý
+
+Bu nitelik yalnýzca Windows’ta çalýþýr; GNU/Linux’ta tanýmlý deðildir.
+
+
+
+sys.stdout
+
+Önceki derslerimizden de bildiðiniz gibi stdout, ‘standart çýktý konumu’, yani programlarýmýzýn çýktýlarýný standart olarak verdikleri konum anlamýna geliyor.
+
+Python’da yazdýðýmýz programlar çýktýlarýný standart olarak komut satýrýna verir. Yani mesela:
+
+>>> print('merhaba zalim dünya')
+
+komutunu verdiðimizde, bu komutun çýktýsý komut ekranýnda görünecektir.
+
+Python’da standart çýktý konumununun neresi olacaðý bilgisi sys modülünün stdout adlý niteliði içinde tutulur:
+
+>>> import sys
+>>> sys.stdout
+
+<_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1254'>
+
+Standart çýktý konumuna yazmanýn en yaygýn yolunun print() komutunu kullanmak olduðunu biliyoruz. Bu komut, standart çýktý konumu neresi ise oraya yazacaktýr.
+
+Standart çýktý konumuma yazmanýn baþka bir yolu da doðrudan sys.stdout niteliðinin write() metodunu kullanmaktýr.
+
+Dikkatlice bakýn:
+
+>>> sys.stdout.write('merhaba zalim dünya')
+
+print() komutundan farklý olarak sys.stdout.write() fonksiyonu þöyle bir çýktý verir:
+
+merhaba zalim dünya19
+
+Burada, çýktýnýn sonundaki 19 sayýsý ‘merhaba zalim dünya’ karakter dizisinin uzunluðunu gösteriyor. sys.stdout.write() fonksiyonu etkileþimli kabukta kullanýldýðýnda böyle bir çýktý verir. Ama eðer bu kodlarý bir dosyaya yazýp çalýþtýrýrsanýz sonraki 19 sayýsý görünmez.
+
+Bu arada, her ne kadar print() ve sys.stdout.write() birbirine benzese de aralarýnda önemli farklar bulunur. Örneðin print() fonksiyonu parametre olarak her türlü veri tipini alabilir. Ancak sys.stdout.write() fonksiyonu parametre olarak yalnýzca karakter dizisi alabilir:
+
+>>> sys.stdout.write(12)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: must be str, not int
+
+Dolayýsýyla sys.stdout.write() fonksiyonuna parametre olarak vereceðiniz deðeri öncelikle karakter dizisine çevirmeniz gerekir:
+
+>>> sys.stdout.write(str(12))
+
+122
+
+Not
+
+Sondaki 2 sayýsýnýn ‘12’ karakter dizisinin uzunluðunu gösterdiðini söylemiþtik. Bu kodlarý dosyaya yazýp çalýþtýrdýðýnýzda yalnýzca 12 çýktýsý alýrsýnýz.
+
+print() ile sys.stdout.write() arasýndaki önemli bir fark da, print() fonksiyonu yazma iþleminden sonra bir sonraki satýra geçerken, sys.stdout.write() fonksiyonunun geçmemesidir.
+
+Uyarý
+
+sys.stdout.write() fonksiyonu etkileþimli kabuktan çalýþtýrýldýðýnda ve dosyadan çalýþtýrýldýðýnda birbirinden farklý çýktýlar verir. O yüzden aþaðýdaki örnekleri dosyaya yazýp çalýþtýrmanýzý tavsiye ederim.
+
+Mesela þu örneðe bakalým:
+
+for i in 'istihza':
+print(i)
+
+Bu komut þu çýktýyý verir:
+
+i
+s
+t
+i
+h
+z
+a
+
+Gördüðünüz gibi, print() fonksiyonu, döngüye giren her öðeyi yeni satýra basýyor.
+
+Bir de sys.stdout.write() fonksiyonunun ne yaptýðýna bakalým:
+
+import sys
+
+for i in 'istihza':
+sys.stdout.write(i)
+
+Bu komutlar ise þu çýktýyý verir:
+
+istihza
+
+Gördüðünüz gibi, sys.stdout.write() fonksiyonu öðelerin hepsini ayný satýra bastý. Eðer öðelerin ayrý satýrlara basýlmasýný istiyorsanýz bunu açýkça belirtmelisiniz:
+
+import sys
+
+for i in 'istihza':
+sys.stdout.write(i+'\n')
+
+sys.stdout.write() fonksiyonunun otomatik olarak satýr baþý karakterini basmýyor oluþunu kullanarak kronometre benzeri bir program yazabilirsiniz:
+
+import sys
+
+sayaç = 0
+
+while True:
+sys.stdout.write(str(sayaç)+'\r')
+sayaç += 1
+
+Burada, önceki derslerimizde öðrendiðimiz kaçýþ dizilerinden \r‘yi kullanarak, her öðenin ekrana basýlmasýnýn ardýndan satýrýn en baþýna dönülmesini saðladýk. Böylece öðeler yan yana deðil de birbirlerinin üstüne basýlmýþ oldu.
+
+Bu arada, eðer yukarýdaki kodlar herhangi bir çýktý vermeden bekliyorsa, kodlarý þu þekilde yazýn:
+
+import sys
+
+sayaç = 0
+
+while True:
+sys.stdout.write(str(sayaç)+'\r')
+sys.stdout.flush()
+sayaç += 1
+
+Burada eklediðimiz sys.stdout.flush() satýrý, Python’ýn tamponda beklettiði verileri çýktýya göndermesini saðlar. Siz bu ‘flush’ kavramýný print() fonksiyonundan hatýrlýyor olmalýsýnýz (print() fonksiyonunun flush parametresi).
+
+Hatýrlarsanýz, ‘flush’ kavramýnýn yanýsýra, print() fonksiyonunu iþlerken öðrendiðimiz bir baþka kavram da standart çýktý konumunun deðiþtirilmesi idi. print() fonksiyonuna verdiðimiz file parametresi yardýmýyla programlarýmýzýn standart olarak çýktý verdiði konumu deðiþtirebiliyorduk:
+
+f = open('çýktýlar.txt', 'w')
+print('merhaba zalim dünya', file=f)
+
+Burada çýktýlar.txt adlý bir dosya oluþturduk ve bunu print() fonksiyonunun file parametresine atayarak, çýktýlarý komut satýrý yerine çýktýlar.txt adlý dosyaya gönderdik.
+
+Ayný iþlemi sys.stdout aracýlýðýyla da yapabileceðimizi biliyorsunuz:
+
+import sys
+
+f = open('çýktýlar.txt', 'w'):
+sys.stdout = f
+sys.stdout.write('merhaba zalim dünya')
+
+Gerçi bu sizin bilmediðiniz bir þey deðil. Zira siz bunu print() Fonksiyonu konusunu iþlerken de görmüþtünüz...
+
+
+sys.stderr
+
+Önceki bölümde gördüðümüz þu kodlarý tekrar önümüze alalým:
+
+import sys
+
+f = open('çýktýlar.txt', 'w')
+sys.stdout = f
+sys.stdout.write('merhaba zalim dünya')
+
+Bu kodlar, bildiðiniz gibi, çýktý olarak verilmek istenen deðerlerin çýktýlar.txt adlý bir dosyaya yönlendirilmesini saðlýyor. Ancak kodlarýmýzý bu þekilde yazdýðýmýzda sadece normal deðerler yönlendirilecektir. Mesela çalýþma esnasýnda ortaya çýkan hatalar yine komut ekranýna basýlmaya devam edecektir:
+
+import sys
+
+f = open('çýktýlar.txt', 'w')
+sys.stdout = f
+sys.stdout.write(1/0)
+
+Bu kodlarý çalýþtýrdýðýnýzda, standart çýktý konumu yönlendirilmiþ olmasýna raðmen, hata mesajý komut satýrýna basýlacaktýr:
+
+Traceback (most recent call last):
+File "deneme.py", line 5, in <module>
+sys.stdout.write(1/0)
+ZeroDivisionError: division by zero
+
+Çünkü Python’da hata mesajlarýnýn öntanýmlý olarak basýldýðý yer komut satýrýdýr. Nasýl çýktýlarýn standart olarak basýldýðý yeri teknik olarak ‘standart çýktý konumu’ (Standard Output - stdout) olarak adlandýrýyorsak, hatalarýn standart olarak basýldýðý yeri de teknik olarak ‘standart hata konumu’ (Standard Error - stderr) olarak adlandýrýyoruz.
+
+Týpký stdout‘u manipüle edebildiðimiz gibi, stderr‘i de manipüle edebiliriz:
+
+import sys
+
+f =open('hatalar.txt', 'w')
+sys.stderr = f
+sys.stderr.write(1/0)
+
+Bu durumda, programýmýzýn iþleyiþi sýrasýnda ortaya çýkan hatalar hatalar.txt adlý bir dosyaya yönlendirilecektir.
+
+Bu bilgiyi kullanarak þöyle bir kod da yazabiliriz:
+
+import sys
+
+çýktýlar = open('çýktýlar.txt', 'w')
+hatalar = open('hatalar.txt', 'w')
+sys.stdout = çýktýlar
+sys.stderr = hatalar
+
+print('normal çýktý')
+print('hata mesajý: ', 1/0)
+
+Bu kodlarý çalýþtýrdýðýnýzda, hata mesajý üretmeden baþarýyla tamamlanan çýktýlarýn çýktýlar.txt adlý dosyaya, hata mesajlarýnýn ise hatalar.txt adlý dosyaya yönlendirildiðini göreceksiniz.
+
+
+sys.stdin
+
+Python’da üç adet standart konum bulunur:
+
+
+Standart çýktý konumu - stdout 
+Standart hata konumu - stderr 
+Standart girdi konumu - stdin 
+
+Ýlk ikisini zaten görmüþtük. Üçüncüsünü de þimdi ele alacaðýz.
+
+Bildiðiniz gibi Python’da kullanýcýdan veri almak için input() fonksiyonunu kullanýyoruz:
+
+sayý = input('Lütfen bir sayý girin: ')
+
+Bu fonksiyonun görevi, standart girdi konumuna girilen verileri okumaktýr. Python’daki standart girdi konumu (genellikle) komut satýrý olduðu için, input() fonksiyonu verileri komut satýrýndan okur.
+
+Python’da standart girdi konumunu tutan deðiþken sys.stdin‘dir. Dolayýsýyla eðer isterseniz, verileri kullanýcýdan input() fonksiyonu yerine doðrudan sys.stdin niteliði aracýlýðýyla da alabilirsiniz:
+
+>>> import sys
+>>> sys.stdin.read()
+
+Bu komutlarý verdiðinizde, komut satýrý sizden veri almaya hazýr hale gelir. Bu þekilde istediðiniz kadar veriyi komut satýrýna girebilirsiniz. Veri giriþini durdurmak istediðinizde ise Windows’ta CTRL+C, GNU/Linux’ta ise CTRL+D tuþlarýna basmanýz gerekir. Bu þekilde komut satýrýný terkettiðinizde, girmiþ olduðunuz deðerler bir karakter dizisi olarak ekrana basýlacaktýr.
+
+sys.stdin niteliði, bize veri okumak için üç farklý fonksiyon sunar:
+
+
+sys.stdin.read() 
+sys.stdin.readline() 
+sys.stdin.readlines() 
+
+read() fonksiyonu birden fazla satýr içeren verilerin girilmesine müsaade eder ve çýktý olarak bir karakter dizisi verir:
+
+>>> sys.stdin.read()
+(Girdi)
+Fýrat
+Özgül
+Adana
+(Çýktý)
+'Fýrat\nÖzgül\nAdana\n'
+
+readline() fonksiyonu tek bir satýr içeren verilerin girilmesine müsaade eder ve çýktý olarak bir karakter dizisi verir:
+
+>>> sys.stdin.readline()
+(Girdi)
+Fýrat
+(Çýktý)
+'Fýrat\n'
+
+readlines() fonksiyonu birden fazla satýr içeren verilerin girilmesine müsaade eder ve çýktý olarak bir liste verir:
+
+>>> sys.stdin.readlines()
+(Girdi)
+Fýrat
+Özgül
+Adana
+(Çýktý)
+['Fýrat\n', 'Özgül\n', 'Adana\n']
+
+Gelin isterseniz sys.stdin niteliðinin nasýl kullanýlabileceðine iliþkin birkaç örnek verelim:
+
+import sys
+
+with open('kayýtlar.txt', 'w') as kayýtlar:
+while True:
+satýrlar = sys.stdin.readline()
+if satýrlar.strip() == ':q':
+break
+else:
+kayýtlar.write(satýrlar)
+
+Burada kayýtlar.txt adlý bir dosya oluþturduk öncelikle. Daha sonra da readline() fonksiyonu aracýlýðýyla kullanýcýdan aldýðýmýz bütün verileri bu dosyaya yazdýk. Kullanýcýnýn programdan çýkabilmesini saðlamak için de ‘:q’ tuþ kombinasyonunu ayarladýk. Böylece komut satýrýndan çalýþan basit bir metin düzenleyici yazmýþ olduk!
+
+Týpký sys.stdout ve sys.stderr konumlarýný deðiþtirdiðimiz gibi, sys.stdin konumunu da deðiþtirebiliriz. Böylece verileri komut satýrý aracýlýðýyla deðil, mesela bir dosya aracýlýðýyla alabiliriz.
+
+Aþaðýdaki örneði dikkatlice inceleyin:
+
+import sys
+
+f = open('oku.txt')
+
+sys.stdin = f
+
+while True:
+satýrlar = sys.stdin.readline()
+if satýrlar.strip() == ':q':
+break
+else:
+sys.stdout.write(satýrlar)
+
+Bu kodlarý yazdýktan sonra, bu kodlarýn bulunduðu dizinde oku.txt adlý bir dosya oluþturun. Ardýndan programýnýzý çalýþtýrýn. Programýnýz þu anda sizden veri girmenizi bekliyor. Verileri oku.txt adlý dosyaya gireceksiniz.
+
+oku.txt adlý dosyayý açýp bir þeyler yazýn. Veri girerken dosyayý her kaydediþinizde dosya içindeki verilerin komut satýrýna düþtüðünü göreceksiniz. Veri giriþini tamamladýktan sonra dosyanýn en son satýrýna ‘:q’ yazýp dosyayý kaydettiðiniz anda da programýnýz kapanacaktýr.
+

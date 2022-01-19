@@ -1,0 +1,89 @@
+
+search() Metodu
+
+Bir önceki bölümde incelediðimiz match() metodu, karakter dizilerinin sadece en baþýna bakýyordu. Ama istediðimiz þey tabii ki her zaman bununla sýnýrlý olmayacaktýr. match() metodunun, karakter dizilerinin sadece baþýna bakmasýný engellemenin yollarý olmakla birlikte, bizim iþimizi görecek çok daha kullanýþlý bir metodu vardýr düzenli ifadelerin. Önceki bölümde dir(re) þeklinde gösterdiðimiz listeye tekrar bakarsanýz, orada re modülünün search() adlý bir metodu olduðunu göreceksiniz. Ýþte bu yazýmýzda inceleyeceðimiz metot bu search() metodu olacaktýr.
+
+search() metodu ile match() metodu arasýnda çok önemli bir fark vardýr. match() metodu bir karakter dizisinin en baþýna bakýp bir eþleþtirme iþlemi yaparken, search() metodu karakter dizisinin genelinde bir arama iþlemi yapar. Yani biri eþleþtirir, öbürü arar.
+
+Hatýrlarsanýz, match() metodunu anlatýrken þöyle bir örnek vermiþtik:
+
+>>> a = "Python güçlü bir dildir"
+>>> re.match("güçlü", a)
+
+Yukarýdaki kod, karakter dizisinin baþýnda bir eþleþme bulamadýðý için bize None deðeri döndürüyordu. Ama eðer ayný iþlemi þöyle yaparsak, daha farklý bir sonuç elde ederiz:
+
+>>> a = "Python güçlü bir dildir"
+>>> re.search("güçlü", a)
+
+<_sre.SRE_Match object; span=(7, 12), match='güçlü'>
+
+Gördüðünüz gibi, search() metodu “güçlü” kelimesini buldu. Çünkü search() metodu, match() metodunun aksine, bir karakter dizisinin sadece baþ tarafýna bakmakla yetinmiyor, karakter dizisinin geneli üzerinde bir arama iþlemi gerçekleþtiriyor.
+
+Týpký match() metodunda olduðu gibi, search() metodunda da span() ve group() metotlarýndan faydalanarak bulunan þeyin hangi aralýkta olduðunu ve bu þeyin ne olduðunu görüntüleyebiliriz:
+
+>>> kardiz = "Python güçlü bir dildir"
+>>> nesne = re.search("güçlü", kardiz)
+>>> nesne.span()
+
+(7, 12)
+
+>>> nesne.group()
+
+'güçlü'
+
+Þimdiye kadar hep karakter dizileri üzerinde çalýþtýk. Ýsterseniz biraz da listeler üzerinde örnekler verelim.
+
+Þöyle bir listemiz olsun:
+
+>>> liste = ["elma", "armut", "kebap"]
+>>> re.search("kebap", liste)
+
+Ne oldu? Hata aldýnýz, deðil mi? Bu normal. Çünkü düzenli ifadeler karakter dizileri üzerinde iþler. Bunlar doðrudan listeler üzerinde iþlem yapamaz. O yüzden bizim Python’a biraz yardýmcý olmamýz gerekiyor:
+
+>>> for i in liste::
+... nesne = re.search("kebap", i)
+... if nesne:
+... print(nesne.group())
+...
+kebap
+
+Hatta þimdiye kadar öðrendiklerimizle daha karmaþýk bir þeyler de yapabiliriz:
+
+>>> import re
+>>> from urllib.request import urlopen
+>>> f = urlopen("http://www.istihza.com")
+>>> for i in f:
+... nesne = re.search(b'programlama', i)
+... if nesne:
+... print(nesne.group())
+...
+b'programlama'
+b'programlama'
+
+Gördüðünüz gibi, www.istihza.com sayfasýnda kaç adet “programlama” kelimesi geçiyorsa hepsi ekrana dökülüyor.
+
+Bu arada, websitesinde arama iþlemi gerçekleþtirirken urllib paketinin içindeki request modülünün urlopen() adlý fonksiyonunu kullandýðýmýza dikkat edin. Ayrýca search() metoduna parametre olarak bir karakter dizisi deðil, bayt dizisi verdiðimizi de gözden kaçýrmayýn:
+
+re.search(b'programlama', i)
+
+Siz isterseniz bu kodlarý biraz daha geliþtirebilirsiniz:
+
+import re
+from urllib.request import urlopen
+
+kelime = input("istihza.com'da aramak istediðiniz kelime: ")
+
+f = urlopen("http://www.istihza.com")
+data = str(f.read())
+
+nesne = re.search(kelime, data)
+
+if nesne:
+print("kelime bulundu:", nesne.group())
+else:
+print("kelime bulunamadý!:", kelime)
+
+Burada, kullanýcýdan aldýðýmýz kelimeyi search() metoduna göndermeden önce, siteden okuduðumuz verileri str() metodu yardýmýyla karakter dizisine dönüþtürdüðümüze dikkat edin. Böylece kullanýcýdan gelen karakter dizisini bayt dizisine çevirmemize gerek kalmadý.
+
+Ýlerde bilgimiz artýnca daha yetkin kodlar yazabilecek duruma geleceðiz. Ama þimdilik elimizde olanlar ancak yukarýdaki kodu yazmamýza müsaade ediyor. Unutmayýn, düzenli ifadeler sahasýnda ýsýnma turlarý atýyoruz daha...
+

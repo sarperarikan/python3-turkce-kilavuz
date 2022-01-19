@@ -1,0 +1,13 @@
+
+Nesne Tabanlý Programlama (Devamý)
+
+Uyarý
+
+Bu makale yoðun bir þekilde geliþtirilmekte, içeriði sýk sýk güncellenmektedir.
+
+Geçen bölümde verdiðimiz bilgiler sayesinde miras alma konusunun temelini oluþturan taban sýnýf, alt sýnýf ve türeme gibi kavramlarla birlikte super() ve object gibi araçlarýn ne olduðunu ve ne iþe yaradýðýný da öðrendik. Dolayýsýyla artýk miras alma mekanizmasýna dair daha renkli, daha teþvik edici örnekler verebiliriz. Böylece, belki de gözünüze ilk bakýþta pek de matah bir þey deðilmiþ gibi görünen bu ‘miras alma’ denen mekanizmanýn aslýnda ne kadar önemli bir konu olduðuna sizleri ikna edebiliriz.
+
+Bu bölümde ayrýca geçen bölümlerde incelemeye fýrsat bulamasak da nesne tabanlý programlama kapsamýnda incelememiz gereken baþka konularý da ele alacaðýz.
+
+Nesne tabanlý programlamadan ilk bahsettiðimiz derste, nesne tabanlý programlama yaklaþýmýnýn grafik arayüz tasarýmý için biçilmiþ kaftan olduðundan söz etmiþtik hatýrlarsanýz. Bu bölümde inceleyeceðimiz konularýn bazýlarýný grafik arayüz tasarýmý eþliðinde anlatacaðýz. Grafik arayüz programlamanýn bize sunduðu düðmeli-menülü görsel programlarýn, nesne tabanlý programlamaya iliþkin soyut kavramlarý somut bir düzleme taþýmamýza imkan tanýmasý sayesinde, nesne tabanlý programlamaya iliþkin çetrefilli konularý daha rahat anlama fýrsatý bulacaðýz.
+

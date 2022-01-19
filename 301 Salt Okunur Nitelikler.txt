@@ -1,0 +1,16 @@
+
+Salt Okunur Nitelikler
+
+@property bezeyicisinin bir baþka kabiliyeti de salt okunur nitelikler oluþturabilmesidir.
+
+Mesela yukarýdaki programý temel alarak þöyle bir þey deneyelim:
+
+>>> p = Program()
+>>> p.data = 5
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: can't set attribute
+
+Gördüðünüz gibi, data niteliði üzerinde deðiþiklik yapamýyoruz. Dolayýsýyla, kodlarýnýzý kullananlarýn deðiþtirmesini istemediðiniz, ‘salt okunur’ nitelikler oluþturmak için @property bezeyicisinden yararlanabilirsiniz.
+

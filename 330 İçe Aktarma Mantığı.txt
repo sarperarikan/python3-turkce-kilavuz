@@ -1,0 +1,7 @@
+
+Ýçe Aktarma Mantýðý
+
+Yukarýdaki örneklerden gördüðünüz gibi, Python’ýn içe aktarma mekanizmasý gayet basit bir þekilde iþliyor. Ancak yine de bu durum sizin rehavete kapýlmanýza yol açmasýn. Zira kimi zaman bu mekanizma hiç beklemediðiniz durumlarýn ortaya çýkmasýna da yol açabilir.
+
+Python’da paketler üzerinde çalýþýrken, Python programlama dilinin paketleri içe aktarma mekanizmasýný çok iyi anlamýþ olmalýsýnýz. Eðer bu mekanizmayý hakkýyla anlamadan paket yapmaya kalkýþýrsanýz, Python’ýn içe aktarma sýrasýnda verebileceði sürpriz hatalar size saç baþ yoldurabilir. Ýþte bu bölümde Python’ýn paket içe aktarma mantýðý üzerine eðilerek, engebeli yüzeyleri nasýl aþabileceðimizi anlamaya çalýþacaðýz.
+

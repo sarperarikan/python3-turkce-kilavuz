@@ -1,0 +1,58 @@
+
+groups() metodu
+
+Bu metot, bize kullanabileceðimiz bütün gruplarý bir demet halinde sunar:
+
+>>> nesne.groups()
+
+('python', 'bir', 'programlama', 'dilidir')
+
+Þimdi isterseniz bir önceki bölümde yaptýðýmýz örneðe geri dönelim:
+
+import re
+from urllib.request import urlopen
+
+url = "http://belgeler.istihza.com/py3/index.html"
+f = urlopen(url)
+
+çýktý = "Baþlýk: {};\nBaðlantý: {}\n"
+regex = 'href="(.+html)">(.+)</a>'
+
+for i in f:
+nesne = re.search(regex, str(i, 'utf-8'))
+if nesne:
+print(çýktý.format(nesne.group(2),
+nesne.group(1)))
+
+Bu kodlarda son satýrý þöyle deðiþtirelim:
+
+import re
+from urllib.request import urlopen
+
+url = "http://belgeler.istihza.com/py3/index.html"
+f = urlopen(url)
+
+çýktý = "Baþlýk: {};\nBaðlantý: {}\n"
+regex = 'href="(.+html)">(.+)</a>'
+
+for i in f:
+nesne = re.search(regex, str(i, 'utf-8'))
+if nesne:
+print(nesne.groups())
+
+Gördüðünüz gibi þuna benzer çýktýlar elde ediyoruz:
+
+('kitap_hakkinda.html', 'Bu Kitap Hakkýnda')
+('python_hakkinda.html', 'Python Hakkýnda')
+('temel_komut_satiri_bilgisi.html', 'Temel Komut Satýrý Bilgisi')
+('path.html', 'YOL (<em>PATH</em>) Kavramý')
+('kurulum.html', 'Python Nasýl Kurulur?')
+...
+...
+...
+
+Demek ki (nesne.groups()) komutu bize “( )” metakarakteri ile daha önceden gruplamýþ olduðumuz öðeleri bir demet olarak veriyor. Biz de bu demetin öðelerine daha sonradan rahatlýkla eriþebiliyoruz...
+
+Böylece eþleþtirme nesnelerinin en sýk kullanýlan iki metodunu görmüþ olduk. Bunlarý daha sonraki örneklerimizde de bol bol kullanacaðýz. O yüzden þimdilik bu konuya ara verelim.
+
+

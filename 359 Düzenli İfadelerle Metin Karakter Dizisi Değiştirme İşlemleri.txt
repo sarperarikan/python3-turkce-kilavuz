@@ -1,0 +1,124 @@
+
+Düzenli Ýfadelerle Metin/Karakter Dizisi Deðiþtirme Ýþlemleri
+
+
+sub() metodu
+
+Þimdiye kadar hep düzenli ifadeler yoluyla bir karakter dizisini nasýl eþleþtireceðimizi inceledik. Ama tabii ki düzenli ifadeler yalnýzca bir karakter dizisi “bulmak”la ilgili deðildir. Bu araç ayný zamanda bir karakter dizisini “deðiþtirmeyi” de kapsar. Bu iþ için temel olarak iki metot kullanýlýr. Bunlardan ilki sub() metodudur. Bu bölümde sub() metodunu inceleyeceðiz.
+
+En basit þekliyle sub() metodunu þu þekilde kullanabiliriz:
+
+>>> a = "Kýrmýzý baþlýklý kýz, kýrmýzý elma dolu sepetiyle \
+... anneannesinin evine gidiyormuþ!"
+>>> derle = re.compile("kýrmýzý", re.IGNORECASE)
+>>> print(derle.sub("yeþil", a))
+
+Burada karakter dizimiz içinde geçen bütün “kýrmýzý” kelimelerini “yeþil” kelimesiyle deðiþtirdik. Bunu yaparken de re.IGNORECASE adlý derleme seçeneðinden yararlandýk.
+
+Elbette sub() metoduyla daha karmaþýk iþlemler yapýlabilir. Bu noktada þöyle bir hatýrlatma yapalým. Bu sub() metodu karakter dizilerinin replace() metoduna çok benzer. Ama tabii ki sub() metodu hem kendi baþýna replace() metodundan çok daha güçlüdür, hem de beraber kullanýlabilecek derleme seçenekleri sayesinde replace() metodundan çok daha esnektir. Ama tabii ki, eðer yapmak istediðiniz iþ replace() metoduyla halledilebiliyorsa en doðru yol, replace() metodunu kullanmaktýr...
+
+Þimdi bu sub() metodunu kullanarak biraz daha karmaþýk bir iþlem yapacaðýz. Aþaðýdaki metne bakalým:
+
+metin = """Karadeniz Ereðlisi denince akla ilk olarak kömür ve demir-çelik
+gelir. Kokusu ve tadýyla dünyaya nam salmýþ meþhur Osmanlý çileði ise ismini
+verdiði festival günleri dýþýnda pek hatýrlanmaz. Oysa Çin'den Arnavutköy'e
+oradan da Ereðli'ye getirilen krallarýn meyvesi çilek, burada geçirdiði deðiþim
+sonucu tadýna doyulmaz bir hal alýr. Ereðli'nin havasýndan mý suyundan mý
+bilinmez, kokusu, tadý bambaþka bir hale dönüþür ve meþhur Osmanlý çileði
+unvanýný hak eder. Bu nazik ve aromalý çilekten yapýlan reçel de likör de bir
+baþka olur. Bu yýl dokuzuncusu düzenlenen Uluslararasý Osmanlý Çileði Kültür
+Festivali'nde 36 üretici arasýnda yetiþtirdiði çileklerle birinci olan Kocaali
+Köyü'nden Güner Özdemir, yýlda bir ton ürün alýyor. 60 yaþýndaki Özdemir,
+çileklerinin sýrrýný yoðun ilgiye ve içten duyduðu sevgiye baðlýyor: "Erkekler
+bahçemize giremez. Koca ayaklarýyla ezerler çileklerimizi" Çileði toplamanýn zor
+olduðunu söyleyen Ayþe Özhan da çocukluðundan bu yana çilek bahçesinde
+çalýþýyor. Her sabah 04.00'te kalkan Özhan, çileklerini özenle suluyor. Kasým
+baþýnda ektiði çilek fideleri haziran baþýnda meyve veriyor."""
+
+Not
+
+Bu metin http://www.radikal.com.tr/haber.php?haberno=40130 adresinden alýnmýþtýr.
+
+Gelin bu metin içinde geçen “çilek” kelimelerini “erik” kelimesi ile deðiþtirelim. Ama bunu yaparken, metin içinde “çilek” kelimesinin “Çilek” þeklinde de geçtiðine dikkat edelim. Ayrýca Türkçe kurallarý gereði bu “çilek” kelimesinin bazý yerlerde ünsüz yumuþamasýna uðrayarak “çileð-” þekline dönüþtüðünü de unutmayalým.
+
+Bu metin içinde geçen “çilek” kelimelerini “erik”le deðiþtirmek için birkaç yol kullanabilirsiniz. Birinci yolda, her deðiþiklik için ayrý bir düzenli ifade oluþturulabilir. Ancak bu yolun dezavantajý, metnin de birkaç kez kopyalanmasýný gerektirmesidir. Çünkü ilk düzenli ifade oluþturulup buna göre metinde bir deðiþiklik yapýldýktan sonra, ilk deðiþiklikleri içeren metnin, farklý bir metin olarak kopyalanmasý gerekir (metin2 gibi...). Ardýndan ikinci deðiþiklik yapýlacaðý zaman, bu deðiþikliðin metin2 üzerinden yapýlmasý gerekir. Ayný þekilde bu metin de, mesela, metin3 þeklinde tekrar kopyalanmalýdýr. Bundan sonraki yeni bir deðiþiklik de bu metin3 üzerinden yapýlacaktýr... Bu durum bu þekilde uzar gider... Metni tekrar tekrar kopyalamak yerine, düzenli ifadeleri kullanarak þöyle bir çözüm de üretebiliriz:
+
+import re
+
+derle = re.compile("çile[kð]", re.IGNORECASE)
+
+def degistir(nesne):
+a = {"çileð":"erið", "Çileð":"Erið", "Çilek":"Erik", "çilek":"erik"}
+b = nesne.group().split()
+for i in b:
+return a[i]
+
+print(derle.sub(degistir, metin))
+
+Gördüðünüz gibi, sub() metodu, argüman olarak bir fonksiyon da alabiliyor. Yukarýdaki kodlar biraz karýþýk görünmüþ olabilir. Tek tek açýklayalým...
+
+Öncelikle þu satýra bakalým:
+
+derle = re.compile("çile[kð]", re.IGNORECASE)
+
+Burada amacýmýz, metin içinde geçen “çilek” ve “çileð” kelimelerini bulmak. Neden “çileð”? Çünkü “çilek” kelimesi bir sesli harften önce geldiðinde sonundaki “k” harfi “ð”ye dönüþüyor. Bu seçenekli yapýyý, daha önceki bölümlerde gördüðümüz “[ ]” adlý metakarakter yardýmýyla oluþturduk. Düzenli ifade kalýbýmýzýn hem büyük harfleri hem de küçük harfleri ayný anda bulmasý için re.IGNORECASE seçeneðinden yararlandýk.
+
+Þimdi de þu satýrlara bakalým:
+
+def degistir(nesne):
+a = {"çileð":"erið", "Çileð":"Erið", "Çilek":"Erik", "çilek":"erik"}
+b = nesne.group().split()
+for i in b:
+return a[i]
+
+Burada, daha sonra sub() metodu içinde kullanacaðýmýz fonksiyonu yazýyoruz. Fonksiyonu, def degistir(nesne) þeklinde tanýmladýk. Burada “nesne” adlý bir argüman kullanmamýzýn nedeni, fonksiyon içinde group() metodunu kullanacak olmamýz. Bu metodu fonksiyon içinde “nesne” adlý argümana baðlayacaðýz. Bu fonksiyon, daha sonra yazacaðýmýz sub() metodu tarafýndan çaðrýldýðýnda, yaptýðýmýz arama iþlemi sonucunda ortaya çýkan “eþleþme nesnesi” fonksiyona atanacaktýr (eþleþme nesnesinin ne demek olduðunu ilk bölümlerden hatýrlýyorsunuz). Ýþte “nesne” adlý bir argüman kullanmamýzýn nedeni de, eþleþme nesnelerinin bir metodu olan group() metodunu fonksiyon içinde kullanabilmek...
+
+Bir sonraki satýrda bir adet sözlük görüyoruz:
+
+a = {"çileð":"erið", "Çileð":"Erið", "Çilek":"Erik", "çilek":"erik"}
+
+Bu sözlüðü oluþturmamýzýn nedeni, metin içinde geçen bütün “çilek” kelimelerini tek bir “erik” kelimesiyle deðiþtiremeyecek olmamýz... Çünkü “çilek” kelimesi metin içinde pek çok farklý biçimde geçiyor. Baþta da dediðimiz gibi, yukarýdaki yol yerine metni birkaç kez kopyalayarak ve her defasýnda bir deðiþiklik yaparak da sorunu çözebilirsiniz. (Mesela önce “çilek” kelimelerini bulup bunlarý “erik” ile deðiþtirirsiniz. Daha sonra “çileð” kelimelerini arayýp bunlarý “erið” ile deðiþtirirsiniz, vb...) Ama metni tekrar tekrar oluþturmak pek performanslý bir yöntem olmayacaktýr. Bizim þimdi kullandýðýmýz yöntem metin kopyalama zorunluluðunu ortadan kaldýrýyor. Bu sözlük içinde “çilek” kelimesinin alacaðý þekilleri sözlük içinde birer anahtar olarak, “erik” kelimesinin alacaðý þekilleri ise birer “deðer” olarak belirliyoruz.
+
+Sonraki satýrda iki metot birden var:
+
+b = nesne.group().split()
+
+Burada, fonksiyonumuzun argümaný olarak vazife gören eþleþme nesnesine ait metotlardan biri olan group() metodunu kullanýyoruz. Böylece derle = re.compile("çile[kð]", re.IGNORECASE) satýrý yardýmýyla metin içinde bulduðumuz bütün “çilek” ve çeþnilerini alýyoruz. Karakter dizilerinin split() metodunu kullanmamýzýn nedeni ise group() metodunun verdiði çýktýyý liste haline getirip daha kolay manipüle etmek. Burada for i in b: print(i) komutunu verirseniz group() metodu yardýmýyla ne bulduðumuzu görebilirsiniz:
+
+çileð
+çilek
+çileð
+çilek
+Çileð
+çilek
+çilek
+çilek
+Çileð
+çilek
+çilek
+çilek
+
+Bu çýktýyý gördükten sonra, kodlarda yapmaya çalýþtýðýmýz þey daha anlamlý görünmeye baþlamýþ olmalý... Þimdi sonraki satýra geçiyoruz:
+
+for i in b:
+return a[i]
+
+Burada, group() metodu yardýmýyla bulduðumuz eþleþmeler üzerinde bir for döngüsü oluþturduk. Ardýndan da return a[i] komutunu vererek “a” adlý sözlük içinde yer alan öðeleri yazdýrýyoruz. Bu arada, buradaki “i”nin yukarýda verdiðimiz group() çýktýlarýný temsil ettiðine dikkat edin. a[i] gibi bir komut verdiðimizde aslýnda sýrasýyla þu komutlarý vermiþ oluyoruz:
+
+a["çilek"]
+a["çileð"]
+a["çilek"]
+a["Çileð"]
+a["çilek"]
+a["çilek"]
+a["çilek"]
+a["Çileð"]
+a["çilek"]
+a["çilek"]
+
+Bu komutlarýn çýktýlarý sýrasýyla “erik”, “erið”, “erik”, “Erið”, “erik”, “erik”, “erik”, “Erið”, “erik”, “erik” olacaktýr. Ýþte bu return satýrý bir sonraki kod olan print(derle.sub(degistir,metin)) ifadesinde etkinlik kazanacak. Bu son satýrýmýz sözlük öðelerini tek tek metne uygulayacak ve mesela a["çilek"] komutu sayesinde metin içinde “çilek” gördüðü yerde “erik” kelimesini yapýþtýracak ve böylece bize istediðimiz þekilde deðiþtirilmiþ bir metin verecektir...
+
+Bu kodlarýn biraz karýþýk gibi göründüðünü biliyorum, ama aslýnda çok basit bir mantýðý var: group() metodu ile metin içinde aradýðýmýz kelimeleri ayýklýyor. Ardýndan da “a” sözlüðü içinde bunlarý anahtar olarak kullanarak “çilek” ve çeþitleri yerine “erik” ve çeþitlerini koyuyor...
+
+Yukarýda verdiðimiz düzenli ifadeyi böyle ufak bir metinde kullanmak çok anlamlý olmayabilir. Ama çok büyük metinler üzerinde çok çeþitli ve karmaþýk deðiþiklikler yapmak istediðinizde bu kodlarýn iþinize yarayabileceðini göreceksiniz.
+

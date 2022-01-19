@@ -1,0 +1,96 @@
+
+^ (Þapka)
+
+^ sembolünün iki iþlevi var. Birinci iþlevi, bir karakter dizisinin en baþýndaki veriyi sorgulamaktýr. Yani aslýnda match() metodunun varsayýlan olarak yerine getirdiði iþlevi bu metakarakter yardýmýyla açýkça belirterek yerine getirebiliyoruz. Þu örneðe bakalým:
+
+>>> a = ['23BH56', 'TY76Z', '4Y7UZ', 'TYUDZ',
+... '34534', '1agAY54']
+>>> for i in a:
+... if re.search("[A-Z]+[0-9]",i):
+... print(i)
+...
+23BH56
+TY76Z
+4Y7UZ
+1agAY54
+
+Bir de þuna bakalým:
+
+>>> for i in a:
+... nesne = re.search("[A-Z]+[0-9]",i)
+... if nesne:
+... print(nesne.group())
+...
+BH5
+TY7
+Y7
+AY5
+
+Dikkat ederseniz, þu son verdiðimiz kod oldukça hassas bir çýktý verdi bize. Çýktýdaki bütün deðerler, aynen düzenli ifademizde belirttiðimiz gibi, yan yana bir veya daha fazla harf içeriyor ve sonra da bir sayý ile devam ediyor. Bu farklýlýðýn nedeni, ilk kodlarda print(i) ifadesini kullanmamýz. Bu durumun çýktýlarýmýzý nasýl deðiþtirdiðine dikkat edin. Bir de þu örneðe bakalým:
+
+>>> for i in a:
+... if re.match("[A-Z]+[0-9]",i):
+... print(i)
+...
+TY76Z
+
+Burada sadece “TY76Z” çýktýsýný almamýzýn nedeni, match() metodunun karakter dizilerinin en baþýna bakýyor olmasý. Ayný etkiyi search() metoduyla da elde etmek için, baþlýkta geçen “^” (þapka) sembolünden yararlanacaðýz:
+
+>>> for i in a:
+... nesne = re.search("^[A-Z]+[0-9]",i)
+... if nesne:
+... print(nesne.group())
+...
+TY7
+
+Gördüðünüz gibi, “^” (þapka) metakarakteri search() metodunun, karakter dizilerinin sadece en baþýna bakmasýný saðladý. O yüzden de bize sadece, “TY7” çýktýsýný verdi. Hatýrlarsanýz ayný kodu, þapkasýz olarak, þu þekilde kullanmýþtýk yukarýda:
+
+>>> for i in a:
+... nesne = re.search("[A-Z]+[0-9]",i)
+... if nesne:
+... print(nesne.group())
+...
+BH5
+TY7
+Y7
+AY5
+
+Gördüðünüz gibi, þapka sembolü olmadýðýnda search() metodu karakter dizisinin baþýna bakmakla yetinmiyor, ayný zamanda karakter dizisinin tamamýný tarýyor. Biz yukarýdaki koda bir “^” sembolü ekleyerek, metodumuzun sadece karakter dizisinin en baþýna bakmasýný istedik. O da emrimize sadakatle uydu. Burada dikkatimizi çekmesi gereken baþka bir nokta da search() metodundaki çýktýnýn kýrpýlmýþ olmasý. Dikkat ettiyseniz, search() metodu bize öðenin tamamýný vermedi. Öðelerin yalnýzca “[A-Z]+[0-9]” kalýbýna uyan kýsýmlarýný kesip attý önümüze. Çünkü biz ona tersini söylemedik. Eðer öðelerin tamamýný istiyorsak bunu açýk açýk belirtmemiz gerekir:
+
+>>> for i in a:
+... nesne = re.search("[A-Z]+[0-9].*",i)
+... if nesne:
+... print(nesne.group())
+...
+BH56
+TY76Z
+Y7UZ
+AY54
+
+Veya metodumuzun karakter dizisinin sadece en baþýna bakmasýný istersek:
+
+>>> for i in a:
+... nesne = re.search("^[A-Z]+[0-9].*",i)
+... if nesne:
+... print(nesne.group())
+...
+TY76Z
+
+Bu kodlarda düzenli ifade kalýbýnýn sonuna ”.*” sembolünü eklediðimize dikkat edin. Böylelikle metodumuzun sonu herhangi bir þekilde biten öðeleri bize vermesini saðladýk...
+
+Baþta da söylediðimiz gibi, “^” metakarakterinin, karakter dizilerinin en baþýna demir atmak dýþýnda baþka bir görevi daha vardýr: “Hariç” anlamýna gelmek... Bu görevini sadece “[]” metakarakterinin içinde kullanýldýðý zaman yerine getirir. Bunu bir örnekle görelim. Yukarýdaki listemiz üzerinde öyle bir süzgeç uygulayalým ki, “1agAY54” öðesi çýktýlarýmýz arasýnda görünmesin... Bu öðeyi avlayabilmek için kullanmamýz gereken düzenli ifade þöyle olacaktýr: [0-9A-Z][^a-z]+
+
+>>> for i in a:
+... nesne = re.match("[0-9A-Z][^a-z]+",i)
+... if nesne:
+... print(nesne.group())
+
+Burada þu ölçütlere sahip bir öðe arýyoruz:
+
+Aradýðýmýz öðe bir sayý veya büyük harf ile baþlamalý 
+En baþtaki sayý veya büyük harften sonra küçük harf GELMEMELÝ (Bu ölçütü “^” iþareti saðlýyor) 
+Üstelik bu “küçük harf gelmeme durumu” bir veya daha fazla sayýda tekrar etmeli... Yani baþtaki sayý veya büyük harften sonra kaç tane olursa olsun asla küçük harf gelmemeli (Bu ölçütü de “+” iþareti saðlýyor”) 
+Bu ölçütlere uymayan tek öðe “1agAY54” olacaktýr. Dolayýsýyla bu öðe çýktýda görünmeyecek...
+
+Burada, “^” iþaretinin nasýl kullanýldýðýna ve küçük harfleri nasýl dýþarýda býraktýðýna dikkat edin. Unutmayalým, bu “^” iþaretinin “hariç” anlamý sadece “[]” metakarakterinin içinde kullanýldýðý zaman geçerlidir.
+

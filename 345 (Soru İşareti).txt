@@ -1,0 +1,54 @@
+
+? (Soru Ýþareti)
+
+Hatýrlarsanýz, “*” karakteri sýfýr ya da daha fazla sayýda eþleþmeleri; “+” ise bir ya da daha fazla sayýda eþleþmeleri kapsýyordu. Ýþte þimdi göreceðimiz ”?” sembolü de eþleþme sayýsýnýn sýfýr veya bir olduðu durumlarý kapsýyor. Bunu daha iyi anlayabilmek için önceden verdiðimiz þu örneðe bakalým:
+
+>>> yeniliste = ["st", "sat", "saat", "saaat", "falanca"]
+>>> for i in yeniliste:
+... if re.match("sa*t",i):
+... print(i)
+...
+st
+sat
+saat
+saaat
+
+>>> for i in yeniliste:
+... if re.match("sa+t",i):
+... print(i)
+...
+sat
+saat
+saaat
+
+“*” ve “+” sembollerinin hangi karakter dizilerini ayýkladýðýný görüyoruz. Þimdi de ”?” sembolünün ne yaptýðýna bakalým:
+
+>>> for i in yeniliste:
+... if re.match("sa?t",i):
+... print(i)
+...
+st
+sat
+
+Gördüðünüz gibi, ”?” adlý metakarakterimiz, kendisinden önce gelen karakterin hiç bulunmadýðý (yani sýfýr sayýda olduðu) ve bir adet bulunduðu durumlarý içine alýyor. Bu yüzden de çýktý olarak bize sadece “st” ve “sat” öðelerini veriyor.
+
+Þimdi bu metakarakteri kullanarak gerçek hayatta karþýmýza çýkabilecek bir örnek verelim. Bu metakarakterin tanýmýna tekrar bakarsak, “olsa da olur olmasa da olur” diyebileceðimiz durumlar için bu metakarakterin rahatlýkla kullanýlabileceðini görürüz. Þöyle bir örnek verelim: Diyelim ki bir metin üzerinde arama yapacaksýnýz. Aradýðýnýz kelime “uluslararasý”:
+
+metin = """Uluslararasý hukuk, uluslar arasý iliþkiler altýnda bir
+disiplindir. Uluslararasý iliþkilerin hukuksal boyutunu bilimsel bir
+disiplin içinde inceler. Devletlerarasý hukuk da denir. Ancak uluslar
+arasý iliþkilere yeni aktörlerin giriþi bu dalý sadece devletlerarasý
+olmaktan çýkarmýþtýr."""
+
+Not
+
+Bu metin http://tr.wikipedia.org/wiki/Uluslararas%C4%B1_hukuk adresinden alýnýp üzerinde ufak deðiþiklikler yapýlmýþtýr.
+
+Þimdi yapmak istediðimiz þey “uluslararasý” kelimesini bulmak. Ama dikkat ederseniz metin içinde “uluslararasý” kelimesi ayný zamanda “uluslar arasý” þeklinde de geçiyor. Bizim bu iki kullanýmý da kapsayacak bir düzenli ifade yazmamýz gerekecek...
+
+>>> nesne = re.findall("[Uu]luslar ?arasý", metin)
+>>> for i in nesne:
+... print(i)
+
+Verdiðimiz düzenli ifade kalýbýný dikkatlice inceleyin. Bildiðiniz gibi, ”?” metakarakteri, kendinden önce gelen karakterin (düzenli ifade kalýbýný) sýfýr veya bir kez geçtiði durumlarý arýyor. Burada ”?” sembolünü ” ” karakterinden, yani “boþluk” karakterinden sonra kullandýk. Dolayýsýyla, “boþluk karakterinin sýfýr veya bir kez geçtiði durumlarý” hedefledik. Bu þekilde hem “uluslar arasý” hem de “uluslararasý” kelimesini ayýklamýþ olduk. Düzenli ifademizde ayrýca þöyle bir þey daha yazdýk: “[Uu]”. Bu da gerekiyor. Çünkü metnimiz içinde “uluslararasý” kelimesinin büyük harfle baþladýðý yerler de var... Bildiðiniz gibi, “uluslar” ve “Uluslar” kelimeleri asla ayný deðildir. Dolayýsýyla hem “u” harfini hem de “U” harfini bulmak için, daha önce öðrendiðimiz “[]” metakarakterini kullanýyoruz.
+

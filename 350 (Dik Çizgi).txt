@@ -1,0 +1,27 @@
+
+| (Dik Çizgi)
+
+Bu metakarakter, birden fazla düzenli ifade kalýbýný birlikte eþleþtirmemizi saðlar. Bu ne demek? Hemen görelim:
+
+>>> liste = ["at", "katký", "fakat", "atký", "rahat",
+... "mat", "yat", "sat", "satýlýk", "katýlým"]
+>>> for i in liste:
+... if re.search("^at|at$",i):
+... print(i)
+...
+at
+fakat
+atký
+rahat
+mat
+yat
+sat
+
+Gördüðünüz gibi “|” metakarakterini kullanarak baþta ve sonda “at” hecesini içeren kelimeleri ayýkladýk. Ayný þekilde, mesela, renkleri içeren bir listeden belli renkleri de ayýklayabiliriz bu metakarakter yardýmýyla...
+
+>>> for i in renkler:
+... if re.search("kýrmýzý|mavi|sarý", i):
+... print(i)
+
+Sýrada son metakarakterimiz olan “()” var...
+

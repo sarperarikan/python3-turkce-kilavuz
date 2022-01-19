@@ -1,0 +1,15 @@
+
+from paket.modül import nitelik_veya_metot
+
+Peki bir paket içinde yer alan herhangi bir modül içindeki nitelik ve metotlara öneksiz olarak eriþmek istersek ne yapacaðýz? Python bize bu isteðimizi yerine getirmemizi saðlayacak bir yol da sunar.
+
+Dikkatlice bakýn:
+
+from urllib.request import urlopen
+
+Bu þekilde urllib paketi içindeki request modülünden urlopen adlý metodu doðrudan içe aktarmýþ olduk. Dolayýsýyla bu metodu dümdüz kullanabiliriz:
+
+>>> urlopen('http://www.istihza.com')
+
+Ancak, modüller konusunu iþlerken öneksiz aktarmaya iliþkin söylediklerimizin paketler için de geçerli olduðunu aklýmýzdan çýkarmýyoruz.
+

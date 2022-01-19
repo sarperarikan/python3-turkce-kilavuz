@@ -1,0 +1,5 @@
+
+Seçilen Verileri Almak
+
+Bu bölümde, SELECT sorgusu ile veritabanýndan seçtiðimiz verileri farklý yollarla nasýl çekebileceðimizi/alabileceðimizi inceleyeceðiz.
+

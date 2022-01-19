@@ -1,0 +1,48 @@
+
+Eþleþme Nesnelerinin Metotlarý
+
+
+group() metodu
+
+Bu bölümde doðrudan düzenli ifadelerin deðil, ama düzenli ifadeler kullanýlarak üretilen eþleþme nesnelerinin bir metodu olan group() metodundan bahsedeceðiz. Esasýnda biz bu metodu önceki bölümlerde de kullanmýþtýk. Ama burada bu metoda biraz daha ayrýntýlý olarak bakacaðýz.
+
+Daha önceki bölümlerden hatýrlayacaðýnýz gibi, bu metot düzenli ifadeleri kullanarak eþleþtirdiðimiz karakter dizilerini görme imkaný saðlýyordu. Bu bölümde bu metodu “( )” metakarakteri yardýmýyla daha verimli bir þekilde kullanacaðýz. Ýsterseniz ilk olarak þöyle basit bir örnek verelim:
+
+>>> kardiz = "python bir programlama dilidir"
+>>> nesne = re.search("(python) (bir) (programlama) (dilidir)", kardiz)
+>>> print(nesne.group())
+
+python bir programlama dilidir
+
+Burada düzenli ifade kalýbýmýzý nasýl grupladýðýmýza dikkat edin. print(nesne.group()) komutunu verdiðimizde eþleþen karakter dizileri ekrana döküldü. Þimdi bu grupladýðýmýz bölümlere tek tek eriþelim:
+
+>>> nesne.group(0)
+
+'python bir programlama dilidir'
+
+Gördüðünüz gibi, “0” indeksi eþleþen karakter dizisinin tamamýný veriyor. Bir de þuna bakalým:
+
+>>> nesne.group(1)
+
+'python'
+
+Burada 1 numaralý grubun öðesi olan “python”u aldýk. Gerisinin nasýl olacaðýný tahmin edebilirsiniz:
+
+>>> nesne.group(2)
+
+'bir'
+
+>>> nesne.group(3)
+
+'programlama'
+
+>>> nesne.group(4)
+
+'dilidir'
+
+Bu metodun bize ilerde ne büyük kolaylýklar saðlayacaðýný az çok tahmin ediyorsunuzdur. Ýsterseniz kullanabileceðimiz metotlarý tekrar listeleyelim:
+
+>>> dir(nesne)
+
+Bu listede group() dýþýnda bir de groups() adlý bir metodun olduðunu görüyoruz. Þimdi bunun ne iþ yaptýðýna bakalým.
+

@@ -1,0 +1,35 @@
+
+Þartlý Tablo Oluþturma
+
+CREATE TABLE komutunu kullanarak tablo oluþtururken þöyle bir problemle karþýlaþmýþ olabilirsiniz. Diyelim ki þu kodlarý yazdýnýz:
+
+import sqlite3
+
+vt = sqlite3.connect('vt.sqlite')
+
+im = vt.cursor()
+im.execute("CREATE TABLE personel (isim, soyisim, memleket)")
+
+Bu kodlarý ilk kez çalýþtýrdýðýnýzda, mevcut dizin altýnda vt.sqlite adlý bir veritabaný dosyasý oluþturulacak ve bu veritabaný içinde ‘isim’, ‘soyisim’ ve ‘memleket’ baþlýklý sütunlara sahip, ‘personel’ adlý bir tablo meydana getirilecektir.
+
+Ancak ayný kodlarý ikinci kez çalýþtýrdýðýnýzda þöyle bir hata mesajý ile karþýlaþacaksýnýz:
+
+sqlite3.OperationalError: table personel already exists
+
+Buradaki sorun, vt.sqlite dosyasý içinde ‘personel’ adlý bir tablonun zaten bulunuyor olmasýdýr. Bir veritabaný üzerinde iþlem yaparken, ayný ada sahip iki tablo oluþturamayýz. Bu hatayý önlemek için þartlý tablo oluþturma yönteminden yararlanacaðýz. Bunun için kullanacaðýmýz SQL komutu þudur: CREATE TABLE IF NOT EXISTS.
+
+Örneðimizi bu yeni bilgiye göre tekrar yazalým:
+
+import sqlite3
+
+vt = sqlite3.connect('vt.sqlite')
+
+im = vt.cursor()
+
+sorgu = """CREATE TABLE IF NOT EXISTS personel
+(isim, soyisim, memleket)"""
+
+im.execute(sorgu)
+
+Bu kodlarý kaç kez çalýþtýrýrsanýz çalýþtýrýn, programýnýz hata vermeden iþleyecek; eðer veritabanýnda ‘personel’ adlý bir tablo yoksa oluþturacak, bu adla zaten bir tablo varsa da sessizce yoluna devam edecektir.
+

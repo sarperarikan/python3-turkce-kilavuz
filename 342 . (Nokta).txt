@@ -1,0 +1,64 @@
+
+. (Nokta)
+
+Bir önceki bölümde “[]” adlý metakarakteri incelemiþtik. Bu bölümde ise farklý bir metakarakteri inceleyeceðiz. Ýnceleyeceðimiz metakarakter: ”.”
+
+Bu metakarakter, yeni satýr karakteri hariç bütün karakterleri temsil etmek için kullanýlýr. Mesela:
+
+>>> for i in liste:
+... nesne = re.match("es.a",i)
+... if nesne:
+... print(nesne.group())
+...
+esma
+esra
+
+Gördüðünüz gibi, daha önce “[]” metakarakterini kullanarak yazdýðýmýz bir düzenli ifadeyi bu kez farklý þekilde yazýyoruz. Unutmayýn, bir düzenli ifade birkaç farklý þekilde yazýlabilir. Biz bunlar içinde en basit ve en anlaþýlýr olanýný seçmeliyiz. Ayrýca yukarýdaki kodu birkaç farklý þekilde de yazabilirsiniz. Mesela þu yazým da bizim durumumuzda geçerli bir seçenek olacaktýr:
+
+>>> for i in liste:
+... if re.match("es.a",i):
+... print(i)
+
+Tabii ki biz, o anda çözmek durumunda olduðumuz soruna en uygun olan seçeneði tercih etmeliyiz...
+
+Yalnýz, unutmamamýz gereken þey, bu ”.” adlý metakarakterin sadece tek bir karakterin yerini tutuyor olmasýdýr. Yani þöyle bir kullaným bize istediðimiz sonucu vermez:
+
+>>> liste = ["ahmet","kemal", "kamil", "mehmet"]
+>>> for i in liste:
+... if re.match(".met",i):
+... print(i)
+
+Burada ”.” sembolü “ah” ve “meh” hecelerinin yerini tutamaz. ”.” sembolünün görevi sadece tek bir karakterin yerini tutmaktýr (yeni satýr karakteri hariç). Ama biraz sonra öðreneceðimiz metakarakter yardýmýyla “ah” ve “meh” hecelerinin yerini de tutabileceðiz.
+
+”.” sembolünü kullanarak bir örnek daha yapalým. Bir önceki bölümde verdiðimiz “a” listesini hatýrlýyorsunuz:
+
+>>> a = ['23BH56', 'TY76Z', '4Y7UZ', 'TYUDZ', '34534']
+
+Önce bu listeye bir öðe daha ekleyelim:
+
+>>> a.append("1agAY54")
+
+Artýk elimizde þöyle bir liste var:
+
+>>> a = ['23BH56', 'TY76Z', '4Y7UZ', 'TYUDZ',
+... '34534', "1agAY54"]
+
+Þimdi bu listeye þöyle bir düzenli ifade uygulayalým:
+
+>>> for i in a:
+... if re.match(".[0-9a-z]", i):
+... print(i)
+...
+23BH56
+34534
+1agAY54
+
+Burada yaptýðýmýz þey çok basit. Þu özelliklere sahip bir karakter dizisi arýyoruz:
+
+Herhangi bir karakter ile baþlayacak. Bu karakter sayý, harf veya baþka bir karakter olabilir. 
+Ardýndan bir sayý veya alfabedeki küçük harflerden herhangi birisi gelecek. 
+Bu ölçütleri karþýladýktan sonra, aradýðýmýz karakter dizisi herhangi bir karakter ile devam edebilir. 
+Yukarýdaki ölçütlere uyan karakter dizilerimiz: “23BH56”, “34534”, “1agAY54”
+
+Yine burada da kendinize göre birtakým deðiþiklikler yaparak, farklý yazým þekilleri ve farklý metotlar kullanarak ne olup ne bittiðini daha iyi kavrayabilirsiniz. Düzenli ifadeleri gereði gibi anlayabilmek için bol bol uygulama yapmamýz gerektiðini unutmamalýyýz.
+

@@ -1,0 +1,67 @@
+
+Tablo Oluþturma
+
+Önceki bölümün sonunda söylediðimiz gibi, bir imleç nesnesi oluþturduktan sonra bunun execute() metodunu kullanarak SQL komutlarýný iþletebiliyoruz.
+
+Dilerseniz þimdi basit bir örnek yaparak neyin ne olduðunu anlamaya çalýþalým.
+
+Öncelikle gerekli modülü içe aktaralým:
+
+>>> import sqlite3
+
+Þimdi de yeni bir veritabaný dosyasý oluþturalým (veya varolan bir veritabaný dosyasýna baðlanalým):
+
+>>> vt = sqlite3.connect('veritabani.sqlite')
+
+Bu veritabaný üzerinde iþlem yapabilmek için öncelikle imlecimizi oluþturalým:
+
+>>> im = vt.cursor()
+
+Þimdi de yukarýda oluþturduðumuz imlecin execute() adlý metodunu kullanarak veritabaný içinde bir tablo oluþturalým:
+
+>>> im.execute("CREATE TABLE adres_defteri (isim, soyisim)")
+
+Hatýrlarsanýz, Sqlite veritabaný sisteminin tablo benzeri bir yapýya sahip olduðunu ve bu sistemdeki her tablonun da bir isminin bulunduðunu söylemiþtik. Ýþte burada yaptýðýmýz þey, ‘adres_defteri’ adlý bir tablo oluþturup, bu tabloya ‘isim’ ve ‘soyisim’ adlý iki sütun eklemekten ibarettir. Yani aslýnda þöyle bir þey oluþturmuþ oluyoruz:
+
+
+isim soyisim 
+    
+
+Ayrýca oluþturduðumuz bu tablonun adýnýn da ‘adres_defteri’ olduðunu unutmuyoruz...
+
+Bu iþlemleri nasýl yaptýðýmýza dikkat edin. Burada CREATE TABLE adres_defteri (isim, soyisim) tek bir karakter dizisidir. Bu karakter dizisindeki CREATE TABLE kýsmý bir SQL komutu olup, bu komut bir tablo oluþturulmasýný saðlar.
+
+Burada CREATE TABLE ifadesini büyük harflerle yazdýk. Ancak bu ifadeyi siz isterseniz küçük harflerle de yazabilirsiniz. Benim burada büyük harf kullanmaktaki amacým SQL komutlarýnýn, ‘adres_defteri’, ‘isim’ ve ‘soyisim’ gibi öðelerden görsel olarak ayýrt edilebilmesini saðlamak. Yani CREATE TABLE ifadesinin mesela ‘adres_defteri’ öðesinden kolayca ayýrt edilebilmesini istediðim için burada CREATE TABLE ifadesini büyük harflerle yazdým.
+
+Karakter dizisinin devamýnda (isim, soyisim) ifadesini görüyoruz. Tahmin edebileceðiniz gibi, bunlar tablodaki sütun baþlýklarýnýn adýný gösteriyor. Buna göre, oluþturduðumuz tabloda ‘isim’ ve ‘soyisim’ adlý iki farklý sütun baþlýðý olacak.
+
+Bu arada, Sqlite tablolarý oluþtururken tablo adý ve sütun baþlýklarýnda Türkçe karakter kullanmaktan kaçýnmak iyi bir fikirdir. Ayrýca eðer tablo adý ve sütun baþlýklarýnda birden fazla kelimeden oluþan etiketler kullanacaksanýz bunlarý ya birbirine bitiþtirin ya da týrnak içine alýn. Örneðin:
+
+import sqlite3
+
+vt = sqlite3.connect('perso.sqlite')
+im = vt.cursor()
+
+im.execute("""CREATE TABLE 'personel dosyasi'
+('personel ismi', 'personel soyismi', memleket)""")
+
+Ayrýca, execute() metoduna parametre olarak verilen SQL komutlarýnýn alelade birer karakter dizisi olduðuna da dikkatinizi çekmek isterim. Bunlar Python’daki karakter dizilerinin bütün özelliklerini taþýr. Mesela bu karakter dizisini execute() metoduna göndermeden önce bir deðiþkene atayabilirsiniz:
+
+import sqlite3
+
+vt = sqlite3.connect('perso.sqlite')
+im = vt.cursor()
+
+sql = """CREATE TABLE 'personel dosyasi'
+('personel ismi', 'personel soyismi', memleket)"""
+
+im.execute(sql)
+
+Bu kodlarý kullanarak oluþturduðunuz perso.sqlite adlý veritabaný dosyasýnýn içeriðini Sqlitebrowser programý yardýmýyla görüntüleyip, gerçekten ‘personel ismi’, ‘personel soyismi’ ve ‘memleket’ sütunlarýnýn oluþup oluþmadýðýný kontrol edin.
+
+Bu arada, bu kodlarý ikinci kez çalýþtýrdýðýnýzda þöyle bir hata mesajý alacaksýnýz:
+
+sqlite3.OperationalError: table 'personel dosyasi' already exists
+
+Bu hata mesajýný almanýz gayet normal. Bunun üstesinden nasýl geleceðinizi öðrenmek için okumaya devam edin...
+

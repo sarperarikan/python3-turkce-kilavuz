@@ -1,0 +1,14 @@
+
+from paket.modül import *
+
+Eðer bir paket içindeki bir modülün bütün nitelik ve metotlarýný mevcut isim alanýna olduðu gibi aktarmak isterseniz þu içe aktarma yöntemini kullanabilirsiniz:
+
+>>> from paket.modül import *
+
+Bu bilgiyi urllib modülüne uygulayalým:
+
+>>> from urllib.request import *
+
+Bu þekilde urllib paketi içindeki request modülünün bütün nitelik ve metotlarýný doðrudan mevcut isim alanýna aktarmýþ olduk. Bu yöntemin büyük bir rahatlýk sunmakla birlikte önemli dezavantajlara da sahip olduðunu gayet iyi bildiðinizden eminim.
+
+

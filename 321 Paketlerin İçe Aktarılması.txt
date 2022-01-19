@@ -1,0 +1,21 @@
+
+Paketlerin Ýçe Aktarýlmasý
+
+Modüllerle paketler arasýndaki önemli bir fark, paketlerin modüllere kýyasla daha karmaþýk bir yapýda olmasýdýr. Yalnýzca tek bir dosyadan oluþan modüllerin bu basit yapýsýndan ötürü, bir modülden nitelik veya metot içe aktarmak çok kolaydýr. Mesela bir modül olan os‘u þu þekilde içe aktarabiliriz:
+
+>>> import os
+
+Eðer os modülünden name niteliðini almak istersek þu komutu kullanabiliriz:
+
+>>> from os import name
+
+os modülü içindeki bütün nitelik ve metotlarý içe aktarmak istediðimizde yýldýzlý içe aktarma yönteminden yararlanabiliriz:
+
+>>> from os import *
+
+Veya bu modül içindeki bir niteliði veya metodu baþka bir isim altýnda da içe aktarabiliriz:
+
+>>> from os import execv as exe
+
+Gelelim paketlere...
+

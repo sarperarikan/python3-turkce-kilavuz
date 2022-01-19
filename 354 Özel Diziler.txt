@@ -1,0 +1,18 @@
+
+Özel Diziler
+
+Düzenli ifadeler içinde metakarakterler dýþýnda, özel anlamlar taþýyan bazý baþka ifadeler de vardýr. Bu bölümde bu özel dizileri inceleyeceðiz: Boþluk karakterinin yerini tutan özel dizi: \s
+
+Bu sembol, bir karakter dizisi içinde geçen boþluklarý yakalamak için kullanýlýr. Örneðin:
+
+>>> a = ["5 Ocak", "27Mart", "4 Ekim", "Nisan 3"]
+>>> for i in a:
+... nesne = re.search("[0-9]\\s[A-Za-z]+",i)
+... if nesne:
+... print(nesne.group())
+...
+5 Ocak
+4 Ekim
+
+Yukarýdaki örnekte, bir sayý ile baþlayan, ardýndan bir adet boþluk karakteri içeren, sonra da bir büyük veya küçük harfle devam eden karakter dizilerini ayýkladýk. Burada boþluk karakterini “\s” simgesi ile gösterdiðimize dikkat edin.
+

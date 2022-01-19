@@ -1,0 +1,48 @@
+
+Tabloya Veri Girme
+
+Buraya kadar, sqlite3 modülünü kullanarak nasýl bir veritabaný oluþturacaðýmýzý ve çeþitli sütünlardan oluþan bir tabloyu bu veritabanýna nasýl yerleþtireceðimizi öðrendik. Þimdi de oluþturduðumuz bu sütun baþlýklarýnýn altýný dolduracaðýz.
+
+Dikkatlice bakýn:
+
+import sqlite3
+
+vt = sqlite3.connect('vt.sqlite')
+im = vt.cursor()
+
+tablo_yap = """CREATE TABLE IF NOT EXISTS personel
+(isim, soyisim, memleket)"""
+
+deðer_gir = """INSERT INTO personel VALUES ('Fýrat', 'Özgül', 'Adana')"""
+
+im.execute(tablo_yap)
+im.execute(deðer_gir)
+
+Uyarý
+
+Bu kodlarý çalýþtýrdýktan sonra, eðer veritabanýnýn içeriðini Sqlitebrowser ile kontrol ettiyseniz verilerin veritabanýna iþlenmediðini göreceksiniz. Endiþe etmeyin; birazdan bunun neden böyle olduðunu açýklayacaðýz.
+
+Burada INSERT INTO tablo_adý VALUES adlý yeni bir SQL komutu daha öðreniyoruz. CREATE TABLE ifadesi Türkçe’de “TABLO OLUÞTUR” anlamýna geliyor. INSERT INTO ise ”... ÝÇÝNE YERLEÞTÝR” anlamýna gelir. Yukarýdaki karakter dizisi içinde görünen VALUES ise “DEÐERLER” demektir. Yani aslýnda yukarýdaki karakter dizisi þu anlama gelir: “personel ÝÇÝNE ‘Fýrat’, ‘Özgül’ ve ‘Adana’ DEÐERLERÝNÝ YERLEÞTÝR. Yani þöyle bir tablo oluþtur”:
+
+
+isim soyisim memleket 
+Fýrat Özgül Adana 
+
+Buraya kadar gayet güzel gidiyoruz. Ýsterseniz þimdi derin bir nefes alýp, þu ana kadar yaptýðýmýz þeyleri bir gözden geçirelim:
+
+Öncelikle sqlite3 modülünü içe aktardýk. Bu modülün nimetlerinden yararlanabilmek için bunu yapmamýz gerekiyordu. “sqlite3” kelimesini her defasýnda yazmak bize angarya gibi gelebileceði için bu modülü farklý bir adla içe aktarmayý tercih edebiliriz. Mesela import sqlite3 as sql veya import sqlite3 as lite gibi... 
+sqlite3 modülünü içe aktardýktan sonra bir veritabanýna baðlanmamýz veya elimizde bir veritabaný yoksa yeni bir veritabaný oluþturmamýz gerekiyor. Bunun için connect() adlý bir fonksiyondan yararlanýyoruz. Bu fonksiyonu, sqlite3.connect('veritabaný_adý') þeklinde kullanýyoruz. Eðer içinde bulunduðumuz dizinde, “veritabaný_adý” adlý bir veritabaný varsa Sqlite bu veritabanýna baðlanýr. Eðer bu adda bir veritabaný yoksa, çalýþma dizini altýnda bu ada sahip yeni bir veritabaný oluþturulur. Özellikle deneme amaçlý iþlemler yapmamýz gerektiðinde, sabit disk üzerinde bir veritabaný oluþturmak yerine RAM üstünde geçici bir veritabaný ile çalýþmayý da tercih edebiliriz. Bunun için yukarýdaki komutu þöyle yazýyoruz: sqlite3.connect(':memory:'). Bu komutla RAM üzerinde oluþturduðumuz veritabaný, baðlantý kesildiði anda ortadan kalkacaktýr. 
+Veritabanýmýzý oluþturduktan veya varolan bir veritabanýna baðlandýktan sonra yapmamýz gereken þey bir imleç oluþturmak olacaktýr. Daha sonra bu imlece ait metotlardan yararlanarak önemli iþler yapabileceðiz. Sqlite’ta bir imleç oluþturabilmek için db.cursor() gibi bir komut kullanýyoruz. Tabii ben burada oluþturduðunuz veritabanýna “db” adýný verdiðinizi varsayýyorum. 
+Ýmlecimizi de oluþturduktan sonra önümüz iyice açýlmýþ oldu. Þimdi dir(im) gibi bir komut kullanarak imlecin metotlarýnýn ne olduðunu inceleyebilirsiniz. Tabii ben burada imlece “im” adýný verdiðinizi varsaydým. Gördüðünüz gibi, listede execute() adlý bir metot da var. Artýk imlecin bu execute() metodunu kullanarak SQL komutlarýný iþletebiliriz. 
+Yukarýda üç adet SQL komutu öðrendik. Bunlardan ilki CREATE TABLE. Bu komut veritabaný içinde bir tablo oluþturmamýzý saðlýyor. Ýkinci komutumuz CREATE TABLE IF NOT EXISTS. Bu komut da bir tabloyu eðer yoksa oluþturmamýzý saðlýyor. Üçüncü komutumuz ise INSERT INTO ... VALUES .... Bu komut, oluþturduðumuz tabloya içerik eklememizi saðlýyor. Bunlarý þuna benzer bir þekilde kullandýðýmýzý hatýrlýyorsunuz: 
+
+im.execute("CREATE TABLE personel (isim, soyisim, memleket)")
+im.execute("INSERT INTO personel VALUES ('Fýrat', 'Özgül', 'Adana')")
+
+Burada bir þey dikkatinizi çekmiþ olmalý. SQL komutlarýný yazmaya baþlarken çift týrnakla baþladýk. Dolayýsýyla karakter dizisini yazarken iç taraftaki Fýrat, Özgül ve Adana deðerlerini yazmak için tek týrnak kullanmamýz gerekti. Karakter dizileri içindeki manevra alanýnýzý geniþletmek için, SQL komutlarýný üç týrnak içinde yazmayý da tercih edebilirsiniz. Böylece karakter dizisi içindeki tek ve çift týrnaklarý daha rahat bir þekilde kullanabilirsiniz. Yani:
+
+im.execute("""CREATE TABLE personel (isim, soyisim, memleket)""")
+im.execute("""INSERT INTO personel VALUES ("Fýrat", "Özgül", "Adana")""")
+
+Ayrýca üç týrnak kullanmanýz sayesinde, uzun satýrlarý gerektiðinde bölerek çok daha okunaklý kodlar da yazabileceðinizi biliyorsunuz.
+

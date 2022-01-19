@@ -1,0 +1,60 @@
+
+compile() ile Derleme Seçenekleri
+
+Bir önceki bölümde compile() metodunun ne olduðunu, ne iþe yaradýðýný ve nasýl kullanýldýðýný görmüþtük. Bu bölümde ise “compile” (derleme) iþlemi sýrasýnda kullanýlabilecek seçenekleri anlatacaðýz.
+
+
+re.IGNORECASE veya re.I
+
+Bildiðiniz gibi, Python’da büyük-küçük harfler önemlidir. Yani eðer “python” kelimesini arýyorsanýz, alacaðýnýz çýktýlar arasýnda “Python” olmayacaktýr. Çünkü “python” ve “Python” birbirlerinden farklý iki karakter dizisidir. Ýþte re.IGNORECASE veya kýsaca re.I adlý derleme seçenekleri bize büyük-küçük harfe dikkat etmeden arama yapma imkaný saðlar. Hemen bir örnek verelim:
+
+import re
+
+metin = """Programlama dili, programcýnýn bir bilgisayara ne yapmasýný
+istediðini anlatmasýnýn standartlaþtýrýlmýþ bir yoludur. Programlama
+dilleri, programcýnýn bilgisayara hangi veri üzerinde iþlem yapacaðýný,
+verinin nasýl depolanýp iletileceðini, hangi koþullarda hangi iþlemlerin
+yapýlacaðýný tam olarak anlatmasýný saðlar. Þu ana kadar 2500’den fazla
+programlama dili yapýlmýþtýr. Bunlardan bazýlarý: Pascal, Basic, C, C#,
+C++, Java, Cobol, Perl, Python, Ada, Fortran, Delphi programlama
+dilleridir."""
+
+derli = re.compile("programlama",re.IGNORECASE)
+print(derli.findall(metin))
+
+Bu programý çalýþtýrdýðýmýzda þu çýktýyý alýyoruz:
+
+['Programlama', 'Programlama', 'programlama', 'programlama']
+
+Not
+
+Bu metin http://tr.wikipedia.org/wiki/Programlama_dili adresinden alýnmýþtýr.
+
+Gördüðünüz gibi, metinde geçen hem “programlama” kelimesini hem de “Programlama” kelimesini ayýklayabildik. Bunu yapmamýzý saðlayan þey de re.IGNORECASE adlý derleme seçeneði oldu. Eðer bu seçeneði kullanmasaydýk, çýktýda yalnýzca “programlama” kelimesini görürdük. Çünkü aradýðýmýz þey aslýnda “programlama” kelimesi idi. Biz istersek re.IGNORECASE yerine kýsaca re.I ifadesini de kullanabiliriz. Ayný anlama gelecektir...
+
+
+re.DOTALL veya re.S
+
+Bildiðiniz gibi, metakarakterler arasýnda yer alan ”.” sembolü herhangi bir karakterin yerini tutuyordu. Bu metakarakter bütün karakterlerin yerini tutmak üzere kullanýlabilir. Hatýrlarsanýz, ”.” metakarakterini anlatýrken, bu metakarakterin, yeni satýr karakterinin yerini tutmayacaðýný söylemiþtik. Bunu bir örnek yardýmýyla görelim. Diyelim ki elimizde þöyle bir karakter dizisi var:
+
+>>> a = "Ben Python,\nMonty Python"
+
+Bu karakter dizisi içinde “Python” kelimesini temel alarak bir arama yapmak istiyorsak eðer, kullanacaðýmýz þu kod istediðimiz þeyi yeterince yerine getiremeyecektir:
+
+>>> print(re.search("Python.*", a).group())
+
+Bu kod þu çýktýyý verecektir:
+
+Python,
+
+Bunun sebebi, ”.” metakarakterinin “\n” (yeni satýr) kaçýþ dizisini dikkate almamasýdýr. Bu yüzden bu kaçýþ dizisinin ötesine geçip orada arama yapmýyor. Ama þimdi biz ona bu yeteneði de kazandýracaðýz:
+
+>>> derle = re.compile("Python.*", re.DOTALL)
+>>> nesne = derle.search(a)
+>>> if nesne:
+... print(nesne.group())
+
+re.DOTALL seçeneðini sadece re.S þeklinde de kýsaltabilirsiniz...
+
+
+

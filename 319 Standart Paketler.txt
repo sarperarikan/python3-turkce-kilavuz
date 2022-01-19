@@ -1,0 +1,30 @@
+
+Standart Paketler
+
+Standart paketler, Python’ýn standart kütüphanesinde bulunan paketlerdir. Týpký gömülü fonksiyonlar ve standart modüller gibi, standart paketler de dilin bir parçasý olduklarýndan, bunlara eriþebilmek için herhangi bir ek yazýlým indirip kurmamýza gerek kalmaz; bu paketler her an emrimize amadedir. Standart paketlere Python kurulum dizini içindeki Lib klasöründen eriþebilirsiniz. Bir standart paketin tam olarak hangi konumda bulunduðunu öðrenmek için ise ilgili paketin __path__ niteliðini sorgulayabilirsiniz:
+
+>>> import urllib
+>>> urllib.__path__
+
+Eðer sorguladýðýnýz þeyin bir __path__ niteliði yoksa, paket sandýðýnýz o þey, aslýnda bir paket deðildir. Örneðin:
+
+>>> import subprocess
+>>> subprocess.__path__
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'module' object has no attribute '__path__'
+
+Çünkü, bildiðiniz gibi, paketlerin aksine, modüllerin __path__ adlý bir niteliði bulunmaz. subprocess de bir paket deðil, modül olduðu için __path__ sorgusu hata verecektir.
+
+Bir paketin __path__ niteliðini sorguladýðýnýzda çýktýda hangi dizini görüyorsanýz, o paketin bilgisayardaki konumu odur. Mesela yukarýda adýný andýðýmýz urllib paketinin __path__ niteliðini sorgulayýp, karþýmýza çýkan klasöre gidelim. Paket dizininin içini açtýðýmýzda karþýmýza þu dosyalar çýkacak:
+
+error.py
+parse.py
+request.py
+response.py
+robotparser.py
+__init__.py
+
+Daha önce de dediðimiz gibi, paketler modüllerden oluþur. Ýþte urllib paketi de yukarýda ismini gördüðümüz modüllerin birleþiminden oluþuyor. Python kurulum dizini içindeki Lib klasörü altýnda yer alan paketleri inceleyerek, hangi paketin hangi modüllerden oluþtuðunu kendiniz de görebilirsiniz.
+

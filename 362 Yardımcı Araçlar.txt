@@ -1,0 +1,57 @@
+
+Yardýmcý Araçlar
+
+Veritabanlarý üzerinde yapacaðýmýz çalýþmalar sýrasýnda, iþlerimizi kolaylaþtýrmak için bazý harici araçlara da ihtiyaç duyacaðýz. Gelin þimdi bu araçlarý tanýyalým.
+
+
+Sqlitebrowser
+
+Sqlitebrowser, Sqlite veritabanlarýnýn içeriðini grafik bir arayüz aracýlýðýyla görüntüleyebilmemizi saðlayan bir program. Bu program sayesinde, veritabaný üzerinde yaptýðýnýz çalýþmanýn doðru sonuç verip vermediðini teyit edebilir, elinizdeki veritabanýnýn içeriðinde hangi verilerin olduðunu açýk seçik görebilirsiniz.
+
+Bu programý indirmek için ziyaret etmemiz gereken adres http://sqlitebrowser.org/.
+
+Eðer siz bir Windows kullanýcýsý iseniz, sitedeki .exe dosyasýný indirip, programý herhangi bir Windows programý gibi kurabilirsiniz.
+
+GNU/Linux kullanýcýlarýnýn önünde ise her zaman olduðu gibi birkaç farklý seçenek var. Öncelikle, bu program çoðu GNU/Linux daðýtýmýnýn paket deposunda zaten bulunur. Dolayýsýyla bu programý daðýtýmýnýzýn paket deposu aracýlýðýyla rahatlýkla kurabilirsiniz. Mesela Ubuntu kullananlar þu komutla programý kurabilir:
+
+sudo apt-get install sqlitebrowser
+
+GNU/Linux kullanýcýlarý, eðer arzu ederlerse, programýn kaynak kodlarýný sitesinden indirip programý kendileri derlemeyi de tercih edebilir. Bunun için öncelikle http://sqlitebrowser.org/ adresine gidip .tar.gz uzantýlý dosyayý indirin.
+
+Bu programý derlemeye geçmeden önce þu baðýmlýlýklarý kurmamýz gerekiyor:
+
+
+cmake 
+libqt4-dev 
+libsqlite3-dev 
+
+Ubuntu’da ayrýca build-essential paketine de ihtiyacýnýz olacak. Ubuntu kullanýcýlarý þu komutu vererek Sqlitebrowser programýnýn bütün baðýmlýlýklarýný sistemlerine kurabilir:
+
+sudo apt-get install build-essential cmake libqt4-dev libsqlite3-dev
+
+Baðýmlýlýklarý kurduktan sonra, indirdiðiniz .tar.gz dosyasýný aþaðýdaki komut yardýmýyla açýn:
+
+tar zxvf sqlitebrowser-3.7.0.tar.gz
+
+Ben burada indirdiðiniz program sürümünün 3.7.0 olduðunu varsaydým. Sizin indirdiðiniz sürüm farklýysa yukarýdaki komutu o sürüme göre vereceksiniz.
+
+Daha sonra þu komutu vererek, açtýðýnýz klasörün içine girin:
+
+cd sqlitebrowser-3.7.0
+
+Yine, burada da klasör adý ve sürüm numarasý sizde farklýysa komutu düzeltin.
+
+Ardýndan sýrasýyla þu komutlarý verin (cmake komutunun yanýndaki nokta iþaretine dikkat!!):
+
+cmake .
+
+make
+
+sudo make install
+
+Böylece Sqlitebrowser programýný sisteminize kurmuþ oldunuz. Programýn kurulduðunu teyit etmek için þu komutu çalýþtýrýn:
+
+sqlitebrowser
+
+Eðer program penceresi açýldýysa her þey yolunda demektir. Eðer programý çalýþtýramadýysanýz veya yukarýdaki komutlarý anlamakta ve iþletmekte zorluk çekiyorsanýz paket deponuzdaki Sqlitebrowser sürümü ile yola devam etmenizi tavsiye ederim. Ya da eðer arzu ederseniz, http://www.istihza.com/forum adresine uðrayýp yardým talebinde bulunabilirsiniz.
+

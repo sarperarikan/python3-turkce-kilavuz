@@ -1,0 +1,154 @@
+
+match() Metodu
+
+Bir önceki bölümde metotlar hakkýnda yardým almaktan bahsederken ilk örneðimizi match() metoduyla vermiþtik, o halde match() metodu ile devam edelim.
+
+match() metodunu tarif etmek yerine, isterseniz bir örnek yardýmýyla bu metodun ne iþe yaradýðýný anlamaya çalýþalým. Diyelim ki elimizde þöyle bir karakter dizisi var:
+
+>>> a = "python güçlü bir programlama dilidir."
+
+Varsayalým ki biz bu karakter dizisi içinde ‘python’ kelimesi geçip geçmediðini öðrenmek istiyoruz. Ve bunu da düzenli ifadeleri kullanarak yapmak istiyoruz. Düzenli ifadeleri bu örneðe uygulayabilmek için yapmamýz gereken þey, öncelikle bir düzenli ifade kalýbý oluþturup, daha sonra bu kalýbý yukarýdaki karakter dizisi ile karþýlaþtýrmak. Biz bütün bu iþlemleri match() metodunu kullanarak yapabiliriz:
+
+>>> re.match("python", a)
+
+Burada, ‘python’ þeklinde bir düzenli ifade kalýbý oluþturduk. Düzenli ifade kalýplarý match() metodunun ilk argümanýdýr (yani parantez içindeki ilk deðer). Ýkinci argümanýmýz ise (yani parantez içindeki ikinci deðer), hazýrladýðýmýz kalýbý kendisiyle eþleþtireceðimiz karakter dizisi olacaktýr.
+
+Klavyede ENTER tuþuna bastýktan sonra karþýmýza þöyle bir çýktý gelecek:
+
+<_sre.SRE_Match object; span=(0, 6), match='python'>
+
+Bu çýktý, düzenli ifade kalýbýnýn karakter dizisi ile eþleþtiði anlamýna geliyor. Yani aradýðýmýz þey, karakter dizisi içinde bulunmuþ.
+
+Yukarýdaki çýktýda gördüðümüz ifadeye Python’cada eþleþme nesnesi (match object) adý veriliyor. Çünkü match() metodu yardýmýyla yaptýðýmýz þey aslýnda bir eþleþtirme iþlemidir (match kelimesi Ýngilizcede ‘eþleþmek’ anlamýna gelir). Biz burada ‘python’ düzenli ifadesinin a deðiþkeniyle eþleþip eþleþmediðine bakýyoruz. Yani re.match("python", a) ifadesi aracýlýðýyla ‘python’ ifadesi ile a deðiþkeninin tuttuðu karakter dizisinin eþleþip eþleþmediðini sorguluyoruz. Bizim örneðimizde ‘python’ a deðiþkeninin tuttuðu karakter dizisi ile eþleþtiði için bize bir eþleþme nesnesi döndürülüyor.
+
+Bu çýktý, düzenli ifade kalýbýnýn karakter dizisi ile eþleþtiðini bildirmenin yanýsýra, bize baþka birtakým bilgiler daha veriyor. Mesela bu çýktýdaki span parametresi, aradýðýmýz ‘python’ karakter dizisinin, a deðiþkeninin 0. ila 6. karakterleri arasýnda yer aldýðýný söylüyor bize. Yani:
+
+>>> a[0:6]
+
+'python'
+
+Ayrýca yukarýdaki çýktýda gördüðümüz match parametresi de bize eþleþen ifadenin ‘python’ olduðu bilgisini veriyor.
+
+Bir de þu örneðe bakalým:
+
+>>> re.match("Java", a)
+
+Burada ENTER tuþuna bastýðýmýzda hiç bir çýktý almýyoruz. Aslýnda biz görmesek de Python burada “None” çýktýsý veriyor. Eðer yukarýdaki komutu þöyle yazarsak “None” çýktýsýný biz de görebiliriz:
+
+>>> print(re.match("Java", a))
+
+None
+
+Gördüðünüz gibi, ENTER tuþuna bastýktan sonra “None” çýktýsý geldi. Demek ki “Java” ifadesi, “a” deðiþkeninin tuttuðu karakter dizisi ile eþleþmiyormuþ. Buradan çýkardýðýmýz sonuca göre, Python match() metodu yardýmýyla aradýðýmýz þeyi eþleþtirdiði zaman bir eþleþme nesnesi (match object) döndürüyor. Eðer eþleþme yoksa, o zaman da “None” deðerini döndürüyor.
+
+Biraz kafa karýþtýrmak için þöyle bir örnek verelim:
+
+>>> a = "Python güçlü bir dildir"
+>>> re.match("güçlü", a)
+
+Burada “a” deðiþkeninde “güçlü” ifadesi geçtiði halde match() metodu bize bir eþleþme nesnesi döndürmedi. Peki ama neden?
+
+Aslýnda bu gayet normal. Çünkü match() metodu bir karakter dizisinin sadece en baþýna bakar. Yani “Python güçlü bir dildir” ifadesini tutan a deðiþkenine re.match(“güçlü”, a) gibi bir fonksiyon uyguladýðýmýzda, match() metodu a deðiþkeninin yalnýzca en baþýna bakacaðý ve a deðiþkeninin en baþýnda “güçlü” yerine “python” olduðu için, match() metodu bize olumsuz yanýt veriyor.
+
+Aslýnda match() metodunun yaptýðý bu iþi, karakter dizilerinin split() metodu yardýmýyla da yapabiliriz:
+
+>>> a.split()[0] == "python"
+
+True
+
+Demek ki a deðiþkeninin en baþýnda “python” ifadesi varmýþ. Bir de þuna bakalým:
+
+>>> a.split()[0] == "güçlü"
+
+False
+
+Veya ayný iþi sadece startswith() metodunu kullanarak dahi yapabiliriz:
+
+>>> a.startswith("python")
+
+Eðer düzenli ifadelerden tek beklentiniz bir karakter dizisinin en baþýndaki veriyle eþleþtirme iþlemi yapmaksa, split() veya startswith() metotlarýný kullanmak daha mantýklýdýr. Çünkü split() ve startswith() metotlarý match() metodundan çok daha hýzlý çalýþacaktýr.
+
+match() metodunu kullanarak bir kaç örnek daha yapalým:
+
+>>> sorgu = "1234567890"
+>>> re.match("1", sorgu)
+
+<_sre.SRE_Match object; span=(0, 1), match='1'>
+
+>>> re.match("1234", sorgu)
+
+<_sre.SRE_Match object; span=(0, 4), match='1234'>
+
+>>> re.match("124", sorgu)
+
+Ýsterseniz þimdiye kadar öðrendiðimiz þeyleri þöyle bir gözden geçirelim:
+
+Düzenli ifadeler Python’ýn çok güçlü araçlarýndan biridir. 
+Python’daki düzenli ifadelere iliþkin bütün fonksiyonlar re adlý bir modül içinde yer alýr. 
+Dolayýsýyla düzenli ifadeleri kullanabilmek için öncelikle bu re modülünü import re diyerek içe aktarmamýz gerekir. 
+re modülünün içeriðini dir(re) komutu yardýmýyla listeleyebiliriz. 
+match() metodu re modülü içindeki fonksiyonlardan biridir. 
+match() metodu bir karakter dizisinin yalnýzca en baþýna bakar. 
+Eðer aradýðýmýz þey karakter dizisinin en baþýnda yer alýyorsa, match() metodu bir eþleþtirme nesnesi döndürür. 
+Eðer aradýðýmýz þey karakter dizisinin en baþýnda yer almýyorsa, match() metodu “None” deðeri döndürür. 
+Daha önce söylediðimiz gibi, match() metodu ile bir eþleþtirme iþlemi yaptýðýmýzda, eðer eþleþme varsa Python bize bir eþleþme nesnesi döndürecektir. Döndürülen bu eþleþme nesnesi bize span ve match parametreleri aracýlýðýyla, eþleþen karakter dizisinin sorgu dizisi içindeki yerini ve eþleþen dizinin ne olduðu söylüyor. span paramtresinin deðerine span() adlý bir metot yardýmýyla eriþebiliyoruz. Örneðin:
+
+>>> import re
+>>> sorgu = 'Bin kunduz'
+>>> eþleþme = re.match('Bin', sorgu)
+>>> eþleþme
+
+<_sre.SRE_Match object; span=(0, 3), match='Bin'>
+
+>>> eþleþme.span()
+(0, 3)
+
+Ancak, match() metodu ile bulunan þeyin ne olduðunu eþleþme nesnesinin match parametresine bakarak görebilsek de, bu deðeri bir kod yardýmýyla alamýyoruz. Çünkü eþleþme nesnelerinin span() metoduna benzeyen bir match() metodu bulunmaz.
+
+Ama istersek tabii ki bulunan þeyi de programatik olarak alma imkânýmýz var. Bunun için group() adlý bir baþka metottan yararlanacaðýz:
+
+>>> kardiz = "perl, python ve ruby yüksek seviyeli dillerdir."
+>>> eþleþme = re.match("perl", kardiz)
+>>> eþleþme.group()
+
+'perl'
+
+Burada, re.match("perl", kardiz) komutunu bir deðiþkene atadýk. Hatýrlarsanýz, bu fonksiyonu komut satýrýna yazdýðýmýzda bir eþleþme nesnesi elde ediyorduk. Ýþte burada deðiþkene atadýðýmýz þey aslýnda bu eþleþme nesnesinin kendisi oluyor. Bu durumu þu þekilde teyit edebilirsiniz:
+
+>>> type(eþleþme)
+
+<class '_sre.SRE_Match'>
+
+Gördüðünüz gibi, eþleþme deðiþkeninin tipi bir eþleþme nesnesi (match object). Ýsterseniz bu nesnenin metotlarýna bir göz gezdirebiliriz:
+
+>>> dir(eþleþme)
+
+Dikkat ederseniz yukarýda kullandýðýmýz group() metodu listede görünüyor. Bu metot, doðrudan doðruya düzenli ifadelerin deðil, eþleþme nesnelerinin bir metodudur. Listedeki öbür metotlarý da sýrasý geldiðinde inceleyeceðiz. Þimdi isterseniz bir örnek daha yapýp bu konuyu kapatalým:
+
+>>> iddia = "Adana memleketlerin en güzelidir!"
+>>> nesne = re.match("Adana", iddia)
+>>> nesne.group()
+
+'Adana'
+
+Peki, eþleþtirmek istediðimiz düzenli ifade kalýbý bulunamazsa ne olur? Öyle bir durumda yukarýdaki kodlar hata verecektir. Hemen bakalým:
+
+>>> nesne = re.match("Ýstanbul", iddia)
+>>> nesne.group()
+
+Hata mesajýmýz:
+
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+AttributeError: 'NoneType' object has no attribute 'group'
+
+Böyle bir hata, yazdýðýnýz bir programýn çökmesine neden olabilir. O yüzden kodlarýmýzý þuna benzer bir þekilde yazmamýz daha mantýklý olacaktýr:
+
+>>> nesne = re.match("Ýstanbul", iddia)
+>>> if nesne:
+... print("eþleþen ifade:", nesne.group())
+... else:
+... print("eþleþme baþarýsýz!")
+
+Þimdi isterseniz bu match() metoduna bir ara verip baþka bir metodu inceleyelim.
+

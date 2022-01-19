@@ -1,0 +1,43 @@
+
+Tablodaki Verileri Seçmek
+
+Yukarýda, bir veritabanýna nasýl veri gireceðimizi ve bu verileri veritabanýna nasýl iþleyeceðimizi gördük. Ýþin asýl önemli kýsmý, bu verileri daha sonra veritabanýndan (yani tablodan) geri alabilmektir. Þimdi bu iþlemi nasýl yapacaðýmýza bakalým.
+
+Veritabanýndan herhangi bir veri alabilmek için ilk olarak SELECT veri FROM tablo_adý adlý bir SQL komutundan yararlanarak ilgili verileri seçmemiz gerekiyor.
+
+Dilerseniz önce bir tablo oluþturalým:
+
+import sqlite3
+
+vt = sqlite3.connect('vt.sqlite')
+
+im = vt.cursor()
+
+im.execute("""CREATE TABLE IF NOT EXISTS faturalar
+(fatura, miktar, ilk_odeme_tarihi, son_odeme_tarihi)""")
+
+Þimdi bu tabloya bazý veriler ekleyelim:
+
+im.execute("""INSERT INTO faturalar VALUES
+("Elektrik", 45, "23 Ocak 2010", "30 Ocak 2010")""")
+
+Verileri veritabanýna iþleyelim:
+
+vt.commit()
+
+Yukarýdaki kodlar bize þöyle bir tablo verdi:
+
+
+fatura miktar ilk_odeme_tarihi son_odeme_tarihi 
+Elektrik 45 23 Ocak 2010 30 Ocak 2010 
+
+Buraya kadar olan kýsmý zaten biliyoruz. Bilmediðimiz ise bu veritabanýndan nasýl veri alacaðýmýz. Onu da þöyle yapýyoruz:
+
+im.execute("""SELECT * FROM faturalar""")
+
+Burada özel bir SQL komutu olan SELECT veri FROM tablo_adý komutundan faydalandýk. Burada joker karakterlerden biri olan “*” iþaretini kullandýðýmýza dikkat edin. SELECT * FROM faturalar ifadesi þu anlama gelir: “faturalar adlý tablodaki bütün öðeleri seç!“
+
+Burada “SELECT” kelimesi “SEÇMEK” demektir. “FROM” ise ”...DEN/...DAN” anlamý verir. Yani “SELECT FROM faturalar” dediðimizde “faturalardan seç” demiþ oluyoruz. Burada kullandýðýmýz “*” iþareti de “her þey” anlamýna geldiði için, “SELECT * FROM faturalar” ifadesi “faturalardan her þeyi seç” gibi bir anlama gelmiþ oluyor.
+
+Verileri seçtiðimize göre, artýk seçtiðimiz bu verileri nasýl alacaðýmýza bakabiliriz. Bunun için de fetchone(), fetchall() veya fetchmany() adlý metotlardan ya da for döngüsünden yararlanacaðýz.
+

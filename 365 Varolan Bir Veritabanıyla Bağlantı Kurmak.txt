@@ -1,0 +1,17 @@
+
+Varolan Bir Veritabanıyla Bağlantı Kurmak
+
+Biraz önce, deneme.sqlite adlı yeni bir Sqlite veritabanı oluşturmak için şöyle bir komut kullanmıştık:
+
+>>> vt = sqlite3.connect('deneme.sqlite')
+
+Eğer bu komutu verdiğiniz dizin içinde deneme.sqlite adlı bir veritabanı yoksa, bu ada sahip bir veritabanı oluşturulur. Eğer zaten bu adla bir veritabanı dosyanız varsa, sqlite3 bu veritabanına bağlanacaktır. Dolayısıyla Sqlite’ta hem yeni bir veritabanı oluşturmak hem de mevcut bir veritabanına bağlanmak için birbiriyle tamamen aynı kodları kullanıyoruz.
+
+Mesela biraz önce http://www.istihza.com/denemeler/kitaplar.sqlite adresinden indirdiğimiz kitaplar.sqlite adlı veritabanına bağlanalım.
+
+Bu dosyanın bulunduğu konumda bir Python etkileşimli kabuk oturumu açtığımızı varsayarsak:
+
+>>> vt = sqlite3.connect('kitaplar.sqlite')
+
+komutunu kullanarak kitaplar.sqlite adlı veritabanıyla bağlantı kurabiliriz.
+

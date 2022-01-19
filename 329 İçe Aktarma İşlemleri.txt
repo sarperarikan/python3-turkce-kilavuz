@@ -1,0 +1,126 @@
+
+Ýçe Aktarma Ýþlemleri
+
+Standart paketleri anlatýrken, bu paketlerin her konumdan içe aktarýlabileceðini söylemiþtik. Ayný þey üçüncü þahýs paketleri için de geçerlidir. Çünkü gerek Python geliþtiricileri, gerekse üçüncü þahýs paketleri geliþtirenler, bu paketleri bize sunarken bunlarý Python’ýn sys.path çýktýsýna eklemiþlerdir. O yüzden standart ve üçüncü þahýs paketlerini içe aktarýrken sorun yaþamayýz.
+
+Ancak tabii ki kendi yazdýðýmýz paketler sys.path listesine ekli olmadýðý için, bunlarý içe aktarýrken bazý noktalara dikkat etmeniz gerekir.
+
+Mesela masaüstünde þu yapýya sahip bir paket oluþturalým:
+
++ paket
+|__ modul1.py
+|__ modul2.py
+|__ modul3.py
++ altdizin
+|__altmodul1.py
+|__altmodul2.py
+
+Bu dizinde dosya içerikleri þöyle olsun:
+
+modul1.py:
+
+isim1 = 'modul1'
+print(isim1)
+
+modul2.py:
+
+isim2 = 'modul2'
+print(isim2)
+
+modul3.py:
+
+isim3 = 'modul3'
+print(isim3)
+
+altmodul1.py:
+
+altisim1 = 'altmodul1'
+print(altisim1)
+
+altmodul2.py:
+
+altisim2 = 'altmodul2'
+print(altisim2)
+
+Þimdi paket adlý dizinin bulunduðu klasörde bir etkileþimli kabuk oturumu açalým. Yalnýz bu oturumu paket dizinin içinde deðil, bir üst dizinde açacaksýnýz. Yani o anda bulunduðunuz dizinde dir veya ls komutu verdiðinizde paket adlý dizini görüyor olmanýz lazým... Eðer dir veya ls komutunun çýktýsýnda altdizin adlý dizini görüyorsanýz yanlýþ yerdesiniz demektir. Hemen bir üst dizine gidin.
+
+Bulunduðumuz konumda þu komutu verelim:
+
+>>> import paket
+
+Eðer hiçbir çýktý almadan bir alt satýra geçtiyseniz her þey yolunda demektir. Eðer bir hata mesajý görüyorsanýz, etkileþimli kabuk oturumunu yanlýþ konumda açmýþsýnýzdýr. Oturumu doðru konumda açýp tekrar gelin...
+
+Standart paketlerde ve üçüncü þahýs paketlerinde gördüðümüz gibi, bir paketi yukarýdaki þekilde içe aktardýðýmýzda, o pakete ait herhangi bir modül veya nitelik otomatik olarak içe aktarýlmýyor. dir(paket) komutu verdiðinizde yalnýzca standart niteliklerin içe aktarýldýðýný göreceksiniz:
+
+>>> dir(paket)
+
+['__doc__', '__loader__', '__name__',
+ '__package__', '__path__', '__spec__']
+
+Gördüðünüz gibi, oluþturduðumuz paket, bir Python paketinin sahip olmasý gereken bütün niteliklere sahip.
+
+Þimdi bu paket içindeki modul1 adlý modülü içe aktaralým:
+
+>>> from paket import modul1
+
+modul1
+
+Böylece modul1 adlý modülün içindeki deðiþkenin deðerini almýþ olduk. Paket içindeki öteki modülleri de ayný þekilde içe aktarabilirsiniz:
+
+>>> from paket import modul2
+
+modul2
+
+>>> from paket import modul3
+
+modul3
+
+Peki ya mesela modul1 içindeki isim1 deðiþkenini almak istersek ne yapacaðýz?
+
+Dikkatlice bakýn:
+
+>>> from paket.modul1 import isim1
+
+modul1
+
+Gördüðünüz gibi, paket içindeki modul1 modülünün isim1 niteliðini baþarýyla aldýk. Örnek olmasý açýsýndan ötekileri de alalým:
+
+>>> from paket.modul2 import isim2
+
+modul2
+
+>>> from paket.modul3 import isim3
+
+modul3
+
+Buradaki temel mantýðý kavradýðýnýzý zannediyorum. Standart modülleri incelerken bahsettiðimiz içe aktarma yöntemlerini tek tek yukarýdaki yapýya uygulayarak, buraya kadar anlattýklarýmýzý anlayýp anlamadýðýnýzý test edebilirsiniz. Dilerseniz pratik yapmak açýsýndan bir de altdizin içindeki modüllere uzanalým.
+
+Öncelikle altdizin‘i içe aktaralým:
+
+>>> import paket.altdizin
+
+Bu þekilde paket adlý paketin altdizin adlý alt dizinini içe aktarmýþ olduk. Artýk bu alt dizin içindeki modüllere ve onlarýn niteliklerine eriþebiliriz. Mesela paket adlý paketin altdizin adlý alt dizini içindeki altmodul1 adlý modülün altisim1 niteliðini alalým:
+
+>>> paket.altdizin.altmodul1.altisim1
+
+'altmodul1'
+
+Gördüðünüz gibi, altisim1 niteliðine eriþmek için uzun bir yol gitmemiz gerekiyor. Bu yolu kýsaltmak isterseniz modülü þu þekilde içe aktarabilirsiniz:
+
+>>> from paket.altdizin import altmodul1
+
+Artýk altmodul1‘in niteliklerine yalnýzca altmodul1 önekiyle ulaþabilirsiniz:
+
+>>> altmodul1.altisim1
+
+'altmodul1'
+
+Hatta doðrudan altisim1 niteliðinin kendisini de alabilirsiniz:
+
+>>> from paket.altdizin.altmodul1 import altisim1
+>>> altisim1
+
+'altmodul1'
+
+Gördüðünüz gibi, Python’ýn içe aktarma mantýðý gayet basit. Bulunduðunuz konumdan itibaren, alt dizin ve modül adlarýný sýrasýyla kullanarak ve bunlarý birbiriyle nokta iþareti ile birleþtirerek her bir modüle ve modül içindeki niteliðe eriþebiliyoruz.
+

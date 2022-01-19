@@ -1,0 +1,41 @@
+
+Bölüm Sorularý
+
+Bir veritabaný dosyasýnýn var olup olmadýðýný nasýl tespit edersiniz?
+
+Bir veritabaný içinde belli bir tablonun var olup olmadýðýný tespit edin. Eðer yoksa o tabloyu oluþturun, varsa herhangi bir iþlem yapmayýn.
+
+Sqlite ile test amaçlý bir veritabaný oluþturun. Bu veritabaný dosyasý, programýnýz kapanýr kapanmaz ortadan kaybolmalý.
+
+Aþaðýdaki kodlarýn istenen veritabanýný, tabloyu, satýr ve sütunlarý oluþturup oluþturmadýðýný teyit edin:
+
+import sqlite3
+
+vt = sqlite3.connect('vt.sqlite')
+
+im = vt.cursor()
+im.execute("CREATE TABLE kullanýcýlar (ad, soyad, doðumtarihi, eposta)")
+
+vt.commit()
+vt.close()
+
+Eðer veritabaný içeriði beklediðiniz gibi deðilse sebebini açýklayýn.
+
+Sqlite ile bir veritabanýnýn oluþturulmasý ve bu veritabanýna birtakým bilgiler girilebilmesi için sýrasýyla hangi iþlemlerin yapýlmasý gerekir?
+
+Aþaðýdaki resimde yapýlmaya çalýþýlan þey nedir?
+
+
+
+sqlite3.connect('kitaplar.sqlite') boþ bir veritabanýnýn mý oluþturulduðunu yoksa varolan kitaplar.sqlite adlý bir veritabaný dosyasýna mý baðlandýðýnýzý nasýl teyit edersiniz?
+
+Sqlitebrowser programýný ne þekilde kurdunuz? Eðer Ubuntu dýþýnda bir GNU/Linux daðýtýmýna bu programý kurduysanýz, programýn kurulum aþamalarýný anlatýn.
+
+cmake komutu ile birlikte kullandýðýmýz . (nokta) iþaretinin anlamý nedir?
+
+Yazdýðýnýz bir programý kullanan kiþilerin, programýnýzý ilk kez çalýþtýrdýklarýnda karþýlarýnda görmeleri gereken verileri veritabanýna yerleþtirmek için nasýl bir yöntem takip edebilirsiniz? Kullanýcýlarýnýz programýnýzý ikinci kez çalýþtýrdýðýnda bu verileri görmemeli.
+
+Bir önceki soruda uyguladýðýnýz yöntemin herhangi bir kýsýtlamasý var mý? Bu yöntem hangi durumlarda iþe yaramaz?
+
+Bir veritabanýndaki bütün tablolarýn adýný nasýl listelersiniz?
+

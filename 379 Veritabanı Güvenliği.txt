@@ -1,0 +1,216 @@
+
+Veritabaný Güvenliði
+
+Python’da veritabanlarý ve Sqlite konusunda daha fazla ilerlemeden önce çok önemli bir konudan bahsetmemiz gerekiyor. Tahmin edebileceðiniz gibi, veritabaný denen þey oldukça hassas bir konudur. Bilgiyi bir araya toplayan bu sistem, içerdeki bilgilerin deðerine ve önemine de baðlý olarak üçüncü þahýslarýn iþtahýný kabartabilir. Ancak depoladýðýnýz verilerin ne kadar deðerli ve önemli olduðundan baðýmsýz olarak veritabaný güvenliðini saðlamak, siz programcýlarýn asli görevidir.
+
+Peki veritabaný yönetim sistemleri acaba hangi tehditlerle karþý karþýya?
+
+SQL komutlarýný iþleten bütün veritabanlarý için günümüzdeki en büyük tehditlerden birisi hiç kuþkusuz kötü niyetli kiþilerin veritabanýnýza SQL komutu sýzdýrma (SQL injection) giriþimleridir.
+
+Þimdi þöyle bir þey düþünün: Diyelim ki siz bir alýþveriþ karþýlýðý birine 100.000 TL’lik bir çek verdiniz. Ancak çeki verdiðiniz kiþi bu çek üzerindeki miktarý tahrif ederek artýrdý ve banka da tahrif edilerek artýrýlan bu miktarý çeki getiren kiþiye (hamiline) ödedi. Böyle bir durumda epey baþýnýz aðrýyacaktýr.
+
+Ýþte böyle tatsýz bir durumla karþýlaþmamak için, çek veren kiþi çekin üzerindeki miktarý hem rakamla hem de yazýyla belirtmeye özen gösterir. Ayrýca rakam ve yazýlara ekleme yapýlmasýný da engellemek için rakam ve yazýlarýn saðýna soluna “#” gibi iþaretler de koyar. Böylece çeki alan kiþinin, kendisine izin verilenden daha fazla bir miktarý yazmasýný engellemeye çalýþýr.
+
+Yukarýdakine benzer bir þey veritabaný uygulamalarýnda da karþýmýza çýkabilir. Þimdi þu örneðe bakalým:
+
+import sqlite3
+
+#vt.sqlite adlý bir veritabaný dosyasý oluþturup
+#bu veritabanýna baðlanýyoruz.
+db = sqlite3.connect("vt.sqlite")
+
+#Veritabaný üzerinde istediðimiz iþlemleri yapabilmek
+#için bir imleç oluþturmamýz gerekiyor.
+im = db.cursor()
+
+#imlecin execute() metodunu kullanarak, veritabaný içinde
+#"kullanicilar" adlý bir tablo oluþturuyoruz. Bu tabloda
+#kullanýcý_adi ve parola olmak üzere iki farklý sütun var.
+im.execute("""CREATE TABLE IF NOT EXISTS kullanicilar
+    (kullanici_adi, parola)""")
+
+#Yukarýda oluþturduðumuz tabloya yerleþtireceðimiz verileri
+#hazýrlýyoruz. Verilerin liste içinde birer demet olarak
+#nasýl gösterildiðine özellikle dikkat ediyoruz.
+veriler = [
+("ahmet123", "12345678"),
+("mehmet321", "87654321"),
+("selin456", "123123123")
+]
+
+#veriler adlý liste içindeki bütün verileri kullanicilar adlý
+#tabloya yerleþtiriyoruz. Burada tek öðeli bir demet
+#tanýmladýðýmýza dikkat edin: (i,)
+for i in veriler:
+im.execute("""INSERT INTO kullanicilar VALUES %s""" %(i,))
+
+#Yaptýðýmýz deðiþikliklerin tabloya iþlenebilmesi için
+#commit() metodunu kullanýyoruz.
+db.commit()
+
+#Kullanýcýdan kullanýcý adý ve parola bilgilerini alýyoruz...
+kull = input("Kullanýcý adýnýz: ")
+paro = input("Parolanýz: ")
+
+#Burada yine bir SQL komutu iþletiyoruz. Bu komut, kullanicilar
+#adlý tabloda yer alan kullanici_adi ve parola adlý sütunlardaki
+#bilgileri seçiyor.
+im.execute("""SELECT * FROM kullanicilar WHERE
+kullanici_adi = '%s' AND parola = '%s'"""%(kull, paro))
+
+#Hatýrlarsanýz daha önce fetchall() adlý bir metottan
+#söz etmiþtik. Ýþte bu fetchone() metodu da ona benzer.
+#fetchall() bütün verileri alýyordu, fetchone() ise
+#verileri tek tek alýr.
+data = im.fetchone()
+
+#Eðer data adlý deðiþken False deðilse, yani bu
+#deðiþkenin içinde bir deðer varsa kullanýcý adý
+#ve parola doðru demektir. Kullanýcýyý içeri alýyoruz.
+if data:
+print("Programa hoþgeldin {}!".format(data[0]))
+
+#Aksi halde kullanýcýya olumsuz bir mesaj veriyoruz.
+else:
+print("Parola veya kullanýcý adý yanlýþ!")
+
+Bu örnekte henüz bilmediðimiz bazý kýsýmlar var. Ama siz þimdilik bunlarý kafanýza takmayýn. Nasýl olsa bu kodlarda görünen her þeyi biraz sonra tek tek öðreneceðiz. Siz þimdilik sadece iþin özüne odaklanýn.
+
+Yukarýdaki kodlarý çalýþtýrdýðýnýzda, eðer kullanýcý adý ve parolayý doðru girerseniz ‘Programa hoþgeldin’ çýktýsýný göreceksiniz. Eðer kullanýcý adýnýz veya parolanýz yanlýþsa bununla ilgili bir uyarý alacaksýnýz.
+
+Her þey iyi hoþ, ama bu kodlarda çok ciddi bir problem var.
+
+Dediðimiz gibi, bu kodlar çalýþýrken (teoride) eðer kullanýcý, veritabanýnda varolan bir kullanýcý adý ve parola yazarsa sisteme kabul edilecektir. Eðer doðru kullanýcý adý ve parola girilmezse sistem kullanýcýya giriþ izni vermeyecektir. Ama acaba gerçekten öyle mi?
+
+Þimdi yukarýdaki programý tekrar çalýþtýrýn. Kullanýcý adý ve parola sorulduðunda da her ikisi için þunu yazýn:
+
+x' OR '1' = '1
+
+O da ne! Program sizi içeri aldý... Hem de kullanýcý adý ve parola doðru olmadýðý halde... Hatta þu kodu sadece kullanýcý adý kýsmýna girip parola kýsmýný boþ býrakmanýz da sisteme giriþ hakký elde etmenize yetecektir.:
+
+x' OR '1' = '1' --
+
+Ýþte yukarýda gösterdiðimiz bu iþleme “SQL sýzdýrma” (SQL injection) adý verilir. Kullanýcý, týpký en baþta verdiðimiz tahrif edilmiþ çek örneðinde olduðu gibi, sistemin zaaflarýndan yararlanarak, elde etmeye hakký olandan daha fazlasýna eriþim hakký elde ediyor.
+
+Burada en basit þekliyle bool iþleçlerinden biri olan or‘dan yararlanýyoruz. or‘un nasýl iþlediðini gayet iyi biliyorsunuz, ama ben yine de birkaç örnekle or‘un ne olduðunu ve ne yaptýðýný size hatýrlatayým. Þu örneklere bakýn:
+
+>>> a = 21
+
+>>> a == 22
+
+False
+
+>>> b = 13
+
+>>> b == 13
+
+True
+
+>>> if a == 22 and b == 13:
+... print("Merhaba!")
+...
+
+>>> if a == 22 or b == 13:
+... print("Merhaba!")
+...
+Merhaba!
+
+Örneklerden de gördüðünüz gibi, and iþlecinin True sonucunu verebilmesi için her iki önermenin de doðru olmasý gerekir. O yüzden a == 22 and b == 13 gibi bir ifade False deðeri veriyor. Ancak or iþlecinin True sonucu verebilmesi için iki önermeden sadece birinin doðru olmasý yeterlidir. Bu yüzden, sadece b == 13 kýsmý True olduðu halde a == 22 or b == 13 ifadesi True sonucu veriyor... Ýþte biz de yukarýdaki SQL sýzdýrma giriþiminde or‘un bu özelliðinden faydalanýyoruz.
+
+Dilerseniz neler olup bittiðini daha iyi anlayabilmek için, sýzdýrýlan kodu doðrudan ilgili satýra uygulayalým:
+
+im.execute("""SELECT * FROM kullanicilar WHERE
+kullanici_adi = 'x' OR '1' = '1' AND parola = 'x' OR '1' = '1'""")
+
+Sanýrým bu þekilde neler olup bittiði daha net görülüyor. Durumu biraz daha netleþtirmek için Python’ý yardýma çaðýrabiliriz:
+
+>>> kullanici_adi = 'ahmet123'
+
+>>> parola = '12345678'
+
+>>> kullanici_adi == 'x'
+
+False
+
+>>> '1' == '1'
+
+True
+
+>>> kullanici_adi == 'x' or '1' == '1'
+
+True
+
+>>> parola == 'x'
+
+False
+
+>>> (kullanici_adi == 'x' or '1' == '1') and (parola == 'x' or '1' == '1')
+
+True
+
+'1' == '1' ifadesi her zaman True deðeri verecektir. Dolayýsýyla kullanýcý adýnýn ve parolanýn doðru olup olmamasý hiçbir önem taþýmaz. Yani her zaman True deðerini vereceði kesin olan ifadeler yardýmýyla yukarýdaki gibi bir sýzdýrma giriþiminde bulunabilirsiniz.
+
+Yukarýda yaptýðýmýz þey, ‘%s’ ile gösterilen yerlere kötü niyetli bir SQL komutu sýzdýrmaktan ibarettir. Burada zaten baþlangýç ve bitiþ týrnaklarý olduðu için sýzdýrýlan kodda baþlangýç ve bitiþ týrnaklarýný yazmýyoruz. O yüzden sýzdýrýlan kod þöyle görünüyor:
+
+x' OR '1' = '1
+
+Gördüðünüz gibi, x’in baþýndaki ve 1’in sonundaki týrnak iþaretleri koymuyoruz.
+
+Peki yukarýda verdiðimiz þu kod nasýl çalýþýyor:
+
+x' OR '1' = '1' --
+
+Python’da yazdýðýmýz kodlara yorum eklemek için “#” iþaretinden yararlandýðýmýzý biliyorsunuz. Ýþte SQL kodlarýna yorum eklemek için de “–” iþaretlerinden yararlanýlýr. Þimdi dilerseniz yukarýdaki kodu doðrudan ilgili satýra uygulayalým ve ne olduðunu görelim:
+
+im.execute("""SELECT * FROM kullanicilar WHERE
+kullanici_adi = 'x' OR '1'='1' --AND parola = '%s'""")
+
+Burada yazdýðýmýz “–” iþareti AND parola = '%s' kýsmýnýn sistem tarafýndan yorum olarak algýlanmasýný saðlýyor. Bu yüzden kodlarýn bu kýsmý iþletilmiyor. Dolayýsýyla da sisteme giriþ yapabilmek için sadece kullanýcý adýný girmemiz yeterli oluyor. Burada ayrýca kodlarýmýzýn çalýþmasý için 1’in sonuna bir adet týrnak yerleþtirerek kodu kapattýðýmýza dikkat edin. Çünkü normal bitiþ týrnaðý yorum tarafýnda kaldý.
+
+Dikkat ederseniz SQL sýzdýrdýðýmýzda “ahmet123” adlý kullanýcýnýn hesabýný ele geçirmiþ olduk. Peki neden ötekiler deðil de “ahmet123”? Bunun sebebi, “ahmet123” hesabýnýn tablonun en baþýnda yer almasý. Eðer tablonun baþýnda “admin” diye bir hesap olmuþ olsaydý, veritabanýna azami düzeyde zarar verme imkanýna kavuþacaktýnýz.
+
+Peki SQL sýzdýrma giriþimlerini nasýl önleyeceðiz? Bu giriþime karþý alabileceðiniz baþlýca önlem “%s” iþaretlerini kullanmaktan kaçýnmak olacaktýr. Bu iþaret yerine ”?” iþaretini kullanacaksýnýz. Yani yukarýdaki programý þöyle yazacaðýz:
+
+import sqlite3
+
+db = sqlite3.connect("vt.sqlite")
+
+im = db.cursor()
+
+im.execute("""CREATE TABLE IF NOT EXISTS kullanicilar
+    (kullanici_adi, parola)""")
+
+veriler = [
+("ahmet123", "12345678"),
+("mehmet321", "87654321"),
+("selin456", "123123123")
+]
+
+for i in veriler:
+im.execute("""INSERT INTO kullanicilar VALUES (?, ?)""", i)
+
+db.commit()
+
+kull = input("Kullanýcý adýnýz: ")
+paro = input("Parolanýz: ")
+
+im.execute("""SELECT * FROM kullanicilar WHERE
+kullanici_adi = ? AND parola = ?""", (kull, paro))
+
+data = im.fetchone()
+
+if data:
+print("Programa hoþgeldin {}!".format(data[0]))
+else:
+print("Parola veya kullanýcý adý yanlýþ!")
+
+Dediðimiz gibi, SQL sýzdýrma giriþimlerine karþý alabileceðiniz baþlýca önlem “%s” iþaretleri yerine ”?” iþaretini kullanmak olmalýdýr. Bunun dýþýnda, SQL komutlarýný iþletmeden önce bazý süzgeçler uygulamak da güvenlik açýsýndan iþinize yarayabilir. Örneðin kullanýcýdan alýnacak verileri alfanümerik karakterlerle [http://www.istihza.com/blog/alfanumerik-ne-demek.html/] sýnýrlayabilirsiniz:
+
+if kull.isalnum() and paro.isalnum():
+im.execute("""SELECT * FROM kullanicilar WHERE
+    kullanici_adi = '%s' AND parola = '%s'"""%(kull, paro))
+
+Böylece kullanýcýnýn bazý “tehlikeli” karakterleri girmesini engelleyebilir, onlarý sadece harf ve sayý girmeye zorlayabilirsiniz.
+
+Her halükarda unutmamamýz gereken þey, güvenliðin çok boyutlu bir kavram olduðudur. Birkaç önlemle pek çok güvenlik açýðýný engelleyebilirsiniz, ancak bütün güvenlik açýklarýný bir çýrpýda yamamak pek mümkün deðildir. Bir programcý olarak sizin göreviniz, yazdýðýnýz programlarý güvenlik açýklarýna karþý sürekli taramak ve herhangi bir açýk ortaya çýktýðýnda da bunu derhal kapatmaya çalýþmaktýr.
+
