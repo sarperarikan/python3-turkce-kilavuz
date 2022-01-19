@@ -1,0 +1,381 @@
+
+Ýkili (Binary) Dosyalar
+
+Dosyalar çoðunlukla iki farklý sýnýfa ayrýlýr: Metin dosyalarý ve ikili dosyalar. Metin dosyalarý derken neyi kastettiðimiz az çok anlaþýlýyor. Eðer bir dosyayý bir metin düzenleyici ile açtýðýnýzda herhangi bir dilde yazýlmýþ ‘okunabilir’ bir metin görüyorsanýz, o dosya bir metin dosyasýdýr. Mesela Notepad, Gedit, Kwrite veya benzeri metin düzenleyicileri kullanarak oluþturduðunuz dosyalar birer metin dosyasýdýr. Þimdiye kadar verdiðimiz bütün örnekler metin dosyalarýný içeriyordu. Peki ‘ikili’ (binary) dosya ne demek?
+
+Ýkili dosyalar ise, metin dosyalarýnýn aksine, metin düzenleyicilerle açýlamayan, açýlmaya çalýþýldýðýnda ise çoðunlukla anlamsýz karakterler içeren bir dosya türüdür. Resim dosyalarý, müzik dosyalarý, video dosyalarý, MS Office dosyalarý, LibreOffice dosyalarý, OpenOffice dosyalarý, vb. ikili dosyalara örnektir.
+
+Önceki bölümlerde de ifade ettiðimiz gibi, bilgisayarlar yalnýzca sayýlarla iþlem yapabilir. Bilgisayarlarýn üzerinde iþlem yapabildiði bu sayýlarýn 0 ve 1 adlý iki sayý olduðunu biliyoruz.
+
+Peki bu iki farklý sayýyý kullanarak neler yapabiliriz? Aslýnda, bu iki farklý sayýyý kullanarak her türlü iþlemi yapabiliriz: Basit veya karmaþýk aritmetik hesaplamalar, metin düzenleme, resim veya video düzenleme, web siteleri hazýrlama, uzaya mekik gönderme... Bütün bu iþlemleri sadece iki farklý sayý kullanarak yapabiliriz. Daha doðrusu bilgisayarlar yapabilir.
+
+Durum böyle olmasýna raðmen, ilk bilgisayarlar yalnýzca hesaplama iþlemleri için kullanýlýyordu. Yani metin içeren iþlemleri yapmak bilgisayarlarýn deðil, mesela daktilolarýn görevi olarak görülüyordu. Bu durumu telefon teknolojisi ile kýyaslayabilirsiniz. Bildiðiniz gibi, ilk telefonlar yalnýzca iki kiþi arasýndaki sesli iletiþimi saðlamak için kullanýlýyordu. Ama yeni nesil telefonlar artýk ikiden fazla kiþi arasýndaki sesli ve görüntülü iletiþimi saðlayabilmenin yanýsýra, önceleri birbirinden farklý cihazlarla gerçekleþtirilen iþlemleri artýk tek baþýna yerine getirebiliyor.
+
+Ýlk bilgisayarlarda ise metinlerin, daha doðrusu karakterlerin görevi bir hayli sýnýrlýydý.
+
+Baþta da söylediðimiz gibi, çoðunlukla dosyalar iki farklý sýnýfa ayrýlýr: Metin dosyalarý ve ikili dosyalar. Ama iþin aslý sadece tek bir dosya türü vardýr: Ýkili dosyalar (binary files). Yani bilgisayarlar açýsýndan bütün dosyalar, içlerinde ne olursa olsun, birer ikili dosyadýr ve içlerinde sadece 0’larý ve 1’leri barýndýrýr. Ýþte bu 0 ve 1’lerin ne anlama geleceðini, iþletim sistemleri ve bu sistemler üzerine kurulu yazýlýmlar belirler. Eðer bir dosya metin dosyasýysa bu dosyadaki 0 ve 1’ler birer karakter/harf olarak yorumlanýr. Ama eðer dosya bir ikili dosyaysa dosya içindeki 0 ve 1’ler özel birtakým veriler olarak ele alýnýr ve bu verileri okuyan yazýlýma göre deðer kazanýr. Örneðin eðer ilgili dosya bir resim dosyasýyla, bu dosya herhangi bir resim görüntüleyici yazýlým ile açýldýðýnda karþýmýza bir resim çýkar. Eðer ilgili dosya bir video dosyasýyla, bu dosya bir video görüntüleyici yazýlým ile açýldýðýnda karþýmýza bir video çýkar. Bu olgudan bir sonraki bölümde daha ayrýntýlý olarak söz edeceðiz. Biz þimdilik iþin sadece pratiðine yoðunlaþalým ve temel olarak iki farklý dosya çeþidi olduðunu varsayalým: Metin dosyalarý ve ikili dosyalar.
+
+Buraya gelene kadar hep metin dosyalarýndan söz etmiþtik. Þimdi ise ikili dosyalardan söz edeceðiz.
+
+Hatýrlarsanýz metin dosyalarýný açmak için temel olarak þöyle bir komut kullanýyorduk:
+
+f = open(dosya_adý, 'r')
+
+Bu þekilde bir metin dosyasýný okuma kipinde açmýþ oluyoruz. Bir metin dosyasýný deðil de, ikili bir dosyayý açmak için ise þu komutu kullanacaðýz:
+
+f = open(dosya_adý, 'rb')
+
+Dosyaya eriþme kiplerini gösterdiðimiz tabloda ikili eriþim türlerini de verdiðimizi hatýrlýyorsunuz.
+
+Peki neden metin dosyalarý ve ikili dosyalar için farklý eriþim kipleri kullanýyoruz?
+
+Ýþletim sistemleri satýr sonlarý için birbirinden farklý karakterler kullanýrlar. Örneðin GNU/Linux daðýtýmlarýnda satýr sonlarý \n karakteri ile gösterilir. Windows iþletim sistemi ise satýr sonlarýný \r\n karakterleriyle gösterir. Ýþte Python herhangi bir dosyayý açarken, eðer o dosya bir metin dosyasý ise, satýr sonlarýný gösteren karakterleri, dosyanýn açýldýðý iþletim sistemine göre ayarlar. Yani satýr sonlarýný standart bir hale getirerek \n karakterine dönüþtürür.
+
+Metin dosyalarý ile ikili dosyalar arasýnda önemli bir fark bulunur: Bir metin dosyasýndaki ufak deðiþiklikler dosyanýn okunamaz hale gelmesine yol açmaz. Olabilecek en kötü þey, deðiþtirilen karakterin okunamaz hale gelmesidir. Ancak ikili dosyalarda ufak deðiþiklikler dosyanýn tümden bozulmasýna yol açabilir. Dolayýsýyla Python’ýn yukarýda bahsedilen satýr sonu deðiþiklikleri ikili dosyalarýn bozulmasýna yol açabilir. Yani eðer siz ikili bir dosyayý ‘rb’ yerine sadece ‘r’ gibi bir kiple açarsanýz dosyanýn bozulmasýna yol açabilirsiniz. Ýkili bir dosyayý ‘rb’ (veya ‘wb’, ‘ab’, ‘xb’, vb.) gibi bir kipte açtýðýnýzda Python satýr sonlarýna herhangi bir deðiþtirme-dönüþtürme iþlemi uygulamaz. Böylece dosya bozulma riskiyle karþý karþýya kalmaz. O yüzden, metin dosyalarýný ve ikili dosyalarý açarken farklý kipler kullanmamýz gerektiðine dikkat ediyoruz.
+
+
+Ýkili Dosyalarla Örnekler
+
+Gelin isterseniz bu noktada birkaç örnek verelim.
+
+
+PDF Dosyalarýndan Bilgi Alma
+
+Týpký resim, müzik ve video dosyalarý gibi, PDF dosyalarý da birer ikili dosyadýr. O halde hemen önümüze bir PDF dosyasý alalým ve bu dosyayý okuma kipinde açalým:
+
+>>> f = open("falanca.pdf", "rb")
+
+Þimdi de bu dosyadan 10 baytlýk bir veri okuyalým:
+
+>>> f.read(10)
+
+b'%PDF-1.3\n4'
+
+Bu çýktýda gördüðünüz ‘b’ iþaretine þimdilik takýlmayýn. Birazdan bunun ne olduðunu bütün ayrýntýlarýyla anlatacaðýz. Biz bu harfin, elimizdeki verinin bayt türünde bir veri olduðunu gösteren bir iþaret olduðunu bilelim yeter.
+
+Gördüðünüz gibi, bir PDF dosyasýnýn ilk birkaç baytýný okuyarak hem dosyanýn bir PDF belgesi olduðunu teyit edebiliyoruz, hem de bu PDF belgesinin, hangi PDF sürümü ile oluþturulduðunu anlayabiliyoruz. Buna göre bu belge PDF talimatnamesinin 1.3 numaralý sürümü ile oluþturulmuþ.
+
+Eðer biz bu belgeyi bir ikili dosya olarak deðil de bir metin dosyasý olarak açmaya çalýþsaydýk þöyle bir hata alacaktýk:
+
+>>> f = open("falanca.pdf")
+>>> okunan = f.read()
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python33\lib\encodings\cp1254.py", line 23, in decode
+return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 527: char
+acter maps to <undefined>
+
+Python’ýn bu dosyanýn bir ikili dosya olduðu konusunda bilgilendirerek, dosyanýn düzgün bir þekilde açýlýp okunabilmesini saðlýyoruz.
+
+Gelin bu PDF belgesi üzerinde biraz daha çalýþalým.
+
+PDF belgelerinde, o belge hakkýnda bazý önemli bilgiler veren birtakým özel etiketler bulunur. Bu etiketler þunlardýr:
+
+
+Etiket Anlamý 
+/Creator Belgeyi oluþturan yazýlým 
+/Producer Belgeyi PDF’e çeviren yazýlým 
+/Title Belgenin baþlýðý 
+/Author Belgenin yazarý 
+/Subject Belgenin konusu 
+/Keywords Belgenin anahtar kelimeleri 
+/CreationDate Belgenin oluþturulma zamaný 
+/ModDate Belgenin deðiþtirilme zamaný 
+
+Bu etiketlerin tamamý bütün PDF dosyalarýnda tanýmlý deðildir. Ama özellikle /Producer etiketi her PDF dosyasýnda bulunur.
+
+Þimdi örnek olmasý bakýmýndan elimize bir PDF dosyasý alalým ve bunu güzelce okuyalým:
+
+>>> f = open("falanca.pdf", "rb")
+>>> okunan = f.read()
+
+Þimdi de /Producer ifadesinin dosya içinde geçtiði noktanýn sýra numarasýný bulalým. Bildiðiniz gibi, dosyalarýn read() metodu bize bir karakter dizisi verir. Yine bildiðiniz gibi, karakter dizilerinin index() metodu yardýmýyla bir öðenin karakter dizisi içinde geçtiði noktayý bulabiliyoruz. Yani:
+
+>>> producer_index = okunan.index(b"/Producer")
+
+Burada /Producer ifadesinin baþýna ‘b’ harfini yerleþtirmeyi unutmuyoruz. Çünkü þu anda yaptýðýmýz iþlem ikili bir dosya içinde geçen birtakým baytlarý arama iþlemidir.
+
+producer_index deðiþkeni, ‘/Producer’ ifadesinin ilk baytýnýn dosya içindeki konumunu tutuyor. Kontrol edelim:
+
+>>> producer_index
+
+4077883
+
+Bu deðerin gerçekten de ‘/Producer’ ifadesinin ilk baytýný depoladýðýný teyit edelim:
+
+>>> okunan[producer_index]
+
+47
+
+Daha önce de dediðimiz gibi, bilgisayarlar yalnýzca sayýlarý görür. Bu sayýnýn hangi karaktere karþýlýk geldiðini bulmak için chr() fonksiyonundan yararlanabilirsiniz:
+
+>>> chr(okunan[producer_index])
+
+'/'
+
+Gördüðünüz gibi, gerçekten de producer_index deðiþkeni ‘/Producer’ ifadesinin ilk baytýnýn dosya içindeki konumunu gösteriyor. Biz bu konumu ve bu konumun 50-60 bayt ötesini sorgularsak, PDF belgesini üreten yazýlýmýn adýna ulaþabiliriz. Dikkatlice bakýn:
+
+>>> okunan[producer_index:producer_index+50]
+
+b'/Producer (Acrobat Distiller 2.0 for Macintosh)\r/T'
+
+Hatta eðer bu çýktý üzerine split() metodunu uygularsak, çýktýyý daha kullanýþlý bir hale getirebiliriz:
+
+>>> producer = okunan[producer_index:producer_index+50].split()
+>>> producer
+
+[b'/Producer', b'(Acrobat', b'Distiller', b'2.0', b'for', b'Macintosh)', b'/T']
+
+Bu þekilde, ihtiyacýmýz olan bilginin istediðimiz parçasýna kolayca ulaþabiliriz:
+
+>>> producer[0]
+
+b'/Producer'
+
+>>> producer[1]
+
+b'(Acrobat'
+
+>>> producer[1:3]
+
+[b'(Acrobat', b'Distiller']
+
+Elbette bu yöntem, bir PDF dosyasýndan gerekli etiketleri almanýn en iyi yöntemi deðildir. Ama henüz Python bilgimiz bu kadarýný yapmamýza müsaade ediyor. Ancak yine de, yukarýda örnek, bir ikili dosyadan nasýl veri alýnacaðý konusunda size iyi bir fikir verecektir.
+
+
+Resim Dosyalarýnýn Türünü Tespit Etme
+
+Dediðimiz gibi, resim dosyalarý, müzik dosyalarý, video dosyalarý ve benzeri dosyalar birer ikili dosyadýr. Mesela resim dosyalarýný ele alalým. Diyelim ki, resimlerin hangi türde olduðunu tespit eden bir program yazmak istiyorsunuz. Yani yazdýðýnýz bu programla bir resim dosyasýnýn PNG mi, JPEG mi, TIFF mi, yoksa BMP mi olduðunu anlamak istiyorsunuz.
+
+Peki bir resim dosyasýnýn hangi türde olduðunu bulmak için uzantýsýna baksanýz olmaz mý? Asla unutmayýn dosya uzantýlarý ile dosya biçimleri arasýnda doðrudan bir baðlantý yoktur. O yüzden dosya uzantýlarý, dosya biçimini anlamak açýsýndan güvenilir bir yöntem deðildir. Bir resim dosyasýnýn sonuna hangi uzantýyý getirirseniz getirin, o dosya bir resim dosyasýdýr. Yani mesela bir resim dosyasýnýn uzantýsý yanlýþlýkla veya bilerek .doc olarak deðiþtirilmiþse, o dosya bir WORD dosyasý haline gelmez. Ýþte yazacaðýnýz program, bir resim dosyasýnýn uzantýsý ne olursa olsun, hatta dosyanýn bir uzantýsý olmasa bile, o dosyanýn hangi türde olduðunu söyleyebilecek.
+
+Bir resim dosyasýnýn hangi türde olduðunu anlayabilmek için ilgili dosyanýn ilk birkaç baytýný okumanýz yeterlidir. Bu birkaç bayt içinde o resim dosyasýnýn türüne dair bilgileri bulabilirsiniz.
+
+Resim dosyalarýnýn türlerini birbirinden ayýrt etmenizi saðlayacak verilerin ne olduðunu, ilgili resim türünün teknik þartnamesine bakarak öðrenebilirsiniz. Ancak teknik þartnameler genellikle okumasý zor metinlerdir. Bu yüzden, doðrudan þartnameyi okumak yerine, Internet üzerinde kýsa bir araþtýrma yaparak konuyu daha kolay anlamanýzý saðlayacak yardýmcý belgelerden de yardým alabilirsiniz.
+
+
+JPEG
+
+JPEG biçimi ile ilgili bilgileri http://www.jpeg.org adresinde bulabilirsiniz. JPEG dosya biçimini daha iyi anlamanýzý saðlayacak yardýmcý kaynak ise þudur:
+
+
+http://www.faqs.org/faqs/jpeg-faq/part1/section-15.html 
+
+Yukarýda verdiðimiz adreslerdeki bilgilere göre bir JPEG dosyasýnýn en baþýnda þu veriler bulunur:
+
+FF  D8      FF      E0      ?   ?   4A      46      49      46      00
+
+Ancak eðer ilgili JPEG dosyasý bir CANON fotograf makinesi ile oluþturulmuþsa bu veri dizisi þöyle de olabilir:
+
+FF  D8      FF      E0      ?   ?   45  78  69  66  00
+
+Burada soru iþareti ile gösterdiðimiz kýsým, yani dosyanýn 5. ve 6. baytlarý farklý JPEG dosyalarýnda birbirinden farklý olabilir. Dolayýsýyla bir JPEG dosyasýný baþka resim dosyalarýndan ayýrabilmek için dosyanýn ilk dört baytýna bakmamýz, sonraki iki baytý atlamamýz ve bunlardan sonra gelen beþ baytý kontrol etmemiz yeterli olacaktýr.
+
+Yukarýda gördükleriniz birer on altýlý (hex) sayýdýr. Bunlar onlu düzende sýrasýyla þu sayýlara karþýlýk gelir:
+
+255 216 255 224 ? ? 74 70 73 70 0
+255 216 255 224 ? ? 45 78 69 66 0 #canon
+
+Bu diziler içinde özellikle þu dört sayý bizi yakýndan ilgilendiriyor:
+
+74 70 73 70
+45 78 69 66 #canon
+
+Bu sayýlar sýrasýyla ‘J’, ‘F’, ‘I’, ‘F’ ve ‘E’, ‘x’, ‘i’, ‘f’ harflerine karþýlýk gelir. Yani bir JPEG dosyasýný ayýrt edebilmek için ilgili dosyanýn 7-10 arasý baytlarýnýn ne olduðuna bakmamýz yeterli olacaktýr. Eðer bu aralýkta ‘JFIF’ veya ‘Exif’ ifadeleri varsa, o dosya bir JPEG dosyasýdýr. Buna göre þöyle bir kod yazabiliriz:
+
+f = open(dosya_adý, 'rb')
+data = f.read(10)
+if data[6:11] in [b"JFIF", b"Exif"]:
+print("Bu dosya JPEG!")
+else:
+print("Bu dosya JPEG deðil!")
+
+Burada herhangi bir resim dosyasýnýn ilk on baytýný okuduk öncelikle:
+
+data = f.read(10)
+
+Çünkü aradýðýmýz bilgiler ilk on bayt içinde yer alýyor.
+
+Daha sonra okuduðumuz kýsmýn 7 ila 10. baytlarý arasýnda kalan verinin ne olduðuna bakýyoruz:
+
+if data[6:11] in [b"JFIF", b"Exif"]:
+...
+
+Eðer ilgili aralýkta ‘JFIF’ veya ‘Exif’ baytlarý yer alýyorsa bu dosyanýn bir JPEG dosyasý olduðuna karar veriyoruz.
+
+Yukarýdaki kodlarý elinizdeki bir JPEG dosyasýna uygulayarak kendi kendinize pratik yapabilirsiniz.
+
+Mesela benim elimde d1.jpg, d2.jpg ve d3.jpeg adlý üç farklý JPEG dosyasý var:
+
+dosyalar = ["d1.jpg", "d2.jpg", "d3.jpeg"]
+
+Bu dosyalarýn ilk onar baytýný okuyorum:
+
+for f in dosyalar:
+okunan = open(f, 'rb').read(10)
+print(okunan)
+
+Buradan þu çýktýyý alýyorum:
+
+d1.jpg b'\xff\xd8\xff\xe0\x00\x10JFIF'
+d2.jpg b'\xff\xd8\xff\xe1T\xaaExif'
+d3.jpeg b'\xff\xd8\xff\xe0\x00\x10JFIF'
+
+Gördüðünüz gibi bu çýktýlar yukarýda JPEG dosyalarýna iliþkin olarak verdiðimiz bayt dizilimi ile uyuþuyor. Mesela ilk dosyayý ele alalým:
+
+d1.jpg b'\xff\xd8\xff\xe0\x00\x10JFIF'
+
+Burada þu baytlar var:
+
+\xff \xd8 \xff \xe0 \x00 \x10 J F I F
+
+Sayýlarýn baþýndaki \x iþaretleri bunlarýn birer on altýlý sayý olduðunu gösteren bir iþarettir. Dolayýsýyla yukarýdakileri daha net inceleyebilmek için þöyle de yazabiliriz:
+
+ff d8 ff e0 00 10 J F I F
+
+Þimdi de ikinci dosyanýn çýktýsýný ele alalým:
+
+d2.jpg b'\xff\xd8\xff\xe1T\xaaExif'
+
+Burada da þu baytlar var:
+
+ff d8 ff e1T aa E x i f
+
+Ýþte dosyalarýn türünü ayýrt etmek için bu çýktýlardaki son dört baytý kontrol etmemiz yeterli olacaktýr:
+
+for f in dosyalar:
+okunan = open(f, 'rb').read(10)
+if okunan[6:11] in [b'JFIF', b'Exif']:
+print("Evet {} adlý dosya bir JPEG!".format(f))
+else:
+print("{} JPEG deðil!".format(f))
+
+Bu kodlarý elinizde bulunan farklý türdeki dosyalara uygulayarak, aldýðýnýz çýktýlarý inceleyebilirsiniz.
+
+
+PNG
+
+PNG dosya biçiminin teknik þartnamesine http://www.libpng.org/pub/png/spec/ adresinden ulaþabilirsiniz.
+
+Ayrýca yardýmcý kaynak olarak da http://www.fileformat.info/format/png/egff.htm adresindeki belgeyi kullanabilirsiniz.
+
+Þartnamade, http://www.libpng.org/pub/png/spec/1.2/PNG-Rationale.html#R.PNG-file-signature sayfasýndaki bilgiye göre bir PNG dosyasýnýn ilk 8 baytý mutlaka aþaðýdaki deðerleri içeriyor:
+
+
+onlu deðer 137 80 78 71 13 10 26 10 
+on altýlý deðer 89 50 4e 47 0d 0a 1a 0a 
+karakter deðeri \211 P N G \r \n \032 \n 
+
+Þimdi elimize herhangi bir PNG dosyasý alarak bu durumu teyit edelim:
+
+>>> f = open("falanca.png", "rb")
+
+>>> okunan = f.read(8)
+
+Þartnamede de söylendiði gibi, bir PNG dosyasýný öteki türlerden ayýrt edebilmek için dosyanýn ilk 8 baytýna bakmamýz yeterli olacaktýr. O yüzden biz de yukarýdaki kodlarda sadece ilk 8 baytý okumakla yetindik.
+
+Bakalým ilk 8 baytta neler varmýþ:
+
+>>> okunan
+
+ b'\x89PNG\r\n\x1a\n'
+
+Bu deðerin, þartnamedeki karakter deðeri ile ayný olup olmadýðýný sorgulayarak herhangi bir dosyanýn PNG olup olmadýðýna karar verebilirsiniz:
+
+>>> okunan == b"\211PNG\r\n\032\n"
+
+True
+
+Dolayýsýyla þuna benzer bir kod yazarak, farklý resim dosyalarýnýn türünü tespit edebilirsiniz:
+
+for f in dosyalar:
+okunan = open(f, 'rb').read(10)
+if okunan[6:11] in [b'JFIF', b'Exif']:
+print("{} adlý dosya bir JPEG!".format(f))
+elif okunan[:8] == b"\211PNG\r\n\032\n":
+print("{} adlý dosya bir PNG!".format(f))
+else:
+print("Türü bilinmeyen dosya: {}".format(f))
+
+Bu kodlarda bir resim dosyasýnýn ilk 10 baytýný okuduk. 7-11 arasý baytlarýn içinde ‘JFIF’ veya ‘Exif’ baytlarý varsa o dosyanýn bir JPEG olduðuna; ilk 8 bayt b”211PNGrn032n” adlý bayt dizisine eþitse de o dosyanýn bir PNG olduðuna karar veriyoruz.
+
+
+GIF
+
+GIF þartnamesine http://www.w3.org/Graphics/GIF/spec-gif89a.txt adresinden ulaþabilirsiniz.
+
+Bir dosyanýn GIF olup olmadýðýna karar verebilmek için ilk 3 baytýný okumanýz yeterli olacaktýr. Standart bir GIF dosyasýnýn ilk üç baytý ‘G’, ‘I’ ve ‘F’ karakterlerinden oluþur. Dosyanýn sonraki 3 baytý ise GIF‘in sürüm numarasýný verir. 20.04.2016 itibariyle GIF standardýnýn þu sürümleri bulunmaktadýr:
+
+
+87a - Mayýs 1987 
+89a - Temmuz 1989 
+
+Dolayýsýyla standart bir GIF dosyasýnýn ilk 6 baytý þöyledir:
+
+‘GIF87a’ veya ‘GIF89a’
+
+Eðer bir dosyanýn GIF olup olmadýðýný anlamak isterseniz dosyanýn ilk 3 veya 6 baytýný denetlemeniz yeterli olacaktýr:
+
+for f in dosyalar:
+okunan = open(f, 'rb').read(10)
+if okunan[6:11] in [b'JFIF', b'Exif']:
+print("{} adlý dosya bir JPEG!".format(f))
+elif okunan[:8] == b"\211PNG\r\n\032\n":
+print("{} adlý dosya bir PNG!".format(f))
+elif okunan[:3] == b'GIF':
+print("{} adlý dosya bir GIF!".format(f))
+else:
+print("Türü bilinmeyen dosya: {}".format(f))
+
+
+TIFF
+
+TIFF þartnamesine http://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf adresinden ulaþabilirsiniz. Bu þartnameye göre bir TIFF dosyasý þunlardan herhangi biri ile baþlar:
+
+
+‘II’ 
+‘MM’ 
+
+Dolayýsýyla, bir TIFF dosyasýný tespit edebilmek için dosyanýn ilk 2 baytýna bakmanýz yeterli olacaktýr:
+
+for f in dosyalar:
+okunan = open(f, 'rb').read(10)
+if okunan[6:11] in [b'JFIF', b'Exif']:
+print("{} adlý dosya bir JPEG!".format(f))
+elif okunan[:8] == b"\211PNG\r\n\032\n":
+print("{} adlý dosya bir PNG!".format(f))
+elif okunan[:3] == b'GIF':
+print("{} adlý dosya bir GIF!".format(f))
+elif okunan[:2] in [b'II', b'MM']:
+print("{} adlý dosya bir TIFF!".format(f))
+else:
+print("Türü bilinmeyen dosya: {}".format(f))
+
+
+BMP
+
+BMP türündeki resim dosyalarýna iliþkin bilgi için http://www.digitalpreservation.gov/formats/fdd/fdd000189.shtml adresine baþvurabilirsiniz.
+
+Buna göre, BMP dosyalarý ‘BM’ ile baþlar. Yani:
+
+for f in dosyalar:
+okunan = open(f, 'rb').read(10)
+if okunan[6:11] in [b'JFIF', b'Exif']:
+print("{} adlý dosya bir JPEG!".format(f))
+elif okunan[:8] == b"\211PNG\r\n\032\n":
+print("{} adlý dosya bir PNG!".format(f))
+elif okunan[:3] == b'GIF':
+print("{} adlý dosya bir GIF!".format(f))
+elif okunan[:2] in [b'II', b'MM']:
+print("{} adlý dosya bir TIFF!".format(f))
+elif okunan[:2] in [b'BM']:
+print("{} adlý dosya bir BMP!".format(f))
+else:
+print("Türü bilinmeyen dosya: {}".format(f))
+
+Gördüðünüz gibi ikili dosyalar, baytlarýn özel bir þekilde dizildiði ve özel bir þekilde yorumlandýðý bir dosya türüdür. Dolayýsýyla ikili dosyalarla çalýþabilmek için, ikili dosyanýn bayt dizilimini yakýndan tanýmak gerekiyor.
+
+
+

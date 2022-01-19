@@ -1,0 +1,79 @@
+
+Baytlarýn Metotlarý
+
+Bütün veri tiplerinde olduðu gibi, bytes adlý veri tipinin de birtakým metotlarý bulunur. Bu metotlarýn listesini almak için þu komutu kullanabileceðinizi biliyorsunuz:
+
+>>> dir(bytes)
+
+Listeye baktýðýnýzda bu metotlarý karakter dizilerinin metotlarý ile hemen hemen ayný olduðunu göreceksiniz. Baytlarýn metotlarý arasýnda olup da karakter dizilerinin metotlarý arasýnda olmayan metotlarý þu þekilde elde edebilirsiniz:
+
+>>> for i in dir(bytes):
+... if i not in dir(str):
+... print(i)
+
+decode
+fromhex
+
+Gördüðünüz gibi, decode() ve fromhex() adlý metotlar baytlarda var, ama karakter dizilerinde yok. O yüzden biz de bu bölümde yalnýzca bu iki metodu incelemekle yetineceðiz. Çünkü öteki metotlarý zaten karakter dizilerinden tanýyorsunuz.
+
+
+decode
+
+Hatýrlarsanýz karakter dizilerinin encode() adlý bir metodu vardý. Bu metot yardýmýyla karakter dizilerini belli bir kodlama biçimine göre kodlayabiliyor, yani bunlarý baytlara çevirebiliyorduk. Mesela ‘Ý’ harfini UTF-8 ile kodlayalým:
+
+>>> "Ý".encode("utf-8")
+
+b'\xc4\xb0'
+
+Ayný harfi cp1254 ile kodlarsak þu çýktýyý elde ederiz:
+
+>>> "Ý".encode("cp1254")
+
+b'\xdd'
+
+Tahmin edebileceðiniz gibi, bu harfi ASCII ile kodlayamayýz:
+
+>>> "Ý".encode("ascii")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeEncodeError: 'ascii' codec can't encode character '\u0130' in position 0:
+ ordinal not in range(128)
+
+Ýþte bu kodlama iþlemini tersine çevirebilmek, yani baytlarý belli bir kodlama biçimine göre karakter dizilerine dönüþtürebilmek için decode() metodundan yararlanacaðýz:
+
+>>> b"\xc4\xb0".decode("utf-8")
+
+'Ý'
+
+Bu baytlarý bir de baþka kodlama sistemleri ile kodlamayý deneyelim:
+
+>>> b"\xc4\xb0".decode("cp1254")
+
+'Ä°'
+
+Gördüðünüz gibi, cp1254 adlý kod çözücü bu baytý çözebiliyor, ama yanlýþ çözüyor! Çünkü bu baytýn gösterdiði sayý cp1254 adlý kod sayfasýnda ‘Ý’ye deðil, baþka bir karaktere karþýlýk geliyor. Aslýnda baþka iki karaktere, yani C4 ve B0 ile gösterilen Ä ve ° karakterlerine karþýlýk geliyor... Bu durumu http://en.wikipedia.org/wiki/Windows-1254 adresine gidip kendiniz de görebilirsiniz.
+
+Bu baytlarý bir de ASCII ile çözmeye çalýþalým:
+
+>>> b"\xc4\xb0".decode("ascii")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xc4 in position 0: ordinal
+not in range(128)
+
+Elbette, bu karakter 128’den büyük bir sayýya karþýlýk geldiði için ASCII tarafýndan çözülemeyecektir.
+
+
+fromhex
+
+Bu metot, onaltýlý sayma sistemindeki bir sayýdan oluþan bir karakter dizisini alýp, bayta dönüþtürür. Bu metodu þöyle kullanýyoruz:
+
+>>> bytes.fromhex("c4b0")
+
+b'\xc4\xb0'
+
+Gördüðünüz gibi, bu metot bir onaltýlý sayý olan c4b0‘ý alýp, bize bir bayt nesnesi veriyor.
+
+

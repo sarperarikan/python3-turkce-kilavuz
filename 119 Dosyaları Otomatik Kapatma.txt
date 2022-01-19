@@ -1,0 +1,29 @@
+
+Dosyalarý Otomatik Kapatma
+
+Daha önce de söylediðimiz gibi, bir dosyayý açýp bu dosya üzerinde gerekli iþlemleri yaptýktan sonra bu dosyayý açýk býrakmamak büyük önem taþýr. Dolayýsýyla üzerinde iþlem yaptýðýmýz bütün dosyalarý, iþimiz bittikten sonra, mutlaka kapatmalýyýz. Çünkü bir dosya açýldýðýnda iþletim sistemi, sistem kaynaklarýnýn bir kýsmýný bu dosyaya ayýrýr. Eðer dosyayý açýk býrakýrsak, sistem kaynaklarýný gereksiz yere meþgul etmiþ oluruz. Ancak farklý sebeplerden, dosyalar açýldýktan sonra kapanmayabilir. Örneðin açtýðýnýz dosyayý kapatmayý unutmuþ olabilirsiniz. Yani programýnýzýn hiçbir yerinde close() metodunu kullanmamýþsýnýzdýr. Bunun dýþýnda, programýnýzdaki bir hata da dosyalarýn kapanmasýný engelleyebilir. Örneðin bir dosya açýldýktan sonra programda beklenmeyen bir hata gerçekleþirse, programýnýz asla close() satýrýna ulaþamayabilir. Bu durumda da açýlan dosya kapanmadan öylece bekler.
+
+Bu tür durumlara karþý iki seçeneðiniz var:
+
+
+try... except... finally... bloklarýndan yararlanmak 
+with adlý bir deyimi kullanmak 
+
+Birinci yöntemden daha önce de bahsettiðimizi hatýrlýyorsunuz. Hata yakalama bölümünü anlatýrken bununla ilgili þöyle bir örnek vermiþtik:
+
+try:
+dosya = open("dosyaadý", "r")
+...burada dosyayla bazý iþlemler yapýyoruz...
+...ve ansýzýn bir hata oluþuyor...
+except IOError:
+print("bir hata oluþtu!")
+finally:
+dosya.close()
+
+Bu yöntem gayet uygun ve iyi bir yöntemdir. Ancak Python bize bu tür durumlar için çok daha pratik bir yöntem sunar. Dikkatlice bakýn:
+
+with open("dosyaadý", "r") as dosya:
+print(dosya.read())
+
+Dosyalarýmýzý bu þekilde açýp üzerlerinde iþlemlerimizi yaptýðýmýzda Python dosyayý bizim için kendisi kapatacaktýr. Bu þekilde bizim ayrýca bir close() satýrý yazmamýza gerek yok. with deyimini kullanmamýz sayesinde, dosya açýldýktan sonra arada bir hata oluþsa bile Python dosyayý saðsalim kapatýp sistem kaynaklarýnýn israf edilmesini önleyecektir.
+

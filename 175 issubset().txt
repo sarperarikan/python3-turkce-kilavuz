@@ -1,0 +1,13 @@
+
+issubset()
+
+Bu metot yardýmýyla, bir kümenin bütün elemanlarýnýn baþka bir küme içinde yer alýp yer almadýðýný sorgulayabiliriz. Yani bir kümenin, baþka bir kümenin alt kümesi olup olmadýðýný bu metot yardýmýyla öðrenebiliriz. Eðer bir küme baþka bir kümenin alt kümesi ise bu metot bize True deðerini verecek; eðer deðilse False çýktýsýný verecektir:
+
+>>> a = set([1, 2, 3])
+>>> b = set([0, 1, 2, 3, 4, 5])
+>>> a.issubset(b)
+
+True
+
+Bu örnekte True çýktýsýný aldýk, çünkü a kümesinin bütün öðeleri b kümesi içinde yer alýyor. Yani a, b‘nin alt kümesidir.
+

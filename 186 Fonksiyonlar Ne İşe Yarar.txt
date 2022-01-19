@@ -1,0 +1,186 @@
+
+Fonksiyonlar Ne Ýþe Yarar?
+
+Þimdiye kadar söylediklerimizden ve verdiðimiz örneklerden fonksiyonlarýn ne iþe yaradýðýný anlamýþ olmalýsýnýz. Ama biz yine de fonksiyonlarýn faydasý üzerine birkaç söz daha söyleyelim. Böylece fonksiyonlarýn ne iþe yaradýðý konusunda aklýmýzda hiçbir þüphe kalmaz...
+
+Ýsterseniz bir örnek üzerinden ilerleyelim.
+
+Diyelim ki, bir sayýnýn karesini bulan bir program yazmak istiyoruz. Þimdiye kadarki bilgilerimizi kullanarak þöyle bir þey yazabiliriz:
+
+sayý = 12
+çýktý = "{} sayýsýnýn karesi {} sayýsýdýr"
+print(çýktý.format(sayý, sayý**2))
+
+Yukarýdaki programý çalýþtýrdýðýmýzda þöyle bir çýktý elde edeceðiz:
+
+12 sayýsýnýn karesi 144 sayýsýdýr
+
+Gayet güzel. Þimdi þöyle bir durum hayal edin: Diyelim ki büyük bir program içinde, farklý farklý yerlerde yukarýdaki iþlemi tekrar tekrar yapmak istiyorsunuz. Böyle bir durumda þöyle bir þey yazmanýz gerekebilir:
+
+sayý = 12
+çýktý = "{} sayýsýnýn karesi {} sayýsýdýr"
+print(çýktý.format(sayý, sayý**2))
+
+####programla ilgili baþka kodlar###
+
+sayý = 15
+print(çýktý.format(sayý, sayý**2))
+
+###programla ilgili baþka kodlar###
+
+sayý = 29
+print(çýktý.format(sayý, sayý**2))
+
+Buradaki sorun, ayný þeyleri tekrar tekrar yazmak zorunda kalmamýzdýr. Bu küçük örnekte pek belli olmuyor olabilir, ama özellikle büyük programlarda ayný kodlarýn program içinde sürekli olarak tekrarlanmasý pek çok probleme yol açar. Örneðin kodlarda bir deðiþiklik yapmak istediðinizde, tekrarlanan kýsýmlarý bulup hepsinin üzerinde tek tek deðiþiklik yapmanýz gerekir. Mesela çýktý adlý deðiþkenin içeriðini deðiþtirmek isterseniz, yaptýðýnýz deðiþiklik programýnýzýn pek çok kýsmýný etkileyebilir. Örneðin, çýktý deðiþkenini þu þekle getirdiðinizi düþünün:
+
+çýktý = "{} sayýsýnýn karesi {}, karekökü {} sayýsýdýr"
+
+Böyle bir durumda, program içinde geçen bütün print(çýktý.format(sayý, sayý**2)) satýrlarýný bulup, üçüncü {} iþaretine ait iþlemi parantez içine eklemeniz gerekir. Tahmin edebileceðiniz gibi, son derece sýkýcý, yorucu ve üstelik hata yapmaya açýk bir iþlemdir bu. Ýþte bu tür problemlere karþý fonksiyonlar çok iyi bir çözümdür.
+
+Yukarýda bahsettiðimiz kare bulma iþlemi için þu þekilde basit bir fonksiyon tanýmlayabiliriz:
+
+def kare_bul():
+sayý = 12
+çýktý = "{} sayýsýnýn karesi {} sayýsýdýr"
+print(çýktý.format(sayý, sayý**2))
+
+Bu fonksiyonu tanýmladýk. Þimdi de fonksiyonumuzu çaðýralým:
+
+kare_bul()
+
+Kodlarýmýz tam olarak þöyle görünüyor:
+
+def kare_bul():
+sayý = 12
+çýktý = "{} sayýsýnýn karesi {} sayýsýdýr"
+print(çýktý.format(sayý, sayý**2))
+
+kare_bul()
+
+Burada fonksiyonumuz def kare_bul(): satýrýyla baþlýyor, print(çýktý.format(sayý, sayý**2)) satýrýyla bitiyor. Daha sonra gelen kare_bul() kodu, girintinin dýþýnda yer aldýðý için fonksiyon tanýmýna ait deðildir.
+
+Bu kodlarý bir dosyaya kaydedip çalýþtýrdýðýmýzda alacaðýmýz çýktý þu olacaktýr:
+
+12 sayýsýnýn karesi 144 sayýsýdýr
+
+kare_bul() adlý fonksiyonu bir kez tanýmladýktan sonra bu fonksiyonu programýnýz içinde gereken her yerde çaðýrabilirsiniz:
+
+kare_bul()
+
+####programla ilgili baþka kodlar###
+
+kare_bul()
+
+###programla ilgili baþka kodlar###
+
+kare_bul()
+
+Gördüðünüz gibi kare_bul() adlý bu fonksiyon bizi pek çok zahmetten kurtarýyor. Ancak bu fonksiyonun bir sorunu var. Bu fonksiyon ekrana yalnýzca 12 sayýsýnýn karesi 144 sayýsýdýr çýktýsý verebiliyor. Buradaki problem, fonksiyonun sadece 12 sayýsý üzerinde iþlem yapabilmesi. Þöyle bir düþününce, bu çýktýnýn ne kadar anlamsýz olduðunu, aslýnda yukarýdaki fonksiyonun tamamen gereksiz bir iþ yaptýðýný rahatlýkla görebiliyoruz. Fonksiyonumuzun adý kare_bul. Ama dediðimiz gibi, fonksiyonumuz sadece 12 sayýsýnýn karesini söyleyebiliyor. Halbuki mantýk olarak fonksiyonumuzun, bütün sayýlarýn karesini söyleyebilmesini beklerdik.
+
+Not
+
+Bu arada, gördüðünüz gibi, yukarýdaki fonksiyon parametresiz bir fonksiyondur. Dolayýsýyla bu fonksiyonu çaðýrýrken parantez içinde herhangi bir deðer belirtmiyoruz.
+
+Fonksiyonumuzun gerçek anlamda iþlevli bir hale gelebilmesi için sadece tek bir sayýyý deðil, bütün sayýlarý inceleyebiliyor olmasý gerek. Ýþte fonksiyonumuza bu yeteneði parametreler aracýlýðýyla kazandýrabiliriz.
+
+Dikkatlice bakýn:
+
+def kare_bul(sayý):
+çýktý = "{} sayýsýnýn karesi {} sayýsýdýr"
+print(çýktý.format(sayý, sayý**2))
+
+Fonksiyona parametre olarak nasýl bir isim verdiðinizin önemi yoktur. Parantez içine parametre olarak istediðiniz kelimeyi yazabilirsiniz. Önemli olan, parantez içinde fonksiyonun kaç parametre alacaðýný gösteren bir iþaret olmasýdýr. Mesela yukarýdaki fonksiyonu þöyle de tanýmlayabilirdik:
+
+def kare_bul(i):
+çýktý = "{} sayýsýnýn karesi {} sayýsýdýr"
+print(çýktý.format(i, i**2))
+
+...veya þöyle:
+
+def kare_bul(osman):
+çýktý = "{} sayýsýnýn karesi {} sayýsýdýr"
+print(çýktý.format(osman, osman**2))
+
+Elbette parametre adý olarak akýlda kalýcý ve daha mantýklý bir seçim yapmak iþlerinizi kolaylaþtýracaktýr...
+
+Þimdi de yukarýdaki fonksiyonu çaðýralým:
+
+kare_bul(9)
+
+Bu fonksiyonu çalýþtýrdýðýmýzda þu çýktýyý alýrýz:
+
+9 sayýsýnýn karesi 81 sayýsýdýr
+
+Bu fonksiyona parametre olarak hangi sayýyý verirseniz o sayýnýn karesi hesaplanacaktýr. Örneðin:
+
+kare_bul(15)
+kare_bul(25555)
+
+Yine bu fonksiyonu programýnýz içinde gereken her yerde çaðýrabilirsiniz:
+
+kare_bul(17)
+
+####programla ilgili baþka kodlar###
+
+kare_bul(21)
+
+###programla ilgili baþka kodlar###
+
+kare_bul(54354)
+
+Fonksiyonu oluþturan kodlarda herhangi bir deðiþiklik yapmak istediðinizde sadece fonksiyon tanýmýnýn gövdesini deðiþtirmeniz yeterli olacaktýr. Örneðin:
+
+def kare_bul(sayý):
+çýktý = "{} sayýsýnýn karesi {}, karekökü ise {} sayýsýdýr"
+print(çýktý.format(sayý, sayý**2, sayý**0.5))
+
+Bu sayede sadece fonksiyon gövdesinde deðiþiklik yaparak, programýn baþka kýsýmlarýný hiç etkilemeden yolumuza devam edebiliyoruz.
+
+Buraya kadar anlattýklarýmýz, fonksiyonlarýn ne iþe yaradýðý ve bir program yazarken neden fonksiyonlara ihtiyaç duyacaðýmýz konusunda size bir fikir vermiþ olmalý. Eðer hala aklýnýzda fonksiyonlarýn faydasý konusunda bir þüphe kaldýysa, fonksiyonlarýn faydasýný anlamanýzý saðlayabilmek için size þöyle bir soru sormama izin verin: Acaba ‘istihza’ kelimesinin kaç karakterden oluþtuðunu nasýl buluruz?
+
+‘Elbette len() fonksiyonunu kullanarak!’ dediðinizi duyar gibiyim. Gerçekten de Python’da bir karakter dizisinin uzunluðunu bulmanýn en iyi yolu len() fonksiyonunu kullanmaktýr:
+
+>>> len("istihza")
+
+7
+
+Peki ya Python’da len() diye bir fonksiyon olmasaydý ne yapacaktýnýz? Böyle bir durumda, karakter dizilerinin uzunluðunu ölçmek için sizin bir yöntem icat etmeniz gerekecekti. Mesela ‘istihza’ kelimesinin kaç karakterden oluþtuðunu bulmak için þöyle bir kod yazacaktýnýz:
+
+c = 0
+for s in "istihza":
+c += 1
+print(c)
+
+Burada önce c adlý bir deðiþken tanýmlayýp, bu deðiþkenin deðerini 0 yaptýk. Bu deðiþken, uzunluðunu sorgulamak istediðimiz kelimenin kaç karakterden oluþtuðu bilgisini saklayacak.
+
+Ardýndan bir for döngüsü tanýmlýyoruz. Bu döngüde, ‘istihza’ kelimesindeki her bir karakter için c deðiþkeninin deðerini 1 sayý artýrýyoruz. Böylece döngü sonunda c deðiþkeni ‘istihza’ kelimesi içinde kaç karakter olduðu bilgisini tutmuþ oluyor.
+
+Son olarak da c deðiþkeninin nihai deðerini ekrana yazdýrýyoruz.
+
+Bu kodlarý çalýþtýrdýðýnýzda 7 cevabý alacaksýnýz. Demek ki ‘istihza’ kelimesinde 7 karakter varmýþ. Peki ‘istihza’ kelimesi yerine mesela ‘Afyonkarahisar’ kelimesi içinde kaç karakter olduðunu hesaplamak isterseniz ne yapacaksýnýz? Elbette yukarýdaki kodlarý tekrar yazýp, ‘istihza’ kelimesini ‘Afyonkarahisar’ kelimesi ile deðiþtireceksiniz. Böylece bu kelimenin kaç karakterden oluþtuðunu bulmuþ olacaksýnýz. Sorgulamak istediðiniz her kelime için ayný þeyleri yapabilirsiniz...
+
+Ne kadar verimsiz bir yöntem, deðil mi?
+
+Halbuki hiç bu tür þeylerle uðraþmaya gerek yok. Eðer Python bize len() fonksiyonu gibi bir fonksiyon vermemiþ olsaydý, kendi len() fonksiyonumuzu icat edebilirdik. Dikkatlice bakýn:
+
+def uzunluk(öðe):
+c = 0
+for s in öðe:
+c += 1
+print(c)
+
+Böylece adý uzunluk olan bir fonksiyon tanýmlamýþ olduk. Artýk bir öðenin uzunluðunu hesaplamak istediðimizde, bütün o kodlarý her defasýnda tekrar tekrar yazmak yerine sadece uzunluk() fonksiyonunu kullanabiliriz:
+
+uzunluk("istihza")
+uzunluk("Afyonkarahisar")
+uzunluk("Tarým ve Köyiþleri Bakanlýðý")
+
+Üstelik bu fonksiyon yalnýzca karakter dizilerinin deðil öteki veri tiplerinin de uzunluðunu hesaplayabilir:
+
+liste = ["ahmet", "mehmet", "veli"]
+uzunluk(liste)
+
+Verdiðimiz bu örnek bize hem gömülü fonksiyonlarýn faydasýný, hem de genel olarak fonksiyonlarýn ne iþe yaradýðýný açýkça gösteriyor. Buna göre, len() benzeri gömülü fonksiyonlar tekerleði yeniden icat etme derdinden kurtarýyor bizi. Örneðin Python geliþtiricilerinin len() gibi bir fonksiyon tanýmlamýþ olmalarý sayesinde, bir karakter dizisinin uzunluðunu hesaplamak için kendi kendimize yöntem icat etmek zorunda kalmýyoruz. Ama eðer kendi yöntemimizi icat etmemiz gerekirse, istediðimiz iþlevi yerine getiren bir fonksiyon tanýmlamamýz da mümkün.
+
+Böylece temel olarak fonksiyonlarýn ne iþe yaradýðýný, neye benzediðini, nasýl tanýmlandýðýný ve nasýl çaðrýldýðýný incelemiþ olduk. Þimdi fonksiyonlarýn biraz daha derinine dalmaya baþlayabiliriz.
+

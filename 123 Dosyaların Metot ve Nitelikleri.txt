@@ -1,0 +1,160 @@
+
+Dosyalarýn Metot ve Nitelikleri
+
+Dosyalara iliþkin olarak bir önceki bölümde anlattýðýmýz þeylerin kafanýza yatmasý açýsýndan size þu bilgiyi de verelim: Dosyalar da, týpký karakter dizileri ve listeler gibi, Python programlama dilindeki veri tiplerinden biridir. Dolayýsýyla týpký karakter dizileri ve listeler gibi, dosya (file) adlý bu veri tipinin de bazý metotlarý ve nitelikleri vardýr. Gelin isterseniz bu metot ve niteliklerin neler olduðunu þöyle bir listeleyelim:
+
+dosya = open("falanca_dosya.txt", "w")
+print(*[metot for metot in dir(dosya) if not metot.startswith("_")], sep="\n")
+
+Bu kodlar, dosya adlý veri tipinin bizi ilgilendiren bütün metotlarýný alt alta ekrana basacaktýr. Eðer yukarýdaki kodlarý anlamakta zorluk çektiyseniz, bunlarý þöyle de yazabilirsiniz:
+
+dosya = open("falanca_dosya.txt", "w")
+
+for metot in dir(dosya):
+if not metot.startswith("_"):
+print(metot, sep="\n")
+
+Bildiðiniz gibi bu kodlar bir öncekiyle tamamen ayný anlama geliyor.
+
+Bu kodlarý çalýþtýrdýðýnýzda karþýnýza pek çok metot çýkacak. Biz buraya gelene kadar bu metotlarýn en önemlilerini zaten inceledik. Ýncelemediðimiz yalnýzca birkaç önemli metot (ve nitelik) kaldý. Gelin isterseniz henüz incelemediðimiz bu önemli metot ve nitelikleri gözden geçirelim.
+
+
+closed Niteliði
+
+Bu nitelik, bir dosyanýn kapalý olup olmadýðýný sorgulamamýzý saðlar. Dosya adýnýn f olduðunu varsayarsak, bu niteliði þöyle kullanýyoruz:
+
+f.closed
+
+Eðer f adlý bu dosya kapalýysa True çýktýsý, açýksa False çýktýsý verilecektir.
+
+
+readable() Metodu
+
+Bu metot bir dosyanýn okuma yetkisine sahip olup olmadýðýný sorgulamamýzý saðlar. Eðer bir dosya “r” gibi bir kiple açýlmýþsa, yani o dosya ‘okunabilir’ özellikle ise bu metot bize True çýktýsý verir. Ama eðer dosya yazma kipinde açýlmýþsa bu metot bize False çýktýsý verecektir.
+
+
+writable() Metodu
+
+Bu metot bir dosyanýn yazma yetkisine sahip olup olmadýðýný sorgulamamýzý saðlar. Eðer bir dosya “w” gibi bir kiple açýlmýþsa, yani o dosya ‘yazýlabilir’ özellikle ise bu metot bize True çýktýsý verir. Ama eðer dosya okuma kipinde açýlmýþsa bu metot bize False çýktýsý verecektir.
+
+
+truncate() Metodu
+
+Bu metot, henüz iþlemediðimiz metotlar arasýnda en önemlilerinden biridir. Bu metot yardýmýyla dosyalarýmýzý istediðimiz boyuta getirebiliyoruz.
+
+Ýngilizcede truncate kelimesi ‘budamak, kýrpmak’ gibi anlamlara gelir. Bu metodun yaptýðý iþ de bu anlamýyla uyumludur. Bu metodu temel olarak þöyle kullanýyoruz:
+
+>>> with open("falanca.txt", "r+") as f:
+... f.truncate()
+
+Bu komutu bu þekilde kullandýðýmýzda dosyanýn bütün içeriði silinecektir. Yani bu kodlar, sanki dosyayý “w” kipiyle açmýþsýnýz gibi bir etki ortaya çýkaracaktýr.
+
+truncate() metodu yukarýda gördüðünüz þekilde parametresiz olarak kullanýlabileceði gibi, parametreli olarak da kullanýlabilir. Bu metodun parantezleri arasýna, dosyanýn kaç baytlýk bir boyuta sahip olmasýný istediðinizi yazabilirsiniz. Örneðin:
+
+>>> with open("falanca.txt", "r+") as f:
+... f.truncate(10)
+
+Bu kodlar, falanca.txt adlý dosyanýn ilk 10 baytý dýþýndaki bütün verileri siler. Yani dosyayý yalnýzca 10 baytlýk bir boyuta sahip olacak þekilde kýrpar.
+
+Gelin isterseniz bu metotla ilgili bir örnek verelim. Elimizdeki dosyanýn þu içeriðe sahip olduðunu varsayalým:
+
+Ahmet Özbudak : 0533 123 23 34
+Mehmet Sülün : 0532 212 22 22
+Sami Sam : 0542 333 34 34
+
+Amacýmýz dosyadaki þu iki satýrý tamamen silmek:
+
+Mehmet Sülün : 0532 212 22 22
+Sami Sam : 0542 333 34 34
+
+Yani dosyanýn yeni içeriðinin tam olarak þöyle olmasýný istiyoruz:
+
+Ahmet Özbudak : 0533 123 23 34
+
+Bunun için truncate() metodundan yararlanarak þu kodlarý yazabiliriz:
+
+with open("fihrist.txt", "r+") as f:
+f.readline()
+f.seek(f.tell())
+f.truncate()
+
+Bu kodlarý bir dosyaya kaydedip çalýþtýrdýðýnýzda, istediðiniz sonucu elde ettiðinizi göreceksiniz.
+
+Burada sýrasýyla þu iþlemleri gerçekleþtirdik:
+
+Önce dosyamýzý hem okuma hem de yazma kipinde açtýk. Çünkü ayný dosya üzerinde hem okuma hem de yazma iþlemleri gerçekleþtireceðiz:
+
+with open("fihrist.txt", "r+") as f:
+
+
+Ardýndan dosyadan tek bir satýr okuduk:
+
+f.readline()
+
+
+Daha sonra, truncate() metodunun imleç konumundan itibaren kýrpma iþlemi gerçekleþtirebilmesi için imleci dosya içinde o anda bulunduðumuz konuma, yani ikinci satýrýn baþýna getirdik. Bildiðiniz gibi dosyalarýn tell() metodu, o anda dosya içinde hangi konumda bulunduðumuzu bildiriyor. Biz biraz önce yazdýðýmýz readline() komutu yardýmýyla dosyadan bir satýr okuduðumuz için, o anda ikinci satýrýn baþýnda bulunuyoruz. Ýþte seek() metodunu ve tell() metodundan elde ettiðimiz bu konum bilgisini kullanarak imleci istediðimiz konuma getirdik:
+
+f.seek(f.tell())
+
+
+Ýmleci istediðimiz konuma getirdiðimize göre artýk kýrpma iþlemini gerçekleþtirebiliriz:
+
+f.truncate()
+
+Artýk elimizde tek satýrlýk bir dosya var...
+
+truncate() metodunun, yukarýda anlattýðýmýzdan farklý bir özelliði daha var. Her ne kadar truncate kelimesi ‘kýrpmak’ anlamýna gelse ve bu metotla dosya boyutlarýný küçültebilsek bile, bu metodu kullanarak ayný zamanda dosya boyutlarýný artýrabiliriz de. Örneðin boyutu 1 kilobayt olan bir dosyayý 3 kilobayta çýkarmak için bu metodu þöyle kullanabiliriz:
+
+>>> f = open("fihrist.txt", "r+")
+>>> f.truncate(1024*3)
+>>> f.close()
+
+Dosyanýn boyutunu kontrol edecek olursanýz, dosyanýn gerçekten de 3 kilobayt’a çýktýðýný göreceksiniz. Peki bu metot bu iþi nasýl yapýyor? Aslýnda bunun cevabý çok basit: Dosyanýn sonuna gereken miktarda 0 ekleyerek... Zaten eðer fihrist.txt adlý bu dosyayý tekrar açýp okursanýz bu durumu kendiniz de görebilirsiniz:
+
+>>> f = open("fihrist.txt")
+>>> f.read()
+
+Gördüðünüz gibi, dosya sýfýrlarla dolu.
+
+
+mode Niteliði
+
+Bu nitelik, bize bir dosyanýn hangi kipte açýldýðýna dair bilgi verir:
+
+>>> f = open("falanca.txt")
+>>> f.mode
+
+'r'
+
+Demek ki bu dosya “r” kipinde açýlmýþ...
+
+
+name Niteliði
+
+Bu nitelik, bize bir dosyanýn adýný verir:
+
+>>> f.name
+
+'falanca.txt'
+
+
+encoding Niteliði
+
+Bu nitelik, bize bir dosyanýn hangi dil kodlamasý ile kodlandýðýný söyler:
+
+>>> f.encoding
+
+'utf-8'
+
+veya:
+
+>>> f.encoding
+
+'cp1254' #Windows
+
+Not
+
+Bu ‘dil kodlamasý’ konusunu ilerleyen sayfalarda ayrýntýlý olarak inceleyeceðiz.
+
+Böylece dosyalarýn en önemli metot ve niteliklerini incelemiþ olduk. Bu arada, gerek bu derste, gerekse önceki derslerde verdiðimiz örneklerden, ‘metot’ ile ‘nitelik’ kavramlarý arasýndaki farký anladýðýnýzý zannediyorum. Metotlar bir iþ yaparken, nitelikler bir deðer gösterir. Nitelikler basit birer deðiþkenden ibarettir. Metotlar ise bir iþin nasýl yapýlacaðý ile ilgili süreci tanýmlar. Esasýnda bu ikisi arasýndaki farklarý çok fazla kafaya takmanýza gerek yok. Zamanla (özellikle de baþka programlarýn kaynak kodlarýný incelemeye baþladýðýnýzda) bu ikisi arasýndaki farký bariz bir biçimde göreceksiniz. O noktaya geldiðinizde, zaten kavramlar arasýndaki farklarý görmeniz konusunda biz de size yardýmcý olmaya çalýþacaðýz.
+

@@ -1,0 +1,113 @@
+
+Rastgele Sayýda Ýsimli Parametre Belirleme
+
+Bir önceki baþlýk altýnda, fonksiyon tanýmlarken rastgele sayýda isimsiz parametrelerin nasýl belirleneceðini tartýþtýk. Ayný bu þekilde, rastgele sayýda isimli parametre belirlemek de mümkündür.
+
+Örneðin:
+
+def fonksiyon(**parametreler):
+print(parametreler)
+
+fonksiyon(isim="Ahmet", soyisim="Öz", meslek="Mühendis", þehir="Ankara")
+
+Bu kodlarý çalýþtýrdýðýmýzda þöyle bir çýktý alýyoruz:
+
+{'þehir': 'Ankara', 'isim': 'Ahmet', 'soyisim': 'Öz', 'meslek': 'Mühendis'}
+
+Gördüðünüz gibi, fonksiyonu tanýmlarken parametremizin sol tarafýna yerleþtirdiðimiz ** iþareti, bu fonksiyonu çaðýrýrken yazdýðýmýz isimli parametrelerin bize bir sözlük olarak verilmesini saðlýyor. Bu yapýnýn bize bir sözlük verdiðini bildikten sonra, bunu sözlük veri tipinin kurallarý çerçevesinde istediðimiz þekilde evirip çevirebiliriz.
+
+Peki bu araç ne iþimize yarar?
+
+Hatýrlarsanýz bu bölümün en baþýnda kayýt_oluþtur() adlý þöyle bir fonksiyon tanýmlamýþtýk:
+
+def kayýt_oluþtur(isim, soyisim, iþsis, þehir):
+print("-"*30)
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+print("-"*30)
+
+Bu fonksiyon bize toplam dört adet parametre kullanarak, isim, soyisim, iþletim sistemi ve þehir bilgilerinden meydana gelen bir kayýt oluþturma imkaný saðlýyor. Bu fonksiyonda kullanýcýnýn girebileceði bilgiler sýnýrlý. Ama bir de þöyle bir fonksiyon yazdýðýmýzý düþünün:
+
+def kayýt_oluþtur(**bilgiler):
+print("-"*30)
+
+for anahtar, deðer in bilgiler.items():
+print("{:<10}: {}".format(anahtar, deðer))
+
+print("-"*30)
+
+kayýt_oluþtur(ad="Fýrat", soyad="Özgül", þehir="Ýstanbul", tel="05333213232")
+
+Bu fonksiyonu çalýþtýrdýðýmýzda þu çýktýyý alacaðýz:
+
+tel : 05333213232
+ad : Fýrat
+þehir : Ýstanbul
+soyad : Özgül
+
+Gördüðünüz gibi, ** iþaretlerini kullanmamýz sayesinde hem adlarýný hem de deðerlerini kendimiz belirlediðimiz bir kiþi veritabaný oluþturma imkaný elde ediyoruz. Üstelik bu veritabanýnýn, kiþiye ait kaç farklý bilgi içereceðini de tamamen kendimiz belirleyebiliyoruz.
+
+Týpký * iþaretlerinin betimlediði parametrenin geleneksel olarak ‘args’ þeklinde adlandýrýlmasý gibi, ** iþaretlerinin betimlediði parametre de geleneksel olarak ‘kwargs’ þeklinde adlandýrýlýr. Dolayýsýyla yukarýdaki gibi bir fonksiyonu Python programcýlarý þöyle tanýmlar:
+
+def kayýt_oluþtur(**kwargs):
+...
+
+** iþaretli parametreler pek çok farklý durumda iþinize yarayabilir veya iþinizi kolaylaþtýrabilir. Mesela * ve ** iþaretlerini kullanarak þöyle bir program yazabilirsiniz:
+
+def karþýlýk_bul(*args, **kwargs):
+for sözcük in args:
+if sözcük in kwargs:
+print("{} = {}".format(sözcük, kwargs[sözcük]))
+else:
+print("{} kelimesi sözlükte yok!".format(sözcük))
+
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming"}
+
+karþýlýk_bul("kitap", "bilgisayar", "programlama", "fonksiyon", **sözlük)
+
+Burada tanýmladýðýmýz karþýlýk_bul() adlý fonksiyon, kendisine verilen parametreleri (*args), bir sözlük içinde arayarak (**sözlük) karþýlýklarýný bize çýktý olarak veriyor. Eðer verilen parametre sözlükte yoksa, ilgili kelimenin sözlükte bulunmadýðý konusunda da bizi bilgilendiriyor.
+
+karþýlýk_bul() adlý fonksiyonu nasýl tanýmladýðýmýza çok dikkat edin. Parametre listesi içinde belirttiðimiz *args ifadesi sayesinde, fonksiyonu kullanacak kiþiye, istediði sayýda isimsiz parametre girme imkaný tanýyoruz. **kwargs parametresi ise kullanýcýya istediði sayýda isimli parametre girme olanaðý veriyor.
+
+Esasýnda yukarýdaki kod *args ve **kwargs yapýlarý açýsýndan ucuz bir örnektir. Bu yapýlar için daha nitelikli bir örnek verelim...
+
+Bildiðiniz gibi print() fonksiyonu sýnýrsýz sayýda isimsiz parametre ve buna ek olarak birkaç tane de isimli parametre alýyor. Bu fonksiyonun alabildiði isimli parametrelerin sep, end, file ve flush adlý parametreler olduðunu biliyorsunuz. Yine bildiðiniz gibi, sep parametresi print() fonksiyonuna verilen isimsiz parametrelerin her birinin arasýna hangi karakterin geleceðini; end parametresi ise bu parametrelerin en sonuna hangi karakterin geleceðini belirliyor. Bizim amacýmýz bu fonksiyona bir de start adýnda isimli bir parametre ekleyerek print() fonksiyonunun iþlevini geniþleten baþka bir fonksiyon yazmak. Bu yeni parametre, karakter dizilerinin en baþýna hangi karakterin geleceðini belirleyecek.
+
+Þimdi bu amacýmýzý gerçekleþtirecek kodlarýmýzý yazalým:
+
+def bas(*args, start='', **kwargs):
+for öðe in args:
+print(start+öðe, **kwargs)
+
+bas('öðe1', 'öðe2', 'öðe3', start="#.")
+
+print() fonksiyonunun iþlevini geniþleten yeni fonksiyonumuzun adý bas(). Bu fonksiyon her bakýmdan print() fonksiyonu ile ayný iþlevi görecek. Ancak bas() fonksiyonu, print() fonksiyonuna ek olarak, sahip olduðu start adlý bir isimli parametre sayesinde, kendisine verilen parametrelerin en baþýna istediðimiz herhangi bir karakteri eklemek olanaðý da verecek bize.
+
+bas() fonksiyonunun ilk parametresi olan *args sayesinde kullanýcýya istediði kadar parametre verme imkaný tanýyoruz. Daha sonra da ilave start parametresini tanýmlýyoruz. Bu parametrenin öntanýmlý deðeri boþ bir karakter dizisi. Yani eðer kullanýcý bu parametrenin deðerine herhangi bir þey yazmazsa, *args kapsamýnda verilen parametreler üzerinde hiçbir deðiþiklik yapmýyoruz. Bunun ardýndan gelen **kwargs parametresi ise print() fonksiyonunun halihazýrda sahip olduðu sep, end, file ve flush parametrelerinin bas() fonksiyonunda da ayný þekilde kullanýlmasýný saðlýyor. **kwargs þeklinde bir tanýmlama sayesinde, print() fonksiyonunun isimli parametrelerini tek tek belirtip tanýmlamak zorunda kalmýyoruz:
+
+def bas(*args, start='', **kwargs):
+for öðe in args:
+print(start+öðe, **kwargs)
+
+f = open("te.txt", "w")
+
+bas('öðe1', 'öðe2', 'öðe3', start="#.", end="", file=f)
+
+Eðer elimizde **kwargs gibi bir imkan olmasaydý yukarýdaki fonksiyonu þu þekilde tanýmlamamýz gerekirdi:
+
+import sys
+
+def bas(*args, start='', sep=' ', end='\n', file=sys.stdout, flush=False):
+for öðe in args:
+print(start+öðe, sep=sep, end=end, file=file, flush=flush)
+
+Gördüðünüz gibi, print() fonksiyonunun bütün isimli parametrelerini ve bunlarýn öntanýmlý deðerlerini tanýmlamak zorunda kaldýk. Eðer günün birinde Python geliþtiricileri print() fonksiyonuna bir baþka isimli parametre daha eklerse, yukarýdaki fonksiyonu ilgili yeniliðe göre elden geçirmemiz gerekir. Ama **kwargs yapýsýný kullandýðýmýzda, print() fonksiyonuna Python geliþtiricilerince eklenecek bütün parametreler bizim fonksiyonumuza da otomatik olarak yansýyacaktýr...
+
+

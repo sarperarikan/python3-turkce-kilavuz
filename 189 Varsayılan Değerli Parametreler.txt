@@ -1,0 +1,59 @@
+
+Varsayýlan Deðerli Parametreler
+
+Þimdiye kadar karþýlaþtýðýmýz fonksiyonlarda bir þey dikkatinizi çekmiþ olmalý. Mesela print() fonksiyonunu ele alalým. Bildiðiniz gibi, bu fonksiyonu en basit þekilde þöyle kullanýyoruz:
+
+print("Fýrat", "Özgül")
+
+Evet, print() fonksiyonunu bu þekilde kullanabiliyoruz, ancak bildiðiniz gibi, aslýnda bu fonksiyonun bazý özel parametreleri de var. Daha önceki derslerimizden hatýrlayacaðýnýz gibi, biz yukarýdaki komutu verdiðimizde aslýnda Python bunu þu þekilde algýlýyor:
+
+print("Fýrat", "Özgül", sep=" ", end="\n", file=sys.stdout, flush=False)
+
+Yani biz görmesek de aslýnda her print() çaðrýsý sep, end, file ve flush parametrelerini de içeriyor. Biz bu özel parametreleri kullanmasak da, yazdýðýmýz kod düzgün bir þekilde çalýþýr. Bunun nedeni, sep, end, file ve flush parametrelerinin öntanýmlý olarak birtakým deðerlere sahip olmasýdýr. Yani biz bu parametrelere kendimiz bir deðer atamazsak Python bu parametrelere kendi belirlediði bazý öntanýmlý deðerleri atayacaktýr. Dolayýsýyla, eðer biz baþka bir deðer yazmazsak, sep parametresi ” “ deðerine, end parametresi “n” deðerine, file parametresi sys.stdout deðerine, flush parametresi ise False deðerine sahip olacaktýr. Ýþte bu tür parametrelere Python’da ‘varsayýlan deðerli parametreler’ adý verilir. Peki biz kendimiz varsayýlan deðerli parametreler içeren fonksiyonlarý nasýl tanýmlayabiliriz?
+
+Þu örneðe dikkatlice bakýn:
+
+def kur(kurulum_dizini="/usr/bin/"):
+print("Program {} dizinine kuruldu!".format(kurulum_dizini))
+
+Burada kur() adlý bir fonksiyon tanýmladýk. Bu fonksiyonun görevi, yazdýðýmýz bir programý, kullanýcýnýn bilgisayarýndaki bir dizine kurmak ve programýn hangi dizine kurulduðu konusunda kullanýcýyý bilgilendirmek. Bu fonksiyonu þu þekilde çaðýrabiliriz:
+
+kur()
+
+Eðer kur() fonksiyonunu böyle çaðýrýrsak bize þu çýktýyý verecektir:
+
+Program /usr/bin/ dizinine kuruldu!
+
+Gördüðünüz gibi, kur() fonksiyonunun kurulum_dizini adlý bir parametresi var. Biz fonksiyonu tanýmlarken, bu parametreye bir varsayýlan deðer atadýk (/usr/bin/). Böylece kur() fonksiyonu parametresiz olarak çaðrýldýðýnda bu varsayýlan deðer devreye girdi. Eðer biz bu deðeri deðiþtirmek istersek, mesela programýmýzýn “C:\Users\firat” dizinine kurulmasýný istersek, kur() fonksiyonunu þöyle çaðýrmalýyýz:
+
+kur("C:\\Users\\firat")
+
+kur() fonksiyonunu yukarýdaki gibi çaðýrdýðýmýzda Python bize þöyle bir çýktý verir:
+
+Program C:\Users\firat dizinine kuruldu!
+
+Bu örnek size, varsayýlan deðerli parametreler belirlemenin ne kadar faydalý olabileceðini göstermiþ olmalý. Mesela bir program yazdýðýnýzý düþünün. Programýnýzý indiren kullanýcýlar, yukarýdaki gibi bir varsayýlan deðerli parametre belirlemiþ olmanýz sayesinde programýnýzý nereye kuracaklarýný belirlemek zorunda kalmadan bir sonraki kurulum adýmýna geçebiliyorlar...
+
+Elbette eðer isterseniz kullanýcýlarýnýzý bir kurulum dizini belirlemeye zorlamak da isteyebilirsiniz. Bunun için yine varsayýlan deðerli parametrelerden yararlanabilirsiniz:
+
+def kur(kurulum_dizini=''):
+if not kurulum_dizini:
+print("Lütfen programý hangi dizine kurmak istediðinizi belirtin!")
+else:
+print("Program {} dizinine kuruldu!".format(kurulum_dizini))
+
+Bu defa kurulum_dizini parametresinin varsayýlan deðerini boþ bir karakter dizisi olarak belirledik. Eðer bu parametrenin deðeri boþ bir karakter dizisi olursa, kullanýcý herhangi bir kurulum dizini belirtmemiþ demektir. Eðer kullanýcý herhangi bir kurulum dizini belirtmezse kurulum_dizini parametresinin bool deðeri False olacaktýr. Bu özelliði dikkate alarak fonksiyon gövdesinde þu kodlarý kullanabiliyoruz:
+
+if not kurulum_dizini:
+print("Lütfen programý hangi dizine kurmak istediðinizi belirtin!")
+
+Böylece, kurulum_dizini parametresinin bool deðeri False olursa kullanýcýlarýmýza þöyle bir uyarý gösteriyoruz:
+
+"Lütfen programý hangi dizine kurmak istediðinizi belirtin!"
+
+Dolayýsýyla kuruluma baþlayabilmek için kur() fonksiyonunun þöyle çalýþtýrýlmasýný zorunlu tutuyoruz:
+
+kur("C:\\Users\\istihza")
+
+Buna benzer durumlarla pek çok kez karþýlaþmýþ olmalýsýnýz. Özellikle programlarýn kurulmasýný saðlayan ‘setup‘ betiklerinde her aþama için bir varsayýlan deðer belirlenip, kullanýcýnýn sadece ‘Next‘ tuþlarýna basarak saðlýklý bir kurulum yapmasý saðlanabiliyor. Eðer kullanýcý varsayýlan deðerlerin dýþýnda birtakým deðerler belirlemek isterse, yukarýda örneðini verdiðimiz yapý kullanýcýya böyle bir özgürlük de saðlýyor.
+

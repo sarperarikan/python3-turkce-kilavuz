@@ -1,0 +1,66 @@
+
+Sözlük Tanýmlamak
+
+Dediðimiz gibi, karakter dizilerini anlatýrken verdiðimiz sözlük örneði sayesinde sözlüklerin neye benzediðini az çok biliyoruz. Gelin isterseniz sözlüklerin nasýl tanýmlandýðýný inceleyerek bu veri tipinin derinliklerine doðru ilk kulaçlarýmýzý atalým.
+
+Python programlama dilindeki sözlük veri tipi, gerçek hayatta ‘sözlük’ denince aklýnýza gelen þeye çok benzer. Mesela gerçek hayatta ‘kitap’ kelimesinin Ýngilizce bir sözlükteki karþýlýðý book kelimesidir. Dolayýsýyla ‘kitap’ ve ‘book‘ kelimeleri arasýndaki iliþkiyi herhalde þu þekilde temsil edebiliriz:
+
+kitap: book
+
+Bu manzara bize ‘kitap’ kelimesinin karþýlýðýnýn ‘book‘ olduðunu açýk bir þekilde gösteriyor. Eðer bu durumu Python’daki sözlük veri tipiyle göstermek isteseydik þöyle bir þey yazacaktýk:
+
+>>> kelimeler = {"kitap": "book"}
+
+Burada, içeriði sözlük veri tipi olan kelimeler adlý bir deðiþken tanýmladýk. Gördüðünüz gibi, listelere benzer bir þekilde sözlük veri tipi de içinde farklý veri tiplerini barýndýran, ‘kapsayýcý’ bir veri tipidir. Burada sözlüðümüz iki adet karakter dizisinden oluþuyor.
+
+Yukarýdaki sözlüðü nasýl tanýmladýðýmýza çok dikkat edin. Nasýl ki listelerin ayýrt edici özelliði köþeli parantezlerdi, sözlüklerin ayýrt edici özelliði de küme parantezleridir.
+
+Esasýnda sözlük dediðimiz þey en basit haliyle þöyle görünür:
+
+>>> sözlük = {}
+
+Bu örnek boþ bir sözlüktür. Ýsterseniz yukarýdaki veri tipinin gerçekten de bir sözlük olduðunu kanýtlayalým:
+
+>>> type(sözlük)
+
+<class 'dict'>
+
+Sözlüklerin Python programlama dilindeki teknik karþýlýðý dict ifadesidir. type(sözlük) sorgusu <class 'dict'> çýktýsý verdiðine göre, sözlük adlý deðiþkenin gerçekten de bir sözlük olduðunu söyleyebiliyoruz.
+
+Yukarýda þöyle bir sözlük örneði verdiðimizi hatýrlýyorsunuz:
+
+>>> kelimeler = {"kitap": "book"}
+
+Python programlama diline özellikle yeni baþlayanlar, sözlüklerin görünüþü nedeniyle bir sözlükteki öðe sayýsý konusunda tereddüte kapýlabilir, örneðin yukarýdaki sözlüðün 2 öðeden oluþtuðu yanýlgýsýna düþebilir. O halde bu noktada size þöyle bir soru sormama izin verin: Acaba bu sözlükte kaç öðe var? Hemen bakalým:
+
+>>> len(kelimeler)
+
+1
+
+Demek ki elimizdeki veri tipi bir adet öðeye sahip bir sözlükmüþ. Gördüðünüz gibi, "kitap": "book" ifadesi tek baþýna bir öðe durumundadýr. Yani burada “kitap” karakter dizisini ayrý, “book” karakter dizisini ayrý bir öðe olarak almýyoruz. Bu ikisi tek bir sözlük öðesi oluþturuyor. Hatýrlarsanýz, listelerde öðeleri birbirinden ayýrmak için virgül iþaretlerinden yararlanýyorduk. Sözlüklerde de birden fazla öðeyi birbirinden ayýrmak için virgül iþaretlerinden yararlanacaðýz:
+
+>>> kelimeler = {"kitap": "book", "bilgisayar": "computer"}
+
+Bir önceki örnek tek öðeliydi. Bu sözlük ise 2 öðeye sahiptir:
+
+>>> len(kelimeler)
+
+2
+
+Ýlk derslerimizden bu yana sürekli olarak vurguladýðýmýz gibi, Python programlama dilinde doðru kod yazmak kadar okunaklý kod yazmak da çok önemlidir. Mesela bir sözlüðü þöyle tanýmladýðýmýzda kodlarýmýzýn pek okunaklý olmayacaðýný söyleyebiliriz:
+
+sözlük = {"kitap": "book", "bilgisayar": "computer", "programlama": "programming",
+"dil": "language", "defter": "notebook"}
+
+Teknik olarak baktýðýmýzda bu kodlarda hiçbir problem yok. Ancak sözlükleri böyle saða doðru uzayacak þekilde tanýmladýðýmýzda okunaklýlýðý azaltmýþ oluyoruz. Bu yüzden yukarýdaki sözlüðü þöyle yazmayý tercih edebiliriz:
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming",
+"dil" : "language",
+"defter" : "notebook"}
+
+Bu þekilde sözlükteki öðeler arasýndaki iliþki daha belirgin, yazdýðýnýz kodlar da daha okunaklý bir hale gelecektir.
+
+Python’da bir sözlük oluþturmanýn baþka yollarý da olmakla birlikte, en temel sözlük oluþturma yöntemi yukarýdaki örneklerde gösterdiðimiz gibidir. Biz ilerleyen sayfalarda sözlük oluþturmanýn farklý yöntemlerini de ele alacaðýz. Ancak þimdilik ‘sözlük tanýmlama’ konusunu burada noktalayýp sözlüklerle ilgili önemli bir konuya daha deðinelim.
+

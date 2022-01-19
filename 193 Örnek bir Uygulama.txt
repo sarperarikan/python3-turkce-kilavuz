@@ -1,0 +1,175 @@
+
+Örnek bir Uygulama
+
+Gelin isterseniz buraya kadar öðrendiklerimizi kullanarak örnek bir uygulama yazalým. Bir yandan da yeni þeyler öðrenerek bilgimize bilgi katalým.
+
+Amacýmýz belli miktarda ve belli aralýkta rastgele sayýlar üreten bir program yazmak. Örneðin programýmýz þu þekilde altý adet rastgele sayý üretebilecek:
+
+103, 298, 152, 24, 91, 285
+
+Ancak programýmýz bu sayýlarý üretirken her sayýdan yalnýzca bir adet üretecek. Yani ayný seride bir sayýdan birden fazla bulunamayacak.
+
+Dilerseniz öncelikle kodlarýmýzý görelim:
+
+import random
+
+def sayý_üret(baþlangýç=0, bitiþ=500, adet=6):
+sayýlar = set()
+
+while len(sayýlar) < adet:
+sayýlar.add(random.randrange(baþlangýç, bitiþ))
+
+return sayýlar
+
+Esasýnda bu kodlarýn (neredeyse) tamamýný anlayabilecek kadar Python bilgisine sahipsiniz. Burada anlamamýþ olabileceðiniz tek þey random modülüdür. O yüzden gelin isterseniz bu modülden biraz söz edelim.
+
+Biz henüz modül kavramýný bilmiyoruz. Ama buraya gelene kadar birkaç konu altýnda modüllerle ilgili bazý örnekler de yapmadýk deðil. Örneðin þimdiye kadar yazdýðýmýz programlardan öðrendiðimiz kadarýyla Python’da os ve sys adlý iki modülün bulunduðunu, bu modüllerin içinde, program yazarken iþimize yarayacak pek çok deðiþken ve fonksiyon bulunduðunu ve bu fonksiyonlarý programlarýmýzda kullanabilmek için ilkin bu modülleri içe aktarmamýz gerektiðini biliyoruz. Ýþte týpký os ve sys gibi, random da Python programlama dili bünyesinde bulunan modüllerden biridir. Bu modülün içinde, rastgele sayýlar üretmemizi saðlayacak bazý fonksiyonlar bulunur. Ýþte randrange() de bu fonksiyonlardan biridir. Dilerseniz bu fonksiyonun nasýl kullanýldýðýný anlamak için etkileþimli kabukta birkaç deneme çalýþmasý yapalým.
+
+random modülünün içindeki araçlarý kullanabilmek için öncelikle bu modülü içe aktarmalýyýz:
+
+>>> import random
+
+Acaba bu modülün içinde neler varmýþ?
+
+>>> dir(random)
+
+['BPF', 'LOG4', 'NV_MAGICCONST', 'RECIP_BPF', 'Random',
+'SG_MAGICCONST', 'SystemRandom', 'TWOPI', '_BuiltinMethodType',
+'_MethodType', '_Sequence', '_Set', '__all__', '__builtins__',
+'__cached__', '__doc__', '__file__', '__initializing__',
+'__loader__', '__name__', '__package__', '_acos', '_ceil',
+'_cos', '_e', '_exp', '_inst', '_log', '_pi', '_random', '_sha512',
+'_sin', '_sqrt', '_test', '_test_generator', '_urandom', '_warn',
+'betavariate', 'choice', 'expovariate', 'gammavariate', 'gauss',
+'getrandbits', 'getstate', 'lognormvariate', 'normalvariate',
+'paretovariate', 'randint', 'random', 'randrange', 'sample',
+'seed', 'setstate', 'shuffle', 'triangular', 'uniform',
+'vonmisesvariate', 'weibullvariate']
+
+Gördüðünüz gibi bu modülün içinde epey araç var. Gelin isterseniz bu araçlardan en sýk kullanýlanlarýný tanýyalým.
+
+Örneðin random modülü içinde bulunan sample() adlý fonksiyon herhangi bir dizi içinden istediðimiz sayýda rastgele numune almamýzý saðlar:
+
+>>> liste = ["ahmet", "mehmet", "sevgi", "sevim", "selin", "zeynep", "selim"]
+>>> random.sample(liste, 2)
+
+['sevim', 'ahmet']
+
+Gördüðünüz gibi, yedi kiþilik bir isim listesinden 2 adet rastgele numune aldýk. Ayný iþlemi tekrarlayalým:
+
+>>> random.sample(liste, 2)
+
+['sevgi', 'zeynep']
+
+>>> random.sample(liste, 5)
+
+['selin', 'zeynep', 'ahmet', 'selim', 'mehmet']
+
+Numune alma iþlemi tamamen rastgeledir. Ayrýca gördüðünüz gibi, listeden istediðimiz sayýda numune alabiliyoruz.
+
+random modülü içinde bulunan shuffle() adlý baþka bir fonksiyon, bir dizi içindeki öðelerin sýrasýný rastgele bir þekilde karýþtýrmamýzý saðlar:
+
+>>> liste = ["ahmet", "mehmet", "sevgi", "sevim",
+... "selin", "zeynep", "selim"]
+>>> random.shuffle(liste)
+
+shuffle() fonksiyonu liste öðelerini yine ayný liste içinde deðiþtirdi. Deðiþikliði görmek için listeyi ekrana basabilirsiniz:
+
+>>> liste
+
+['selim', 'selin', 'ahmet', 'mehmet',
+'sevim', 'sevgi', 'zeynep']
+
+random modülü içinde bulunan bir baþka fonksiyon ise randrange() fonksiyonudur. Bu fonksiyon, belli bir aralýkta rastgele sayýlar üretmemizi saðlar:
+
+>>> random.randrange(0, 500)
+
+156
+
+Burada 0 ile 500 arasýnda rastgele bir sayý ürettik.
+
+Gördüðünüz gibi random son derece faydalý olabilecek bir modüldür. Dilerseniz þimdi random fonksiyonunu bir kenara býrakýp kodlarýmýza geri dönelim:
+
+import random
+
+def sayý_üret(baþlangýç=0, bitiþ=500, adet=6):
+sayýlar = set()
+
+while len(sayýlar) < adet:
+sayýlar.add(random.randrange(baþlangýç, bitiþ))
+
+return sayýlar
+
+Burada ilk satýrýn ne iþ yaptýðýný öðrendik. Bu satýr yardýmýyla random modülünü içe aktarýyoruz.
+
+Sonraki satýrda fonksiyonumuzu tanýmlamaya baþlýyoruz:
+
+def sayý_üret(baþlangýç=0, bitiþ=500, adet=6):
+...
+
+Fonksiyonumuzun adý sayý_üret. Bu fonksiyon toplam üç farklý parametre alýyor. Bunlar baþlangýç, bitiþ ve adet. Dikkat ederseniz bu parametrelerin her birinin bir varsayýlan deðeri var. Dolayýsýyla sayý_üret() fonksiyonu parametresiz olarak çaðrýldýðýnda bu üç parametre öntanýmlý deðerlerine sahip olacaktýr.
+
+Gelelim fonksiyon gövdesine...
+
+Ýlk olarak sayýlar adlý bir küme tanýmlýyoruz.
+
+Bildiðiniz gibi, kümeler içinde öðeler her zaman tektir. Yani bir küme içinde ayný öðeden yalnýzca bir adet bulunabilir. Kümelerin bu özelliði bizim yazdýðýmýz program için oldukça uygun. Çünkü biz de ürettiðimiz rastgele sayýlarýn benzersiz olmasýný istiyoruz. Bu benzersizliði saðlayabilecek en uygun veri tipi kümelerdir.
+
+Bir sonraki satýrda bir while döngüsü görüyoruz:
+
+while len(sayýlar) < adet:
+sayýlar.add(random.randrange(baþlangýç, bitiþ))
+
+Bu döngüye göre, sayýlar deðiþkeninin uzunluðu adet parametresinin deðerinden az olduðu müddetçe, sayýlar adlý deðiþkene baþlangýç ve bitiþ parametrelerinin gösterdiði deðerler arasýndan rastgele sayýlar eklemeye devam edeceðiz. Örneðin kullanýcý fonksiyonumuzu parametresiz olarak çaðýrdýysa, yukarýdaki döngü þu þekilde iþleyecektir:
+
+while len(sayýlar) < 6:
+sayýlar.add(random.randrange(0, 500))
+
+Buna göre, sayýlar deðiþkeninin uzunluðu 6‘dan az olduðu müddetçe bu deðiþkene 0 ile 500 arasýnda rastgele sayýlar eklemeye devam edeceðiz. Böylelikle sayýlar deðiþkeni içinde birbirinden farklý toplam 6 sayý olmuþ olacak.
+
+Fonksiyonun son satýrýnda ise þu kodu görüyoruz:
+
+return sayýlar
+
+Bu kod yardýmýyla, belirtilen miktardaki sayýlarý tutan sayýlar adlý deðiþkeni fonksiyondan döndürüyoruz. Yani fonksiyonumuz dýþ dünyaya sayýlar adlý bir deðiþken veriyor... Bu deðiþkeni bu þekilde döndürdükten sonra istediðimiz gibi kullanabiliriz. Mesela:
+
+for i in range(100):
+print(sayý_üret())
+
+Buradan þuna benzer bir çýktý alacaksýnýz:
+
+{34, 144, 211, 468, 58, 286}
+{41, 170, 395, 113, 178, 29}
+{161, 195, 452, 271, 212, 324}
+{1, 328, 461, 398, 464, 220}
+{356, 489, 12, 114, 329, 472}
+{320, 34, 238, 176, 243, 149}
+{364, 304, 434, 403, 217, 63}
+{452, 392, 175, 464, 81, 467}
+{36, 230, 21, 440, 287, 415}
+{292, 391, 145, 182, 440, 223}
+{386, 38, 309, 377, 59, 277}
+{0, 2, 42, 400, 404, 60}
+{48, 482, 393, 80, 116, 407}
+{483, 136, 431, 35, 344, 381}
+...
+
+Gördüðünüz gibi, sayý_üret() fonksiyonunu kullanarak, her biri 6 öðeden oluþan 100 adet sayý listesi elde ettik. Biz yukarýda bu fonksiyonu parametresiz olarak çalýþtýrdýðýmýz için, Python baþlangýç, bitiþ ve adet parametrelerinin öntanýmlý deðerlerini kullandý (sýrasýyla 0, 500 ve 6).
+
+Ýstersek biz fonksiyonumuzu farklý parametrelerle çaðýrabiliriz:
+
+print(sayý_üret(0, 100, 10))
+
+Bu kodlar bize 0 ile 100 arasýndan 10 adet rastgele sayý seçer:
+
+{3, 4, 9, 11, 13, 47, 50, 53, 54, 61}
+
+Eðer çýktýnýn küme parantezleri arasýnda görünmesini istemiyorsanýz elbette çýktýyý keyfinize göre biçimlendirebilirsiniz:
+
+print(*sayý_üret(100, 1500, 20), sep='-')
+
+Bu þekilde, 100 ile 1500 arasý sayýlardan rastgele 20 adet seçip her bir sayýnýn arasýna bir tane - iþareti yerleþtirdik:
+
+352-1251-1366-1381-1350-330-203-842-269-285-816
+-658-643-308-1174-152-594-522-1214-959
+

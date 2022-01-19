@@ -1,0 +1,47 @@
+
+Kümelerin Metotlarý
+
+Daha önceki veri tiplerinde olduðu gibi, kümelerin de metotlarý vardýr. Artýk biz bir veri tipinin metotlarýný nasýl listeleyeceðimizi çok iyi biliyoruz. Nasýl liste için list(); demet için tuple(); sözlük için de dict() fonksiyonlarýný kullanýyorsak, kümeler için de set() adlý fonksiyondan yararlanacaðýz:
+
+>>> dir(set)
+
+['__and__', '__class__', '__contains__', '__delattr__', '__doc__',
+'__eq__', '__format__', '__ge__', '__getattribute__', '__gt__',
+'__hash__', '__iand__', '__init__', '__ior__', '__isub__', '__iter__',
+'__ixor__', '__le__', '__len__', '__lt__', '__ne__', '__new__',
+'__or__', '__rand__', '__reduce__', '__reduce_ex__', '__repr__',
+'__ror__', '__rsub__', '__rxor__', '__setattr__', '__sizeof__',
+'__str__', '__sub__', '__subclasshook__', '__xor__', 'add',
+'clear','copy', 'difference', 'difference_update', 'discard',
+'intersection', 'intersection_update', 'isdisjoint', 'issubset',
+'issuperset', 'pop', 'remove', 'symmetric_difference',
+'symmetric_difference_update', 'union', 'update']
+
+Hemen iþimize yarayacak metotlarý alalým:
+
+>>> for i in dir(set):
+... if "__" not in i:
+... print(i)
+...
+add
+clear
+copy
+difference
+difference_update
+discard
+intersection
+intersection_update
+isdisjoint
+issubset
+issuperset
+pop
+remove
+symmetric_difference
+symmetric_difference_update
+union
+update
+
+Gördüðünüz gibi kümelerin epey metodu var. Bu arada if "__" not in i satýrýnda “_” yerine “__” kullandýðýmýza dikkat edin. Neden? Çünkü eðer sadece “_” kullanýrsak symmetric_difference ve symmetric_difference_update metotlarý çýktýmýzda yer almayacaktýr.
+
+Unutmadan söyleyelim: Kümeler de, týpký listeler ve sözlükler gibi, deðiþtirilebilir bir veri tipidir.
+

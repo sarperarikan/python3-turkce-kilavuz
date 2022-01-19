@@ -1,0 +1,120 @@
+
+Kümeler ve Dondurulmuþ Kümeler
+
+Bu bölümde Python’daki iki veri tipini daha inceleyeceðiz. Ýnceleyeceðimiz veri tiplerinin adý küme ve dondurulmuþ küme.
+
+Özellikle kümeleri öðrendiðimizde, bu veri tipinin kendine has birtakým özellikleri sayesinde bunlarýn kimi zaman hiç tahmin bile edemeyeceðimiz yerlerde iþimize yaradýðýný göreceðiz. Normalde uzun uzun kod yazmayý gerektiren durumlarda kümeleri kullanmak, bir-iki satýrla iþlerimizi halletmemizi saðlayabilir.
+
+Bu bölümde kümeler dýþýnda, bir de dondurulmuþ kümelerden söz edeceðiz. Bu iki veri tipi birbiriyle iliþkilidir. O yüzden bu iki veri tipini tek bölümde ele alacaðýz.
+
+Ýsterseniz anlatmaya önce kümelerle baþlayalým.
+
+
+Kümeler
+
+Týpký listeler, demetler, karakter dizileri, sayýlar ve dosyalar gibi kümeler de Python’daki veri tiplerinden biridir. Adýndan da az çok tahmin edebileceðiniz gibi kümeler, matematikten bildiðimiz “küme” kavramýyla sýký sýkýya baðlantýlýdýr. Bu veri tipi, matematikteki kümelerin sahip olduðu bütün özellikleri taþýr. Yani matematikteki kümelerden bildiðimiz kesiþim, birleþim ve fark gibi özellikler Python’daki kümeler için de geçerlidir.
+
+
+Küme Oluþturmak
+
+Kümelerin bize sunduklarýndan faydalanabilmek için elbette öncelikle bir küme oluþturmamýz gerekiyor. Küme oluþturmak çok kolay bir iþlemdir. Örneðin boþ bir kümeyi þöyle oluþturuyoruz:
+
+>>> boþ_küme = set()
+
+Listeler, demetler ve sözlüklerin aksine kümelerin ayýrt edici bir iþareti yoktur. Küme oluþturmak için set() adlý özel bir fonksiyondan yararlanýyoruz.
+
+Yukarýdaki boþ veri tipinin bir küme olduðunu nasýl teyit edeceðinizi biliyorsunuz:
+
+>>> type(boþ_küme)
+
+<class 'set'>
+
+Gördüðünüz gibi, Python programlama dilinde kümeler set ifadesiyle gösteriliyor.
+
+Yukarýda boþ bir küme oluþturduk. Ýçinde öðe de barýndýran kümeleri ise þu þekilde oluþturuyoruz:
+
+>>> küme = set(["elma", "armut", "kebap"])
+
+Böylelikle, içinde öðe barýndýran ilk kümemizi baþarýyla oluþturduk. Dikkat ederseniz, küme oluþtururken listelerden faydalandýk. Gördüðünüz gibi set() fonksiyonu içindeki öðeler bir liste içinde yer alýyor. Dolayýsýyla yukarýdaki tanýmlamayý þöyle de yapabiliriz:
+
+>>> liste = ["elma", "armut", "kebap"]
+>>> küme = set(liste)
+
+Bu daha temiz bir görüntü oldu. Elbette küme tanýmlamak için mutlaka liste kullanmak zorunda deðiliz. Ýstersek demetleri de küme haline getirebiliriz:
+
+>>> demet = ("elma", "armut", "kebap")
+>>> küme = set(demet)
+
+Hatta ve hatta karakter dizilerinden dahi küme yapabiliriz:
+
+>>> kardiz = "Python Programlama Dili için Türkçe Kaynak"
+>>> küme = set(kardiz)
+
+Kullandýðýmýz karakter dizisinin böyle uzun olmasýna da gerek yok. Tek karakterlik dizilerden bile küme oluþturabiliriz:
+
+>>> kardiz = "a"
+>>> küme = set(kardiz)
+
+Ama sayýlardan küme oluþturamayýz:
+
+>>> n = 10
+>>> küme = set(n)
+
+TypeError: 'int' object is not iterable
+
+Peki sözlükleri kullanarak küme oluþturabilir miyiz? Elbette, neden olmasýn?
+
+>>> bilgi = {"iþletim sistemi": "GNU", "sistem çekirdeði": "Linux",
+... "daðýtým": "Ubuntu GNU/Linux"}
+
+>>> küme = set(bilgi)
+
+Küme oluþturmanýn son bir yönteminden daha söz edelim. En baþta söylediðimiz gibi, listeler, demetler, sözlükler ve karakter dizilerinin aksine kümelerin [ ], ( ), { }, ‘ ‘ gibi ayýrt edici bir iþareti yoktur. Ama eðer istersek sözlükleri oluþturmak için kullandýðýmýz özel iþaretleri küme oluþturmak için de kullanabiliriz. Dikkatlice bakýn:
+
+>>> küme = {'Python', 'C++', 'Ruby', 'PHP'}
+
+Gördüðünüz gibi, aslýnda sözlüklerin ayýrt edici iþareti olan süslü parantezleri kullanarak ve öðeleri birbirinden virgülle ayýrarak da küme adlý veri tipini elde edebiliyoruz. Teyit edelim bunu:
+
+>>> type(küme)
+
+<class 'set'>
+
+Ancak bu yapýyý kullanarak boþ bir küme oluþturamazsýnýz:
+
+>>> küme = {}
+
+Bu þekilde oluþturduðunuz þey bir küme deðil, sözlük olacaktýr:
+
+>>> type(küme)
+
+<class 'dict'>
+
+Boþ bir küme oluþturmak için set() fonksiyonunu kullanmanýz gerektiðini biliyorsunuz:
+
+>>> küme = set(küme)
+>>> type(küme)
+
+<class 'set'>
+
+Böylece kümeleri nasýl oluþturacaðýmýzý öðrendik. Eðer oluþturduðunuz kümeyi ekrana yazdýrmak isterseniz, ne yapacaðýnýzý biliyorsunuz. Tanýmladýðýnýz küme deðiþkenini kullanmanýz yeterli olacaktýr:
+
+>>> küme
+
+{'iþletim sistemi', 'sistem çekirdeði', 'daðýtým'}
+
+Bu arada, bir sözlüðü kümeye çevirdiðinizde, elbette sözlüðün yalnýzca anahtarlarý kümeye eklenecektir. Sözlüðün deðerleri ise böyle bir iþlemin sonucunda ortadan kaybolur.
+
+Eðer bir sözlüðü kümeye çevirirken hem anahtarlarý hem de deðerleri korumak gibi bir niyetiniz varsa þöyle bir þey yazabilirsiniz:
+
+Sözlüðümüz þu:
+
+>>> bilgi = {"iþletim sistemi": "GNU", "sistem çekirdeði": "Linux",
+... "daðýtým": "Ubuntu GNU/Linux"}
+
+Bu sözlükteki anahtar-deðer çiftlerini bir küme içine, çift öðeli demetler olarak yerleþtirebiliriz:
+
+>>> liste = [(anahtar, deðer) for anahtar, deðer in bilgi.items()]
+>>> küme = set(liste)
+
+Gördüðünüz gibi, liste üreteçlerini kullanarak önce bir liste oluþturuyoruz. Bu liste her bir anahtarý ve deðeri tek tek bir demet içine yerleþtiriyor. Daha sonra da bu listeyi set() fonksiyonuna göndererek kümemizi oluþturuyoruz.
+

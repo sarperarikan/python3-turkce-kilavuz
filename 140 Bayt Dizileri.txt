@@ -1,0 +1,20 @@
+
+Bayt Dizileri
+
+bytes adlý veri tipi ile elde ettiðimiz veri týpký karakter dizileri gibi, üzerinde deðiþiklik yapýlamayan bir veridir. Dolayýsýyla bir bytes nesnesi üzerinde deðiþiklik yapabilmek için o nesneyi tekrar tanýmlamamýz gerekir:
+
+>>> b = b'PDF'
+>>> v = b'-1.7'
+>>> b = b + v
+>>> b
+
+b'PDF-1.7'
+
+Ama Python programlama dilinde bytes veri tipi dýþýnda, baytlara iliþkin ikinci veri tipi daha bulunur. bytearray adlý bu veri tipi, bytes veri tipinin aksine, üzerinde deðiþiklik yapýlabilen bir veri tipidir.
+
+Python’da bytearray veri tipini þu þekilde tanýmlýyoruz:
+
+>>> pdf = bytearray(b'PDF-1.7')
+
+Gördüðünüz gibi, bir bayt dizisi tanýmlayabilmek için bytearray() adlý bir fonksiyondan faydalanýyoruz.
+

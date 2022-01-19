@@ -1,0 +1,17 @@
+
+discard()
+
+Bir önceki bölümde öðrendiðimiz add() metodu yardýmýyla, önceden oluþturduðumuz bir kümeye yeni öðeler ekleyebiliyorduk. Bu bölümde öðreneceðimiz discard() metodu ise kümeden öðe silmemizi saðlayacak:
+
+>>> hayvanlar = set(["kedi", "köpek", "at", "kuþ", "inek", "deve"])
+>>> hayvanlar.discard("kedi")
+>>> print(hayvanlar)
+
+{'kuþ', 'inek', 'deve', 'köpek', 'at'}
+
+Eðer küme içinde bulunmayan bir öðe silmeye çalýþýrsak hiç bir þey olmaz. Yani hata mesajý almayýz:
+
+>>> hayvanlar.discard("yýlan")
+
+Burada etkileþimli kabuk sessizce bir alt satýra geçecektir. Bu metodun en önemli özelliði budur. Yani olmayan bir öðeyi silmeye çalýþtýðýmýzda hata vermemesi.
+

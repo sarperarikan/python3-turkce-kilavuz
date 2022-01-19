@@ -1,0 +1,39 @@
+
+keys()
+
+Sözlükleri tarif ederken, sözlüklerin anahtar-deðer çiftlerinden oluþan bir veri tipi olduðunu söylemiþtik. Bir sözlüðü normal yollardan ekrana yazdýrýrsanýz size hem anahtarlarý hem de bunlara karþýlýk gelen deðerleri verecektir. Ama eðer bir sözlüðün sadece anahtarlarýný almak isterseniz keys() metodundan yararlanabilirsiniz:
+
+>>> sözlük = {"a": 0,
+... "b": 1,
+... "c": 2,
+... "d": 3}
+>>> print(sözlük.keys())
+
+dict_keys(['b', 'c', 'a', 'd'])
+
+Gördüðünüz gibi, sözlük.keys() komutu bize bir dict_keys nesnesi veriyor. Bu nesneyi programýnýzda kullanabilmek için isterseniz, bunu listeye, demete veya karakter dizisine dönüþtürebilirsiniz:
+
+>>> liste = list(sözlük.keys())
+>>> liste
+
+['b', 'c', 'a', 'd']
+
+>>> demet = tuple(sözlük.keys())
+>>> demet
+
+('b', 'c', 'a', 'd')
+
+>>> kardiz = "".join(sözlük.keys())
+>>> kardiz
+
+'bcad'
+
+Son örnekte sözlük anahtarlarýný karakter dizisine dönüþtürmek için str() fonksiyonunu deðil, karakter dizilerinin join() adlý metodunu kullandýðýmýza dikkat edin. Çünkü tuple() ve list() fonksiyonlarýnýn aksine str() fonksiyonu, sözlükteki anahtarlarýn nasýl bir ölçüte göre karakter dizisine çevrileceðine dair bir kural içermez. Zira siz bu sözlük anahtarlarýný pek çok farklý þekilde karakter dizisine çevirebilirsiniz. Örneðin öðeleri karakter dizisi içine yerleþtirirken öðelerin arasýna virgül koymak isteyebilirsiniz:
+
+>>> kardiz = ', '.join(sözlük.keys())
+>>> kardiz
+
+'b, c, a, d'
+
+Eðer sözlük anahtarlarýný str() fonksiyonu yardýmýyla karakter dizisine dönüþtürmeye kalkýþýrsanýz beklemediðiniz bir çýktý alýrsýnýz.
+

@@ -1,0 +1,140 @@
+
+Fonksiyon Tanýmlamak ve Çaðýrmak
+
+Bir önceki bölümde, kayýt_oluþtur() adlý hayali bir fonksiyondan söz etmiþtik. Tasarýmýza göre bu fonksiyon þu þekilde kullanýlacak:
+
+kayýt_oluþtur("Ahmet", "Gür", "Pardus", "Ýzmir")
+
+Bu komutu verdiðimizde ise þöyle bir çýktý almayý planlýyoruz:
+
+------------------------------
+isim : Ahmet
+soyisim : Gür
+iþletim sistemi: Pardus
+þehir : Ýzmir
+------------------------------
+
+Dediðimiz gibi, böyle bir þey yapmak Python’la mümkündür. Ancak tabii ki kayýt_oluþtur() adlý böyle bir fonksiyonu kullanabilmenin belli ön koþullarý var. Nasýl sayý adlý bir deðiþkeni kullanabilmek için öncelikle bu ada sahip bir deðiþken tanýmlamýþ olmamýz gerekiyorsa, ayný þekilde kayýt_oluþtur() adlý bir fonksiyonu kullanabilmek için de öncelikle bu ada sahip bir fonksiyonu tanýmlamýþ olmamýz gerekiyor. Zira mesela input() ve print() gibi fonksiyonlarý kullanabiliyor olmamýz, Python geliþtiricilerinin bu fonksiyonlarý tanýmlayýp dilin içine gömmüþ olmalarý sayesindedir.
+
+Ýþte biz de kayýt_oluþtur() adlý fonksiyonu kullanabilmek için bu ada sahip fonksiyonu aþaðýdaki þekilde tanýmlamalýyýz:
+
+def kayýt_oluþtur(isim, soyisim, iþsis, þehir):
+print("-"*30)
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+print("-"*30)
+
+Ýlk bakýþta bu kodlar size hiçbir þey ifade etmemiþ olabilir. Ama hiç endiþe etmeyin. Biz birazdan bu satýrlarýn ne anlama geldiðini bütün ayrýntýlarýyla anlatacaðýz. Siz þimdilik anlamadýðýnýz kýsýmlarý görmezden gelip okumaya devam edin.
+
+Yukarýdaki kodlar yardýmýyla fonksiyonumuzu tanýmlamýþ olduk. Artýk elimizde, týpký print() veya input() gibi, kayýt_oluþtur() adlý ‘ev yapýmý’ bir fonksiyon var. Dolayýsýyla bu yeni fonksiyonumuzu, daha önce öðrendiðimiz fonksiyonlarý nasýl kullanýyorsak ayný þekilde kullanabiliriz. Yani aþaðýdaki gibi komutlar yazabiliriz:
+
+kayýt_oluþtur("Fýrat", "Özgül", "Ubuntu", "Ýstanbul")
+kayýt_oluþtur("Mehmet", "Öztaban", "Debian", "Ankara")
+
+Yalnýz fonksiyonumuzu tanýmlayýp bitirdikten sonra, bu fonksiyonu kullanýrken, kodlarýmýzýn hizalamasýna dikkat ediyoruz. Fonksiyonu kullanmak için yazdýðýmýz kodlarý def ifadesinin hizasýna getiriyoruz. Yani:
+
+def kayýt_oluþtur(isim, soyisim, iþsis, þehir):
+print("-"*30)
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+print("-"*30)
+
+kayýt_oluþtur("Fýrat", "Özgül", "Ubuntu", "Ýstanbul")
+kayýt_oluþtur("Mehmet", "Öztaban", "Debian", "Ankara")
+
+Yukarýdaki yapýyý kullanarak, istediðiniz sayýda kayýt oluþturabilirsiniz. Mesela:
+
+kayýt_oluþtur("Ýlkay", "Kaya", "Mint", "Adana")
+kayýt_oluþtur("Seda", "Kara", "SuSe", "Erzurum")
+
+Gördüðünüz gibi, yukarýdaki yöntem sayesinde kodlarýmýzdaki tekrar eden kýsýmlar ortadan kalktý. Yukarýdaki fonksiyonun bize nasýl bir kolaylýk saðladýðýný daha net görebilmek için, fonksiyon kullanarak sadece þu 11 satýrla elde ettiðimiz çýktýyý, fonksiyon kullanmadan elde etmeyi deneyebilirsiniz:
+
+def kayýt_oluþtur(isim, soyisim, iþsis, þehir):
+print("-"*30)
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+print("-"*30)
+
+kayýt_oluþtur("Fýrat", "Özgül", "Ubuntu", "Ýstanbul")
+kayýt_oluþtur("Mehmet", "Öztaban", "Debian", "Ankara")
+kayýt_oluþtur("Ýlkay", "Kaya", "Mint", "Adana")
+kayýt_oluþtur("Seda", "Kara", "SuSe", "Erzurum")
+
+Bu anlattýklarýmýz size çok karmaþýk gelmiþ olabilir. Ama endiþe etmenize hiç gerek yok. Biraz sonra, yukarýda yazdýðýmýz kodlarýn hepsini didik didik edeceðiz. Ama öncelikle yukarýdaki kod parçasýný yapýsal olarak bir incelemenizi istiyorum. Fonksiyonu tanýmladýðýmýz aþaðýdaki kod parçasýna þöyle bir baktýðýnýzda neler görüyorsunuz?
+
+def kayýt_oluþtur(isim, soyisim, iþsis, þehir):
+print("-"*30)
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+print("-"*30)
+
+kayýt_oluþtur("Fýrat", "Özgül", "Ubuntu", "Ýstanbul")
+
+Bu kodlarý incelediðinizde þu noktalar dikkatinizi çekiyor olmalý:
+
+Kodlar def adlý bir ifade ile baþlamýþ. 
+Bunun ardýndan ‘kayýt_oluþtur’ ifadesini görüyoruz. 
+Bu ifadeyi, içinde birtakým kelimeler barýndýran bir parantez çifti izliyor. 
+Parantezin içinde, isim, soyisim, iþsis ve þehir adlý deðerler var. 
+def ile baþlayan bu satýr iki nokta üst üste iþareti ile son buluyor. 
+Ýlk satýrýn ardýndan gelen kýsým ilk satýra göre girintili bir þekilde yazýlmýþ. 
+kayýt_oluþtur("Fýrat", "Özgül", "Ubuntu", "Ýstanbul") satýrý önceki satýrlara göre girintisiz yazýlmýþ. 
+Eðer bu kodlara dikkatlice bakacak olursanýz, aslýnda bu kodlarýn topu topu iki parçadan oluþtuðunu göreceksiniz. Ýsterseniz yukarýdaki yapýyý biraz sadeleþtirelim:
+
+def kayýt_oluþtur(parametre1, parametre2, parametre3, parametre4):
+(...)
+
+kayýt_oluþtur(parametre1, parametre2, parametre3, parametre4)
+
+Bu yapýnýn ilk parçasý þudur:
+
+def kayýt_oluþtur(parametre1, parametre2, parametre3, parametre4):
+(...)
+
+Ýkinci parçasý ise þu:
+
+kayýt_oluþtur(parametre1, parametre2, parametre3, parametre4)
+
+Teknik olarak söylemek gerekirse, ilk parçaya ‘fonksiyon tanýmý’ (function definition), ikinci parçaya ise ‘fonksiyon çaðrýsý’ (function call) adý verilir. Dolayýsýyla bir fonksiyonun yaþam döngüsü iki aþamadan oluþur. Buna göre bir fonksiyon önce tanýmlanýr;
+
+def kayýt_oluþtur(parametre1, parametre2, parametre3, parametre4):
+(...)
+
+...sonra da çaðrýlýr;
+
+kayýt_oluþtur(parametre1, parametre2, parametre3, parametre4)
+
+Aslýnda biz þimdiye kadar gördüðümüz print(), type(), open() vb. fonksiyonlarda bu ‘fonksiyon çaðrýsý’ kýsmýyla zaten tanýþmýþtýk. Zira þu komut tam anlamýyla bir fonksiyon çaðrýsýdýr (yani bir fonksiyon çaðýrma iþlemidir):
+
+print("Fýrat", "Özgül", "Adana", 32)
+
+Gördüðünüz gibi, yukarýdaki komutun yapý olarak þu komuttan hiçbir farký yok:
+
+kayýt_oluþtur("Fýrat", "Özgül", "Ubuntu", "Ýstanbul")
+
+Bu iki fonksiyon arasýndaki tek fark, print() fonksiyonunu Python geliþtiricilerinin; kayýt_oluþtur() fonksiyonunu ise sizin tanýmlamýþ olmanýzdýr.
+
+Elbette bu iki fonksiyon yapý olarak birbirinin ayný olsa da, iþlev olarak birbirinden farklýdýr. print() fonksiyonunun görevi kendisine parametre olarak verilen deðerleri ekrana çýktý vermek iken, kayýt_oluþtur() fonksiyonunun görevi kendisine parametre olarak verilen deðerleri kullanarak bir kayýt oluþturmaktýr.
+
+Bu derse gelinceye kadar öðrendiðimiz print(), type() ve open() gibi fonksiyonlara teknik olarak ‘gömülü fonksiyonlar’ (builtin functions) adý verilir. Bu fonksiyonlara bu adýn verilmiþ olmasýnýn sebebi, bu fonksiyonlarýn gerçekten de Python programlama dili içine gömülü bir vaziyette olmalarýdýr. Dikkat ederseniz kendi yazdýðýmýz fonksiyonlarý kullanabilmek için öncelikle fonksiyonu tanýmlamamýz gerekiyor. Gömülü fonksiyonlar ise Python geliþtiricileri tarafýndan halihazýrda tanýmlanmýþ olduðu için bunlarý biz herhangi bir tanýmlama iþlemi yapmaya gerek kalmadan doðrudan çaðýrabiliyoruz.
+
+Böylece bir fonksiyonun yapý olarak neye benzediðini üstünkörü de olsa incelemiþ olduk. Buraya kadar anlatýlan kýsýmda bazý noktalarý anlamakta zorlanmýþ olabilirsiniz. Eðer öyleyse hiç endiþelenmeyin. Bu gayet doðal.
+
+Gelin isterseniz þimdi yukarýda anlattýklarýmýzýn içini doldurmaya çalýþalým.
+

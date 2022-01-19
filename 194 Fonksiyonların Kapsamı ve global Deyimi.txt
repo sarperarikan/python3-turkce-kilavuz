@@ -1,0 +1,195 @@
+
+Fonksiyonlarýn Kapsamý ve global Deyimi
+
+Elimizde þöyle bir kod olduðunu düþünelim:
+
+x = 0
+
+def fonk():
+x = 1
+return x
+
+Bu kodlarda, fonksiyonun dýþýnda x adlý bir deðiþken var. Fonksiyonun içinde de yine x adýný taþýyan baþka bir deðiþken var. Fonksiyonumuzun görevi bu x deðiþkenini döndürmek.
+
+Bu noktada size þöyle bir soru sormama izin verin: Acaba fonksiyon içinde tanýmladýðýmýz x deðiþkeni, fonksiyon dýþýndaki x deðiþkeninin deðerini deðiþtiriyor mu? Bu sorunun cevabýný þu kodlarla verelim:
+
+x = 0
+
+def fonk():
+x = 1
+return x
+
+print('fonksiyon içindeki x: ', fonk())
+print('fonksiyon dýþýndaki x: ', x)
+
+Bu kodlarý çalýþtýrdýðýmýzda þu çýktýyý alacaðýz:
+
+fonksiyon içindeki x: 1
+fonksiyon dýþýndaki x: 0
+
+Gördüðünüz gibi fonksiyon içindeki ve fonksiyon dýþýndaki ayný adlý deðiþkenler birbirine karýþmýyor. Bunun sebebi, Python’daki ‘isim alaný’ (namespace) adlý bir kavramdýr.
+
+Peki isim alaný ne demek?
+
+Python’da deðiþkenlerin, fonksiyonlarýn ve daha sonra göreceðiniz gibi sýnýflarýn bir kapsamý vardýr. Bu kapsama Python’da ‘isim alaný’ adý verilir. Dolayýsýyla Python’da her nesnenin, geçerli ve etkin olduðu bir isim alaný bulunur. Örneðin yukarýdaki kodlarda fonksiyon dýþýndaki x deðiþkeni ana isim alanýnda yer alan ‘global’ bir deðiþkendir. Fonksiyon içindeki x deðiþkeni ise fonk() deðiþkeninin isim alaný içinde yer alan ‘lokal’ bir deðiþkendir. Bu iki deðiþken, adlarý ayný da olsa, birbirlerinden farklý iki nesnedir.
+
+Bir de þu örneklere bakalým:
+
+x = []
+print('x\'in ilk hali:', x)
+
+def deðiþtir():
+print('x\'i deðiþtiriyoruz...')
+x.append(1)
+return x
+
+deðiþtir()
+print('x\'in son hali: ', x)
+
+Burada ise daha farklý bir durum söz konusu. Fonksiyon içinde append() metodunu kullanarak yaptýðýmýz ekleme iþlemi fonksiyon dýþýndaki listeyi de etkiledi. Peki ama bu nasýl oluyor?
+
+Python herhangi bir nesneye göndermede bulunduðumuzda, yani o nesnenin deðerini talep ettiðimizde aradýðýmýz nesneyi ilk önce mevcut isim alaný içinde arar. Eðer aranan nesneyi mevcut isim alaný içinde bulamazsa yukarýya doðru bütün isim alanlarýný tek tek kontrol eder.
+
+Birkaç örnek verelim:
+
+def fonk():
+print(x)
+
+fonk()
+
+Tahmin edebileceðiniz gibi, bu kodlar þu hatayý verecektir:
+
+Traceback (most recent call last):
+File "deneme.py", line 4, in <module>
+fonk()
+File "deneme.py", line 2, in fonk
+print(x)
+NameError: global name 'x' is not defined
+
+Bu hatanýn sebebi, x adlý bir deðiþkenin tanýmlanmamýþ olmasýdýr. Bu hatayý gidermek için þöyle bir kod yazabiliriz:
+
+x = 0
+
+def fonk():
+print(x)
+
+fonk()
+
+Bu kod global alandaki x deðiþkeninin deðerini verecektir.
+
+Yukarýdaki örnekte, biz print() ile x‘in deðerini sorguladýðýmýzda Python öncelikle fonk() adlý fonksiyonun isim alanýna baktý. Orada x‘i bulamayýnca bu kez global alana yönelip, orada bulduðu x‘in deðerini yazdýrdý.
+
+Bu durumu daha net anlayabilmek için þu kodlarý inceleyelim:
+
+x = 0
+
+def fonk():
+x = 10
+print(x)
+
+fonk()
+print(x)
+
+Bu kodlarý çalýþtýrdýðýmýzda 10 çýktýsýný alýrýz. Çünkü Python, dediðimiz gibi, öncelikle mevcut isim alanýný kontrol ediyor. x deðiþkenini mevcut isim alanýnda bulduðu için de global alana bakmasýna gerek kalmýyor.
+
+Yalnýz burada dikkat etmemiz gereken bazý þeyler var.
+
+Dediðimiz gibi, global isim alanýndaki nesnelerin deðerini lokal isim alanlarýndan sorgulayabiliyoruz. Ancak istediðimiz þey global isim alanýndaki nesnelerin deðerini deðiþtirmekse bazý kavramlar arasýndaki farklarý iyi anlamamýz gerekiyor.
+
+Python’da bir nesnenin deðerini deðiþtirmekle, o nesneyi yeniden tanýmlamak farklý kavramlardýr.
+
+Eðer bir nesne deðiþtirilebilir bir nesne ise, o nesnenin deðerini, lokal isim alanlarýndan deðiþtirebilirsiniz:
+
+x = set()
+
+def fonk():
+x.add(10)
+return x
+
+print(fonk())
+
+Ama eðer bir nesne deðiþtirilemez bir nesne ise, o nesnenin deðerini zaten normalde de deðiþtiremezsiniz. Deðiþtirmiþ gibi yapmak için ise o nesneyi yeniden tanýmlamanýz gerektiðini biliyorsunuz:
+
+>>> isim = 'Fýrat'
+>>> isim += ' Özgül'
+>>> print(isim)
+
+Fýrat Özgül
+
+Burada yaptýðýmýz þey, karakter dizisinin deðerini deðiþtirmekten ziyade bu karakter dizisini yeniden tanýmlamaktýr. Çünkü bildiðiniz gibi karakter dizileri deðiþtirilemeyen veri tipleridir.
+
+Ýþte karakter dizileri gibi deðiþtirilemeyen nesneleri, lokal isim alanlarýnda deðiþtiremeyeceðiniz gibi, yeniden tanýmlayamazsýnýz da...
+
+isim = 'Fýrat'
+
+def fonk():
+isim += ' Özgül'
+return isim
+
+print(fonk())
+
+Bu kodlarý çalýþtýrdýðýnýzda Python size bir hata mesajý gösterecektir.
+
+Ayný durum deðiþtirilebilir nesneler için de geçerlidir:
+
+isim_listesi = []
+
+def fonk():
+isim_listesi += ['Fýrat Özgül', 'Orçun Kunek']
+return isim_listesi
+
+print(fonk())
+
+Deðiþtirilebilen bir veri tipi olan listeleri, fonksiyon içinde yeniden tanýmlayamazsýnýz. Ancak tabii isterseniz listeleri deðiþikliðe uðratabilirsiniz:
+
+isim_listesi = []
+
+def fonk():
+isim_listesi.extend(['Fýrat Özgül', 'Orçun Kunek'])
+return isim_listesi
+
+print(fonk())
+
+Bu kodlar düzgün bir þekilde çalýþýp, fonksiyon dýþýndaki isim_listesi adlý listeyi deðiþikliðe uðratacaktýr. Ancak þu kodlar hata verecektir:
+
+isim_listesi = []
+
+def fonk():
+isim_listesi += ['Fýrat Özgül', 'Orçun Kunek']
+return isim_listesi
+
+print(fonk())
+
+Ýþte Python programlama dili bu tür durumlar için çözüm olacak bir araç sunar bize. Bu aracýn adý global.
+
+Gelin isterseniz bu global adlý deyimin nasýl kullanýlacaðýna bakalým önce...
+
+Þu kodlarýn hata vereceðini biliyorsunuz:
+
+isim = 'Fýrat'
+
+def fonk():
+isim += ' Özgül'
+return isim
+
+print(fonk())
+
+Ama bu kodlara þöyle bir ekleme yaparsanýz iþler deðiþir:
+
+isim = 'Fýrat'
+
+def fonk():
+global isim
+isim += ' Özgül'
+return isim
+
+print(fonk())
+
+Burada fonk() adlý fonksiyonun ilk satýrýnda þöyle bir kod görüyoruz:
+
+global isim
+
+Ýþte bu satýr, isim adlý deðiþkenin global alana taþýnmasýný saðlýyor. Böylece global alanda bulunan isim adlý deðiþkeni deðiþikliðe uðratabiliyoruz.
+
+global deyimi her ne kadar ilk bakýþta çok faydalý bir araçmýþ gibi görünse de aslýnda programlarýmýzda genellikle bu deyimi kullanmaktan kaçýnmamýz iyi bir fikir olacaktýr. Çünkü bu deyim aslýnda global alaný kirletmemize neden oluyor. Global deðiþkenlerin lokal isim alanlarýnda deðiþikliðe uðratýlmasý, eðer dikkatsiz davranýrsanýz programlarýnýzýn hatalý çalýþmasýna yol açabilir.
+

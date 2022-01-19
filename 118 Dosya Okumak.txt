@@ -1,0 +1,107 @@
+
+Dosya Okumak
+
+Bir önceki baþlýkta dosyalarýn içine bilgi girme iþleminin Python programlama dilinde nasýl yapýldýðýný inceledik. Elbette bir dosyaya yazabilmenin yanýsýra, bilgisayarýnýzda halihazýrda var olan bir dosyayý okumak da isteyeceksiniz. Peki bunu nasýl yapacaksýnýz?
+
+Python’da bir dosyayý okumak için yukarýda anlattýðýmýz yazma yöntemine benzer bir yöntem kullanacaðýz. Bildiðiniz gibi, bir dosyayý yazma kipinde açmak için “w” harfini kullanýyoruz. Bir dosyayý okuma kipinde açmak için ise “r” harfini kullanacaðýz.
+
+Mesela, bilgisayarýmýzda var olan fihrist.txt adlý dosyayý okumak üzere açalým:
+
+fihrist = open("fihrist.txt", "r")
+
+Bir dosyayý open() fonksiyonu yardýmýyla açarken kip parametresi için “r” harfini kullanýrsak, Python o dosyayý okuma yetkisiyle açacaktýr. Yalnýz burada þöyle bir özellik var: Eðer bir dosyayý okuma kipinde açacaksanýz, bu “r” harfini hiç belirtmeseniz de olur. Yani þu komut bilgisayarýmýzdaki fihrist.txt adlý dosyayý okuma kipinde açacaktýr:
+
+fihrist = open("fihrist.txt")
+
+Dolayýsýyla bir dosyayý açarken kip belirtmediðimizde Python bizim o dosyayý okuma kipinde açmak istediðimizi varsayacaktýr.
+
+Hatýrlarsanýz, “w” kipiyle açtýðýmýz bir dosyaya yazmak için write() adlý bir metottan yararlanýyorduk. “r” kipiyle açtýðýmýz bir dosyayý okumak için ise read(), readline() ve readlines() adlý üç farklý metottan yararlanacaðýz.
+
+Yukarýdaki üç metot da Python’da dosya okuma iþlemlerini gerçekleþtirmemizi saðlar. Peki bu metotlarýn üçü de ayný iþi yapýyorsa neden tek bir metot deðil de üç farklý metot var?
+
+Bu metotlarýn üçü de dosya okumaya yarasa da, verdikleri çýktýlar birbirinden farklýdýr. O yüzden farklý amaçlar için farklý metodu kullanmanýz gereken durumlarla karþýlaþabilirsiniz.
+
+Bu metotlar arasýndaki farký anlamanýn en kolay yolu bu üç metodu sýrayla kullanýp, çýktýlarý incelemektir.
+
+Öncelikle içeriði þu olan, fihrist.txt adlý bir dosyamýzýn olduðunu varsayalým:
+
+Ahmet Özbudak : 0533 123 23 34
+Mehmet Sülün : 0532 212 22 22
+Sami Sam : 0542 333 34 34
+
+Þimdi bir dosya açýp þu kodlarý yazalým:
+
+fihrist = open("fihrist.txt")
+print(fihrist.read())
+
+Bu kodlarý çalýþtýrdýðýmýzda, eðer kullandýðýnýz iþletim sistemi GNU/Linux ise muhtemelen þu çýktýyý elde edeceksiniz:
+
+Ahmet Özbudak : 0533 123 23 34
+Mehmet Sülün : 0532 212 22 22
+Sami Sam : 0542 333 34 34
+
+Ama eðer bu kodlarý Windows’ta çalýþtýrdýysanýz Türkçe karakterler bozuk çýkmýþ olabilir. Bu durumu þimdilik görmezden gelin. Birazdan bu durumun nedenini açýklayacaðýz.
+
+Yukarýda elde ettiðimiz þey bir karakter dizisidir bunu þu þekilde teyit edebileceðinizi biliyorsunuz:
+
+fihrist = open("fihrist.txt")
+print(type(fihrist.read()))
+
+Gördüðünüz gibi, read() metodu bize, dosyanýn bütün içeriðini bir karakter dizisi olarak veriyor. Bir de þuna bakalým:
+
+fihrist = open("fihrist.txt")
+print(fihrist.readline())
+
+Burada da readline() metodunu kullandýk. Bu kodlar bize þöyle bir çýktý veriyor:
+
+Ahmet Özbudak : 0533 123 23 34
+
+read() metodu bize dosya içeriðinin tamamýný veriyordu. Gördüðünüz gibi readline() metodu tek bir satýr veriyor. Yani bu metot yardýmýyla dosyalarý satýr satýr okuyabiliyoruz.
+
+Bu metodun iþleyiþ tarzýný daha iyi görebilmek için bu kodlarý dosyaya yazýp çalýþtýrmak yerine etkileþimli kabuk üzerinden de çalýþtýrabilirsiniz:
+
+>>> fihrist = open("fihrist.txt", "r")
+>>> print(fihrist.readline())
+
+Ahmet Özbudak : 0533 123 23 34
+
+>>> print(fihrist.readline())
+
+Mehmet Sülün  : 0532 212 22 22
+
+>>> print(fihrist.readline())
+
+Sami Sam      : 0542 333 34 34
+
+Gördüðünüz gibi, readline() metodu gerçekten de dosyayý satýr satýr okuyor.
+
+Son satýrý da okuduktan sonra, readline() metodunu tekrar çalýþtýrýrsak ne olur peki? Bakalým:
+
+>>> print(fihrist.readline())
+
+Gördüðünüz gibi, bu defa hiçbir çýktý almadýk. Çünkü dosyada okunacak satýr kalmadý. Bu yüzden de Python bize boþ bir çýktý verdi. Bu durumu daha net görmek için kodu etkileþimli kabukta print() olmadan yazabilirsiniz:
+
+>>> fihrist.readline()
+
+''
+
+Gerçekten de elimizdeki þey boþ bir karakter dizisi... Demek ki bir dosya tamamen okunduktan sonra, Python otomatik olarak tekrar dosyanýn baþýna dönmüyor. Böyle bir durumda dosyanýn baþýna nasýl geri döneceðimizi inceleyeceðiz, ama isterseniz biz baþka bir konuyla devam edelim.
+
+Not
+
+Bir dosyanýn tamamý okunduktan sonra otomatik olarak baþa sarýlmamasý özelliði sadece readline() metodu için deðil, öteki bütün dosya okuma metotlarý için de geçerlidir. Yani bir dosyayý read(), readline() veya readlines() metotlarýndan herhangi biri ile okuduðunuzda imleç baþa dönmez.
+
+Dediðimiz ve gösterdiðimiz gibi, read() ve readline() metotlarý bize bir karakter dizisi döndürüyor. Bu iki metot arasýndaki fark ise, read() metodunun dosyanýn tamamýný önümüze sererken, readline() metodunun dosyayý satýr satýr okuyup, her defasýnda tek bir satýrý önümüze sürmesidir. Bir de readlines() metodunun ne yaptýðýna bakalým...
+
+Þu kodlarý yazalým:
+
+fihrist = open("fihrist.txt")
+print(fihrist.readlines())
+
+Bu kodlarý yazdýðýmýzda þuna benzer bir çýktý alacaðýz:
+
+['Ahmet Özbudak : 0533 123 23 34\n', 'Mehmet Sülün  : 0532 212 22 22\n',
+'Sami Sam      : 0542 333 34 34']
+
+Gördüðünüz gibi, bu defa karakter dizisi yerine bir liste ile karþýlaþýyoruz. Demek ki read() ve readline() metotlarý çýktý olarak bize bir karakter dizisi verirken, readlines() metodu liste veriyormuþ. Bunun neden önemli bir bilgi olduðunu artýk gayet iyi biliyor olmanýz lazým. Zira bir verinin tipi, o veriyle neler yapýp neler yapamayacaðýmýzý doðrudan etkiler...
+

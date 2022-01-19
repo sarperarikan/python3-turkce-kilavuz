@@ -1,0 +1,13 @@
+
+ord()
+
+Bu fonksiyon, bir karakterin sayý karþýlýðýný verir:
+
+>>> ord("\n")
+
+10
+
+>>> ord("€")
+
+8364
+

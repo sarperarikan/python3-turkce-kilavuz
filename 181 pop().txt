@@ -1,0 +1,16 @@
+
+pop()
+
+Ýnceleyeceðimiz son metot pop() metodu olacak. Gerçi bu metot bize hiç yabancý deðil. Bu metodu listeler konusundan hatýrlýyoruz. Orada öðrendiðimize göre, bu metot listenin bir öðesini silip ekrana basýyordu. Aslýnda buradaki fonksiyonu da farklý deðil. Burada da kümelerin öðelerini silip ekrana basýyor:
+
+>>> a = set(["elma", "armut", "kebap"])
+>>> a.pop()
+
+'elma'
+
+Peki bu metot hangi ölçüte göre kümeden öðe siliyor? Herhangi bir ölçüt yok. Bu metot, küme öðelerini tamamen rastgele siliyor.
+
+Böylelikle Python’da Listeler, Demetler, Sözlükler ve Kümeler konusunu bitirmiþ olduk. Bu konularý sýk sýk tekrar etmek, hiç olmazsa arada sýrada göz gezdirmek bazý þeylerin zihnimizde yer etmesi açýsýndan oldukça önemlidir.
+
+
+

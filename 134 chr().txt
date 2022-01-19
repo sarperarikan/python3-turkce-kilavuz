@@ -1,0 +1,12 @@
+
+chr()
+
+Bu fonksiyon, bir sayýnýn karakter karþýlýðýný verir:
+
+>>> chr(10)
+
+'\n'
+
+>>> chr(8364)
+
+'€'

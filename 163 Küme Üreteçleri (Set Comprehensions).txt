@@ -1,0 +1,37 @@
+
+Küme Üreteçleri (Set Comprehensions)
+
+Bildiðiniz gibi liste üreteçleri, liste oluþturmanýn kýsa ve temiz bir yoludur. Ayný þekilde sözlük üreteçleri de sözlük oluþturmanýn kýsa ve temiz bir yoludur.
+
+Ýþte liste üreteçlerini ve sözlük üreteçlerini kullanarak nasýl tek satýrda ve hýzlý bir þekilde listeler ve sözlükler üretebiliyorsak, ayný þekilde küme üreteçlerini kullanarak tek satýrda ve hýzlý bir þekilde kümeler de üretebiliriz.
+
+Örneðin elimizde þöyle bir liste olduðunu düþünelim:
+
+import random
+
+liste = [random.randint(0, 10000) for i in range(1000)]
+
+Bu arada, buradaki random adlý modüle þimdilik takýlmayýn. Birkaç bölüm sonra bu modülü inceleyeceðiz. Biz þimdilik random‘un da týpký sys ve os gibi bir modül olduðunu ve rastgele sayýlar üretmemizi saðladýðýný bilelim yeter. Yukarýdaki kodlarda da bu modül 0 ile 10000 arasýnda rstgele 1000 adet sayý üretmemizi saðladý.
+
+Þimdi amacýmýz bu liste içinde yer alan sayýlardan, deðeri 100‘den küçük olanlarý bulmak.
+
+Bunun için þu kodlarý kullanabiliriz:
+
+import random
+
+liste = [random.randint(0, 10000) for i in range(1000)]
+
+yüzden_küçük_sayýlar = [i for i in liste if i < 100]
+print(yüzden_küçük_sayýlar)
+
+Ancak ortaya çýkan listede ayný sayýlardan birkaç tane olabilir. Ýþte eðer birbirinin ayný olmayan sayýlardan oluþmuþ bir listeyi hýzlý ve pratik bir þekilde elde etmek istiyorsanýz küme üreteçlerini kullanabilirsiniz:
+
+import random
+
+liste = [random.randint(0, 10000) for i in range(1000)]
+
+küme = {i for i in liste if i < 100}
+print(küme)
+
+Gördüðünüz gibi, küme üreteçlerinin sözdizimi, liste ve sözlük üreteçlerinin sözdizimine çok benziyor.
+

@@ -1,0 +1,62 @@
+
+Dosyayý Ýleri-Geri Sarmak
+
+Dosya okumak için kullanýlan metotlarý anlatýrken, dosya bir kez okunduktan sonra imlecin otomatik olarak dosyanýn baþýna dönmediðini görmüþtük. Yani mesela read() metoduyla dosyayý bir kez okuduktan sonra, dosyayý tekrar okumak istersek elde edeceðimiz þey boþ bir karakter dizisi olacaktýr. Çünkü dosya okunduktan sonra okunacak baþka bir satýr kalmamýþ, imleç dosya sonuna ulaþmýþ ve otomatik olarak da baþa dönmemiþtir. Bu olguyu etkileþimli kabuk üzerinde daha net bir þekilde görebileceðinizi biliyorsunuz.
+
+Peki dosyayý tamamen okuduktan sonra tekrar baþa dönmek istersek ne yapacaðýz? Bir dosya tamamen okunduktan sonra tekrar baþa dönmek için dosyalarýn seek() adlý bir metodundan yararlanacaðýz.
+
+Mesela þu örneklere bakalým. Bu örnekleri daha iyi anlamak için bunlarý Python’ýn etkileþimli kabuðunda çalýþtýrmanýzý tavsiye ederim:
+
+>>> f = open("python.txt")
+>>> f.read()
+
+'Bu programlama dili Guido Van Rossum adlý Hollandalý bir
+programcý\ntarafýndan 90’lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr.
+Çoðu insan,\nisminin Python olmasýna aldanarak, bu programlama dilinin,
+adýný piton\nyýlanýndan aldýðýný düþünür. Ancak zannedildiðinin aksine bu
+programlama dilinin\nadý piton yýlanýndan gelmez. Guido Van Rossum bu
+programlama dilini, The Monty\nPython adlý bir Ýngiliz komedi grubunun,
+Monty Python’s Flying Circus adlý\ngösterisinden esinlenerek adlandýrmýþtýr.
+Ancak her ne kadar gerçek böyle olsa\nda, Python programlama dilinin pek çok
+yerde bir yýlan figürü ile temsil\nedilmesi neredeyse bir gelenek halini
+almýþtýr.\n'
+
+Burada open() fonksiyonunu kullanarak python.txt adlý bir dosyayý açýp, read() metodu yardýmýyla da bu dosyanýn içeriðini okuduk. Bu noktada dosyayý tekrar okumaya çalýþýrsak elde edeceðimiz þey boþ bir karakter dizisi olacaktýr:
+
+>>> f.read()
+
+''
+
+Çünkü dosya bir kez tamamen okunduktan sonra imleç otomatik olarak baþa dönmüyor. Dosyayý tekrar okumak istiyorsak, bunu baþa bizim sarmamýz lazým. Ýþte bunun için seek() metodunu kullanacaðýz:
+
+>>> f.seek(0)
+
+Gördüðünüz gibi seek() metodunu bir parametre ile birlikte kullandýk. Bu metoda verdiðimiz parametre, dosya içinde kaçýncý bayt konumuna gideceðimizi gösteriyor. Biz burada 0 sayýsýný kullanarak dosyanýn ilk baytýna, yani en baþýna dönmüþ olduk. Artýk dosyayý tekrar okuyabiliriz:
+
+>>> f.read()
+
+'Bu programlama dili Guido Van Rossum adlý Hollandalý bir
+programcý\ntarafýndan 90’lý yýllarýn baþýnda geliþtirilmeye baþlanmýþtýr.
+Çoðu insan,\nisminin Python olmasýna aldanarak, bu programlama dilinin,
+adýný piton\nyýlanýndan aldýðýný düþünür. Ancak zannedildiðinin aksine bu
+programlama dilinin\nadý piton yýlanýndan gelmez. Guido Van Rossum bu
+programlama dilini, The Monty\nPython adlý bir Ýngiliz komedi grubunun,
+Monty Python’s Flying Circus adlý\ngösterisinden esinlenerek adlandýrmýþtýr.
+Ancak her ne kadar gerçek böyle olsa\nda, Python programlama dilinin pek çok
+yerde bir yýlan figürü ile temsil\nedilmesi neredeyse bir gelenek halini
+almýþtýr.\n'
+
+Elbette seek() metodunu kullanarak istediðiniz bayt konumuna dönebilirsiniz. Mesela eðer dosyanýn 10. baytýnýn bulunduðu konuma dönmek isterseniz bu metodu þöyle kullanabilirsiniz:
+
+>>> f.seek(10)
+
+Eðer o anda dosyanýn hangi bayt konumunda bulunduðunuzu öðrenmek isterseniz de tell() adlý baþka bir metottan yararlanabilirsiniz. Bu metodu parametresiz olarak kullanýyoruz:
+
+>>> f.tell()
+
+20
+
+Bu çýktýya göre o anda dosyanýn 20. baytýnýn üzerindeyiz...
+
+Bu arada, dosya içinde bulunduðumuz konumu baytlar üzerinden tarif etmemizi biraz yadýrgamýþ olabilirsiniz. Acaba neden karakter deðil de bayt? Biraz sonra bu konuya geleceðiz. Biz þimdilik önemli baþka bir konuya deðinelim.
+

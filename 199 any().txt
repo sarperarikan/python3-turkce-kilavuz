@@ -1,0 +1,23 @@
+
+any()
+
+Any kelimesi Ýngilizcede ‘herhangi bir’ anlamýna gelir. Ýþte any() fonksiyonunun görevi de, bir dizi içindeki bütün deðerlerden en az biri True ise True çýktýsý vermektir.
+
+Örneðin:
+
+>>> liste = ['ahmet', 'mehmet', '']
+>>> any(liste)
+
+True
+
+any() fonksiyonunun True çýktýsý verebilmesi için listede yalnýzca bir adet True deðerli öðe olmasý yeterlidir. Bu fonksiyonun False çýktýsý verebilmesi için dizi içindeki bütün öðelerin bool deðerinin False olmasý gerekir:
+
+>>> l = ['', 0, [], (), set(), dict()]
+>>> any(l)
+
+False
+
+Ýçi boþ veri tiplerinin bool deðerinin False olduðunu biliyorsunuz.
+
+Týpký all() fonksiyonunda olduðu gibi, any() fonksiyonunu da, bir grup nesnenin bool deðerlerini denetlemek amacýyla kullanabilirsiniz.
+

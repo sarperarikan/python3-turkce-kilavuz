@@ -1,0 +1,45 @@
+
+all()
+
+All kelimesi Türkçede ‘hepsi’ anlamýna gelir. Bu fonksiyonun görevi de bu anlamý çaðrýþtýrýr. all() fonksiyonunun görevi, bir dizi içinde bulunan bütün deðerler True ise True deðeri, eðer bu deðerlerden herhangi biri False ise de False deðeri döndürmektir.
+
+Örneðin elimizde þöyle bir liste olduðunu varsayalým:
+
+>>> liste = [1, 2, 3, 4]
+
+Þimdi all() fonksiyonunu bu liste üzerine uygulayalým:
+
+>>> all(liste)
+
+True
+
+Bildiðiniz gibi, 0 hariç bütün sayýlarýn bool deðeri True‘dur. Yukarýdaki listede False deðeri verebilecek herhangi bir deðer bulunmadýðýndan, all() fonksiyonu bu liste için True deðerini veriyor. Bir de þuna bakalým:
+
+>>> liste = [0, 1, 2, 3, 4]
+>>> all(liste)
+
+False
+
+Dediðimiz gibi, all() fonksiyonu ancak dizi içindeki bütün deðerlerin bool deðeri True ise True çýktýsý verecektir.
+
+Son bir örnek daha verelim:
+
+>>> liste = ['ahmet', 'mehmet', '']
+>>> all(liste)
+
+False
+
+Listede False deðerine sahip bir boþ karakter dizisi bulunduðu için all() fonksiyonu False çýktýsý veriyor.
+
+Bu fonksiyonu her türlü kodun bool deðerlerini test etmek için kullanabilirsiniz. Mesela bu fonksiyonu kullanarak, bir nesnenin listelenen özelliklerin hepsine sahip olup olmadýðýný denetleyebilirsiniz:
+
+>>> a = 3
+>>> t1 = a == 3 #sayý 3 mü?
+>>> t2 = a < 4 #sayý 4'ten küçük mü?
+>>> t3 = a % 2 == 1 #sayý bir tek sayý mý?
+>>> all([t1, t2, t3]) #sayý bu özelliklerin hepsine sahip mi?
+
+True
+
+Eðer sayýmýz bu özelliklerin birine bile sahip deðilse, all() fonksiyonu False çýktýsý verecektir.
+

@@ -1,0 +1,11 @@
+
+popitem()
+
+popitem() metodu da bir önceki bölümde öðrendiðimiz pop() metoduna benzer. Bu iki metodun görevleri hemen hemen aynýdýr. Ancak pop() metodu parantez içinde bir parametre alýrken, popitem() metodunun parantezi boþ, yani parametresiz olarak kullanýlýr. Bu metot bir sözlükten rastgele öðeler silmek için kullanýlýr. Daha önce de pek çok kez söylediðimiz gibi, sözlükler sýrasýz veri tipleridir. Dolayýsýyla popitem() metodunun öðeleri silerken kullanabileceði bir sýra kavramý yoktur. Bu yüzden bu metot öðeleri rastgele silmeyi tercih eder...
+
+>>> sepet = {"meyveler": ("elma", "armut"), "sebzeler": ("pýrasa", "fasulye")}
+
+>>> sepet.popitem()
+
+Bu komut sözlükten rastgele bir anahtarý, deðerleriyle birlikte sözlükten silecektir. Eðer sözlük boþsa bu metot bize bir hata mesajý gösterir.
+

@@ -1,0 +1,67 @@
+
+Kümelerin Yapýsý
+
+Bir önceki baþlýk altýnda kümelerin nasýl tanýmlanacaðýný inceledik. Gelin þimdi de biraz kümelerin yapýsýndan bahsedelim.
+
+Örneðin þöyle bir küme tanýmlayalým:
+
+>>> kardiz = "Python Programlama Dili"
+>>> küme = set(kardiz)
+>>> print(küme)
+
+{'g', 'D', 'a', ' ', 'o', 'n', 'm', 'l', 'i', 'h', 't', 'r', 'P', 'y'}
+
+Burada bir þey dikkatinizi çekmiþ olmalý. Bir öðeyi küme olarak tanýmlayýp ekrana yazdýrdýðýmýzda elde ettiðimiz çýktý, o öðe içindeki her bir alt öðeyi tek bir kez içeriyor. Yani mesela “Python Programlama Dili” içinde iki adet “P” karakteri var, ama çýktýda bu iki “P” karakterinin yalnýzca biri görünüyor. Buradan anlýyoruz ki, kümeler ayný öðeyi birden fazla tekrar etmez. Bu çok önemli bir özelliktir ve pek çok yerde iþimize yarar. Ayný durum karakter dizisi dýþýnda kalan öteki veri tipleri için de geçerlidir. Yani mesela eðer bir listeyi küme haline getiriyorsak, o listedeki öðeler küme içinde yalnýzca bir kez geçecektir. Listede ayný öðeden iki-üç tane bulunsa bile, kümemiz bu öðeleri teke indirecektir.
+
+>>> liste = ["elma", "armut", "elma", "kebap", "þeker", "armut",
+... "çilek", "aðaç", "þeker", "kebap", "þeker"]
+
+>>> for i in set(liste):
+... print(i)
+...
+aðaç
+elma
+þeker
+kebap
+çilek
+armut
+
+Gördüðünüz gibi, liste içinde birden fazla bulunan öðeler, Python’daki kümeler yardýmýyla teke indirilebiliyor.
+
+Öðrendiðimiz bu bilgi sayesinde, daha önce gördüðümüz count() metodunu da kullanarak, þöyle bir kod yazabiliriz:
+
+>>> liste = ["elma", "armut", "elma", "kiraz",
+... "çilek", "kiraz", "elma", "kebap"]
+
+>>> for i in set(liste):
+... print("{} listede {} kez geçiyor!".format(i, liste.count(i)))
+
+kebap listede 1 kez geçiyor!
+elma listede 3 kez geçiyor!
+kiraz listede 2 kez geçiyor!
+armut listede 1 kez geçiyor!
+çilek listede 1 kez geçiyor!
+
+Burada set(liste) ifadesini kullanarak, liste öðelerini eþþiz ve benzersiz bir hale getirdik.
+
+Kümelerin önemli bir özelliði de, týpký sözlükler gibi, herhangi bir þekilde ‘öðe sýrasý’ kavramýna sahip olmamasýdýr.
+
+Dikkatlice bakýn:
+
+>>> arayüz_takýmlarý = {'Tkinter', 'PyQT', 'PyGobject'}
+>>> arayüz_takýmlarý
+
+{'PyGobject', 'PyQT', 'Tkinter'}
+
+Sözlüklerde karþýlaþtýðýmýz durumun aynýsýnýn kümeler için de geçerli olduðuna dikkatinizi çekmek isterim. Gördüðünüz gibi, arayüz_takýmlarý adlý kümenin öðeleri, öðe tanýmlama sýrasýný çýktýda korumuyor. Biz ‘Tkinter’ öðesini kümenin ilk sýrasýna yerleþtirmiþtik, ama bu öðe çýktýda en sona gitti... Aynen sözlüklerde olduðu gibi, kümelerde de öðelerin tanýmlanma sýrasýna bel baðlayarak herhangi bir iþlem yapamazsýnýz. Bu durumun bir yansýmasý olarak, küme öðelerine sýralarýna göre de eriþemezsiniz:
+
+>>> arayüz_takýmlarý[0]
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'set' object does not support indexing
+
+Týpký hata mesajýnda da söylendiði gibi, küme adlý veri tipi açýsýndan öðe sýrasý diye bir kavram yoktur...
+
+Esasýnda tek bir küme pek bir iþe yaramaz. Kümeler ancak birden fazla olduðunda bunlarla yararlý iþler yapabiliriz. Çünkü kümelerin en önemli özelliði, baþka kümelerle karþýlaþtýrýlabilme kabiliyetidir. Yani mesela kümelerin kesiþimini, birleþimini veya farkýný bulabilmek için öncelikle elimizde birden fazla küme olmasý gerekiyor. Ýþte biz de þimdi bu tür iþlemleri nasýl yapacaðýmýzý öðreneceðiz. O halde hiç vakit kaybetmeden yolumuza devam edelim.
+

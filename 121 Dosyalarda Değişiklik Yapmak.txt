@@ -1,0 +1,173 @@
+
+Dosyalarda Deðiþiklik Yapmak
+
+Buraya kadar, Python’da bir dosyanýn nasýl oluþturulacaðýný, boþ bir dosyaya nasýl veri girileceðini ve varolan bir dosyadan nasýl veri okunacaðýný öðrendik. Ama varolan ve içi halihazýrda dolu bir dosyaya nasýl veri ekleneceðini bilmiyoruz. Ýþte þimdi bu iþlemin nasýl yapýlacaðýný tartýþacaðýz.
+
+Ancak burada önemli bir ayrýntýya dikkatinizi çekmek istiyorum. Dosyalarýn neresinde deðiþiklik yapmak istediðiniz büyük önem taþýr. Unutmayýn, dosyalarýn baþýnda, ortasýnda ve sonunda deðiþiklik yapmak birbirlerinden farklý kavramlar olup, birbirinden farklý iþlemlerin uygulanmasýný gerektirir.
+
+Biz bu bölümde dosyalarýn baþ tarafýna, ortasýna ve sonuna nasýl veri eklenip çýkarýlacaðýný ayrý ayrý tartýþacaðýz.
+
+
+Dosyalarýn Sonunda Deðiþiklik Yapmak
+
+Daha önce de söylediðimiz gibi, Python’da bir dosyayý açarken, o dosyayý hangi kipte açacaðýmýzý belirtmemiz gerekiyor. Yani eðer bir dosyayý okumak istiyorsak dosyayý “r” kipinde, yazmak istiyorsak da “w” kipinde açmamýz gerekiyor. Bildiðiniz gibi “w” kipi dosya içeriðini tamamen siliyor.
+
+Eðer bir dosyayý tamamen silmeden, o dosyaya ekleme yapmak veya o dosyada herhangi bir deðiþiklik yapmak istiyorsak, dosyamýzý buraya kadar öðrendiðimiz iki kipten daha farklý bir kiple açmamýz gerekiyor. Þimdi öðreneceðimiz bu yeni kipin adý “a”. Yani Python’da içi boþ olmayan bir dosyada deðiþiklik yapabilmek için “a” adlý bir kipten yararlanacaðýz:
+
+f = open(dosya_adý, "a")
+
+Örneðin yukarýda verdiðimiz fihrist.txt adlý dosyayý bu kipte açalým ve dosyaya yeni bir girdi ekleyelim:
+
+with open("fihrist.txt", "a") as f:
+f.write("Selin Özden\t: 0212 222 22 22")
+
+Gördüðünüz gibi, dosyaya yeni eklediðimiz girdiler otomatik olarak dosyanýn sonuna ilave ediliyor. Burada þu noktaya dikkat etmeniz lazým. Dosyanýn sonunda bir satýr baþý karakterinin (\n) bulunup bulunmamasýna baðlý olarak, dosyaya eklediðiniz yeni satýrlar düzgün bir þekilde bir alt satýra geçebileceði gibi, dosyanýn son satýrýnýn yanýna da eklenebilir. Dolayýsýyla duruma göre yukarýdaki satýrý þu þekilde yazmanýz gerekebilir:
+
+with open("fihrist.txt", "a") as f:
+f.write("\nSelin Özden\t: 0212 222 22 22")
+
+Burada bir alt satýra geçebilmek için ‘Selin’ ifadesinden önce bir satýr baþý karakteri eklediðimize dikkat edin. Ayrýca eðer bu satýrdan sonra bir baþka satýr daha ekleyecekseniz, ilgili satýrýn sonuna da bir satýr baþý karakteri koymanýz gerekebilir:
+
+with open("fihrist.txt", "a") as f:
+f.write("Selin Özden\t: 0212 222 22 22\n")
+
+Karþý karþýya olduðunuz duruma göre, satýr baþý karakterlerine ihtiyacýnýz olup olmadýðýný ve ihtiyacýnýz varsa bunlarý nereye yerleþtireceðinizi kendiniz deðerlendirmelisiniz.
+
+
+Dosyalarýn Baþýnda Deðiþiklik Yapmak
+
+Bir önceki bölümde dosya sonuna nasýl yeni satýr ekleyeceðimizi öðrendik. Ama siz programcýlýk maceranýz sýrasýnda muhtemelen dosyalarýn sonuna deðil de, en baþýna ekleme yapmanýz gereken durumlarla da karþýlaþacaksýnýz. Python’da bu iþi yapmak da çok kolaydýr.
+
+Örnek olmasý açýsýndan, fihrist.txt adlý dosyanýn içeriðini ele alalým:
+
+Ahmet Özbudak : 0533 123 23 34
+Mehmet Sülün : 0532 212 22 22
+Sami Sam : 0542 333 34 34
+Selin Özden : 0212 222 22 22
+
+Dosya içeriði bu. Eðer bu dosyayý “a” kipi ile açtýktan sonra doðrudan write() metodunu kullanarak bir ekleme yaparsak, yeni deðer dosyanýn sonuna eklenecektir. Ama biz mesela þu veriyi:
+
+Sedat Köz : 0322 234 45 45
+
+‘Ahmet Özbudak : 0533 123 23 34’ girdisinin hemen üstüne, yani dosyanýn sonuna deðil de en baþýna eklemek istersek ne yapacaðýz?
+
+Öncelikle þu kodlarý deneyelim:
+
+with open("fihrist.txt", "r") as f:
+veri = f.read()
+f.seek(0) #Dosyayý baþa sarýyoruz
+f.write("Sedat Köz\t: 0322 234 45 45\n"+veri)
+
+Bu kodlarý bir dosyaya kaydedip çalýþtýrdýðýmýzda Python bize þu hatayý verecektir:
+
+istihza@netbook:~/Desktop$ python3 deneme.py
+Traceback (most recent call last):
+  File "deneme.py", line 4, in <module>
+    f.write("Sedat Köz\t: 0322 234 45 45\n"+veri)
+io.UnsupportedOperation: not writable
+
+Bu hatayý almamýzýn sebebi dosyayý ‘okuma’ kipinde açmýþ olmamýz. Çünkü bir dosyayý okuma kipinde açtýðýmýzda o dosya üzerinde yalnýzca okuma iþlemleri yapabiliriz. Dosyaya yeni veri ekleme kýsmýna gelindiðinde, dosya yalnýzca okuma yetkisine sahip olduðu için, Python bize yukarýdaki hata mesajýný verecek, dosyanýn ‘yazýlamaz’ olduðundan þikayet edecektir.
+
+Peki dosyayý “w” karakteri yardýmýyla yazma kipinde açarsak ne olur? O zaman da þu meþ’um hatayý alýrýz:
+
+istihza@netbook:~/Desktop$ python3 deneme.py
+Traceback (most recent call last):
+  File "deneme.py", line 2, in <module>
+    veri = f.read()
+io.UnsupportedOperation: not readable
+
+Gördüðünüz gibi, bu kez de dosyanýn okunamadýðýna iliþkin bir hata alýyoruz. Çünkü biz bu kez de dosyayý ‘yazma’ kipinde açtýk. Ancak burada þöyle bir durum var. Bildiðiniz gibi, bir dosyayý “w” kipi ile açtýðýmýzda, Python bize hiçbir þey sormadan varolan içeriði silecektir. Burada da yukarýda yazdýðýmýz kodlar yüzünden dosya içeriðini kaybettik. Unutmayýn, dosya okuma-yazma iþlemleri belli bir takým riskleri içinde barýndýrýr. O yüzden bu tür iþlemleri yaparken fazladan dikkat göstermeliyiz.
+
+Yukarýda da gördüðümüz gibi, dosyamýzý “r” veya “w” kiplerinde açmak iþe yaramadý. Peki ne yapacaðýz? Bunun cevabý çok basit: Dosyamýzý hem okuma hem de yazma kipinde açacaðýz. Bunun için de farklý bir kip kullanacaðýz. Dikkatlice bakýn:
+
+with open("fihrist.txt", "r+") as f:
+veri = f.read()
+f.seek(0) #Dosyayý baþa sarýyoruz
+f.write("Sedat Köz\t: 0322 234 45 45\n"+veri)
+
+Burada “r+” adlý yeni bir kip kullandýðýmýza dikkat edin. “+” iþareti bir dosyayý hem okuma hem de yazma kipinde açmamýza yardýmcý olur. Ýþte bu iþareti “r” kipiyle birlikte “r+” þeklinde kullanarak dosyamýzý hem okuma hem de yazma kipinde açmayý baþardýk. Artýk ilgili dosya üzerinde hem okuma hem de yazma iþlemlerini ayný anda gerçekleþtirebiliriz.
+
+Yukarýdaki kodlarda ilk satýrýn ardýndan þöyle bir kod yazdýk:
+
+veri = f.read()
+
+Böylece dosyanýn bütün içeriðini veri adlý bir deðiþkene atamýþ olduk. Peki bu iþlemi yapmazsak ne olur? Yani mesela þöyle bir kod yazarsak:
+
+with open("fihrist.txt", "r+") as f:
+f.seek(0)
+f.write("Sedat Köz\t: 0322 234 45 45\n")
+
+Bu þekilde ‘Sedat Köz\t: 0322 234 45 45\n’ satýrý, dosyadaki ilk satýrý silip onun yerine geçecektir. Çünkü f.seek(0) ile dosyanýn baþýna dönüp o noktaya, yani dosyanýn ilk satýrýna bir veri ekledikten sonra Python öbür satýrlarý otomatik olarak bir alt satýra kaydýrmaz. Bunun yerine ilk satýrdaki verileri silip onun yerine, yeni eklenen satýrý getirir. Eðer yapmak istediðiniz þey buysa ne âlâ. Bu kodlarý kullanabilirsiniz. Ama bizim istediðimiz þey bu deðil. O yüzden veri = f.read() satýrýný kullanarak dosya içeriðini bir deðiþken içinde depoluyoruz ve böylece bu verileri kaybetmemiþ oluyoruz.
+
+Bu satýrýn ardýndan gelen f.seek(0) satýrýnýn ne iþe yaradýðýný biliyorsunuz. Biz yeni veriyi dosyanýn en baþýna eklemek istediðimiz için, doðal olarak bu kod yardýmýyla dosyanýn en baþýna sarýyoruz. Böylece þu kod:
+
+f.write("Sedat Köz\t: 0322 234 45 45\n"+veri)
+
+Sedat Köz\t: 0322 234 45 45\n’ satýrýný dosyanýn en baþýna ekliyor. Ayrýca burada, biraz önce veri deðiþkenine atadýðýmýz dosya içeriðini de yeni eklediðimiz satýrýn hemen arkasýna ilave ettiðimize dikkat edin. Eðer bunu yapmazsanýz, elinizde sadece Sedat Köz’ün iletiþim bilgilerini barýndýran bir dosya olacaktýr...
+
+
+Dosyalarýn Ortasýnda Deðiþiklik Yapmak
+
+Gördüðünüz gibi, Python’da bir dosyanýn en sonuna ve en baþýna veri eklemek çok zor deðil. Birkaç satýr yardýmýyla bu iþlemleri rahatlýkla yapabiliyoruz. Peki ya bir dosyanýn en baþýna veya en sonuna deðil de rastgele bir yerine ekleme yapmak istersek ne olacak?
+
+Hatýrlarsanýz, Python’da her veri tipinin farklý özellikleri olduðundan, her veri tipinin farklý açýlardan birbirlerine karþý üstünlükleri ya da zayýflýklarý olduðundan söz etmiþtik. Dediðimiz gibi, Python’da bazý iþler için bazý veri tiplerini kullanmak daha pratik ve avantajlý olabilir. Örneðin karakter dizileri deðiþtirilemeyen veri tipleri olduðu için, mesela bir metinde deðiþiklik yapmamýz gereken durumlarda, eðer mümkünse listeleri kullanmak daha mantýklý olabilir. Zira bildiðiniz gibi, karakter dizilerinin aksine listeler deðiþtirilebilir veri tipleridir.
+
+Önceki sayfalarda bir dosyayý okurken üç farklý metottan yararlanabileceðimizi öðrenmiþtik. Bu metotlarýn read(), readline() ve readlines() adlý metotlar olduðunu biliyorsunuz. Bu üç metottan read() adlý olaný bize çýktý olarak bir karakter dizisi veriyor. readline() metodu ise dosyalarý satýr satýr okuyor ve bize yine bir karakter dizisi veriyor. Sonuncu metot olan readlines() ise bize bir liste veriyor. readline() metodundan farklý olarak readlines() metodu dosyanýn tamamýný bir çýrpýda okuyor.
+
+Bu üç metot arasýndan, adý readlines() olanýnýn, dosyalarýn herhangi bir yerinde deðiþiklik yapmak konusunda bize yardýmcý olabileceðini tahmin etmiþ olabilirsiniz. Çünkü dediðimiz gibi readlines() metodu bize bir dosyanýn içeriðini liste halinde veriyor. Bildiðiniz gibi listeler, üzerinde deðiþiklik yapýlabilen veri tipleridir. Listelerin bu özelliðinden yararlanarak, dosyalarýn herhangi bir yerinde yapmak istediðimiz deðiþiklikleri rahatlýkla yapabiliriz. Þimdi dikkatlice bakýn þu kodlara:
+
+with open("fihrist.txt", "r+") as f:
+veri = f.readlines()
+veri.insert(2, "Sedat Köz\t: 0322 234 45 45\n")
+f.seek(0)
+f.writelines(veri)
+
+Bu kodlarý bir dosyaya kaydedip çalýþtýrdýysanýz, istediðimiz iþlemi baþarýyla yerine getirdiðini görmüþsünüzdür. Peki ama bu kodlar nasýl çalýþýyor?
+
+Yukarýdaki kodlarda dikkatimizi çeken pek çok özellik var. Ýlk olarak gözümüze çarpan þey, dosyayý “r+” kipinde açmýþ olmamýz. Bu þekilde dosyayý hem okuma hem de yazma kipinde açmýþ oluyoruz. Çünkü dosyada ayný anda hem okuma hem de yazma iþlemleri gerçekleþtireceðiz.
+
+Daha sonra þöyle bir satýr yazdýk:
+
+veri = f.readlines()
+
+Bu sayede dosyadaki bütün verileri bir liste olarak almýþ olduk. Liste adlý veri tipi ile ne yapabiliyorsak, bu þekilde aldýðýmýz dosya içeriði üzerinde de ayný þeyleri yapabiliriz. Bizim amacýmýz bu listenin 2. sýrasýna yeni bir satýr eklemek. Bu iþlemi listelerin insert() adlý metodu yardýmýyla rahatlýkla yapabiliriz:
+
+veri.insert(2, "Sedat Köz\t: 0322 234 45 45\n")
+
+Bu þekilde liste üzerinde istediðimiz deðiþiklikleri yaptýktan sonra tekrar dosyanýn baþýna dönmemiz lazým. Çünkü readlines() metoduyla dosyayý bir kez tam olarak okuduktan sonra imleç o anda dosyanýn en sonunda bulunuyor. Eðer dosyanýn en baþýna dönmeden herhangi bir yazma iþlemi gerçekleþtirirsek, yazýlan veriler dosyanýn sonuna eklenecektir. Bizim yapmamýz gereken þey dosyanýn en baþýna sarýp, deðiþtirilmiþ verilerin dosyaya yazýlmasýný saðlamak olmalý. Bunu da þu satýr yardýmýyla yapýyoruz:
+
+f.seek(0)
+
+Son olarak da bütün veirleri dosyaya yazýyoruz:
+
+f.writelines(veri)
+
+Þimdiye kadar dosyaya yazma iþlemleri için write() adlý bir metottan yararlanmýþtýk. Burada ise writelines() adlý baþka bir metot görüyoruz. Peki bu iki metot arasýndaki fark nedir?
+
+write() metodu bir dosyaya yalnýzca karakter dizilerini yazabilir. Bu metot yardýmýyla dosyaya liste tipinde herhangi bir veri yazamazsýnýz. Eðer mutlaka write() metodunu kullanmak isterseniz, liste üzerinde bir for döngüsü kurmanýz gerekir. O zaman yukarýdaki kodlarý þöyle yazmanýz gerekir:
+
+with open("fihrist.txt", "r+") as f:
+veri = f.readlines()
+veri.insert(2, "Sedat Köz\t: 0322 234 45 45\n")
+f.seek(0)
+for öðe in veri:
+f.write(öðe)
+
+writelines() adlý metot ise bize dosyaya liste tipinde verileri yazma imkaný verir. Dolayýsýyla herhangi bir döngü kurmak zorunda kalmadan listeleri dosyalarýmýza yazabiliriz.
+
+Böylece Python’da dosyalarýn herhangi bir yerine nasýl yazabileceðimizi öðrenmiþ olduk. Bu arada eðer isteseydik yukarýdaki kodlarý þöyle de yazabilirdik:
+
+with open("fihrist.txt", "r") as f:
+veri = f.readlines()
+
+with open("fihrist.txt", "w") as f:
+veri.insert(2, "Sedat Köz\t: 0322 234 45 45\n")
+f.writelines(veri)
+
+Bir önceki kodlardan farklý olarak bu kodlarda dosyamýzý önce okuma kipinde açýp verileri veri adlý bir deðiþken içinde sakladýk. Ardýndan ayný dosyayý bir kez de yazma kipinde açarak, gerekli deðiþiklikleri liste üzerinde gerçekleþtirdikten sonra bütün verileri dosyaya yazdýk.
+
+Unutmayýn, Python’da herhangi bir iþlemi pek çok farklý þekilde gerçekleþtirebilirsiniz. Biz yukarýda olasý yöntemlerden bazýlarýný ele aldýk. Zaten bütün yöntemleri tek tek göstermemiz pek mümkün olmazdý. Siz dosyalara iliþkin bilgilerinizi ve farklý araçlarý kullanarak ayný iþlemleri çok daha farklý þekillerde de yapabilirsiniz. Yani karþý karþýya olduðunuz duruma deðerlendirip, yukarýdaki kodlardan uygun olanýný veya kendi bulduðunuz bambaþka bir yöntemi kullanabilirsiniz.
+
+Bu arada, aslýnda yukarýdaki kodlarda uyguladýðýmýz yöntem biraz güvensiz. Çünkü ayný dosyayý hem okuyup hem de bu dosyaya yeni veri ekliyoruz. Eðer bu iþlemlerin herhangi bir aþamasýnda bir hata oluþursa, bütün deðiþiklikleri dosyaya iþleyemeden dosya içeriðini tümden kaybedebiliriz. Bu tür risklere karþý en uygun çözüm, okuma ve yazma iþlemlerini ayrý dosyalar üzerinde gerçekleþtirmektir. Bunun nasýl yapýlacaðýndan biraz sonra söz edeceðiz. Biz þimdi baþka bir konuya deðinelim.
+
+

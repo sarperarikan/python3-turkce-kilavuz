@@ -1,0 +1,62 @@
+
+intersection()
+
+intersection kelimesi Türkçe’de “kesiþim” anlamýna gelir. Adýndan da anladýðýmýz gibi, intersection() metodu bize iki kümenin kesiþim kümesini verecektir:
+
+>>> k1 = set([1, 2, 3, 4])
+>>> k2 = set([1, 3, 5, 7])
+>>> k1.intersection(k2)
+
+{1, 3}
+
+Gördüðünüz gibi, bu metot bize k1 ve k2’nin kesiþim kümesini veriyor. Dolayýsýyla bu iki küme arasýndaki ortak elemanlarý bulmuþ oluyoruz.
+
+Hatýrlarsanýz, difference() metodunu anlatýrken, difference() kelimesi yerine “-” iþaretini de kullanabileceðimiz, söylemiþtik. Benzer bir durum intersection() metodu için de geçerlidir. Ýki kümenin kesiþimini bulmak için “&” iþaretinden yararlanabiliriz:
+
+>>> k1 & k2
+
+{1, 3}
+
+Python programcýlarý genellikle uzun uzun intersection yazmak yerine “&” iþaretini kullanýrlar...
+
+Ýsterseniz bu metot için örnek bir program verelim. Böylece gerçek hayatta bu metodu nasýl kullanabileceðimizi görmüþ oluruz:
+
+tr = "þçöðüýÞÇÖÐÜÝ"
+
+parola = input("Sisteme giriþ için bir parola belirleyin: ")
+
+if set(tr) & set(parola):
+print("Parolanýzda Türkçe harfler kullanmayýn!")
+
+else:
+print("Parolanýz kabul edildi!")
+
+Burada eðer kullanýcý, parola belirlerken içinde Türkçe bir harf geçen bir kelime yazarsa programýmýz kendisini Türkçe harf kullanmamasý konusunda uyaracaktýr. Bu kodlarda kümeleri nasýl kullandýðýmýza dikkat edin. Programda asýl iþi yapan kýsým þu satýrdýr:
+
+if set(tr) & set(parola):
+print("Parolanýzda Türkçe harfler kullanmayýn!")
+
+Burada aslýnda þöyle bir þey demiþ oluyoruz:
+
+Eðer set(tr) ve set(parola) kümelerinin kesiþim kümesi boþ deðilse, kullanýcýya “Parolanýzda Türkçe harfler kullanmayýn!” uyarýsýný göster!
+
+set(tr) ve set(parola) kümelerinin kesiþim kümesinin boþ olmamasý, kullanýcýnýn girdiði kelime içindeki harflerden en az birinin tr adlý deðiþken içinde geçtiði anlamýna gelir. Burada basitçe, tr deðiþkeni ile parola deðiþkeni arasýndaki ortak öðeleri sorguluyoruz. Eðer kullanýcý herhangi bir Türkçe harf içermeyen bir kelime girerse set(tr) ve set(parola) kümelerinin kesiþim kümesi boþ olacaktýr. Ýsterseniz küçük bir deneme yapalým:
+
+>>> tr = "þçöðüýÞÇÖÐÜÝ"
+>>> parola = "çilek"
+>>> set(tr) & set(parola)
+
+{'ç'}
+
+Burada kullanýcýnýn “çilek” adlý kelimeyi girdiðini varsayýyoruz. Böyle bir durumda set(tr) ve set(parola) kümelerinin kesiþim kümesi “ç” harfini içerecek, dolayýsýyla da programýmýz kullanýcýya uyarý mesajý gösterecektir. Eðer kullanýcýmýz “kalem” gibi Türkçe harf içermeyen bir kelime girerse:
+
+>>> tr = "þçöðüýÞÇÖÐÜÝ"
+>>> parola = "kalem"
+>>> set(tr) & set(parola)
+
+set()
+
+Gördüðünüz gibi, elde ettiðimiz küme boþ. Dolayýsýyla böyle bir durumda programýmýz kullanýcýya herhangi bir uyarý mesajý göstermeyecektir.
+
+intersection() metodunu pek çok yerde kullanabilirsiniz. Hatta iki dosya arasýndaki benzerlikleri bulmak için dahi bu metottan yararlanabilirsiniz. Ýlerde dosya iþlemleri konusunu iþlerken bu metottan nasýl yararlanabileceðimizi de anlatacaðýz.
+

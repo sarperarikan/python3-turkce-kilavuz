@@ -1,0 +1,55 @@
+
+Dosyaya Yazmak
+
+Bir dosyayý, yukarýda gösterdiðimiz þekilde yazma kipinde açtýðýmýz zaman, Python bizim için içi boþ bir dosya oluþturacaktýr. Peki biz bu dosyanýn içini nasýl dolduracaðýz?
+
+Python programlama dilinde, open() fonksiyonu ile yazma kipinde açtýðýmýz bir dosyaya bir veri yazabilmek için dosyalarýn write() adlý metodundan yararlanacaðýz.
+
+Siz aslýnda bu metodun da nasýl kullanýlacaðýný çok iyi biliyorsunuz:
+
+dosya.write(yazýlacak_þeyler)
+
+Gelin bu formülü somutlaþtýracak bir örnek verelim. Mesela yukarýda oluþturduðumuz tahsilat dosyasýnýn içine bazý veriler girelim.
+
+Önce dosyamýzý nasýl oluþturacaðýmýzý hatýrlayalým:
+
+ths = open("tahsilat_dosyasý.txt", "w")
+
+Þimdi de bu dosyaya þu bilgileri girelim:
+
+ths.write("Halil Pazarlama: 120.000 TL")
+
+Yani programýmýz þöyle görünsün:
+
+ths = open("tahsilat_dosyasý.txt", "w")
+ths.write("Halil Pazarlama: 120.000 TL")
+
+Bu komutlarý verdiðinizde, tahsilat_dosyasý.txt adlý dosyanýn içine þu bilgilerin iþlendiðini göreceksiniz:
+
+Halil Pazarlama: 120.000 TL
+
+Eðer dosyayý açtýðýnýzda bu bilgi yerine hâlâ boþ bir dosya görüyorsanýz, sebebi tamponda tutulan verilerin henüz dosyaya iþlenmemiþ olmasýdýr.
+
+Not
+
+Bu konuyu print() fonksiyonunun flush adlý parametresini incelerken öðrendiðimizi hatýrlýyor olmalýsýnýz.
+
+Eðer durum böyleyse, dosyanýzý kapatmanýz gerekiyor. Bunu close() adlý baþka bir metotla yapabildiðimizi biliyorsunuz:
+
+ths.close()
+
+Bu arada, bu söylediklerimizden, eðer yazdýðýnýz bilgiler zaten dosyaya iþlenmiþse dosyayý kapatmanýza gerek olmadýðý anlamýný çýkarmayýn. Herhangi bir þekilde açtýðýnýz dosyalarý kapatmanýz, özellikle dosyanýn açýlmasýyla birlikte kullanýlmaya baþlayan ve arka planda çalýþan kaynaklarýn serbest býrakýlmasý açýsýndan büyük önem taþýyor. O yüzden açtýðýmýz dosyalarýn tamamýný programýn iþleyiþi sona erdiðinde kapatmayý unutmuyoruz. Yani yukarýdaki programý tam olarak þöyle yazýyoruz:
+
+ths = open("tahsilat_dosyasý.txt", "w")
+ths.write("Halil Pazarlama: 120.000 TL"),
+ths.close()
+
+Bu kodlarda sýrasýyla þu iþlemleri gerçekleþtirdik:
+
+tahsilat_dosyasý adlý bir dosyayý yazma kipinde açarak, bu adda bir dosya oluþturulmasýný saðladýk, 
+write() metodunu kullanarak bu dosyaya bazý bilgiler girdik, 
+Dosyamýza yazdýðýmýz bilgilerin dosyaya iþlendiðinden emin olmak ve iþletim sisteminin dosyanýn açýlmasý ve dosyaya veri iþlenmesi için devreye soktuðu bütün kaynaklarý serbest býrakmak için close() metoduyla programýmýzý kapattýk. 
+Bu arada, bu baþlýðý kapatmadan önce önemli bir bilgi daha verelim. Python’da bir dosyayý “w” kipinde açtýðýmýzda, eðer o adda bir dosya ilgili dizin içinde zaten varsa, Python bu dosyayý sorgusuz sualsiz silip, yerine ayný adda baþka bir boþ dosya oluþturacaktýr. Yani mesela yukarýda tahsilat_dosyasý.txt adlý dosyayý oluþturup içine bir þeyler yazdýktan sonra bu dosyayý yine “w” kipinde açmaya çalýþýrsanýz, Python bu dosyanýn bütün içeriðini silip, yine tahsilat_dosyasý.txt adýný taþýyan baþka bir dosya oluþturacaktýr. O yüzden dosya iþlemleri sýrasýnda bu “w” kipini kullanýrken dikkat ediyoruz ve disk üzerinde var olan dosyalarýmýzý yanlýþlýkla silmiyoruz.
+
+Böylece bir dosyanýn nasýl oluþturulacaðýný, nasýl açýlacaðýný ve içine birtakým bilgilerin nasýl girileceðini kabataslak da olsa öðrenmiþ olduk. Þimdi de dosyalarý nasýl okuyacaðýmýzý öðrenelim.
+

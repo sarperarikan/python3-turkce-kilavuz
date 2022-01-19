@@ -1,0 +1,25 @@
+
+bytes() Fonksiyonu
+
+Bayt veri tipi temel olarak ASCII karakterleri kabul eder. Dolayýsýyla ASCII tablosu dýþýnda kalan karakterleri doðrudan bayt olarak temsil edemezsiniz:
+
+>>> b'þ'
+
+  File "<stdin>", line 1
+SyntaxError: bytes can only contain ASCII literal characters.
+
+Ama ASCII dýþýnda kalan karakterleri de bayt’a dönüþtürmenin bir yolu var. Bunun için bytes() adlý bir fonksiyondan yararlanacaðýz:
+
+>>> b = bytes("þ", "utf-8")
+
+Gördüðünüz gibi, ilgili karakterin hangi kod çözücü ile kodlanacaðýný belirterek, bayt tipinde bir veri oluþturabiliyoruz.
+
+Tahmin edebileceðiniz gibi, bytes() fonksiyonu, belirttiðimiz kod çözücü ile kodlanamayan karakterlerle karþýlaþýlmasý durumunda ne yapýlacaðýný belirlememizi saðlayan errors adlý bir parametreye de sahiptir:
+
+>>> b = bytes("Fýrat", "ascii", errors="xmlcharrefreplace")
+>>> b
+
+b'F&#305;rat'
+
+Önceki derslerimizde errors parametresinin hangi deðerleri alabileceðini tartýþmýþtýk. Orada anlattýðýmýz þeyler burada da geçerlidir.
+

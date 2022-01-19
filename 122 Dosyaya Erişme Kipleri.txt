@@ -1,0 +1,28 @@
+
+Dosyaya Eriþme Kipleri
+
+Dosyalar konusunu anlatýrken yukarýda verdiðimiz örneklerden de gördüðünüz gibi, Python’da dosyalara eriþimin türünü ve niteliðini belirleyen bazý kipler var. Bu kipler dosyalarýn açýlýrken hangi yetkilere sahip olacaðýný veya olmayacaðýný belirliyor. Gelin isterseniz bu kipleri tek tek ele alalým.
+
+Kip Açýklamasý 
+"r" Bu öntanýmlý kiptir. Bu kip dosyayý okuma yetkisiyle açar. Ancak bu kipi kullanabilmemiz için, ilgili dosyanýn disk üzerinde halihazýrda var olmasý gerekir. Eðer bu kipte açýlmak istenen dosya mevcut deðilse Python bize bir hata mesajý gösterecektir. Dediðimiz gibi, bu öntanýmlý kiptir. Dolayýsýyla dosyayý açarken herhangi bir kip belirtmezsek Python dosyayý bu kipte açmak istediðimizi varsayacaktýr. 
+"w" Bu kip dosyayý yazma yetkisiyle açar. Eðer belirttiðiniz adda bir dosya zaten disk üzerinde varsa, Python hiçbir þey sormadan dosya içeriðini silecektir. Eðer belirttiðiniz adda bir dosya diskte yoksa, Python o adda bir dosyayý otomatik olarak oluþturur. 
+"a" Bu kip dosyayý yazma yetkisiyle açar. Eðer dosya zaten disk üzerinde mevcutsa içeriðinde herhangi bir deðiþiklik yapýlmaz. Bu kipte açtýðýnýz bir dosyaya eklediðiniz veriler varolan verilere ilave edilir. Eðer belirttiðiniz adda bir dosya yoksa Python otomatik olarak o adda bir dosyayý sizin için oluþturacaktýr. 
+"x" Bu kip dosyayý yazma yetkisiyle açar. Eðer belirttiðiniz adda bir dosya zaten disk üzerinde varsa, Python varolan dosyayý silmek yerine size bir hata mesajý gösterir. Zaten bu kipin “w” kipinden farký, varolan dosyalarý silmemesidir. Eðer belirttiðiniz adda bir dosya diskte yoksa, bu kip yardýmýyla o ada sahip bir dosya oluþturabilirsiniz. 
+"r+" Bu kip, bir dosyayý hem yazma hem de okuma yetkisiyle açar. Bu kipi kullanabilmeniz için, belirttiðiniz dosyanýn disk üzerinde mevcut olmasý gerekir. 
+"w+" Bu kip bir dosyayý hem yazma hem de okuma yetkisiyle açar. Eðer dosya mevcutsa içerik silinir, eðer dosya mevcut deðilse oluþturulur. 
+"a+" Bu kip bir dosyayý hem yazma hem de okuma yetkisiyle açar. Eðer dosya zaten disk üzerinde mevcutsa içeriðinde herhangi bir deðiþiklik yapýlmaz. Bu kipte açtýðýnýz bir dosyaya eklediðiniz veriler varolan verilere ilave edilir. Eðer belirttiðiniz adda bir dosya yoksa Python otomatik olarak o adda bir dosyayý sizin için oluþturacaktýr. 
+"x+" Bu kip dosyayý hem okuma hem de yazma yetkisiyle açar. Eðer belirttiðiniz adda bir dosya zaten disk üzerinde varsa, Python varolan dosyayý silmek yerine size bir hata mesajý gösterir. Zaten bu kipin “w+” kipinden farký, varolan dosyalarý silmemesidir. Eðer belirttiðiniz adda bir dosya diskte yoksa, bu kip yardýmýyla o ada sahip bir dosya oluþturup bu dosyayý hem okuma hem de yazma yetkisiyle açabilirsiniz. 
+"rb" Bu kip, metin dosyalarý ile ikili (binary) dosyalarý ayýrt eden sistemlerde ikili dosyalarý okuma yetkisiyle açmak için kullanýlýr. “r” kipi için söylenenler bu kip için de geçerlidir. 
+"wb" Bu kip, metin dosyalarý ile ikili dosyalarý ayýrt eden sistemlerde ikili dosyalarý yazma yetkisiyle açmak için kullanýlýr. “w” kipi için söylenenler bu kip için de geçerlidir. 
+"ab" Bu kip, metin dosyalarý ile ikili dosyalarý ayýrt eden sistemlerde ikili dosyalarý yazma yetkisiyle açmak için kullanýlýr. “a” kipi için söylenenler bu kip için de geçerlidir. 
+"xb" Bu kip, metin dosyalarý ile ikili dosyalarý ayýrt eden sistemlerde ikili dosyalarý yazma yetkisiyle açmak için kullanýlýr. “x” kipi için söylenenler bu kip için de geçerlidir. 
+"rb+" Bu kip, metin dosyalarý ile ikili dosyalarý ayýrt eden sistemlerde ikili dosyalarý hem okuma hem de yazma yetkisiyle açmak için kullanýlýr. “r+” kipi için söylenenler bu kip için de geçerlidir. 
+"wb+" Bu kip, metin dosyalarý ile ikili dosyalarý ayýrt eden sistemlerde ikili dosyalarý hem okuma hem de yazma yetkisiyle açmak için kullanýlýr. “w+” kipi için söylenenler bu kip için de geçerlidir. 
+"ab+" Bu kip, metin dosyalarý ile ikili dosyalarý ayýrt eden sistemlerde ikili dosyalarý hem okuma hem de yazma yetkisiyle açmak için kullanýlýr. “a+” kipi için söylenenler bu kip için de geçerlidir. 
+"xb+" Bu kip, metin dosyalarý ile ikili dosyalarý ayýrt eden sistemlerde ikili dosyalarý hem okuma hem de yazma yetkisiyle açmak için kullanýlýr. “x+” kipi için söylenenler bu kip için de geçerlidir. 
+Bütün bu tabloya baktýðýnýzda ilk bakýþta sanki bir sürü farklý eriþim kipi olduðunu düþünmüþ olabilirsiniz. Ama aslýnda tabloyu biraz daha incelerseniz, temel olarak “r”, “w”, “a”, “x” ve “b” kiplerinin olduðunu, geri kalan kiplerin ise bunlarýn kombinasyonlarýndan oluþtuðunu göreceksiniz.
+
+Daha önce de söylediðimiz gibi, dosya iþlemlerini pek çok farklý yöntemle gerçekleþtirebilirsiniz. Yukarýdaki tabloyu dikkatlice inceleyerek, yapmak istediðiniz iþleme uygun kipi rahatlýkla seçebilirsiniz.
+
+Bu arada, yukarýdaki tabloda deðindiðimiz ikili (binary) dosyalardan henüz söz etmedik. Bir sonraki bölümde bu dosya türünü de ele alacaðýz.
+

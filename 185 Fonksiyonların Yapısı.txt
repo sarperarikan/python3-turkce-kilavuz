@@ -1,0 +1,100 @@
+
+Fonksiyonlarýn Yapýsý
+
+Ýsterseniz biraz da fonksiyonlarýn yapýsýndan söz edelim. Böylelikle ne ile karþý karþýya olduðumuzu anlamak zihninizde biraz daha kolaylaþýr.
+
+Dedik ki, bir fonksiyonun ilk parçasýna ‘fonksiyon tanýmý’ (function definition) adý verilir. Bir fonksiyonu tanýmlamak için def adlý bir parçacýktan yararlanýyoruz. Örneðin:
+
+def bir_fonksiyon():
+(...)
+
+Burada def parçacýðý, tanýmladýðýmýz þeyin bir fonksiyon olduðunu gösteriyor. bir_fonksiyon ifadesi ise tanýmladýðýmýz bu fonksiyonun adýdýr. Fonksiyonu tanýmladýktan sonra, çaðýrýrken bu adý kullanacaðýz.
+
+def bir_fonksiyon(): ifadesinin sonundaki iki nokta iþaretinden de tahmin edebileceðiniz gibi, sonraki satýra yazacaðýmýz kodlar girintili olacak. Yani mesela:
+
+def selamla():
+print("Elveda Zalim Dünya!")
+
+Yukarýda selamla() adlý bir fonksiyon tanýmlamýþ olduk. Bu fonksiyonun görevi ekrana Elveda Zalim Dünya! çýktýsý vermektir.
+
+Bu noktada þöyle bir soru akla geliyor: Acaba fonksiyon gövdesindeki kýsým için ne kadarlýk bir girinti oluþturacaðýz?
+
+Girintilemeye iliþkin olarak önceki derslerde bahsettiðimiz bütün kurallar burada da geçerlidir. Fonksiyon gövdesine, def ifadesinden itibaren 4 (dört) boþlukluk bir girinti veriyoruz. def ifadesinden itibaren girintili olarak yazdýðýmýz kýsmýn tamamý o fonksiyonun gövdesini oluþturur ve bütünüyle o fonksiyona aittir.
+
+Bu kodlarla yaptýðýmýz þey bir fonksiyon tanýmlama iþlemidir. Eðer bu kodlarý bir dosyaya kaydedip çalýþtýrýrsak herhangi bir çýktý almayýz. Çünkü henüz fonksiyonumuzu çaðýrmadýk. Bu durumu print(), input() ve benzeri gömülü fonksiyonlara benzetebilirsiniz. Týpký yukarýda bizim yaptýðýmýz gibi, gömülü fonksiyonlar da Python geliþtiricileri tarafýndan bir yerlerde tanýmlanmýþ vaziyette dururlar, ama biz bu fonksiyonlarý yazdýðýmýz programlarda çaðýrana kadar bu fonksiyonlar çalýþmaz.
+
+Daha önce de dediðimiz gibi, bir fonksiyonun yaþam döngüsü iki aþamadan oluþur: Fonksiyon tanýmý ve fonksiyon çaðrýsý. Yukarýda bu döngünün sadece fonksiyon tanýmý aþamasý mevcut. Unutmayýn, bir fonksiyon çaðrýlmadan asla çalýþmaz. Bir fonksiyonun çalýþabilmesi için o fonksiyonun tanýmlandýktan sonra çaðrýlmasý gerekir. Örneðin input() fonksiyonu Python’ýn derinliklerinde bir yerlerde tanýmlanmýþ vaziyette durur. Bu fonksiyon, biz onu çaðýrana kadar, bulunduðu yerde sessizce bekler. Ayný þekilde selamla() adlý fonksiyon da programýmýz içinde tanýmlanmýþ vaziyette, bizim onu çaðýracaðýmýz aný bekliyor. Bu söylediklerimizi destekleyecek açýklayýcý bilgileri biraz sonra vereceðiz. Biz þimdilik fonksiyon tanýmý kýsmýný incelemeye devam edelim.
+
+Bu arada yukarýdaki fonksiyon tanýmýnýn yapýsýna çok dikkat edin. Ýki nokta üst üste iþaretinden sonraki satýrda girintili olarak yazýlan bütün kodlar (yani fonksiyonun gövde kýsmý) fonksiyonun bir parçasýdýr. Girintinin dýþýna çýkýldýðý anda fonksiyon tanýmlama iþlemi de sona erer.
+
+Örneðin:
+
+def selamla():
+print("Elveda Zalim Dünya!")
+
+selamla()
+
+Ýþte burada fonksiyonumuzu çaðýrmýþ olduk. Dikkat edin! Dediðim gibi, iki nokta üst üste iþaretinden sonraki satýrda girintili olarak yazýlan bütün kodlar fonksiyona aittir. selamla() satýrý ise fonksiyon tanýmýnýn dýþýnda yer alýr. Bu satýrla birlikte girintinin dýþýna çýkýldýðý için artýk fonksiyon tanýmlama safhasý sona ermiþ oldu.
+
+Biz yukarýdaki örnekte, selamla() adlý fonksiyonu tanýmlar tanýmlamaz çaðýrmayý tercih ettik. Ama elbette siz bir fonksiyonu tanýmlar tanýmlamaz çaðýrmak zorunda deðilsiniz. Yazdýðýnýz bir program içinde fonksiyonlarýnýzý tanýmladýktan sonra, ihtiyacýnýza baðlý olarak, programýn herhangi baþka bir yerinde fonksiyonlarýnýzý çaðýrabilirsiniz.
+
+Fonksiyonlarla ilgili söylediklerimizi toparlayacak olursak þöyle bir bilgi listesi ortaya çýkarabiliriz:
+
+Python’da kabaca iki tip fonksiyon bulunur. Bunlardan biri gömülü fonksiyonlar (builtin functions), öteki ise özel fonksiyonlardýr (custom functions). Burada ‘özel’ ifadesi, ‘kullanýcýnýn ihtiyaçlarýna göre kullanýcý tarafýndan özel olarak üretilmiþ’ anlamýna gelir. 
+Gömülü fonksiyonlar; Python geliþtiricileri tarafýndan tanýmlanýp dilin içine gömülmüþ olan print(), open(), type(), str(), int() vb. fonksiyonlardýr. Bu fonksiyonlar halihazýrda tanýmlanýp hizmetimize sunulduðu için bunlarý biz herhangi bir tanýmlama iþlemi yapmadan doðrudan kullanabiliriz. 
+Özel fonksiyonlar ise, gömülü fonksiyonlarýn aksine, Python geliþtiricileri tarafýndan deðil, bizim tarafýmýzdan tanýmlanmýþtýr. Bu fonksiyonlar dilin bir parçasý olmadýðýndan, bu fonksiyonlarý kullanabilmek için bunlarý öncelikle tanýmlamamýz gerekir. 
+Python’da bir fonksiyonun yaþam döngüsü iki aþamadan oluþur: Tanýmlanma ve çaðrýlma. 
+Bir fonksiyonun çaðrýlabilmesi (yani kullanýlabilmesi) için mutlaka birisi tarafýndan tanýmlanmýþ olmasý gerekir. 
+Fonksiyonu tanýmlayan kiþi Python geliþtiricileri olabileceði gibi, siz de olabilirsiniz. Ama neticede ortada bir fonksiyon varsa, bir yerlerde o fonksiyonun tanýmý da vardýr. 
+Fonksiyon tanýmlamak için def adlý bir ifadeden yararlanýyoruz. Bu ifadeden sonra, tanýmlayacaðýmýz fonksiyonun adýný belirleyip iki nokta üst üste iþareti koyuyoruz. Ýki nokta üst üste iþaretinden sonra gelen satýrlar girintili olarak yazýlýyor. Daha önce öðrendiðimiz bütün girintileme kurallarý burada da geçerlidir. 
+Fonksiyonun adýný belirleyip iki nokta üst üste koyduktan sonra, alt satýrda girintili olarak yazdýðýmýz bütün kodlar fonksiyonun gövdesini oluþturur. Doðal olarak, bir fonksiyonun gövdesindeki bütün kodlar o fonksiyona aittir. Girintinin dýþýna çýkýldýðý anda fonksiyon tanýmý da sona erer. 
+Fonksiyonlarla ilgili öðrendiklerimizi toparladýðýmýza göre, gelin isterseniz fonksiyonlarla ilgili bir örnek yaparak, bu yapýyý daha iyi anlamaya çalýþalým:
+
+def sistem_bilgisi_göster():
+import sys
+print("\nSistemde kurulu Python'ýn;")
+print("\tana sürüm numarasý:", sys.version_info.major)
+print("\talt sürüm numarasý:", sys.version_info.minor)
+print("\tminik sürüm numarasý:", sys.version_info.micro)
+
+print("\nKullanýlan iþletim sisteminin;")
+print("\tadý:", sys.platform)
+
+Burada sistem_bilgisi_göster() adlý bir fonksiyon tanýmladýk. Bu fonksiyonun görevi, kullanýcýnýn sistemindeki Python sürümü ve iþletim sistemine dair birtakým bilgiler vermektir.
+
+Bu arada, bu kodlarda, daha önceki derslerimizde öðrendiðimiz sys modülünden ve bu modül içindeki deðiþkenlerden yararlandýðýmýzý görüyorsunuz. Bu kodlarda sys modülünün içindeki þu araçlarý kullandýk:
+
+version_info.major: Python’ýn ana sürüm numarasý (Örn. 3) 
+version_info.minor: Python’ýn alt sürüm numarasý (Örn. 4) 
+version_info.micro: Python’ýn minik sürüm numarasý (Örn. 0) 
+platform: Kullanýlan iþletim sisteminin adý (Örn. ‘win32’ veya ‘linux2’) 
+Yukarýda tanýmladýðýmýz fonksiyonu nasýl çaðýracaðýmýzý biliyorsunuz:
+
+sistem_bilgisi_göster()
+
+Bu fonksiyon tanýmý ve çaðrýsýný eksiksiz bir program içinde gösterelim:
+
+def sistem_bilgisi_göster():
+import sys
+print("\nSistemde kurulu Python'ýn;")
+print("\tana sürüm numarasý:", sys.version_info.major)
+print("\talt sürüm numarasý:", sys.version_info.minor)
+print("\tminik sürüm numarasý:", sys.version_info.micro)
+
+print("\nKullanýlan iþletim sisteminin;")
+print("\tadý:", sys.platform)
+
+sistem_bilgisi_göster()
+
+Bu kodlarý bir dosyaya kaydedip çalýþtýrdýðýmýzda þuna benzer bir çýktý alacaðýz:
+
+Sistemde kurulu Python'ýn;
+ana sürüm numarasý: 3
+alt sürüm numarasý: 3
+minik sürüm numarasý: 0
+
+Kullanýlan iþletim sisteminin;
+adý: linux
+
+Demek ki bu kodlarýn çalýþtýrýldýðý sistem Python’ýn 3.3.0 sürümünün kurulu olduðu bir GNU/Linux iþletim sistemi imiþ...
+

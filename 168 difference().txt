@@ -1,0 +1,30 @@
+
+difference()
+
+Bu metot iki kümenin farkýný almamýzý saðlar. Örneðin:
+
+>>> k1 = set([1, 2, 3, 5])
+>>> k2 = set([3, 4, 2, 10])
+
+>>> k1.difference(k2)
+
+{1, 5}
+
+Demek ki k1’in k2’den farký buymuþ. Peki k2’nin k1’den farkýný bulmak istersek ne yapacaðýz?
+
+>>> k2.difference(k1)
+
+{10, 4}
+
+Gördüðünüz gibi, birinci kullanýmda, k1’de bulunup k2’de bulunmayan öðeleri elde ediyoruz. Ýkinci kullanýmda ise bunun tam tersi. Yani ikinci kullanýmda k2’de bulunup k1’de bulunmayan öðeleri alýyoruz.
+
+Ýsterseniz uzun uzun difference() metodunu kullanmak yerine sadece eksi (-) iþaretini kullanarak da ayný sonucu elde edebilirsiniz:
+
+>>> k1 - k2
+
+...veya...
+
+>>> k2 - k1
+
+Hayýr, “madem eksi iþaretini kullanabiliyoruz, o halde artý iþaretini de kullanabiliriz!” gibi bir fikir doðru deðildir.
+

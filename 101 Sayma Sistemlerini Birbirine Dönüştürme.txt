@@ -1,0 +1,9 @@
+
+Sayma Sistemlerini Birbirine Dönüþtürme
+
+Sýklýkla kullanýlan dört farklý sayma sistemini öðrendik. Peki biz bir sayma sisteminden öbürüne dönüþtürme iþlemi yapmak istersek ne olacak? Örneðin onlu sistemdeki bir sayýyý ikili sisteme nasýl çevireceðiz?
+
+Python programlama dilinde bu tür iþlemleri kolaylýkla yapmamýzý saðlayan birtakým fonksiyonlar bulunur. Ayrýca özel fonksiyonlarý kullanmanýn yanýsýra karakter dizisi biçimlendirme (string formatting) yöntemlerini kullanarak da sayma sistemlerini birbirine dönüþtürebiliriz. Biz burada her iki yöntemi de tek tek inceleyeceðiz.
+
+Gelin isterseniz bu dönüþtürme iþlemleri için hangi özel fonksiyonlarýn olduðuna bakalým önce.
+

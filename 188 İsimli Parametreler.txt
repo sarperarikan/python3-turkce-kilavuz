@@ -1,0 +1,30 @@
+
+Ýsimli Parametreler
+
+Bir önceki bölümde verdiðimiz þu örneði yeniden ele alalým:
+
+def kayýt_oluþtur(isim, soyisim, iþsis, þehir):
+print("-"*30)
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+print("-"*30)
+
+Bu fonksiyonu çaðýrýrken parametrelerin sýrasýný doðru vermenin, alacaðýmýz çýktýnýn düzgün olmasý bakýmýndan büyük önem taþýdýðýný biliyoruz. Ancak özellikle parametre sayýsýnýn çok olduðu fonksiyonlarda parametre sýrasýný akýlda tutmak zor olabilir. Böyle durumlarda parametreleri isimleri ile birlikte kullanmayý tercih edebiliriz:
+
+kayýt_oluþtur(soyisim="Öz", isim="Ahmet", iþsis="Debian", þehir= "Ankara")
+
+Böylece fonksiyon parametrelerini istediðimiz sýra ile kullanabiliriz. Ancak burada dikkat etmemiz gereken bazý noktalar var. Python’da isimli bir parametrenin ardýndan sýralý bir parametre gelemez. Yani þu kullaným yanlýþtýr:
+
+kayýt_oluþtur(soyisim="Öz", isim="Ahmet", "Debian", "Ankara")
+
+Bu kodlar bize þu hatayý verir:
+
+File "<stdin>", line 1
+SyntaxError: non-keyword arg after keyword arg
+
+Bu yüzden, eðer isimli parametreler kullanacaksak, isimli parametrelerden sonra sýralý parametre kullanmamaya dikkat ediyoruz.
+

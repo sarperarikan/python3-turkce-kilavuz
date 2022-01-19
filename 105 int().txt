@@ -1,0 +1,24 @@
+
+int()
+
+Aslýnda biz bu fonksiyonu yakýndan tanýyoruz. Bildiðiniz gibi bu fonksiyon herhangi bir sayý veya sayý deðerli karakter dizisini tam sayýya (integer) dönüþtürmek için kullanýlýyor. int() fonksiyonunun þimdiye kadar gördüðümüz iþlevi dýþýnda bir iþlevi daha bulunur: Biz bu fonksiyonu kullanarak herhangi bir sayýyý onlu sistemdeki karþýlýðýna dönüþtürebiliriz:
+
+>>> int('7bc', 16)
+
+1980
+
+Gördüðünüz gibi, bu fonksiyonu kullanýrken dikkat etmemiz gereken bazý noktalar var. Ýlkin, eðer int() fonksiyonunu yukarýdaki gibi bir dönüþtürme iþlemi için kullanacaksak, bu fonksiyona verdiðimiz ilk parametrenin bir karakter dizisi olmasý gerekiyor. Dikkat etmemiz gereken ikinci nokta, int() fonksiyonuna verdiðimiz ikinci parametrenin niteliði. Bu parametre, dönüþtürmek istediðimiz sayýnýn hangi tabanda olduðunu gösteriyor. Yukarýdaki örneðe göre biz, on altý tabanýndaki 7bc sayýsýný on tabanýna dönüþtürmek istiyoruz.
+
+Bir de þu örneklere bakalým:
+
+>>> int('1100', 2)
+
+12
+
+>>> int('1100', 16)
+
+4352
+
+Ýlk örnekte, ikili sistemdeki 1100 sayýsýný onlu sisteme çeviriyoruz ve 12 sayýsýný elde ediyoruz. Ýkinci örnekte ise on altýlý sistemdeki 1100 sayýsýný onlu sisteme çeviriyoruz ve 4352 sayýsýný elde ediyoruz.
+
+

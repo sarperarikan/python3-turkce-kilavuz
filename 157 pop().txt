@@ -1,0 +1,22 @@
+
+pop()
+
+Bu metodu listelerden hatýrlýyoruz. Bu metot listelerle birlikte kullanýldýðýnda, listenin en son öðesini silip, silinen öðeyi de ekrana basýyordu. Eðer bu metodu bir sýra numarasý ile birlikte kullanýrsak, listede o sýra numarasýna karþýlýk gelen öðe siliniyor ve silinen bu öðe ekrana basýlýyordu. Bu metodun sözlüklerdeki kullanýmý da az çok buna benzer. Ama burada farký olarak, pop metodunu argümansýz bir þekilde kullanamýyoruz. Yani pop metodunun parantezi içinde mutlaka bir sözlük öðesi belirtmeliyiz:
+
+>>> sepet = {"meyveler": ("elma", "armut"), "sebzeler": ("pýrasa", "fasulye"),
+... "içecekler": ("su", "kola", "ayran")}
+
+>>> sepet.pop("meyveler")
+
+Bu komut, sözlükteki “meyveler” anahtarýný silecek ve sildiði bu öðenin deðerini ekrana basacaktýr. Eðer silmeye çalýþtýðýmýz anahtar sözlükte yoksa Python bize bir hata mesajý gösterecektir:
+
+>>> sepet.pop("tatlýlar")
+
+KeyError: 'tatlýlar'
+
+Bir program yazarken böyle bir durumla karþýlaþmak istemeyiz çoðu zaman. Yani bir sözlük içinde arama yaparken, aranan öðenin sözlükte bulunmadýðý bir durumda kullanýcýya mekanik ve anlamsýz bir hata göstermek yerine, daha anlaþýlýr bir mesaj iletmeyi tercih edebiliriz. Hatýrlarsanýz sözlüklerin get() metodunu kullanarak benzer bir þey yapabiliyorduk. Þu anda incelemekte olduðumuz pop() metodu da bize böyle bir imkan verir. Bakalým:
+
+>>> sepet.pop("tatlýlar", "Silinecek öðe yok!")
+
+Böylelikle sözlükte bulunmayan bir öðeyi silmeye çalýþtýðýmýzda Python bize bir hata mesajý göstermek yerine, “Silinecek öðe yok!” þeklinde daha anlamlý bir mesaj verecektir...
+

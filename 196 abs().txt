@@ -1,0 +1,29 @@
+
+abs()
+
+Ýngilizcede ‘mutlak’ anlamýna gelen absolute adlý bir kelime bulunur. Ýþte bu fonksiyonun adý da bu kelimeden gelir. Fonksiyonumuzun görevi de isminin anlamýna yakýndýr. abs() fonksiyonunu bir sayýnýn mutlak deðerini elde etmek için kullanýyoruz.
+
+Peki ‘mutlak deðer’ ne anlama geliyor. Esasýnda siz bu kavrama matematik derslerinden aþinasýnýz. Ama bilmeyenler veya unutmuþ olanlar için tekrar edelim. ‘Mutlak deðer’ bir sayýnýn 0‘a olan uzaklýðýdýr. Örneðin 20 sayýsýnýn 0 sayýsýna olan uzaklýðý 20’dir. Dolayýsýyla 20 sayýsýnýn mutlak deðeri 20’dir. Ayný þekilde -20 sayýsýnýn da 0 sayýsýna uzaklýðý 20’dir. Yani, -20 sayýsýnýn da mutlak deðeri 20’dir.
+
+Ýþte abs() fonksiyonu bize bir sayýnýn mutlak deðerinin ne olduðunu söyler:
+
+>>> abs(-20)
+
+20
+
+>>> abs(20)
+
+20
+
+>>> abs(20.0)
+
+20.0
+
+Mutlak deðer kavramý yalnýzca tamsayýlar ve kayan noktalý sayýlar için deðil, ayný zamanda karmaþýk sayýlar için de geçerlidir. Dolayýsýyla abs() fonksiyonunu kullanarak karmaþýk sayýlarýn da mutlak deðerini hesaplayabiliriz:
+
+>>> abs(20+3j)
+
+20.223748416156685
+
+Gördüðünüz gibi bu fonksiyon yalnýzca tek bir parametre alýyor ve bu parametrenin mutlak deðerini döndürüyor.
+

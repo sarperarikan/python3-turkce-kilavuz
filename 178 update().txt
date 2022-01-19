@@ -1,0 +1,30 @@
+
+update()
+
+Hatýrlarsanýz add() metodunu anlatýrken þöyle bir örnek vermiþtik:
+
+>>> küme = set(["elma", "armut", "kebap"])
+>>> yeni = [1, 2, 3]
+
+>>> for i in yeni:
+... küme.add(i)
+...
+>>> küme
+
+{1, 2, 3, 'elma', 'armut', 'kebap'}
+
+Bu örneði verdikten sonra da þöyle bir þey demiþtik:
+
+“Burada yeni adlý listeyi kümeye for döngüsü ile ekledik. Ama bu iþlemi yapmanýn baþka bir yolu daha vardýr. Bu iþlem için Python’da ayrý bir metot bulunur.”
+
+Ýþte bu metodu öðrenmenin vakti geldi. Metodumuzun adý update(). Bu metot, bir kümeyi güncellememizi saðlar. Ýsterseniz yukarýdaki örneði, bu metodu kullanarak tekrar yazalým:
+
+>>> küme = set(["elma", "armut", "kebap"])
+>>> yeni = [1, 2, 3]
+>>> küme.update(yeni)
+>>> print(küme)
+
+{1, 2, 3, 'elma', 'armut', 'kebap'}
+
+Gördüðünüz gibi, for döngüsünü kullanmaya gerek kalmadan ayný sonucu elde edebildik.
+

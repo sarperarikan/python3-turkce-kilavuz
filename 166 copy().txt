@@ -1,0 +1,17 @@
+
+copy()
+
+Listeler ve sözlükleri incelerken copy() adlý bir metot öðrenmiþtik. Bu metot ayný zamanda kümelerle birlikte de kullanýlabilir. Üstelik iþlevi de aynýdýr:
+
+>>> km = set("kahramanmaraþ")
+>>> yedek = km.copy()
+>>> yedek
+
+{'a', 'r', 'h', 'k', 'm', 'þ', 'n'}
+
+>>> km
+
+{'a', 'h', 'k', 'm', 'n', 'r', 'þ'}
+
+Burada bir þey dikkatinizi çekmiþ olmalý. “km” adlý kümeyi “yedek” adýyla kopyaladýk, ama bu iki kümenin çýktýlarýna baktýðýmýz zaman öðe sýralamasýnýn birbirinden farklý olduðunu görüyoruz. Biliyorsunuz, týpký sözlüklerde olduðu gibi, kümeler de sýrasýz veri tipleridir. Bu yüzden, elde ettiðimiz çýktýda öðeler rastgele diziliyor. Dolayýsýyla öðelere sýralarýna göre eriþemiyoruz. Aynen sözlüklerde olduðu gibi...
+

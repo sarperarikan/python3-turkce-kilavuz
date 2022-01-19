@@ -1,0 +1,73 @@
+
+round()
+
+round() fonksiyonu bir sayýyý belli ölçütlere göre yukarý veya aþaðý doðru yuvarlamamýzý saðlar. Basit birkaç örnek verelim:
+
+>>> round(12.4)
+
+12
+
+>>> round(12.7)
+
+13
+
+Gördüðünüz gibi bu fonksiyon, kayan noktalý sayýlarý en yakýn tam sayýya doðru yuvarlýyor.
+
+Ancak burada dikkat etmemiz gereken bir nokta var.
+
+Þu örnekleri bir inceleyelim:
+
+>>> round(1.5)
+
+2
+
+>>> round(12.5)
+
+12
+
+Gördüðünüz gibi, fonksiyonumuz 1.5 sayýsýný yukarý doðru, 12.5 sayýsýný ise aþaðý doðru yuvarladý. Bunun sebebi, kayan noktalý bir sayýnýn üst ve alt tam sayýlara olan uzaklýðýnýn birbirine eþit olduðu durumlarda Python’ýn çift sayýya doðru yuvarlama yapmayý tercih etmesidir. Mesela yukarýdaki örneklerde 1.5 sayýsý hem 1 sayýsýna, hem de 2 sayýsýna eþit uzaklýkta bulunuyor. Ýþte Python bu durumda, bir çift sayý olan 2 sayýsýna doðru yuvarlamayý tercih edecektir.
+
+round() fonksiyonu toplam iki parametre alýr. Ýlk parametre, yuvarlanacak sayýnýn kendisidir. Yuvarlama hassasiyetini belirlemek için ise ikinci bir parametreden yararlanabiliriz.
+
+Örneðin 22 sayýsýný 7‘ye böldüðümüzde normalde þöyle bir çýktý elde ederiz:
+
+>>> 22/7
+
+3.142857142857143
+
+round() fonksiyonunu tek parametre ile kullandýðýmýzda bu fonksiyon yukarýdaki sayýyý þu þekilde yuvarlayacaktýr:
+
+>>> round(22/7)
+
+3
+
+Ýþte biz round() fonksiyonuna ikinci bir parametre daha vererek, yuvarlama hassasiyetini kontrol edebiliriz.
+
+Aþaðýdaki örnekleri dikkatlice inceleyin:
+
+>>> round(22/7)
+
+3
+
+>>> round(22/7, 0)
+
+3.0
+
+>>> round(22/7, 1)
+
+3.1
+
+>>> round(22/7, 2)
+
+3.14
+
+>>> round(22/7, 3)
+
+3.143
+
+>>> round(22/7, 4)
+
+3.1429
+
+Gördüðünüz gibi, round() fonksiyonuna verdiðimiz ikinci parametre, yuvarlama iþleminin ne kadar hassas olacaðýný belirliyor.
+

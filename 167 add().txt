@@ -1,0 +1,104 @@
+
+add()
+
+Kümelerden bahsederken, bunlarýn deðiþtirilebilir bir veri tipi olduðunu söylemiþtik. Dolayýsýyla kümeler, üzerlerinde deðiþiklik yapmamýza müsaade eden metotlar da içerir. Örneðin add() bu tür metotlardan biridir. Add kelimesi Türkçe’de “eklemek” anlamýna gelir. Adýndan da anlaþýlacaðý gibi, bu metot yardýmýyla kümelerimize yeni öðeler ilave edebileceðiz. Hemen bunun nasýl kullanýldýðýna bakalým:
+
+>>> küme = set(["elma", "armut", "kebap"])
+>>> küme.add("çilek")
+>>> print(küme)
+
+{'elma', 'armut', 'kebap', 'çilek'}
+
+Gördüðünüz gibi, add() metodunu kullanarak, kümemize çilek adlý yeni bir öðe ekledik. Eðer kümede zaten varolan bir öðe eklemeye çalýþýrsak kümede herhangi bir deðiþiklik olmayacaktýr. Çünkü, daha önce de söylediðimiz gibi, kümeler her bir öðeyi tek bir sayýda barýndýrýr.
+
+Eðer bir kümeye birden fazla öðeyi ayný anda eklemek isterseniz for döngüsünden yararlanabilirsiniz:
+
+>>> yeni = [1,2,3]
+>>> for i in yeni:
+... küme.add(i)
+...
+
+>>> küme
+
+{1, 2, 3, 'elma', 'kebap', 'çilek', 'armut'}
+
+Burada yeni adlý listeyi kümeye for döngüsü ile ekledik. Ama bu iþlemi yapmanýn baþka bir yolu daha vardýr. Bu iþlem için Python’da ayrý bir metot bulunur. Bu metodun adý update() metodudur. Sýrasý gelince bu metodu da göreceðiz.
+
+Bu arada, yeri gelmiþken kümelerin önemli bir özelliðinden daha söz edelim. Bir kümeye herhangi bir öðe ekleyebilmemiz için, o öðenin deðiþtirilemeyen (immutable) bir veri tipi olmasý gerekiyor. Bildiðiniz gibi Python’daki þu veri tipleri deðiþtirilemeyen veri tipleridir:
+
+Demetler 
+Sayýlar 
+Karakter Dizileri 
+Þu veri tipleri ise deðiþtirilebilen veri tipleridir:
+
+Listeler 
+Sözlükler 
+Kümeler 
+Dolayýsýyla bir kümeye ancak þu veri tiplerini ekleyebiliriz:
+
+Demetler 
+Sayýlar 
+Karakter Dizileri 
+Þu kodlarý dikkatlice inceleyin:
+
+Önce boþ bir küme oluþturalým:
+
+>>> küme = set()
+
+Bu kümeye bir demet ekleyelim:
+
+>>> l = (1,2,3)
+>>> küme.add(l)
+>>> küme
+
+{(1, 2, 3)}
+
+Bir sayý ekleyelim:
+
+>>> l = 45
+>>> küme.add(l)
+>>> küme
+
+{45, (1, 2, 3)}
+
+Bir karakter dizisi ekleyelim:
+
+>>> l = 'Jacques Derrida'
+>>> küme.add(l)
+>>> küme
+
+{'Jacques Derrida', 45, (1, 2, 3)}
+
+Yukarýdakiler, deðiþtirilemeyen veri tipleri olduðu için kümelere eklenebilir.
+
+Bir de þunlara bakalým:
+
+Kümemize bir liste eklemeye çalýþalým:
+
+>>> l = [1,2,3]
+>>> küme.add(l)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+
+Kümemize bir sözlük eklemeye çalýþalým:
+
+>>> l = {"a": 1, "b": 2, "c": 3}
+>>> küme.add(l)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'dict'
+
+Kümemize bir küme eklemeye çalýþalým:
+
+>>> l = {1, 2, 3}
+>>> küme.add(l)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'set'
+
+Gördüðünüz gibi, týpký sözlüklerde olduðu gibi, bir kümeye herhangi bir veri ekleyebilmemiz için o verinin ‘deðiþtirilemeyen’ bir veri tipi olmasý gerekiyor.
+

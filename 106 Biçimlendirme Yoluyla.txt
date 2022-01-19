@@ -1,0 +1,61 @@
+
+Biçimlendirme Yoluyla
+
+Esasýnda biz karakter dizisi biçimlendirme yöntemlerini kullanarak dönüþtürme iþlemlerini nasýl gerçekleþtireceðimizi biliyoruz. Biz burada zaten öðrendiðimiz bu bilgileri tekrar ederek öðrendiklerimizi pekiþtirme amacý güdeceðiz.
+
+
+b
+
+Bu karakteri kullanarak bir sayýyý ikili düzendeki karþýlýðýna dönüþtürebiliriz:
+
+>>> '{:b}'.format(12)
+
+'1100'
+
+Bu karakter, bin() fonksiyonuyla ayný iþi yapar.
+
+
+x
+
+Bu karakteri kullanarak bir sayýyý on altýlý düzendeki karþýlýðýna dönüþtürebiliriz:
+
+>>> '{:x}'.format(1980)
+
+'7bc'
+
+Bu karakter, hex() fonksiyonuyla ayný iþi yapar.
+
+
+o
+
+Bu karakteri kullanarak bir sayýyý sekizli düzendeki karþýlýðýna dönüþtürebiliriz:
+
+>>> '{:o}'.format(1980)
+
+'3674'
+
+Bu karakter, oct() fonksiyonuyla ayný iþi yapar.
+
+Bütün bu anlattýklarýmýzdan sonra (eðer o zaman anlamakta zorluk çekmiþseniz) aþaðýdaki kodlarý daha iyi anlamýþ olmalýsýnýz:
+
+sayý_sistemleri = ["onlu", "sekizli", "on altýlý", "ikili"]
+
+print(("{:^9} "*len(sayý_sistemleri)).format(*sayý_sistemleri))
+
+for i in range(17):
+print("{0:^9} {0:^9o} {0:^9x} {0:^9b}".format(i))
+
+Bu arada, yukarýda bir sayýnýn, karakter dizisi biçimlendirme yöntemleri kullanýlarak ikili, sekizli ve on altýlý düzene nasýl çevrileceðini gördük. Bir sayýyý onlu düzene çevirmek için ise sadece int() fonksiyonunu kullanabiliyoruz. Böyle bir çevirme iþlemini karakter dizisi biçimlendirme yöntemlerini kullanarak yapamýyoruz. Ama elbette, eðer baþka bir sayma sisteminden onlu sisteme çevirdiðiniz bir sayýyý herhangi bir karakter dizisi içinde biçimlendirmek isterseniz þöyle bir kod kullanabilirsiniz:
+
+>>> n = '7bc'
+>>> "{} sayýsýnýn onlu karþýlýðý {:d} sayýsýdýr.".format(n, int(n, 16))
+
+...veya:
+
+>>> n = '7bc'
+>>> "{} sayýsýnýn onlu karþýlýðý {} sayýsýdýr.".format(n, int(n, 16))
+
+Zira bildiðiniz gibi, Python’da onlu sayýlarý temsil eden harf d harfidir. Eðer {} yapýsý içinde herhangi bir harf kullanmazsanýz yukarýdaki durumda Python {:d} yazmýþsýnýz gibi davranacaktýr.
+
+
+

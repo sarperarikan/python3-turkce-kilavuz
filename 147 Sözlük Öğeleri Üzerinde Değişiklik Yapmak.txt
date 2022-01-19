@@ -1,0 +1,19 @@
+
+Sözlük Öðeleri Üzerinde Deðiþiklik Yapmak
+
+Sözlükler deðiþtirilebilir veri tipleridir. Dolayýsýyla sözlükler üzerinde rahatlýkla istediðimiz deðiþikliði yapabiliriz.
+
+Sözlükler üzerinde deðiþiklik yapma iþlemi, biraz önce öðrendiðimiz, sözlüklere yeni öðe ekleme iþlemiyle aynýdýr. Dikkatlice bakýn:
+
+>>> notlar = {'Seda': 98, 'Ege': 95, 'Mehmet': 77,
+... 'Zeynep': 100, 'Deniz': 95, 'Ahmet': 45}
+
+Sözlüðümüz bu. Þimdi bu sözlükteki ‘Ahmet’ adlý kiþinin 45 olan notunu 65 olarak deðiþtirelim:
+
+>>> notlar["Ahmet"] = 65
+>>> print(notlar)
+
+{'Seda': 98, 'Ege': 95, 'Mehmet': 77, 'Zeynep': 100, 'Deniz': 95, 'Ahmet': 65}
+
+Gördüðünüz gibi Ahmet’in notu 65 olarak deðiþmiþ...
+

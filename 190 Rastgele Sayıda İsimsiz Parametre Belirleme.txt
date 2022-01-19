@@ -1,0 +1,80 @@
+
+Rastgele Sayýda Ýsimsiz Parametre Belirleme
+
+Þimdiye kadar öðrendiðimiz pek çok fonksiyonun toplam kaç parametre alabileceði bellidir. Örneðin input() fonksiyonu yalnýzca tek bir parametre alabilir. Eðer bu fonksiyona birden fazla parametre verirsek Python bize bir hata mesajý gösterecektir. Ayný þekilde mesela pow() fonksiyonunun da kaç parametre alabileceði bellidir. Ama örneðin print() fonksiyonuna verebileceðimiz parametre sayýsý (teknik olarak 256 ile sýnýrlý olsa da) pratik olarak neredeyse sýnýrsýzdýr.
+
+Peki acaba biz kendimiz, sýnýrsýz parametre alabilen fonksiyonlar üretebilir miyiz?
+
+Bu sorunun cevabý ‘evet’ olacaktýr. Þimdi þu örneðe dikkatlice bakýn:
+
+def fonksiyon(*parametreler):
+print(parametreler)
+
+fonksiyon(1, 2, 3, 4, 5)
+
+Bu kodlarý çalýþtýrdýðýmýzda þu çýktýyý alacaðýz:
+
+(1, 2, 3, 4, 5)
+
+Gördüðünüz gibi, fonksiyon tanýmý içinde kullandýðýmýz * iþareti sayesinde fonksiyonumuzun pratik olarak sýnýrsýz sayýda parametre kabul etmesini saðlayabiliyoruz. Bu arada, bu tür fonksiyonlarýn alabileceði parametre sayýsý, dediðimiz gibi, pratikte sýnýrsýzdýr, ama teknik olarak bu sayý 256 adedi geçemez.
+
+Yukarýdaki kodlarýn verdiði çýktýnýn bir demet olduðuna dikkatinizi çekmek isterim. Bu bilgiye sahip olduktan sonra, bu tür fonksiyonlarý demet iþleme kurallarýna göre istediðiniz þekilde manipüle edebilirsiniz.
+
+Peki böyle bir fonksiyon tanýmlamak ne iþimize yarar?
+
+Mesela bu yapýyý kullanarak þöyle bir fonksiyon yazabilirsiniz:
+
+def çarp(*sayýlar):
+sonuç = 1
+for i in sayýlar:
+sonuç *= i
+print(sonuç)
+
+Bu fonksiyon kendisine verilen bütün parametreleri birbiriyle çarpar. Örneðin:
+
+çarp(1, 2, 3, 4)
+
+Bu kodun çýktýsý 24 olacaktýr. Gördüðünüz gibi, fonksiyonumuza istediðimiz sayýda parametre vererek bu sayýlarýn birbiriyle çarpýlmasýný saðlayabiliyoruz.
+
+Aslýnda burada kullandýðýmýz * iþareti size hiç yabancý deðil. Hatýrlarsanýz print() fonksiyonundan bahsederken þuna benzer bir kullaným örneði vermiþtik:
+
+>>> print(*'TBMM', sep='.')
+
+T.B.M.M
+
+Burada * iþareti, eklendiði parametreyi öðelerine ayýrýyor. sep parametresi ise * iþaretinin birbirinden ayýrdýðý öðelerin arasýna birer ‘.’ karakteri ekliyor.
+
+Bu iþaretin etkilerini þu örneklerde daha net görebilirsiniz:
+
+>>> liste = ["Ahmet", "Mehmet", "Veli"]
+>>> print(*liste)
+
+Ahmet Mehmet Veli
+
+>>> sözlük = {"a": 1, "b": 2}
+>>> print(*sözlük)
+
+a b
+
+Gördüðünüz gibi, * iþareti herhangi bir öðeyi alýp, bunu parçalarýna ayýrýyor. Ýþte bu * iþaretini fonksiyon tanýmlarken kullandýðýmýzda ise bu iþlemin tam tersi gerçekleþiyor. Yani fonksiyon tanýmýnda parametrenin soluna * getirdiðimizde, bu fonksiyon çaðrýlýrken verilen argümanlar tek bir deðiþken içinde bir demet olarak toplanýyor. Zaten bu konunun baþýnda verdiðimiz þu örnekte de bu durum açýkça görünüyor:
+
+def fonksiyon(*parametreler):
+print(parametreler)
+
+fonksiyon(1, 2, 3, 4, 5)
+
+Bu fonksiyonu çaðýrdýðýmýzda þu çýktý veriliyor:
+
+(1, 2, 3, 4, 5)
+
+Aynen söylediðimiz gibi, fonksiyon() adlý fonksiyona argüman olarak verdiðimiz her bir öðenin (1, 2, 3, 4, 5) tek bir demet içinde toplandýðýný görüyorsunuz.
+
+Yýldýzlý parametreler, tanýmladýðýnýz fonksiyonun parametre sayýsýný herhangi bir þekilde sýnýrlamak istemediðiniz durumlarda çok iþinize yarar.
+
+Elbette * iþaretiyle birlikte kullanacaðýnýz parametrenin adý olarak, Python’ýn deðiþken adlandýrma kurallarýna uygun bütün kelimeleri belirleyebilirsiniz. Mesela biz yukarýda ‘parametreler’ adýný tercih ettik. Ama Python dünyasýnda * iþaretiyle birlikte kullanýlacak parametrenin adý geleneksel olarak, ‘argümanlar’ anlamýnda ‘args’týr. Yani Python programcýlarý genellikle yukarýdaki gibi bir fonksiyonu þöyle tanýmlar:
+
+def fonksiyon(*args):
+...
+
+* iþareti ile birlikte kullanýlacak parametrenin adýný ‘args’ yapmak bir zorunluluk olmamakla birlikte, baþka Python programcýlarýnýn kodlarýnýzý daha kolay anlayabilmesi açýsýndan bu geleneði devam ettirmenizi tavsiye ederim. Yazdýðýmýz kodlarda Python programlama dilinin geleneklerine baðlý kalmak çoðunlukla iyi bir alýþkanlýktýr.
+

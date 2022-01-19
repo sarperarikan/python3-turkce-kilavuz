@@ -1,0 +1,24 @@
+
+Sayma Sistemlerinin Birbirlerine Karþý Avantajlarý
+
+Böylece dört farklý sayý sisteminin hangi mantýk üzerine iþlediðini anlamýþ olduk. Ayrýca sayý sistemleri arasýnda dönüþtürme iþlemlerini de öðrendik.
+
+Ýþte bilgisayarlar bu sayý sistemleri arasýnda sadece ikili sayý sistemini ‘anlayabilir’. Aslýnda bu da hiç mantýksýz deðil. Bilgisayar dediðimiz þey, üzerinden elektrik geçen devrelerden ibaret bir makinedir. Eðer bir devrede elektrik yoksa o devrenin deðeri ~0 volt iken, o devreden elektrik geçtiðinde devrenin deðeri ~5 volttur. Gördüðünüz gibi, ortada iki farklý deðer var: ~0 volt ve ~5 volt. Yukarýda anlattýðýmýz gibi, ikili (binary) sayma sisteminde de iki deðer bulunur: 0 ve 1. Dolayýsýyla ikili sayma sistemi bilgisayarýn iç iþleyiþine en uygun sistemdir. ikili sistemde ~0 volt’u 0 ile, ~5 volt’u ise 1 ile temsil edebiliyoruz. Yani devreden elektrik geçtiðinde o devrenin deðeri 1, elektrik geçmediðinde ise 0 olmuþ oluyor. Tabii bilgisayar açýsýndan bakýldýðýnda devrede elektrik vardýr veya yoktur. Biz insanlar bu ikili durumu daha kolay bir þekilde temsil edebilmek için her bir duruma 0 ve 1 gibi bir ad veriyoruz.
+
+Bilgisayarýn iþlemcisi sadece bu iki farklý durumu kullanarak her türlü hesaplama iþlemini gerçekleþtirebilir. Bu sebeple ikili sayý sistemi bilgisayarýn çalýþma mantýðý için gayet yeterli ve uygundur. Ýkili sayý sistemi yerine mesela onlu sayý sistemini kullanmak herhalde simge israfýndan baþka bir þey olmazdý. Neticede, dediðimiz gibi, bilgisayarýn iþleyebilmesi için iki farklý simge yeterlidir.
+
+Dediðimiz gibi, ikili sayma sistemi bilgisayarýn yapýsýna gayet uygundur. Ama biz insanlar açýsýndan sadece iki simge yardýmýyla saymaya çalýþmak epey zor olacaktýr. Ayrýca sayý büyüdükçe, ikili sistemde sayýnýn kapladýðý alan hýzla ve kolayca artacak, yýðýlan bu sayýlarý idare etmek hiç de kolay olmayacaktýr. Ýþte bu noktada devreye on altýlý (hexadecimal) sayýlar girer. Bu sayma sisteminde toplam 16 farklý rakam/simge olduðu için, büyük sayýlar çok daha az yer kaplayacak þekilde gösterilebilir.
+
+Bildiðiniz gibi, ikili sayma sistemindeki herbir basamaða ‘bit’ adý verilir. Ýkili sayma sistemini kullanarak, 0‘dan 256‘ya kadar sayabilmek için toplam 8 bitlik (yani 8 hanelik) bir yer kullanmanýz gerekir. On altýlý sistemde ise bu iþlemi sadece iki basamakla halledebilirsiniz. Yani on altýlý sistemde 00 ile FF arasýna toplam 255 tane sayý sýðdýrýlabilir. Dolayýsýyla on altýlý sistemi kullanarak, çok büyük sayýlarý çok az yer kullanarak gösterebilirsiniz:
+
+>>> for i in range(256):
+... print(i, bin(i)[2:], hex(i)[2:])
+...
+0 0 0
+(...)
+255 11111111 ff
+>>>
+
+Gördüðünüz gibi, onlu sistemde 255 þeklinde, ikili sistemde ise 11111111 þeklinde gösterilen sayý on altýlý sistemde yalnýzca ff þeklinde gösterilebiliyor. Dolayýsýyla, kullaným açýsýndan, biz insanlar için on altýlýk sayma sisteminin ikili sisteme kýyasla çok daha pratik bir yöntem olduðunu söyleyebiliriz.
+
+Ayrýca on altýlý sistem, az alana çok veri sýðdýrabilme özelliði nedeniyle HTML renk kodlarýnýn gösterilmesinde de tercih edilir. Örneðin beyaz rengi temsil etmek için on altýlý sistemdeki #FFFFFF ifadesini kullanmak rgb(255,255,255) ifadesini kullanmaya kýyasla çok daha mantýklýdýr. Hatta #FFFFFF ifadesini #FFF þeklinde kýsaltma imkaný dahi vardýr.

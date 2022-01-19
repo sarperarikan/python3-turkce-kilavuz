@@ -1,0 +1,140 @@
+
+Sözlüklerin Yapýsý
+
+Yukarýdaki örneklerden, Python’da bir sözlüðün nasýl tanýmlanacaðýný ve bir sözlüðün öðelerine nasýl eriþileceðini öðrendik. Gelin isterseniz þimdi sözlük veri tipinin yapýsýna iliþkin bazý ayrýntýlarý inceleyelim.
+
+Mesela þu örneði tekrar önümüze alalým:
+
+sözlük = {"kitap": "book"}
+
+Burada iki nokta üst üste iþaretinden önce ve sonra birer tane karakter dizisi görüyoruz. Bu karakter dizileri “kitap” ve “book”. Dediðimiz gibi, sözlükler de týpký listeler gibi, farklý veri tiplerinin bir araya gelmesi ile oluþan birleþik/kapsayýcý bir veri tipidir. Dolayýsýyla bir sözlük içinde sadece karakter dizilerini deðil, baþka veri tiplerini de görebilirsiniz. Ýlerleyen sayfalarda sözlüklere iliþkin daha karmaþýk örnekler verdiðimizde sözlüklerin hangi veri tiplerini içerebileceðini de göreceðiz.
+
+Ne dedik? Sözlük içinde iki nokta üst üste iþaretinin solunda ve saðýnda “kitap” ve “book” adlý karakter dizileri var. Teknik olarak, iki nokta üst üste iþaretinin solundaki karakter dizisine ‘anahtar’ (key), saðýndaki karakter dizisine ise ‘deðer’ (value) adý verilir. Bu bilgilere bakarak sözlük için þöyle bir taným verebiliriz:
+
+Sözlükler; anahtar ve deðer çiftlerinin birbirleriyle eþleþtirildiði bir veri tipidir. Dolayýsýyla sözlükler bu anahtar ve deðer çiftleri arasýnda birebir iliþki kurar.
+
+Mesela yukarýdaki örnekte “kitap” öðesi anahtar, “book” öðesi ise deðerdir. Ýþte sözlük dediðimiz þey, bu anahtar ve deðer çifti arasýnda birebir iliþki kuran bir veri tipidir. Yani sözlük adlý veri tipi, bir anahtarý bir deðerle eþleþtirme görevi görür.
+
+Sözlüklerin bu özelliðini, sözlük öðelerine eriþirken gayet net bir þekilde görebiliyoruz.
+
+Yukarýdaki örneklerde tanýmladýðýmýz sözlüklerde sadece karakter dizilerini kullandýk. Ama aslýnda sözlükler farklý veri tiplerinden oluþabilir. Mesela:
+
+sözlük = {"sýfýr": 0,
+"bir" : 1,
+"iki" : 2,
+"üç" : 3,
+"dört" : 4,
+"beþ" : 5}
+
+Burada sözlük içinde hem sayýlarý hem de karakter dizilerini kullandýk. Ayný þekilde sözlük içinde listelere de yer verebiliriz:
+
+sözlük = {"Ahmet Özkoparan": ["Ýstanbul", "Öðretmen", 34],
+"Mehmet Yaðýz" : ["Adana", "Mühendis", 40],
+"Seda Bayrak" : ["Ýskenderun", "Doktor", 30]}
+
+Mesela bu sözlükte “Seda Bayrak” adlý kiþinin bilgilerine ulaþmak istersek þöyle bir kod yazabiliriz:
+
+print(sözlük["Seda Bayrak"])
+
+Bu kod bize þöyle bir çýktý verecektir:
+
+['Ýskenderun', 'Doktor', 30]
+
+Gördüðünüz gibi, sözlük içinde “Seda Bayrak” adlý öðenin karþýsýndaki bilgi listesine ulaþabildik.
+
+Ýstersek sözlükleri, içlerinde baþka sözlükleri barýndýracak þekilde de tanýmlayabiliriz:
+
+kiþiler = {"Ahmet Özkoparan": {"Memleket": "Ýstanbul",
+"Meslek" : "Öðretmen",
+"Yaþ" : 34},
+
+"Mehmet Yaðýz" : {"Memleket": "Adana",
+"Meslek" : "Mühendis",
+"Yaþ" : 40},
+
+"Seda Bayrak" : {"Memleket": "Ýskenderun",
+"Meslek" : "Doktor",
+"Yaþ" : 30}}
+
+Böylece þöyle kodlar yazabiliriz:
+
+print(kiþiler["Mehmet Yaðýz"]["Memleket"])
+print(kiþiler["Seda Bayrak"]["Yaþ"])
+print(kiþiler["Ahmet Özkoparan"]["Meslek"])
+
+Yukarýdaki yapýnýn benzerini listeler konusundan hatýrlýyor olmalýsýnýz. Ýç içe geçmiþ listelerin öðelerine ulaþýrken de buna benzer bir sözdiziminden yararlanýyorduk. Örneðin:
+
+liste = [["Ahmet", "Mehmet", "Ayþe"],
+["Sedat", "Serkan", "Selin"],
+["Zeynep", "Nur", "Eda"]]
+
+Burada bir liste içinde iç içe geçmiþ üç farklý liste ile karþý karþýyayýz. Mesela ilk listenin ilk öðesi olan “Ahmet” adlý öðeye eriþmek istersek þöyle bir kod yazmamýz gerekiyor:
+
+print(liste[0][0])
+
+Ýþte iç içe geçmiþ sözlüklerin öðelerine ulaþmak için de buna benzer bir kod yazmamýz gerekiyor. Örneðin kiþiler adlý sözlükteki “Mehmet Yaðýz” adlý kiþinin yaþýna ulaþmak istersek þöyle bir þey yazacaðýz:
+
+print(kiþiler["Mehmet Yaðýz"]["Yaþ"])
+
+Gelin isterseniz kiþiler adlý sözlüðü kullanarak basit bir irtibat listesi uygulamasý yazalým. Böylece sözlüklere elimizi alýþtýrmýþ oluruz:
+
+kiþiler = {"Ahmet Özkoparan": {"Memleket": "Ýstanbul",
+"Meslek" : "Öðretmen",
+"Yaþ" : 34},
+
+"Mehmet Yaðýz" : {"Memleket": "Adana",
+"Meslek" : "Mühendis",
+"Yaþ" : 40},
+
+"Seda Bayrak" : {"Memleket": "Ýskenderun",
+"Meslek" : "Doktor",
+"Yaþ" : 30}}
+
+isim = "Hakkýnda ayrýntýlý bilgi edinmek \
+istediðiniz kiþinin adýný girin: "
+
+arama = input(isim)
+
+ayrýntý = input("Memleket/Meslek/Yaþ? ")
+
+print(kiþiler[arama][ayrýntý])
+
+Týpký bir önceki telefon defteri uygulamamýz gibi, bu irtibat listesi uygulamasý da geliþtirilmeye açýktýr. Ancak henüz bu iki uygulamayý geliþtirmemizi saðlayacak bilgilerden yoksunuz. Bu uygulamalarý istediðimiz kývama sokabilmek için sözlüklere dair öðrenmemiz gereken baþka þeyler de var.
+
+Sözlüklerin öteki veri tiplerinden önemli bir farký, sözlük içinde yer alan öðelerin herhangi bir sýralama mantýðýna sahip olmamasýdýr. Yani sözlükteki öðeler açýsýndan ‘sýra’ diye bir kavram yoktur.
+
+Örneðin bir liste, demet veya karakter dizisi içindeki öðelere; bu öðelerin o liste, demet veya karakter dizisi içindeki sýralarýna göre eriþebilirsiniz:
+
+>>> liste = ["Ahmet", "Mehmet", "Zeynep"]
+>>> liste[0]
+
+'Ahmet'
+
+>>> liste[-1]
+
+'Zeynep'
+
+Ancak sözlükler açýsýndan böyle bir þey söz konusu deðildir:
+
+>>> sözlük = {'elma': 'apple',
+... 'armut': 'pear',
+... 'çilek': 'strawberry'}
+>>> sözlük[0]
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 0
+
+Gördüðünüz gibi, sözlükler üzerinde sýralamaya dayalý bir sorgulama yapmaya çalýþtýðýmýzda Python bize bir hata mesajý gösteriyor.
+
+Bu durumun etkilerini þurada da görebilirsiniz:
+
+Dikkatlice bakýn:
+
+>>> sözlük = {'a': '0', 'b': '1', 'c': '2'}
+>>> sözlük
+
+{'a': '0', 'c': '2', 'b': '1'}
+
+Bu çýktýyý iyi inceleyin. Göreceðiniz gibi, çýktýda görünen öðeler bizim sözlüðü tanýmladýðýmýz sýradaki gibi deðil. Biz sözlüðü ‘a’, ‘b’ ve ‘c’ þeklinde sýralayarak tanýmladýk, ama çýktý ‘a’, ‘c’ ve ‘b’ þeklinde oldu. O yüzden sözlükler üzerinde çalýþýrken öðelerin sýrasýna dayalý herhangi bir iþlem yapmak hiç mantýklý deðildir. Çünkü sözlükteki öðeleri tanýmlarken kullandýðýnýz sýralama düzeninin çýktýda da aynen korunacaðýnýn herhangi bir garantisi bulunmaz.
+

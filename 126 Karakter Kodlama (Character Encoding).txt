@@ -1,0 +1,13 @@
+
+Karakter Kodlama (Character Encoding)
+
+Bu bölüme gelinceye kadar Python programlama dilindeki karakter dizisi, liste ve dosya adlý veri tiplerine iliþkin epey söz söyledik. Artýk bu veri tiplerine dair hemen hemen bütün ayrýntýlarý biliyoruz. Ancak henüz öðrenmediðimiz, ama programcýlýk maceramýz açýsýndan mutlaka öðrenmemiz gereken çok önemli bir konu daha var. Bu önemli konunun adý, karakter kodlama.
+
+Bu bölümde ‘karakter kodlama’ adlý hayati konuyu iþlemenin yanýsýra, son birkaç bölümde üstünkörü bir þekilde üzerinden geçtiðimiz, ama derinlemesine incelemeye pek fýrsat bulamadýðýmýz bütün konularý da ele almaya çalýþacaðýz. Bu konuyu bitirdikten sonra, önceki konularý çalýþýrken zihninizde oluþmuþ olabilecek boþluklarýn pek çoðunun dolduðunu farkedeceksiniz. Sözün özü, bu bölümde hem yeni þeyler söyleyeceðiz, hem de halihazýrda öðrendiðimiz þeylerin bir kez daha üzerinden geçerek bunlarýn zihnimizde iyiden iyine pekiþmesini saðlayacaðýz.
+
+Hatýrlarsanýz önceki derslerimizde karakter dizilerinin encode() adlý bir metodu olduðundan söz etmiþtik. Ayný þekilde, dosyalarýn da encoding adlý bir parametresi olduðunu söylemiþtik. Ayrýca bu encoding konusu, ilk derslerimizde metin düzenleyici ayarlarýný anlatýrken de karþýmýza çýkmýþtý. Orada, yazdýðýmýz programlarda özellikle Türkçe karakterlerin düzgün görünebilmesi için, kullandýðýmýz metin düzenleyicinin dil kodlamasý (encoding) ayarlarýný düzgün yapmamýz gerektiðini üstüne basa basa söylemiþtik. Biz þu ana kadar bu konuyu ayrýntýlý olarak ele almamýþ da olsak, siz þimdiye kadar yazdýðýnýz programlarda Türkçe karakterleri kullanýrken halihazýrda pek çok problemle karþýlaþmýþ ve bu sorunlarýn neden kaynaklandýðýný anlamakta zorlanmýþ olabilirsiniz.
+
+Ýþte bu bölümde, o zaman henüz bilgimiz yetersiz olduðu için ertelediðimiz bu encoding konusunu bütün ayrýntýlarýyla ele alacaðýz ve yazdýðýmýz programlarda Türkçe karakterleri kullanýrken neden sorunlarla karþýlaþtýðýmýzý, bu sorunun temelinde neyin yattýðýný anlamaya çalýþacaðýz.
+
+O halde hiç vakit kaybetmeden bu önemli konuyu incelemeye baþlayalým.
+

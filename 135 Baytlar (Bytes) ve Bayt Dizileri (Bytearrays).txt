@@ -1,0 +1,43 @@
+
+Baytlar (Bytes) ve Bayt Dizileri (Bytearrays)
+
+Bu bölüme gelinceye kadar veri tipi olarak karakter dizilerinden, listelerden ve dosyalardan söz etmiþtik. Bu bölümde ise Python programlama dilindeki iki veri tipinden daha söz edeceðiz. Birbirleriyle doðrudan baðlantýlý olduklarý için bu bölümde birlikte ele alacaðýmýz bu veri tiplerinin adý ‘baytlar’(bytes) ve ‘bayt dizileri’ (bytearrays).
+
+Bu bölümde yalnýzca ‘baytlar’ ve ‘bayt dizileri’ adlý veri tiplerinden söz etmeyeceðiz. Bu iki yeni veri tipini bilgi daðarcýðýmýza eklemenin yanýsýra, önceki bölümlerde öðrendiðimiz konularý zihnimizde pekiþtirmeye ve saðlamlaþtýrmaya da devam edeceðiz.
+
+
+Giriþ
+
+Bilgisayar teknolojisi ve bilimi açýsýndan ‘karakter’ tamamen soyut bir kavramdýr. Son birkaç bölümdür üstüne basa basa tekrar ettiðimiz gibi, karakter dediðimiz þey, bilgisayarlarýn anlayabildiði tek kavram olan sayýlara biz insanlarýn atadýðý birtakým iþaretlerden ibarettir. Dolayýsýyla bilgisayarlar açýsýndan karakterler deðil, ikili sayma düzenindeki birtakým sayýlar, yani bitler ve baytlar vardýr.
+
+Teknik olarak 1 bit, ikili sayma sistemindeki her bir basamaða verilen isimdir. Zaten ‘bit’ kelimesinin de Ýngilizcede ‘ikili basamak’ anlamýna gelen ‘binary digit ifadesinin kýsaltmasý olduðunu geçen bölümde öðrenmiþtiniz.
+
+Örneðin ikili sayma sistemindeki 0, bir bitlik bir sayý iken, 100 üç bitlik bir sayýdýr. Bu bit’lerin 8 tanesi bir araya gelince ‘bayt’ denen birimi oluþturur. Yani bayt, 8 adet bit’ten oluþan bir birimdir. Nasýl bir düzinede 10, bir destede de 12 öðe olmasýný biz insanlar tercih etmiþ ve belirlemiþsek, bir bayt’ta da 8 bit olmasýný yine biz insanlar tercih etmiþ ve belirlemiþizdir.
+
+Önceki derslerimizde de öðrendiðimiz gibi, 8 adet bit, yani 1 bayt, Geniþletilmiþ ASCII sisteminde bir adet karakteri temsil etmek için kullanýlabilecek en büyük birim olarak tasarlanmýþtýr. Yani Geniþletilmiþ ASCII tablolarýnýn en sonundaki 255 numaralý karakteri temsil edebilmek için 8 adet bit, yani toplam 1 bayt kullanmamýz gerekir. Standart ASCII sistemi ise 7 bitlik bir sistem olduðu için, bir adet karakteri temsil etmek için kullanýlabilecek en büyük birimin 7 bit olduðunu biliyorsunuz. Dolayýsýyla ASCII sistemindeki son karaktere karþýlýk gelen 127. sayýyý temsil edebilmek için toplam 7 bit yeterlidir.
+
+Farklý bir sistem olan UTF-8 ise birden fazla bayt kullanarak çok sayýda karakteri temsil etmeye imkan tanýr. UTF-8 ile, duruma göre 1, 2, 3 veya 4 bayt kullanarak, UNICODE sistemi içinde tanýmlanmýþ bütün karakterleri temsil edebilirsiniz. UTF-8, deðiþken boyutlu bir kodlama sistemi olmasý sayesinde, bir karakteri temsil edebilmek için kaç bayt gerekiyorsa, o karakteri temsil etmek için o kadar bayt kullanýr. Ama mesela UTF-32 adlý kod çözücü hangi karakter olursa olsun hepsini 4 bayt (32 bit) ile temsil eder. Bu durumda aslýnda tek baytla temsil edilebilecek ‘a’, ‘b’, ‘c’ gibi karakterler de boþu boþuna 4 bayt yer kaplamýþ olur. Zaten UTF-8’in bu kadar yaygýn ve gözde olmasýnýn nedeni de hem çok sayýda karakteri kodlayabilmesi, hem de bu iþi yaparken tasarruflu olmayý baþarabilmesidir.
+
+Python programlama dilinde karakter dizileri UNICODE kod konumlarý þeklinde temsil edilir. Dolayýsýyla str adý verilen veri tipi esasýnda karakter dizilerini birtakým UNICODE kod konumlarý þeklinde gösteren soyut bir yapýdýr. Yani biz Python’da karakter dizileri üzerinde iþlem yaparken aslýnda baytlarla deðil, UNICODE kod konumlarý ile muhatap oluyoruz. Ancak UNICODE kod konumlarý da tamamen soyut kavramlardýr. Bunlarý bilgisayarýn belleðinde bu þekilde temsil edemezsiniz ya da bu kod konumlarýný herhangi bir að üzerinden baþka bilgisayarlara iletemezsiniz. Bu kod konumlarýný anlamlý bir þekilde kullanabilmek için öncelikle bunlarý bilgisayarlarýn anlayabileceði bir biçim olan baytlara çevirmeniz gerekir. Çünkü dediðimiz gibi bilgisayarlar yalnýzca bitler ve baytlardan anlar. Ýþte kod çözücülerin görevi de zaten bu kod konumlarýný baytlara çevirmektir.
+
+Esasýnda programcýlýk maceranýz boyunca genellikle metin ihtiyaçlarýnýzý UNICODE kod konumlarý üzerinden halledeceksiniz. Python sistemdeki öntanýmlý kod çözücüyü kullanarak bu kod konumlarýný alttan alta bayta çevirip bellekte saklayacaktýr. Ama eðer yazdýðýnýz programlarda herhangi bir þekilde doðrudan baytlarla muhatap olmanýz gerekirse str veri tipini deðil, bytes adlý baþka bir veri tipini kullanacaksýnýz. Örneðin ikili (binary) dosyalar üzerinde çeþitli çalýþmalar yapacaksanýz ve bu ikili dosyalara birtakým veriler girecekseniz, gireceðiniz bu veriler bytes tipinde olacaktýr.
+
+Bütün bu sebeplerden ötürü, str ve bytes veri tipleri arasýndaki farký anlamak, yazdýðýnýz programlarýn kararlýlýðý ve saðlamlýðý açýsýndan büyük önem taþýr. O anda elinizde olan verinin hangi tipte olduðunu bilmezseniz, bu verinin, programýnýzýn çalýþmasý esnasýnda size ne tür tuzaklar kurabileceðini de kestiremezsiniz. Örneðin bütün karakterlerin 1 bayt olduðunu ve bunlarýn da yalnýzca 0 ile 127 arasý sayýlarla temsil edilebileceðini zanneden yazýlýmcýlarýn tasarladýðý programlara Türkçe karakterler girdiðinizde nasýl bu programlar patýr patýr dökülüyorsa, eðer siz de baytlar ve karakterler arasýndaki farký anlamazsanýz sizin yazdýðýnýz programlar da hiç beklemediðiniz bir anda tökezleyebilir.
+
+Örneðin yazdýðýnýz bir programýn bir aþamasýnda programa yalnýzca tek karakterlik verilerin girilmesi temeli üzerinden bir iþlem yaptýðýnýzý düþünün. Yani programýnýz içinde yapacaðýnýz bir iþlem, birden fazla karakter giriþinin engellenmesini gerektiriyor olsun.
+
+Bunun için þöyle bir þey yazmýþ olun:
+
+a = "k"
+
+if len(a) > 1:
+print("Lütfen yalnýzca tek bir karakter giriniz!")
+else:
+print("Teþekkürler!")
+
+Ben burada temsili olarak a adlý bir deðiþken oluþturdum ve örnek olmasý açýsýndan da bunun deðerini ‘k’ olarak belirledim. Bu deðerlerle programýmýz düzgün bir þekilde çalýþýr. Çünkü a deðiþkeninin deðeri tek bir karakter olan ‘k’ harfi. Ama eðer a deðiþkeninin deðeri mesela ‘kz’ gibi bir þey olsaydý programýmýz ‘Lütfen yalnýzca tek bir karakter giriniz!’ uyarýsý verecekti...
+
+Þimdi bu a deðiþkeninin sizin tarafýnýzdan belirlenmediðini, bu deðerin baþka bir kaynaktan geldiðini düþünün. Eðer size bu deðeri gönderen kaynak, bu deðeri UNICODE kod konumu olarak gönderiyorsa programýnýz düzgün çalýþýr. Ama peki ya gelen bu veri bayt olarak geliyorsa ne olacak?
+
+Yukarýda verdiðimiz örneðin neden önemli olduðunu, daha doðrusu bu örnekle ne demek istediðimiz ve nereye varmaya çalýþtýðýmýzý anlamamýþ olabilirsiniz. Ama endiþe etmenize hiç gerek yok. Zira bu bölümde yukarýda sorduðumuz sorunun cevabýný derinlemesine ele alacaðýz. Bu bölümün sonuna vardýðýmýzda neler olup bittiðini ve baytlarýn neden bu kadar önemli olduðunu gayet iyi anlýyor olacaksýnýz.
+

@@ -1,0 +1,35 @@
+
+Karmaþýk Sayýlarýn Metotlarý
+
+Gelelim karmaþýk sayýlarýn metot ve niteliklerine...
+
+>>> [i for i in dir(complex) if not i.startswith("_")]
+
+['conjugate', 'imag', 'real']
+
+Gördüðünüz gibi, karmaþýk sayýlarýn da birkaç tane metot ve niteliði var. Biz bunlar arasýndan imag ve real adlý nitelikleri inceleyeceðiz.
+
+
+imag
+
+Bir gerçek bir de sanal kýsýmdan oluþan sayýlara karmaþýk sayýlar (complex) adý verildiðini biliyorsunuz. Örneðin þu bir karmaþýk sayýdýr:
+
+12+4j
+
+Ýþte imag adlý nitelik, bize bir karmaþýk sayýnýn sanal kýsmýný verir:
+
+>>> c = 12+4j
+>>> c.imag
+
+4.0
+
+
+real
+
+real adlý nitelik bize bir karmaþýk sayýnýn gerçek kýsmýný verir:
+
+>>> c = 12+4j
+>>> c.real
+
+12.0
+

@@ -1,0 +1,14 @@
+
+symmetric_difference_update()
+
+Daha önce difference_update ve intersection_update gibi metotlarý öðrenmiþtik. symmetric_difference_update() metodu da bunlara benzer bir iþlevi yerine getirir:
+
+>>> a = set([1,2, 5])
+>>> b = set([1,4, 5])
+>>> a.symmetric_difference_update(b)
+>>> print(a)
+
+{2, 4}
+
+Gördüðünüz gibi, a kümesinin eski öðeleri gitti, yerlerine symmetric_difference() metoduyla elde edilen çýktý geldi. Yani a kümesi, symmetric_difference() metodunun sonucuna göre güncellenmiþ oldu...
+

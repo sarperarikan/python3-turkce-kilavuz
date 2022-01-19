@@ -1,0 +1,19 @@
+
+remove()
+
+Bu metot da bir önceki bölümde gördüðümüz discard() metoduyla ayný iþlevi yerine getirir. Eðer bir kümeden öðe silmek istersek remove() metodunu da kullanabiliriz:
+
+>>> hayvanlar.remove("köpek")
+
+Peki discard() varken remove() metoduna ne gerek var? Ya da tersi.
+
+Bu iki metot ayný iþlevi yerine getirse de aralarýnda önemli bir fark vardýr. Hatýrlarsanýz discard() metoduyla, kümede olmayan bir öðeyi silmeye çalýþýrsak herhangi bir hata mesajý almayacaðýmýzý söylemiþtik. Eðer remove() metodunu kullanarak, kümede olmayan bir öðeyi silmeye çalýþýrsak, discard() metodunun aksine, hata mesajý alýrýz:
+
+>>> hayvanlar.remove("fare")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'fare'
+
+Bu iki metot arasýndaki bu fark önemli bir farktýr. Bazen yazdýðýnýz programlarda, duruma göre her iki özelliðe de ihtiyacýnýz olabilir.
+

@@ -1,0 +1,31 @@
+
+Tam Sayýlar (integers) 
+Kayan Noktalý Sayýlar (floating point numbers veya kýsaca floats) 
+Karmaþýk Sayýlar (complex numbers) 
+
+Eðer bir veri type(veri) sorgulamasýna int cevabý veriyorsa o veri bir tam sayýdýr. Eðer bir veri type(veri) sorgulamasýna float cevabý veriyorsa o veri bir kayan noktalý sayýdýr. Eðer bir veri type(veri) sorgulamasýna complex cevabýný veriyorsa o veri bir karmaþýk sayýdýr.
+
+Mesela þunlar birer tam sayýdýr:
+
+15, 4, 33
+
+Þunlar birer kayan noktalý sayýdýr:
+
+3.5, 6.6, 2.3
+
+Þunlarsa birer karmaþýk sayýdýr:
+
+3+3j, 5+2j, 19+10j
+
+Ayrýca þimdiye kadar öðrendiklerimiz sayesinde bu sayýlarýn çeþitli fonksiyonlar yardýmýyla birbirlerine dönüþtürülebileceðini de biliyoruz:
+
+
+Fonksiyon Görevi Örnek 
+int() Bir veriyi tam sayýya dönüþtürür int('2') 
+float() Bir veriyi kayan noktalý sayýya dönüþtürür float(2) 
+complex() Bir veriyi karmaþýk sayýya dönüþtürür complex(2) 
+
+Dediðimiz gibi, bunlar bizim zaten sayýlara dair bildiðimiz þeyler. Elbette bir de henüz öðrenmediklerimiz var.
+
+Gelin þimdi bunlarýn neler olduðunu inceleyelim.
+

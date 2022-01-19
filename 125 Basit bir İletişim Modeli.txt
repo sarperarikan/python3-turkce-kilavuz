@@ -1,0 +1,218 @@
+
+Basit bir Ýletiþim Modeli
+
+Bu bölümde, bilgisayarlarýn çalýþma mantýðýný, verileri nasýl iþlediðini, sayýlarla karakter dizilerini nasýl temsil ettiðini daha iyi ve daha net bir þekilde anlayabilmek için basit bir iletiþim modeli kuracaðýz.
+
+Þimdi þöyle bir durum hayal edin: Diyelim ki, hatlar üzerinden iletilen elektrik akýmý yoluyla bir arkadaþýnýzla haberleþmenizi saðlayacak bir sistem tasarlýyorsunuz. Bu sistem, verici tarafýnda elektrik akýmýnýn gönderilmesini saðlayan bir anahtardan, alýcý tarafýnda ise, gelen akýmýn þiddetine göre loþ veya parlak ýþýk veren bir ampulden oluþuyor. Eðer vericiden gönderilen elektrik akýmý düþükse alýcý loþ bir ýþýk, eðer gelen akým yüksekse alýcý parlak bir ýþýk görecek. Elbette eðer isterseniz düþük akým-yüksek akým karþýtlýðý yerine akým varlýðý-akým yokluðu karþýtlýðýný da kullanabilirsiniz. Böylece vericiden akým gönderildiðinde ampul yanar, gönderilmediðinde ise söner. Bana düþük akým-yüksek akým karþýtlýðý daha kullanýþlý geldiði için böyle tercih ettim. Siz tabii ki öbür türlüsünü de tercih edebilirsiniz.
+
+Yukarýda bahsedildiði gibi sistemimizi kurduk diyelim. Peki ama bu sistem verici ile alýcý arasýnda basit de olsa bir iletiþim kurmamýzý nasýl olacak da saðlayacak?
+
+Aslýnda bunun cevabý ve mantýðý çok basit. Gördüðünüz gibi, bu sistemde iki farklý durum söz konusu: Loþ ýþýk ve parlak ýþýk (veya yanan ampul ve sönmüþ ampul).
+
+Bu ikili yapýyý, tahmin edebileceðiniz gibi, ikili (binary) sayma sistemi aracýlýðýyla rahatlýkla temsil edebiliriz. Mesela loþ ýþýk durumuna 0, parlak ýþýk durumuna ise 1 diyebiliriz. Dolayýsýyla verici, ampulün loþ ýþýk vermesini saðlayacak düþük bir akým gönderdiðinde bunun deðerini 0, ampulün yüksek ýþýk vermesini saðlayacak yüksek bir akým gönderdiðinde ise bunun deðerini 1 olarak deðerlendirebiliriz.
+
+Burada yaptýðýmýz dönüþtürme iþlemine teknik olarak ‘kodlama’ (encoding) adý verilir. Bu kodlama sistemine göre biz, iki farklý elektrik akýmý deðerini, yani loþ ýþýk ve parlak ýþýk deðerlerini sýrasýyla ikili sistemdeki 0 ve 1 sayýlarý ile eþleþtirip, loþ ýþýða 0, parlak ýþýða ise 1 dedik.
+
+Hemen anlayacaðýnýz gibi, bahsettiðimiz bu hayali sistem, telgraf iletiþimine çok benziyor. Ýþte gerçekte de kullanýlan telgraf sistemine çok benzeyen bu basitleþtirilmiþ model bizim bilgisayarlarýn çalýþma mantýðýný da daha net bir þekilde anlamamýzý saðlayacak.
+
+
+8 Bitlik bir Sistem
+
+Hatýrlarsanýz ikili sayma sisteminde 0‘lar ve 1‘lerin oluþturduðu her bir basamaða ‘bit’ adýný veriyorduk.
+
+Not
+
+Bit kelimesi Ýngilizcede ‘binary’ (ikili) ve ‘digit‘ (rakam) kelimelerinin birleþtirilmesi ile üretilmiþtir.
+
+Bu bilgiye göre mesela 0 sayýsý bir bitlik bir sayý iken, 1001 sayýsý dört bitlik bir sayýdýr. Ýletiþimimizi eksiksiz bir biçimde saðlayabilmemiz, yani gereken bütün karakterleri temsil edebilmemiz için, sistemimizin 8 hanelik bir sayý kapasitesine sahip olmasý, yani teknik bir dille ifade etmek gerekirse sistemimizin 8 bitlik olmasý herhalde yeterli olacaktýr.
+
+8 bitlik bir iletiþim sisteminde 10‘a kadar þu þekilde sayabiliriz:
+
+>>> for i in range(10):
+... print(bin(i)[2:].zfill(8))
+...
+00000000
+00000001
+00000010
+00000011
+00000100
+00000101
+00000110
+00000111
+00001000
+00001001
+
+Verici tarafýndaki kiþi elindeki anahtar yardýmýyla farklý kuvvetlere sahip sinyalleri art arda göndererek yukarýda gösterildiði gibi on farklý sayýyý alýcýya iletebilir. Sistemimizin 8 bitlik olduðunu düþünürsek karþý tarafa 0 sayýsý ile birlikte toplam 2 ** 8 = 256 farklý sinyal gönderebiliriz:
+
+>>> for i in range(256):
+... print(bin(i)[2:].zfill(8))
+
+00000000
+00000001
+00000010
+00000011
+00000100
+...
+...
+...
+11111001
+11111010
+11111011
+11111100
+11111101
+11111110
+11111111
+
+Gördüðünüz gibi, bizim 8 bitlik bu sistemle gönderebileceðimiz son sinyal, yani sayý 255‘tir. Bu sistemle bundan büyük bir sayýyý gönderemeyiz. Bu durumu kendi gözlerinizle görmek için þu kodlarý çalýþtýrýn:
+
+>>> for i in range(256):
+... print(bin(i)[2:], i.bit_length(), sep="\t")
+
+Burada ilk sütun 256‘ya kadar olan sayýlarýn ikili sistemdeki karþýlýklarýný, ikinci sütun ise bu sayýlarýn bit uzunluðunu gösteriyor. Bu çýktýyý incelediðinizde de göreceðiniz gibi, 8 bit uzunluða sahip son sayý 255‘tir. 256 sayýsý ise 9 bit uzunluða sahiptir. Yani 256 sayýsý mecburen bizim sistemimizin dýþýndadýr:
+
+>>> bin(255)[2:]
+
+'11111111'
+
+
+>>> (255).bit_length()
+
+8
+
+>>> bin(256)[2:]
+
+'100000000'
+
+>>> (256).bit_length()
+
+9
+
+Dediðimiz gibi, bu sistemde elimizde toplam 8 bit var. Yani bu sistemi kullanarak 0‘dan 256‘ya kadar sayýp, bu sayýlarý alýcýya iletebiliriz.
+
+Peki verici ile alýcý arasýnda birtakým sayýlarý gönderip alabilmek ne iþimize yarar? Yani bu iþ neden bu kadar önemli?
+
+Bu sorularýn cevabýný birazdan vereceðiz, ama ondan önce daha önemli bir konuya deðinelim.
+
+
+Hata Kontrolü
+
+Buraya kadar her þey yolunda. Alýcý ve verici arasýndaki iletiþimi elektrik akýmý vasýtasýyla, 8 bitlik bir sistem üzerinden saðlayabiliyoruz. Ancak sistemimizin çok önemli bir eksiði var. Biz bu sistemde hiçbir hata kontrolü yapmýyoruz. Yani vericiden gelen mesajýn doðruluðunu test eden hiçbir ölçütümüz yok. Zira alýcý ile verici arasýnda gidip gelen veriler pek çok farklý þekilde ve sebeple bozulmaya uðrayabilir. Örneðin, gönderilen veri alýcý tarafýndan doðru anlaþýlamayabilir veya elektrik sinyallerini ileten kablolardaki arýzalar sinyallerin doðru iletilmesini engelleyebilir.
+
+Ýþte bütün bunlarý hesaba katarak, iletiþimin doðru bir þekilde gerçekleþebilmesini saðlamak amacýyla sistemimiz için basit bir hata kontrol süreci tasarlayalým.
+
+Dediðimiz gibi, elimizdeki sistem toplam 256‘ya kadar saymamýza olanak tanýyor. Çünkü bizim sistemimiz 8 bitlik bir sistem. Bu sisteme bir hata kontrol mekanizmasý ekleyebilmek için veri iletimini 8 bitten 7 bite çekeceðiz. Yani iletiþimimizi toplam 2 ** 7 = 127 sayý ile sýnýrlayacaðýz. Boþta kalan 8. biti ise bahsettiðimiz bu hata kontrol mekanizmasýna ayýracaðýz.
+
+Peki hata kontrol mekanizmamýz nasýl iþleyecek?
+
+Çok basit: Vericiden alýcýya ulaþan verilerin tek mi yoksa çift mi olduðuna bakacaðýz.
+
+Buna göre sistemimiz þöyle çalýþacak:
+
+Diyelim ki verici alýcýya sinyaller aracýlýðýyla þu sayýyý göndermek istiyor:
+
+0110111
+
+Bu arada, bunun 7 bitlik bir sayý olduðuna dikkat edin. Dediðimiz gibi, biz kontrol mekanizmamýzý kurabilmek için elimizdeki 8 bitlik kapasitenin 7 bitini kullanacaðýz. Boþta kalan 8. biti ise kontrol mekanizmasýna tahsis edeceðiz.
+
+Ne diyorduk? Evet, biz karþý tarafa 7 bitlik bir sayý olan 0110111 sayýsýný göndermek istiyoruz. Bu sayýyý göndermeden önce, içindeki 1‘lerin miktarýna bakarak bu sayýnýn tek mi yoksa çift mi olduðuna karar verelim. Burada toplam beþ adet 1 sayýsý var. Yani bu sayý bir tek sayýdýr. Eðer göndermek istediðimiz sayý bir tek sayý ise, karþý tarafa ulaþtýðýnda da bir tek sayý olmalýdýr.
+
+Biz bu sistem için þöyle bir protokol tasarlayabiliriz:
+
+Bu sistemde bütün sayýlar karþý tarafa bir ‘tek sayý’ olarak iletilmelidir. Eðer iletilen sayýlar arasýnda bir çift sayý varsa, o sayý hatalý iletilmiþ veya iletim esnasýnda bozulmuþ demektir.
+
+Peki biz iletilen bütün sayýlarýn bir tek sayý olmasýný nasýl saðlayacaðýz? Ýþte bu iþlemi, boþa ayýrdýðýmýz o 8. bit ile gerçekleþtireceðiz:
+
+Eðer karþý tarafa iletilen bir sayý zaten tekse, o sayýnýn baþýna 0 ekleyeceðiz. Böylece sayýnýn teklik-çiftlik durumu deðiþmemiþ olacak. Ama eðer iletilecek sayý çiftse, o sayýnýn baþýna 1 ekleyeceðiz. Böylece çift sayýyý, sistemimizin gerektirdiði þekilde, tek sayýya çevirmiþ olacaðýz.
+
+Örnek olarak 0110111 sayýsýný verelim. Bu sayýda toplam beþ adet 1 var. Yani bu sayý bir tek sayý. Dolayýsýyla bu sayýnýn baþýna bir adet 0 ekliyoruz:
+
+0 0110111
+
+Böylece sayýmýzýn teklik-çiftlik durumu deðiþmemiþ oluyor. Karþý taraf bu sayýyý aldýðýnda 1‘lerin miktarýna bakarak bu verinin doðru iletildiðinden emin oluyor.
+
+Bir de þu sayýya bakalým:
+
+1111011
+
+Bu sayýda toplam altý adet 1 sayýsý var. Yani bu sayý bir çift sayý. Bir sayýnýn sistemimiz tarafýndan ‘hatasýz’ olarak kabul edilebilmesi için bu sayýnýn bir tek sayý olmasý gerekiyor. Bu yüzden biz bu sayýyý tek sayýya çevirmek için baþýna bir adet 1 sayý ekliyoruz:
+
+1 1111011
+
+Böylece sayýmýzýn içinde toplam yedi adet 1 sayýsý olmuþ ve böylece sayýmýz tek sayýya dönüþmüþ oluyor.
+
+Teknik olarak ifade etmemiz gerekirse, yukarýda yaptýðýmýz kontrol türüne ‘eþlik denetimi’ (parity check) adý verilir. Bu iþlemi yapmamýzý saðlayan bit’e ise ‘eþlik biti’ (parity bit) denir. Ýki tür eþlik denetimi bulunur:
+
+
+Tek eþlik denetimi (odd parity check) 
+Çift eþlik denetimi (even parity check) 
+
+Biz kendi sistemimizde hata kontrol mekanizmasýný bütün verilerin bir ‘tek sayý’ olmasý gerekliliði üzerine kurduk. Yani burada bir ‘tek eþlik denetimi’ gerçekleþtirmiþ olduk. Elbette bütün verilerin bir çift sayý olmasý gerekliliði üzerine de kurabilirdik bu sistemi. Yani isteseydik ‘çift eþlik denetimi’ de yapabilirdik. Bu tamamen bir tercih meselesidir. Bu tür sistemlerde yaygýn olarak ‘tek eþlik denetimi’ kullanýldýðý için biz de bunu tercih ettik.
+
+Bu örneklerden de gördüðünüz gibi, toplam 8 bitlik kapasitemizin 7 bitini veri aktarýmý için, kalan 1 bitini ise alýnýp verilen bu verilerin doðruluðunu denetlemek için kullanýyoruz. Elbette kullandýðýmýz hata kontrol mekanizmasý epey zayýf bir sistemdir. Ama, iletiþim sistemleri arasýnda verilerin hatasýz bir þekilde aktarýlýp aktarýlamadýðýný kontrol etmeye yarayan bir sistem olan eþlik denetiminin, bugün bilgisayarýn belleklerinde (RAM) dahi kullanýlmaya devam ettiðini söylemeden geçmeyelim...
+
+
+Karakterlerin Temsili
+
+Yukarýda anlattýklarýmýzdan da gördüðünüz gibi, sistemimizi kullanarak 7 bit üzerinden toplam 127 sayý gönderebiliyoruz. Tabii ki sistemimiz 8 bit olduðu için 1 bit de boþta kalýyor. Ýþte boþta duran bu 1 biti ise eþlik denetimi için kullanýyoruz. Ama elbette alýcý ile verici arasýnda sayý alýþveriþi yapmak pek de heyecan uyandýrýcý bir faaliyet deðil. Karþý tarafa sayýsal mesajlar yerine birtakým sözel mesajlar iletebilsek herhalde çok daha keyifli olurdu...
+
+Þunu asla unutmayýn. Eðer bir noktadan baþka bir noktaya en az iki farklý sinyal yolu ile birtakým sayýsal verileri gönderebiliyorsanýz ayný þekilde sözel verileri de rahatlýkla gönderebilirsiniz. Týpký düþük voltaj ve yüksek voltaj deðerlerini sýrasýyla 0 ve 1 sayýlarý ile temsil ettiðiniz gibi, karakterleri de bu iki sayý ile temsil edebilirsiniz. Yapmanýz gereken tek þey hangi sayýlarýn hangi karakterlere karþýlýk geleceðini belirlemekten ibarettir. Mesela elimizde sayýlarla karakterleri eþleþtiren þöyle bir tablo olduðunu varsayalým:
+
+
+sayý karakter sayý karakter sayý karakter sayý karakter 
+0 ‘a’ 1 ‘b’ 10 ‘c’ 11 ‘d’ 
+100 ‘e’ 101 ‘f’ 110 ‘g’ 111 ‘h’ 
+1000 ‘i’ 1001 ‘j’ 1010 ‘k’ 1011 ‘l’ 
+1100 ‘m’ 1101 ‘n’ 1110 ‘o’ 1111 ‘p’ 
+10000 ‘q’ 10001 ‘r’ 10010 ‘s’ 10011 ‘t’ 
+10100 ‘u’ 10101 ‘v’ 10110 ‘w’ 10111 ‘x’ 
+11000 ‘y’ 11001 ‘z’ 11010 ‘A’ 11011 ‘B’ 
+11100 ‘C’ 11101 ‘D’ 11110 ‘E’ 11111 ‘F’ 
+100000 ‘G’ 100001 ‘H’ 100010 ‘I’ 100011 ‘J’ 
+100100 ‘K’ 100101 ‘L’ 100110 ‘M’ 100111 ‘N’ 
+101000 ‘O’ 101001 ‘P’ 101010 ‘Q’ 101011 ‘R’ 
+101100 ‘S’ 101101 ‘T’ 101110 ‘U’ 101111 ‘V’ 
+110000 ‘W’ 110001 ‘X’ 110010 ‘Y’ 110011 ‘Z’ 
+
+Bu tabloda toplam 52 karakter ile 52 sayý birbiriyle eþleþtirilmiþ durumda. Mesela vericiden 0 sinyali geldiðinde bu tabloya göre biz bunu ‘a’ harfi olarak yorumlayacaðýz. Örneðin karþý tarafa ‘python’ mesajýný iletmek için sýrasýyla þu sinyalleri göndereceðiz:
+
+1111, 11000, 10011, 111, 1110, 1101
+
+Gördüðünüz gibi, elimizdeki 127 sayýnýn 52’sini harflere ayýrdýk ve elimizde 75 tane daha sayý kaldý. Eðer isterseniz geri kalan bu sayýlarý da birtakým baþka karakterlere veya iþaretlere ayýrarak, alýcý ve verici arasýndaki bütün iletiþimin eksiksiz bir þekilde gerçekleþmesini saðlayabilirsiniz. Örneðin þöyle bir tablo oluþturabilirsiniz:
+
+
+sayý karakter sayý karakter sayý karakter sayý karakter 
+0 ‘0’ 1 ‘1’ 10 ‘2’ 11 ‘3’ 
+100 ‘4’ 101 ‘5’ 110 ‘6’ 111 ‘7’ 
+1000 ‘8’ 1001 ‘9’ 1010 ‘a’ 1011 ‘b’ 
+1100 ‘c’ 1101 ‘d’ 1110 ‘e’ 1111 ‘f’ 
+10000 ‘g’ 10001 ‘h’ 10010 ‘i’ 10011 ‘j’ 
+10100 ‘k’ 10101 ‘l’ 10110 ‘m’ 10111 ‘n’ 
+11000 ‘o’ 11001 ‘p’ 11010 ‘q’ 11011 ‘r’ 
+11100 ‘s’ 11101 ‘t’ 11110 ‘u’ 11111 ‘v’ 
+100000 ‘w’ 100001 ‘x’ 100010 ‘y’ 100011 ‘z’ 
+100100 ‘A’ 100101 ‘B’ 100110 ‘C’ 100111 ‘D’ 
+101000 ‘E’ 101001 ‘F’ 101010 ‘G’ 101011 ‘H’ 
+101100 ‘I’ 101101 ‘J’ 101110 ‘K’ 101111 ‘L’ 
+110000 ‘M’ 110001 ‘N’ 110010 ‘O’ 110011 ‘P’ 
+110100 ‘Q’ 110101 ‘R’ 110110 ‘S’ 110111 ‘T’ 
+111000 ‘U’ 111001 ‘V’ 111010 ‘W’ 111011 ‘X’ 
+111100 ‘Y’ 111101 ‘Z’ 111110 ‘!’ 111111 ‘”’ 
+1000000 ‘#’ 1000001 ‘$’ 1000010 ‘%’ 1000011 ‘&’ 
+1000100 “’”’ 1000101 ‘’(‘ 1000110 ‘)’ 1000111 ‘*’ 
+1001000 ‘+’ 1001001 ‘,’ 1001010 ‘-‘ 1001011 ‘.’ 
+1001100 ‘/’ 1001101 ‘:’ 1001110 ‘;’ 1001111 ‘<’ 
+1010000 ‘=’ 1010001 ‘>’ 1010010 ‘?’ 1010011 ‘@’ 
+1010100 ‘[‘ 1010101 ‘\’ 1010110 ‘]’ 1010111 ‘^’ 
+1011000 ‘_’ 1011001 ‘’ 1011010 ‘{‘ 1011011 ‘’ 
+1011100 ‘}’ 1011101 ‘~’ 1011110 ‘ ‘ 1011111 ‘t’ 
+1100000 ‘n’ 1100001 ‘r’ 1100010 ‘x0b’ 1100011 ‘x0c’ 
+
+Aslýnda yukarýda anlattýðýmýz sayý-karakter eþleþtirme iþleminin, ta en baþta yaptýðýmýz sinyal-sayý eþleþtirme iþlemiyle mantýk olarak ayný olduðuna dikkatinizi çekmek isterim.
+
+Sistemimizi tasarlarken, iletilen iki farklý sinyali 0 ve 1 sayýlarý ile temsil etmiþtik. Yani bu sinyalleri 0 ve 1‘ler halinde kodlamýþtýk. Þimdi ise bu sayýlarý karakterlere dönüþtürüyoruz. Yani yine bir kodlama (encoding) iþlemi gerçekleþtiriyoruz.
+
+Baþtan beri anlattýðýmýz bu küçük iletiþim modeli, sayýlarýn ve karakterlerin nasýl temsil edilebileceði konusunda bize epey bilgi verdi. Bu arada, yukarýda anlattýðýmýz sistem her ne kadar hayali de olsa, bu sisteme benzeyen sistemlerin tarih boyunca kullanýldýðýný ve hatta bugün kullandýðýmýz bütün iletiþim sistemlerinin de yukarýda anlattýðýmýz temel üzerinde þekillendiðini belirtmeden geçmeyelim. Örneðin telgraf iletiþiminde kullanýlan Mors alfabesi yukarýda tarif ettiðimiz sisteme çok benzer. Mors alfabesi, kýsa ve uzun sinyallerle karakterlerin eþleþtirilmesi yoluyla oluþturulmuþtur. Mors sisteminde farklý sinyaller (týpký bizim sistemimizde olduðu gibi) farklý harflere karþýlýk gelir:
+
+
+Mors alfabesinin bizim oluþturduðumuz sisteme mantýk olarak ne kadar benzediðine dikkat edin. Bu sistemin benzeri biraz sonra göstereceðimiz gibi, modern bilgisayarlarda da kullanýlmaktadýr.
+

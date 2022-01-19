@@ -1,0 +1,140 @@
+
+Konu ile ilgili Fonksiyonlar
+
+Bu bölümde, karakter kodlama iþlemleri esnasýnda iþimize yarayacak bazý fonksiyonlarý ele alacaðýz.
+
+
+repr()
+
+Ýnceleyeceðimiz ilk fonksiyonun adý repr(). Esasýnda biz bu fonksiyonu önceki derslerimizde de birkaç örnekte kullanmýþtýk. Belki o zaman bu fonksiyonun ne iþe yaradýðýný deneme-yanýlma yoluyla anlamýþ olabilirsiniz. Eðer henüz bu fonksiyonun görevini anlamadýysanýz da mesele deðil. Bu bölümde bu fonksiyonu ve iþlevini ayrýntýlý bir þekilde anlatmaya çalýþacaðýz.
+
+Dilerseniz repr() fonksiyonunu anlatmaya bir örnek ile baþlayalým.
+
+Þimdi Python’ýn etkileþimli kabuðunu açarak þu kodu yazýn:
+
+>>> "Python programlama dili"
+
+Bu kodu yazýp ENTER düðmesine bastýðýnýzda þöyle bir çýktý alacaðýnýzý biliyorsunuz:
+
+>>> 'Python programlama dili'
+
+Dikkat ettiyseniz, yukarýdaki kodlarýn çýktýsýnda karakter dizisi týrnak iþaretleri içinde gösteriliyor. Eðer bu karakter dizisini print() fonksiyonu içine yazarsanýz o týrnak iþaretleri kaybolacaktýr:
+
+>>> print("Python programlama dili")
+
+Python programlama dili
+
+Peki bu iki farklý çýktýnýn sebebi ne?
+
+Python programlama dilinde nesneler iki farklý þekilde temsil edilir:
+
+
+Python’ýn göreceði þekilde 
+Kullanýcýnýn göreceði þekilde 
+
+Yukarýdaki ilk kullaným, yazdýðýmýz kodu Python programlama dilinin nasýl gördüðünü gösteriyor. Ýkinci kullaným ise ayný kodu bizim nasýl gördüðümüzü gösteriyor. Zaten bu yüzden, etkileþimli kabukta print() fonksiyonu içinde yazmadýðýmýz karakter dizilerinin çýktýlarýný ekranda görebildiðimiz halde, ayný karakter dizilerini bir dosyaya yazýp kaydettiðimizde ekranda çýktý olarak görebilmek için bunlarý print() fonksiyonu içine yazmamýz gerekiyor.
+
+Bu söylediklerimiz biraz karmaþýk gelmiþ olabilir. Ýsterseniz ne anlatmaya çalýþtýðýmýzý daha açýk bir örnek üzerinde gösterelim. Þimdi tekrar etkileþimli kabuðu açýp þu kodu çalýþtýralým:
+
+>>> "birinci satýr\n"
+
+Bu komut bize þu çýktýyý verdi:
+
+'birinci satýr\n'
+
+Þimdi ayný kodu bir de þöyle yazalým:
+
+>>> print("birinci satýr\n")
+
+birinci satýr
+
+Gördüðünüz gibi, ilk kodun çýktýsýnda satýr baþý karakteri (\n) görünürken, ikinci kodun çýktýsýnda bu karakter görünmüyor (ama iþlevini yerine getiriyor. Yani satýr baþýna geçilmesini saðlýyor).
+
+Ýþte bunun sebebi, ilk kodun Python’ýn bakýþ açýsýný yansýtýrken, ikinci kodun bizim bakýþ açýmýzý yansýtmasýdýr.
+
+Peki bu bilgi bizim ne iþimize yarar?
+
+Þimdi þöyle bir örnek düþünün:
+
+Diyelim ki elimizde þöyle bir deðiþken var:
+
+>>> a = "elma "
+
+Þimdi bu deðiþkeni ekrana çýktý olarak verelim:
+
+>>> print(a)
+
+elma
+
+Gördüðünüz gibi, bu çýktýya bakarak, a deðiþkeninin tuttuðu karakter dizisinin son tarafýnda bir adet boþluk karakteri olduðunu anlayamýyoruz. Bu yüzden bu deðiþkeni þöyle bir program içinde kullanmaya çalýþtýðýmýzda neden bozuk bir çýktý elde ettiðimizi anlamak zor olabilir:
+
+>>> print("{} kilo {} kaldý!".format(23, a))
+
+23 kilo elma  kaldý!
+
+Gördüðünüz gibi, “elma” karakter dizisinin son tarafýnda bir boþluk olduðu için ‘elma’ ile ‘kaldý’ kelimeleri arasýnda gereksiz bir açýklýk meydana geldi.
+
+Bu boþluðu print() ile göremiyoruz, ama bu deðiþkeni print() olmadan yazdýrdýðýmýzda o boþluk da görünür:
+
+>>> a
+
+'elma '
+
+Bu sayede programýnýzdaki aksaklýklarý giderme imkaný kazanmýþ olur, þu kodu yazarak gereksiz boþluklarý atabilirsiniz:
+
+>>> print("{} kilo {} kaldý!".format(23, a.strip()))
+
+23 kilo elma kaldý!
+
+Daha önce de dediðimiz gibi, baþýnda print() olmayan ifadeler, bir dosyaya yazýlýp çalýþtýrýldýðýnda çýktýda görünmez. O halde biz yukarýdaki özellikten yazdýðýmýz programlarda nasýl yararlanacaðýz. Ýþte burada yardýmýmýza repr() adlý bir fonksiyon yetiþecek. Bu fonksiyonu þöyle kullanýyoruz:
+
+print(repr("karakter dizisi\n"))
+
+Bu kodu bir dosyaya yazýp kaydettiðimizde þöyle bir çýktý alýyoruz:
+
+'karakter dizisi\n'
+
+Gördüðünüz gibi hem týrnak iþaretleri, hem de satýr baþý karakteri çýktýda görünüyor. Eðer repr() fonksiyonunu kullanmasaydýk þöyle bir çýktý alacaktýk:
+
+karakter dizisi
+
+repr() fonksiyonu özellikle yazdýðýmýz programlardaki hatalarý çözmeye çalýþýrken çok iþimize yarar. Çünkü print() fonksiyonu, kullanýcýnýn gözüne daha cazip görünecek bir çýktý üretebilmek için arkaplanda neler olup bittiðini kullanýcýdan gizler. Ýþte arkaplanda neler döndüðünü, print() fonksiyonunun bizden neleri gizlediðini görebilmek için bu repr() fonksiyonundan yararlanabiliriz.
+
+Not
+
+repr() fonksiyonu ile ilgili gerçek hayattan bir örnek için istihza.com/blog/windows-python-3-2de-bir-hata.html adresindeki yazýmýzý okuyabilirsiniz.
+
+Bütün bu açýklamalar bize þunu söylüyor: repr() fonksiyonu, bir karakter dizisinin Python tarafýndan nasýl temsil edildiðini gösterir. Yukarýda biz bu fonksiyonun nasýl kullanýldýðýna dair ayrýntýlarý verdik. Ancak bu fonksiyonun, yine yukarýdaki iþleviyle baðlantýlý olmakla birlikte biraz daha farklý görünen bir iþlevi daha bulunur.
+
+Hatýrlarsanýz, ilk derslerimizde r adlý bir kaçýþ dizisinden söz etmiþtik. Bu kaçýþ dizisini þöyle kullanýyorduk:
+
+print(r"\n")
+
+Bildiðiniz gibi, \n kaçýþ dizisi bir alt satýra geçmemizi saðlýyor. Ýþte r adlý kaçýþ dizisi \n kaçýþ dizisinin bu iþlevini baskýlayarak, bizim \n kaçýþ dizisinin kendisini çýktý olarak verebilmemizi saðlýyor.
+
+O halde bu noktada size þöyle bir soru sormama izin verin:
+
+Acaba bir deðiþkene atanmýþ kaçýþ dizilerinin iþlevini nasýl baskýlayabiliriz? Yani mesela elimizde þöyle bir deðiþken bulunuyor olsun:
+
+yeni_satýr = "\n"
+
+Biz bu deðiþkenin deðerini nasýl ekrana yazdýracaðýz?
+
+Eðer bunu doðrudan print() fonksiyonuna gönderirsek ne olacaðýný biliyorsunuz: Yeni satýr karakteri iþlevini yerine getirecek ve biz de yeni satýr karakterinin kendisini deðil, yaptýðý iþin sonucunu (yani satýr baþýna geçildiðini) göreceðiz.
+
+Ýþte bu tür durumlar için de repr() fonksiyonundan yararlanabilirsiniz:
+
+print(repr('\n'))
+
+Böylece satýr baþý karakterinin iþlevi baskýlanacak ve biz çýktýda bu karakterin kendisini göreceðiz.
+
+Hatýrlarsanýz ASCII konusunu anlatýrken þöyle bir örnek vermiþtik:
+
+for i in range(128):
+if i % 4 == 0:
+print("\n")
+
+print("{:<3}{:>8}\t".format(i, repr(chr(i))), sep="", end="")
+
+Ýþte burada, repr() fonksiyonunun yukarýda sözünü ettiðimiz iþlevinden yararlanýyoruz. Eðer bu kodlarda repr() fonksiyonunu kullanmazsak, ASCII tablosunu oluþturan karakterler arasýndaki \n, \a, \t gibi kaçýþ dizileri ekranda görünmeyecek, bunun yerine bu kaçýþ dizileri doðrudan iþlevlerini yerine getirecek, bu da bizim istediðimiz ASCII tablosunu üretmemize engel olacaktýr.
+

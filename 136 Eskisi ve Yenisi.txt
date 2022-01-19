@@ -1,0 +1,64 @@
+
+Eskisi ve Yenisi
+
+Gelin isterseniz tam olarak ne ile karþý karþýya olduðumuzu daha iyi anlayabilmek için Python3 öncesi durumun nasýl olduðuna bakalým. Eðer geçmiþte Python programlama dilinin karakter dizileri ve baytlarý nasýl ele aldýðýný bilirsek bugünkü durumu ve dolayýsýyla genel olarak karakter dizisi ve bayt kavramýný çok daha net bir þekilde kavrayabiliriz.
+
+Python’ýn 2.x sürümlerinde, bir karakter dizisi tanýmladýðýnýzda Python bu karakter dizisini bir bayt dizisi olarak temsil ediyordu. Örneðin:
+
+>>> kardiz = "e"
+
+Burada kardiz adlý deðiþkenin deðeri, bir baytlýk bir karakter dizisidir. Bunu len() fonksiyonu ile teyit edelim:
+
+>>> len(kardiz)
+
+1
+
+Bir de þuna bakalým:
+
+>>> kardiz = "þ"
+
+Burada ise kardiz adlý deðiþkenin deðerinin kaç baytlýk bir karakter dizisi olduðu, yani bir bakýma len() fonksiyonunun ne çýktý vereceði iþletim sisteminden iþletim sistemine farklýlýk gösterir. Eðer kullandýðýnýz iþletim sistemi Windows ise muhtelemen len(kardiz) komutu 1 çýktýsý verecektir. Ama eðer bu komutu GNU/Linux daðýtýmlarýndan birinde veriyorsanýz alacaðýnýz çýktý büyük ihtimalle 2 olacaktýr.
+
+Dediðimiz gibi, Python2’de str veri tipi bize bir dizi bayt verir. Dolayýsýyla bu veri tipinin içinde tuttuðu karakter dizisinin kaç bayt ile gösterileceði, sistemdeki öntanýmlý kod çözücünün hangisi olduðuna baðlýdýr. Kullandýðýnýz iþletim sisteminde öntanýmlý kod çözücünün hangisi olduðunu þu komutla bulabilirsiniz:
+
+>>> import locale
+>>> locale.getpreferredencoding()
+
+Eðer Windows kullanýyorsanýz buradan alacaðýnýz çýktý muhtemelen cp1254 olacaktýr. cp1254, Microsoft’un Türkçe için özel olarak kullandýðý bir kod sayfasý olduðu için, 128 ile 256 sayýlarý arasýnda Türkçe karakterleri içerir. O yüzden bu kodlama sisteminde Türkçe karakterler 1 bayt ile gösterilebilir. Bu kod sayfasýnýn içeriðinde hangi karakterlerin hangi sayýlara karþýlýk geldiðini görmek için en.wikipedia.org/wiki/Windows-1254 adresindeki tabloyu inceleyebilirsiniz.
+
+Ama eðer yukarýdaki komutlarýn çýktýsý UTF-8 veya baþka bir kod çözücü ise, Türkçe karakterler 1 bayt ile gösterilemeyeceði için len(kardiz) komutu 1 deðil, 2 çýktýsý verecektir.
+
+Bir de þuna bakalým:
+
+>>> len("€")
+
+Bu komutu hangi iþletim sisteminde verdiðinize baðlý olarak yukarýdaki komuttan alacaðýnýz çýktý farklý olacaktýr. str tipi Python2’de karakter dizilerini bayt olarak temsil eder. Bu temsilin de hangi kurallara göre yapýlacaðý kullanýlan kod çözücüye baðlýdýr. Eðer karakter dizileri baytlara çevrilirken cp1254 adlý kod çözücü kullanýlýrsa, bu kod çözücü ‘€’ simgesini tek bayt ile gösterilebildiði için yukarýdaki komut 1 çýktýsý verir. Ama UTF-8 adlý kod çözücü ‘€’ simgesini 3 baytla gösterebildiði için yukarýdaki komutun çýktýsý da buna paralel olarak 3 olacaktýr.
+
+str veri tipi ile gösterilen bu karakter dizilerinin içindeki baytlara ulaþmak için þu yöntemi kullanabilirsiniz:
+
+>>> "þ"[0]
+
+'\xc5'
+
+>>> "þ"[1]
+
+'\x9f'
+
+Gördüðünüz gibi, str veri tipi gerçekten de bize bir dizi bayt veriyor. Eðer karakter dizilerini baytlarýna göre deðil de sahip olduklarý karakter sayýsýna göre saymak isterseniz bunlarý UNICODE olarak tanýmlanýz gerekiyor:
+
+>>> len(u'þ')
+
+1
+
+Python3 ile birlikte yukarýda bahsettiðimiz durumda bazý deðiþiklikler oldu. Artýk str veri tipi UNICODE kod konumlarýný döndürüyor. Dolayýsýyla artýk her karakter dizisi, sahip olduklarý karakter sayýsýna göre sayýlabiliyor:
+
+>>> len("þ")
+
+1
+
+>>> len("€")
+
+1
+
+Ýþte eðer Python2’deki str veri tipini elde etmek istiyorsanýz, Python3’te bytes adlý yeni veri tipini kullanmanýz gerekiyor.
+

@@ -1,0 +1,65 @@
+
+ascii()
+
+Bu fonksiyon, bir nesnenin ekrana basýlabilir halini verir bize. Dilerseniz bu fonksiyonun yaptýðý iþi tanýmlamak yerine bunu bir örnek üzerinden anlatmaya çalýþalým:
+
+>>> a = 'istihza'
+>>> print(ascii(a))
+
+'istihza'
+
+Bu fonksiyonun, print() fonksiyonundan farklý olarak, çýktýya týrnak iþaretlerini de eklediðine dikkat edin.
+
+ascii() fonksiyonunun tam olarak ne yaptýðýný daha iyi anlamak için herhalde þu örnek daha faydalý olacaktýr.
+
+Dikkatlice bakýn:
+
+>>> print('\n')
+
+Bu komutu verdiðimizde, n kaçýþ dizisinin etkisiyle yeni satýra geçileceðini biliyorsunuz.
+
+Bir de þuna bakýn:
+
+>>> print(ascii('\n!'))
+
+'\n'
+
+Gördüðünüz gibi, ascii() fonksiyonu, satýr baþý kaçýþ dizisinin görevini yapmasýný saðlamak yerine bu kaçýþ dizisinin ekrana basýlabilir halini veriyor bize.
+
+Ayrýca bu fonksiyon, karakter dizileri içindeki Türkçe karakterlerin de UNICODE temsillerini döndürür. Örneðin:
+
+>>> a = 'ýþýk'
+>>> print(ascii(a))
+'\u0131\u015f\u0131k'
+
+Bunu daha net þu þekilde görebiliriz:
+
+>>> for i in a:
+... print(ascii(i))
+...
+'\u0131'
+'\u015f'
+'\u0131'
+'k'
+
+Gördüðünüz gibi, ascii() fonksiyonu ASCII olmayan karakterlerle karþýlaþtýðýnda bunlarýn karakter temsilleri yerine UNICODE temsillerini (veya onaltýlýk sayma düzenindeki karþýlýklarýný) veriyor.
+
+Son olarak þu örneðe bakalým:
+
+>>> liste = ['elma', 'armut', 'erik']
+>>> temsil = ascii(liste)
+>>> print(temsil)
+
+['elma', 'armut', 'erik']
+
+Burada listemiz ascii() fonksiyonuna parametre olarak verildikten sonra artýk liste olma özelliðini yitirip bir karakter dizisi haline gelir. Bunu denetleyelim:
+
+>>> print(type(temsil))
+<class 'str'>
+
+>>> temsil[0]
+
+'['
+
+Gördüðünüz gibi, ascii() fonksiyonu listeyi alýp, bunu ekrana basýlabilir bir bütün haline getiriyor. Elbette bunun için de, kendisine verilen parametreyi bir karakter dizisine dönüþtürüyor.
+

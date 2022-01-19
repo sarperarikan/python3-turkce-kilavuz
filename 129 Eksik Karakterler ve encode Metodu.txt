@@ -1,0 +1,56 @@
+
+Eksik Karakterler ve encode Metodu
+
+Dediðimiz ve örneklerden de gördüðümüz gibi, her karakter her kod çözücü ile çözülemeyebilir. Mesela Windows-1254 adlý kod sayfasýnda bulunan bir karakter Windows-1250 adlý kod sayfasýnda bulunamadýðýnda, bulunmayan karakterin yerine bir soru iþareti (veya baþka bir simge) yerleþtirilecektir.
+
+Aslýnda siz bu olguya hiç yabancý deðilsiniz. Ýnternette dolaþýrken mutlaka anlamsýz karakterlerle dolu web sayfalarýyla karþýlaþmýþsýnýzdýr. Bu durumun sebebi, ilgili sayfanýn dil kodlamasýnýn (encoding) düzgün belirtilmemiþ olmasýdýr. Yani sayfanýn HTML kodlarý arasýnda meta charset etiketi ya hiç yazýlmamýþ ya da yanlýþ yazýlmýþtýr. Eðer bu etiket hiç yazýlmamýþsa, Internet tarayýcýnýz dil kodlamasýnýn ne olduðunu kendince tahmin etmeyece çalýþacak, çoðunlukla da yanlýþ bir karar verecektir. Tarayýcýnýz metnin dilini düzgün tespit edemediði için de bu metni yanlýþ bir karakter tablosu ile eþleþtirecek, o karakter tablosunda tanýmlanmamýþ karakterler yerine bir soru iþareti veya baþka anlamsýz bir simge yerleþtirecektir. Metni düzgün görüntüleyebilmek için tarayýcýnýzýn dil kodlamasýnýn yapýldýðý menü öðesini bulup, doðru dil kodlamasýný kendiniz seçeceksiniz. Böyle bir þeyi hayatýnýz boyunca en az bir kez yapmak zorunda kaldýðýnýza eminim...
+
+Bir karakter kümesinde herhangi bir karakter bulunamadýðýnda, bulunamayan bu karakterin yerine neyin geleceði, tamamen aradaki yazýlýma baðlýdýr. Örneðin söz konusu olan bir Python programýysa, ilgili karakter bulunamadýðýnda öntanýmlý olarak bu karakterin yerine hiçbir þey koyulmaz. Onun yerine program çökmeye býrakýlýr... Ancak böyle bir durumda ne yapýlacaðýný isterseniz kendiniz de belirleyebilirsiniz.
+
+Bunun için karakter dizilerinin encode() metodunun errors adlý parametresinden yararlanacaðýz. Bu parametre dört farklý deðer alabilir:
+
+
+Parametre Anlamý 
+‘strict’ Karakter temsil edilemiyorsa hata verilir 
+‘ignore’ Temsil edilemeyen karakter görmezden gelinir 
+‘replace’ Temsil edilemeyen karakterin yerine bir ‘?’ iþareti koyulur 
+‘xmlcharrefreplace’ Temsil edilemeyen karakter yerine XML karþýlýðý koyulur 
+
+Bu parametreleri þöyle kullanýyoruz:
+
+>>> "bu Türkçe bir cümledir.".encode("ascii", errors="strict")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeEncodeError: 'ascii' codec can't encode character '\xfc' in
+position 4: ordinal not in range(128)
+
+‘strict’ zaten öntanýmlý deðerdir. Dolayýsýyla eðer errors parametresine herhangi bir deðer vermezsek Python sanki ‘strict’ deðerini vermiþiz gibi davranacak ve ilgili karakter kodlamasý ile temsil edilemeyen bir karakter ile karþýlaþýldýðýnda hata verecektir:
+
+>>> "bu Türkçe bir cümledir.".encode("ascii")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+UnicodeEncodeError: 'ascii' codec can't encode character '\xfc' in
+position 4: ordinal not in range(128)
+
+Gelelim öteki deðerlerin ne yaptýðýna:
+
+>>> "bu Türkçe bir cümledir.".encode("ascii", errors="ignore")
+
+b'bu Trke bir cmledir.'
+
+Gördüðünüz gibi, errors parametresine ‘ignore’ deðerini verdiðimizde, temsil edilemeyen karakterler görmezden geliniyor:
+
+>>> "bu Türkçe bir cümledir.".encode("ascii", errors="replace")
+
+b'bu T?rk?e bir c?mledir.'
+
+Burada ise ‘replace’ deðerini kullandýk. Böylece temsil edilemeyen karakterlerin yerine birer ? iþareti koyuldu:
+
+>>> "bu Türkçe bir cümledir.".encode("ascii", errors="xmlcharrefreplace")
+
+b'bu T&#252;rk&#231;e bir c&#252;mledir.'
+
+Son olarak ise ‘xmlcharrefreplace’ deðerinin ne yaptýðýný görüyoruz. Eðer errors parametresine ‘xmlcharrefreplace’ deðerini verecek olursak, temsil edilemeyen her bir harf yerine o harfin XML karþýlýðý yerleþtirilir. Bu deðer, programýnýzdan alacaðýnýz çýktýyý bir XML dosyasýnda kullanacaðýnýz durumlarda iþinize yarayabilir.
+

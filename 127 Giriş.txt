@@ -1,0 +1,221 @@
+
+Giriþ
+
+Önceki bölümlerde sýk sýk tekrar ettiðimiz gibi, bilgisayar dediðimiz þey, üzerinden elektrik geçen devrelerden oluþmuþ bir sistemdir. Eðer bir devrede elektrik yoksa o devrenin deðeri 0 volt iken, o devreden elektrik geçtiðinde devrenin deðeri yaklaþýk +5 volttur.
+
+Gördüðünüz gibi, ortada iki farklý deðer var: 0 volt ve +5 volt. Ýkili (binary) sayma sisteminde de iki deðer bulunur: 0 ve 1. Ýþte biz bu 0 volt’u ikili sistemde 0 ile, +5 volt’u ise 1 ile temsil ediyoruz. Yani devreden elektrik geçtiðinde o devrenin deðeri 1, elektrik geçmediðinde ise 0 olmuþ oluyor. Tabii bilgisayar açýsýndan bakýldýðýnda devrede elektrik vardýr veya yoktur. Biz insanlar bu ikili durumu daha kolay bir þekilde manipüle edebilmek için farklý voltaj durumlarýndan her birine sýrasýyla 0 ve 1 gibi bir ad veriyoruz. Yani iki farklý voltaj deðerini iki farklý sayý halinde ‘kodlamýþ’ oluyoruz...
+
+Hatýrlarsanýz bir önceki bölümde tasarladýðýmýz basit iletiþim modelinde de ampulün loþ ýþýk vermesini saðlayan düþük elektrik sinyallerini 0 ile, parlak ýþýk vermesini saðlayan yüksek elektrik sinyallerini ise 1 ile temsil etmiþtik. Bu temsil iþine de teknik olarak ‘kodlama’ (encoding) adý verildiðini söylemiþtik. Ýþte bilgisayarlar açýsýndan da benzer bir durum söz konusudur. Bilgisayarlarda da 0 volt ve +5 volt deðerleri sýrasýyla ikili sayma sistemindeki 0 ve 1 sayýlarý halinde kodlanabilir.
+
+Sözün özü ilk baþta yalnýzca iki farklý elektrik sinyali vardýr. Elbette bu elektrik sinyalleri ile doðrudan herhangi bir iþlem yapamayýz. Mesela elektrik sinyallerini birbiriyle toplayýp, birbirinden çýkaramayýz. Ama bu sinyalleri bir sayma sistemi ile temsil edersek (yani bu sinyalleri o sayma sisteminde kodlarsak), bunlarý kullanarak, örneðin, aritmetik iþlemleri rahatlýkla gerçekleþtirebiliriz. Mesela 0 volt ile +5 voltu birbiriyle toplayamayýz, ama 0 voltu ikili sistemdeki 0 sayýsýyla, +5 voltu ise ikili sistemdeki 1 sayýsýyla kodladýktan sonra bu ikili sayýlar arasýnda her türlü aritmetik iþlemi gerçekleþtirebiliriz.
+
+Bilgisayarlar yalnýzca iki farklý voltaj durumundan anladýðý ve bu iki farklý voltaj durumu da ikili sayma sistemindeki iki farklý sayý ile kolayca temsil edilebildiði için, ilk bilgisayarlar çoðunlukla sadece hesap iþlemlerinde kullanýlýyordu. Karakterlerin/harflerin bilgisayar dünyasýndaki iþlevi bir hayli kýsýtlýydý. Metin oluþturma iþi o zamanlarda daktilo ve benzeri araçlarýn görevi olarak görülüyordu. Bu durumu, telefon teknolojisi ile kýyaslayabilirsiniz. Ýlk telefonlar da yalnýzca iki kiþi arasýndaki sesli iletiþimi saðlamak gibi kýsýtlý bir amaca hizmet ediyordu. Bugün ise, geçmiþte pek çok farklý cihaza paylaþtýrýlmýþ görevleri akýllý telefonlar aracýlýðýyla tek elden halledebiliyoruz.
+
+Peki bir bilgisayar yalnýzca elektrik sinyallerinden anlýyorsa, biz mesela bilgisayarlarý nasýl oluyor da metin giriþi için kullanabiliyoruz?
+
+Bu sorunun cevabý aslýnda çok açýk: Birtakým elektrik sinyallerini, birtakým aritmetik iþlemleri gerçekleþtirebilmek amacýyla nasýl birtakým sayýlar halinde kodlayabiliyorsak; birtakým sayýlarý da, birtakým metin iþlemlerini gerçekleþtirebilmek amacýyla birtakým karakterler halinde kodlayabiliriz.
+
+Peki ama nasýl?
+
+Bir önceki bölümde bahsettiðimiz basit iletiþim modeli aracýlýðýyla bunun nasýl yapýlacaðýný anlatmýþtýk. Týpký bizim basit iletiþim sistemimizde olduðu gibi, bilgisayarlar da yalnýzca elektrik sinyallerini görür. Týpký orada yaptýðýmýz gibi, bilgisayarlarda da hangi elektrik sinyalinin hangi sayýya; hangi sayýnýn da hangi karaktere karþýlýk geleceðini belirleyebiliriz. Daha doðrusu, bilgisayarlarýn gördüðü bu elektrik sinyallerini sayýlara ve karakterlere dönüþtürebiliriz. Dýþarýdan girilen karakterleri de, bilgisayarlarýn anlayabilmesi için tam aksi istikamette sayýya, oradan da elektrik sinyallerine çevirebiliriz. Ýþte bu dönüþtürme iþlemine karakter kodlama (character encoding) adý verilir.
+
+Bu noktada þöyle bir soru akla geliyor: Tamam, sayýlarý karakterlere, karakterleri de sayýlara dönüþtüreceðiz. Ama peki hangi sayýlarý hangi karakterlere, hangi karakterleri de hangi sayýlara dönüþtüreceðiz? Yani mesela ikili sistemdeki 0 sayýsý hangi karaktere, 1 sayýsý hangi karaktere, 10 sayýsý hangi karaktere karþýlýk gelecek?
+
+Siz aslýnda bu sorunun cevabýný da biliyorsunuz. Yine bir önceki bölümde anlattýðýmýz gibi, hangi sayýlarýn hangi karakterlere karþýlýk geleceðini, sayýlarla karakterlerin eþleþtirildiði birtakým tablolalar yardýmýyla rahatlýkla belirleyebiliriz.
+
+Bu iþ ilk baþta kulaða çok kolaymýþ gibi geliyor. Esasýnda iþ kolaydýr, ama þöyle bir problem var: Herkes ayný sayýlarý ayný karakterlerle eþleþtirmiyor olabilir. Mesela durumu bir önceki bölümde tasarladýðýmýz basit iletiþim modeli üzerinden düþünelim. Diyelim ki, baþta yalnýzca bir arkadaþýnýzla ikinizin arasýndaki iletiþimi saðlamak için tasarladýðýnýz bu sistem baþkalarýnýn da dikkatini çekmiþ olsun... Týpký sizin gibi, baþkalarý da loþ ýþýk-parlak ýþýk karþýtlýðý üzerinden birbiriyle iletiþim kurmaya karar vermiþ olsun. Ancak sistemin temeli herkesçe ayný þekilde kullanýlýyor olsa da, karakter eþleþtirme tablolarýný herkes ayný þekilde kullanmýyor olabilir. Örneðin baþkalarý, kendi ihtiyaçlarý çerçevesinde, farklý sayýlarýn farklý karakterlerle eþleþtirildiði farklý tablolar tasarlamýþ olabilir. Bu durumun dezavantajý, farklý sistemlerle üretilen mesajlarýn, baþka sistemlerde aslý gibi görüntülenemeyecek olmasýdýr. Örneðin ‘a’ harfinin 1010 gibi bir sayýyla temsil edildiði sistemle üretilen bir mesaj, ayný harfin mesela 1101 gibi bir sayýyla temsil edildiði sistemde düzgün görüntülenemeyecektir. Ýþte ayný þey bilgisayarlar için de geçerlidir.
+
+1960’lý yýllarýn ilk yarýsýna kadar her bilgisayar üreticisi, sayýlarla karakterlerin eþleþtirildiði, birbirinden çok farklý tablolar kullanýyordu. Yani her bilgisayar üreticisi farklý karakterleri farklý sayýlarla eþleþtiriyordu. Örneðin bir bilgisayarda 10 sayýsý ‘a’ harfine karþýlýk geliyorsa, baþka bir bilgisayarda 10 sayýsý ‘b’ harfine karþýlýk gelebiliyordu. Bu durumun doðal sonucu olarak, iki bilgisayar arasýnda güvenilir bir veri aktarýmý gerçekleþtirmek mümkün olmuyordu. Hatta daha da vahimi, ayný firma içinde bile birden fazla karakter eþleþtirme tablosunun kullanýldýðý olabiliyordu...
+
+Peki bu sorunun çözümü ne olabilir?
+
+Cevap elbette standartlaþma.
+
+Standartlaþma ilerleme ve uygarlýk açýsýndan çok önemli bir kavramdýr. Standartlaþma olmadan ilerleme ve uygarlýk düþünülemez. Eðer standartlaþma diye bir þey olmasaydý, mesela A4 piller boy ve en olarak standart bir ölçüye sahip olmasaydý, evde kullandýðýnýz küçük aletlerin pili bittiðinde uygun pili satýn almakta büyük zorluk çekerdiniz. Banyo-mutfak musluklarýndaki plastik contanýn belli bir standardý olmasaydý, conta eskidiðinde yenisini alabilmek için eskisinin ölçülerini inceden inceye hesaplayýp bu ölçülere göre yeni bir conta arayýþýna çýkmanýz gerekirdi. Herhangi bir yerden bulduðunuz contayý herhangi bir muslukta kullanamazdýnýz. Ýþte bu durumun aynýsý bilgisayarlar için de geçerlidir. Eðer bugün karakterlerle sayýlarý eþleþtirme iþlemi belli bir standart üzerinden yürütülüyor olmasaydý, kendi bilgisayarýnýzda oluþturduðunuz bir metni baþka bir bilgisayarda açtýðýnýzda ayný metni göremezdiniz. Ýþte 1960’lý yýllara kadar bilgisayar dünyasýnda da aynen buna benzer bir sorun vardý. Yani o dönemde, hangi sayýlarýn hangi karakterlerle eþleþeceði konusunda uzlaþma olmadýðý için, farklý bilgisayarlar arasýnda metin deðiþ tokuþu pek mümkün deðildi.
+
+1960’lý yýllarýn baþýnda IBM þirketinde çalýþan Bob Bemer adlý bir bilim adamý bu kargaþanýn sona ermesi gerektiðine karar verip, herkes tarafýndan benimsenecek ortak bir karakter kodlama sistemi üzerinde ilk çalýþmalarý baþlattý. Ýþte ASCII (‘aski’ okunur) böylece hayatýmýza girmiþ oldu.
+
+Peki bu ‘ASCII’ denen þey tam olarak ne anlama geliyor? Gelin bu sorunun cevabýný, en baþtan baþlayarak ve olabildiðince ayrýntýlý bir þekilde vermeye çalýþalým.
+
+
+ASCII
+
+Bilgisayarlarýn iki farklý elektrik sinyali ile çalýþtýðýný, bu iki farklý sinyalin de 0 ve 1 sayýlarý ile temsil edildiðini, bilgisayarla metin iþlemleri yapabilmek için ise bu sayýlarýn belli karakterlerle eþleþtirilmesi gerektiðini söylemiþtik.
+
+Yukarýda da bahsettiðimiz gibi, uygarlýk ve ilerleme açýsýndan standartlaþma önemli bir basamaktýr. Þöyle düþünün: Biz bilgisayarlarýn çalýþma prensibinde iki farklý elektrik sinyali olduðunu biliyoruz. Biz insanlar olarak, iþlerimizi daha kolay yapabilmek için, bu sinyalleri daha somut birer araç olan 0 ve 1 sayýlarýna atamýþýz. Eðer devrede elektrik yoksa bu durumu 0 ile, eðer devrede elektrik varsa bu durumu 1 ile temsil ediyoruz. Esasýnda bu da bir uzlaþma gerektirir. Devrede elektrik yoksa bu durumu pekala 0 yerine 1 ile de temsil edebilirdik... Eðer elektrik sinyallerinin temsili üzerinde böyle bir uzlaþmazlýk olsaydý, her þeyden önce hangi sinyalin hangi sayýya karþýlýk geleceði konusunda da ortak bir karara varmamýz gerekirdi.
+
+Elektriðin var olmadýðý durumu 0 yerine 1 ile temsil etmek akla pek yatkýn olmadýðý için uzlaþmada bir problem çýkmýyor. Ama karakterler böyle deðildir. Onlarca (hatta yüzlerce ve binlerce) karakterin sayýlarla eþleþtirilmesi gereken bir durumda, ortak bir eþleþtirme düzeni üzerinde uzlaþma saðlamak hiç de kolay bir iþ deðildir. Zaten 1960’lý yýllarýn baþýna kadar da böyle bir uzlaþma saðlanabilmiþ deðildi. Dediðimiz gibi, her bilgisayar üreticisi sayýlarý farklý karakterlerle eþleþtiriyor, yani birbirlerinden tamamen farklý karakter kodlama sistemleri kullanýyordu.
+
+Ýþte bu kargaþayý ortadan kaldýrmak gayesiyle, Bob Bemer ve ekibi hangi sayýlarýn hangi karakterlere karþýlýk geleceðini belli bir standarda baðlayan bir tablo oluþturdu. Bu standarda ise American Standard Code for Information Interchange, yani ‘Bilgi Alýþveriþi için Standart Amerikan Kodu’ veya kýsaca ‘ASCII’ adý verildi.
+
+
+7 Bitlik bir Sistem
+
+ASCII adý verilen sistem, birtakým sayýlarýn birtakým karakterlerle eþleþtirildiði basit bir tablodan ibarettir. Bu tabloyu http://www.asciitable.com/ adresinde görebilirsiniz:
+
+Ýsterseniz bu tabloyu Python yardýmýyla kendiniz de oluþturabilirsiniz:
+
+for i in range(128):
+if i % 4 == 0:
+print("\n")
+
+print("{:<3}{:>8}\t".format(i, repr(chr(i))), sep="", end="")
+
+Not
+
+Bu kodlarda repr() fonksiyonu dýþýnda bilmediðiniz ve anlayamayacaðýnýz hiçbir þey yok. Biraz sonra repr() fonksiyonundan da bahsedeceðiz. Ama dilerseniz, bu fonksiyonun ne iþe yaradýðý konusunda en azýndan bir fikir sahibi olmak için, yukarýdaki kodlarý bir de repr() olmadan yazmayý ve aldýðýnýz çýktýyý incelemeyi deneyebilirsiniz.
+
+ASCII tablosunda toplam 128 karakterin sayýlarla eþleþtirilmiþ durumda olduðunu görüyorsunuz. Bir önceki bölümde bahsettiðimiz basit iletiþim modelinde anlattýklarýmýzdan da aþina olduðunuz gibi, 128 adet sayý 7 bite karþýlýk gelir (2**7=128). Yani 7 bit ile gösterilebilecek son sayý 127‘dir. Dolayýsýyla ASCII 7 bitlik bir sistemdir.
+
+ASCII tablosunu þöyle bir incelediðimizde ilk 32 öðenin göze ilk baþta anlamsýz görünen birtakým karakterlerden oluþtuðunu görüyoruz:
+
+
+sayý karakter sayý karakter sayý karakter sayý karakter 
+0 ‘\x00’ 1 ‘\x01’ 2 ‘\x02’ 3 ‘\x03’ 
+4 ‘\x04’ 5 ‘\x05’ 6 ‘\x06’ 7 ‘\x07’ 
+8 ‘\x08’ 9 ‘\t’ 10 ‘\n’ 11 ‘\x0b’ 
+12 ‘\x0c’ 13 ‘\r’ 14 ‘\x0e’ 15 ‘\x0f’ 
+16 ‘\x10’ 17 ‘\x11’ 18 ‘\x12’ 19 ‘\x13’ 
+20 ‘\x14’ 21 ‘\x15’ 22 ‘\x16’ 23 ‘\x17’ 
+24 ‘\x18’ 25 ‘\x19’ 26 ‘\x1a’ 27 ‘\x1b’ 
+28 ‘\x1c’ 29 ‘\x1d’ 30 ‘\x1e’ 31 ‘\x1f’ 
+
+Not
+
+Bu arada, asciitable.com adresinden baktýðýnýz tablo ile yukarýdaki tablonun birbirinden farklý olduðunu zannedebilirsiniz ilk bakýþta. Ama aslýnda arada herhangi bir fark yok. Yalnýzca iki tablonun karakterleri gösterim þekli birbirinden farklý. Örneðin asciitable.com’daki tabloda 9 sayýsýnýn ‘TAB (horizontal tab)’ adlý bir karaktere atandýðýný görüyoruz. Yukarýdaki tabloda ise 9 sayýsýnýn yanýnda \t adlý kaçýþ dizisi var. Gördüðünüz gibi, ‘TAB (horizontal tab)’ ifadesi ile \t ifadesi ayný karaktere atýfta bulunuyor. Yalnýzca bunlarýn gösterimleri birbirinden farklý, o kadar.
+
+Aslýnda bu karakter salatasý arasýnda bizim tanýdýðýmýz birkaç karakter de yok deðil. Mesela 9. sýradaki \t öðesinin sekme oluþturan kaçýþ dizisi olduðunu söyledik. Ayný þekilde, 10. sýradaki \n öðesinin satýr baþýna geçiren kaçýþ dizisi olduðunu, 13. sýradaki \r öðesinin ise satýrý baþa alan kaçýþ dizisi olduðunu da biliyoruz. Bu tür karakterler ‘basýlamayan’ (non-printing) karakterlerdir. Yani mesela ekranda görüntülenebilen ‘a’, ‘b’, ‘c’, ‘!’, ‘?’, ‘=’ gibi karakterlerden farklý olarak bu ilk 32 karakter ekranda görünmez. Bunlara ayný zamanda ‘kontrol karakterleri’ (control characters) adý da verilir. Çünkü bu karakterler ekranda görüntülenmek yerine, metnin akýþýný kontrol eder. Bu karakterlerin ne iþe yaradýðýný þu tabloyla tek tek gösterebiliriz (tablo http://tr.wikipedia.org/wiki/ASCII adresinden alýntýdýr):
+
+
+Sayý Karakter Sayý Karakter 
+0 boþ 16 veri baðlantýsýndan çýk 
+1 baþlýk baþlangýcý 17 aygýt denetimi 1 
+2 metin baþlangýcý 18 aygýt denetimi 2 
+3 metin sonu 19 aygýt denetimi 3 
+4 aktarým sonu 20 aygýt denetimi 4 
+5 sorgu 21 olumsuz bildirim 
+6 bildirim 22 zaman uyumlu boþta kalma 
+7 zil 23 aktarým bloðu sonu 
+8 geri al 24 iptal 
+9 yatay sekme 25 ortam sonu 
+10 satýr besleme/yeni satýr 26 deðiþtir 
+11 dikey sekme 27 çýk 
+12 form besleme/yeni sayfa 28 dosya ayýrýcýsý 
+13 satýr baþý 29 grup ayýrýcýsý 
+14 dýþarý kaydýr 30 kayýt ayýrýcýsý 
+15 içeri kaydýr 31 birim ayýrýcýsý 
+
+Gördüðünüz gibi, bunlar birer harf, sayý veya noktalama iþareti deðil. O yüzden bu karakterler ekranda görünmez. Ama bir metindeki veri, satýr ve paragraf düzeninin nasýl olacaðýný, metnin nerede baþlayýp nerede biteceðini ve nasýl görüneceðini kontrol ettikleri için önemlidirler.
+
+Geri kalan sayýlar ise doðrudan karakterlere, sayýlara ve noktalama iþaretlerine tahsis edilmiþtir:
+
+
+sayý karakter sayý karakter sayý karakter sayý karakter 
+32 ‘ ‘ 33 ‘!’ 34 ‘”’ 35 ‘#’ 
+36 ‘$’ 37 ‘%’ 38 ‘&’ 39 “’” 
+40 ‘(‘ 41 ‘)’ 42 ‘*’ 43 ‘+’ 
+44 ‘,’ 45 ‘-‘ 46 ‘.’ 47 ‘/’ 
+48 ‘0’ 49 ‘1’ 50 ‘2’ 51 ‘3’ 
+52 ‘4’ 53 ‘5’ 54 ‘6’ 55 ‘7’ 
+56 ‘8’ 57 ‘9’ 58 ‘:’ 59 ‘;’ 
+60 ‘<’ 61 ‘=’ 62 ‘>’ 63 ‘?’ 
+64 ‘@’ 65 ‘A’ 66 ‘B’ 67 ‘C’ 
+68 ‘D’ 69 ‘E’ 70 ‘F’ 71 ‘G’ 
+72 ‘H’ 73 ‘I’ 74 ‘J’ 75 ‘K’ 
+76 ‘L’ 77 ‘M’ 78 ‘N’ 79 ‘O’ 
+80 ‘P’ 81 ‘Q’ 82 ‘R’ 83 ‘S’ 
+84 ‘T’ 85 ‘U’ 86 ‘V’ 87 ‘W’ 
+88 ‘X’ 89 ‘Y’ 90 ‘Z’ 91 ‘[‘ 
+92 ‘\’ 93 ‘]’ 94 ‘^’ 95 ‘_’ 
+96 ‘’‘ 97 ‘a’ 98 ‘b’ 99 ‘c’ 
+100 ‘d’ 101 ‘e’ 102 ‘f’ 103 ‘g’ 
+104 ‘h’ 105 ‘i’ 106 ‘j’ 107 ‘k’ 
+108 ‘l’ 109 ‘m’ 110 ‘n’ 111 ‘o’ 
+112 ‘p’ 113 ‘q’ 114 ‘r’ 115 ‘s’ 
+116 ‘t’ 117 ‘u’ 118 ‘v’ 119 ‘w’ 
+120 ‘x’ 121 ‘y’ 122 ‘z’ 123 ‘{‘ 
+124 ‘|’ 125 ‘}’ 126 ‘~’ 127 ‘x7f’ 
+
+Ýþte 32 ile 127 arasý sayýlarla eþleþtirilen yukarýdaki karakterler yardýmýyla metin ihtiyaçlarýmýzýn büyük bölümünü karþýlayabiliriz. Yani ASCII adý verilen bu eþleþtirme tablosu sayesinde bilgisayarlarýn sayýlarla birlikte karakterleri de iþleyebilmesini saðlayabiliriz.
+
+1960’lý yýllara gelindiðinde, bilgisayarlar 8 bit uzunluðundaki verileri iþleyebiliyordu. Yani, ASCII sisteminin gerçeklendiði (yani hayata geçirildiði) bilgisayarlar 8 bitlik bir kapasiteye sahipti. Bu 8 bitin 7 biti karakterle ayrýlmýþtý. Dolayýsýyla mevcut bütün karakterler 7 bitlik bir alana sýðdýrýlmýþtý. Boþta kalan 8. bit ise, veri aktarýmýnýn düzgün gerçekleþtirilip gerçekleþtirilmediðini denetlemek amacýyla ‘doðruluk kontrolü’ için kullanýlýyordu. Bu kontrole teknik olarak ‘eþlik denetimi’ (parity check), bu eþlik denetimini yapmamýzý saðlayan bit’e ise ‘eþlik biti’ (parity bit) adý verildiðini biliyorsunuz. Geçen bölümde bu teknik terimlerin ne anlama geldiðini açýklamýþ, hatta bunlarla ilgili basit bir örnek de vermiþtik.
+
+Adýndan da anlaþýlacaðý gibi, ASCII bir Amerikan standardýdýr. Dolayýsýyla hazýrlanýþýnda Ýngilizce temel alýnmýþtýr. Zaten ASCII tablosunu incelediðinizde, bu tabloda Türkçeye özgü harflerin bulunmadýðýný göreceksiniz. Bu sebepten, bu standart ile mesela Türkçeye özgü karakterleri gösteremeyiz. Çünkü ASCII standardýnda ‘þ’, ‘ç’, ‘ð’ gibi harfler kodlanmamýþtýr. Özellikle Python’ýn 2.x serisini kullanmýþ olanlar, ASCII’nin bu yetersizliðinin nelere sebep olduðunu gayet iyi bilir. Python’ýn 2.x serisinde mesela doðrudan þöyle bir kod yazamayýz:
+
+print("Merhaba Þirin Baba!")
+
+“Merhaba Þirin Baba! adlý karakter dizisinde geçen ‘Þ’ harfi ASCII dýþý bir karakterdir. Yani bu harf ASCII ile temsil edilemez. O yüzden böyle bir kod yazýp bu kodu çalýþtýrdýðýmýzda Python bize þöyle bir hata mesajý gösterecektir:
+
+File "deneme.py", line 1
+SyntaxError: Non-ASCII character '\xde' in file deneme.py on line 1, but no
+encoding declared; see http://www.python.org/peps/pep-0263.html for details
+
+Aynen anlattýðýmýz gibi, yukarýdaki hata mesajý da kodlar arasýnda ASCII olmayan bir karakter yer aldýðýndan yakýnýyor...
+
+ASCII’nin her ne kadar yukarýda bahsettiðimiz eksiklikleri olsa da bu standart son derece yaygýndýr ve piyasada bulunan pek çok sistemde kullanýlmaya devam etmektedir. Örneðin size kullanýcý adý ve parola soran hemen hemen bütün sistemler bu ASCII tablosunu temel alýr veya bu tablodan etkilenmiþtir. O yüzden çoðu yerde kullanýcý adý ve/veya parola belirlerken Türkçe karakterleri kullanamazsýnýz. Hatta pek çok yazý tipinde yalnýzca ASCII tablosunda yer alan karakterlerin karþýlýðý bulunur. Bu yüzden, mesela blogunuzda kullanmak üzere seçip beðendiðiniz çoðu yazý tipi ‘þ’, ‘ç’, ‘ð’, ‘ö’ gibi harfleri göstermeyebilir. Yukarýda ‘Merhaba Þirin Baba!’ örneðinde de gösterdiðimiz gibi, Python’ýn 2.x serisinde de öntanýmlý olarak ASCII kodlama biçimi kullanýlýyordu. O yüzden Python’ýn 2.x sürümlerinde Türkçe karakterleri gösterebilmek için daha fazla ilave iþlem yapmak zorunda kalýyorduk.
+
+Sözün özü, eðer yazdýðýnýz veya kendiniz yazmamýþ da olsanýz herhangi bir sebeple kullanmakta olduðunuz bir programda Türkçe karakterlere iliþkin bir hata alýyorsanýz, bu durumun en muhtemel sebebi, kullandýðýnýz programýn veya sistemin, doðrudan ASCII’yi veya ASCII’ye benzer baþka bir sistemi temel alarak çalýþýyor olmasýdýr. ASCII tablosunda görünen 128 karakter dýþýnda kalan hiçbir karakter ASCII ile kodlanamayacaðý için, özellikle farklý dillerin kullanýldýðý bilgisayarlarda çalýþan programlar kaçýnýlmaz olarak karakterlere iliþkin pek çok hata verecektir. Örneðin, karakter kodlamalarýna iliþkin olarak yukarýda bahsettiðimiz ayrýntýlardan habersiz bir Amerikalý programcýnýn yazdýðý bir programa Türkçe veri girdiðinizde bu program bir anda tuhaf görünen hatalar verip çökecektir...
+
+
+Geniþletilmiþ ASCII
+
+Dediðimiz gibi, ASCII 7 bitlik bir karakter kümesidir. Bu standardýn ilk çýktýðý dönemde 8. bitin hata kontrolü için kullanýldýðýný söylemiþtik. Sonraki yýllarda 8. bitin hata kontrolü için kullanýlmasýndan vazgeçildi. Böylece 8. bit yine boþa düþmüþ oldu. Bu bitin boþa düþmesi ile elimizde yine toplam 128 karakterlik bir boþluk olmuþ oldu. Dediðimiz gibi 7 bit ile toplam 128 sayý-karakter eþleþtirilebilirken, 8 bit ile toplam 256 sayý-karakter eþleþtirilebilir. Ne de olsa:
+
+>>> 2**7
+
+128
+
+>>> 2**8
+
+256
+
+Ýþte bu fazla bit, farklý kiþi, kurum ve organizasyonlar tarafýndan, Ýngilizcede bulunmayan ama baþka dillerde bulunan karakterleri temsil etmek için kullanýldý. Ancak elbette bu fazladan bitin saðladýðý 128 karakter de dünyadaki bütün karakterlerin temsil edilmesine yetmez. Bu yüzden 8. bitin sunduðu boþluk, birbirinden farklý karakterleri gösteren çeþitli tablolarýn ortaya çýkmasýna sebep oldu. Bu birbirinden farklý tablolara genel olarak ‘kod sayfasý’ adý verilir. Örneðin Microsoft þirketinin Türkiye’ye gönderdiði bilgisayarlarda tanýmlý ‘cp857’ adlý kod sayfasýnda 128 ile 256 aralýðýnda Türkçe karakterlere de yer verilmiþti (bkz. http://msdn.microsoft.com/en-us/library/cc195068.aspx)
+
+Bu tabloya baktýðýnýzda baþtan 128’e kadar olan karakterlerin standart ASCII tablosu ile ayný olduðunu göreceksiniz. 128. karakterden itibaren ise Türkçeye özgü harfler tanýmlanýr. Mesela bu tabloda 128. karakter Türkçedeki büyük ‘ç’ harfi iken, 159. karakter küçük ‘þ’ harfidir. Bu durumu þu Python kodlarý ile de teyit edebilirsiniz:
+
+>>> "Ç".encode("cp857")
+
+b'\x80'
+
+>>> "þ".encode("cp857")
+
+b'\x9f'
+
+Bu arada bu sayýlarýn onaltýlý sayma düzenine göre olduðunu biliyorsunuz. Onlu düzende bunlarýn karþýlýðý sýrasýyla þudur:
+
+>>> int("80", 16)
+
+128
+
+>>> int("9f", 16)
+
+159
+
+Burada karakter dizilerinin encode() adlý metodunu kullandýðýmýza dikkat edin. Bu metot yardýmýyla herhangi bir karakteri herhangi bir karakter kodlama sistemine göre kodlayabiliriz. Mesela yukarýdaki iki örnekte ‘Ç’ ve ‘þ’ harflerini ‘cp857’ adlý kod sayfasýna göre kodladýk ve bunlarýn bu kod sayfasýnda hangi sayýlara karþýlýk geldiðini bulduk.
+
+cp857 numaralý kod sayfasýnda ‘Ç’ ve ‘þ’ harfleri yer aldýðý için, biz bu harfleri o kod sayfasýna göre kodlayabiliyoruz. Ama mesela ASCII kodlama sisteminde bu harfler bulunmaz. O yüzden bu harfleri ASCII sistemine göre kodlayamayýz:
+
+>>> "Ç".encode("ascii")
+
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+UnicodeEncodeError: 'ascii' codec can't encode character '\xc7' in position
+0: ordinal not in range(128)
+
+Týpký hata mesajýnda da söylendiði gibi:
+
+Unicode Kodlama Hatasý: 'ascii' kod çözücüsü, 0 konumundaki '\xc7' adlý
+karakteri kodlayamýyor. Sayý 0-128 aralýðýnda deðil.
+
+Gerçekten de onlu sistemde 199 sayýsýna karþýlýk gelen bu onaltýlý ‘\xc7’ sayýsý ASCII’nin kapsadýðý sayý aralýðýnýn dýþýnda kalmakta, bu yüzden de ASCII kod çözücüsü ile kodlanamamaktadýr.
+
+Dediðimiz gibi, Microsoft Türkiye’ye gönderdiði bilgisayarlarda 857 numaralý kod sayfasýný tanýmlýyordu. Ama mesela Arapça konuþulan ülkelere gönderdiði bilgisayarlarda ise, http://msdn.microsoft.com/en-us/library/cc195061.aspx adresinden görebileceðiniz 708 numaralý kod sayfasýný tanýmlýyordu. Bu kod sayfasýný incelediðinizde, 128 altý karakterlerin standart ASCII ile ayný olduðunu ancak 128 üstü karakterlerin Türkçe kod sayfasýndaki karakterlerden farklý olduðunu göreceksiniz. Ýþte 128 üstü karakterler bütün dillerde birbirinden farklýdýr. Bu farklýlýðýn ne sonuç doðurabileceðini tahmin edebildiðinizi zannediyorum. Elbette, mesela kendi bilgisayarýnýzda yazdýðýnýz bir metni Arapça konuþulan bir ülkedeki bilgisayara gönderdiðinizde, doðal olarak metin içindeki Türkçeye özgü karakterlerin yerinde baþka karakterler belirecektir.
+
+Bu bölümün baþýnda da söylediðimiz gibi, Geniþletilmiþ ASCII sisteminde 128 ile 256 aralýðý için pek çok farklý karakter eþleþtirme tablolarý kullanýlýyordu. Mesela Microsoft þirketi bu aralýk için kendine özgü birtakým kod sayfalarý tasarlamýþtý. Bu kod sayfalarýna örnek olarak yukarýda cp857 ve cp708 numaralý kod sayfalarýný örnek vermiþtik.
+
+Elbette 128 ile 256 aralýðýný dolduran, yalnýzca Microsoft’a ait kod sayfalarý yoktu piyasada. Ayný aralýðý farklý karakterlerle dolduran pek çok baþka eþleþtirme tablosu da dolaþýyordu etrafta. Örneðin özellikle Batý Avrupa dillerindeki karakterleri temsil edebilmek için oluþturulmuþ ‘latin1’ (öbür adýyla ISO-8859-1) adlý karakter kümesi bugün de yaygýn olarak kullanýlan sistemlerinden biridir. Almancada olup da ASCII sistemi ile temsil edilemeyen ‘ö’, ‘ß’, ‘ü’ gibi harfler ve Fransýzcada olup da yine ASCII sistemi ile temsil edilemeyen ‘ç’ ve ‘é’ gibi harfler bu karakter kümesinde temsil edilebiliyordu. Eðer dilerseniz bu karakter kümesini de http://www.fileformat.info/info/charset/ISO-8859-1/list.htm adresinden inceleyebilirsiniz.
+
+Yalnýz burada önemli bir ayrýntýyý not düþelim. ‘Geniþletilmiþ ASCII’, standart ASCII gibi genel kabul görmüþ tek bir sistem deðildir.Geniþletilmiþ ASCII dediðimizde zaten tek bir karakter kümesi akla gelmiyor. Dolayýsýyla ASCII dendiðinde anlamamýz gereken þey 128 karakterlik bir sayý-karakter eþleþtirme tablosudur. ASCII hiçbir zaman bu 128 karakterin ötesine geçip de 256 karakterlik bir aralýðý temsil etmiþ deðildir. Dolayýsýyla 127. sayýnýn ötesindeki karakterleri kapsayan sistem ASCII deðildir. ‘Geniþletilmiþ ASCII’ kavramý, temel ASCII sisteminde temsil edilen sayý-karakter çiftlerinin pek çok farklý kurum ve kuruluþ tarafýndan birbirinden farklý biçimlerde ‘geniþletilmesiyle’ oluþturulmuþ, ancak ASCII’nin kendisi kadar standartlaþamamýþ bir sistemler bütünüdür. Bu sistem içinde pek çok farklý kod sayfasý (veya karakter kümesi) yer alýr. Tek baþýna ‘Geniþletilmiþ ASCII’ ifadesi açýklayýcý olmayýp; ASCII’nin hangi karakter kümesine göre geniþletildiðinin de belirtilmesi gerekir.
+
+Bütün bu anlattýklarýmýzdan þu sonucu çýkarýyoruz: ASCII bilgisayarlar arasýnda güvenli bir þekilde veri aktarýmýný saðlamak için atýlmýþ en önemli ve en baþarýlý adýmlardan bir tanesidir. Bu güçlü standart sayesinde uzun yýllar bilgisayarlar arasý temel iletiþim baþarýyla saðlandý. Ancak bu standardýn zayýf kaldýðý nokta 7 bitlik olmasý ve boþta kalan 8. bitin tek baþýna dünyadaki bütün dilleri temsil etmeye yeterli olmamasýdýr.
+

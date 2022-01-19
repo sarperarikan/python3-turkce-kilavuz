@@ -1,0 +1,166 @@
+
+Aritmetik Fonksiyonlar
+
+Python programlama dili, bize sayýlarla rahat çalýþabilmemiz için bazý fonksiyonlar sunar. Bu fonksiyonlarý kullanarak, karmaþýk aritmetik iþlemleri kolayca yapabiliriz.
+
+Biz bu bölümde Python’ýn bize sunduðu bu gömülü fonksiyonlarý tek tek inceleyeceðiz.
+
+Gömülü fonksiyonlar, Python programlama dilinde, herhangi bir özel iþlem yapmamýza gerek olmadan, kodlarýmýz içinde doðrudan kullanabileceðimiz fonksiyonlardýr. Biz þimdiye kadar pek çok gömülü fonksiyonla zaten tanýþmýþtýk. O yüzden gömülü fonksiyonlar bizim yabancýsý olduðumuz bir konu deðil. Mesela buraya gelene kadar gördüðümüz, len(), range(), type(), open(), print() ve id() gibi fonksiyonlarýn tamamý birer gömülü fonksiyondur. Biz bu fonksiyonlarý ilerleyen derslerde çok daha ayrýntýlý bir þekilde inceleyeceðiz. Ama þu anda bile fonksiyonlar konusunda epey bilgiye sahibiz.
+
+Þimdiye kadar öðrendiðimiz gömülü fonksiyonlardan þu listede yer alanlar, matematik iþlemlerinde kullanýlmaya uygun olanlardýr:
+
+
+complex() 
+float() 
+int() 
+pow() 
+round() 
+hex() 
+oct() 
+bin() 
+
+Biz bu fonksiyonlarýn ne iþe yaradýðýný önceki derslerimizde zaten ayrýntýlý olarak incelemiþtik. O yüzden burada bunlardan söz etmeyeceðiz. Onun yerine, henüz öðrenmediðimiz, ama mutlaka bilmemiz gereken gömülü fonksiyonlarý ele alacaðýz.
+
+O halde hiç vakit kaybetmeden yola koyulalým...
+
+
+abs()
+
+Bu fonksiyon bize bir sayýnýn mutlak deðerini verir:
+
+>>> abs(-2)
+
+2
+
+>>> abs(2)
+
+2
+
+
+divmod()
+
+Bu fonksiyon, bir sayýnýn bir sayýya bölünmesi iþleminde bölümü ve kalaný verir:
+
+>>> divmod(10, 2)
+
+(5, 0)
+
+10 sayýsý 2 sayýsýna bölündüðünde ‘bölüm’ 5, ‘kalan’ ise 0‘dýr.
+
+Bir örnek daha verelim:
+
+>>> divmod(14, 3)
+
+(4, 2)
+
+Bu sonuçtan gördüðünüz gibi, aslýnda divmod() fonksiyonu þu kodlarla ayný iþi yapýyor:
+
+>>> 14 // 3, 14 % 3
+
+Bu fonksiyonun gerçekleþtirdiði bölme iþleminin bir ‘taban bölme’ iþlemi olduðuna özellikle dikkatinizi çekmek istiyorum.
+
+
+max()
+
+Size þöyle bir soru sorduðumu düþünün: Acaba aþaðýdaki listede yer alan sayýlarýn en büyüðü kaçtýr?
+
+[882388, 260409, 72923, 692476, 131925, 259114, 47630, 84513, 25413, 614654,
+239479, 299159, 175488, 345972, 458112, 791030, 243610, 413702, 565285,
+773607, 131583, 979177, 247202, 615485, 647512, 556823, 242460, 852928,
+893126, 792435, 273904, 544434, 627222, 601984, 966446, 384143, 308858,
+915106, 914423, 826315, 258342, 188056, 934954, 253918, 468223, 262875,
+462902, 370061, 336521, 367829, 147846, 838385, 605377, 175140, 957437,
+105779, 153499, 435097, 9934, 435761, 989066, 357279, 341319, 420455,
+220075, 28839, 910043, 891209, 975758, 140968, 837021, 526798, 235190,
+634295, 521918, 400634, 385922, 842289, 106889, 742531, 359913, 842431,
+666182, 516933, 22222, 445705, 589281, 709098, 48521, 513501, 277645,
+860937, 655966, 923944, 7895, 77482, 929007, 562981, 904166, 619260,
+616293, 203512, 67534, 615578, 74381, 484273, 941872, 110617, 53517,
+402324, 156156, 839504 , 625325, 694080, 904277, 163914, 756250, 809689,
+354050, 523654, 26723, 167882, 103404, 689579, 121439, 158946, 485258,
+850804, 650603, 717388, 981770, 573882, 358726, 957285, 418479, 851590,
+960182, 11955, 894146, 856069, 369866, 740623, 867622, 616830, 894801,
+827179, 580024, 987174, 638930, 129200, 214789, 45268, 455924, 655940,
+335481, 845907, 942437, 759380, 790660, 432715, 858959, 289617, 757317,
+982063, 237940, 141714, 939369, 198282, 975017, 785968, 49954, 854914,
+996780, 121633, 436419, 471, 776271, 91626, 209175, 894281, 417963, 624464,
+736535, 418888, 506194, 591087, 64075, 50252, 952943, 25878, 217085,
+223996, 416042, 484123, 810460, 423284, 956886, 237772, 960241, 601551,
+830147, 449088, 364567, 337281, 524358, 980387, 393760, 619710, 100181,
+96738, 275199, 553783, 975654, 662536, 979103, 869504, 702350, 174361,
+970250, 267625, 661580, 444662, 871532, 881977, 981660, 446047, 508758,
+530694, 608789, 339540, 242774, 637473, 874011, 732999, 511638, 744144,
+710805, 641326, 88085, 128487, 59732, 739340, 443638, 830333, 832136,
+882277, 403538, 441349, 721048, 32859]
+
+Ýþte böyle bir soruyu çözmek için max() fonksiyonundan yararlanabilirsiniz. Yukarýdaki listeyi sayýlar adlý bir deðiþkene atadýðýmýzý varsayarsak, aþaðýdaki kod bize listedeki en büyük sayýyý verecektir:
+
+>>> max(sayýlar)
+
+Yukarýdaki örneklerde max() fonksiyonunu kullanarak bir dizi içindeki en büyük sayýyý bulduk. Peki bu fonksiyonu kullanarak bir dizi içindeki en uzun karakter dizisini bulabilir miyiz? Evet, bulabiliriz.
+
+Diyelim ki elimizde þöyle bir liste var:
+
+isimler = ["ahmet", "mehmet", "necla", "sedat", "abdullah",
+"gýyaseddin", "sibel", "can", "necmettin", "savaþ", "özgür"]
+
+Amacýmýz bu liste içindeki en uzun kelimeyi bulmak. Ýþte bunu max() fonksiyonu ile yapabiliriz. Dikkatlice bakýn:
+
+print(max(isimler, key=len))
+
+Bu kodlarý çalýþtýrdýðýmýzda, listedeki en uzun isim olan ‘gýyaseddin’i elde edeceðiz.
+
+Gördüðünüz gibi, max() fonksiyonu key adlý özel bir parametre daha alýyor. Bu parametreye biz ‘len’ deðerini verdik. Böylece max() fonksiyonu liste içindeki öðeleri uzunluklarýna göre sýralayýp en uzun öðeyi bize sundu.
+
+Hatýrlarsanýz geçen bölümde þöyle bir kod yazmýþtýk:
+
+sayý_sistemleri = ["onlu", "sekizli", "on altýlý", "ikili"]
+
+print(("{:^9} "*len(sayý_sistemleri)).format(*sayý_sistemleri))
+
+for i in range(17):
+print("{0:^9} {0:^9o} {0:^9x} {0:^9b}".format(i))
+
+Bu kodlar, farklý sayma sistemleri arasýndaki farklarý daha net görmemizi saðlamýþtý. Yalnýz burada dikkat ettiyseniz, sayý_sistemleri adlý listeye her öðe ekleyiþimizde, listedeki en uzun deðeri dikkate alarak karakter dizisi biçimlendiricileri içindeki, öðeler arasýnda ne kadar boþluk býrakýlacaðýný belirleyen sayýlarý güncelliyorduk. Mesela yukarýdaki örnekte, öðeler arasýnda yeterince boþluk býrakabilmek için bu sayýyý 9 olarak belirlemiþtik. Ýþte þimdi öðrendiðimiz max() fonksiyonunu kullanarak bu sayýnýn otomatik olarak belirlenmesini saðlayabiliriz. Dikkatlice inceleyin:
+
+sayý_sistemleri = ["onlu", "sekizli", "on altýlý", "ikili"]
+
+en_uzun = len(max(sayý_sistemleri, key=len))
+
+print(("{:^{aralýk}} "*len(sayý_sistemleri)).format(*sayý_sistemleri, aralýk=en_uzun))
+
+for i in range(17):
+print("{0:^{1}} {0:^{1}o} {0:^{1}x} {0:^{1}b}".format(i, en_uzun))
+
+Gördüðünüz gibi, max() fonksiyonunu ve bu fonksiyonun key parametresini kullanarak, oluþturduðumuz tablodaki öðelerin arasýna uygun boþluðu otomatik olarak eklemiþ olduk. Bunun için, sayý_sistemleri adlý listedeki en uzun öðenin uzunluk miktarýný temel aldýk.
+
+
+min()
+
+Bu fonksiyon, max() fonksiyonun yaptýðý iþin tam tersini yapar. Yani bu fonksiyonu kullanarak bir dizi içindeki en küçük sayýyý bulabilirsiniz:
+
+>>> min(sayýlar)
+
+Týpký max() fonksiyonunda olduðu gibi, min() fonksiyonunda da key parametresini kullanabilirsiniz. Mesela max() fonksiyonunu anlatýrken verdiðimiz isim listesindeki en kýsa ismi bulabilmek için þu kodu yazabilirsiniz:
+
+print(min(isimler, key=len))
+
+
+sum()
+
+Bu fonksiyon bir dizi içinde yer alan bütün sayýlarý birbiriyle toplar. Örneðin:
+
+>>> a = [10, 20, 43, 45 , 77, 2, 0, 1]
+>>> sum(a)
+
+198
+
+Eðer bu fonksiyonun, toplama iþlemini belli bir sayýnýn üzerine gerçekleþtirmesini istiyorsanýz þu kodu yazabilirsiniz:
+
+>>> sum(a, 10)
+
+208
+
+sum() fonksiyonuna bu þekilde ikinci bir parametre verdiðinizde, bu ikinci parametre toplam deðere eklenecektir.
+
+

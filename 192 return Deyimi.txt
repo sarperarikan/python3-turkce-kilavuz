@@ -1,0 +1,117 @@
+
+return Deyimi
+
+Bu bölümde return adlý bir deyimden söz edeceðiz. Özellikle Python programlama dilini öðrenmeye yeni baþlayanlar bu deyimin ne iþe yaradýðýný anlamakta zorlanabiliyor. Biz burada bu deyimi anlaþýlýr hale getirebilmek için elimizden geleni yapacaðýz. Öncelikle çok basit bir örnek verelim:
+
+def ismin_ne():
+isim = input("ismin ne? ")
+print(isim)
+
+Bu çok basit bir fonksiyon. Bu fonksiyonu nasýl çaðýracaðýmýzý biliyoruz:
+
+ismin_ne()
+
+Fonksiyonu bu þekilde çaðýrdýktan sonra, fonksiyon tanýmýnda yer alan input() fonksiyonu sayesinde kullanýcýya ismi sorulacak ve verdiði cevap ekrana basýlacaktýr.
+
+Yukarýdaki fonksiyonun tek iþlevi kullanýcýdan aldýðý isim bilgisini ekrana basmaktýr. Aldýðýnýz bu veriyi baþka yerlerde kullanamazsýnýz. Bu fonksiyonu çaðýrdýðýnýz anda kullanýcýya ismi sorulacak ve alýnan cevap ekrana basýlacaktýr. Ancak siz, tanýmladýðýnýz fonksiyonlarýn tek görevinin bir veriyi ekrana basmak olmasýný istemeyebilirsiniz.
+
+Örneðin yukarýdaki fonksiyon yardýmýyla kullanýcýdan ismini aldýktan sonra, bu isim bilgisini baþka bir karakter dizisi içinde kullanmak isteyebilirsiniz. Diyelim ki amacýnýz ismin_ne() fonksiyonuyla aldýðýnýz ismi þu karakter dizisi içine aþaðýdaki þekilde yerleþtirmek:
+
+Merhaba Fýrat. Nasýlsýn?
+
+Bildiðimiz yöntemi kullanarak bu amacýmýzý gerçekleþtirmeye çalýþalým:
+
+print("Merhaba {}. Nasýlsýn?".format(ismin_ne()))
+
+Buradan þöyle bir çýktý alýyoruz:
+
+ismin ne? Fýrat
+Fýrat
+Merhaba None. Nasýlsýn?
+
+Gördüðünüz gibi, istediðimiz þeyi elde edemiyoruz. Çünkü dediðimiz gibi, yukarýdaki fonksiyonun tek görevi kullanýcýdan aldýðý çýktýyý ekrana basmaktýr. Bu fonksiyondan gelen çýktýyý baþka yerde kullanamayýz. Eðer kullanmaya çalýþýrsak yukarýdaki gibi hiç beklemediðimiz bir sonuç alýrýz.
+
+Bu arada, çýktýda None diye bir þey gördüðünüze dikkat edin. Yukarýdaki fonksiyonu þu þekilde çaðýrarak bunu daha net görebilirsiniz:
+
+print(ismin_ne())
+
+Buradan þu çýktýyý alýyoruz:
+
+ismin ne? Fýrat
+Fýrat
+None
+
+Bu çýktýnýn ne anlama geldiðini birazdan açýklayacaðýz. Ama öncelikle baþka bir konudan söz edelim.
+
+Biraz önce söylediðimiz gibi, yukarýda tanýmladýðýmýz ismin_ne() adlý fonksiyonun tek görevi kullanýcýdan aldýðý isim bilgisini ekrana basmaktýr. Þimdi bu fonksiyonu bir de þöyle tanýmlayalým:
+
+def ismin_ne():
+isim = input("ismin ne? ")
+return isim
+
+Þimdi de bu fonksiyonu çaðýralým:
+
+ismin_ne()
+
+Gördüðünüz gibi, fonksiyonu çaðýrdýðýmýzda yalnýzca fonksiyon gövdesindeki input() fonksiyonu çalýþtý, ama bu fonksiyondan gelen veri ekrana çýktý olarak verilmedi. Çünkü biz burada herhangi bir ekrana basma (‘print’) iþlemi yapmadýk. Yaptýðýmýz tek þey isim adlý deðiþkeni ‘döndürmek’.
+
+Peki bu ne anlama geliyor?
+
+return kelimesi Ýngilizcede ‘iade etmek, geri vermek, döndürmek’ gibi anlamlar taþýr. Ýþte yukarýdaki örnekte de return deyiminin yaptýðý iþ budur. Yani bu deyim bize fonksiyondan bir deðer ‘döndürür’.
+
+Eðer tanýmladýðýmýz bir fonksiyonda return deyimini kullanarak herhangi bir deðer döndürmezsek, Python fonksiyondan hususi bir deðerin döndürülmediðini göstermek için ‘None’ adlý bir deðer döndürür... Ýþte yukarýda tanýmladýðýmýz ilk ismin_ne() fonksiyonunu print(ismin_ne()) þeklinde çaðýrdýðýmýzda ekranda None deðerinin görünmesinin nedeni budur.
+
+Peki bir fonksiyon içinde herhangi bir veriyi ekrana basmayýp return deyimi yardýmýyla döndürmemizin bize ne faydasý var?
+
+Aslýnda bunun cevabý çok açýk. Bir fonksiyon içinde bir deðeri döndürmek yerine ekrana bastýðýnýzda o fonksiyonun iþlevini alabildiðine kýsýtlamýþ oluyorsunuz. Fonksiyonunuzun tek iþlevi bir deðeri ekrana basmak oluyor. Þu örnekte de gösterdiðimiz gibi, bu deðeri daha sonra baþka ortamlarda kullanamýyoruz:
+
+def ismin_ne():
+isim = input("ismin ne? ")
+print(isim)
+
+print("Merhaba {}. Nasýlsýn?".format(ismin_ne()))
+
+Ama eðer, mesela yukarýdaki fonksiyonda isim deðiþkenini basmak yerine döndürürsek iþler deðiþir:
+
+def ismin_ne():
+isim = input("ismin ne? ")
+return isim
+
+print("Merhaba {}. Nasýlsýn?".format(ismin_ne()))
+
+Bu kodlarý çalýþtýrdýðýmýzda þu çýktýyý alýyoruz:
+
+ismin ne? Fýrat
+Merhaba Fýrat. Nasýlsýn?
+
+Gördüðünüz gibi, istediðimiz çýktýyý rahatlýkla elde ettik. ismin_ne() adlý fonksiyondan isim deðerini döndürmüþ olmamýz sayesinde bu deðerle istediðimiz iþlemi gerçekleþtirebiliyoruz. Yani bu deðeri sadece ekrana basmakla sýnýrlamýyoruz kendimizi. Hatta fonksiyondan döndürdüðümüz deðeri baþka bir deðiþkene atama imkanýna dahi sahibiz bu þekilde:
+
+ad = ismin_ne()
+print(ad)
+
+Eðer fonksiyondan deðer döndürmek yerine bu deðeri ekrana basmayý tercih etseydik yukarýdaki iþlemi yapamazdýk.
+
+return deyimiyle ilgili son bir þey daha söyleyelim...
+
+Bu deyim, içinde bulunduðu fonksiyonun çalýþma sürecini kesintiye uðratýr. Yani return deyimini kullandýðýnýz satýrdan sonra gelen hiçbir kod çalýþmaz. Basit bir örnek verelim:
+
+def fonk():
+print(3)
+return
+print(5)
+
+fonk()
+
+Bu kodlarý çalýþtýrdýðýnýzda yalnýzca print(3) satýrýnýn çalýþtýðýný, print(5) satýrýna ise hiç ulaþýlmadýðýný göreceksiniz. Ýþte bu durumun sebebi, Python’ýn kodlarý return satýrýndan itibaren okumayý býrakmasýdýr. Bu özellikten çeþitli þekillerde yararlanabilirsiniz. Örneðin:
+
+def fonk(n):
+if n < 0:
+return 'eksi deðerli sayý olmaz!'
+else:
+return n
+
+f = fonk(-5)
+print(f)
+
+Burada eðer fonksiyona parametre olarak eksi deðerli bir sayý verilirse Python bize bir uyarý verecek ve fonksiyonun çalýþmasýný durduracaktýr.
+

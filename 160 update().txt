@@ -1,0 +1,21 @@
+
+update()
+
+Ýnceleyeceðimiz son metot update() metodu... Bu metot yardýmýyla oluþturduðumuz sözlükleri yeni verilerle güncelleyeceðiz. Diyelim ki elimizde þöyle bir sözlük var:
+
+>>> stok = {"elma": 5, "armut": 10, "peynir": 6, "sosis": 15}
+
+Stoðumuzda 5 adet elma, 10 adet armut, 6 kutu peynir, 15 adet de sosis var. Diyelim ki daha sonraki zamanlarda bu stoða mal giriþ-çýkýþý oldu ve stoðun son hali þöyle:
+
+>>> yeni_stok = {"elma": 3, "armut": 20, "peynir": 8, "sosis": 4, "sucuk": 6}
+
+Yapmamýz gereken þey, stoðumuzu yeni bilgilere göre güncellemek olacaktýr. Ýþte bu iþlemi update() metodu ile yapabiliriz:
+
+>>> stok.update(yeni_stok)
+
+>>> print(stok)
+
+{'peynir': 8, 'elma': 3, 'sucuk': 6, 'sosis': 4, 'armut': 20}
+
+Böylelikle mallarýn son miktarlarýna göre stok bilgilerimizi güncellemiþ olduk...
+

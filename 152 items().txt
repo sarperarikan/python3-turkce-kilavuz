@@ -1,0 +1,18 @@
+
+items()
+
+Bu metot, bir sözlüðün hem anahtarlarýný hem de deðerlerini ayný anda almamýzý saðlar:
+
+>>> sözlük.items()
+
+dict_items([('a', 0), ('c', 2), ('b', 1)])
+
+Gördüðünüz gibi, tek bir liste içinde iki öðeli demetler halinde hem anahtarlarý hem de deðerleri görebiliyoruz. Bu metot sýklýkla for döngüleri ile birlikte kullanýlarak bir sözlüðün anahtar ve deðerlerinin manipüle edilebilmesini saðlar:
+
+>>> for anahtar, deðer in sözlük.items():
+... print("{} = {}".format(anahtar, deðer))
+...
+a = 0
+c = 2
+b = 1
+

@@ -1,0 +1,27 @@
+
+Bayt Tanýmlamak
+
+Bildiðiniz gibi Python programlama dilinde her veri tipinin kendine özgü bir tanýmlanma biçimi var. Örneðin bir liste tanýmlamak için þöyle bir þey yazýyoruz:
+
+>>> liste = []
+
+Böylece boþ bir liste tanýmlamýþ olduk. Ayný þekilde karakter dizilerini de þöyle tanýmlýyorduk:
+
+>>> kardiz = ''
+
+Bu þekilde de boþ bir karakter dizisi tanýmlamýþ olduk. Ýþte boþ bir bayt tanýmlamak için de þu yapýyý kullanýyoruz:
+
+>>> bayt = b''
+
+Gelin tanýmladýðýmýz bu veri tipinin bayt olduðunu teyit edelim:
+
+>>> type(bayt)
+
+<class 'bytes'
+
+Gördüðünüz gibi, gerçekten de bayt tipinde bir veri tanýmlamýþýz. Nasýl karakter dizileri ‘str’, listeler ‘list’ ifadesiyle gösteriliyorsa, baytlar da ‘bytes’ ifadesi ile gösterilir.
+
+Peki bu þekilde bir bayt veri tipi tanýmlamak ne iþimize yarar?
+
+Hatýrlarsanýz bayt veri tipini ikili (binary) dosyalarý anlatýrken de görmüþtük. Orada da söylediðimiz gibi, ikili dosyalarý okuduðunuzda elde edeceðiniz þey karakter dizisi deðil bayttýr. Ayný þekilde, ikili dosyalara da ancak baytlarý yazabilirsiniz. Dolayýsýyla eðer ikili dosyalarla birtakým iþlemler yapacaksanýz bu bayt veri tipini yoðun olarak kullanacaðýnýzdan hiç þüpheniz olmasýn. Yani bayt veri tipi kolayca görmezden gelebileceðiniz gereksiz bir veri tipi deðildir.
+

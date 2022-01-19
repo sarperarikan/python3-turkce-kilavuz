@@ -1,0 +1,83 @@
+
+Parametreler ve Argümanlar
+
+Þimdiye kadar yaptýðýmýz örnekler sayesinde aslýnda parametrelerin neye benzediðini ve ne iþe yaradýðýný öðrenmiþtik. Bu bölümde ise sizi ‘argüman’ adlý bir kavramla tanýþtýrýp, argüman ile parametre arasýndaki benzerlik ve farklýlýklarý inceleyeceðiz. Bunun yanýsýra, parametre kavramýný da bu bölümde daha derinlikli bir þekilde ele alacaðýz.
+
+O halde hemen yola koyulalým.
+
+Parametrenin ne olduðunu biliyorsunuz. Bunlar fonksiyon tanýmlarken parantez içinde belirttiðimiz, fonksiyon gövdesinde yapýlan iþin deðiþken öðelerini gösteren parçalardýr. Mesela:
+
+def kopyala(kaynak_dosya, hedef_dizin):
+çýktý = "{} adlý dosya {} adlý dizin içine kopyalandý!"
+print(çýktý.format(kaynak_dosya, hedef_dizin))
+
+Burada kopyala() adlý bir fonksiyon tanýmladýk. Bu fonksiyon toplam iki adet parametre alýyor: kaynak_dosya ve hedef_dizin. Gördüðünüz gibi, bu iki parametre gerçekten de fonksiyon gövdesinde yapýlan iþin deðiþken öðelerini gösteriyor. Bu fonksiyonun üreteceði çýktý, fonksiyonu çaðýran kiþinin bu iki parametreye vereceði deðerlere baðlý olarak þekillenecek.
+
+Bildiðiniz gibi, parametrelere ne ad verdiðinizin hiçbir önemi yok. Elbette parametrenin görevine uygun bir isim vermeniz fonksiyonunuzun okunaklýlýðýný artýracaktýr. Ama tabii ki bu fonksiyonu pekala þu parametrelerle de tanýmlayabilirdik:
+
+def kopyala(a, b):
+çýktý = "{} adlý dosya {} adlý dizin içine kopyalandý!"
+print(çýktý.format(a, b))
+
+Burada önemli olan, parametre görevi görecek iki adet kelime bulmak. Bu kelimelerin ne olduðunun önemi yok. Ama tabii ki kaynak_dosya ve hedef_dizin adlarý, a ve b adlarýna kýyasla, fonksiyondaki parametrelerin yaptýðý iþi çok daha iyi tarif ediyor.
+
+Parametre adý belirleme kurallarý deðiþken adý belirleme kurallarýyla aynýdýr. Dolayýsýyla bir deðiþken adý belirlerken neye dikkat ediyorsak, parametre adý belirlerken de ayný þeye dikkat etmeliyiz.
+
+Gelin þimdi isterseniz tanýmladýðýnýz bu fonksiyonu çaðýralým:
+
+kopyala("deneme.txt", "/home/istihza/Desktop")
+
+Kodlarýmýz dosya içinde tam olarak þöyle görünüyor:
+
+def kopyala(kaynak_dosya, hedef_dizin):
+çýktý = "{} adlý dosya {} adlý dizin içine kopyalandý!"
+print(çýktý.format(kaynak_dosya, hedef_dizin))
+
+kopyala("deneme.txt", "/home/istihza/Desktop")
+
+Bu kodlarý bir dosyaya kaydedip çalýþtýrdýðýmýzda þöyle bir çýktý alýrýz:
+
+deneme.txt adlý dosya /home/istihza/Desktop adlý dizin içine kopyalandý!
+
+Gördüðünüz gibi, “deneme.txt” ve “/home/istihza/Desktop” deðerleri, çýktý adlý karakter dizisinde uygun yerlere yerleþtirildi ve ekrana çýktý olarak verildi. Ýþte burada gördüðünüz bu “deneme.txt” ve “/home/istihza/Desktop” deðerlerine argüman adý verilir. Yani bir fonksiyonu tanýmlarken belirlediðimiz adlara parametre, ayný fonksiyonu çaðýrýrken belirlediðimiz adlara ise argüman deniyor. Dolayýsýyla fonksiyon tanýmýnda belirlediðimiz kaynak_dosya ve hedef_dizin adlý deðiþkenler birer parametre, fonksiyon çaðrýsýnda bu parametrelere karþýlýk gelen “deneme.txt” ve “/home/istihza/Desktop” deðerleri ise birer argüman oluyor.
+
+Böylece parametre ve argüman arasýndaki farký öðrenmiþ olduk. Ancak þunu belirtmekte yarar var: Bu iki kavram genellikle birbirinin yerine kullanýlýr. Yani bu iki kavram arasýndaki, yukarýda açýkladýðýmýz farka pek kimse dikkat etmez. Dolayýsýyla pek çok yerde hem parametre hem de argüman için ayný ifadenin kullanýldýðýný görebilirsiniz. Özellikle Türkçede parametre kelimesi argüman kelimesine kýyasla daha bilinir ve yaygýn olduðu için, ayrým yapýlmaksýzýn hem fonksiyon çaðrýsýndaki deðerlere, hem de fonksiyon tanýmýndaki deðerlere parametre adý verilir.
+
+Gelelim parametrelerin çeþitlerine...
+
+Python’da parametreler iþlevlerine göre farklý kategorilere ayrýlýr. Gelin þimdi bu kategorileri tek tek inceleyelim.
+
+
+Sýralý (veya Ýsimsiz) Parametreler
+
+Python’da þöyle bir fonksiyon tanýmlayabileceðimizi biliyoruz:
+
+def kayýt_oluþtur(isim, soyisim, iþsis, þehir):
+print("-"*30)
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+print("-"*30)
+
+Yukarýda tanýmladýðýmýz bu fonksiyonu þu þekilde çaðýrabiliriz:
+
+kayýt_oluþtur("Ahmet", "Öz", "Debian", "Ankara")
+
+Bu fonksiyonda, yazdýðýmýz parametrelerin sýrasý büyük önem taþýr. Mesela yukarýdaki fonksiyonu þöyle çaðýrdýðýmýzý düþünün:
+
+kayýt_oluþtur("Debian", "Ankara", "Öz", "Ahmet")
+
+Eðer fonksiyon parametrelerini bu sýrayla kullanýrsak aldýðýmýz çýktý hatalý olacaktýr:
+
+------------------------------
+isim : Debian
+soyisim : Ankara
+iþletim sistemi: Öz
+þehir : Ahmet
+------------------------------
+
+Gördüðünüz gibi, isim, soyisim ve öteki bilgiler birbirine karýþmýþ. Ýþte Python’da, veriliþ sýrasý önem taþýyan bu tür parametrelere ‘sýralý parametreler’ (veya isimsiz parametreler) adý verilir.
+

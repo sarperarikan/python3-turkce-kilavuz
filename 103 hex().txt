@@ -1,0 +1,11 @@
+
+hex()
+
+Bu fonksiyon, herhangi bir sayıyı alıp, o sayının on altılı sistemdeki karşılığını verir:
+
+>>> hex(10)
+
+'Oxa'
+
+Tıpkı bin() fonksiyonunda olduğu gibi, hex() fonksiyonunun da çıktı olarak bir karakter dizisi verdiğine dikkat edin. Hatırlarsanız bin() fonksiyonunun çıktısındaki ilk iki karakter (0b), o sayının ikili sisteme ait bir sayı olduğunu gösteren bir işaret olarak kullanılıyordu. hex() fonksiyonunun çıktısındaki ilk iki karakter de (0x), o sayının on altılı sisteme ait bir sayı olduğunu gösteriyor.
+

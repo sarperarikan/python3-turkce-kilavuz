@@ -1,0 +1,17 @@
+
+setdefault()
+
+Bu metot epey enteresan, ama bir o kadar da yararlý bir araçtýr... Bu metodun ne iþe yaradýðýný doðrudan bir örnek üzerinde görelim:
+
+>>> sepet = {"meyveler": ("elma", "armut"), "sebzeler": ("pýrasa", "fasulye")}
+
+>>> sepet.setdefault("içecekler", ("su", "kola"))
+
+Bu komut yardýmýyla sözlüðümüz içinde “içecekler” adlý bir anahtar oluþturduk. Bu anahtarýn deðeri ise (“su”, “kola”) oldu... Bir de þuna bakalým:
+
+>>> sepet.setdefault("meyveler", ("erik", "çilek"))
+
+('elma', 'armut')
+
+Gördüðünüz gibi, sözlükte zaten “meyveler” adlý bir anahtar bulunduðu için, Python ayný adý taþýyan ama deðerleri farklý olan yeni bir “meyveler” anahtarý oluþturmadý. Demek ki bu metot yardýmýyla bir sözlük içinde arama yapabiliyor, eðer aradýðýmýz anahtar sözlükte yoksa, setdefault() metodu içinde belirttiðimiz özellikleri taþýyan yeni bir anahtar-deðer çifti oluþturabiliyoruz.
+

@@ -1,0 +1,18 @@
+
+Sözlüklerin Metotlarý
+
+Týpký öteki veri tiplerinde olduðu gibi, sözlüklerin de birtakým metotlarý bulunur. Bu bölümde sözlüklerin þu metotlarýný inceleyeceðiz:
+
+clear() 
+copy() 
+fromkeys() 
+get() 
+items() 
+keys() 
+pop() 
+popitem() 
+setdefault() 
+update() 
+values() 
+Ýlk olarak keys() metoduyla baþlayalým.
+

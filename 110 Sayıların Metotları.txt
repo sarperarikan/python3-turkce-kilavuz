@@ -1,0 +1,19 @@
+
+Sayýlarýn Metotlarý
+
+Týpký öteki veri tiplerinde olduðu gibi, sayýlarýn da bazý metotlarý bulunur. Bu metotlarý kullanarak sayýlar üzerinde çeþitli iþlemler gerçekleþtirebiliriz.
+
+
+Tam Sayýlarýn Metotlarý
+
+Dediðimiz gibi, Python’da birkaç farklý sayý tipi bulunur. Biz ilk olarak tam sayý (integer) denen sayý tipinin metot ve niteliklerini inceleyeceðiz.
+
+Öncelikle hangi metotlar ve niteliklerle karþý karþýya olduðumuza bakalým:
+
+>>> [i for i in dir(int) if not i.startswith("_")]
+
+['bit_length', 'conjugate', 'denominator', 'from_bytes', 'imag', 'numerator',
+'real', 'to_bytes']
+
+Bu listede þimdilik bizi ilgilendiren tek bir metot var. Bu metodun adý bit_length().
+

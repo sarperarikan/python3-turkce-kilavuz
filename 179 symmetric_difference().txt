@@ -1,0 +1,30 @@
+
+symmetric_difference()
+
+Daha önceki bölümlerde difference() metodunu kullanarak iki küme arasýndaki farklý öðeleri bulmayý öðrenmiþtik. Örneðin elimizde þöyle iki küme var diyelim:
+
+>>> a = set([1, 2, 5])
+>>> b = set([1, 4, 5])
+
+Eðer a kümesinin b kümesinden farkýný bulmak istersek þöyle yapýyoruz:
+
+>>> a.difference(b)
+
+{2}
+
+Demek ki a kümesinde bulunup b kümesinde bulunmayan öðe 2 imiþ.
+
+Bir de b kümesinde bulunup a kümesinde bulunmayan öðelere bakalým:
+
+>>> b.difference(a)
+
+{4}
+
+Bu da bize “4” çýktýsýný verdi. Demek ki bu öðe b kümesinde bulunuyor, ama a kümesinde bulunmuyormuþ. Peki ya kümelerin ikisinde de bulunmayan öðeleri ayný anda nasýl alacaðýz? iþte bu noktada yardýmýmýza symmetric_difference() adlý metot yetiþecek:
+
+>>> a.symmetric_difference(b)
+
+{2, 4}
+
+Böylece iki kümede de bulunmayan öðeleri ayný anda almýþ olduk.
+

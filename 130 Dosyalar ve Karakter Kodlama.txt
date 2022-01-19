@@ -1,0 +1,72 @@
+
+Dosyalar ve Karakter Kodlama
+
+Dosyalar konusunu anlatýrken, Python’da bir dosyanýn open() fonksiyonu ile açýlacaðýný söylemiþtik. Bildiðiniz gibi open() fonksiyonunu þu þekilde kullanýyoruz:
+
+>>> f = open(dosya_adý, dosya_açma_kipi)
+
+Burada biz open() fonksiyonunu iki farklý parametre ile birlikte kullandýk. Ancak aslýnda belirtmemiz gereken önemli bir parametresi daha var bu fonksiyonun. Ýþte bu parametrenin adý encoding‘dir.
+
+Gelin þimdi bu parametrenin ne olduðuna ve nasýl kullanýldýðýna bakalým:
+
+
+encoding
+
+Tahmin edebileceðiniz gibi, encoding parametresi bir dosyanýn hangi kod çözücü ile açýlacaðýný belirtmemizi saðlar. Python’da dosyalar öntanýmlý olarak locale adlý bir modülün getpreferredencoding() adlý fonksiyonunun gösterdiði kod çözücü ile açýlýr. Siz de dosyalarýnýzýn varsayýlan olarak hangi kod çözücü ile açýlacaðýný öðrenmek için þu komutlarý yazabilirsiniz:
+
+>>> import locale
+>>> locale.getpreferredencoding()
+
+Ýþte eðer siz encoding parametresini belirtmezseniz, dosyalarýnýz yukarýdaki çýktýda görünen kod çözücü ile açýlacaktýr.
+
+GNU/Linux daðýtýmlarýnda bu çýktý çoðunlukla UTF-8 olacaktýr. O yüzden GNU/Linux’ta dosyalarýnýz muhtemelen encoding belirtmeseniz bile düzgün görünecektir. Ancak Windows’ta locale.getpreferredencoding() deðeri cp1254 olacaðý için, mesela UTF-8 ile kodlanmýþ dosyalarýnýzda özellikle Türkçe karakterler düzgün görüntülenemeyecektir. O yüzden, dosyalarýnýzýn hangi kod çözücü ile kodlanmýþ olduðunu open() fonksiyonuna vereceðiniz encoding parametresi aracýlýðýyla her zaman belirtmelisiniz:
+
+>>> f = open(dosya, encoding='utf-8')
+
+Diyelim ki açmak istediðiniz dosya cp1254 adlý kod çözücü ile kodlanmýþ olsun. Eðer siz bu dosyayý açarken cp1254 adlý kod çözücüyü deðil de baþka bir kod çözücüyü yazarsanýz elbette dosyadaki karakterler düzgün görüntülenemeyecektir.
+
+Örneðin cp1254 ile kodlanmýþ bir belgeyi UTF-8 ile açmaya kalkýþýrsanýz veya siz hiçbir kod çözücü belirtmediðiniz halde kullandýðýnýz iþletim sistemi öntanýmlý olarak dosyalarý açmak için cp1254 harici bir kod çözücüyü kullanýyorsa, dosyayý okuma esnasýnda þuna benzer bir hata alýrsýnýz:
+
+>>> f = open("belge.txt", encoding="utf-8")
+>>> f.read(50)
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python33\lib\codecs.py", line 300, in decode
+(result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xde in position 79: invalid
+ continuation byte
+
+Gördüðünüz gibi, dosyamýz bizim kullanmaya çalýþtýðýmýz kod çözücüden (UTF-8) farklý bir kod çözücü ile (cp1254) kodlanmýþ olduðu için, doðal olarak karakterler doðru sayýlarla eþleþtirilemiyor. Bu da kaçýnýlmaz olarak yukarýdaki hatanýn verilmesine sebep oluyor.
+
+Aslýnda siz bu hatayý tanýyorsunuz. encode() metodunu anlatýrken bunun ne olduðundan ve bu hataya karþý neler yapabileceðinizden söz etmiþtik.
+
+Hatýrlarsanýz bu tür hatalara karþý ne tepki verileceðini belirleyebilmek için encode() metodunda errors adlý bir parametreyi kullanabiliyorduk. Ýþte open() fonksiyonunda da ayný errors parametresi bulunur.
+
+
+errors
+
+Dediðimiz gibi, bir dosyanýn doðru görüntülenebilmesi ve okunabilmesi için, sahip olduðu kodlama biçiminin doðru olarak belirtilmesi gerekir. Ama okuyacaðýnýz dosyalarýn hangi kodlama sistemine sahip olduðunu doðru tahmin etmeniz her zaman mümkün olmayabilir. Böyle durumlarda, programýnýzýn çökmesini önlemek için çeþitli stratejiler belirlemeniz gerekir.
+
+Bir önceki bölümde verdiðimiz örnekten de gördüðünüz gibi, eðer Python, açýlmaya çalýþýlan dosyadaki karakterleri encoding parametresinde gösterilen kod çözücü ile çözemezse öntanýmlý olarak bir hata mesajý üretip programdan çýkacaktýr. Ancak sizin istediðiniz þey her zaman bu olmayabilir. Mesela dosyadaki karakterler doðru kodlanamasa bile programýnýzýn çökmemesini tercih edebilirsiniz. Ýþte bunun için errors parametresinden yararlanacaksýnýz.
+
+Bu parametreyi encoding() metodundan hatýrlýyorsunuz. Bu parametre orada nasýl kullanýlýyorsa, open() fonksiyonunda da ayný þekilde kullanýlýr. Dikkatlice bakýn:
+
+>>> f = open(dosya_adý, encoding='utf-8', errors='strict')
+
+Bu zaten errors parametresinin öntanýmlý deðeridir. Dolayýsýyla ‘strict’ deðerini belirtmeseniz de öntanýmlý olarak bu deðeri belirtmiþsiniz gibi davranýlacaktýr.
+
+>>> f = open(dosya_adý, encoding='utf-8', errors='ignore')
+
+Burada ise ‘ignore’ deðerini kullanarak, Python’ýn kodlanamayan karakterleri görmezden gelmesini saðlýyoruz.
+
+>>> f = open(dosya_adý, encoding='utf-8', errors='replace')
+
+‘replace’ deðeri ise kodlanamayan karakterlerin yerine \ufffd karakterini yerleþtirecektir. Bu karakter iþlev bakýmýndan, encode() metodunu anlatýrken gördüðümüz ‘?’ iþaretine benzer. Bu karaktere teknik olarak ‘UNICODE Deðiþtirme Karakteri’ (UNICODE Replacement Character) adý verilir. Bazý yerlerde bu karakteri elmas þeklinde siyah bir küp içine yerleþtirilmiþ soru iþareti þeklinde görebilirsiniz.
+
+Peki encode() metodunu anlatýrken errors parametresi ile birlikte kullanabildiðimiz ‘xmlcharrefreplace’ deðerini open() fonksiyonu ile birlikte kullanabilir miyiz?
+
+Hayýr, open() fonksiyonu, errors parametresinde bu deðerin kullanýlmasýna izin vermez.
+
+
+

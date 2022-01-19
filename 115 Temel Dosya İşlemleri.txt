@@ -1,0 +1,15 @@
+
+Temel Dosya Ýþlemleri
+
+Hatýrlarsanýz print() fonksiyonunu anlatýrken, bu fonksiyonun file adlý bir parametresi olduðundan söz etmiþtik. Bu parametre yardýmýyla print() fonksiyonunun çýktýlarýný bir dosyaya gönderebiliyorduk. Böylece print() fonksiyonunun bu özelliði sayesinde, Python’daki ‘Dosya Girdi/Çýktýsý’ (File I/O) konusuyla da ilk kez tanýþmýþ olmuþtuk.
+
+Ayrýca print() fonksiyonu dýþýnda, open() adlý baþka bir fonksiyon yardýmýyla da dosyalarý açabileceðimizi ve bu dosyalarýn üzerinde çeþitli iþlemleri gerçekleþtirebileceðimizi öðrenmiþtik. Ancak gerek print() fonksiyonunun file parametresi, gerekse open() fonksiyonuyla þimdiye kadar yaptýðýmýz örnekler aracýlýðýyla öðrendiklerimiz dosyalara iliþkin çok sýnýrlý iþlemleri yerine getirmemizi saðlýyordu.
+
+Ýþte biz bu bölümde, dosya girdi/çýktýsý konusuna iliþkin bildiklerimizi bir adým öteye götüreceðiz ve gerçek anlamda dosyalarý nasýl manipüle edeceðimizi öðreneceðiz.
+
+Programcýlýk maceramýz boyunca dosyalarla bol bol muhatap olacaksýnýz. O yüzden bu konuyu olabildiðince ayrýntýlý ve anlaþýlýr bir þekilde anlatmaya çalýþacaðýz.
+
+Dediðimiz gibi, biz esasýnda bu noktaya gelinceye kadar çeþitli fonksiyonlar ve bunlarýn birtakým parametreleri aracýlýðýyla dosya iþlemlerinden az da olsa zaten söz etmiþtik. Dolayýsýyla aslýnda tamamen yabancýsý olduðunuz bir konuyla karþý karþýya olmanýz gibi bir durum söz konusu deðil. Biz bu bölümde, zaten aþina olduðumuz bir konuyu çok daha derinlemesine ele alacaðýz.
+
+Python programlama dilinde dosyalarla uðraþýrken bütün dosya iþlemleri için temel olarak tek bir fonksiyondan yararlanacaðýz. Bu fonksiyonu siz zaten tanýyorsunuz. Fonksiyonumuzun adý open().
+

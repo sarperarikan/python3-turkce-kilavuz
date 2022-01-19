@@ -1,0 +1,19 @@
+
+clear()
+
+Kümelerle ilgili olarak inceleyeceðimiz ilk metot clear(). Bu metodu daha önce sözlükleri çalýþýrken de görmüþtük. Sözlüklerde bu metodun görevi sözlüðün içini boþaltmak idi. Burada da ayný vazifeyi görür:
+
+>>> km = set("adana")
+>>> for i in km:
+... print(i)
+...
+a
+d
+n
+
+>>> km.clear()
+>>> km
+set()
+
+Burada önce “km” adlý bir küme oluþturduk. Daha sonra da clear() metodunu kullanarak bu kümenin bütün öðelerini sildik. Artýk elimizde boþ bir küme var.
+

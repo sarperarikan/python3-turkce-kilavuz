@@ -1,0 +1,60 @@
+
+copy()
+
+Diyelim ki elimizde þöyle bir sözlük var:
+
+>>> hava_durumu = {"Ýstanbul": "yaðmurlu", "Adana": "güneþli", ... "Ýzmir": "bulutlu"}
+
+Biz bu sözlüðü kopyalamak istiyoruz. Hemen þöyle bir þey deneyelim:
+
+>>> yedek_hava_durumu = hava_durumu
+
+Artýk elimizde ayný sözlükten iki tane var:
+
+>>> hava_durumu
+
+{'Ýstanbul': 'yaðmurlu', 'Adana': 'güneþli', 'Ýzmir': 'bulutlu'}
+
+>>> yedek_hava_durumu
+
+{'Ýstanbul': 'yaðmurlu', 'Adana': 'güneþli', 'Ýzmir': 'bulutlu'}
+
+Þimdi hava_durumu adlý sözlüðe bir öðe ekleyelim:
+
+>>> hava_durumu["Mersin"] = "sisli"
+
+>>> hava_durumu
+
+{'Ýstanbul': 'yaðmurlu', 'Adana': 'güneþli', 'Mersin': 'sisli', 'Ýzmir': 'bulutlu'}
+
+Þimdi bir de yedek_hava_durumu adlý sözlüðün durumuna bakalým:
+
+>>> yedek_hava_durumu
+
+{'Ýstanbul': 'yaðmurlu', 'Adana': 'güneþli', 'Mersin': 'sisli', 'Ýzmir': 'bulutlu'}
+
+Gördüðünüz gibi, hava_durumu adlý sözlüðe yaptýðýmýz ekleme yedek_hava_durumu adlý sözlüðü de etkiledi. Hatýrlarsanýz buna benzer bir durumla daha önce listeleri anlatýrken de karþýlaþmýþtýk. Çünkü varolan bir sözlüðü veya listeyi baþka bir deðiþkene atadýðýmýzda aslýnda yaptýðýmýz þey bir kopyalama iþleminden ziyade bellekteki ayný nesneye gönderme yapan iki farklý isim belirlemekten ibaret. Yani sözlüðümüzü bellekteki bir nesne olarak düþünürsek, bu nesneye atýfta bulunan, “hava_durumu” ve “yedek_hava_durumu” adlý iki farklý isim belirlemiþ oluyoruz. Eðer istediðimiz þey bellekteki nesneden iki adet oluþturmak ve bu iki farklý nesneyi iki farklý isimle adlandýrmak ise yukarýdaki yöntemi kullanmak istemediðiniz sonuçlar doðurabilir. Yani amacýnýz bir sözlüðü yedekleyip orijinal sözlüðü korumaksa ve yukarýdaki yöntemi kullandýysanýz, hiç farkýnda olmadan orijinal sözlüðü de deðiþtirebilirsiniz. Ýþte böyle durumlarda imdadýmýza sözlüklerin “copy” metodu yetiþecek. Bu metodu kullanarak varolan bir sözlüðü gerçek anlamda kopyalayabilir, yani yedekleyebiliriz...
+
+>>> hava_durumu = {"Ýstanbul": "yaðmurlu", "Adana": "güneþli", ... "Ýzmir": "bulutlu"}
+
+Þimdi bu sözlüðü yedekliyoruz. Yani kopyalýyoruz:
+
+>>> yedek_hava_durumu = hava_durumu.copy()
+
+Bakalým hava_durumu adlý sözlüðe ekleme yapýnca yedek_hava_durumu adlý sözlüðün durumu ne oluyor?
+
+>>> hava_durumu["Mersin"] = "sisli"
+
+>>> hava_durumu
+
+{'Ýstanbul': 'yaðmurlu', 'Adana': 'güneþli', 'Mersin': 'sisli', 'Ýzmir':
+'bulutlu'}
+
+yedek_hava_durumu adlý sözlüðe bakalým:
+
+>>> yedek_hava_durumu
+
+{'Ýstanbul': 'yaðmurlu', 'Adana': 'güneþli', 'Ýzmir': 'bulutlu'}
+
+Gördüðünüz gibi bu defa sözlüklerin birinde yapýlan deðiþiklik öbürünü etkilemedi... copy metodu saðolsun!...
+

@@ -1,0 +1,81 @@
+
+Sözlük Üreteçleri (Dictionary Comprehensions)
+
+Hatýrlarsanýz listeleri anlatýrken liste üreteçleri adý bir kavramdan söz etmiþtik. Liste üreteçlerini kullanarak tek satýrda ve hýzlý bir þekilde listeler oluþturabiliyorduk. Ayný þey sözlükler için de geçerlidir. Týpký liste üreteçlerinde olduðu gibi, sözlük üreteçleri sayesinde tek satýrda ve hýzlý bir þekilde sözlükler üretebiliriz.
+
+Örneðin elimizde, Türkçe alfabedeki harfleri içeren harfler adlý þöyle bir liste olduðunu düþünün:
+
+>>> harfler = 'abcçdefgðhýijklmnoöprsþtuüvyz'
+
+Amacýmýz bu harflerin her birine bir numara vermek. Yani nihai olarak þöyle bir sözlük elde etmek istiyoruz:
+
+{'ð': 8,
+'v': 26,
+'þ': 22,
+'u': 24,
+'t': 23,
+'ö': 18,
+'ý': 10,
+'p': 19,
+'s': 21,
+'r': 20,
+'ü': 25,
+'y': 27,
+'ç': 3,
+'z': 28,
+'e': 5,
+'d': 4,
+'g': 7,
+'f': 6,
+'a': 0,
+'c': 2,
+'b': 1,
+'m': 15,
+'l': 14,
+'o': 17,
+'n': 16,
+'i': 11,
+'h': 9,
+'k': 13,
+'j': 12}
+
+Bunun için birkaç farklý yöntemden yararlanabiliriz. Örneðin:
+
+>>> sözlük = {}
+>>> for i in harfler:
+... sözlük[i] = harfler.index(i)
+
+veya:
+
+>>> sözlük = {}
+>>> for i in range(len(harfler)):
+... sözlük[harfler[i]] = i
+
+Ýþte bu iþlemleri sözlük üreteçlerini kullanarak çok daha hýzlý ve pratik bir þekilde halledebiliriz. Dikkatlice bakýn:
+
+>>> sözlük = {i: harfler.index(i) for i in harfler}
+
+Bir örnek daha verelim. Diyelim ki elinizde þöyle bir isim listesi var:
+
+isimler = ["ahmet", "mehmet", "fýrat", "zeynep", "selma", "abdullah", "cem"]
+
+Amacýnýz, bu isimleri ve her bir ismin kaç harften oluþtuðunu gösteren bir sözlük elde etmek. Yani nihai olarak þöyle bir þey olsun istiyorsunuz elinizde:
+
+{'zeynep': 6,
+'cem': 3,
+'abdullah': 8,
+'ahmet': 5,
+'mehmet': 6,
+'fýrat': 5,
+'selma': 5}
+
+Ýþte bu görev için de sözlük üreteçlerinden yararlanabilirsiniz:
+
+>>> isimler = ["ahmet", "mehmet", "fýrat", "zeynep", "selma", "abdullah", "cem"]
+>>> sözlük = {i: len(i) for i in isimler}
+>>> sözlük
+
+{'zeynep': 6, 'cem': 3, 'abdullah': 8, 'ahmet': 5, 'mehmet': 6, 'fýrat': 5, 'selma': 5}
+
+Bildiðiniz gibi sözlükler, her biri birbirinden : iþareti ile ayrýlan birtakým anahtar-deðer çiftlerinden oluþuyor. Ýþte yukarýdaki sözlük üreteci yapýsýnda biz : iþaretinin sol tarafýna isimler adlý listedeki her bir öðeyi; sað tarafýna da bu öðelerin uzunluklarýný bir çýrpýda ekliyoruz.
+

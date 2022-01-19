@@ -1,0 +1,241 @@
+
+1 Karakter == 1 Bayt
+
+ASCII standardý, her karakterin 1 bayt ile temsil edilebileceði varsayýmý üzerine kurulmuþtur. Bildiðiniz gibi, 1 bayt (geleneksel olarak) 8 bit’e karþýlýk gelir. Peki 1 bayt’ýn 8 bit’e karþýlýk gelmesinin nedeni nedir? Aslýnda bunun özel bir nedeni yok. 1 destede neden 10 öðe, 1 düzinede de 12 öðe varsa, 1 bayt’ta da 8 bit vardýr... Yani biz insanlar öyle olmasýna karar verdiðimiz için 1 destede 10 öðe, 1 düzinede 12 öðe, 1 bayt’ta ise 8 bit vardýr.
+
+Dediðimiz gibi ASCII standardý 7 bitlik bir sistemdir. Yani bu standartta en büyük sayý olan 127 yalnýzca 7 bit ile gösterilebilir:
+
+>>> bin(127)[2:]
+
+'1111111'
+
+127 sayýsý 7 bit ile gösterilebilecek son sayýdýr:
+
+>>> (127).bit_length()
+
+7
+
+>>> (128).bit_length()
+
+8
+
+8 bitlik bir sistem olan Geniþletilmiþ ASCII ise 0 ile 255 arasý sayýlarý temsil edebilir:
+
+>>> bin(255)[2:]
+
+'11111111'
+
+255 sayýsý 8 bit ile gösterilebilecek son sayýdýr:
+
+>>> (255).bit_length()
+
+8
+
+>>> (256).bit_length()
+
+9
+
+Dolayýsýyla ASCII’de ve Geniþletilmiþ ASCII’de 1 baytlýk alana toplam 256 karakter sýðdýrýlabilir. Eðer daha fazla karakteri temsil etmek isterseniz 1 bayttan fazla bir alana ihtiyaç duyarsýnýz.
+
+Bu arada, olasý bir yanlýþ anlamayý önleyelim:
+
+1 bayt olma durumu mesela doðrudan ‘a’ harfinin kendisi ile ilgili bir þey deðildir. Yani ‘a’ harfi 1 bayt ile gösterilebiliyorken, mesela ‘þ’ harfi 1 bayt ile gösterilemiyorsa, bunun nedeni ‘þ’ harfininin ‘tuhaf bir harf’ olmasý deðildir! Eðer ASCII gibi bir sistem Türkiye’de tasarlanmýþ olsaydý, herhalde ‘þ’ harfi ilk 128 sayý arasýnda kendine bir yer bulurdu. Mesela böyle bir sistemde muhtemelen ‘x’, ‘w’ ve ‘q’ harfleri, Türk alfabesinde yer almadýklarý için, dýþarýda kalýrdý. O zaman da ‘þ’, ‘ç’, ‘ð’ gibi harflerin 1 bayt olduðunu, ‘x’, ‘w’ ve ‘q’ gibi harflerin ise 1 bayt olmadýðýný söylerdik.
+
+
+
+UNICODE
+
+Ýlk bilgisayarlarýn ABD çýkýþlý olmasý nedeniyle, bilgisayarlar çoðunlukla ABD’de üretilip ABD pazarýna satýlýyordu. Bu nedenle Ýngilizce alfabeyi temel alan ASCII gibi bir sistem bu pazarýn karakter temsil ihtiyaçlarýný %99 oranýnda karþýlýyordu. Ancak bilgisayarlarýn ABD dýþýna çýkmasý ve ABD dýþýnda da da yayýlmaya baþlamasýnýn ardýndan, ASCII’nin yetersizlikleri de iyice görünür olmaya baþladý. Çünkü ASCII tablosunda, Ýngilizce dýþýndaki dillerde bulunan aksanlý ve noktalý harflerin (é, ä, ö, ç gibi) hiçbiri bulunmuyordu.
+
+Ýlk zamanlarda insanlar aksanlý ve noktalý harfleri ASCII tablosundaki benzerleriyle deðiþtirerek kullanmaya razý olmuþlardý (é yerine e; ä yerine a; ö yerine o; ç yerine c gibi). Ancak bu çözüm Avrupa dillerini kullananlarýn sorununu kýsmen çözüyor da olsa, Asya dillerindeki problemi çözemez. Çünkü ASCII tablosunu kullanarak Çince ve Japonca gibi dillerdeki karakterleri herhangi bir þekilde temsil etmeniz mümkün deðildir.
+
+Bu sýkýntýyý kýsmen de olsa giderebilmek için, yukarýda da bahsetmiþ olduðumuz, 128-256 arasýndaki boþluktan yararlanýlmaya baþlandý. Dediðimiz gibi, ASCII 7 bitlik bir sistem olduðu için, 8 bitlik bilgisayarlarda fazladan 1 bitin boþta kalmasýna izin verir. Ýþte bu 1 bitlik boþluk dünyanýn çeþitli ülkeleri tarafýndan kendi karakter ihtiyaçlarýný karþýlamak için kullanýldý. Dolayýsýyla Almanlar 128-256 arasýný farklý karakterlerle, Fransýzlar baþka karakterlerle, Yunanlar ise bambaþka karakterlerle doldurdular.
+
+Hatýrlarsanýz ASCII’nin ortaya çýkýþ sebebi bilgisayarlar arasýnda veri alýþveriþini mümkün kýlmaktý. ASCII Amerika’daki bilgisayarlar arasýnda saðlýklý bir veri alýþveriþi gerçekleþtirilmesini rahatlýkla mümkün kýlýyordu. Ama bilgisayarlarýn dünyaya yayýlmasý ile birlikte ilk baþtaki veri aktarýmý problemi tekrar ortaya çýktý. Bu defa da, mesela Türkiye’den gönderilen bir metin (örneðin bir e.posta) Almanya’daki bilgisayarlarda düzgün görüntülenemeyebiliyordu. Örneðin Windows-1254 (cp1254) numaralý kod sayfasý ile kodlanmýþ Türkçe bir metin, Almanya’da Windows-1250 numaralý kod sayfasýnýn tanýmlý olduðu bir bilgisayarda, ayný sayýlarýn her iki kod sayfasýnda farklý karakterlere karþýlýk gelmesi nedeniyle düzgün görüntülenemez.
+
+Not
+
+Windows-1254 adlý kod sayfasý için http://en.wikipedia.org/wiki/Windows-1254 adresine; Windows-1250 adlý kod sayfasý için ise http://en.wikipedia.org/wiki/Windows-1250 adresine bakabilirsiniz.
+
+Ýþte nasýl 1960’lý yýllarýn baþýnda Bob Bemer ve arkadaþlarý bilgisayarlar arasýnda saðlýklý bir veri iletiþimi saðlamak için kollarý sývayýp ASCII gibi bir çözüm ürettiyse, ASCII ve Geniþletilmiþ ASCII ile kodlanamayan karakterleri de kodlayýp, uluslar arasýnda çok geniþ çaplý veri alýþveriþine izin verebilmek amacýyla Xerox þirketinden Joe Becker, Apple þirketinden ise Lee Collins ve Mark Davis UNICODE adlý bir çözüm üzerinde ilk çalýþmalarý baþlattý.
+
+Peki tam olarak nedir bu UNICODE denen þey?
+
+Aslýnda Unicode da týpký ASCII gibi bir standarttýr. Unicode’un bir proje olarak ortaya çýkýþý 1987 yýlýna dayanýr. Projenin amacý, dünyadaki bütün dillerde yer alan karakterlerin tek, benzersiz ve doðru bir biçimde temsil edilebilmesidir. Yani bu projenin ortaya çýkýþ gayesi, ASCII’nin yetersiz kaldýðý noktalarý telafi etmektir.
+
+
+Sýnýrsýz Bitlik bir Sistem
+
+Unicode standardý ile ilgili olarak bilmemiz gereken ilk þey bu standardýn ASCII’yi tamamen görmezden gelmiyor olmasýdýr. Daha önce de söylediðimiz gibi, ASCII son derece yaygýn ve güçlü bir standarttýr. Üstelik ASCII standardý yaygýn olarak kullanýlmaya da devam etmektedir. Bu sebeple ASCII ile halihazýrda kodlanmýþ karakterler UNICODE standardýnda da ayný þekilde kodlanmýþtýr. Dolayýsýyla ASCII UNICODE sisteminin bir alt kümesi olduðu için, ASCII ile uyumlu olan bütün sistemler otomatik olarak UNICODE ile de uyumludur. Ancak tabii bunun tersi geçerli deðildir.
+
+UNICODE’un ASCII’den en önemli farký, UNICODE’un ASCII’ye kýyasla çok daha büyük miktarda karakterin kodlanmasýna izin vermesidir. ASCII yalnýzca 128 karakterin kodlanmasýna izin verirken UNICODE 1.000.000’dan fazla karakterin kodlanmasýna izin verir.
+
+UNICODE sistemini devasa bir karakter tablosu olarak hayal edebilirsiniz. Bildiðiniz gibi ASCII 7 bitlik bir sistemdir. Bu sebeple de sadece 128 karakteri kodlayabilir. UNICODE ilk ortaya çýktýðýnda 16 bitlik bir sistem olarak tasarlanmýþtý. Dolayýsýyla UNICODE daha ilk çýkýþýnda 2**16=65536 karakterin kodlanmasýna izin veriyordu. Bugün ise UNICODE sisteminin böyle kesin bir sýnýrý yoktur. Çünkü ‘bilmem kaç bitlik bir sistem’ kavramý UNICODE için geçerli deðildir. Dediðimiz gibi, UNICODE’u, ucu bucaðý olmayan dev bir karakter tablosu olarak düþünebilirsiniz. Bu tabloya istediðimiz kadar karakteri ekleyebiliriz. Bizi engelleyen sýnýrlý bir bit kavramý mevcut deðildir. Çünkü UNICODE sisteminin kendisi, ASCII sisteminin aksine, doðrudan doðruya karakterleri kodlamaz. UNICODE’un yaptýðý þey karakterleri tanýmlamaktan ibarettir.
+
+Unicode sisteminde her karakter tek ve benzersiz bir ‘kod konumuna’ (code point) karþýlýk gelir. Kod konumlarý þu formüle göre gösterilir:
+
+U+sayýnýn_onaltýlý_deðeri
+
+Örneðin ‘a’ harfinin kod konumu þudur:
+
+u+0061
+
+Buradaki 0061 sayýsý onaltýlý bir sayýdýr. Bunu onlu sayý sistemine çevirebilirsiniz:
+
+>>> int("61", 16)
+
+97
+
+Hatýrlarsanýz ‘a’ harfinin ASCII tablosundaki karþýlýðý da 97 idi.
+
+Esasýnda ASCII ile UNICODE birbirleri ile karþýlaþtýrýlamayacak iki farklý kavramdýr. Neticede ASCII bir kodlama biçimidir. UNICODE ise pek çok farklý kodlama biçimini içinde barýndýran devasa bir sistemdir.
+
+Not
+
+Unicode standardýna http://www.unicode.org/versions/Unicode6.2.0/UnicodeStandard-6.2.pdf adresinden ulaþabilirsiniz.
+
+
+
+UTF-8 Kod Çözücüsü
+
+Dediðimiz gibi UNICODE devasa bir tablodan ibarettir. Bu tabloda karakterlere iliþkin birtakým bilgiler bulunur ve bu sistemde her karakter, kod konumlarý ile ifade edilir. UNICODE kendi baþýna karakterleri kodlamaz. Bu sistemde tanýmlanan karakterleri kodlama iþi kod çözücülerin görevidir.
+
+UNICODE sistemi içinde UTF-1, UTF-7, UTF-8, UTF-16 ve UTF-32 adlý kod çözücüler bulunur. UTF-8, UNICODE sistemi içindeki en yaygýn, en bilinen ve en kullanýþlý kod çözücüdür.
+
+UTF-8 adlý kod çözücünün kodlayabildiði karakterlerin listesine http://www.fileformat.info/info/charset/UTF-8/list.htm adresinden ulaþabilirsiniz. Bu listenin sayfalar dolusu olduðuna ve her sayfaya, sayfanýn en altýndaki ‘More...’ baðlantýsý ile ulaþabileceðinize dikkat edin.
+
+
+1 Karakter != 1 Bayt
+
+ASCII sisteminde her karakterin 1 bayt’a karþýlýk geldiðini söylemiþtik. Ancak 1 bayt dünyadaki bütün karakterleri kodlamaya yetmez. Geri kalan karakterleri de kodlayabilmek için 1 bayttan fazlasýna ihtiyacýmýz var. Mesela karakter kodlama için:
+
+1 bayt kullanýrsak toplam 2**8  = 256
+2 bayt kullanýrsak toplam 2**16 = 65,536
+3 bayt kullanýrsak toplam 2**24 = 16,777,216
+4 bayt kullanýrsak toplam 2**32 = 4,294,967,296
+
+karakter kodlayabiliriz. Bu durumu þu Python kodlarý ile de gösterebiliriz:
+
+>>> for i in range(1, 5):
+... print("{} bayt kullanýrsak toplam 2**{:<2} = {:,}".format(i, i*8, (2**(i*8))))
+
+Görünüþe göre biz 4 baytlýk bir sistem kullanýrsak gelmiþ geçmiþ bütün karakterleri rahatlýkla temsil etmeye yetecek kadar alana sahip oluyoruz. Ancak burada þöyle bir durum var. Bildiðiniz gibi, 0 ile 256 aralýðýndaki karakterler yalnýzca 1 bayt ile temsil edilebiliyor. 256 ile 65,536 arasýndaki karakterler için ise 2 bayt yeter. Ayný þekilde 65,536 ile 16,777,216 aralýðýndaki sayýlar için de 3 bayt yeterli. Bu durumda eðer biz bütün karakterleri 4 bayt ile temsil edecek olursak, korkunç derece bir israfa düþmüþ oluruz. Çünkü ASCII gibi bir kodlama sisteminde yalnýzca 1 bayt ile temsil edilebilecek bir karakterin kapladýðý alan bu sistemle boþu boþuna 4 kat artmýþ olacaktýr.
+
+Bu sorunun çözümü elbette sabit boyutlu karakter kodlama biçimleri yerine deðiþken boyutlu karakter kodlama biçimleri kullanmaktýr. Ýþte UNICODE sistemi içindeki UTF-8 adlý kod çözücü, karakterleri deðiþken sayýda baytlar halinde kodlayabilir. UTF-8, UNICODE sistemi içinde tanýmlanmýþ karakterleri kodlayabilmek için 1 ile 4 bayt arasý deðerleri kullanýr. Böylece de bu kod çözücü UNICODE sistemi içinde tanýmlanmýþ bütün karakterleri temsil edebilir.
+
+Bu durumu bir örnek üzerinden göstermeye çalýþalým:
+
+harfler = "abcçdefgðhýijklmnoöprsþtuüvyz"
+for s in harfler:
+print("{:<5}{:<15}{:<15}".format(s,
+str(s.encode("utf-8")),
+len(s.encode("utf-8"))))
+
+Buradan þuna benzer bir çýktý alýyoruz:
+
+a b'a' 1
+b b'b' 1
+c b'c' 1
+ç b'\xc3\xa7' 2
+d b'd' 1
+e b'e' 1
+f b'f' 1
+g b'g' 1
+ð b'\xc4\x9f' 2
+h b'h' 1
+ý b'\xc4\xb1' 2
+i b'i' 1
+j b'j' 1
+k b'k' 1
+l b'l' 1
+m b'm' 1
+n b'n' 1
+o b'o' 1
+ö b'\xc3\xb6' 2
+p b'p' 1
+r b'r' 1
+s b's' 1
+þ b'\xc5\x9f' 2
+t b't' 1
+u b'u' 1
+ü b'\xc3\xbc' 2
+v b'v' 1
+y b'y' 1
+z b'z' 1
+
+Burada, s.encode("utf-8") komutunun ‘baytlar’ (bytes) türünden bir veri tipi verdiðine dikkat edin (baytlar veri tipini bir sonraki bölümde ayrýntýlý olarak inceleyeceðiz). Karakter dizilerinin aksine baytlarýn format() adlý bir metodu bulunmaz. Bu yüzden, bu veri tipini format() metoduna göndermeden önce str() fonksiyonu yardýmýyla karakter dizisine dönüþtürmemiz gerekiyor. Bu dönüþtürme iþlevini, alternatif olarak þu þekilde de yapabilirdik:
+
+print("{:<5}{!s:<15}{:<15}".format(s,
+s.encode("utf-8"),
+len(s.encode("utf-8"))))
+
+Hangi yöntemi seçeceðiniz paþa gönlünüze kalmýþ... Biz konumuza dönelim.
+
+Yukarýdaki tabloda ilk sütun Türk alfabesindeki tek tek harfleri gösteriyor. Ýkinci sütun ise bu harflerin UTF-8 ile kodlandýðýnda nasýl göründüðünü. Son sütunda ise UTF-8 ile kodlanan Türk harflerinin kaç baytlýk yer kapladýðýný görüyoruz.
+
+Bu tabloyu daha iyi anlayabilmek için mesela buradaki ‘ç’ harfini ele alalým:
+
+>>> 'ç'.encode('utf-8')
+
+b'\xc3\xa7'
+
+Burada Python’ýn kendi yerleþtirdiði karakterleri çýkarýrsak (‘b’ ve ‘\x’ gibi) elimizde þu onaltýlý sayý kalýr:
+
+c3a7
+
+Bu onaltýlý sayýnýn onlu sistemdeki karþýlýðý þudur:
+
+>>> int('c3a7', 16)
+
+50087
+
+50087 sayýsýnýn ikili sayma sistemindeki karþýlýðý ise þudur:
+
+>>> bin(50087)
+
+'0b1100001110100111'
+
+Gördüðünüz gibi, bu sayý 16 bitlik, yani 2 baytlýk bir sayýdýr. Bunu nasýl teyit edeceðinizi biliyorsunuz:
+
+>>> (50087).bit_length()
+
+16
+
+http://www.fileformat.info/info/charset/UTF-8/list.htm adresine gittiðinizde de UTF-8 tablosunda ‘ç’ harfinin ‘c3a7’ sayýsýyla eþleþtirildiðini göreceksiniz.
+
+Bir de UTF-8’in ‘a’ harfini nasýl temsil ettiðine bakalým:
+
+>>> "a".encode("utf-8")
+
+b'a'
+
+‘a’ harfi standart ASCII harflerinden biri olduðu için Python doðrudan bu harfin kendisini gösteriyor. Eðer bu harfin hangi sayýya karþýlýk geldiðini görmek isterseniz þu kodu kullanabilirsiniz:
+
+>>> ord("a")
+
+97
+
+Daha önce de söylediðimiz gibi, UNICODE sistemi ASCII ile uyumludur. Yani ASCII sisteminde tanýmlanmýþ bir harf hangi sayý deðerine sahipse, UNICODE içindeki bütün kod çözücüleri de o harf için ayný sayýyý kullanýr. Yani mesela ‘a’ harfi hem ASCII’de, hem UTF-8’de 97 sayýsý ile temsil edilir. Bu sayý 256’dan küçük olduðu için yalnýzca 1 bayt ile temsil edilir. Ancak standart ASCII dýþýnda kalan karakterler, farklý kod çözücüler tarafýndan farklý sayýlarla eþleþtirilecektir. Bununla ilgili þöyle bir çalýþma yapabiliriz:
+
+kod_çözücüler = ['UTF-8', 'cp1254', 'latin-1', 'ASCII']
+
+harf = 'Ý'
+
+for kç in kod_çözücüler:
+try:
+print("'{}' karakteri {} ile {} olarak "
+"ve {} sayýsýyla temsil edilir.".format(harf, kç,
+harf.encode(kç),
+ord(harf)))
+except UnicodeEncodeError:
+print("'{}' karakteri {} ile temsil edilemez!".format(harf, kç))
+
+Bu programý çalýþtýrdýðýmýzda þuna benzer bir çýktý alýrýz:
+
+'Ý' karakteri UTF-8 ile b'\xc4\xb0' olarak ve 304 sayýsýyla temsil edilir
+'Ý' karakteri cp1254 ile b'\xdd' olarak ve 304 sayýsýyla temsil edilir.
+'Ý' karakteri latin-1 ile temsil edilemez!
+'Ý' karakteri ASCII ile temsil edilemez!
+
+Bu ufak programý kullanarak hangi karakterin hangi kod çözücü ile nasýl temsil edildiðini (veya temsil edilip edilemediðini) görebilirsiniz.
+

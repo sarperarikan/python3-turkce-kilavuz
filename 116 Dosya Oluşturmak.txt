@@ -1,0 +1,51 @@
+
+Dosya Oluþturmak
+
+Dediðimiz gibi, Python programlama dilinde dosya iþlemleri için open() adlý bir fonksiyondan yararlanacaðýz. Ýþte dosya oluþturmak için de bu fonksiyonu kullanacaðýz.
+
+Önceki derslerimizde verdiðimiz örneklerden de bildiðiniz gibi, open() fonksiyonunu temel olarak þöyle kullanýyoruz:
+
+f = open(dosya_adý, kip)
+
+Not
+
+open() fonksiyonu dosya_adý ve kip dýþýnda baþka parametreler de alýr. Ýlerleyen sayfalarda bu parametrelerden de söz edeceðiz.
+
+Mesela “tahsilat.txt” adlý bir dosyayý yazma kipinde açmak için þöyle bir komut kullanýyoruz:
+
+tahsilat_dosyasý = open("tahsilat_dosyasý.txt", "w")
+
+Burada ‘tahsilat_dosyasý.txt’ ifadesi dosyamýzýn adýný belirtiyor. “w” harfi ise bu dosyanýn yazma kipinde açýldýðýný söylüyor.
+
+Yukarýdaki komutu çalýþtýrdýðýnýzda, o anda hangi dizin altýnda bulunuyorsanýz o dizin içinde tahsilat_dosyasý.txt adlý boþ bir dosyanýn oluþtuðunu göreceksiniz.
+
+Bu arada, dosya adýný yazarken, dosya adý ile birlikte o dosyanýn hangi dizin altýnda oluþturulacaðýný da belirleyebilirsiniz. Örneðin:
+
+dosya = open("/dosyayý/oluþturmak/istediðimiz/dizin/dosya_adý", "w")
+
+Eðer dosya adýný dizin belirtmeden yazarsanýz, oluþturduðunuz dosya, o anda hangi dizin altýnda bulunuyorsanýz orada oluþacaktýr.
+
+Ayrýca dosyayý barýndýran dizin adlarýný yazarken, dizinleri ayýrmak için ters taksim (\) yerine düz taksim (/) kullanmaya dikkat edin. Aksi halde, dizin adý oluþturmaya çalýþýrken yanlýþlýkla kaçýþ dizileri oluþturabilirsiniz. Esasýnda siz bu olguya hiç yabancý deðilsiniz. Zira kaçýþ dizilerini anlatýrken þöyle bir örnek verdiðimizi hatýrlýyor olmalýsýnýz:
+
+print("C:\aylar\nisan\toplam masraf")
+
+Ýþte eðer bu örnekte olduðu gibi ters taksim iþaretleri ile oluþturulmuþ dizin adlarý kullanýrsanýz programýnýz hata verecektir:
+
+>>> open("C:\aylar\nisan\toplam masraf\masraf.txt", "w")
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+OSError: [Errno 22] Invalid argument: 'C:\x07ylar\nisan\toplam masraf\masraf.txt'
+
+Bunun sebebi, bildiðiniz gibi, Python’ýn \a, \n ve \t ifadelerini birer kaçýþ dizisi olarak algýlamasýdýr. Bu durumdan kaçabilmek için, dizin adlarýný ters taksim iþareti ile ayýrmanýn dýþýnda, r adlý kaçýþ dizisinden de yararlanabilirsiniz:
+
+>>> open(r"C:\aylar\nisan\toplam masraf\masraf.txt", "w")
+
+...veya ters taksim iþaretlerini çiftleyebilirsiniz:
+
+>>> open("C:\\aylar\\nisan\\toplam masraf\\masraf.txt", "w")
+
+Bu þekilde, eðer bilgisayarýnýzda C:\aylar\nisan\toplam masraf\ adlý bir dizin varsa, o dizin içinde masraf.txt adlý bir dosya oluþturulacaktýr.
+
+Böylece Python programlama dilinde boþ bir dosyanýn nasýl oluþturulacaðýný öðrenmiþ olduk. O halde gelin isterseniz þimdi bu dosyanýn içini nasýl dolduracaðýmýzý öðrenelim.
+

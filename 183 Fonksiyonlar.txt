@@ -1,0 +1,164 @@
+
+Fonksiyonlar
+
+Ýlk derslerimizden bu yana bir þey özellikle dikkatinizi çekmiþ olmalý: Ýlk andan itibaren hep ‘fonksiyon’ diye bir kavramdan söz ettik; üstelik yazdýðýmýz kodlarda da bu fonksiyon denen þeyi bolca kullandýk. Evet, belki bu kavramý þimdiye dek enine boyuna inceleme fýrsatýmýz hiç olmadý, ama yine de adýnýn fonksiyon olduðunu söylediðimiz pek çok araç tanýdýk bu noktaya gelinceye kadar.
+
+Herhalde, ‘Fonksiyon denince aklýnýza ilk ne geliyor?’ diye bir soru sorsam, vereceðiniz cevap print() fonksiyonu olacaktýr. Gerçekten de bu fonksiyonu ilk derslerimizden bu yana o kadar sýk kullandýk ki, fonksiyon denince aklýnýza ilk bu fonksiyonun gelmesi gayet doðal.
+
+Elbette öðrendiðimiz tek fonksiyon print() deðildi. Bunun dýþýnda type() diye bir fonksiyondan da söz etmiþtik. print() kadar olmasa da, type() fonksiyonunu da yazdýðýmýz kodlarda epey kullandýk. print() ve type() dýþýnda, fonksiyon olarak str(), int() ve benzeri araçlarla da tanýþtýk. Bunlarýn dýþýnda pek çok baþka fonksiyon da Python’la birlikte hayatýmýza girdi.
+
+Ýþte bu bölümde, en baþtan bu yana sýklýkla sözünü ettiðimiz, ama hiçbir zaman tam anlamýyla ele almadýðýmýz bu kavramý daha iyi anlayabilmek için, fonksiyon konusunu ayrýntýlý olarak ele alacaðýz. Bu bölümde amacýmýz fonksiyonlarý enine boyuna inceleyerek, okurun bilgi daðarcýðýnda fonksiyonlara iliþkin saðlam bir altyapý oluþturmaktýr. Okur, bu bölümü bitirdikten sonra fonksiyonlara iliþkin olarak bilmesi gereken her þeyi öðrenmiþ olacak.
+
+
+Fonksiyon Nedir ve Ne Ýþe Yarar?
+
+Biz þimdiye dek karþýlaþtýðýmýz print(), len(), type() ve open() gibi örnekler sayesinde ‘fonksiyon’ denen þeyi az çok tanýdýðýmýzý söyleyebiliriz. Dolayýsýyla fonksiyonun ne demek olduðunu þeklen de olsa biliyoruz ve hatta fonksiyonlarý kodlarýmýz içinde etkili bir þekilde kullanabiliyoruz.
+
+Ýlk derslerimizden bu yana öðrendiðimiz fonksiyonlara þöyle bir bakacak olursak, fonksiyonlarýn görünüþüne ve yapýsýna dair herhalde þu tespitleri yapabiliriz:
+
+
+Her fonksiyonun bir adý bulunur ve fonksiyonlar sahip olduklarý bu adlarla anýlýr. (print fonksiyonu, open fonksiyonu, type fonksiyonu, input fonksiyonu, len fonksiyonu vb.) 
+Þekil olarak, her fonksiyonun isminin yanýnda birer parantez iþareti bulunur. (open(), print(), input(), len() vb.) 
+Bu parantez iþaretlerinin içine, fonksiyonlara iþlevsellik kazandýran bazý parametreler yazýlýr. (open(dosya_adý), print("Merhaba Zalim Dünya!"), len("kahramanmaraþ") vb.) 
+Fonksiyonlar farklý sayýda parametre alabilir. Örneðin print() fonksiyonu toplam 256 adet parametre alabilirken, input() fonksiyonu yalnýzca tek bir parametre alýr. 
+Fonksiyonlarýn isimli ve isimsiz parametreleri vardýr. print() fonksiyonundaki sep, end ve file parametreleri isimli parametrelere örnekken, mesela print("Merhaba Dünya!") kodunda Merhaba Dünya! parametresi isimsiz bir parametredir. Ayný þekilde input("Adýnýz: ") gibi bir kodda Adýnýz: parametresi isimsiz bir parametredir. 
+Fonksiyonlarýn, isimli ve isimsiz parametreleri dýþýnda, bir de varsayýlan deðerli parametreleri vardýr. Örneðin print() fonksiyonunun sep, end ve file parametreleri varsayýlan deðerli parametrelere birer örnektir. Eðer bir parametrenin varsayýlan bir deðeri varsa, o parametreye herhangi bir deðer vermeden de fonksiyonu kullanabiliriz. Python bu parametrelere, belirli deðerleri öntanýmlý olarak kendisi atayacaktýr. Tabii eðer istersek, varsayýlan deðerli parametrelere kendimiz de baþka birtakým deðerler verebiliriz. 
+
+Fonksiyon kavramýnýn tam olarak ne olduðunu henüz bilmiyor da olsak, þimdiye kadar öðrendiðimiz fonksiyonlara bakarak fonksiyonlar hakkýnda yukarýdaki çýkarýmlarý yapabiliyoruz. Demek ki aslýnda fonksiyonlar hakkýnda alttan alta pek çok þey öðrenmiþiz. O halde, fonksiyonlar hakkýnda þimdiden bildiklerimize güvenerek, fonksiyon kavramýnýn ne olduðundan ziyade ne iþe yaradýðý konusuna rahatlýkla eðilebiliriz. Zaten fonksiyonlarýn ne iþe yaradýðýný öðrendikten sonra, fonksiyonlarýn ne olduðunu da hemencecik anlayacaksýnýz.
+
+Fonksiyonlarýn ne iþe yaradýðýný en genel ve en kaba haliyle tarif etmek istersek þöyle bir tanýmlama yapabiliriz:
+
+Fonksiyonlarýn görevi, karmaþýk iþlemleri bir araya toplayarak, bu iþlemleri tek adýmda yapmamýzý saðlamaktýr. Fonksiyonlar çoðu zaman, yapmak istediðimiz iþlemler için bir þablon vazifesi görür. Fonksiyonlarý kullanarak, bir veya birkaç adýmdan oluþan iþlemleri tek bir isim altýnda toplayabiliriz. Python’daki ‘fonksiyon’ kavramý baþka programlama dillerinde ‘rutin’ veya ‘prosedür’ olarak adlandýrýlýr. Gerçekten de fonksiyonlar rutin olarak tekrar edilen görevleri veya prosedürleri tek bir ad/çatý altýnda toplayan araçlardýr.
+
+Dilerseniz yukarýdaki soyut ifadeleri basit bir örnek üzerinde somutlaþtýrmaya çalýþalým. Örneðin print() fonksiyonunu ele alalým.
+
+Bu fonksiyonun görevini biliyorsunuz: print() fonksiyonunun görevi, kullanýcýnýn girdiði parametreleri ekrana çýktý olarak vermektir. Her ne kadar print() fonksiyonunun görevini, ekrana çýktý vermek olarak tanýmlasak da, aslýnda bu fonksiyon, ekrana çýktý vermenin yanýsýra, baþka bir takým ilave iþlemler de yapar. Yani bu fonksiyon, aslýnda aldýðý parametreleri sadece ekrana çýktý olarak vermekle yetinmez. Örneðin þu komutu inceleyelim:
+
+>>> print("Fýrat", "Özgül", "1980", "Adana")
+
+Burada print() fonksiyonu toplam dört adet parametre alýyor. Fonksiyonumuz, görevi gereði, bu parametreleri ekrana çýktý olarak verecek. Bu komutu çalýþtýrdýðýmýzda þöyle bir çýktý alýyoruz:
+
+Fýrat Özgül 1980 Adana
+
+Dikkat ederseniz, burada salt bir ‘ekrana çýktý verme’ iþleminden fazlasý var. Zira print() fonksiyonu aldýðý parametreleri þu þekilde de ekrana verebilirdi:
+
+FýratÖzgül1980Adana
+
+Veya þu þekilde:
+
+F
+ý
+r
+a
+t
+Ö
+z
+g
+ü
+l
+1
+9
+8
+0
+A
+d
+a
+n
+a
+
+Neticede bunlar da birer çýktý verme iþlemidir. Ama dediðimiz gibi, print() fonksiyonu aldýðý parametreleri sadece ekrana çýktý olarak vermekle yetinmiyor. Gelin isterseniz ne demek istediðimizi biraz daha açýklayalým:
+
+print() fonksiyonunun yukarýdaki komutu nasýl algýladýðýný önceki derslerimizde öðrenmiþtik. Yukarýdaki komut Python tarafýndan þu þekilde algýlanýyor:
+
+>>> print("Fýrat", "Özgül", "1980", "Adana", sep=" ", end="\n",
+... file=sys.stdout, flush=False)
+
+Yani print() fonksiyonu;
+
+Kendisine verilen “Fýrat”, “Özgül”, “1980” ve “Adana” parametrelerini ekrana basýyor, 
+sep=” “ parametresinin etkisiyle, bu parametreler arasýna birer boþluk ekliyor, 
+end=”\n” parametresinin etkisiyle, sonuncu parametreyi de ekrana bastýktan sonra bir alt satýra geçiyor, 
+file=sys.stdout parametresinin etkisiyle, çýktý konumu olarak komut ekranýný kullanýyor. Yani çýktýlarý ekrana veriyor. 
+flush=False parametresinin etkisiyle, çýktýlar ekrana gönderilmeden önce tamponda bekletiliyor. 
+Eðer print() gibi bir fonksiyon olmasaydý, yukarýda listediðimiz bütün bu iþlemleri kendimiz yapmak zorunda kalacaktýk. Yani ekranda göstermek istediðimiz ifadeleri ekrana çýktý olarak vermenin yanýsýra, bunlarýn ekranda nasýl görüneceðini de tek tek kendimiz elle ayarlamak zorunda kalacaktýr. Ekrana çýktý verme ile ilgili pek çok iþlem tek bir print() fonksiyonu altýnda birleþtirildiði için, her ihtiyaç duyduðumuzda o iþlemleri tek tek bizim yapmamýza gerek kalmýyor.
+
+Ayný þey mesela input() fonksiyonu için de geçerlidir. Bu fonksiyonu kullanarak, programýmýzý kullanan kiþilerle etkileþim içine girebiliyoruz. Týpký print() fonksiyonunda olduðu gibi, input() fonksiyonu da aslýnda alttan alta epey karmaþýk iþlemler gerçekleþtirir. Ama o karmaþýk iþlemlerin tek bir input() fonksiyonu içinde bir araya getirilmiþ olmasý sayesinde, sadece input() gibi basit bir komut vererek kullanýcýlarýmýzla iletiþime geçebiliyoruz.
+
+Bu açýdan bakýldýðýnda fonksiyonlar deðiþkenlere benzer. Bildiðiniz gibi, her defasýnda bir deðeri tekrar tekrar yazmak yerine bir deðiþkene atayarak o deðere kolayca eriþebiliyoruz. Örneðin:
+
+>>> kurum = "Sosyal Sigortalar Kurumu"
+
+Burada tanýmladýðýmýz kurum adlý deðiþken sayesinde, ‘Sosyal Sigortalar Kurumu’ ifadesini kullanmamýz gereken her yerde sadece deðiþken adýný kullanarak, deðiþkenin tuttuðu deðere ulaþabiliyoruz. Ýþte fonksiyonlar da buna benzer bir iþlev görür: Örneðin ekrana bir çýktý vermemiz gereken her yerde, yukarýda verdiðimiz karmaþýk adýmlarý tek tek gerçekleþtirmeye çalýþmak yerine, bu karmaþýk ve rutin adýmlarý bir araya getiren print() gibi bir fonksiyondan yararlanarak iþlerimizi çok daha kolay bir þekilde halledebiliriz.
+
+Bu anlattýklarýmýz fonksiyonlarýn ne iþe yaradýðý konusunda size bir fikir vermiþ olabilir. Dilerseniz bu anlattýklarýmýzý bir örnek aracýlýðýyla biraz daha somutlaþtýrmaya çalýþalým:
+
+Hatýrlarsanýz ‘Kullanýcýyla Veri Alýþveriþi’ baþlýklý bölümde þöyle bir örnek vermiþtik:
+
+isim = "Fýrat"
+soyisim = "Özgül"
+iþsis = "Ubuntu"
+þehir = "Ýstanbul"
+
+print("isim           : ", isim)
+print("soyisim        : ", soyisim)
+print("iþletim sistemi: ", iþsis)
+print("þehir          : ", þehir)
+
+Bu programý çalýþtýrdýðýmýzda þöyle bir çýktý alýyoruz:
+
+isim : Fýrat
+soyisim : Özgül
+iþletim sistemi: Ubuntu
+þehir : Ýstanbul
+
+Bu program, belli deðerleri kullanarak bir kayýt oluþturma iþlemi gerçekleþtiriyor. Mesela yukarýdaki örnekte, ‘Fýrat Özgül’ adlý þahsa ait isim, soyisim, iþletim sistemi ve þehir bilgilerini alarak, bu kiþi için bir kayýt oluþturuyoruz.
+
+Peki ‘Fýrat Özgül’ adlý kiþinin yanýsýra, ‘Mehmet Öztaban’ adlý baþka bir kiþi için de kayýt oluþturmak istersek ne yapacaðýz?
+
+Aklýnýza þöyle bir þey yazmak gelmiþ olabilir:
+
+isim1 = "Fýrat"
+soyisim1 = "Özgül"
+iþsis1 = "Ubuntu"
+þehir1 = "Ýstanbul"
+
+print("isim           : ", isim1)
+print("soyisim        : ", soyisim1)
+print("iþletim sistemi: ", iþsis1)
+print("þehir          : ", þehir1)
+
+print("-"*30)
+
+isim2 = "Mehmet"
+soyisim2 = "Öztaban"
+iþsis2 = "Debian"
+þehir2 = "Ankara"
+
+print("isim           : ", isim2)
+print("soyisim        : ", soyisim2)
+print("iþletim sistemi: ", iþsis2)
+print("þehir          : ", þehir2)
+
+print("-"*30)
+
+Programa her yeni kayýt ekleniþinde, her yeni kiþi için benzer satýrlarý tekrar tekrar yazabilirsiniz. Peki ama bu yöntem sizce de çok sýkýcý deðil mi? Üstelik bir o kadar da hataya açýk bir yöntem. Muhtemelen ilk kaydý ekledikten sonra, ikinci kaydý eklerken birinci kayýttaki bilgileri kopyalayýp, bu kopya üzerinden ikinci kaydý oluþturuyorsunuz. Hatta muhtemelen kopyalayýp yapýþtýrdýktan sonra yeni kaydý düzenlerken bazý hatalar da yapýyor ve düzgün çalýþan bir program elde edebilmek için o hatalarý düzeltmekle de uðraþýyorsunuz.
+
+Bütün bu iþleri kolaylaþtýracak bir çözüm olsa ve bizi ayný þeyleri tekrar tekrar yazmaktan kurtarsa sizce de çok güzel olmaz mýydý? Mesela týpký print() fonksiyonu gibi, kayýt_oluþtur() adlý bir fonksiyon olsa, biz sadece gerekli bilgileri bu fonksiyonun parantezleri içine parametre olarak yazsak ve bu fonksiyon bize istediðimiz bilgileri içeren bir kayýt oluþtursa ne hoþ olurdu, deðil mi? Yani örneðin bahsettiðimiz bu hayali kayýt_oluþtur() fonksiyonunu þu þekilde kullanabilseydik...
+
+kayýt_oluþtur("Mehmet", "Öztaban", "Debian", "Ankara")
+
+... ve bu komut bize þu çýktýyý verebilseydi...
+
+------------------------------
+isim : Mehmet
+soyisim : Öztaban
+iþletim sistemi: Debian
+þehir : Ankara
+------------------------------
+
+... ne kadar güzel olurdu, deðil mi?
+
+Ýþte böyle bir þey Python’da mümkündür. Nasýl Python geliþtiricileri print(), input() ve benzeri fonksiyonlarý tanýmlayýp, karmaþýk iþlemleri tek adýmda yapabilmemiz için bize sunmuþ ve böylece bizi her defasýnda tekerleði yeniden icat etme külfetinden kurtarmýþsa, biz de kendi fonksiyonlarýmýzý tanýmlayarak, kendimizi ayný iþlemleri tekrar tekrar yapma zahmetinden kurtarabiliriz.
+
+Gelin þimdi bu iþi nasýl yapabileceðimizi tartýþalým.
+

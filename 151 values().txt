@@ -1,0 +1,46 @@
+
+values()
+
+keys() metodu bir sözlüðün anahtarlarýný veriyor. Bir sözlüðün deðerlerini ise values() metodu verir:
+
+>>> sözlük
+{'b': 1, 'c': 2, 'a': 0, 'd': 3}
+
+>>> print(sözlük.values())
+
+dict_values([1, 2, 0, 3])
+
+Gördüðünüz gibi, bu metottan bir dict_values nesnesi alýyoruz. Týpký keys() metodunda olduðu gibi, values() metodunda da bu çýktýyý baþka veri tiplerine dönüþtürme imkanýna sahibiz:
+
+>>> liste = list(sözlük.values())
+>>> liste
+
+[1, 2, 0, 3]
+
+>>> demet = tuple(sözlük.values())
+>>> demet
+
+(1, 2, 0, 3)
+
+Yalnýz bu verileri karakter dizisine dönüþtürmeye çalýþtýðýnýzda ufak bir problemle karþýlacaksýnýz:
+
+>>> kardiz = "".join(sözlük.values())
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: sequence item 0: expected str instance, int found
+
+Bunun sebebi, sözlükteki deðerlerin int tipinde olmasýdýr. Bildiðiniz gibi, sadece ayný tip verileri birbiriyle birleþtirebiliriz. Eðer birleþtirmek istediðimiz veriler birbirinden farklý tipte ise, bunlarý birleþtirmeden önce bir dönüþtürme iþlemi yapmamýz gerekir:
+
+>>> kardiz = "".join([str(i) for i in sözlük.values()])
+>>> kardiz
+
+'1203'
+
+Gördüðünüz gibi, sözlükteki deðerlerin her birini, tek bir liste üreteci içinde karakter dizisine dönüþtürdük ve ortaya çýkan listeyi karakter dizilerinin join() metodu yardýmýyla, öðelerin arasýnda hiçbir boþluk býrakmadan kardiz adlý bir karakter dizisi içine yerleþtirdik. Elbette eðer isteseydik bu öðelerin her birinin arasýna bir virgül de koyabilirdik:
+
+>>> kardiz = ", ".join([str(i) for i in sözlük.values()])
+>>> kardiz
+
+'1, 2, 0, 3'
+

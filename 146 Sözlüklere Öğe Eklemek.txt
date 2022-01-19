@@ -1,0 +1,166 @@
+
+Sözlüklere Öðe Eklemek
+
+Týpký listeler gibi, sözlükler de büyüyüp küçülebilen bir veri tipidir. Yani bir sözlüðü ilk kez tanýmladýktan sonra istediðimiz zaman bu sözlüðe yeni öðeler ekleyebilir veya varolan öðeleri çýkarabiliriz. Biz þimdi bir sözlüðe nasýl öðe ekleyeceðimizi inceleyeceðiz.
+
+Diyelim ki elimizde þöyle boþ bir sözlük var:
+
+>>> sözlük = {}
+
+Bu listeye öðe eklemek için þöyle bir formül kullanacaðýz:
+
+>>> sözlük[anahtar] = deðer
+
+Bu formülü bir örnek üzerinden somutlaþtýralým:
+
+>>> sözlük["Ahmet"] = "Adana"
+
+Böylece sözlüðe, anahtarý “Ahmet”, deðeri ise “Adana” olan bir öðe eklemiþ olduk. Sözlüðümüzün son durumunu kontrol edelim:
+
+>>> print(sözlük)
+
+{'Ahmet': 'Adana'}
+
+Gördüðünüz gibi, “Ahmet” öðesi sözlüðe eklendi. Artýk bu öðeye normal yollardan ulaþabiliriz:
+
+>>> print(sözlük["Ahmet"])
+
+Adana
+
+Elimiz alýþsýn diye sözlüðe öðe eklemeye devam edelim:
+
+>>> sözlük["Mehmet"] = "Ýstanbul"
+>>> sözlük
+
+{'Ahmet': 'Adana', 'Mehmet': 'Ýstanbul'}
+
+>>> sözlük["Seda"] = "Mersin"
+>>> sözlük
+
+{'Ahmet': 'Adana', 'Mehmet': 'Ýstanbul', 'Seda': 'Mersin'}
+
+>>> sözlük["Eda"] = "Tarsus"
+>>> sözlük
+
+{'Ahmet': 'Adana', 'Eda': 'Tarsus', 'Mehmet': 'Ýstanbul', 'Seda': 'Mersin'}
+
+Özellikle son çýktýya dikkatlice bakýn. Sözlüðe en son “Eda” öðesini eklemiþtik. Ama sözlüðü ekrana bastýðýmýzda bu öðenin sözlüðün sonuna deðil ortasýna bir yere yerleþtiðini görüyoruz. Bu durumun, sözlüklerin sýrasýz bir veri tipi olmasýndan kaynaklandýðýný biliyorsunuz.
+
+Gelin pratik olmasý açýsýndan birkaç örnek daha verelim.
+
+Elimizde þöyle bir sözlük olsun:
+
+>>> personel = {"Mehmet Öz": "AR-GE Müdürü",
+... "Samet Söz": "Genel Direktör",
+... "Sedat Gün": "Proje Müdürü"}
+
+Þimdi bu sözlüðe "Turgut Özben": "Mühendis" anahtar-deðer çiftini ekleyelim:
+
+>>> personel["Turgut Özben"] = "Mühendis"
+
+Sözlüðümüzün son halini görelim:
+
+>>> print(personel)
+
+{'Samet Söz': 'Genel Direktör', 'Mehmet Öz': 'AR-GE Müdürü', 'Turgut Özben':
+'Mühendis', 'Sedat Gün': 'Proje Müdürü'}
+
+Gördüðünüz gibi eklemek istediðimiz öðe sözlüðe eklenmiþ. Ancak bu öðenin sözlüðün en sonuna deðil, sözlük içine rastgele bir þekilde yerleþtirildiðine dikkatinizi çekmek isterim. Çünkü, dediðimiz gibi, sözlükler sýrasýz bir veri tipidir.
+
+Gelin bu konuyu daha iyi anlamak için bir örnek daha verelim.
+
+Önce notlar adýnda boþ bir sözlük tanýmlayalým:
+
+>>> notlar = {}
+
+Bu sözlüðe öðrencilerin sýnavdan aldýklarý notlarý ekleyeceðiz:
+
+>>> notlar["Ahmet"] = 45
+>>> notlar["Mehmet"] = 77
+>>> notlar["Seda"] = 98
+>>> notlar["Deniz"] = 95
+>>> notlar["Ege"] = 95
+>>> notlar["Zeynep"] = 100
+
+Sözlüðümüzün son halini görelim:
+
+>>> print(notlar)
+
+{'Seda': 98, 'Ege': 95, 'Mehmet': 77, 'Zeynep': 100, 'Deniz': 95, 'Ahmet': 45}
+
+Bu noktada sözlüklerin önemli bir özelliðinden bahsetmemiz uygun olacak. Bir sözlüðe deðer olarak bütün veri tiplerini verebiliriz. Yani:
+
+>>> sözlük = {}
+>>> sözlük = {'a': 1}
+>>> sözlük = {'a': (1,2,3)}
+>>> sözlük = {'a': 'kardiz'}
+>>> sözlük = {'a': [1,2,3]}
+
+Gördüðünüz gibi, sözlükler deðer olarak her türlü veri tipini kabul ediyor. Ama durum sözlük anahtarlarý açýsýndan böyle deðildir. Yani sözlüklere anahtar olarak her veri tipini atayamayýz. Bir deðerin ‘anahtar’ olabilmesi için, o öðenin deðiþtirilemeyen (immutable) bir veri tipi olmasý gerekir. Python’da þimdiye kadar öðrendiðimiz þu veri tipleri deðiþtirilemeyen veri tipleridir:
+
+Demetler 
+Sayýlar 
+Karakter Dizileri 
+Þu veri tipleri ise deðiþtirilebilen veri tipleridir:
+
+Listeler 
+Sözlükler 
+Dolayýsýyla bir sözlüðe ancak þu veri tiplerini ekleyebiliriz:
+
+Demetler 
+Sayýlar 
+Karakter Dizileri 
+Þu kodlarý dikkatlice inceleyin:
+
+Önce boþ bir sözlük oluþturalým:
+
+>>> sözlük = {}
+
+Bu sözlüðe anahtar olarak bir demet ekleyelim:
+
+>>> l = (1,2,3)
+>>> sözlük[l] = 'falanca'
+>>> sözlük
+
+{(1, 2, 3): 'falanca'}
+
+Bir sayý ekleyelim:
+
+>>> l = 45
+>>> sözlük[l] = 'falanca'
+>>> sözlük
+
+{45: 'falanca', (1, 2, 3): 'falanca'}
+
+Bir karakter dizisi ekleyelim:
+
+>>> l = 'kardiz'
+>>> sözlük[l] = 'falanca'
+>>> sözlük
+
+{'kardiz': 'falanca', 45: 'falanca', (1, 2, 3): 'falanca'}
+
+Yukarýdakiler, deðiþtirilemeyen veri tipleri olduðu için sözlüklere anahtar olarak eklenebildi.
+
+Bir de þunlara bakalým:
+
+Sözlüðümüze anahtar olarak bir liste eklemeye çalýþalým:
+
+>>> l = [1,2,3]
+>>> sözlük[l] = 'falanca'
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+
+Kümemize bir sözlük eklemeye çalýþalým:
+
+>>> l = {"a": 1, "b": 2, "c": 3}
+>>> sözlük[l] = 'falanca'
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'dict'
+
+Sözlüklerle çalýþýrken sözlüklerin bu özelliðine karþý uyanýk olmalýyýz.
+

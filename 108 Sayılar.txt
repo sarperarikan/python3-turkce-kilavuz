@@ -1,0 +1,7 @@
+
+
+Sayýlar
+
+Geçen bölümde sayma sistemlerini ayrýntýlý bir þekilde inceledik. Bu bölümde ise yine bununla baðlantýlý bir konu olan sayýlar konusunu ele alacaðýz. Esasýnda biz sayýlarýn ne olduðuna ve Python’da bunlarýn nasýl kullanýlacaðýna dair tamamen bilgisiz deðiliz. Buraya gelene kadar, sayýlar konusunda epey þey söyledik aslýnda. Mesela biz Python’da üç tür sayý olduðunu biliyoruz:
+
+

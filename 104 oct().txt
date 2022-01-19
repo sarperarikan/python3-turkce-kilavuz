@@ -1,0 +1,11 @@
+
+oct()
+
+Bu fonksiyon, herhangi bir sayıyı alıp, o sayının sekizli sistemdeki karşılığını verir:
+
+>>> oct(10)
+
+'0o12'
+
+Tıpkı bin() ve hex() fonksiyonlarında olduğu gibi, oct() fonksiyonunun da çıktı olarak bir karakter dizisi verdiğine dikkat edin. Hatırlarsanız bin() ve hex() fonksiyonlarının çıktısındaki ilk iki karakter (0b ve 0x), o sayıların hangi sisteme ait sayılar olduğunu gösteriyordu. Aynı şekilde oct() fonksiyonunun çıktısındaki ilk iki karakter de (0o), o sayının sekizli sisteme ait bir sayı olduğunu gösteriyor.
+

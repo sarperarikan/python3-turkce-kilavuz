@@ -1,0 +1,18 @@
+
+Fonksiyon Kullanarak
+
+
+bin()
+
+Bu fonksiyon bir sayının ikili (binary) sayı sistemindeki karşılığını verir:
+
+>>> bin(2)
+
+'0b10'
+
+Bu fonksiyonun çıktı olarak bir karakter dizisi verdiğine dikkat edin. Bu karakter dizisinin ilk iki karakteri (‘0b’), o sayının ikili sisteme ait bir sayı olduğunu gösteren bir işarettir. Bu bilgilerden yola çıkarak, yukarıdaki karakter dizisinin gerçek ikili kısmını almak için şu yöntemi kullanabilirsiniz:
+
+>>> bin(2)[2:]
+
+'10'
+

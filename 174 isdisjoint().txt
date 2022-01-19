@@ -1,0 +1,27 @@
+
+isdisjoint()
+
+Bu metodun çok basit bir görevi vardýr. isdisjoint() metodunu kullanarak iki kümenin kesiþim kümesinin boþ olup olmadýðý sorgulayabilirsiniz. Hatýrlarsanýz ayný iþi bir önceki bölümde gördüðümüz intersection() metodunu kullanarak da yapabiliyorduk. Ama eðer hayattan tek beklentiniz iki kümenin kesiþim kümesinin boþ olup olmadýðýný, yani bu iki kümenin ortak eleman içerip içermediðini öðrenmekse, basitçe isdisjoint() metodundan yararlanabilirsiniz:
+
+>>> a = set([1, 2, 3])
+>>> b = set([2, 4, 6])
+>>> a.isdisjoint(b)
+
+False
+
+Gördüðünüz gibi, a ve b kümesinin kesiþimi boþ olmadýðý için, yani bu iki küme ortak en az bir öðe barýndýrdýðý için, isdisjoint() metodu False çýktýsý veriyor. Burada temel olarak þu soruyu sormuþ oluyoruz:
+
+a ve b ayrýk kümeler mi?
+
+Python da bize cevap olarak, “Hayýr deðil,” anlamýna gelen False çýktýsýný veriyor... Çünkü a ve b kümelerinin ortak bir elemaný var (2).
+
+Bir de þuna bakalým:
+
+>>> a = set([1, 3, 5])
+>>> b = set([2, 4, 6])
+>>> a.isdisjoint(b)
+
+True
+
+Burada a ve b kümeleri ortak hiç bir elemana sahip olmadýðý için “Doðru” anlamýna gelen True çýktýsýný elde ediyoruz.
+

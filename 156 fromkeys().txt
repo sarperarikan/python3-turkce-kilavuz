@@ -1,0 +1,17 @@
+
+fromkeys()
+
+fromkeys() metodu öteki metotlardan biraz farklýdýr. Bu metot mevcut sözlük üzerinde iþlem yapmaz. fromkeys()‘in görevi yeni bir sözlük oluþturmaktýr. Bu metot yeni bir sözlük oluþtururken listeler veya demetlerden yararlanýr. Þöyle ki:
+
+>>> elemanlar = "Ahmet", "Mehmet", "Can"
+
+>>> adresler = dict.fromkeys(elemanlar, "Kadýköy")
+
+>>> adresler
+
+{'Ahmet': 'Kadýköy', 'Mehmet': 'Kadýköy', 'Can': 'Kadýköy'}
+
+Gördüðünüz gibi öncelikle “elemanlar” adlý bir demet tanýmladýk. Daha sonra da “adresler” adlý bir sözlük tanýmlayarak, fromkeys() metodu yardýmýyla anahtar olarak “elemanlar” demetindeki öðelerden oluþan, deðer olarak ise “Kadýköy”ü içeren bir sözlük meydana getirdik.
+
+En baþta tanýmladýðýmýz “elemanlar” demeti liste de olabilirdi. Hatta tek baþýna bir karakter dizisi dahi yazabilirdik oraya...
+

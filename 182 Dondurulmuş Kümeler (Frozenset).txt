@@ -1,0 +1,23 @@
+
+Dondurulmuþ Kümeler (Frozenset)
+
+Daha önce de söylediðimiz gibi, kümeler üzerinde deðiþiklik yapabiliyoruz. Zaten kümelerin add() ve remove() gibi metotlarýnýn olmasý bu durumu teyit ediyor. Ancak kimi durumlarda, öðeleri üzerinde deðiþiklik yapýlamayan kümelere de ihtiyaç duyabilirsiniz. Hatýrlarsanýz listeler ve demetler arasýnda da buna benzer bir iliþki var. Demetler çoðu zaman, üzerinde deðiþiklik yapýlamayan bir liste gibi davranýr. Ýþte Python ayný imkaný bize kümelerde de saðlar. Eðer öðeleri üzerinde deðiþiklik yapýlamayan bir küme oluþturmak isterseniz set() yerine frozenset() fonksiyonunu kullanabilirsiniz. Dilerseniz hemen bununla ilgili bir örnek verelim:
+
+>>> dondurulmuþ = frozenset(["elma", "armut", "ayva"])
+
+Dondurulmuþ kümeleri bu þekilde oluþturuyoruz. Þimdi bu dondurulmuþ kümenin metotlarýna bakalým:
+
+>>> dir(dondurulmuþ)
+
+['__and__', '__class__', '__contains__', '__delattr__', '__doc__', '__eq__',
+ '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__',
+ '__init__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__',
+ '__or__', '__rand__', '__reduce__', '__reduce_ex__', '__repr__', '__ror__',
+ '__rsub__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__',
+ '__subclasshook__', '__xor__', 'copy', 'difference', 'intersection',
+ 'isdisjoint', 'issubset', 'issuperset', 'symmetric_difference', 'union']
+
+Gördüðünüz gibi, add(), remove(), update() gibi, deðiþiklik yapmaya yönelik metotlar listede yok.
+
+Dondurulmuþ kümeler ile normal kümeler arasýnda iþlev olarak hiçbir fark yoktur. Bu ikisi arasýndaki fark, listeler ile demetler arasýndaki fark gibidir.
+

@@ -1,0 +1,21 @@
+
+issuperset()
+
+Bu metot, bir önceki bölümde gördüðümüz issubset() metoduna benzer. Matematik derslerinde gördüðümüz “kümeler” konusunda hatýrladýðýnýz “b kümesi a kümesini kapsar” ifadesini bu metotla gösteriyoruz. Önce bir önceki derste gördüðümüz örneðe bakalým:
+
+>>> a = set([1, 2, 3])
+>>> b = set([0, 1, 2, 3, 4, 5])
+>>> a.issubset(b)
+
+True
+
+Buradan, “a kümesi b kümesinin alt kümesidir,” sonucuna ulaþýyoruz. Bir de þuna bakalým:
+
+>>> a = set([1, 2, 3])
+>>> b = set([0, 1, 2, 3, 4, 5])
+>>> b.issuperset(a)
+
+True
+
+Burada ise, “b kümesi a kümesini kapsar,” sonucunu elde ediyoruz. Yani b kümesi a kümesinin bütün elemanlarýný içinde barýndýrýyor.
+

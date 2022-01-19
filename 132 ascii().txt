@@ -1,0 +1,43 @@
+
+ascii()
+
+ascii() fonksiyonu biraz önce öðrendiðimiz repr() fonksiyonuna çok benzer. Örneðin:
+
+>>> repr("asds")
+
+"'asds'"
+
+>>> ascii("asds")
+
+"'asds'"
+
+Bu iki fonksiyon, ASCII tablosunda yer almayan karakterlere karþý tutumlarý yönünden birbirlerinden ayrýlýr. Örneðin:
+
+>>> repr("Ý")
+
+"'Ý'"
+
+>>> ascii("Ý")
+
+"'\\u0130'"
+
+Gördüðünüz gibi, repr() fonksiyonu ASCII tablosunda yer almayan karakterleri de göründükleri gibi temsil ediyor. ascii() fonksiyonu ise bu karakterlerin UNICODE kod konumlarýný (code points) gösteriyor.
+
+Bir örnek daha verelim:
+
+>>> repr("€")
+
+"'€'"
+
+>>> ascii("€")
+
+"'\\u20ac'"
+
+ascii() fonksiyonunun UNICODE kod konumlarýný gösterme özelliðinin bir benzerini daha önce öðrendiðimiz encode() metodu yardýmýyla da elde edebilirsiniz:
+
+>>> "€".encode("unicode_escape")
+
+b'\\u20ac'
+
+Ancak ascii() fonksiyonunun str tipinde, encode() metodunun ise bytes tipinde bir çýktý verdiðine dikkat edin.
+

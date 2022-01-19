@@ -1,0 +1,36 @@
+
+Kayan Noktalı Sayıların Metotları
+
+Python’da tam sayılar dışında kayan noktalı sayıların da olduğunu biliyoruz. Bu sayı tipinin şu metotları vardır:
+
+>>> [i for i in dir(float) if not i.startswith("_")]
+
+['as_integer_ratio', 'conjugate', 'fromhex', 'hex', 'imag', 'is_integer', 'real']
+
+Biz bu metotlar arasından, as_integer_ratio() ve is_integer() adlı metotlarla ilgileneceğiz.
+
+
+as_integer_ratio()
+
+Bu metot, birbirine bölündüğünde ilgili kayan noktalı sayıyı veren iki adet tam sayı verir bize. Örnek üzerinden açıklayalım:
+
+>>> sayı = 4.5
+>>> sayı.as_integer_ratio()
+
+(9, 2)
+
+9 sayısını 2 sayısına böldüğümüzde 4.5 sayısını elde ederiz. İşte as_integer_ratio() metodu, bu 9 ve 2 sayılarını bize ayrı ayrı verir.
+
+
+is_integer()
+
+Bir kayan noktalı sayının ondalık kısmında 0 harici bir sayının olup olmadığını kontrol etmek için bu metodu kullanıyoruz. Örneğin:
+
+>>> (12.0).is_integer()
+
+True
+
+>>> (12.5).is_integer()
+
+False
+

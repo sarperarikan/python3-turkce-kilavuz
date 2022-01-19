@@ -1,0 +1,68 @@
+
+get()
+
+Bu metot sözlüklerin en kullanýþlý metotlarýndan biridir. Bu metot pek çok durumda iþinizi bir hayli kolaylaþtýrýr.
+
+Diyelim ki þöyle bir program yazdýk:
+
+#!/usr/bin/env python3.0
+
+ing_sözlük = {"dil": "language", "bilgisayar": "computer", "masa": "table"}
+
+sorgu = input("Lütfen anlamýný öðrenmek istediðiniz kelimeyi yazýnýz:")
+
+print(ing_sözlük[sorgu])
+
+Bu programý çalýþtýrdýðýmýzda eðer kullanýcý “ing_sözlük” adýyla belirttiðimiz sözlük içinde bulunan kelimelerden birini yazarsa, o kelimenin karþýlýðýný alacaktýr. Diyelim ki kullanýcýmýz soruya “dil” diye cevap verdi. Bu durumda ekrana “dil” kelimesinin sözlükteki karþýlýðý olan “language” yazdýrýlacaktýr. Peki ya kullanýcý sözlükte tanýmlý olmayan bir kelime yazarsa ne olacak? Öyle bir durumda programýmýz hata verecektir. Programýmýz için doðru yol, hata vermektense, kullanýcýyý kelimenin sözlükte olmadýðý konusunda bilgilendirmektir. Bunu klasik bir yaklaþýmla þu þekilde yapabiliriz:
+
+ing_sözlük = {"dil": "language", "bilgisayar": "computer", "masa": "table"}
+
+sorgu = input("Lütfen anlamýný öðrenmek istediðiniz kelimeyi yazýnýz:")
+
+if sorgu not in ing_sözlük:
+print("Bu kelime veritabanýmýzda yoktur!")
+
+else:
+print(ing_sözlük[sorgu])
+
+Ama açýkçasý bu pek verimli bir yaklaþým sayýlmaz. Yukarýdaki yöntem yerine sözlüklerin get() metodundan faydalanabiliriz. Bakalým bunu nasýl yapýyoruz:
+
+ing_sözlük = {"dil": "language", "bilgisayar": "computer", "masa": "table"}
+
+sorgu = input("Lütfen anlamýný öðrenmek istediðiniz kelimeyi yazýnýz:")
+
+print(ing_sözlük.get(sorgu, "Bu kelime veritabanýmýzda yoktur!"))
+
+Gördüðünüz gibi, burada çok basit bir metot yardýmýyla bütün dertlerimizi hallettik. Sözlüklerin get() adlý metodu, parantez içinde iki adet argüman alýr. Birinci argüman sorgulamak istediðimiz sözlük öðesidir. Ýkinci argüman ise bu öðenin sözlükte bulunmadýðý durumda kullanýcýya hangi mesajýn gösterileceðini belirtir. Buna göre, yukarýda yaptýðýmýz þey, önce “sorgu” deðiþkenini sözlükte aramak, eðer bu öðe sözlükte bulunamýyorsa da kullanýcýya, “Bu kelime veritabanýmýzda yoktur!” cümlesini göstermekten ibarettir...
+
+Gelin isterseniz bununla ilgili bir örnek daha yapalým.
+
+Diyelim ki bir havadurumu programý yazmak istiyoruz. Bu programda kullanýcý bir þehir adý girecek. Program da girilen þehre ait havadurumu bilgilerini ekrana yazdýracak. Bu programý klasik yöntemle þu þekilde yazabiliriz:
+
+#!/usr/bin/env python3
+
+soru = input("Þehrinizin adýný tamamý küçük harf olacak þekilde yazýn:")
+
+if soru == "istanbul":
+print("gök gürültülü ve saðanak yaðýþlý")
+
+elif soru == "ankara":
+print("açýk ve güneþli")
+
+elif soru == "izmir":
+print("bulutlu")
+
+else:
+print("Bu þehre iliþkin havadurumu bilgisi bulunmamaktadýr.")
+
+Yukarýdaki, gayet geçerli bir yöntemdir. Ama biz istersek bu kodlarý “get” metodu yardýmýyla çok daha verimli ve sade bir hale getirebiliriz:
+
+#!/usr/bin/env python3
+
+soru = input("Þehrinizin adýný tamamý küçük harf olacak þekilde yazýn:")
+
+cevap = {"istanbul": "gök gürültülü ve saðanak yaðýþlý",
+"ankara": "açýk ve güneþli", "izmir": "bulutlu"}
+
+print(cevap.get(soru, "Bu þehre iliþkin havadurumu bilgisi bulunmamaktadýr."))
+

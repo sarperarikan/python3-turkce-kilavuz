@@ -1,0 +1,15 @@
+
+Gömülü Fonksiyonlar
+
+Bu bölümde, daha önce de birkaç kez bahsettiðimiz ve çokça örneðini gördüðümüz bir kavramdan söz edeceðiz. Bu kavramýn adý ‘gömülü fonksiyonlar’.
+
+Esasýnda biz buraya gelene kadar Python’da pek çok gömülü fonksiyon gördük. Dolayýsýyla aslýnda görünüþ olarak bunlarýn neye benzediðini biliyoruz. Örneðin daha önceki derslerimizde gördüðümüz print() gömülü bir fonksiyondur. Ayný þekilde open(), type(), len(), pow(), bin() ve þimdiye kadar tanýþtýðýmýz öteki bütün fonksiyonlar birer gömülü fonksiyondur.
+
+Gömülü fonksiyonlar Ýngilizcede builtin functions olarak adlandýrýlýr. Bu fonksiyonlar gerçekten de dile gömülü vaziyettedirler. Bildiðiniz gibi, bir fonksiyonu kullanabilmemiz için o fonksiyonu tanýmlamamýz gerekir. Ýþte gömülü fonksiyonlar, bizim tanýmlamamýza gerek kalmadan, Python geliþtiricileri tarafýndan önceden tanýmlanýp dile gömülmüþ ve hizmetimize sunulmuþ faydalý birtakým araçlardýr.
+
+Ýþte bu bölümde biz de bu gömülü fonksiyonlarý tek tek ve ayrýntýlý olarak inceleyeceðiz. Dediðimiz gibi, bunlardan bir kýsmýný halihazýrda görmüþtünüz. Ama biz bütünlük açýsýndan, önceden ele almýþ olduðumuz bu fonksiyonlara da kýsaca deðinmeden geçmeyeceðiz. Böylelikle hem yeni fonksiyonlar öðrenmiþ olacaðýz hem de önceden öðrendiðimiz fonksiyonlarla birlikte yeni fonksiyonlarý da derli toplu bir þekilde görme imkanýmýz olacak.
+
+Bu bölümde elbette birtakým fonksiyonlarý salt art arda sýralamakla yetinmeyeceðiz. Python’daki gömülü fonksiyonlarý incelerken bir yandan da Python programlama dilindeki çok önemli bazý kavramlarý ele alacaðýz.
+
+Ýlk olarak abs() adlý bir fonksiyonla baþlýyoruz gömülü fonksiyonlarý incelemeye...
+

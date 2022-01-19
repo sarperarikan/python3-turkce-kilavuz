@@ -1,0 +1,144 @@
+
+Sözlük Öðelerine Eriþmek
+
+Yukarýdaki örneklerden bir sözlüðün en basit þekilde nasýl tanýmlanacaðýný öðrendik. Peki tanýmladýðýmýz bir sözlüðün öðelerine nasýl eriþeceðiz?
+
+Hemen basit bir örnek verelim. Daha önce tanýmladýðýmýz þu sözlüðe bir bakalým mesela:
+
+sözlük = {"kitap" : "book",
+"bilgisayar" : "computer",
+"programlama": "programming",
+"dil" : "language",
+"defter" : "notebook"}
+
+Bu sözlükte birtakým Türkçe kelimeler ve bunlarýn Ýngilizce karþýlýklarý var. Þimdi mesela bu sözlükteki ‘kitap’ adlý öðeye eriþelim:
+
+print(sözlük["kitap"])
+
+Bu kodlarý çalýþtýrdýðýmýzda þöyle bir çýktý alýrýz:
+
+book
+
+Yukarýdaki örnekten anladýðýmýz gibi, sözlük öðelerine eriþmek için þöyle bir formül kullanýyoruz:
+
+sözlük[sözlük_öðesinin_adý]
+
+Ayný þekilde sözlük deðiþkeni içindeki ‘bilgisayar’ öðesinin karþýlýðýný almak istersek þöyle bir kod yazýyoruz:
+
+print(sözlük["bilgisayar"])
+
+Bu da bize “computer” çýktýsýný veriyor.
+
+Karakter dizilerini anlatýrken verdiðimiz çeviri_tablosu adlý sözlüðe ve orada anlattýklarýmýza geri dönelim þimdi. Artýk sözlük adlý veri tipiyle iyiden iyiye tanýþtýðýmýza göre, orada anlattýklarýmýz zihninizde daha net bir hale gelmiþ olmalý.
+
+Oradaki tablomuz þöyleydi:
+
+çeviri_tablosu = {"Ö": "O",
+"ç": "c",
+"Ü": "U",
+"Ç": "C",
+"Ý": "I",
+"ý": "i",
+"Ð": "G",
+"ö": "o",
+"þ": "s",
+"ü": "u",
+"Þ": "S",
+"ð": "g"}
+
+Mesela bu sözlükteki “Ö” öðesinin karþýlýðýný elde etmek için þöyle bir kod yazdýðýmýzý gayet iyi hatýrlýyorsunuz:
+
+print(çeviri_tablosu["Ö"])
+
+Bu kodlarý bir dosyaya kaydedip çalýþtýrdýðýmýzda þöyle bir çýktý alýyorduk:
+
+O
+
+Gördüðünüz gibi sözlükteki “Ö” adlý öðeyi parantez içinde belirttiðimiz zaman, Python bize bu öðenin karþýsýndaki deðeri veriyor. Dolayýsýyla sözlük içinde “Ö” öðesinin karþýlýðý “O” harfi olduðu için de çýktýmýz “O” oldu.
+
+Sözlüðün öteki öðelerini ise þu þekilde alabiliyoruz:
+
+print(çeviri_tablosu["Ö"])
+print(çeviri_tablosu["ç"])
+print(çeviri_tablosu["Ü"])
+print(çeviri_tablosu["Ç"])
+print(çeviri_tablosu["Ý"])
+print(çeviri_tablosu["ý"])
+print(çeviri_tablosu["Ð"])
+print(çeviri_tablosu["ö"])
+print(çeviri_tablosu["Þ"])
+print(çeviri_tablosu["ð"])
+
+Ancak kod tekrarýndan kaçýnmak için yukarýdaki kodlarý þu þekilde sadeleþtirme imkanýmýzýn da olduðunu biliyorsunuz:
+
+for i in çeviri_tablosu:
+print(çeviri_tablosu[i])
+
+Gördüðünüz gibi, sözlük içinde iki nokta üst üste iþaretinin sol tarafýnda görünen öðeleri köþeli parantez içinde yazarak, iki nokta üst üste iþaretinin sað tarafýndaki deðerleri elde edebiliyoruz.
+
+Eðer bir sözlük içinde bulunmayan bir öðeye eriþmeye çalýþýrsak Python bize KeyError tipinde bir hata mesajý verecektir. Mesela yukarýdaki sözlüðü temel alacak olursak þöyle bir sorgu hata verecektir:
+
+>>> print(çeviri_tablosu["Z"])
+
+Traceback (most recent call last):
+  File "deneme.py", line 14, in <module>
+print(çeviri_tablosu["Z"])
+KeyError: 'Z'
+
+Sözlükte “Z” kaydý bulunmadýðý için doðal olarak Python’ýn bize bir hata mesajý göstermekten baþka çaresi kalmýyor.
+
+Sözlükler ile ilgili epey bilgi edindik. Dilerseniz bu öðrendiklerimizi örnek bir uygulama üzerinde somutlaþtýrmaya çalýþalým. Mesela Python’daki sözlükleri kullanarak basit bir telefon defteri uygulamasý yazalým:
+
+telefon_defteri = {"ahmet öz" : "0532 532 32 32",
+"mehmet su": "0543 543 42 42",
+"seda naz" : "0533 533 33 33",
+"eda ala" : "0212 212 12 12"}
+
+kiþi = input("Telefon numarasýný öðrenmek için bir kiþi adý girin: ")
+
+cevap = "{} adlý kiþinin telefon numarasý: {}"
+
+print(cevap.format(kiþi, telefon_defteri[kiþi]))
+
+Burada öncelikle isimler ve telefon numaralarýndan oluþan, sözlük veri tipinde bir telefon defteri oluþturduk:
+
+telefon_defteri = {"ahmet öz" : "0532 532 32 32",
+"mehmet su": "0543 543 42 42",
+"seda naz" : "0533 533 33 33",
+"eda ala" : "0212 212 12 12"}
+
+Bu kodlarda bilmediðimiz hiçbir þey yok. Sözlüklere dair öðrendiklerimizi kullanarak oluþturduðumuz oldukça basit bir sözlüktür bu.
+
+Daha sonra kullanýcýdan, telefon numarasýný öðrenmek için bir kiþi adý girmesini istiyoruz. Bunu da þu kodlar yardýmýyla yapýyoruz:
+
+kiþi = input("Telefon numarasýný öðrenmek için bir kiþi adý girin: ")
+
+Ardýndan da telefon defterinde sorgulama yapacak olan kullanýcýya göstereceðimiz cevap için bir þablon oluþturuyoruz:
+
+cevap = "{} adlý kiþinin telefon numarasý: {}"
+
+Mesela kullanýcý “ahmet öz” ismini sorgulamýþsa ona þöyle bir cevap vereceðiz:
+
+"ahmet öz adlý kiþinin telefon numarasý 0532 532 32 32"
+
+Eðer aranan isim telefon defterinde varsa, bir önceki adýmda tanýmladýðýmýz cevap þablonuna göre kullanýcýyý bilgilendiriyoruz. Ama eðer eðer isim defterde yoksa, programýmýz hata veriyor. Bunu önlemek için þöyle bir kod yazabilirsiniz:
+
+telefon_defteri = {"ahmet öz" : "0532 532 32 32",
+"mehmet su": "0543 543 42 42",
+"seda naz" : "0533 533 33 33",
+"eda ala" : "0212 212 12 12"}
+
+kiþi = input("Telefon numarasýný öðrenmek için bir kiþi adý girin: ")
+
+if kiþi in telefon_defteri:
+cevap = "{} adlý kiþinin telefon numarasý: {}"
+print(cevap.format(kiþi, telefon_defteri[kiþi]))
+else:
+print("Aradýðýnýz kiþi telefon rehberinde yok!")
+
+Gördüðünüz gibi, if kiþi in telefon_defteri satýrý yardýmýyla öncelikle aranan ismin sözlükte olup olmadýðýný denetledik. Eðer aranan isim sözlükte yer alýyorsa bu telefon numarasýný kullanýcýlarýmýza gösteriyoruz. Aksi durumda aranan kiþinin telefon rehberinde olmadýðý konusunda kullanýcýlarýmýzý bilgilendiriyoruz.
+
+Gördüðünüz gibi, sözlükler gerçekten de bize Python programlama maceramýzda yepyeni olanaklarýn kapýsýný açabilecek kadar güçlü bir veri tipi. Bu veri tipini programlarýnýzda bolca kullanacaksýnýz.
+
+Yukarýda verdiðimiz telefon defteri uygulamasýna þöyle bir baktýðýnýzda bu uygulamanýn aslýnda geliþtirilmeye bir hayli açýk olduðu dikkatinizi çekmiþtir. Mesela biz bu uygulamada sadece kendi tanýmladýðýmýz bir telefon defteri üzerinden sorgulama yapmaya izin verdik. Örneðin kullanýcý bu telefon defterine kendi isim-telefon çiftlerini giremiyor. Bu veri tipini etkili bir þekilde kullanmamýzý saðlayacak araçlardan henüz yoksun olduðumuz için yukarýda tanýmladýðýmýz uygulama çok basit kaldý. O halde, sözlük veri tipini daha verimli ve etkili bir biçimde kullanabilmek için hiç vakit kaybetmeden bu veri tipinin derinliklerine doðru yol almaya devam edelim.
+

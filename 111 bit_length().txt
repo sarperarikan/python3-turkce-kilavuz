@@ -1,0 +1,70 @@
+
+bit_length()
+
+Bilgisayarlar hakkýnda bilmemiz gereken en önemli bilgilerden biri þudur: Bilgisayarlar ancak ve ancak sayýlarla iþlem yapabilir. Bilgisayarlarýn iþlem yapabildiði sayýlar da onlu sistemdeki sayýlar deðil, ikili sistemdeki sayýlardýr. Yani 0’lar ve 1’ler.
+
+Bilgisayar terminolojisinde bu 0’lar ve 1’lerden oluþan herbir basamaða ‘bit’ adý verilir. Yani ikili sayma sisteminde ‘0’ ve ‘1’ sayýlarýndan herbiri 1 bit’tir. Mesela onlu sistemde 2 sayýsýnýn ikili sistemdeki karþýlýðý olan 10 sayýsý iki bit’lik bir sayýdýr. Onlu sistemdeki 100 sayýsýnýn ikili sistemdeki karþýlýðý olan 1100100 sayýsý ise yedi bitlik bir sayýdýr.
+
+Bu durumu daha net bir þekilde görebilmek için þu kodlarý yazalým:
+
+>>> for i in range(11):
+... print(i, bin(i)[2:], len(bin(i)[2:]), sep="\t")
+...
+0       0       1
+1       1       1
+2       10      2
+3       11      2
+4       100     3
+5       101     3
+6       110     3
+7       111     3
+8       1000    4
+9       1001    4
+10      1010    4
+
+Burada ikinci sütundaki sayýlar ilk sütundaki sayýlarýn ikili sistemdeki karþýlýklarýdýr. Üçüncü sütundaki sayýlar ise her bir sayýnýn kaç bit olduðunu, yani bir bakýma ikili sayma sisteminde kaç basamaða sahip olduðunu gösteriyor.
+
+Ýþte herhangi bir tam sayýnýn kaç bit’lik bir yer kapladýðýný öðrenmek için, tam sayýlarýn metotlarýndan biri olan bit_length() metodundan yararlanacaðýz:
+
+>>> sayý = 10
+>>> sayý.bit_length()
+
+4
+
+Demek ki 10 sayýsý bellekte dört bitlik bir yer kaplýyormuþ. Yani bu sayýnýn ikili sistemdeki karþýlýðý olan 1010 sayýsý dört basamaktan oluþuyormuþ.
+
+Yukarýdaki örneklerden de rahatlýkla çýkarabileceðiniz gibi, bit_length() metodu, ikili sayma sistemindeki bir sayý üzerine len() fonksiyonunun uygulanmasý ile eþdeðerdir. Yani:
+
+>>> len(bin(10)[2:]) == (10).bit_length()
+True
+
+Bu arada þu son örnekte bir þey dikkatinizi çekmiþ olmalý: bit_length() metodunu doðrudan sayýlar üzerine uygulayamýyoruz. Yani:
+
+>>> 10.bit_length()
+  File "<stdin>", line 1
+10.bit_length()
+^
+SyntaxError: invalid syntax
+
+Bu metodu sayýlarla birlikte kullanabilmek için iki seçeneðimiz var: bit_length() metodunu uygulamak istediðimiz sayýyý önce bir deðiþkene atayabiliriz:
+
+>>> a = 10
+>>> a.bit_length()
+
+4
+
+...veya ilgili sayýyý parantez içine alabiliriz:
+
+>>> (10).bit_length()
+
+4
+
+Bu durum, yani sayýyý parantez içinde gösterme zorunluluðu, 10 sayýsýnýn saðýna bir nokta iþareti koyduðumuzda, Python’ýn bu sayýyý bir kayan noktalý sayý olarak deðerlendirmesinden kaynaklanýyor. Yani biz ‘10’ yazýp, bit_length() metodunu bu sayýya baðlama amacýyla sayýnýn saðýna bir nokta koyduðumuz anda, Python bu sayýnýn bir kayan noktalý sayý olduðunu zannediyor. Çünkü Python açýsýndan, 10. sayýsý bir kayan noktalý sayýdýr. Bunu teyit edelim:
+
+>>> type(10.)
+
+<class 'float'>
+
+Kayan noktalý sayýlarýn bit_length() adlý bir metodu olmadýðý için de Python’ýn bize bir hata mesajý göstermekten baþka yapabileceði bir þey kalmýyor.
+
+

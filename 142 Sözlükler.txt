@@ -1,0 +1,36 @@
+
+Sözlükler
+
+Þu ana kadar Python programlama dilinde veri tipi olarak karakter dizilerini, sayýlarý, listeleri, demetleri ve dosyalarý öðrendik. Yeni veri tipleri öðrendikçe Python’daki hareket alanýmýzýn da geniþlediðini siz de farketmiþsinizdir. Bu bölümde yine Python’daki önemli veri tiplerinden birini inceleyeceðiz. Bu defa inceleyeceðimiz veri tipinin adý sözlük. Ýngilizcede buna dictionary diyorlar.
+
+Sözlükler de, týpký daha önceki derslerimizde öðrendiðimiz karakter dizileri, sayýlar, listeler, demetler ve dosyalar gibi programlama maceramýz boyunca iþlerimizi bir hayli kolaylaþtýracak ve hareket imkanýmýzý geniþletecek veri tiplerinden biridir.
+
+Öteki veri tiplerinde olduðu gibi, sözlüklerin de birtakým metotlarý vardýr. Ýþte bu bölümde hem genel olarak sözlüklerden söz edeceðiz, hem de bu veri tipinin metotlarýný en ince ayrýntýsýna kadar inceleyeceðiz.
+
+Sözlük denen veri tipi Python programlama dilinin son derece kullanýþlý ve iþe yarar araçlarýndan bir tanesidir. Programlama alanýnda ilerledikçe, bu veri tipinin neler yapabileceðini görüp þaþýracaðýnýzý rahatlýkla söyleyebilirim.
+
+Esasýnda biz daha önceki derslerimizin birinde sözlük adlý bu veri tipinden üstünkörü de olsa söz etmiþtik. Yani aslýnda bu veri tipiyle tanýþýklýðýmýz eskiye dayanýyor.
+
+Hatýrlayacaksýnýz, karakter dizilerinin str.maketrans() ve translate() adlý metotlarýný anlatýrken, Türkçeye özgü karakterleri ve bunlarýn noktasýz karþýlýklarýný içeren çeviri_tablosu adýný verdiðimiz þöyle bir deðiþken tanýmlamýþtýk:
+
+çeviri_tablosu = {"Ö": "O",
+"ç": "c",
+"Ü": "U",
+"Ç": "C",
+"Ý": "I",
+"ý": "i",
+"Ð": "G",
+"ö": "o",
+"þ": "s",
+"ü": "u",
+"Þ": "S",
+"ð": "g"}
+
+Burada çeviri_tablosu deðiþkeni içinde gösterdiðimiz biçimin Python’daki adýnýn ‘sözlük’ olduðunu da ifade etmiþtik. Ýþte bu bölümde, orada þöyle bir deðinip geçtiðimiz bu veri tipini çok daha ayrýntýlý bir þekilde ele alma imkanýmýz olacak.
+
+Hem eski bilgilerimize dayanarak, hem de yukarýda anlattýklarýmýzdan yola çýkarak sözlük veri tipinin ne olduðuna dair halihazýrda kafamýzda bir fikir oluþmuþ olduðunu söyleyebiliriz.
+
+Sözlükler öteki veri tiplerine kýyasla biraz farklý bir görünüþe sahip bir veri tipidir. Biz birazdan sözlüklerin yapýsýný derinlemesine inceleyeceðiz.
+
+Ancak sözlüklerin yapýsýný incelemeye geçmeden önce öðrenmemiz gereken bir þey var. Týpký öteki veri tiplerinde olduðu gibi, sözlüklerle de çalýþabilmek için öncelikle bu veri tipini tanýmlamýþ olmamýz gerekiyor. O yüzden isterseniz sözlüklerin yapýsýndan söz etmeden önce bir sözlüðü nasýl tanýmlayacaðýmýzdan bahsedelim.
+

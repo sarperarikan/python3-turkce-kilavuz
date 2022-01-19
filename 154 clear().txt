@@ -1,0 +1,51 @@
+
+clear()
+
+Sözlüklerin, inceleyeceðimiz ilk metodu clear(). Bu kelime Ýngilizce’de “temizlemek” anlamýna gelir. Görevi sözlükteki öðeleri temizlemektir. Yani içi dolu bir sözlüðü bu metot yardýmýyla tamamen boþaltabiliriz:
+
+>>> lig = {"þampiyon": "Adana Demirspor", "ikinci": "Mersin Ýdman Yurdu",
+... "üçüncü": "Adana Gençlerbirliði"}
+
+Ýsterseniz sözlüðümüzü boþaltmadan önce bu sözlükle biraz çalýþalým:
+
+Sözlüðümüzün öðelerine þöyle ulaþýyoruz:
+
+>>> lig
+
+{'þampiyon': 'Adana Demirspor', 'ikinci': 'Mersin Ýdman Yurdu',
+'üçüncü': 'Adana Gençlerbirliði'}
+
+Eðer bu sözlüðün öðelerine tek tek eriþmek istersek þöyle yapýyoruz:
+
+>>> lig["þampiyon"]
+
+'Adana Demirspor'
+
+>>> lig["üçüncü"]
+
+'Adana Gençlerbirliði'
+
+Þimdi geldi bu sözlüðün bütün öðelerini silmeye:
+
+>>> lig.clear()
+
+Þimdi sözlüðümüzün durumunu tekrar kontrol edelim:
+
+>>> lig
+
+{}
+
+Gördüðünüz gibi artýk “lig” adlý sözlüðümüz bomboþ. clear() metodunu kullanarak bu sözlüðün bütün öðelerini sildik. Ama tabii ki bu þekilde sözlüðü silmiþ olmadýk. Boþ da olsa bellekte hâlâ “lig” adlý bir sözlük duruyor. Eðer siz “lig”i ortadan kaldýrmak isterseniz “del” adlý bir parçacýktan yararlanmanýz gerekir:
+
+>>> del lig
+
+Kontrol edelim:
+
+>>> lig
+
+NameError: name 'lig' is not defined
+
+Gördüðünüz gibi artýk “lig” diye bir þey yok... Bu sözlüðü bellekten tamamen kaldýrdýk.
+
+clear() adlý metodun ne olduðunu ve ne iþe yaradýðýný gördüðümüze göre baþka bir metoda geçebiliriz.
+
